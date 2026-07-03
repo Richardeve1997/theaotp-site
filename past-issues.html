@@ -161,6 +161,48 @@
     }
     .empty p { margin-top: 10px; max-width: 52ch; font-size: 14px; }
 
+    /* ---- Email gate ---- */
+    .gate {
+      flex: 1;
+      border-top: 1px solid var(--ink);
+      padding: 64px 0 96px;
+      max-width: 560px;
+    }
+    .gate .prompt {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 22px;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+    .gate .form { display: flex; align-items: stretch; border-bottom: 1px solid var(--ink); }
+    .gate .form input[type=email] {
+      flex: 1;
+      border: 0;
+      background: transparent;
+      font-family: var(--ui);
+      font-size: 15px;
+      padding: 14px 2px;
+      color: var(--ink);
+      outline: none;
+    }
+    .gate .form input[type=email]::placeholder { color: var(--ink-mid); }
+    .gate .form button {
+      border: 0;
+      background: transparent;
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink);
+      padding: 0 4px 0 24px;
+      cursor: pointer;
+    }
+    .gate .form button:hover { color: var(--ink-mid); }
+    .gate .fineprint { margin-top: 12px; font-size: 13px; color: var(--ink-mid); }
+    .gate .status { margin-top: 6px; font-size: 13px; color: var(--ink); min-height: 1.2em; }
+
     footer {
       display: flex;
       align-items: center;
@@ -210,7 +252,18 @@
       <p class="lede">Every letter the studio has sent, newest first. Each one carries the thing that shipped and the recipe behind it.</p>
     </div>
 
-    <section class="issues">
+    <!-- Email gate: shown until the reader gives an email (which also subscribes them) -->
+    <section class="gate" id="gate" hidden>
+      <p class="prompt">The archive is for subscribers. Enter your email to read.</p>
+      <form class="form" id="gate-form" novalidate>
+        <input type="email" name="email" placeholder="you@somewhere.com" autocomplete="email" required />
+        <button type="submit">Unlock</button>
+      </form>
+      <p class="fineprint">Already subscribed? Same box. New here? This signs you up too.</p>
+      <p class="status" aria-live="polite"></p>
+    </section>
+
+    <section class="issues" id="issues" hidden>
 
       <!-- To add an issue: copy one .issue block to the TOP of this list,
            update the number, date, title, summary, and href. -->
@@ -258,5 +311,46 @@
     </footer>
 
   </div>
+
+  <script>
+    // Set to your deployed Cloudflare Worker URL (same value as index.html).
+    const API_BASE = 'https://theaotp-gate.YOUR-SUBDOMAIN.workers.dev';
+
+    const gate = document.getElementById('gate');
+    const issues = document.getElementById('issues');
+    const form = document.getElementById('gate-form');
+    const status = gate.querySelector('.status');
+
+    function unlock(email) {
+      localStorage.setItem('aotp-email', email);
+      gate.hidden = true;
+      issues.hidden = false;
+    }
+
+    // Already gave us an email on either page? Straight through.
+    const saved = localStorage.getItem('aotp-email');
+    if (saved) { issues.hidden = false; } else { gate.hidden = false; }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = form.querySelector('input[type=email]').value.trim().toLowerCase();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        status.textContent = 'That email looks off. Try again.'; return;
+      }
+      status.textContent = 'One sec…';
+      try {
+        // Subscribe covers both cases: new reader joins, existing reader passes.
+        const res = await fetch(API_BASE + '/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }),
+        });
+        if (!res.ok) throw new Error();
+        unlock(email);
+      } catch {
+        status.textContent = 'Something broke on our end. Try again in a minute.';
+      }
+    });
+  </script>
 </body>
 </html>

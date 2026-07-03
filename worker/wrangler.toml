@@ -1,0 +1,10 @@
+name = "theaotp-gate"
+main = "worker.js"
+compatibility_date = "2026-07-01"
+
+# Deploy:
+#   cd worker
+#   npx wrangler login
+#   npx wrangler secret put BUTTONDOWN_API_KEY
+#   npx wrangler deploy
+# Then put the printed *.workers.dev URL into API_BASE in index.html + past-issues.html.

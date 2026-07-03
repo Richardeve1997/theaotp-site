@@ -268,17 +268,30 @@
   </div>
 
   <script>
-    // Front-end only for now. To wire a real provider (Buttondown, ConvertKit,
-    // Formspree), replace the body of the handler with a fetch to its endpoint.
+    // Set to your deployed Cloudflare Worker URL (from `npx wrangler deploy`).
+    const API_BASE = 'https://theaotp-gate.YOUR-SUBDOMAIN.workers.dev';
+
     const form = document.getElementById('waitlist');
     const status = document.querySelector('.status');
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const email = form.querySelector('input[type=email]').value.trim();
+      const email = form.querySelector('input[type=email]').value.trim().toLowerCase();
       const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
       if (!ok) { status.textContent = 'That email looks off. Try again.'; return; }
-      status.textContent = "You're on the list. First letter soon.";
-      form.reset();
+      status.textContent = 'One sec…';
+      try {
+        const res = await fetch(API_BASE + '/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }),
+        });
+        if (!res.ok) throw new Error();
+        localStorage.setItem('aotp-email', email);
+        status.textContent = "You're on the list. First letter soon.";
+        form.reset();
+      } catch {
+        status.textContent = 'Something broke on our end. Try again in a minute.';
+      }
     });
   </script>
 </body>
