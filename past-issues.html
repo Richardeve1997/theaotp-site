@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Art of the Possible — Past issues</title>
+  <meta name="description" content="Every past issue of the Art of the Possible newsletter." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper:   #ffffff;
+      --frame:   #e9e9e7;
+      --ink:     #111111;
+      --ink-mid: #9b9b9b;
+      --ink-soft:#555555;
+      --rule:    #ececec;
+      --display: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+      --ui:      "Inter", "Helvetica Neue", Arial, sans-serif;
+      --tracking: -0.035em;
+      --max: 1240px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      background: var(--frame);
+      color: var(--ink);
+      font-family: var(--ui);
+      font-size: 16px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; }
+
+    .page {
+      max-width: var(--max);
+      margin: 40px auto;
+      background: var(--paper);
+      padding: 0 40px 40px;
+      min-height: calc(100vh - 80px);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ---- Nav ---- */
+    nav {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: 30px 0;
+    }
+    .lockup { display: inline-flex; align-items: center; gap: 10px; justify-self: start; }
+    .lockup .symbol { width: 22px; height: 22px; object-fit: contain; }
+    .wordmark {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .wordmark sup { font-size: 0.5em; vertical-align: super; margin-left: 2px; letter-spacing: 0; }
+    .nav-links { display: flex; gap: 24px; font-size: 14px; font-weight: 500; justify-self: center; }
+    .nav-links a { color: var(--ink-mid); transition: color 120ms ease; }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-links a.active { color: var(--ink); font-weight: 600; }
+    .nav-cta {
+      justify-self: end;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    /* ---- Header (offset right, like the landing) ---- */
+    .head {
+      display: grid;
+      grid-template-columns: 40% 1fr;
+      padding: 96px 0 0;
+    }
+    .head-copy { grid-column: 2; }
+    .head-copy h1 {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: clamp(36px, 5vw, 60px);
+      letter-spacing: var(--tracking);
+      line-height: 1.04;
+    }
+    .muted { color: var(--ink-mid); }
+
+    .head-row {
+      display: grid;
+      grid-template-columns: 40% 1fr;
+      align-items: end;
+      padding: 48px 0 20px;
+    }
+    .eyebrow {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.01em;
+      text-transform: uppercase;
+    }
+    .lede { font-size: 15px; color: var(--ink-soft); max-width: 68ch; }
+
+    /* ---- Issue list ---- */
+    .issues { flex: 1; padding-bottom: 72px; }
+    .issue {
+      display: grid;
+      grid-template-columns: 40% 1fr auto;
+      gap: 24px;
+      align-items: baseline;
+      padding: 30px 0;
+      border-top: 1px solid var(--rule);
+    }
+    .issue:first-of-type { border-top: 1px solid var(--ink); }
+    .issue .meta {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--ink-mid);
+    }
+    .issue h2 {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: clamp(20px, 2.2vw, 26px);
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+    .issue h2 { transition: color 120ms ease; }
+    .issue:hover h2 { color: var(--ink-mid); }
+    .issue p { margin-top: 6px; font-size: 14px; color: var(--ink-soft); max-width: 60ch; }
+    .issue .read {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    /* empty state — swap in until issue 001 ships */
+    .empty {
+      border-top: 1px solid var(--ink);
+      padding: 56px 0;
+      color: var(--ink-soft);
+    }
+    .empty h2 {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: clamp(22px, 2.8vw, 32px);
+      letter-spacing: var(--tracking);
+      color: var(--ink);
+    }
+    .empty p { margin-top: 10px; max-width: 52ch; font-size: 14px; }
+
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 24px;
+      border-top: 1px solid var(--rule);
+      font-size: 13px;
+      color: var(--ink-mid);
+    }
+    footer .wordmark { font-size: 12px; color: var(--ink); }
+
+    @media (max-width: 820px) {
+      .page { margin: 0 auto; padding: 0 20px 24px; }
+      nav { grid-template-columns: 1fr auto; }
+      .nav-links { display: none; }
+      .head, .head-row { grid-template-columns: 1fr; }
+      .head { padding-top: 56px; }
+      .head-copy { grid-column: 1; }
+      .head-row { gap: 16px; padding: 28px 0 16px; }
+      .issue { grid-template-columns: 1fr; gap: 6px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <nav>
+      <a class="lockup" href="index.html" aria-label="Art of the Possible">
+        <img class="symbol" src="qualia-symbol.png" alt="" aria-hidden="true">
+        <span class="wordmark">Art of the Possible<sup>®</sup></span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html">The letter</a>
+        <a href="past-issues.html" class="active">Past issues</a>
+      </div>
+      <a class="nav-cta" href="index.html#subscribe">Subscribe</a>
+    </nav>
+
+    <header class="head">
+      <div class="head-copy">
+        <h1>Everything that was <span class="muted">possible so far.</span></h1>
+      </div>
+    </header>
+
+    <div class="head-row">
+      <div class="eyebrow">The Archive</div>
+      <p class="lede">Every letter the studio has sent, newest first. Each one carries the thing that shipped and the recipe behind it.</p>
+    </div>
+
+    <section class="issues">
+
+      <!-- To add an issue: copy one .issue block to the TOP of this list,
+           update the number, date, title, summary, and href. -->
+
+      <a class="issue" href="#">
+        <span class="meta">№ 003 · Jul 2026</span>
+        <span>
+          <h2>Sample issue title goes here</h2>
+          <p>Placeholder. One sentence on what shipped and the lever behind it, written after the issue goes out.</p>
+        </span>
+        <span class="read">Read</span>
+      </a>
+
+      <a class="issue" href="#">
+        <span class="meta">№ 002 · Jul 2026</span>
+        <span>
+          <h2>Sample issue title goes here</h2>
+          <p>Placeholder. One sentence on what shipped and the lever behind it, written after the issue goes out.</p>
+        </span>
+        <span class="read">Read</span>
+      </a>
+
+      <a class="issue" href="#">
+        <span class="meta">№ 001 · Jun 2026</span>
+        <span>
+          <h2>Sample issue title goes here</h2>
+          <p>Placeholder. One sentence on what shipped and the lever behind it, written after the issue goes out.</p>
+        </span>
+        <span class="read">Read</span>
+      </a>
+
+      <!-- Empty state: delete the sample issues above and un-comment this
+           block until the first real issue ships.
+      <div class="empty">
+        <h2>The first letter is on its way.</h2>
+        <p>Nothing in the archive yet. Subscribe on the main page and you'll get issue № 001 when it ships.</p>
+      </div>
+      -->
+
+    </section>
+
+    <footer>
+      <span class="wordmark">Art of the Possible<sup>®</sup></span>
+      <span>New things are possible every day. · 2026</span>
+    </footer>
+
+  </div>
+</body>
+</html>
