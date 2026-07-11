@@ -169,6 +169,49 @@
         "treatment": "standard"
       },
       {
+        "order": 4,
+        "sourceSlug": "pov-bloopers",
+        "category": "Rich's corner",
+        "title": {
+          "lead": "The content engine has a human inside.",
+          "muted": "Take fourteen."
+        },
+        "hook": "Teaching people about AI and startups also means repeatedly forgetting how sentences work in front of a camera.",
+        "whatShipped": [
+          "This 32-second compilation is the honest layer underneath the polished explainers: missed lines, resets and the strange reality of becoming an on-camera creator because you wanted to teach what you were building.",
+          "It is lighter than the four builds above, but it belongs in the week because it is what shipping the other four actually looked like."
+        ],
+        "whyItMatters": "A repeatable system should make the work easier without pretending the work is frictionless. Showing the resets is part of building in public, and a useful antidote to the idea that everybody else ships perfectly on the first take.",
+        "lever": {
+          "label": "Keep the rough cut",
+          "body": "Save the resets. The failed takes are useful feedback on the script, and occasionally they are the most human thing you made all week.",
+          "url": "https://www.instagram.com/artofthepossible.ai/"
+        },
+        "takeaways": [
+          "Friction is evidence, not a personal defect.",
+          "A good system preserves the human parts worth sharing."
+        ],
+        "media": {
+          "type": "poster",
+          "poster": "/media/issues/2026-07-11-ai-left-the-chat-box/pov-bloopers.jpg",
+          "alt": "Rich on camera under a caption about realising that teaching AI and startups means making content",
+          "aspectRatio": "9:16",
+          "canonicalUrl": "",
+          "embedUrl": "",
+          "videoUrl": "",
+          "needsPublicUrl": true
+        },
+        "links": [
+          {
+            "label": "Follow the next build",
+            "url": "https://www.instagram.com/artofthepossible.ai/",
+            "type": "watch"
+          }
+        ],
+        "emailSummary": "The unpolished reality behind the week's four builds: resets, missed lines and one useful reminder to keep the rough cut.",
+        "treatment": "richs-corner"
+      },
+      {
         "order": 5,
         "sourceSlug": "hf-realtime-voice",
         "category": "Open voice AI",
@@ -215,49 +258,6 @@
         ],
         "emailSummary": "A hands-on real-time voice demo shows why low latency plus tools turns speech into a serious interface.",
         "treatment": "standard"
-      },
-      {
-        "order": 4,
-        "sourceSlug": "pov-bloopers",
-        "category": "Rich's corner",
-        "title": {
-          "lead": "The content engine has a human inside.",
-          "muted": "Take fourteen."
-        },
-        "hook": "Teaching people about AI and startups also means repeatedly forgetting how sentences work in front of a camera.",
-        "whatShipped": [
-          "This 32-second compilation is the honest layer underneath the polished explainers: missed lines, resets and the strange reality of becoming an on-camera creator because you wanted to teach what you were building.",
-          "It is lighter than the four builds above, but it belongs in the week because it is what shipping the other four actually looked like."
-        ],
-        "whyItMatters": "A repeatable system should make the work easier without pretending the work is frictionless. Showing the resets is part of building in public, and a useful antidote to the idea that everybody else ships perfectly on the first take.",
-        "lever": {
-          "label": "Keep the rough cut",
-          "body": "Save the resets. The failed takes are useful feedback on the script, and occasionally they are the most human thing you made all week.",
-          "url": "https://www.instagram.com/artofthepossible.ai/"
-        },
-        "takeaways": [
-          "Friction is evidence, not a personal defect.",
-          "A good system preserves the human parts worth sharing."
-        ],
-        "media": {
-          "type": "poster",
-          "poster": "/media/issues/2026-07-11-ai-left-the-chat-box/pov-bloopers.jpg",
-          "alt": "Rich on camera under a caption about realising that teaching AI and startups means making content",
-          "aspectRatio": "9:16",
-          "canonicalUrl": "",
-          "embedUrl": "",
-          "videoUrl": "",
-          "needsPublicUrl": true
-        },
-        "links": [
-          {
-            "label": "Follow the next build",
-            "url": "https://www.instagram.com/artofthepossible.ai/",
-            "type": "watch"
-          }
-        ],
-        "emailSummary": "The unpolished reality behind the week's four builds: resets, missed lines and one useful reminder to keep the rough cut.",
-        "treatment": "richs-corner"
       }
     ],
     "seo": {

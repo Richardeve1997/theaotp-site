@@ -37,17 +37,6 @@ WHY IT MATTERS: The editorial bet is information timing: a feed built around peo
 CURATE THE ALGORITHM: Pick one field you want to understand, open the matching category, and follow the first ten people whose work is genuinely relevant. Do not copy the whole leaderboard; build a deliberate signal set.
 https://digg.com/tech/x/rankings
 
-05 · OPEN VOICE AI
-Open voice AI already feels live. The interface is changing.
-A real-time Hugging Face demo can hold a fast conversation, search the web and reason over a screenshot.
-
-I tested an open-source real-time voice workflow rather than another polished assistant demo. In this test it responded quickly, searched the web, read a screenshot and moved between tasks without forcing the conversation back into a text box.
-That is enough to imagine the next layer: tutors that can see the work, accessibility tools that can explain a screen, and home assistants that are useful because they understand context.
-
-WHY IT MATTERS: The demo suggests voice stops feeling like a novelty when latency gets low enough and the model can use tools. The interaction becomes closer to directing a collaborator than dictating into software.
-START FROM AN OPEN DEMO: Use a working real-time voice Space or repository as the harness, then add one narrow tool that makes the conversation useful for a real job.
-https://huggingface.co/spaces/smolagents/hf-realtime-voice
-
 04 · RICH'S CORNER
 The content engine has a human inside. Take fourteen.
 Teaching people about AI and startups also means repeatedly forgetting how sentences work in front of a camera.
@@ -58,6 +47,17 @@ It is lighter than the four builds above, but it belongs in the week because it 
 WHY IT MATTERS: A repeatable system should make the work easier without pretending the work is frictionless. Showing the resets is part of building in public, and a useful antidote to the idea that everybody else ships perfectly on the first take.
 KEEP THE ROUGH CUT: Save the resets. The failed takes are useful feedback on the script, and occasionally they are the most human thing you made all week.
 https://www.instagram.com/artofthepossible.ai/
+
+05 · OPEN VOICE AI
+Open voice AI already feels live. The interface is changing.
+A real-time Hugging Face demo can hold a fast conversation, search the web and reason over a screenshot.
+
+I tested an open-source real-time voice workflow rather than another polished assistant demo. In this test it responded quickly, searched the web, read a screenshot and moved between tasks without forcing the conversation back into a text box.
+That is enough to imagine the next layer: tutors that can see the work, accessibility tools that can explain a screen, and home assistants that are useful because they understand context.
+
+WHY IT MATTERS: The demo suggests voice stops feeling like a novelty when latency gets low enough and the model can use tools. The interaction becomes closer to directing a collaborator than dictating into software.
+START FROM AN OPEN DEMO: Use a working real-time voice Space or repository as the harness, then add one narrow tool that makes the conversation useful for a real job.
+https://huggingface.co/spaces/smolagents/hf-realtime-voice
 
 Archive: https://theaotp.com/letters/
 Unsubscribe: {{ unsubscribe_url }}

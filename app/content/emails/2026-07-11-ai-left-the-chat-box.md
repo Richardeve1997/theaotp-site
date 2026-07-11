@@ -10,8 +10,8 @@ These are the five things I made to understand that shift. I have kept the usefu
 1. [Your workday can write itself.](https://theaotp.com/letters/2026-07-11-ai-left-the-chat-box/#story-1)
 2. [The shortcut to an animated website.](https://theaotp.com/letters/2026-07-11-ai-left-the-chat-box/#story-2)
 3. [Nine million follows reveal who shapes tech.](https://theaotp.com/letters/2026-07-11-ai-left-the-chat-box/#story-3)
-5. [Open voice AI already feels live.](https://theaotp.com/letters/2026-07-11-ai-left-the-chat-box/#story-5)
 4. [The content engine has a human inside.](https://theaotp.com/letters/2026-07-11-ai-left-the-chat-box/#story-4)
+5. [Open voice AI already feels live.](https://theaotp.com/letters/2026-07-11-ai-left-the-chat-box/#story-5)
 
 ---
 
@@ -95,6 +95,32 @@ Pick one field you want to understand, open the matching category, and follow th
 
 ---
 
+## 04 · Rich's corner
+
+### The content engine has a human inside. Take fourteen.
+
+[Teaching people about AI and startups also means repeatedly forgetting how sentences work in front of a camera.](https://theaotp.com/letters/2026-07-11-ai-left-the-chat-box/#story-4)
+
+[![Rich on camera under a caption about realising that teaching AI and startups means making content](https://theaotp.com/media/issues/2026-07-11-ai-left-the-chat-box/pov-bloopers.jpg)](https://www.instagram.com/artofthepossible.ai/)
+
+**What shipped**
+
+This 32-second compilation is the honest layer underneath the polished explainers: missed lines, resets and the strange reality of becoming an on-camera creator because you wanted to teach what you were building.
+It is lighter than the four builds above, but it belongs in the week because it is what shipping the other four actually looked like.
+
+**Why it matters**
+
+A repeatable system should make the work easier without pretending the work is frictionless. Showing the resets is part of building in public, and a useful antidote to the idea that everybody else ships perfectly on the first take.
+
+**Keep the rough cut**
+
+Save the resets. The failed takes are useful feedback on the script, and occasionally they are the most human thing you made all week.
+
+[Open it →](https://www.instagram.com/artofthepossible.ai/)
+- [Follow the next build](https://www.instagram.com/artofthepossible.ai/)
+
+---
+
 ## 05 · Open voice AI
 
 ### Open voice AI already feels live. The interface is changing.
@@ -119,32 +145,6 @@ Use a working real-time voice Space or repository as the harness, then add one n
 [Open it →](https://huggingface.co/spaces/smolagents/hf-realtime-voice)
 - [Try the real-time voice Space](https://huggingface.co/spaces/smolagents/hf-realtime-voice)
 - [Open the speech-to-speech repo](https://github.com/huggingface/speech-to-speech)
-
----
-
-## 04 · Rich's corner
-
-### The content engine has a human inside. Take fourteen.
-
-[Teaching people about AI and startups also means repeatedly forgetting how sentences work in front of a camera.](https://theaotp.com/letters/2026-07-11-ai-left-the-chat-box/#story-4)
-
-[![Rich on camera under a caption about realising that teaching AI and startups means making content](https://theaotp.com/media/issues/2026-07-11-ai-left-the-chat-box/pov-bloopers.jpg)](https://www.instagram.com/artofthepossible.ai/)
-
-**What shipped**
-
-This 32-second compilation is the honest layer underneath the polished explainers: missed lines, resets and the strange reality of becoming an on-camera creator because you wanted to teach what you were building.
-It is lighter than the four builds above, but it belongs in the week because it is what shipping the other four actually looked like.
-
-**Why it matters**
-
-A repeatable system should make the work easier without pretending the work is frictionless. Showing the resets is part of building in public, and a useful antidote to the idea that everybody else ships perfectly on the first take.
-
-**Keep the rough cut**
-
-Save the resets. The failed takes are useful feedback on the script, and occasionally they are the most human thing you made all week.
-
-[Open it →](https://www.instagram.com/artofthepossible.ai/)
-- [Follow the next build](https://www.instagram.com/artofthepossible.ai/)
 
 ---
 
