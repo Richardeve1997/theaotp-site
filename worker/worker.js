@@ -1,7 +1,6 @@
 // theaotp.com email gate — Cloudflare Worker
 // Endpoints:
 //   POST /subscribe  {email}  -> adds to Buttondown (already-subscribed counts as success)
-//   POST /check      {email}  -> {subscribed: true|false}
 // Secret required: BUTTONDOWN_API_KEY  (wrangler secret put BUTTONDOWN_API_KEY)
 
 const ALLOWED_ORIGINS = [
@@ -9,6 +8,8 @@ const ALLOWED_ORIGINS = [
   'https://www.theaotp.com',
   'https://richardeve1997.github.io',
   'http://localhost:8000',
+  'http://localhost:5173',
+  'http://localhost:5200',
 ];
 
 function cors(origin) {
@@ -41,7 +42,7 @@ export default {
 
     const url = new URL(request.url);
     const bd = (path, init = {}) =>
-      fetch(`https://api.buttondown.email/v1${path}`, {
+      fetch(`https://api.buttondown.com/v1${path}`, {
         ...init,
         headers: {
           Authorization: `Token ${env.BUTTONDOWN_API_KEY}`,
@@ -61,11 +62,6 @@ export default {
       if (res.status === 400 && /already/i.test(body))
         return new Response(JSON.stringify({ ok: true, new: false }), { headers });
       return new Response(JSON.stringify({ error: 'subscribe failed' }), { status: 502, headers });
-    }
-
-    if (url.pathname === '/check') {
-      const res = await bd(`/subscribers/${encodeURIComponent(email)}`);
-      return new Response(JSON.stringify({ subscribed: res.status === 200 }), { headers });
     }
 
     return new Response(JSON.stringify({ error: 'not found' }), { status: 404, headers });

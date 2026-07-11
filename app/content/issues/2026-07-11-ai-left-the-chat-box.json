@@ -1,0 +1,235 @@
+{
+  "schemaVersion": 1,
+  "issueNumber": 1,
+  "slug": "2026-07-11-ai-left-the-chat-box",
+  "status": "draft",
+  "publishedAt": "2026-07-11T03:30:00Z",
+  "subject": "AI left the chat box this week",
+  "preheader": "A workday that writes itself, an animated site, a tech power map, open voice and the honest outtakes.",
+  "title": {
+    "lead": "AI left the chat box this week.",
+    "muted": "Here are five things I made with it."
+  },
+  "dek": "A weekly field note from Art of the Possible: what shipped, why it matters, and the lever you can copy.",
+  "editorNote": [
+    "AI stopped being a chat window this week. It watched a workday, spoke back in real time, rebuilt a website and rewired an information diet. The common thread is that the model is disappearing into the tool. You notice the result before you notice the AI.",
+    "These are the five things I made to understand that shift. I have kept the useful bit from each one: the repo, the template, the workflow, or the honest version of what it took to ship. Start with whichever one solves a problem you actually have."
+  ],
+  "sourceWindow": {
+    "from": "2026-07-05T00:00:00Z",
+    "to": "2026-07-11T03:30:00Z",
+    "selectedSlugs": [
+      "dayflow-local-ai-time-tracker",
+      "ai-website-hero-3-steps",
+      "digg-x-rankings",
+      "pov-bloopers",
+      "hf-realtime-voice"
+    ]
+  },
+  "stories": [
+    {
+      "order": 1,
+      "sourceSlug": "dayflow-local-ai-time-tracker",
+      "category": "Local AI",
+      "title": {
+        "lead": "Your workday can write itself.",
+        "muted": "No timers required."
+      },
+      "hook": "Dayflow turns everything you did on your Mac into a useful journal, without asking you to log a thing.",
+      "whatShipped": [
+        "Dayflow is an open-source Mac app that watches your screen in the background and writes the journal of your workday. No timers, tags or notes. It reconstructs the day as a clean timeline of what you were actually doing.",
+        "You can choose a local model through Ollama or LM Studio, which keeps the analysis on your machine. Cloud providers are optional, not required."
+      ],
+      "whyItMatters": "The interesting part is not another productivity dashboard. Local models can now make sense of sensitive personal context without shipping it to somebody else's server. That unlocks software that works precisely because the AI lives with you.",
+      "lever": {
+        "label": "Build on the repo",
+        "body": "Install the app, run the local-model path, then treat its timeline as a starting point for the workflow you wish your computer understood automatically.",
+        "url": "https://github.com/JerryZLiu/Dayflow"
+      },
+      "takeaways": [
+        "Passive products beat habits that depend on remembering.",
+        "Local is a capability choice; cloud providers remain optional."
+      ],
+      "media": {
+        "type": "poster",
+        "poster": "/media/issues/2026-07-11-ai-left-the-chat-box/dayflow-local-ai-time-tracker.jpg",
+        "alt": "Rich presenting a Dayflow Reel with the headline This is the future of AI startups",
+        "aspectRatio": "9:16",
+        "canonicalUrl": "",
+        "embedUrl": "",
+        "videoUrl": "",
+        "needsPublicUrl": true
+      },
+      "links": [
+        {"label": "Open the Dayflow repo", "url": "https://github.com/JerryZLiu/Dayflow", "type": "source"},
+        {"label": "Visit Dayflow", "url": "https://www.dayflow.so/", "type": "tool"}
+      ],
+      "emailSummary": "An open-source Mac app turns your screen activity into a work journal, with a fully local AI option.",
+      "treatment": "lead"
+    },
+    {
+      "order": 2,
+      "sourceSlug": "ai-website-hero-3-steps",
+      "category": "Build this",
+      "title": {
+        "lead": "The shortcut to an animated website.",
+        "muted": "Iteration beats prompting."
+      },
+      "hook": "The best AI websites rarely begin with a blank prompt. They begin with taste, a proven template and a good substitution brief.",
+      "whatShipped": [
+        "I used a three-step workflow to make the animated newsletter page you are looking at: Pinterest for direction, Midjourney and Gemini for the visual assets, then a proven motion prompt from motionsites.ai.",
+        "The final step was deliberately simple: paste the template into Claude and tell it exactly which images and video should replace the placeholders."
+      ],
+      "whyItMatters": "AI rewards iteration and art direction more than heroic one-shot prompting. Starting from a strong structure lets you spend your time choosing and refining, rather than persuading a model to rediscover a pattern somebody already solved.",
+      "lever": {
+        "label": "The three-step recipe",
+        "body": "1. Find the visual direction. 2. Borrow a motion pattern that already works. 3. Ask Claude to swap in your assets without changing the interaction model.",
+        "url": "https://motionsites.ai/"
+      },
+      "takeaways": [
+        "Use Midjourney for divergent visual exploration.",
+        "Use Gemini for precise edits and video generation.",
+        "Use Claude to adapt the implementation, not invent the whole brief."
+      ],
+      "media": {
+        "type": "poster",
+        "poster": "/media/issues/2026-07-11-ai-left-the-chat-box/ai-website-hero-3-steps.jpg",
+        "alt": "Rich presenting three animated mobile website examples with the headline Level up your website the easy way",
+        "aspectRatio": "9:16",
+        "canonicalUrl": "",
+        "embedUrl": "",
+        "videoUrl": "",
+        "needsPublicUrl": true
+      },
+      "links": [
+        {"label": "Browse MotionSites", "url": "https://motionsites.ai/", "type": "tool"},
+        {"label": "See the finished site", "url": "https://theaotp.com/", "type": "source"}
+      ],
+      "emailSummary": "A three-step visual, template and substitution workflow for building animated AI websites without starting from scratch.",
+      "treatment": "utility"
+    },
+    {
+      "order": 3,
+      "sourceSlug": "digg-x-rankings",
+      "category": "Follow the signal",
+      "title": {
+        "lead": "Nine million follows reveal who shapes tech.",
+        "muted": "Rebuild your feed around them."
+      },
+      "hook": "Digg used the X social graph to rank the people whose followings carry the strongest signal across AI, startups and investing.",
+      "whatShipped": [
+        "Digg mapped roughly nine million follow relationships to show how the tech community connects. The ranking surfaces people, companies and politicians actively shaping technology, with category views for AI, founders, investors and more.",
+        "The useful surface is the ranking itself: a set of names and categories you can use to rebuild a more deliberate information diet."
+      ],
+      "whyItMatters": "The editorial bet is information timing: a feed built around people doing the work should expose you to stronger ideas earlier than a feed optimised for mass reach. Curating your inputs remains one of the highest-leverage ways to improve what you know.",
+      "lever": {
+        "label": "Curate the algorithm",
+        "body": "Pick one field you want to understand, open the matching category, and follow the first ten people whose work is genuinely relevant. Do not copy the whole leaderboard; build a deliberate signal set.",
+        "url": "https://digg.com/tech/x/rankings"
+      },
+      "takeaways": [
+        "Ranked followers are a different signal from raw audience size.",
+        "Digg does not publish the exact gravity formula, so treat it as discovery rather than truth."
+      ],
+      "media": {
+        "type": "poster",
+        "poster": "/media/issues/2026-07-11-ai-left-the-chat-box/digg-x-rankings.jpg",
+        "alt": "Rich presenting a Reel about the most influential technology people on X",
+        "aspectRatio": "9:16",
+        "canonicalUrl": "",
+        "embedUrl": "",
+        "videoUrl": "",
+        "needsPublicUrl": true
+      },
+      "links": [
+        {"label": "Explore the rankings", "url": "https://digg.com/tech/x/rankings", "type": "tool"}
+      ],
+      "emailSummary": "Digg mapped nine million X follows into a practical discovery layer for tech's highest-signal voices.",
+      "treatment": "standard"
+    },
+    {
+      "order": 5,
+      "sourceSlug": "hf-realtime-voice",
+      "category": "Open voice AI",
+      "title": {
+        "lead": "Open voice AI already feels live.",
+        "muted": "The interface is changing."
+      },
+      "hook": "A real-time Hugging Face demo can hold a fast conversation, search the web and reason over a screenshot.",
+      "whatShipped": [
+        "I tested an open-source real-time voice workflow rather than another polished assistant demo. In this test it responded quickly, searched the web, read a screenshot and moved between tasks without forcing the conversation back into a text box.",
+        "That is enough to imagine the next layer: tutors that can see the work, accessibility tools that can explain a screen, and home assistants that are useful because they understand context."
+      ],
+      "whyItMatters": "The demo suggests voice stops feeling like a novelty when latency gets low enough and the model can use tools. The interaction becomes closer to directing a collaborator than dictating into software.",
+      "lever": {
+        "label": "Start from an open demo",
+        "body": "Use a working real-time voice Space or repository as the harness, then add one narrow tool that makes the conversation useful for a real job.",
+        "url": "https://huggingface.co/spaces/smolagents/hf-realtime-voice"
+      },
+      "takeaways": [
+        "Low latency changes what users are willing to say aloud.",
+        "Tool use matters more than a perfect synthetic voice."
+      ],
+      "media": {
+        "type": "poster",
+        "poster": "/media/issues/2026-07-11-ai-left-the-chat-box/hf-realtime-voice.jpg",
+        "alt": "Rich presenting a Reel with the headline You can now build anything with Voice AI",
+        "aspectRatio": "9:16",
+        "canonicalUrl": "",
+        "embedUrl": "",
+        "videoUrl": "",
+        "needsPublicUrl": true
+      },
+      "links": [
+        {"label": "Try the real-time voice Space", "url": "https://huggingface.co/spaces/smolagents/hf-realtime-voice", "type": "tool"},
+        {"label": "Open the speech-to-speech repo", "url": "https://github.com/huggingface/speech-to-speech", "type": "source"}
+      ],
+      "emailSummary": "A hands-on real-time voice demo shows why low latency plus tools turns speech into a serious interface.",
+      "treatment": "standard"
+    },
+    {
+      "order": 4,
+      "sourceSlug": "pov-bloopers",
+      "category": "Rich's corner",
+      "title": {
+        "lead": "The content engine has a human inside.",
+        "muted": "Take fourteen."
+      },
+      "hook": "Teaching people about AI and startups also means repeatedly forgetting how sentences work in front of a camera.",
+      "whatShipped": [
+        "This 32-second compilation is the honest layer underneath the polished explainers: missed lines, resets and the strange reality of becoming an on-camera creator because you wanted to teach what you were building.",
+        "It is lighter than the four builds above, but it belongs in the week because it is what shipping the other four actually looked like."
+      ],
+      "whyItMatters": "A repeatable system should make the work easier without pretending the work is frictionless. Showing the resets is part of building in public, and a useful antidote to the idea that everybody else ships perfectly on the first take.",
+      "lever": {
+        "label": "Keep the rough cut",
+        "body": "Save the resets. The failed takes are useful feedback on the script, and occasionally they are the most human thing you made all week.",
+        "url": "https://www.instagram.com/artofthepossible.ai/"
+      },
+      "takeaways": [
+        "Friction is evidence, not a personal defect.",
+        "A good system preserves the human parts worth sharing."
+      ],
+      "media": {
+        "type": "poster",
+        "poster": "/media/issues/2026-07-11-ai-left-the-chat-box/pov-bloopers.jpg",
+        "alt": "Rich on camera under a caption about realising that teaching AI and startups means making content",
+        "aspectRatio": "9:16",
+        "canonicalUrl": "",
+        "embedUrl": "",
+        "videoUrl": "",
+        "needsPublicUrl": true
+      },
+      "links": [
+        {"label": "Follow the next build", "url": "https://www.instagram.com/artofthepossible.ai/", "type": "watch"}
+      ],
+      "emailSummary": "The unpolished reality behind the week's four builds: resets, missed lines and one useful reminder to keep the rough cut.",
+      "treatment": "richs-corner"
+    }
+  ],
+  "seo": {
+    "title": "AI left the chat box this week | Art of the Possible",
+    "description": "Five things Rich made this week: local AI, an animated website, a technology power map, real-time voice and the honest outtakes.",
+    "image": "/media/issues/2026-07-11-ai-left-the-chat-box/dayflow-local-ai-time-tracker.jpg"
+  }
+}
