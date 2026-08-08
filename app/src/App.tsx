@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState, type CSSProperties, type FormEvent, type PointerEvent as ReactPointerEvent } from 'react'
+import { useEffect, useRef, useState, type CSSProperties, type FormEvent, type PointerEvent as ReactPointerEvent, type ReactNode } from 'react'
 import {
   Blocks,
+  ChevronDown,
   Compass,
   Gauge,
   GraduationCap,
@@ -11,51 +12,36 @@ import {
   Rocket,
   Sparkles,
   X,
+  Youtube,
   Zap,
 } from 'lucide-react'
 import heroFront from './assets/hero-front.webp'
 import heroReveal from './assets/hero-reveal.webp'
 import qualiaLogo from './assets/qualia-symbol.png'
-import issueData from './data/issues.json'
+import richSpeaking from './assets/about/rich-speaking.jpg'
+import logoEucalyptus from './assets/about/logo-eucalyptus.png'
+import logoHcf from './assets/about/logo-hcf.png'
+import logoJuniper from './assets/about/logo-juniper.png'
+import logoCompound from './assets/about/logo-compound.png'
+import logoEverlab from './assets/about/logo-everlab.png'
+import logoQualia from './assets/about/logo-qualia.png'
 
 const API_BASE = 'https://theaotp-gate.theaotp.workers.dev'
 const WRAP = 'mx-auto max-w-wrap px-5 sm:px-10 md:px-14'
 
-type Story = {
-  order: number
-  sourceSlug: string
-  category: string
-  title: { lead: string; muted?: string }
-  hook: string
-  treatment: string
-  media: { poster: string; alt: string }
+function Eyebrow({ children }: { children: ReactNode }) {
+  return (
+    <p className="rv mb-8 flex items-center gap-3 font-display text-[14px] font-extrabold uppercase tracking-[0.14em] text-ink">
+      <span className="inline-block h-[3px] w-9 bg-ink" aria-hidden="true" />
+      {children}
+    </p>
+  )
 }
 
-type Issue = {
-  issueNumber: number
-  slug: string
-  publishedAt: string
-  subject: string
-  preheader: string
-  title: { lead: string; muted: string }
-  dek: string
-  editorNote: string[]
-  stories: Story[]
-}
-
-const issues = issueData as Issue[]
-const latest = issues[0]
-const latestStories = [...latest.stories].sort((a, b) => a.order - b.order)
-
-function formatDate(value: string) {
-  return new Intl.DateTimeFormat('en-AU', { day: '2-digit', month: 'short', year: 'numeric' })
-    .format(new Date(value))
-    .toUpperCase()
-}
-
-function SubscribeForm() {
+function SubscribeForm({ idSuffix = 'a' }: { idSuffix?: string }) {
   const [status, setStatus] = useState('')
   const formRef = useRef<HTMLFormElement>(null)
+  const inputId = `newsletter-email-${idSuffix}`
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -85,9 +71,9 @@ function SubscribeForm() {
   return (
     <>
       <form ref={formRef} onSubmit={onSubmit} noValidate className="flex items-stretch border-b-2 border-ink">
-        <label className="sr-only" htmlFor="newsletter-email">Email address</label>
+        <label className="sr-only" htmlFor={inputId}>Email address</label>
         <input
-          id="newsletter-email"
+          id={inputId}
           type="email"
           name="email"
           placeholder="you@somewhere.com"
@@ -142,10 +128,9 @@ function Nav() {
         </a>
 
         <div className="hidden items-center gap-7 sm:flex">
-          <a href="#latest" className={`text-sm font-semibold transition-colors duration-500 ${textColour}`}>The letter</a>
-          <a href="/letters/" className={`text-sm font-medium transition-colors duration-500 ${secondaryColour}`}>Archive</a>
           <a href="#about" className={`text-sm font-medium transition-colors duration-500 ${secondaryColour}`}>About</a>
-          <a href="#subscribe" className={`px-5 py-2.5 font-display text-[13px] font-semibold transition-colors duration-500 ${scrolled ? 'bg-ink text-paper hover:opacity-85' : 'bg-white text-ink hover:bg-white/90'}`}>
+          <a href="/letters/" className={`text-sm font-medium transition-colors duration-500 ${secondaryColour}`}>Archive</a>
+          <a href="#signup" className={`px-5 py-2.5 font-display text-[13px] font-semibold transition-colors duration-500 ${scrolled ? 'bg-ink text-paper hover:opacity-85' : 'bg-white text-ink hover:bg-white/90'}`}>
             Subscribe
           </a>
         </div>
@@ -163,10 +148,9 @@ function Nav() {
       {open && (
         <div className={`border-t px-5 py-5 sm:hidden ${scrolled ? 'border-rule bg-paper text-ink' : 'border-white/20 bg-black/80 text-white backdrop-blur-md'}`}>
           <div className="mx-auto flex max-w-wrap flex-col gap-4 font-display font-semibold">
-            <a href="#latest" onClick={() => setOpen(false)}>The letter</a>
-            <a href="/letters/" onClick={() => setOpen(false)}>Archive</a>
+            <a href="#signup" onClick={() => setOpen(false)}>Subscribe</a>
             <a href="#about" onClick={() => setOpen(false)}>About</a>
-            <a href="#subscribe" onClick={() => setOpen(false)}>Subscribe</a>
+            <a href="/letters/" onClick={() => setOpen(false)}>Archive</a>
           </div>
         </div>
       )}
@@ -258,8 +242,8 @@ function Hero() {
         </h1>
       </div>
 
-      <a href="#latest" className="hero-anim hero-fade absolute bottom-8 left-6 z-50 inline-flex items-center gap-3 text-white/75 transition-colors hover:text-white sm:left-10 md:left-14" style={{ animationDelay: '0.9s' }}>
-        <span className="font-display text-[11px] font-semibold uppercase tracking-[0.22em]">Read the latest</span>
+      <a href="#signup" className="hero-anim hero-fade absolute bottom-8 left-6 z-50 inline-flex items-center gap-3 text-white/75 transition-colors hover:text-white sm:left-10 md:left-14" style={{ animationDelay: '0.9s' }}>
+        <span className="font-display text-[11px] font-semibold uppercase tracking-[0.22em]">Start here</span>
         <span className="hero-bounce text-lg leading-none">↓</span>
       </a>
     </section>
@@ -272,7 +256,14 @@ const STATS = [
   { value: '100k+', label: 'users reached' },
 ]
 
-const COMPANIES = ['Eucalyptus', 'HCF', 'Juniper', 'compound', 'everlab', 'Qualia']
+const COMPANY_LOGOS = [
+  { src: logoEucalyptus, name: 'Eucalyptus' },
+  { src: logoHcf, name: 'HCF' },
+  { src: logoJuniper, name: 'Juniper' },
+  { src: logoCompound, name: 'compound' },
+  { src: logoEverlab, name: 'everlab' },
+  { src: logoQualia, name: 'Qualia' },
+]
 
 const JOURNEY = [
   { year: '2022', title: 'Joined Eucalyptus', body: 'One of the team of 10 that launched Juniper, now doing over $400m a year. Euc later sold to a NY-listed healthcare giant in a $1.6b deal.' },
@@ -298,8 +289,44 @@ const FOR_YOU = [
 
 const SOCIALS = [
   { icon: Instagram, label: 'Instagram', href: 'https://www.instagram.com/artofthepossible.ai/' },
+  { icon: Youtube, label: 'YouTube', href: 'https://www.youtube.com/@artofthepossibleai' },
   { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/richard-eve-545179138/' },
 ]
+
+function Journey() {
+  const [open, setOpen] = useState(false)
+  return (
+    <section className="border-t border-rule">
+      <div className={`${WRAP} py-[clamp(44px,7vh,72px)]`}>
+        <button
+          onClick={() => setOpen((value) => !value)}
+          aria-expanded={open}
+          className="rv flex w-full items-center justify-between gap-4 text-left"
+        >
+          <span>
+            <span className="mb-2 flex items-center gap-3 font-display text-[14px] font-extrabold uppercase tracking-[0.14em] text-ink">
+              <span className="inline-block h-[3px] w-9 bg-ink" aria-hidden="true" />
+              The journey so far
+            </span>
+            <span className="block max-w-[54ch] text-[15px] text-ink-soft">From a team of ten to a $1.6b exit, and plenty I broke along the way.</span>
+          </span>
+          <ChevronDown size={26} strokeWidth={2} className={`shrink-0 transition-transform duration-300 ${open ? 'rotate-180' : ''}`} />
+        </button>
+        {open && (
+          <div className="mt-8">
+            {JOURNEY.map((item) => (
+              <div key={`${item.year}-${item.title}`} className="grid grid-cols-[64px_1fr] items-baseline gap-x-[clamp(16px,3vw,48px)] gap-y-1.5 border-t border-rule py-[clamp(22px,3.5vh,36px)] transition-colors hover:bg-[#f6f6f3] md:grid-cols-[minmax(90px,160px)_1fr_1.1fr]">
+                <span className="font-display text-[clamp(17px,1.9vw,26px)] font-extrabold tracking-[-0.03em]">{item.year}</span>
+                <h3 className="font-display text-[clamp(18px,2vw,26px)] font-bold leading-[1.1] tracking-[-0.02em]">{item.title}</h3>
+                <p className="col-start-2 max-w-[48ch] text-[15px] text-ink-soft md:col-start-3">{item.body}</p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  )
+}
 
 export default function App() {
   useEffect(() => {
@@ -327,131 +354,27 @@ export default function App() {
       <Hero />
 
       <main>
-        <div className="overflow-hidden whitespace-nowrap border-y border-rule py-6" aria-hidden="true">
-          <div className="marquee-track inline-flex gap-16 font-display text-[clamp(15px,1.6vw,20px)] font-bold tracking-[-0.02em] text-ink-mid">
-            <span className="inline-flex items-center gap-16">Five useful builds · The prompt behind each one · One honest field note ·</span>
-            <span className="inline-flex items-center gap-16">Five useful builds · The prompt behind each one · One honest field note ·</span>
-          </div>
-        </div>
-
-        <section id="latest" className={`${WRAP} scroll-mt-16 py-[clamp(64px,11vh,120px)]`}>
+        <section id="signup" className={`${WRAP} scroll-mt-16 py-[clamp(64px,11vh,120px)]`}>
           <div className="grid items-start gap-10 md:grid-cols-[1.25fr_0.75fr] md:gap-[clamp(42px,7vw,110px)]">
             <div>
-              <p className="rv mb-8 font-display text-[13px] font-bold uppercase tracking-[0.14em] text-ink-mid">
-                The weekly letter · № {String(latest.issueNumber).padStart(3, '0')} · {formatDate(latest.publishedAt)}
-              </p>
-              <h2 className="rv max-w-[15ch] text-balance font-display text-[clamp(38px,5.8vw,78px)] font-extrabold leading-[0.99] tracking-[-0.045em]">
-                {latest.title.lead} <span className="text-ink-mid">{latest.title.muted}</span>
+              <Eyebrow>The weekly letter</Eyebrow>
+              <h2 className="rv max-w-[18ch] text-balance font-display text-[clamp(36px,5.2vw,72px)] font-extrabold leading-[1.0] tracking-[-0.045em]">
+                Sign up for the best weekend read <span className="text-ink-mid">covering AI and startups.</span>
               </h2>
-              <p className="rv mt-7 max-w-[62ch] text-[17px] leading-relaxed text-ink-soft">{latest.editorNote[0]}</p>
-              <a className="rv mt-8 inline-block border-b-2 border-ink pb-1 font-display font-bold" href={`/letters/${latest.slug}/`}>
-                Read edition № {String(latest.issueNumber).padStart(3, '0')} →
-              </a>
+              <p className="rv mt-7 max-w-[56ch] text-[17px] leading-relaxed text-ink-soft">
+                One email a week. From someone with the experience to know what's useful and what's not.
+              </p>
             </div>
-            <div className="rv border-t border-ink pt-6 md:mt-12">
-              <p className="mb-7 max-w-[44ch] text-[15px] leading-relaxed text-ink-soft">{latest.dek} Get the next five directly in your inbox.</p>
-              <SubscribeForm />
-            </div>
-          </div>
-
-          <div className="mt-[clamp(58px,9vh,100px)] border-t border-ink">
-            {latestStories.map((story) => (
-              <a
-                key={story.sourceSlug}
-                href={`/letters/${latest.slug}/#story-${story.order}`}
-                className={`rv group grid gap-5 border-b border-rule py-7 transition-colors hover:bg-[#f6f6f3] sm:grid-cols-[54px_minmax(0,1fr)_150px] sm:items-center sm:px-3 ${story.treatment === 'richs-corner' ? 'bg-[#f6f6f3]' : ''}`}
-              >
-                <span className="font-display text-[18px] font-extrabold text-ink-mid">{String(story.order).padStart(2, '0')}</span>
-                <span>
-                  <small className="font-display text-[11px] font-bold uppercase tracking-[0.09em] text-ink-mid">{story.category}</small>
-                  <strong className="mt-1 block font-display text-[clamp(22px,2.4vw,32px)] font-bold leading-[1.08] tracking-[-0.025em] transition-transform duration-200 group-hover:translate-x-1">
-                    {story.title.lead} {story.title.muted && <span className="text-ink-mid">{story.title.muted}</span>}
-                  </strong>
-                  <em className="mt-2 block max-w-[68ch] text-[14px] not-italic leading-relaxed text-ink-soft">{story.hook}</em>
-                </span>
-                <img src={story.media.poster} alt="" className="hidden aspect-[3/2] w-full object-cover sm:block" loading="lazy" />
-              </a>
-            ))}
-          </div>
-        </section>
-
-        <section className="border-t border-rule">
-          <div className={`${WRAP} py-[clamp(52px,8vh,88px)]`}>
-            <div className="rv flex flex-wrap items-end justify-between gap-5">
-              <div>
-                <p className="mb-4 font-display text-[13px] font-bold uppercase tracking-[0.14em] text-ink-mid">The archive</p>
-                <h2 className="font-display text-[clamp(28px,3.8vw,50px)] font-extrabold tracking-[-0.04em]">Everything possible so far.</h2>
-              </div>
-              <a href="/letters/" className="border-b-2 border-ink pb-1 font-display font-bold">Browse all editions →</a>
-            </div>
-            <div className="rv mt-10 border-t border-ink">
-              {issues.slice(0, 4).map((issue) => (
-                <a key={issue.slug} href={`/letters/${issue.slug}/`} className="grid gap-2 border-b border-rule py-6 transition-colors hover:bg-[#f6f6f3] sm:grid-cols-[90px_1fr_140px_auto] sm:items-baseline sm:px-3">
-                  <span className="text-[12px] text-ink-mid">№ {String(issue.issueNumber).padStart(3, '0')}</span>
-                  <strong className="font-display text-[22px] tracking-[-0.02em]">{issue.subject}</strong>
-                  <small className="text-[12px] text-ink-mid">{formatDate(issue.publishedAt)}</small>
-                  <em className="font-display text-[12px] font-bold not-italic">Read →</em>
-                </a>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="about" className={`${WRAP} scroll-mt-16 py-[clamp(64px,11vh,120px)]`}>
-          <p className="rv mb-8 font-display text-[13px] font-bold uppercase tracking-[0.14em] text-ink-mid">Start here · Who I am</p>
-          <div className="grid items-start gap-10 md:grid-cols-[1.25fr_1fr] md:gap-[clamp(32px,5vw,96px)]">
-            <h2 className="rv text-balance font-display text-[clamp(30px,4.3vw,58px)] font-extrabold leading-[1.02] tracking-[-0.04em]">
-              I'm a massive nerd with <em className="italic">AI psychosis</em>, and enough real-world experience to have something to say about it.
-            </h2>
-            <div className="rv">
-              <p className="text-[15px] leading-relaxed text-ink-soft">Ten years obsessed with startups and innovation. I've built AI products everywhere from a consumer startup that sold for $1.6b to one of Australia's largest enterprises, doing over $4b in revenue.</p>
-              <p className="mt-4 text-[13px] italic leading-relaxed text-ink-mid">AI psychosis (noun): a state of all-consuming curiosity that leaves you unable to stop thinking about, tinkering with, or talking about AI.</p>
+            <div className="rv border-t border-ink pt-6 md:mt-14">
+              <p className="mb-7 max-w-[44ch] text-[15px] leading-relaxed text-ink-soft">What shipped, the lever that made it work, and the recipe to build it yourself. No drip, no sales sequence.</p>
+              <SubscribeForm idSuffix="top" />
             </div>
           </div>
 
-          <div className="rv mt-14 grid grid-cols-3 gap-6 border-t border-rule pt-10 sm:gap-10">
-            {STATS.map((stat) => (
-              <div key={stat.label}>
-                <div className="font-display text-[clamp(30px,4.4vw,58px)] font-extrabold leading-none tracking-[-0.04em]">{stat.value}</div>
-                <div className="mt-2 text-[12px] text-ink-soft sm:text-sm">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-
-          <div className="rv mt-10 flex flex-wrap items-center gap-x-7 gap-y-3">
-            <span className="font-display text-[12px] font-semibold uppercase tracking-[0.14em] text-ink-mid">Built @</span>
-            {COMPANIES.map((company) => <span key={company} className="font-display text-[15px] font-bold text-ink/70">{company}</span>)}
-          </div>
-        </section>
-
-        <section className="border-t border-rule">
-          <div className={`${WRAP} py-[clamp(64px,11vh,120px)]`}>
-            <h2 className="rv mb-2 font-display text-[clamp(24px,2.6vw,34px)] font-bold tracking-[-0.03em]">The journey so far</h2>
-            <p className="rv mb-10 max-w-[54ch] text-[15px] text-ink-soft">From a team of ten to a $1.6b exit, and plenty I broke along the way.</p>
-            {JOURNEY.map((item) => (
-              <div key={`${item.year}-${item.title}`} className="rv grid grid-cols-[64px_1fr] items-baseline gap-x-[clamp(16px,3vw,48px)] gap-y-1.5 border-t border-rule py-[clamp(22px,3.5vh,36px)] transition-colors hover:bg-[#f6f6f3] md:grid-cols-[minmax(90px,160px)_1fr_1.1fr]">
-                <span className="font-display text-[clamp(17px,1.9vw,26px)] font-extrabold tracking-[-0.03em]">{item.year}</span>
-                <h3 className="font-display text-[clamp(18px,2vw,26px)] font-bold leading-[1.1] tracking-[-0.02em]">{item.title}</h3>
-                <p className="col-start-2 max-w-[48ch] text-[15px] text-ink-soft md:col-start-3">{item.body}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="border-t border-ink">
-          <div className={`${WRAP} py-[clamp(72px,13vh,150px)]`}>
-            <p className="rv mb-8 font-display text-[13px] font-bold uppercase tracking-[0.14em] text-ink-mid">Why I'm writing this</p>
-            <p className="rv max-w-[24ch] text-balance font-display text-[clamp(28px,3.8vw,52px)] font-extrabold leading-[1.06] tracking-[-0.035em]">We're less than five years from AGI. That can be scary. It can also be the best time in history to <em className="italic">build</em>.</p>
-            <p className="rv mt-8 max-w-[62ch] text-[clamp(16px,1.5vw,20px)] leading-relaxed text-ink-soft">One person, a laptop, and curiosity have never been able to make a bigger dent. I've been heads-down building for a decade. Now I want to share it, and build with you. That's why I write this letter: to help you find that excitement, and see the art of the possible with AI.</p>
-          </div>
-        </section>
-
-        <section className="border-t border-rule">
-          <div className={`${WRAP} py-[clamp(64px,11vh,120px)]`}>
-            <h2 className="rv mb-10 font-display text-[clamp(24px,2.6vw,34px)] font-bold tracking-[-0.03em]">What you'll get</h2>
+          <div className="rv mt-[clamp(48px,8vh,84px)] border-t border-rule pt-10">
             <div className="grid gap-x-[clamp(24px,5vw,80px)] gap-y-10 sm:grid-cols-2">
               {POST_TYPES.map(({ icon: Icon, title, body }) => (
-                <div key={title} className="rv flex gap-5">
+                <div key={title} className="flex gap-5">
                   <div className="grid h-12 w-12 shrink-0 place-items-center rounded-full border border-ink"><Icon size={20} strokeWidth={1.75} /></div>
                   <div><h3 className="mb-1 font-display text-[clamp(19px,2vw,24px)] font-bold tracking-[-0.02em]">{title}</h3><p className="max-w-[42ch] text-[15px] text-ink-soft">{body}</p></div>
                 </div>
@@ -460,19 +383,65 @@ export default function App() {
           </div>
         </section>
 
+        <section id="about" className="scroll-mt-16 border-t border-ink">
+          <div className={`${WRAP} py-[clamp(64px,11vh,120px)]`}>
+            <Eyebrow>Start here · Who I am</Eyebrow>
+            <div className="grid items-start gap-10 md:grid-cols-[1.25fr_1fr] md:gap-[clamp(32px,5vw,96px)]">
+              <div>
+                <h2 className="rv text-balance font-display text-[clamp(30px,4.3vw,58px)] font-extrabold leading-[1.02] tracking-[-0.04em]">
+                  I'm a massive nerd with <em className="italic">AI psychosis</em>, and enough real-world experience to have something to say about it.
+                </h2>
+                <p className="rv mt-8 text-[15px] leading-relaxed text-ink-soft">Ten years obsessed with startups and innovation. I've built AI products everywhere from a consumer startup that sold for $1.6b to one of Australia's largest enterprises, doing over $4b in revenue.</p>
+                <p className="rv mt-4 text-[13px] italic leading-relaxed text-ink-mid">AI psychosis (noun): a state of all-consuming curiosity that leaves you unable to stop thinking about, tinkering with, or talking about AI.</p>
+              </div>
+              <figure className="rv">
+                <img src={richSpeaking} alt="Rich speaking on stage with a microphone" className="w-full object-cover" loading="lazy" />
+                <figcaption className="mt-3 text-[13px] text-ink-mid">Talking startups and AI, as always.</figcaption>
+              </figure>
+            </div>
+
+            <div className="rv mt-14 grid grid-cols-3 gap-6 border-t border-rule pt-10 sm:gap-10">
+              {STATS.map((stat) => (
+                <div key={stat.label}>
+                  <div className="font-display text-[clamp(30px,4.4vw,58px)] font-extrabold leading-none tracking-[-0.04em]">{stat.value}</div>
+                  <div className="mt-2 text-[12px] text-ink-soft sm:text-sm">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+
+            <div className="rv mt-12">
+              <p className="mb-5 font-display text-[12px] font-semibold uppercase tracking-[0.14em] text-ink-mid">Built @</p>
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+                {COMPANY_LOGOS.map(({ src, name }) => (
+                  <img key={name} src={src} alt={`${name} logo`} className="aspect-[8/5] w-full object-cover" loading="lazy" />
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <Journey />
+
+        <section className="border-t border-ink">
+          <div className={`${WRAP} py-[clamp(72px,13vh,150px)]`}>
+            <Eyebrow>Why I'm writing this</Eyebrow>
+            <p className="rv max-w-[24ch] text-balance font-display text-[clamp(28px,3.8vw,52px)] font-extrabold leading-[1.06] tracking-[-0.035em]">We're less than five years from AGI. That can be scary. It can also be the best time in history to <em className="italic">build</em>.</p>
+            <p className="rv mt-8 max-w-[62ch] text-[clamp(16px,1.5vw,20px)] leading-relaxed text-ink-soft">One person, a laptop, and curiosity have never been able to make a bigger dent. I've been heads-down building for a decade. Now I want to share it, and build with you. That's why I write this letter: to help you find that excitement, and see the art of the possible with AI.</p>
+          </div>
+        </section>
+
         <section id="subscribe" className="scroll-mt-16 border-t border-ink">
           <div className={`${WRAP} grid items-start gap-12 py-[clamp(64px,11vh,120px)] md:grid-cols-2 md:gap-[clamp(32px,5vw,96px)]`}>
             <div>
-              <h2 className="rv mb-8 text-balance font-display text-[clamp(28px,3.8vw,52px)] font-extrabold leading-[1.02] tracking-[-0.04em]">This is for you if you want to…</h2>
+              <h2 className="rv mb-8 text-balance font-display text-[clamp(28px,3.8vw,52px)] font-extrabold leading-[1.02] tracking-[-0.04em]">Follow to understand the art of the <em className="italic">possible</em>.</h2>
               <ul className="space-y-4">
                 {FOR_YOU.map(({ icon: Icon, text }) => <li key={text} className="rv flex items-center gap-4"><Icon size={20} strokeWidth={1.75} className="shrink-0" /><span className="text-[16px] text-ink-soft">{text}</span></li>)}
               </ul>
             </div>
             <div className="rv md:pt-1">
-              <p className="mb-7 max-w-[44ch] text-[15px] text-ink-soft">One email a week: what shipped, the lever that made it work, and the recipe to build it yourself. No drip, no sales sequence.</p>
-              <SubscribeForm />
-              <p className="mt-9 font-display text-[clamp(18px,2vw,24px)] font-bold leading-[1.15] tracking-[-0.02em]">Follow to make me this happy, and to understand the art of the possible.</p>
-              <div className="mt-5 flex flex-wrap items-center gap-3">
+              <p className="mb-7 max-w-[44ch] text-[15px] text-ink-soft">One email a week: what shipped, the lever that made it work, and the recipe to build it yourself.</p>
+              <SubscribeForm idSuffix="bottom" />
+              <div className="mt-9 flex flex-wrap items-center gap-3">
                 {SOCIALS.map(({ icon: Icon, label, href }) => (
                   <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 border border-ink px-4 py-2.5 font-display text-[13px] font-semibold transition-colors hover:bg-ink hover:text-paper"><Icon size={17} strokeWidth={2} />{label}</a>
                 ))}
