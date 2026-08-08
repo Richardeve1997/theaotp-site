@@ -292,8 +292,8 @@ const SOCIALS = [
 function Journey() {
   const [open, setOpen] = useState(false)
   return (
-    <section className="border-t border-rule">
-      <div className={`${WRAP} roll py-[clamp(44px,7vh,72px)]`}>
+    <section className="roll border-t border-rule">
+      <div className={`${WRAP} py-[clamp(44px,7vh,72px)]`}>
         <button
           onClick={() => setOpen((value) => !value)}
           aria-expanded={open}
@@ -340,14 +340,14 @@ function WhySection() {
 
   return (
     <section
-      className="relative overflow-hidden border-t border-ink"
+      className="roll relative overflow-hidden border-t border-ink"
       onPointerMove={onPointerMove}
       onPointerLeave={() => revealRef.current?.classList.remove('is-active')}
     >
       <img src={whySky} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
       <div ref={revealRef} className="spotlight-reveal absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none" style={{ backgroundImage: `url(${whySkyReveal})` }} aria-hidden="true" />
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/45 via-black/20 to-transparent" />
-      <div className={`${WRAP} roll relative z-10 py-[clamp(72px,13vh,150px)]`}>
+      <div className={`${WRAP} relative z-10 py-[clamp(72px,13vh,150px)]`}>
         <p className="rv mb-8 flex items-center gap-3 font-display text-[14px] font-extrabold uppercase tracking-[0.14em] text-white">
           <span className="inline-block h-[3px] w-9 bg-white" aria-hidden="true" />
           Why I'm writing this
@@ -385,7 +385,8 @@ export default function App() {
       <Hero />
 
       <main>
-        <section id="signup" className={`${WRAP} roll scroll-mt-16 py-[clamp(64px,11vh,120px)]`}>
+        <section id="signup" className="roll scroll-mt-16">
+          <div className={`${WRAP} py-[clamp(64px,11vh,120px)]`}>
           <div className="grid items-start gap-10 md:grid-cols-[1.25fr_0.75fr] md:gap-[clamp(42px,7vw,110px)]">
             <div>
               <Eyebrow>The weekly letter</Eyebrow>
@@ -414,10 +415,11 @@ export default function App() {
               ))}
             </div>
           </div>
+          </div>
         </section>
 
-        <section id="about" className="scroll-mt-16 border-t border-ink">
-          <div className={`${WRAP} roll py-[clamp(64px,11vh,120px)]`}>
+        <section id="about" className="roll scroll-mt-16 border-t border-ink">
+          <div className={`${WRAP} py-[clamp(64px,11vh,120px)]`}>
             <Eyebrow>Start here · Who I am</Eyebrow>
             <div className="grid items-start gap-10 md:grid-cols-[1.25fr_1fr] md:gap-[clamp(32px,5vw,96px)]">
               <div>
@@ -427,7 +429,7 @@ export default function App() {
                 <p className="rv mt-8 text-[15px] leading-relaxed text-ink-soft">Ten years obsessed with startups and innovation. I've built AI products everywhere from a consumer startup that sold for $1.6b to one of Australia's largest enterprises, doing over $4b in revenue.</p>
                 <p className="rv mt-4 text-[13px] italic leading-relaxed text-ink-mid">AI psychosis (noun): a state of all-consuming curiosity that leaves you unable to stop thinking about, tinkering with, or talking about AI.</p>
               </div>
-              <figure className="rv w-full max-w-[300px] md:justify-self-end">
+              <figure className="rv w-full max-w-[380px] md:self-end md:justify-self-end">
                 <img src={richSpeaking} alt="Rich speaking on stage with a microphone" className="aspect-square w-full object-cover" loading="lazy" />
                 <figcaption className="mt-3 text-[13px] text-ink-mid">Talking startups and AI, as always.</figcaption>
               </figure>
@@ -460,8 +462,8 @@ export default function App() {
 
         <WhySection />
 
-        <section id="subscribe" className="scroll-mt-16 border-t border-ink">
-          <div className={`${WRAP} roll grid items-start gap-12 py-[clamp(64px,11vh,120px)] md:grid-cols-2 md:gap-[clamp(32px,5vw,96px)]`}>
+        <section id="subscribe" className="roll scroll-mt-16 border-t border-ink">
+          <div className={`${WRAP} grid items-start gap-12 py-[clamp(64px,11vh,120px)] md:grid-cols-2 md:gap-[clamp(32px,5vw,96px)]`}>
             <div>
               <h2 className="rv mb-8 text-balance font-display text-[clamp(28px,3.8vw,52px)] font-extrabold leading-[1.02] tracking-[-0.04em]">Follow to understand the art of the <em className="italic">possible</em>.</h2>
               <ul className="space-y-4">

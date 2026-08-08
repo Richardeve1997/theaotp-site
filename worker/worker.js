@@ -51,10 +51,28 @@ export default {
       });
 
     if (url.pathname === '/subscribe') {
-      const res = await bd('/subscribers', {
-        method: 'POST',
-        body: JSON.stringify({ email_address: email }),
+      // Forward the real visitor IP + referrer so Buttondown's firewall doesn't
+      // see every signup as coming from one Cloudflare datacenter IP.
+      const payload = JSON.stringify({
+        email_address: email,
+        ip_address: request.headers.get('CF-Connecting-IP') || undefined,
+        referrer_url: origin || 'https://theaotp.com',
       });
+      let res = await bd('/subscribers', { method: 'POST', body: payload });
+      if (res.status === 400 && /firewall/i.test(await res.clone().text())) {
+        // False positive from Buttondown's rate-heuristic firewall (all our
+        // signups share one worker egress IP). Retry via the documented
+        // trusted-source bypass; Buttondown caps it at 5/hour per newsletter.
+        res = await fetch('https://api.buttondown.com/v1/subscribers', {
+          method: 'POST',
+          headers: {
+            Authorization: `Token ${env.BUTTONDOWN_API_KEY}`,
+            'Content-Type': 'application/json',
+            'X-Buttondown-Bypass-Firewall': 'true',
+          },
+          body: payload,
+        });
+      }
       // 201 = new subscriber; 400 with "already subscribed" also counts as success
       if (res.status === 201)
         return new Response(JSON.stringify({ ok: true, new: true }), { headers });

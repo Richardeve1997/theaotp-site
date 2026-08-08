@@ -45,12 +45,12 @@ a { color: inherit; text-decoration: none; }
 
 .roll {
   opacity: 0;
-  transform: perspective(1200px) rotateX(9deg) translateY(56px) scale(.985);
+  transform: perspective(1400px) rotateX(14deg) translateY(72px) scale(.97);
   transform-origin: 50% 0%;
-  transition: opacity .85s cubic-bezier(.16,1,.3,1), transform 1s cubic-bezier(.16,1,.3,1);
+  transition: opacity .9s cubic-bezier(.16,1,.3,1), transform 1.1s cubic-bezier(.16,1,.3,1);
   will-change: transform, opacity;
 }
-.roll.in { opacity: 1; transform: perspective(1200px) rotateX(0) translateY(0) scale(1); }
+.roll.in { opacity: 1; transform: perspective(1400px) rotateX(0) translateY(0) scale(1); }
 
 @keyframes slide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .marquee-track { animation: slide 36s linear infinite; }
