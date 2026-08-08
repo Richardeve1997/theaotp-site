@@ -4,13 +4,9 @@ import {
   ChevronDown,
   Compass,
   Gauge,
-  GraduationCap,
   Instagram,
   Linkedin,
   Menu,
-  Newspaper,
-  Rocket,
-  Sparkles,
   X,
   Youtube,
   Zap,
@@ -19,6 +15,11 @@ import heroFront from './assets/hero-front.webp'
 import heroReveal from './assets/hero-reveal.webp'
 import qualiaLogo from './assets/qualia-symbol.png'
 import richSpeaking from './assets/about/rich-speaking.jpg'
+import whySky from './assets/why-sky.jpg'
+import whySkyReveal from './assets/why-sky-reveal.jpg'
+import iconProjects from './assets/about/icons/side-projects.png'
+import iconTutorials from './assets/about/icons/ai-tutorials.png'
+import iconNews from './assets/about/icons/ai-news.png'
 import logoEucalyptus from './assets/about/logo-eucalyptus.png'
 import logoHcf from './assets/about/logo-hcf.png'
 import logoJuniper from './assets/about/logo-juniper.png'
@@ -274,10 +275,9 @@ const JOURNEY = [
 ]
 
 const POST_TYPES = [
-  { icon: Rocket, title: 'Side projects', body: 'A million things I want to build, and the full zero-to-one journey for each.' },
-  { icon: GraduationCap, title: 'AI tutorials', body: 'The tools I actually use day to day, not just whatever gets the most likes and views.' },
-  { icon: Newspaper, title: 'AI news that matters', body: 'The non-obvious updates, trends, and predictions you actually need to be across.' },
-  { icon: Sparkles, title: 'Random', body: "Whatever you want to see, or whatever I feel like posting. It's not that serious." },
+  { icon: iconProjects, title: 'Side projects', body: 'A million things I want to build, and the full zero-to-one journey for each.' },
+  { icon: iconTutorials, title: 'AI tutorials', body: 'The tools I actually use day to day, not just whatever gets the most likes and views.' },
+  { icon: iconNews, title: 'AI news that matters', body: 'The non-obvious updates, trends, and predictions you actually need to be across.' },
 ]
 
 const FOR_YOU = [
@@ -328,6 +328,41 @@ function Journey() {
   )
 }
 
+function WhySection() {
+  const revealRef = useRef<HTMLDivElement>(null)
+
+  function onPointerMove(event: ReactPointerEvent<HTMLElement>) {
+    if (event.pointerType === 'touch') return
+    const bounds = event.currentTarget.getBoundingClientRect()
+    const layer = revealRef.current
+    if (layer) {
+      layer.classList.add('is-active')
+      layer.style.setProperty('--x', `${event.clientX - bounds.left}px`)
+      layer.style.setProperty('--y', `${event.clientY - bounds.top}px`)
+    }
+  }
+
+  return (
+    <section
+      className="relative overflow-hidden border-t border-ink"
+      onPointerMove={onPointerMove}
+      onPointerLeave={() => revealRef.current?.classList.remove('is-active')}
+    >
+      <img src={whySky} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
+      <div ref={revealRef} className="spotlight-reveal absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none" style={{ backgroundImage: `url(${whySkyReveal})` }} aria-hidden="true" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/45 via-black/20 to-transparent" />
+      <div className={`${WRAP} relative z-10 py-[clamp(72px,13vh,150px)]`}>
+        <p className="rv mb-8 flex items-center gap-3 font-display text-[14px] font-extrabold uppercase tracking-[0.14em] text-white">
+          <span className="inline-block h-[3px] w-9 bg-white" aria-hidden="true" />
+          Why I'm writing this
+        </p>
+        <p className="rv max-w-[24ch] text-balance font-display text-[clamp(28px,3.8vw,52px)] font-extrabold leading-[1.06] tracking-[-0.035em] text-white">We're less than five years from AGI. That can be scary. It can also be the best time in history to <em className="italic">build</em>.</p>
+        <p className="rv mt-8 max-w-[62ch] text-[clamp(16px,1.5vw,20px)] leading-relaxed text-white/85">One person, a laptop, and curiosity have never been able to make a bigger dent. I've been heads-down building for a decade. Now I want to share it, and build with you. That's why I write this letter: to help you find that excitement, and see the art of the possible with AI.</p>
+      </div>
+    </section>
+  )
+}
+
 export default function App() {
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -359,7 +394,7 @@ export default function App() {
             <div>
               <Eyebrow>The weekly letter</Eyebrow>
               <h2 className="rv max-w-[18ch] text-balance font-display text-[clamp(36px,5.2vw,72px)] font-extrabold leading-[1.0] tracking-[-0.045em]">
-                Sign up for the best weekend read <span className="text-ink-mid">covering AI and startups.</span>
+                Sign up for the best weekend read covering AI and startups.
               </h2>
               <p className="rv mt-7 max-w-[56ch] text-[17px] leading-relaxed text-ink-soft">
                 One email a week. From someone with the experience to know what's useful and what's not.
@@ -372,11 +407,16 @@ export default function App() {
           </div>
 
           <div className="rv mt-[clamp(48px,8vh,84px)] border-t border-rule pt-10">
-            <div className="grid gap-x-[clamp(24px,5vw,80px)] gap-y-10 sm:grid-cols-2">
-              {POST_TYPES.map(({ icon: Icon, title, body }) => (
-                <div key={title} className="flex gap-5">
-                  <div className="grid h-12 w-12 shrink-0 place-items-center rounded-full border border-ink"><Icon size={20} strokeWidth={1.75} /></div>
-                  <div><h3 className="mb-1 font-display text-[clamp(19px,2vw,24px)] font-bold tracking-[-0.02em]">{title}</h3><p className="max-w-[42ch] text-[15px] text-ink-soft">{body}</p></div>
+            <h3 className="mb-10 flex items-center gap-3 font-display text-[14px] font-extrabold uppercase tracking-[0.14em] text-ink">
+              <span className="inline-block h-[3px] w-9 bg-ink" aria-hidden="true" />
+              What to expect
+            </h3>
+            <div className="grid gap-x-[clamp(24px,4vw,64px)] gap-y-10 sm:grid-cols-3">
+              {POST_TYPES.map(({ icon, title, body }) => (
+                <div key={title}>
+                  <img src={icon} alt="" aria-hidden="true" className="mb-5 h-16 w-16 object-contain" loading="lazy" />
+                  <h3 className="mb-1 font-display text-[clamp(19px,2vw,24px)] font-bold tracking-[-0.02em]">{title}</h3>
+                  <p className="max-w-[38ch] text-[15px] text-ink-soft">{body}</p>
                 </div>
               ))}
             </div>
@@ -400,7 +440,19 @@ export default function App() {
               </figure>
             </div>
 
-            <div className="rv mt-14 grid grid-cols-3 gap-6 border-t border-rule pt-10 sm:gap-10">
+            <div className="rv mt-14 border-t border-rule pt-10">
+              <h3 className="mb-6 flex items-center gap-3 font-display text-[14px] font-extrabold uppercase tracking-[0.14em] text-ink">
+                <span className="inline-block h-[3px] w-9 bg-ink" aria-hidden="true" />
+                Built AI products @
+              </h3>
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+                {COMPANY_LOGOS.map(({ src, name }) => (
+                  <img key={name} src={src} alt={`${name} logo`} className="aspect-[8/5] w-full object-cover" loading="lazy" />
+                ))}
+              </div>
+            </div>
+
+            <div className="rv mt-12 grid grid-cols-3 gap-6 sm:gap-10">
               {STATS.map((stat) => (
                 <div key={stat.label}>
                   <div className="font-display text-[clamp(30px,4.4vw,58px)] font-extrabold leading-none tracking-[-0.04em]">{stat.value}</div>
@@ -408,27 +460,12 @@ export default function App() {
                 </div>
               ))}
             </div>
-
-            <div className="rv mt-12">
-              <p className="mb-5 font-display text-[12px] font-semibold uppercase tracking-[0.14em] text-ink-mid">Built @</p>
-              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
-                {COMPANY_LOGOS.map(({ src, name }) => (
-                  <img key={name} src={src} alt={`${name} logo`} className="aspect-[8/5] w-full object-cover" loading="lazy" />
-                ))}
-              </div>
-            </div>
           </div>
         </section>
 
         <Journey />
 
-        <section className="border-t border-ink">
-          <div className={`${WRAP} py-[clamp(72px,13vh,150px)]`}>
-            <Eyebrow>Why I'm writing this</Eyebrow>
-            <p className="rv max-w-[24ch] text-balance font-display text-[clamp(28px,3.8vw,52px)] font-extrabold leading-[1.06] tracking-[-0.035em]">We're less than five years from AGI. That can be scary. It can also be the best time in history to <em className="italic">build</em>.</p>
-            <p className="rv mt-8 max-w-[62ch] text-[clamp(16px,1.5vw,20px)] leading-relaxed text-ink-soft">One person, a laptop, and curiosity have never been able to make a bigger dent. I've been heads-down building for a decade. Now I want to share it, and build with you. That's why I write this letter: to help you find that excitement, and see the art of the possible with AI.</p>
-          </div>
-        </section>
+        <WhySection />
 
         <section id="subscribe" className="scroll-mt-16 border-t border-ink">
           <div className={`${WRAP} grid items-start gap-12 py-[clamp(64px,11vh,120px)] md:grid-cols-2 md:gap-[clamp(32px,5vw,96px)]`}>
