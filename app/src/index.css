@@ -43,6 +43,15 @@ a { color: inherit; text-decoration: none; }
 .rv { opacity: 0; transform: translateY(26px); transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
 .rv.in { opacity: 1; transform: none; }
 
+.roll {
+  opacity: 0;
+  transform: perspective(1200px) rotateX(9deg) translateY(56px) scale(.985);
+  transform-origin: 50% 0%;
+  transition: opacity .85s cubic-bezier(.16,1,.3,1), transform 1s cubic-bezier(.16,1,.3,1);
+  will-change: transform, opacity;
+}
+.roll.in { opacity: 1; transform: perspective(1200px) rotateX(0) translateY(0) scale(1); }
+
 @keyframes slide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .marquee-track { animation: slide 36s linear infinite; }
 
@@ -53,7 +62,7 @@ a { color: inherit; text-decoration: none; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .hero-anim, .hero-zoom, .hero-bounce { animation: none; opacity: 1; }
-  .rv { opacity: 1; transform: none; transition: none; }
+  .rv, .roll { opacity: 1; transform: none; transition: none; }
   .marquee-track { animation: none; }
   .spotlight-reveal { display: none; }
 }

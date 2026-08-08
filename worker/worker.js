@@ -61,7 +61,18 @@ export default {
       const body = await res.text();
       if (res.status === 400 && /already/i.test(body))
         return new Response(JSON.stringify({ ok: true, new: false }), { headers });
-      return new Response(JSON.stringify({ error: 'subscribe failed' }), { status: 502, headers });
+      if (res.status === 400) {
+        // Surface Buttondown's reason (e.g. blocked/undeliverable address) instead of a generic 502
+        let detail = '';
+        try {
+          const parsed = JSON.parse(body);
+          detail = parsed.detail || parsed.error || (Array.isArray(parsed) ? parsed.join(' ') : '');
+        } catch {
+          detail = body.slice(0, 200);
+        }
+        return new Response(JSON.stringify({ error: 'rejected', detail }), { status: 400, headers });
+      }
+      return new Response(JSON.stringify({ error: 'subscribe failed', status: res.status }), { status: 502, headers });
     }
 
     return new Response(JSON.stringify({ error: 'not found' }), { status: 404, headers });

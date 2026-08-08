@@ -8,7 +8,6 @@ import {
   Linkedin,
   Menu,
   X,
-  Youtube,
   Zap,
 } from 'lucide-react'
 import heroFront from './assets/hero-front.webp'
@@ -89,7 +88,7 @@ function SubscribeForm({ idSuffix = 'a' }: { idSuffix?: string }) {
           Subscribe
         </button>
       </form>
-      <p className="mt-3.5 text-[13px] text-ink-mid">One useful email a week. Unsubscribe any time.</p>
+      <p className="mt-3.5 text-[13px] text-ink-mid">Unsubscribe any time.</p>
       <p className="mt-1.5 min-h-[1.2em] text-[13px] text-ink" aria-live="polite">{status}</p>
     </>
   )
@@ -130,7 +129,6 @@ function Nav() {
 
         <div className="hidden items-center gap-7 sm:flex">
           <a href="#about" className={`text-sm font-medium transition-colors duration-500 ${secondaryColour}`}>About</a>
-          <a href="/letters/" className={`text-sm font-medium transition-colors duration-500 ${secondaryColour}`}>Archive</a>
           <a href="#signup" className={`px-5 py-2.5 font-display text-[13px] font-semibold transition-colors duration-500 ${scrolled ? 'bg-ink text-paper hover:opacity-85' : 'bg-white text-ink hover:bg-white/90'}`}>
             Subscribe
           </a>
@@ -151,7 +149,6 @@ function Nav() {
           <div className="mx-auto flex max-w-wrap flex-col gap-4 font-display font-semibold">
             <a href="#signup" onClick={() => setOpen(false)}>Subscribe</a>
             <a href="#about" onClick={() => setOpen(false)}>About</a>
-            <a href="/letters/" onClick={() => setOpen(false)}>Archive</a>
           </div>
         </div>
       )}
@@ -289,7 +286,6 @@ const FOR_YOU = [
 
 const SOCIALS = [
   { icon: Instagram, label: 'Instagram', href: 'https://www.instagram.com/artofthepossible.ai/' },
-  { icon: Youtube, label: 'YouTube', href: 'https://www.youtube.com/@artofthepossibleai' },
   { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/richard-eve-545179138/' },
 ]
 
@@ -297,7 +293,7 @@ function Journey() {
   const [open, setOpen] = useState(false)
   return (
     <section className="border-t border-rule">
-      <div className={`${WRAP} py-[clamp(44px,7vh,72px)]`}>
+      <div className={`${WRAP} roll py-[clamp(44px,7vh,72px)]`}>
         <button
           onClick={() => setOpen((value) => !value)}
           aria-expanded={open}
@@ -351,7 +347,7 @@ function WhySection() {
       <img src={whySky} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
       <div ref={revealRef} className="spotlight-reveal absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none" style={{ backgroundImage: `url(${whySkyReveal})` }} aria-hidden="true" />
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/45 via-black/20 to-transparent" />
-      <div className={`${WRAP} relative z-10 py-[clamp(72px,13vh,150px)]`}>
+      <div className={`${WRAP} roll relative z-10 py-[clamp(72px,13vh,150px)]`}>
         <p className="rv mb-8 flex items-center gap-3 font-display text-[14px] font-extrabold uppercase tracking-[0.14em] text-white">
           <span className="inline-block h-[3px] w-9 bg-white" aria-hidden="true" />
           Why I'm writing this
@@ -376,7 +372,7 @@ export default function App() {
       },
       { threshold: 0.12 },
     )
-    document.querySelectorAll('.rv').forEach((element) => observer.observe(element))
+    document.querySelectorAll('.rv, .roll').forEach((element) => observer.observe(element))
     const hashTarget = window.location.hash ? document.querySelector(window.location.hash) : null
     if (hashTarget) requestAnimationFrame(() => hashTarget.scrollIntoView())
     return () => observer.disconnect()
@@ -389,19 +385,16 @@ export default function App() {
       <Hero />
 
       <main>
-        <section id="signup" className={`${WRAP} scroll-mt-16 py-[clamp(64px,11vh,120px)]`}>
+        <section id="signup" className={`${WRAP} roll scroll-mt-16 py-[clamp(64px,11vh,120px)]`}>
           <div className="grid items-start gap-10 md:grid-cols-[1.25fr_0.75fr] md:gap-[clamp(42px,7vw,110px)]">
             <div>
               <Eyebrow>The weekly letter</Eyebrow>
               <h2 className="rv max-w-[18ch] text-balance font-display text-[clamp(36px,5.2vw,72px)] font-extrabold leading-[1.0] tracking-[-0.045em]">
                 Sign up for the best weekend read covering AI and startups.
               </h2>
-              <p className="rv mt-7 max-w-[56ch] text-[17px] leading-relaxed text-ink-soft">
-                One email a week. From someone with the experience to know what's useful and what's not.
-              </p>
             </div>
             <div className="rv border-t border-ink pt-6 md:mt-14">
-              <p className="mb-7 max-w-[44ch] text-[15px] leading-relaxed text-ink-soft">What shipped, the lever that made it work, and the recipe to build it yourself. No drip, no sales sequence.</p>
+              <p className="mb-7 max-w-[44ch] text-[15px] leading-relaxed text-ink-soft">One email a week containing the most useful AI and startup content.</p>
               <SubscribeForm idSuffix="top" />
             </div>
           </div>
@@ -424,7 +417,7 @@ export default function App() {
         </section>
 
         <section id="about" className="scroll-mt-16 border-t border-ink">
-          <div className={`${WRAP} py-[clamp(64px,11vh,120px)]`}>
+          <div className={`${WRAP} roll py-[clamp(64px,11vh,120px)]`}>
             <Eyebrow>Start here · Who I am</Eyebrow>
             <div className="grid items-start gap-10 md:grid-cols-[1.25fr_1fr] md:gap-[clamp(32px,5vw,96px)]">
               <div>
@@ -434,8 +427,8 @@ export default function App() {
                 <p className="rv mt-8 text-[15px] leading-relaxed text-ink-soft">Ten years obsessed with startups and innovation. I've built AI products everywhere from a consumer startup that sold for $1.6b to one of Australia's largest enterprises, doing over $4b in revenue.</p>
                 <p className="rv mt-4 text-[13px] italic leading-relaxed text-ink-mid">AI psychosis (noun): a state of all-consuming curiosity that leaves you unable to stop thinking about, tinkering with, or talking about AI.</p>
               </div>
-              <figure className="rv">
-                <img src={richSpeaking} alt="Rich speaking on stage with a microphone" className="w-full object-cover" loading="lazy" />
+              <figure className="rv w-full max-w-[300px] md:justify-self-end">
+                <img src={richSpeaking} alt="Rich speaking on stage with a microphone" className="aspect-square w-full object-cover" loading="lazy" />
                 <figcaption className="mt-3 text-[13px] text-ink-mid">Talking startups and AI, as always.</figcaption>
               </figure>
             </div>
@@ -468,7 +461,7 @@ export default function App() {
         <WhySection />
 
         <section id="subscribe" className="scroll-mt-16 border-t border-ink">
-          <div className={`${WRAP} grid items-start gap-12 py-[clamp(64px,11vh,120px)] md:grid-cols-2 md:gap-[clamp(32px,5vw,96px)]`}>
+          <div className={`${WRAP} roll grid items-start gap-12 py-[clamp(64px,11vh,120px)] md:grid-cols-2 md:gap-[clamp(32px,5vw,96px)]`}>
             <div>
               <h2 className="rv mb-8 text-balance font-display text-[clamp(28px,3.8vw,52px)] font-extrabold leading-[1.02] tracking-[-0.04em]">Follow to understand the art of the <em className="italic">possible</em>.</h2>
               <ul className="space-y-4">
