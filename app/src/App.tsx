@@ -74,7 +74,8 @@ function SubscribeForm() {
         body: JSON.stringify({ email }),
       })
       if (!response.ok) throw new Error('subscribe failed')
-      setStatus('Check your inbox to confirm your subscription.')
+      const data = await response.json().catch(() => null)
+      setStatus(data && data.new === false ? "You're already on the list. See you Friday." : 'Check your inbox to confirm your subscription.')
       form.reset()
     } catch {
       setStatus('Something broke on our end. Try again in a minute.')

@@ -1,0 +1,315 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Switch Kit | Art of the Possible</title>
+<meta name="description" content="The setup video and the three prompts: run Claude and GPT side by side on the same project, with a file system both can read.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://theaotp.com/switch/">
+<link rel="icon" href="/qualia-symbol.png">
+<meta property="og:title" content="The Switch Kit | Art of the Possible">
+<meta property="og:description" content="Stop using Opus 5 for everything. The setup video plus the three prompts for running two models side by side.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://theaotp.com/media/kits/switch/setup-poster.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#fdfdfb;--canvas:#e9e9e6;--rule:#e4e4e0;--ink:#121210;--muted:#9c9c96;--soft:#52524d;--display:'Inter Tight','Helvetica Neue',Arial,sans-serif;--ui:Inter,'Helvetica Neue',Arial,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--ui);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.page{max-width:1280px;margin:0 auto;background:var(--paper);min-height:100vh}
+.pad{padding-left:clamp(22px,4.5vw,58px);padding-right:clamp(22px,4.5vw,58px)}
+nav{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--rule);padding-top:25px;padding-bottom:25px}
+.lockup{display:flex;align-items:center;gap:11px;text-decoration:none}.lockup img{width:25px;height:25px}
+.wordmark{font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:.055em;text-transform:uppercase}
+.navlinks{display:flex;gap:24px;font-size:14px}.navlinks a{text-decoration:none;color:var(--soft)}.navlinks a:hover{color:var(--ink)}
+.eyebrow{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
+h1,h2{font-family:var(--display);letter-spacing:-.038em;line-height:1.01;margin:0}
+h1{font-size:clamp(42px,6.2vw,82px);max-width:15ch}
+.muted{color:var(--muted)}
+.kit-head{padding-top:90px;padding-bottom:58px}
+.dek{max-width:56ch;color:var(--soft);margin:24px 0 0;font-size:17px}
+.gate{border-top:1px solid var(--ink);padding-top:44px;padding-bottom:80px}
+.gate-grid{display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px}
+.gate h2{font-size:clamp(26px,3vw,38px);max-width:22ch}
+.gate p{max-width:56ch;color:var(--soft)}
+.gate form{display:flex;align-items:stretch;border-bottom:2px solid var(--ink);max-width:480px;margin-top:26px}
+.gate input{min-width:0;flex:1;border:0;background:transparent;padding:15px 0;font:inherit;color:var(--ink);outline:none}
+.gate input::placeholder{color:var(--muted)}
+.gate button{border:0;background:transparent;cursor:pointer;padding:0 2px 0 24px;font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+.gate button:hover{opacity:.6}
+.gate-small{font-size:13px;color:var(--muted);margin-top:14px}
+.gate-status{font-size:13px;color:var(--ink);min-height:1.3em;margin-top:6px}
+.step{display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px;border-top:1px solid var(--ink);padding-top:56px;padding-bottom:72px}
+.step-kicker{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.step h2{font-size:clamp(30px,3.8vw,50px);max-width:18ch}
+.step .lede{font-family:var(--display);font-size:19px;font-weight:600;line-height:1.35;max-width:54ch;margin:18px 0 26px}
+.step p{color:var(--soft);max-width:64ch}
+.video-shell{max-width:390px;margin-top:10px}
+.video-shell video{display:block;width:100%;aspect-ratio:9/16;background:#000}
+.cmd{background:#f3f3ef;border-left:7px solid var(--ink);padding:20px 24px;margin:22px 0;max-width:720px;overflow-x:auto}
+.cmd code{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:13.5px;line-height:1.8;white-space:pre;display:block}
+.promptbox{position:relative;background:#f3f3ef;border-left:7px solid var(--ink);margin-top:26px;max-width:820px}
+.promptbox pre{margin:0;padding:26px 28px;overflow-x:auto;font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:13px;line-height:1.75;white-space:pre-wrap;color:var(--ink)}
+.copybtn{position:absolute;top:0;right:0;border:0;cursor:pointer;background:var(--ink);color:var(--paper);font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding:12px 18px}
+.copybtn:hover{opacity:.85}
+.closeblock{background:var(--ink);color:var(--paper);padding-top:82px;padding-bottom:88px}
+.closeblock h2{font-size:clamp(36px,5vw,64px);max-width:15ch}
+.closeblock .muted{color:#b7b7b1}
+.closeblock p{max-width:56ch;color:#b7b7b1;margin-top:20px}
+.closeblock a{display:inline-block;margin-top:30px;background:var(--paper);color:var(--ink);padding:14px 22px;text-decoration:none;font-family:var(--display);font-weight:700}
+footer{display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--rule);padding-top:28px;padding-bottom:32px;color:var(--soft);font-size:13px}
+[hidden]{display:none!important}
+@media(max-width:800px){.navlinks{display:none}.kit-head{padding-top:58px}.gate-grid,.step{grid-template-columns:1fr;gap:18px}.copybtn{position:static;display:inline-block;margin:0 0 0 28px}}
+</style></head><body>
+<div class="page">
+<nav class="pad"><a class="lockup" href="/"><img src="/qualia-symbol.png" alt=""><span class="wordmark">Art of the Possible<sup>®</sup></span></a><div class="navlinks"><a href="/">Latest</a><a href="/letters/">Archive</a><a href="/#about">About</a></div></nav>
+
+<header class="kit-head pad">
+  <div class="eyebrow">The Switch Kit · From the Reel</div>
+  <h1 style="margin-top:26px">Stop using Opus 5 <span class="muted">for everything.</span></h1>
+  <p class="dek">You commented "switch". Here it is: the setup video, the file system that lets Claude Code and the Codex CLI work on the same project, and the three prompts that make two models cheaper and better than one.</p>
+</header>
+
+<section class="gate pad" id="gate">
+  <div class="gate-grid">
+    <div class="eyebrow">Unlock the kit</div>
+    <div>
+      <h2>Drop your email and everything unlocks on this page.</h2>
+      <p>You'll also get the weekly letter: five useful things I made with AI, with the prompts and workflows inside. Unsubscribe any time.</p>
+      <form id="gate-form" novalidate>
+        <label class="sr-only" for="gate-email" style="position:absolute;left:-9999px">Email address</label>
+        <input id="gate-email" type="email" name="email" placeholder="you@somewhere.com" autocomplete="email" required>
+        <button type="submit">Unlock</button>
+      </form>
+      <p class="gate-status" id="gate-status" aria-live="polite"></p>
+      <p class="gate-small">Already on the list? Enter the same email and it unlocks without subscribing you twice.</p>
+      <noscript><p class="gate-small">This page needs JavaScript to unlock. Or just subscribe on <a href="/">the homepage</a> and reply to any letter for the kit.</p></noscript>
+    </div>
+  </div>
+</section>
+
+<div id="kit" hidden>
+
+<section class="step pad" id="video">
+  <div class="step-kicker"><span>01</span> · Watch</div>
+  <div>
+    <h2>The setup, <span class="muted">in under a minute.</span></h2>
+    <p class="lede">Why the switch matters and what the finished setup looks like. The steps below give you everything shown here.</p>
+    <div class="video-shell">
+      <video controls playsinline preload="metadata" poster="/media/kits/switch/setup-poster.jpg" src="/media/kits/switch/setup-video.mp4"></video>
+    </div>
+  </div>
+</section>
+
+<section class="step pad" id="clis">
+  <div class="step-kicker"><span>02</span> · Install</div>
+  <div>
+    <h2>Leave the apps. <span class="muted">Get both CLIs.</span></h2>
+    <p class="lede">The chat apps lock you into one model at a time. The terminal versions run against the same folder, side by side, on the subscriptions you already pay for.</p>
+    <div class="cmd"><code>npm install -g @anthropic-ai/claude-code
+npm install -g @openai/codex</code></div>
+    <p>Then run <strong>claude</strong> and log in with your Claude account, and run <strong>codex</strong> and log in with your ChatGPT account. Two separate quotas, one project. That's the whole trick.</p>
+  </div>
+</section>
+
+<section class="step pad" id="prompt-1">
+  <div class="step-kicker"><span>03</span> · Prompt 1</div>
+  <div>
+    <h2>Build the file system <span class="muted">both models can read.</span></h2>
+    <p class="lede">One folder, one source of truth. CLAUDE.md holds the instructions, AGENTS.md is a thin adapter that points Codex at it, and one shared skill tree serves both. Paste this into Claude Code inside the folder you want as your workspace.</p>
+    <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>You are setting up my personal AI file system: one folder that holds my context, skills, and
+instructions, and works with both Claude Code and the Codex CLI on the same project at the same
+time.
+
+Before you write anything, interview me. Ask me these five questions, one message, numbered, then
+wait for my answers:
+
+1. What do you do, and what should AI know about your role?
+2. What are the two or three projects or areas you'll work on in this folder?
+3. What tools and platforms do you live in day to day?
+4. How do you like things written? (tone, length, formatting rules, anything you hate)
+5. What do you want AI to take off your plate first?
+
+Once I answer, build this exact structure:
+
+1. `CLAUDE.md` at the root. This is the single canonical instruction file for the whole
+   workspace. It contains: who I am and how I work (from my answers), a map of every folder below
+   and what belongs in it, my writing rules, and this standing rule: "CLAUDE.md is the source of
+   truth. AGENTS.md is a thin adapter for Codex and never duplicates this file."
+
+2. `AGENTS.md` at the root. A short adapter for the Codex CLI, under 25 lines. It must say:
+   read CLAUDE.md in full and treat it as canonical; the skill tree lives in `.claude/skills/`
+   and is shared between both tools, never copied; if the two files ever disagree, CLAUDE.md
+   wins; durable changes get written back to the canonical owner, not into this file.
+
+3. `.claude/skills/` as the canonical skill tree. Create one starter skill,
+   `.claude/skills/README.md`, explaining that each skill is a folder with a `SKILL.md` that says
+   when to use it and exactly how to do the job.
+
+4. `.agents/skills` as a symlink pointing at `.claude/skills`, so Codex discovers the exact same
+   skills. On a system without symlinks, write `.agents/skills/README.md` pointing at the
+   canonical tree instead.
+
+5. `context/` for durable knowledge: `context/about-me.md` (from my answers) and
+   `context/preferences.md` (my writing and working rules). CLAUDE.md should point here rather
+   than restating everything.
+
+6. `projects/` with one subfolder per project I named, each holding a short `README.md` stating
+   the goal and current state.
+
+7. `inbox/` for raw notes and ideas I drop in for AI to process later.
+
+When you're done, verify your own work: confirm the symlink resolves, confirm AGENTS.md is under
+25 lines and contains no duplicated content, and print the folder tree with a one-line
+explanation of each entry. Then tell me the one-sentence rule for keeping this system healthy:
+every durable instruction lives in exactly one file, and both tools read the same files.</pre></div>
+  </div>
+</section>
+
+<section class="step pad" id="prompt-2">
+  <div class="step-kicker"><span>04</span> · Prompt 2</div>
+  <div>
+    <h2>The loop: <span class="muted">plan, execute, review.</span></h2>
+    <p class="lede">The prompt from the video. Claude plans and reviews, GPT 5.6 implements through the Codex CLI. You pay Anthropic prices for judgement and OpenAI prices for keystrokes. Paste into Claude Code with your task filled in at the top.</p>
+    <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>TASK: &lt;describe what you want built or done&gt;
+
+We're doing this with a two-model loop. You (Claude) are the planner and reviewer. GPT 5.6,
+running through the Codex CLI, is the implementer. Follow these four steps exactly.
+
+STEP 1: PLAN.
+Write a complete, self-contained spec to `specs/&lt;task-slug&gt;.md`. Codex cannot see this
+conversation, so the file must stand entirely on its own: the goal, the constraints, the files
+to create or change, what NOT to touch, and a numbered list of acceptance checks that can be
+verified from the terminal. Show me the spec and wait for my approval before continuing.
+
+STEP 2: EXECUTE.
+Hand the spec to GPT 5.6:
+
+    codex exec -s workspace-write "Read specs/&lt;task-slug&gt;.md and implement it exactly. Do not
+    expand scope. Do not refactor unrelated code. When you finish, list every file you changed
+    and how each acceptance check is met."
+
+Do not edit any files yourself while Codex is running.
+
+STEP 3: REVIEW.
+Ignore Codex's summary of its own work. Read the actual diff. Run every acceptance check from
+the spec. Be adversarial: look for scope creep, broken edge cases, and anything the spec asked
+for that quietly didn't happen.
+
+STEP 4: ITERATE.
+If the review fails, send precise, file-level feedback back into the same Codex session:
+
+    codex exec resume --last "&lt;exactly what is wrong and what to change&gt;"
+
+Then review again. Maximum three iterations; after that, fix the remainder yourself and note
+what you fixed.
+
+When everything passes, report: what shipped, what Codex built, what you corrected, and the
+acceptance checks with their results.</pre></div>
+  </div>
+</section>
+
+<section class="step pad" id="prompt-3">
+  <div class="step-kicker"><span>05</span> · Prompt 3</div>
+  <div>
+    <h2>Make it a skill <span class="muted">you never type again.</span></h2>
+    <p class="lede">Run this once, after Prompt 1. It turns the loop into a reusable handover skill both tools can see. From then on you just say "hand this to 5.6" and the whole workflow fires.</p>
+    <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>Create a reusable skill called `handover` in my file system so I never have to type the
+two-model workflow again.
+
+Write `.claude/skills/handover/SKILL.md` with:
+
+1. Frontmatter: `name: handover` and a description tuned so the skill fires when I say things
+   like "hand this to 5.6", "have codex build this", "run the loop on X", "plan execute review
+   this", or "use both models on this".
+
+2. The workflow, exactly this shape:
+   - PLAN: write a self-contained spec to `specs/&lt;task-slug&gt;.md`. It must stand alone because
+     Codex cannot see the conversation: goal, constraints, files to touch, files to leave alone,
+     numbered acceptance checks runnable from the terminal. Show me the spec for approval first.
+   - EXECUTE: `codex exec -s workspace-write "Read specs/&lt;task-slug&gt;.md and implement it
+     exactly. Do not expand scope. List every file you changed."` Never edit the tree while
+     Codex runs.
+   - REVIEW: read the real diff, not Codex's summary. Run every acceptance check. Be
+     adversarial.
+   - ITERATE: on failure, `codex exec resume --last "&lt;precise file-level feedback&gt;"`. Maximum
+     three rounds, then finish the remainder directly and say what was fixed.
+
+3. An effort dial: when I say "on low", "on medium", "on high", or "flat out", append
+   `-c model_reasoning_effort=&lt;low|medium|high|xhigh&gt;` to the codex command. Default to medium
+   for mechanical work and high for anything with design decisions.
+
+4. Standing rules inside the skill: specs are self-contained files; one spec per task; the
+   reviewer never rubber-stamps; report what shipped, what Codex did, and what was corrected.
+
+Then verify `.agents/skills/handover/SKILL.md` resolves through the symlink so the Codex CLI
+discovers the same skill, and show me the finished SKILL.md.</pre></div>
+  </div>
+</section>
+
+<section class="closeblock pad">
+  <h2>See what's possible. <span class="muted">Then build it.</span></h2>
+  <p>You're on the list now. Every week you'll get five useful things I made with AI, with the prompt or workflow behind each one. This kit was one of them.</p>
+  <a href="/">Back to the site</a>
+</section>
+
+</div>
+
+<footer class="pad"><span>Art of the Possible®</span><span>New things are possible every day. · 2026</span></footer>
+</div>
+
+<script>
+(function () {
+  var API = 'https://theaotp-gate.theaotp.workers.dev';
+  var KEY = 'aotp_switch_unlocked';
+  var kit = document.getElementById('kit');
+  var gate = document.getElementById('gate');
+  var form = document.getElementById('gate-form');
+  var status = document.getElementById('gate-status');
+
+  function unlock() {
+    kit.hidden = false;
+    gate.hidden = true;
+    try { localStorage.setItem(KEY, '1'); } catch (e) {}
+  }
+
+  try { if (localStorage.getItem(KEY) === '1') unlock(); } catch (e) {}
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    var email = document.getElementById('gate-email').value.trim().toLowerCase();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      status.textContent = 'That email looks off. Try again.';
+      return;
+    }
+    status.textContent = 'One sec…';
+    fetch(API + '/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email }),
+    }).then(function (response) {
+      if (!response.ok) throw new Error('subscribe failed');
+      return response.json();
+    }).then(function (data) {
+      status.textContent = data && data.new
+        ? 'Unlocked. Check your inbox to confirm your subscription to the letter.'
+        : 'Welcome back. Unlocked.';
+      unlock();
+      window.scrollTo({ top: document.getElementById('video').offsetTop - 40, behavior: 'smooth' });
+    }).catch(function () {
+      status.textContent = 'Something broke on our end. Try again in a minute.';
+    });
+  });
+
+  document.querySelectorAll('[data-copy]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      var pre = button.parentElement.querySelector('pre');
+      navigator.clipboard.writeText(pre.textContent).then(function () {
+        button.textContent = 'Copied';
+        setTimeout(function () { button.textContent = 'Copy'; }, 1600);
+      });
+    });
+  });
+})();
+</script>
+</body></html>
