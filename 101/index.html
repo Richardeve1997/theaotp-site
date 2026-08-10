@@ -1,0 +1,295 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Engineering 101 | Art of the Possible</title>
+<meta name="description" content="Two days of AI training in Sydney, distilled. Building an agent is the cheap part. Evaluation, observability and governance are what actually cost you.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://theaotp.com/101/">
+<link rel="icon" href="/qualia-symbol.png">
+<meta property="og:title" content="AI Engineering 101 | Art of the Possible">
+<meta property="og:description" content="Building an agent is now the cheap part. Two days of training in Sydney, distilled into what actually transfers.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#fdfdfb;--canvas:#e9e9e6;--rule:#e4e4e0;--ink:#121210;--muted:#9c9c96;--soft:#52524d;--azure:#0096ff;--display:'Inter Tight','Helvetica Neue',Arial,sans-serif;--ui:Inter,'Helvetica Neue',Arial,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--ui);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.page{max-width:1280px;margin:0 auto;background:var(--paper);min-height:100vh}
+.pad{padding-left:clamp(22px,4.5vw,58px);padding-right:clamp(22px,4.5vw,58px)}
+nav{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--rule);padding-top:25px;padding-bottom:25px}
+.lockup{display:flex;align-items:center;gap:11px;text-decoration:none}.lockup img{width:25px;height:25px}
+.wordmark{font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:.055em;text-transform:uppercase}
+.navlinks{display:flex;gap:24px;font-size:14px}.navlinks a{text-decoration:none;color:var(--soft)}.navlinks a:hover{color:var(--ink)}
+.eyebrow{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
+h1,h2,h3{font-family:var(--display);letter-spacing:-.038em;line-height:1.01;margin:0}
+h1{font-size:clamp(42px,6.2vw,82px);max-width:15ch}
+.muted{color:var(--muted)}
+.kit-head{padding-top:90px;padding-bottom:58px}
+.dek{max-width:58ch;color:var(--soft);margin:24px 0 0;font-size:17px}
+.meta{margin-top:34px;font-size:13.5px;color:var(--muted);max-width:70ch;line-height:1.75}
+.step{display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px;border-top:1px solid var(--ink);padding-top:56px;padding-bottom:72px}
+.step-kicker{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.step h2{font-size:clamp(30px,3.8vw,50px);max-width:18ch}
+.step .lede{font-family:var(--display);font-size:19px;font-weight:600;line-height:1.35;max-width:54ch;margin:18px 0 26px}
+.step p{color:var(--soft);max-width:64ch}
+.step h3{font-size:20px;margin:34px 0 10px;max-width:40ch}
+.step ul{color:var(--soft);max-width:64ch;padding-left:20px}
+.step li{margin-bottom:11px}
+.rule{height:3px;width:52px;background:var(--azure);margin:0 0 20px}
+.lessons{list-style:none;padding:0;margin:26px 0 0;max-width:66ch}
+.lessons li{border-top:1px solid var(--rule);padding:20px 0;margin:0;color:var(--soft)}
+.lessons strong{display:block;font-family:var(--display);font-size:17px;color:var(--ink);margin-bottom:6px;letter-spacing:-.01em}
+.flow{background:#f3f3ef;border-left:7px solid var(--azure);padding:24px 26px;margin:26px 0;max-width:720px;overflow-x:auto}
+.flow code{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:13px;line-height:1.9;white-space:pre;display:block;color:var(--ink)}
+.repo{border:1px solid var(--rule);padding:24px 26px;margin:20px 0;max-width:720px}
+.repo h3{margin:0 0 6px;font-size:18px}
+.repo p{margin:0 0 12px;font-size:15px}
+.repo a{font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;border-bottom:2px solid var(--azure);padding-bottom:2px}
+.note{border-left:3px solid var(--muted);padding:2px 0 2px 18px;margin:26px 0;max-width:62ch;color:var(--soft);font-size:15px}
+table{border-collapse:collapse;width:100%;max-width:720px;margin:22px 0;font-size:14.5px}
+th,td{text-align:left;padding:12px 14px 12px 0;border-bottom:1px solid var(--rule);vertical-align:top;color:var(--soft)}
+th{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+td:first-child{color:var(--ink);font-weight:600;white-space:nowrap;padding-right:24px}
+.closeblock{background:var(--ink);color:var(--paper);padding-top:82px;padding-bottom:88px}
+.closeblock h2{font-size:clamp(36px,5vw,64px);max-width:15ch}
+.closeblock .muted{color:#b7b7b1}
+.closeblock p{max-width:56ch;color:#b7b7b1;margin-top:20px}
+.closeblock a{display:inline-block;margin-top:30px;background:var(--paper);color:var(--ink);padding:14px 22px;text-decoration:none;font-family:var(--display);font-weight:700}
+.gate{border-top:1px solid var(--ink);padding-top:44px;padding-bottom:80px}
+.gate-grid{display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px}
+.gate h2{font-size:clamp(26px,3vw,38px);max-width:22ch}
+.gate p{max-width:56ch;color:var(--soft)}
+.gate form{display:flex;align-items:stretch;border-bottom:2px solid var(--ink);max-width:480px;margin-top:26px}
+.gate input{min-width:0;flex:1;border:0;background:transparent;padding:15px 0;font:inherit;color:var(--ink);outline:none}
+.gate input::placeholder{color:var(--muted)}
+.gate button{border:0;background:transparent;cursor:pointer;padding:0 2px 0 24px;font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+.gate button:hover{opacity:.6}
+.gate-small{font-size:13px;color:var(--muted);margin-top:14px}
+.gate-status{font-size:13px;color:var(--ink);min-height:1.3em;margin-top:6px}
+footer{display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--rule);padding-top:28px;padding-bottom:32px;color:var(--soft);font-size:13px}
+[hidden]{display:none!important}
+@media(max-width:800px){.navlinks{display:none}.kit-head{padding-top:58px}.gate-grid,.step{grid-template-columns:1fr;gap:18px}td:first-child{white-space:normal}}
+</style></head><body>
+<div class="page">
+<nav class="pad"><a class="lockup" href="/"><img src="/qualia-symbol.png" alt=""><span class="wordmark">Art of the Possible<sup>&reg;</sup></span></a><div class="navlinks"><a href="/">Home</a><a href="/letters/">Archive</a><a href="/#about">About</a></div></nav>
+
+<header class="kit-head pad">
+  <div class="eyebrow">AI Engineering 101 &middot; Field notes</div>
+  <h1 style="margin-top:26px">Building the agent <span class="muted">is the cheap part.</span></h1>
+  <p class="dek">Two days of AI training in Sydney, one for business users and one for engineers, pointed at the same conclusion from opposite directions. You can ship an agent in an afternoon. What costs you is everything after: knowing whether it works, knowing when it breaks, and being able to prove either.</p>
+  <p class="meta">Delivered by Cognitivo, UNSW and the Macquarie University Centre for Applied AI. Sponsored by Gigabyte, NVIDIA and LangChain. UNSW CBD Campus, Sydney, 29 and 30 July 2026. Speakers included Dr Haritha Thilakarathne (NVIDIA), Faisal Masood (LangChain), Jake Broekhuizen (LangChain), Aadhar Bhardwaj (Cognitivo) and Vito Chen (Gigabyte).<br><br>These are my own notes on what transfers, written up for anyone deciding what to take from an event like this. Vendor slide decks are not reproduced here. The two workshop repositories are public and linked below.</p>
+</header>
+
+<section class="gate pad" id="gate">
+  <div class="gate-grid">
+    <div class="eyebrow">Unlock the notes</div>
+    <div>
+      <h2>Drop your email and the full write-up unlocks on this page.</h2>
+      <p>You'll also get the weekly letter: five useful things I made with AI, with the prompts and workflows inside. Unsubscribe any time.</p>
+      <form id="gate-form" novalidate>
+        <label for="gate-email" style="position:absolute;left:-9999px">Email address</label>
+        <input id="gate-email" type="email" name="email" placeholder="you@somewhere.com" autocomplete="email" required>
+        <button type="submit">Unlock</button>
+      </form>
+      <p class="gate-status" id="gate-status" aria-live="polite"></p>
+      <p class="gate-small">Already on the list? Enter the same email and it unlocks without subscribing you twice.</p>
+      <noscript><p class="gate-small">This page needs JavaScript to unlock. Or just subscribe on <a href="/">the homepage</a> and reply to any letter for the notes.</p></noscript>
+    </div>
+  </div>
+</section>
+
+<div id="kit" hidden>
+
+<section class="step pad" id="through-line">
+  <div class="step-kicker">The through-line</div>
+  <div>
+    <div class="rule"></div>
+    <h2>Two audiences, <span class="muted">one conclusion.</span></h2>
+    <p class="lede">Day 1 put people with no coding background in front of a real API that spends real money. Day 2 took engineers through the parts of the stack that decide whether an agent survives contact with production. Neither day argued that evaluation matters. Both were built so you couldn't avoid noticing.</p>
+    <p>The framing talk traced software architecture from monoliths through to agents, and made two claims worth repeating. First, that SaaS as a category is under pressure from personal software individuals now assemble themselves. Second, that RAG is a stepping stone rather than a destination: useful, but bounded by what retrieval can reach. The rest of the day was constructed so participants felt both rather than accepted them on authority.</p>
+  </div>
+</section>
+
+<section class="step pad" id="day-1">
+  <div class="step-kicker"><span>Day 1</span> &middot; Building with AI</div>
+  <div>
+    <div class="rule"></div>
+    <h2>Ship a real app <span class="muted">in a single day.</span></h2>
+    <p class="lede">Fifty business users, no coding background, one working internet-reachable web app each with an AI agent inside it. The exercise was the buyer side of a simulated furniture marketplace: a real catalogue of 762 products, a real per-user balance, and an ordering system that genuinely debits it.</p>
+
+    <table>
+      <tr><th>Level</th><th>What it required</th></tr>
+      <tr><td>Level 1</td><td>A normal web app: entity model, UI, login, database persistence, workflow logic, reports, and the local instance exposed to the internet through a tunnel.</td></tr>
+      <tr><td>Level 2</td><td>External APIs: email, calendar invites, transcription, LLM calls for generation and summarisation, basic context engineering, inbound webhooks.</td></tr>
+      <tr><td>Level 3</td><td>An in-app agent. Turn the API into a tool menu so plain-English requests just work.</td></tr>
+      <tr><td>Level 4</td><td>Stretch: vector RAG over the catalogue for open-ended product questions.</td></tr>
+    </table>
+
+    <h3>What actually transfers</h3>
+    <ul class="lessons">
+      <li><strong>Plan in files before building.</strong> Participants had the assistant produce a CLAUDE.md of standing instructions, a requirements.md, an architecture.md holding the data model, and technical specs, all before meaningful code existed. CLAUDE.md is read at the start of every session, so it is where durable rules belong. Describe the goal, not the implementation, and keep each ask small.</li>
+      <li><strong>Sketch the entity model first.</strong> Get the model to describe what the app must remember, customer, product, order, as a diagram plus a plain-English explanation. Read the explanation, not the diagram syntax. Confirming that before scaffolding was presented as the highest-leverage few minutes of the day.</li>
+      <li><strong>Tool descriptions are the product.</strong> This was the conceptual centre. Nobody was handed a ready-made agent. The exercise was to name the four available actions and write an honest one-sentence description of when to use each. The failure mode is explicit: the catalogue search does exact category matching only, so a description that overpromises gets you a confident wrong answer instead of a clean failure. Reasoning the API cannot do, "cheap", a colour, a vibe, has to happen in the agent over plain results.</li>
+      <li><strong>Confirm before spending.</strong> Placing an order really debits a real balance, so the agent had to show what it was about to buy and wait. Treat that as a default for anything that spends money, sends something externally, or is hard to reverse. Not a hardening step you add later.</li>
+      <li><strong>Failures are conversations, not stack traces.</strong> Insufficient balance and missing products had to be explained back in plain language with a suggested next step. Participants were then told to deliberately break their own app, overspend, request nonexistent products, double-click buy, before the showcase.</li>
+      <li><strong>Secrets from the first commit.</strong> Repos were public, so the guides walked through environment variables and a gitignored .env, then had everyone run git status and confirm it did not appear. Small, taught deliberately.</li>
+    </ul>
+
+    <h3>The optional stretch</h3>
+    <p>The vector RAG task is a genuinely good teaching artefact. It explains chunking, embedding, storage, retrieval and generation in plain terms, then points out that for 762 products a dedicated vector database is unnecessary: embeddings fit in memory and cosine similarity over a list is enough. It also insists you test retrieval on its own, printing which chunks came back and checking them by eye, before wiring up generation. That discipline transfers to any RAG work.</p>
+    <p>The second was OpenClaw, an open-source personal agent that runs on your own machine and acts through apps you already use. Participants packaged their four shop tools as an OpenClaw skill. The guide carries a pointed safety note: it is not sandboxed the way an in-app agent is, it takes real actions on a real machine and a real account, and it should be granted the one skill it needs rather than every permission it offers.</p>
+  </div>
+</section>
+
+<section class="step pad" id="day-2">
+  <div class="step-kicker"><span>Day 2</span> &middot; AI engineering foundations</div>
+  <div>
+    <div class="rule"></div>
+    <h2>What decides whether <span class="muted">it survives production.</span></h2>
+    <p class="lede">Thirty-five engineers, four sessions, two of them long hands-on workshops. Infrastructure and hosting economics, then a fireside on owning your own intelligence, then the two blocks that mattered: evaluation and the agent lifecycle.</p>
+
+    <h3>Infrastructure</h3>
+    <p>LLM hosting pathways and the cost implications of each, clustering, environment setup, and hosting foundation models with vLLM and LiteLLM alongside RAG. One pattern worth stealing regardless of hardware: participants reached shared GPU boxes over SSH through Cloudflare Access, which puts authenticated access to expensive shared machines behind an identity provider instead of exposed SSH.</p>
+
+    <h3>Evaluation, and why it is a commercial decision</h3>
+    <p>The case made was not academic. Evaluation drives which model you pick, whether to fine-tune at all, which prompt strategy you standardise on, cloud versus on-premises, your safety and bias posture, and when to retrain. Without a baseline you cannot tell whether a model swap, a prompt change or a fine-tune helped, and the answer is never obvious from spot-checking.</p>
+    <p>Evaluation splits three ways. <strong>Controlled</strong>: automated benchmarking on standard datasets, plus synthetic and adversarial cases you generate to stress-test behaviour. <strong>Human-centred</strong>: expert review where tone and nuance matter, plus crowdsourced assessment for breadth. <strong>Field</strong>: production monitoring, A/B testing, log analysis and live feedback.</p>
+    <p>The metric taxonomy runs from accuracy, precision, recall and F1, through perplexity and n-gram overlap measures like BLEU and ROUGE, to academic benchmarks such as GLUE, SuperGLUE, SQuAD, MMLU and GSM8K. The qualitative side is LLM-as-a-judge, pairwise comparison, coherence and relevance ratings, consistency across similar inputs, and bias checks. Runs were tracked in MLflow, with Weights &amp; Biases as the alternative.</p>
+
+    <h3>Customisation, in order of cost</h3>
+    <p>The spectrum runs pre-training, continued pre-training, supervised and domain-adaptive fine-tuning, preference alignment, RAG, and in-context learning. The practical guidance for anyone not training foundation models: try in-context learning first, and if you do fine-tune, keep the backbone frozen and inject a small trainable set. LoRA for dense updates, adapters for modularity, prefix tuning for prompt-like control. Expect trainable parameters around 0.1 to 1 percent of the full model, use a higher learning rate than full fine-tuning (roughly 1e-4 to 1e-3), and monitor a held-out set to avoid over-adapting.</p>
+    <div class="note">Two details worth carrying from the lab, because they only surface when you run things locally. The same running container served as both the model under test and the judge, which is fine for a demo and explicitly flagged as not a production judging setup. And fine-tuning had to stop the inference container first, because the serving runtime reserves most of the box.</div>
+
+    <h3>The agent development lifecycle</h3>
+    <p>Build, test, deploy, monitor in sequence for any single change, with iterate and govern running continuously across all of them.</p>
+    <p>The build argument is the one to internalise. A chain is inflexible: a vanilla RAG pipeline has no answer when the search step returns irrelevant results. A plain ReAct agent is flexible but unreliable, failing through task ambiguity, inconsistent tool use, over-reliance on internal knowledge, and getting lost in long history. The resolution is developer-defined control flow where you need determinism, and agentic autonomy only where flexibility genuinely earns its keep.</p>
+    <p><strong>Middleware is the mechanism.</strong> Hooks wrapping the core agent loop that add human-in-the-loop approval, summarisation to prevent context overflow, PII redaction, retry with backoff, and model fallback, without rewriting the agent. Treat it as part of the agent, not infrastructure bolted on afterwards.</p>
+  </div>
+</section>
+
+<section class="step pad" id="loop">
+  <div class="step-kicker">The loop</div>
+  <div>
+    <div class="rule"></div>
+    <h2>Offline and online <span class="muted">feed each other.</span></h2>
+    <p class="lede">You can prototype an agent in an afternoon, but the space of possible failures is vast and cannot be predicted upfront. Models are non-deterministic and constantly changing, fixes cause regressions, tool calls fail, user input is unbounded, and small early mistakes cascade.</p>
+    <p>Two evaluator types: deterministic code evaluators for structured output, LLM-as-judge for unstructured. Two paradigms: offline evaluation against known ground truths before deployment, and online evaluation on live traces where no ground truth exists, checking helpfulness, policy violations, PII exposure and tone.</p>
+    <div class="flow"><code>online eval surfaces an issue
+        ↓
+  becomes an offline test case
+        ↓
+offline eval validates the fix
+        ↓
+ online eval confirms it in prod
+        ↺</code></div>
+    <p>Annotation queues sit in the middle, so humans review flagged traces, correct outputs, and promote validated examples into the evaluation dataset. That is what stops the dataset going stale while the product moves.</p>
+  </div>
+</section>
+
+<section class="step pad" id="repos">
+  <div class="step-kicker">Reference code</div>
+  <div>
+    <div class="rule"></div>
+    <h2>Two repositories <span class="muted">worth reading.</span></h2>
+    <p class="lede">Both public. Both short enough to read in a sitting, which is the main reason to bother with them.</p>
+
+    <div class="repo">
+      <h3>langchain-basics</h3>
+      <p>An async support agent over the Chinook sample music database. Seven tools grouped by capability: music discovery, account support, long-term memory, and delegated LLM reasoning. The most instructive file is the authorisation middleware, which blocks anonymous access to account tools and stops a customer reading another customer's invoice, short-circuiting before the tool ever runs, with the same check repeated inside the tool as defence in depth. Long-term memories are namespaced per customer so they persist across threads without leaking between them.</p>
+      <p>The evaluation suite is the other reason to read it: offline it scores tool trajectory, required output, data leakage, PII, correctness and conciseness; online it checks live traces for the same concerns.</p>
+      <a href="https://github.com/masoodfaisal/langchain-basics" target="_blank" rel="noopener noreferrer">github.com/masoodfaisal/langchain-basics &#8599;</a>
+    </div>
+
+    <div class="repo">
+      <h3>llm-eval-nim-demo</h3>
+      <p>Evaluating and improving a model for a specialised domain, legal Q&amp;A, running entirely on one machine. Notebook 01 deploys a local NIM and evaluates it on GSM8K with LLM-as-judge and ELO ranking. Notebook 02 does the domain evaluation, comparing zero-shot against in-context learning using BLEU, ROUGE and token F1 plus a judge scoring against a rubric. Notebook 03 LoRA fine-tunes and compares the adapted model against the same base weights on the same held-out rows.</p>
+      <p>That last part is the bit to copy. Comparing against the same base weights on the same held-out set is the correct control, and it is easy to get wrong in a way that flatters your fine-tune.</p>
+      <a href="https://github.com/haritha91/llm-eval-nim-demo" target="_blank" rel="noopener noreferrer">github.com/haritha91/llm-eval-nim-demo &#8599;</a>
+    </div>
+  </div>
+</section>
+
+<section class="step pad" id="actions">
+  <div class="step-kicker">If you take five things</div>
+  <div>
+    <div class="rule"></div>
+    <h2>What I'd actually <span class="muted">act on.</span></h2>
+    <ul class="lessons">
+      <li><strong>Write tool descriptions like API docs for a new hire.</strong> Make them honest about what the underlying system cannot do. Overpromising converts a clean failure into a confident wrong answer, which is far harder to detect.</li>
+      <li><strong>Put a confirmation step in front of anything hard to reverse.</strong> Spending money, sending externally, deleting. Default, not hardening.</li>
+      <li><strong>Get an evaluation dataset in place early, even a tiny one.</strong> Without a baseline you are guessing about every change you make afterwards.</li>
+      <li><strong>Prefer in-context learning before fine-tuning.</strong> If you do fine-tune, use a parameter-efficient method and compare against the same base weights on the same held-out set.</li>
+      <li><strong>Treat middleware as part of the agent.</strong> Authorisation, PII redaction, approval gates, retries, fallbacks. Not infrastructure you add once something goes wrong.</li>
+    </ul>
+    <p style="margin-top:34px">One meta-observation. Day 1 put non-engineers in front of a real API that spends real money, and the guides carried the safety thinking rather than the tooling: confirm before spending, handle failure gracefully, keep the key out of the repo, grant only the permission you need. That is a reasonable model for how to onboard non-engineers onto agent tooling anywhere.</p>
+  </div>
+</section>
+
+<section class="closeblock pad">
+  <h2>See what's possible. <span class="muted">Then build it.</span></h2>
+  <p>You're on the list now. Every week you'll get five useful things I made with AI, with the prompt or workflow behind each one. Notes like these turn up there first.</p>
+  <a href="/">Back to the site</a>
+</section>
+
+</div>
+
+<footer class="pad"><span>Art of the Possible&reg;</span><span>New things are possible every day. &middot; 2026</span></footer>
+</div>
+
+<script>
+(function () {
+  var API = 'https://theaotp-gate.theaotp.workers.dev';
+  var KEY = 'aotp_101_unlocked';
+  var kit = document.getElementById('kit');
+  var gate = document.getElementById('gate');
+  var form = document.getElementById('gate-form');
+  var status = document.getElementById('gate-status');
+
+  function unlock() {
+    kit.hidden = false;
+    gate.hidden = true;
+    try { localStorage.setItem(KEY, '1'); } catch (e) {}
+  }
+
+  try { if (localStorage.getItem(KEY) === '1') unlock(); } catch (e) {}
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    var email = document.getElementById('gate-email').value.trim().toLowerCase();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      status.textContent = 'That email looks off. Try again.';
+      return;
+    }
+    status.textContent = 'One sec…';
+    fetch(API + '/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email }),
+    }).then(function (response) {
+      return response.json().catch(function () { return {}; }).then(function (data) {
+        if (!response.ok) {
+          var err = new Error('subscribe failed');
+          err.status = response.status;
+          err.detail = data && data.detail;
+          throw err;
+        }
+        return data;
+      });
+    }).then(function (data) {
+      status.textContent = data && data.new
+        ? 'Unlocked. Check your inbox to confirm your subscription to the letter.'
+        : 'Welcome back. Unlocked.';
+      unlock();
+      window.scrollTo({ top: document.getElementById('through-line').offsetTop - 40, behavior: 'smooth' });
+    }).catch(function (err) {
+      if (err && err.status === 400) {
+        status.textContent = 'That email was rejected' + (err.detail ? ' (' + err.detail + ')' : '') + '. Try a different address.';
+      } else {
+        status.textContent = 'Something broke on our end. Try again in a minute, or subscribe on the homepage and DM me on Instagram for the notes.';
+      }
+    });
+  });
+})();
+</script>
+</body></html>

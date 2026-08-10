@@ -1,0 +1,390 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Token Kit | Art of the Possible</title>
+<meta name="description" content="The prompt that puts a live usage bar in your Claude Code and Codex setup, so you can see what you're spending before you spend it.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://theaotp.com/tokens/">
+<link rel="icon" href="/qualia-symbol.png">
+<meta property="og:title" content="The Token Kit | Art of the Possible">
+<meta property="og:description" content="You need to understand token economics. Here's the prompt that puts a live usage bar in your Claude Code and Codex setup.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#fdfdfb;--canvas:#e9e9e6;--rule:#e4e4e0;--ink:#121210;--muted:#9c9c96;--soft:#52524d;--display:'Inter Tight','Helvetica Neue',Arial,sans-serif;--ui:Inter,'Helvetica Neue',Arial,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--ui);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.page{max-width:1280px;margin:0 auto;background:var(--paper);min-height:100vh}
+.pad{padding-left:clamp(22px,4.5vw,58px);padding-right:clamp(22px,4.5vw,58px)}
+nav{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--rule);padding-top:25px;padding-bottom:25px}
+.lockup{display:flex;align-items:center;gap:11px;text-decoration:none}.lockup img{width:25px;height:25px}
+.wordmark{font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:.055em;text-transform:uppercase}
+.navlinks{display:flex;gap:24px;font-size:14px}.navlinks a{text-decoration:none;color:var(--soft)}.navlinks a:hover{color:var(--ink)}
+.eyebrow{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
+h1,h2{font-family:var(--display);letter-spacing:-.038em;line-height:1.01;margin:0}
+h1{font-size:clamp(42px,6.2vw,82px);max-width:15ch}
+.muted{color:var(--muted)}
+.kit-head{padding-top:90px;padding-bottom:58px}
+.dek{max-width:56ch;color:var(--soft);margin:24px 0 0;font-size:17px}
+.gate{border-top:1px solid var(--ink);padding-top:44px;padding-bottom:80px}
+.gate-grid{display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px}
+.gate h2{font-size:clamp(26px,3vw,38px);max-width:22ch}
+.gate p{max-width:56ch;color:var(--soft)}
+.gate form{display:flex;align-items:stretch;border-bottom:2px solid var(--ink);max-width:480px;margin-top:26px}
+.gate input{min-width:0;flex:1;border:0;background:transparent;padding:15px 0;font:inherit;color:var(--ink);outline:none}
+.gate input::placeholder{color:var(--muted)}
+.gate button{border:0;background:transparent;cursor:pointer;padding:0 2px 0 24px;font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+.gate button:hover{opacity:.6}
+.gate-small{font-size:13px;color:var(--muted);margin-top:14px}
+.gate-status{font-size:13px;color:var(--ink);min-height:1.3em;margin-top:6px}
+.step{display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px;border-top:1px solid var(--ink);padding-top:56px;padding-bottom:72px}
+.step-kicker{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.step h2{font-size:clamp(30px,3.8vw,50px);max-width:18ch}
+.step .lede{font-family:var(--display);font-size:19px;font-weight:600;line-height:1.35;max-width:54ch;margin:18px 0 26px}
+.step p{color:var(--soft);max-width:64ch}
+.step ul{color:var(--soft);max-width:64ch;padding-left:20px}
+.step li{margin-bottom:9px}
+.cmd{background:#f3f3ef;border-left:7px solid var(--ink);padding:20px 24px;margin:22px 0;max-width:720px;overflow-x:auto}
+.cmd code{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:13.5px;line-height:1.8;white-space:pre;display:block}
+.termshot{background:#15130e;color:#e8e6df;padding:20px 24px;margin:22px 0;max-width:720px;overflow-x:auto;font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:13px;line-height:1.9;white-space:pre}
+.termshot .g{color:#7ee081}.termshot .y{color:#e8c85c}.termshot .r{color:#ec6a5e}.termshot .d{color:#8c8475}
+.promptbox{position:relative;background:#f3f3ef;border-left:7px solid var(--ink);margin-top:26px;max-width:820px}
+.promptbox pre{margin:0;padding:26px 28px;overflow-x:auto;font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:13px;line-height:1.75;white-space:pre-wrap;color:var(--ink)}
+.copybtn{position:absolute;top:0;right:0;border:0;cursor:pointer;background:var(--ink);color:var(--paper);font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding:12px 18px}
+.copybtn:hover{opacity:.85}
+.note{border-left:3px solid var(--muted);padding:2px 0 2px 18px;margin:24px 0;max-width:62ch;color:var(--soft);font-size:15px}
+.closeblock{background:var(--ink);color:var(--paper);padding-top:82px;padding-bottom:88px}
+.closeblock h2{font-size:clamp(36px,5vw,64px);max-width:15ch}
+.closeblock .muted{color:#b7b7b1}
+.closeblock p{max-width:56ch;color:#b7b7b1;margin-top:20px}
+.closeblock a{display:inline-block;margin-top:30px;background:var(--paper);color:var(--ink);padding:14px 22px;text-decoration:none;font-family:var(--display);font-weight:700}
+footer{display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--rule);padding-top:28px;padding-bottom:32px;color:var(--soft);font-size:13px}
+[hidden]{display:none!important}
+@media(max-width:800px){.navlinks{display:none}.kit-head{padding-top:58px}.gate-grid,.step{grid-template-columns:1fr;gap:18px}.copybtn{position:static;display:inline-block;margin:0 0 0 28px}}
+</style></head><body>
+<div class="page">
+<nav class="pad"><a class="lockup" href="/"><img src="/qualia-symbol.png" alt=""><span class="wordmark">Art of the Possible<sup>&reg;</sup></span></a><div class="navlinks"><a href="/">Home</a><a href="/letters/">Archive</a><a href="/#about">About</a></div></nav>
+
+<header class="kit-head pad">
+  <div class="eyebrow">The Token Kit &middot; From the Reel</div>
+  <h1 style="margin-top:26px">You need to understand <span class="muted">token economics.</span></h1>
+  <p class="dek">You commented "tokens". Here it is: one prompt that puts a live usage bar in your Claude Code status line, and a second that does the same job for the Codex CLI. Paste, verify, done. You stop guessing how much of your plan is left.</p>
+</header>
+
+<section class="gate pad" id="gate">
+  <div class="gate-grid">
+    <div class="eyebrow">Unlock the kit</div>
+    <div>
+      <h2>Drop your email and everything unlocks on this page.</h2>
+      <p>You'll also get the weekly letter: five useful things I made with AI, with the prompts and workflows inside. Unsubscribe any time.</p>
+      <form id="gate-form" novalidate>
+        <label for="gate-email" style="position:absolute;left:-9999px">Email address</label>
+        <input id="gate-email" type="email" name="email" placeholder="you@somewhere.com" autocomplete="email" required>
+        <button type="submit">Unlock</button>
+      </form>
+      <p class="gate-status" id="gate-status" aria-live="polite"></p>
+      <p class="gate-small">Already on the list? Enter the same email and it unlocks without subscribing you twice.</p>
+      <noscript><p class="gate-small">This page needs JavaScript to unlock. Or just subscribe on <a href="/">the homepage</a> and reply to any letter for the kit.</p></noscript>
+    </div>
+  </div>
+</section>
+
+<div id="kit" hidden>
+
+<section class="step pad" id="what">
+  <div class="step-kicker"><span>01</span> &middot; What you get</div>
+  <div>
+    <h2>A quota readout <span class="muted">on every turn.</span></h2>
+    <p class="lede">Not a token counter. A plan-quota bar: how much of your session and your week you have left, in the status line you're already looking at, refreshed as you work.</p>
+    <div class="termshot">Opus 5  main  ctx:14%  Session <span class="g">62% left</span> <span class="d">(14:30)</span> | Week <span class="y">28%</span> <span class="d">(Thu)</span> | Opus wk <span class="r">9%</span></div>
+    <p>Green above 30% left, amber at 30 and under, red at 10 and under. The point isn't the number, it's the intuition you build by seeing it a hundred times a day. You learn which tasks are expensive before the week runs out, not after.</p>
+    <div class="note"><strong>Before you start:</strong> these prompts write to <code>~/.claude/</code> and read your OAuth token from the macOS Keychain. Both prompts are written to never print, log, or copy that token. Read what they build before you run it, the same as you should with anything that touches credentials.</div>
+  </div>
+</section>
+
+<section class="step pad" id="prompt-1">
+  <div class="step-kicker"><span>02</span> &middot; Prompt 1</div>
+  <div>
+    <h2>The Claude Code <span class="muted">usage bar.</span></h2>
+    <p class="lede">Open Claude Code anywhere and paste this whole thing. It builds the reader, the wrapper, wires up your settings, and then proves to you that it works before it claims to be done.</p>
+    <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>Add a live usage bar to my Claude Code status line so I can see how much of my plan I
+have left without running /usage.
+
+Build it exactly as specified below. Verify each step before moving to the next one.
+Never print, log, echo, or copy my access token into any file or any output.
+
+## What you are building
+
+A status line that renders on every turn and shows, left to right: the model name, the
+git branch, the context-window percentage, then how much of my plan quota is left for
+the current session and the current week.
+
+## Step 1 - the usage reader
+
+Create `~/.claude/statusline-usage.py`. Python 3, standard library only (json, os,
+subprocess, sys, time, urllib.request, datetime). No pip installs.
+
+It must:
+
+1. Read the OAuth access token WITHOUT ever printing it. Try the macOS Keychain first:
+   run `security find-generic-password -s "Claude Code-credentials" -w`, parse stdout
+   as JSON, take `["claudeAiOauth"]["accessToken"]`. If that fails for any reason, fall
+   back to reading `~/.claude/.credentials.json` and taking the same nested key. If
+   neither works, return None and degrade gracefully. On Linux the Keychain call will
+   always fail and the file fallback is the real path, so keep both branches.
+
+2. Call `GET https://api.anthropic.com/api/oauth/usage` with exactly two headers:
+   `Authorization: Bearer &lt;token&gt;` and `anthropic-beta: oauth-2025-04-20`.
+   Use a 5 second timeout. This is the same endpoint the /usage command reads.
+
+3. Cache aggressively. The status line re-renders constantly and must never hammer the
+   API. Write the response to `~/.claude/.usage-statusline-cache.json` in the shape
+   `{"fetched_at": &lt;unix time&gt;, "data": &lt;response&gt;}` and chmod it 0600. Serve from
+   cache whenever it is under 60 seconds old. On ANY fetch failure, serve the stale
+   cache rather than showing nothing. A network blip must never break my status line.
+
+4. Parse the response. It contains a `limits` array. Each entry has:
+   - `kind`: one of `session`, `weekly_all`, `weekly_scoped`
+   - `percent`: the percentage USED, so remaining is `100 - percent`
+   - `resets_at`: an ISO timestamp
+   - `group`: `weekly` on the weekly limits
+   - `scope.model.display_name`: present only on `weekly_scoped`, naming the model
+     that limit applies to
+
+5. Render one segment per limit, joined by ` | `:
+   - `session`       -&gt; `Session 62% left (resets 14:30)`
+   - `weekly_all`    -&gt; `Week 41% (Thu)`
+   - `weekly_scoped` -&gt; `Opus wk 23%`
+   Convert reset times into MY local timezone. For weekly limits show the weekday
+   abbreviation when the reset falls on a different day, otherwise HH:MM. For the
+   session limit always show HH:MM. If a timestamp will not parse, show `?` rather
+   than raising.
+
+6. Colour each percentage with raw ANSI escapes: green `\033[32m` above 30% left,
+   yellow `\033[33m` at 30 or below, red `\033[31m` at 10 or below. Dim `\033[2m` the
+   model name and the reset times. Emit reset `\033[0m` after every coloured span.
+
+7. Read the Claude Code JSON payload from stdin and pull `model.display_name` to prefix
+   the line. If stdin is empty or unparseable, carry on without the model name rather
+   than failing.
+
+8. If there is no usable data at all, print `&lt;model&gt; | usage unavailable` dimmed,
+   rather than crashing or printing an empty line.
+
+## Step 2 - the status line wrapper
+
+Create `~/.claude/statusline-command.sh`, bash. Claude Code pipes a JSON object into it
+on every render. Using `jq`, pull out:
+
+- `.model.display_name`, falling back to "Unknown Model"
+- `.workspace.current_dir`
+- `.context_window.used_percentage`
+
+Assemble the line from: the model name; the current git branch if the working directory
+is inside a repo (resolve it with `git -C "$cwd" rev-parse --abbrev-ref HEAD`, and emit
+nothing if that fails); `ctx:NN%` from the context percentage rounded to a whole number;
+and finally the Python script from Step 1, called as
+
+    usage=$(echo '{}' | python3 "$HOME/.claude/statusline-usage.py" 2&gt;/dev/null)
+
+Append the usage segment only when it came back non-empty, so any failure degrades to a
+shorter line instead of a broken one. Finish with `printf '%s'` rather than echo so no
+trailing newline is emitted.
+
+## Step 3 - wire it up
+
+Edit `~/.claude/settings.json`, preserving every existing key. Read the file, parse it
+as JSON, add the key below, write it back formatted. If the file does not exist, create
+it containing only this:
+
+    "statusLine": {
+      "type": "command",
+      "command": "bash /Users/&lt;me&gt;/.claude/statusline-command.sh"
+    }
+
+Use my real absolute home path, not a tilde. Tilde does not expand here.
+
+## Step 4 - verify before you tell me it works
+
+Do not report success until all five of these pass, and show me the output of each:
+
+1. `chmod +x` both scripts.
+2. `echo '{}' | python3 ~/.claude/statusline-usage.py` prints real percentages, not
+   "usage unavailable". If it does print that, diagnose it: token not found, endpoint
+   unreachable, or an unexpected response shape. Say which.
+3. A realistic payload through the wrapper renders correctly:
+   `echo '{"model":{"display_name":"Opus 5"},"workspace":{"current_dir":"'$PWD'"},"context_window":{"used_percentage":12.4}}' | bash ~/.claude/statusline-command.sh`
+4. `~/.claude/.usage-statusline-cache.json` exists and is mode 600.
+5. My token appears in NO file you created and in none of your output. Grep to confirm.
+
+Then tell me the exact line I will see, and remind me the status line only redraws on a
+new turn, so I need to press enter once in an open session before it appears.</pre></div>
+  </div>
+</section>
+
+<section class="step pad" id="prompt-2">
+  <div class="step-kicker"><span>03</span> &middot; Prompt 2</div>
+  <div>
+    <h2>The same thing <span class="muted">for Codex.</span></h2>
+    <p class="lede">The Codex CLI has no status-line hook, so this one works differently, and the prompt is written to stop the model inventing a config option that doesn't exist. Codex does write its rate limits to disk. This reads them.</p>
+    <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>Add a usage readout for the Codex CLI.
+
+Important, and do not work around it: unlike Claude Code, the Codex CLI has NO
+status-line hook. There is nothing to configure in `~/.codex/config.toml` for this. Do
+not invent a setting, and do not add one speculatively. Codex does write its rate-limit
+state to disk, so build a standalone command instead.
+
+## Where the data actually lives
+
+Codex writes a rollout log per session at
+`~/.codex/sessions/YYYY/MM/DD/rollout-&lt;timestamp&gt;-&lt;uuid&gt;.jsonl`. Lines in that file
+carry a `rate_limits` object shaped like this:
+
+    "rate_limits": {
+      "limit_id": "codex",
+      "primary":   {"used_percent": 92.0, "window_minutes": 43200, "resets_at": 1782974598},
+      "secondary": null,
+      "credits": null,
+      "plan_type": "free"
+    }
+
+VERIFY this on my machine before writing any code. Find the most recently modified
+rollout file and grep it:
+
+    grep -o '"rate_limits":{[^}]*}[^}]*}' &lt;that file&gt; | tail -1
+
+If the shape differs from what I have described above, follow what you actually find
+and tell me exactly how it differed. Do not code against my description if the machine
+disagrees with it.
+
+## Build `~/.local/bin/codex-usage`
+
+Python 3, standard library only. It must:
+
+1. Find the most recently MODIFIED `rollout-*.jsonl` anywhere under
+   `~/.codex/sessions/`, not the newest by filename. Filenames sort by session start
+   time, which is not the same as last write, and the freshest numbers live in whichever
+   session was most recently active.
+
+2. Read that file BACKWARDS from the end and stop at the first line carrying a non-null
+   `rate_limits`. Do not parse the whole file; these logs get large.
+
+3. Print remaining percentage as `100 - used_percent` for `primary`, and for `secondary`
+   as well when it is not null. Label each by its window: convert `window_minutes` into
+   something human (43200 = 30d, 10080 = 7d, 300 = 5h) and use that in the label, so it
+   reads like `Codex 30d: 8% left`.
+
+4. Convert `resets_at` from a unix epoch into my local time and show it.
+
+5. Include `plan_type` in the output so I can see which plan the numbers describe.
+
+6. Print `Codex: no usage data yet` and exit 0 when no rollout file carries rate limits,
+   so it is safe to call from a shell prompt.
+
+## The honesty requirement
+
+These numbers are a snapshot from the last Codex API response, not a live reading. If I
+have not run Codex for three days, they are three days stale. Print the age of the
+reading alongside it, like `(as of 14:32, 2h ago)`, so I can never mistake a stale
+number for a current one. Do not smooth this over or round it away.
+
+## Verify
+
+Run it, and show me its output next to what `codex` itself reports for rate limits, so
+I can confirm the two agree. Then tell me the single line I could add to my shell config
+to put it in my prompt, but do NOT edit my shell config unless I say yes.</pre></div>
+  </div>
+</section>
+
+<section class="step pad" id="notes">
+  <div class="step-kicker"><span>04</span> &middot; If it misbehaves</div>
+  <div>
+    <h2>Four things <span class="muted">that go wrong.</span></h2>
+    <ul>
+      <li><strong>Nothing appears.</strong> The status line only redraws on a new turn. Press enter once in an open session.</li>
+      <li><strong>"usage unavailable".</strong> The token lookup failed. Run <code>echo '{}' | python3 ~/.claude/statusline-usage.py</code> on its own and read the error. Usually it means you're signed in with an API key rather than a Claude subscription, and there's no plan quota to report.</li>
+      <li><strong>The tilde didn't expand.</strong> <code>settings.json</code> needs the real absolute path to the script. <code>~</code> is not expanded there.</li>
+      <li><strong>Codex numbers look frozen.</strong> They are. They only update when Codex next talks to the API. That's why the prompt makes it print how old the reading is.</li>
+    </ul>
+    <p>Both scripts fail soft by design. If the endpoint is down or your token rotates, you lose the usage segment and keep the rest of the status line. Nothing blocks your session.</p>
+  </div>
+</section>
+
+<section class="closeblock pad">
+  <h2>See what's possible. <span class="muted">Then build it.</span></h2>
+  <p>You're on the list now. Every week you'll get five useful things I made with AI, with the prompt or workflow behind each one. This kit was one of them.</p>
+  <a href="/">Back to the site</a>
+</section>
+
+</div>
+
+<footer class="pad"><span>Art of the Possible&reg;</span><span>New things are possible every day. &middot; 2026</span></footer>
+</div>
+
+<script>
+(function () {
+  var API = 'https://theaotp-gate.theaotp.workers.dev';
+  var KEY = 'aotp_tokens_unlocked';
+  var kit = document.getElementById('kit');
+  var gate = document.getElementById('gate');
+  var form = document.getElementById('gate-form');
+  var status = document.getElementById('gate-status');
+
+  function unlock() {
+    kit.hidden = false;
+    gate.hidden = true;
+    try { localStorage.setItem(KEY, '1'); } catch (e) {}
+  }
+
+  try { if (localStorage.getItem(KEY) === '1') unlock(); } catch (e) {}
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    var email = document.getElementById('gate-email').value.trim().toLowerCase();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      status.textContent = 'That email looks off. Try again.';
+      return;
+    }
+    status.textContent = 'One sec…';
+    fetch(API + '/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email }),
+    }).then(function (response) {
+      return response.json().catch(function () { return {}; }).then(function (data) {
+        if (!response.ok) {
+          var err = new Error('subscribe failed');
+          err.status = response.status;
+          err.detail = data && data.detail;
+          throw err;
+        }
+        return data;
+      });
+    }).then(function (data) {
+      status.textContent = data && data.new
+        ? 'Unlocked. Check your inbox to confirm your subscription to the letter.'
+        : 'Welcome back. Unlocked.';
+      unlock();
+      window.scrollTo({ top: document.getElementById('what').offsetTop - 40, behavior: 'smooth' });
+    }).catch(function (err) {
+      if (err && err.status === 400) {
+        status.textContent = 'That email was rejected' + (err.detail ? ' (' + err.detail + ')' : '') + '. Try a different address.';
+      } else {
+        status.textContent = 'Something broke on our end. Try again in a minute, or subscribe on the homepage and DM me on Instagram for the kit.';
+      }
+    });
+  });
+
+  document.querySelectorAll('[data-copy]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      var pre = button.parentElement.querySelector('pre');
+      navigator.clipboard.writeText(pre.textContent).then(function () {
+        button.textContent = 'Copied';
+        setTimeout(function () { button.textContent = 'Copy'; }, 1600);
+      });
+    });
+  });
+})();
+</script>
+</body></html>
