@@ -1,0 +1,371 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Top 1% Reading List | Art of the Possible</title>
+<meta name="description" content="The ten concepts that separate people who use AI from people who ship it, each one explained plainly and paired with the single best article on it.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://theaotp.com/top1/">
+<link rel="icon" href="/qualia-symbol.png">
+<meta property="og:title" content="The Top 1% Reading List | Art of the Possible">
+<meta property="og:description" content="Ten concepts, ten articles. The vocabulary of the people building AI systems for a living.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#fdfdfb;--canvas:#e9e9e6;--rule:#e4e4e0;--ink:#121210;--muted:#9c9c96;--soft:#52524d;--azure:#0096ff;--display:'Inter Tight','Helvetica Neue',Arial,sans-serif;--ui:Inter,'Helvetica Neue',Arial,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--ui);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.page{max-width:1280px;margin:0 auto;background:var(--paper);min-height:100vh}
+.pad{padding-left:clamp(22px,4.5vw,58px);padding-right:clamp(22px,4.5vw,58px)}
+nav{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--rule);padding-top:25px;padding-bottom:25px}
+.lockup{display:flex;align-items:center;gap:11px;text-decoration:none}.lockup img{width:25px;height:25px}
+.wordmark{font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:.055em;text-transform:uppercase}
+.navlinks{display:flex;gap:24px;font-size:14px}.navlinks a{text-decoration:none;color:var(--soft)}.navlinks a:hover{color:var(--ink)}
+.eyebrow{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
+h1,h2,h3{font-family:var(--display);letter-spacing:-.038em;line-height:1.01;margin:0}
+h1{font-size:clamp(42px,6.2vw,82px);max-width:15ch}
+.muted{color:var(--muted)}
+.kit-head{padding-top:90px;padding-bottom:58px}
+.dek{max-width:58ch;color:var(--soft);margin:24px 0 0;font-size:17px}
+.gate{border-top:1px solid var(--ink);padding-top:44px;padding-bottom:80px}
+.gate-grid{display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px}
+.gate h2{font-size:clamp(26px,3vw,38px);max-width:22ch}
+.gate p{max-width:56ch;color:var(--soft)}
+.gate form{display:flex;align-items:stretch;border-bottom:2px solid var(--ink);max-width:480px;margin-top:26px}
+.gate input{min-width:0;flex:1;border:0;background:transparent;padding:15px 0;font:inherit;color:var(--ink);outline:none}
+.gate input::placeholder{color:var(--muted)}
+.gate button{border:0;background:transparent;cursor:pointer;padding:0 2px 0 24px;font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+.gate button:hover{opacity:.6}
+.gate-small{font-size:13px;color:var(--muted);margin-top:14px}
+.gate-status{font-size:13px;color:var(--ink);min-height:1.3em;margin-top:6px}
+.step{display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px;border-top:1px solid var(--ink);padding-top:56px;padding-bottom:72px}
+.step-kicker{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.step h2{font-size:clamp(30px,3.8vw,50px);max-width:18ch}
+.step .lede{font-family:var(--display);font-size:19px;font-weight:600;line-height:1.35;max-width:54ch;margin:18px 0 26px}
+.step p{color:var(--soft);max-width:64ch}
+.step ul{color:var(--soft);max-width:64ch;padding-left:20px}
+.step li{margin-bottom:9px}
+.rule{height:3px;width:52px;background:var(--azure);margin:0 0 20px}
+.note{border-left:3px solid var(--muted);padding:2px 0 2px 18px;margin:26px 0;max-width:62ch;color:var(--soft);font-size:15px}
+.index{list-style:none;padding:0;margin:26px 0 0;max-width:66ch;counter-reset:idx}
+.index li{border-top:1px solid var(--rule);padding:14px 0;display:flex;gap:18px;align-items:baseline;font-size:15.5px;color:var(--soft)}
+.index .n{font-family:var(--display);font-weight:700;font-size:13px;color:var(--azure);min-width:26px}
+.index a{text-decoration:none;font-family:var(--display);font-weight:600;font-size:17px;color:var(--ink);letter-spacing:-.01em}
+.index a:hover{border-bottom:2px solid var(--azure)}
+.concept{border-top:1px solid var(--ink);padding-top:52px;padding-bottom:60px;display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px;scroll-margin-top:20px}
+.concept-num{font-family:var(--display);font-weight:800;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.concept-num span{color:var(--azure)}
+.concept h2{font-size:clamp(28px,3.4vw,44px);max-width:20ch}
+.concept .lede{font-family:var(--display);font-size:19px;font-weight:600;line-height:1.35;max-width:54ch;margin:18px 0 22px}
+.concept p{color:var(--soft);max-width:64ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 0}
+.chip{font-family:var(--display);font-weight:600;font-size:12.5px;letter-spacing:.02em;color:var(--soft);background:#f3f3ef;padding:6px 11px;border-radius:3px}
+.read{border:1px solid var(--rule);border-left:7px solid var(--azure);padding:22px 24px;margin:26px 0 0;max-width:720px}
+.read .src{font-family:var(--display);font-weight:700;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.read h3{font-size:19px;margin:8px 0 14px;max-width:44ch;line-height:1.2}
+.read a{display:inline-block;font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;border-bottom:2px solid var(--azure);padding-bottom:2px}
+.read a:hover{color:var(--azure)}
+.closeblock{background:var(--ink);color:var(--paper);padding-top:82px;padding-bottom:88px}
+.closeblock h2{font-size:clamp(36px,5vw,64px);max-width:15ch}
+.closeblock .muted{color:#b7b7b1}
+.closeblock p{max-width:56ch;color:#b7b7b1;margin-top:20px}
+.closeblock a{display:inline-block;margin-top:30px;background:var(--paper);color:var(--ink);padding:14px 22px;text-decoration:none;font-family:var(--display);font-weight:700}
+footer{display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--rule);padding-top:28px;padding-bottom:32px;color:var(--soft);font-size:13px}
+[hidden]{display:none!important}
+@media(max-width:800px){.navlinks{display:none}.kit-head{padding-top:58px}.gate-grid,.step,.concept{grid-template-columns:1fr;gap:18px}}
+</style></head><body>
+<div class="page">
+<nav class="pad"><a class="lockup" href="/"><img src="/qualia-symbol.png" alt=""><span class="wordmark">Art of the Possible<sup>&reg;</sup></span></a><div class="navlinks"><a href="/">Home</a><a href="/letters/">Archive</a><a href="/#about">About</a></div></nav>
+
+<header class="kit-head pad">
+  <div class="eyebrow">The Top 1% Reading List &middot; From the Reel</div>
+  <h1 style="margin-top:26px">Ten concepts. <span class="muted">Ten articles.</span></h1>
+  <p class="dek">You commented "top 1%". Here it is. These are the ten disciplines that separate people who use AI from people who ship AI systems that survive contact with real users. Each one is explained here in plain English, then handed off to the single best article I found on it. No course, no upsell. Just the vocabulary, and where to go deep on each piece of it.</p>
+</header>
+
+<section class="gate pad" id="gate">
+  <div class="gate-grid">
+    <div class="eyebrow">Unlock the list</div>
+    <div>
+      <h2>Drop your email and the whole list unlocks on this page.</h2>
+      <p>You'll also get the weekly letter: five useful things I made with AI, with the prompts and workflows inside. Unsubscribe any time.</p>
+      <form id="gate-form" novalidate>
+        <label for="gate-email" style="position:absolute;left:-9999px">Email address</label>
+        <input id="gate-email" type="email" name="email" placeholder="you@somewhere.com" autocomplete="email" required>
+        <button type="submit">Unlock</button>
+      </form>
+      <p class="gate-status" id="gate-status" aria-live="polite"></p>
+      <p class="gate-small">Already on the list? Enter the same email and it unlocks without subscribing you twice.</p>
+      <noscript><p class="gate-small">This page needs JavaScript to unlock. Or just subscribe on <a href="/">the homepage</a> and reply to any letter for the list.</p></noscript>
+    </div>
+  </div>
+</section>
+
+<div id="kit" hidden>
+
+<section class="step pad" id="how">
+  <div class="step-kicker"><span>00</span> &middot; How to use this</div>
+  <div>
+    <div class="rule"></div>
+    <h2>Read them <span class="muted">in order.</span></h2>
+    <p class="lede">The ten are sequenced deliberately. One to five build the thing and tell you whether it works. Six to eight keep it alive in production. Nine and ten are the two that put you level with the people inside the labs.</p>
+    <p>You do not need to read all ten this week. Read one, then go and find that concept inside something you have already built. The gap between knowing the word and recognising the thing in your own system is where the actual advantage sits.</p>
+    <ol class="index">
+      <li><span class="n">01</span><a href="#c1">Harness engineering</a></li>
+      <li><span class="n">02</span><a href="#c2">Evaluations</a></li>
+      <li><span class="n">03</span><a href="#c3">Retrieval architecture</a></li>
+      <li><span class="n">04</span><a href="#c4">Retrieval evals</a></li>
+      <li><span class="n">05</span><a href="#c5">Observability</a></li>
+      <li><span class="n">06</span><a href="#c6">Safety engineering</a></li>
+      <li><span class="n">07</span><a href="#c7">Cost attribution</a></li>
+      <li><span class="n">08</span><a href="#c8">Production failure modes</a></li>
+      <li><span class="n">09</span><a href="#c9">The iron triangle of trade-offs</a></li>
+      <li><span class="n">10</span><a href="#c10">Model adaptation strategies</a></li>
+    </ol>
+    <div class="note">Every article below is someone else's work, linked to the original. I did not write them and I do not earn anything from them. They are simply the clearest explanations I found while learning each concept myself.</div>
+  </div>
+</section>
+
+<section class="concept pad" id="c1">
+  <div class="concept-num"><span>01</span> &middot; Build</div>
+  <div>
+    <h2>Harness <span class="muted">engineering.</span></h2>
+    <p class="lede">The model is maybe thirty percent of your system. The harness is everything wrapped around it, and that is where your quality actually comes from.</p>
+    <p>Two teams using the identical model get wildly different results, and people assume it is the prompt. It is not. It is the harness: what context gets assembled and in what order, which model handles which step, what the guardrails reject, how many loops the agent is allowed before it gives up, how many tool calls it can burn, and what condition tells it it is finished. Swap the model and a good harness stays good. Swap the harness and everything changes.</p>
+    <p>This is the first concept because it reframes the whole job. You are not prompt engineering. You are building the machine the prompt runs inside.</p>
+    <div class="chips"><span class="chip">context</span><span class="chip">model routing</span><span class="chip">guardrails</span><span class="chip">loop budgets</span><span class="chip">tool budgets</span><span class="chip">termination conditions</span></div>
+    <div class="read">
+      <div class="src">Medium</div>
+      <h3>The Agent Harness: Why 70% of Your AI Agent's Performance Lives Outside the Model</h3>
+      <a href="https://medium.com/@tentenco/the-agent-harness-why-70-of-your-ai-agents-performance-lives-outside-the-model-5093cfe03df1" target="_blank" rel="noopener">Read it &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="concept pad" id="c2">
+  <div class="concept-num"><span>02</span> &middot; Build</div>
+  <div>
+    <h2>Evaluations.</h2>
+    <p class="lede">Vibes do not scale. An eval is the difference between believing your system got better and knowing it did.</p>
+    <p>You need a golden set: real inputs with known-good outputs that you grade every change against. You need regression tests so today's improvement does not quietly break last month's fix. You need adversarial cases, the weird and hostile inputs that expose what your happy path hides. And when you use a model to grade a model, LLM-as-judge, you have to align that judge against human grading first, or you are just measuring one model's taste.</p>
+    <p>Most people skip this and ship on feel. It works right up until it does not, and by then nobody can tell you which change caused the drop.</p>
+    <div class="chips"><span class="chip">golden sets</span><span class="chip">regression tests</span><span class="chip">adversarial tests</span><span class="chip">LLM-as-judge</span><span class="chip">human grading alignment</span></div>
+    <div class="read">
+      <div class="src">Data Science at Microsoft</div>
+      <h3>Evaluating LLM systems: Metrics, challenges, and best practices</h3>
+      <a href="https://medium.com/data-science-at-microsoft/evaluating-llm-systems-metrics-challenges-and-best-practices-664ac25be7e5" target="_blank" rel="noopener">Read it &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="concept pad" id="c3">
+  <div class="concept-num"><span>03</span> &middot; Build</div>
+  <div>
+    <h2>Retrieval <span class="muted">architecture.</span></h2>
+    <p class="lede">Most bad AI answers are not a model problem. They are a retrieval problem wearing a model's clothes.</p>
+    <p>If the right passage never made it into the context window, no model on earth answers correctly. So the architecture matters: how you chunk documents, which embedding model you use, whether you combine semantic search with keyword search because pure vectors miss exact terms like error codes and product names, whether you rerank the top candidates before spending context on them, and how fresh the index is. Stale retrieval is confidently wrong retrieval.</p>
+    <p>Chunking, hybrid search and reranking are the three levers that move quality most, and almost nobody tunes all three.</p>
+    <div class="chips"><span class="chip">chunking</span><span class="chip">embeddings</span><span class="chip">hybrid search</span><span class="chip">reranking</span><span class="chip">freshness</span></div>
+    <div class="read">
+      <div class="src">Medium</div>
+      <h3>Chunking, Hybrid Search, and Reranking: What Actually Improves RAG</h3>
+      <a href="https://medium.com/@garima_yadav/chunking-hybrid-search-and-reranking-what-actually-improves-rag-de3d453c9059" target="_blank" rel="noopener">Read it &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="concept pad" id="c4">
+  <div class="concept-num"><span>04</span> &middot; Build</div>
+  <div>
+    <h2>Retrieval <span class="muted">evals.</span></h2>
+    <p class="lede">Evaluating the answer is not the same as evaluating what the answer was built from. These are two separate scoreboards.</p>
+    <p>Retrieval has its own metrics. Recall asks whether the right documents were fetched at all. Precision asks how much junk came with them. Grounding asks whether the generated answer is actually supported by what was retrieved, rather than the model filling gaps from memory. Attribution and citation quality ask whether the sources it points at genuinely say what it claims they say.</p>
+    <p>Splitting these out is what lets you fix the real problem. A grounded answer built on the wrong documents and a hallucinated answer built on the right ones look identical from the outside, and they need opposite fixes.</p>
+    <div class="chips"><span class="chip">recall</span><span class="chip">precision</span><span class="chip">grounding</span><span class="chip">attribution</span><span class="chip">citation quality</span></div>
+    <div class="read">
+      <div class="src">Medium</div>
+      <h3>RAG Evaluation Metrics Explained: A Complete Guide with Examples</h3>
+      <a href="https://medium.com/@sanjeebmeister/rag-evaluation-metrics-explained-a-complete-guide-with-examples-dea8bf4467db" target="_blank" rel="noopener">Read it &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="concept pad" id="c5">
+  <div class="concept-num"><span>05</span> &middot; Run</div>
+  <div>
+    <h2>Observability.</h2>
+    <p class="lede">When an agent gives a bad answer in production, can you replay exactly what happened? If not, you are not running a system, you are hoping.</p>
+    <p>Traces and spans give you the full path of a request: every model call, every tool call, every retrieval, nested and timed. On top of that you watch tokens, latency, error rates, and drift, the slow shift in your inputs or your model's behaviour that nobody notices until quality has already gone.</p>
+    <p>The tell is simple. Ask someone how they debug a bad output. If the answer involves re-running it manually and seeing what happens, they have no observability.</p>
+    <div class="chips"><span class="chip">traces</span><span class="chip">spans</span><span class="chip">tokens</span><span class="chip">latency</span><span class="chip">errors</span><span class="chip">drift</span></div>
+    <div class="read">
+      <div class="src">Medium</div>
+      <h3>A Practical Guide to Observability for LLM Applications: Logs, Traces, and Quality Metrics</h3>
+      <a href="https://medium.com/@zakariabenhadi/a-practical-guide-to-observability-for-llm-applications-logs-traces-and-quality-metrics-c29568ef52eb" target="_blank" rel="noopener">Read it &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="concept pad" id="c6">
+  <div class="concept-num"><span>06</span> &middot; Run</div>
+  <div>
+    <h2>Safety <span class="muted">engineering.</span></h2>
+    <p class="lede">Any text your system reads is text that can instruct it. That single sentence is the whole discipline.</p>
+    <p>Prompt injection is not a jailbreak game, it is an architectural problem: a web page, a PDF, a support ticket or an email can carry instructions your agent will happily follow. Defending it means treating retrieved content as untrusted data rather than commands, preventing data leakage across users and tenants, and drawing hard permission boundaries so the agent simply cannot reach the tool that does the damage.</p>
+    <p>The rule that survives everything: never rely on the model refusing. Rely on the model not having access.</p>
+    <div class="chips"><span class="chip">prompt injection defense</span><span class="chip">data leakage prevention</span><span class="chip">permission boundaries</span></div>
+    <div class="read">
+      <div class="src">Medium &middot; ML Made Simple</div>
+      <h3>7 Methods to Secure LLM Apps from Prompt Injections and Jailbreaks</h3>
+      <a href="https://machine-learning-made-simple.medium.com/7-methods-to-secure-llm-apps-from-prompt-injections-and-jailbreaks-11987b274012" target="_blank" rel="noopener">Read it &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="concept pad" id="c7">
+  <div class="concept-num"><span>07</span> &middot; Run</div>
+  <div>
+    <h2>Cost <span class="muted">attribution.</span></h2>
+    <p class="lede">Knowing your monthly model bill is not cost control. It is a number you can do nothing with.</p>
+    <p>Attribution means slicing spend the way the business is actually shaped: per feature, per workflow, per tenant, per user journey. That is what lets you say this one feature costs eleven cents a run and earns nothing, or this customer's usage is quietly unprofitable, or this retry loop tripled our spend on Tuesday.</p>
+    <p>This is the concept that gets you taken seriously outside engineering, because it converts tokens into the only unit a business cares about: margin per thing we do.</p>
+    <div class="chips"><span class="chip">per feature</span><span class="chip">per workflow</span><span class="chip">per tenant</span><span class="chip">per user journey</span><span class="chip">not just per model</span></div>
+    <div class="read">
+      <div class="src">Braintrust</div>
+      <h3>How to track LLM costs (2026): per-user, per-feature, per-agent-run attribution</h3>
+      <a href="https://www.braintrust.dev/articles/how-to-track-llm-costs-2026" target="_blank" rel="noopener">Read it &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="concept pad" id="c8">
+  <div class="concept-num"><span>08</span> &middot; Run</div>
+  <div>
+    <h2>Production <span class="muted">failure modes.</span></h2>
+    <p class="lede">Experienced operators do not debug faster because they are smarter. They debug faster because they have seen the same five failures before.</p>
+    <p>Agents fail in patterns: hallucinated tool calls to functions that do not exist, malformed JSON that breaks the parser downstream, stale retrieval serving last quarter's answer, runaway agents looping until the budget is gone, and the worst one, silent eval regressions where quality drops and every dashboard stays green because nothing technically errored.</p>
+    <p>Learn the catalogue and you stop treating each incident as novel. You start recognising it in the first minute instead of the first hour.</p>
+    <div class="chips"><span class="chip">hallucinated tool calls</span><span class="chip">malformed JSON</span><span class="chip">stale retrieval</span><span class="chip">runaway agents</span><span class="chip">silent eval regressions</span></div>
+    <div class="read">
+      <div class="src">Arize AI</div>
+      <h3>Why AI Agents Break: A Field Analysis of Production Failures</h3>
+      <a href="https://arize.com/blog/common-ai-agent-failures/" target="_blank" rel="noopener">Read it &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="concept pad" id="c9">
+  <div class="concept-num"><span>09</span> &middot; Frontier</div>
+  <div>
+    <h2>The iron triangle <span class="muted">of trade-offs.</span></h2>
+    <p class="lede">Latency, quality, cost. You get to optimise two. Every serious decision in an AI system is you choosing which one to give up.</p>
+    <p>Want a better answer? Bigger model, more reasoning, more retrieval, so it costs more and takes longer. Want it instant? Smaller model or aggressive caching, so quality moves. Want it cheap? Something gives, always. And this plays out across the whole inference stack, not just the model choice: how you chunk, how many candidates you rerank, how many agent loops you allow, whether you batch.</p>
+    <p>The people inside the labs think in this triangle constantly. Once you see it, every architecture argument becomes legible, because you can name which corner each side is defending.</p>
+    <div class="chips"><span class="chip">latency</span><span class="chip">quality</span><span class="chip">cost</span><span class="chip">across the full inference stack</span></div>
+    <div class="read">
+      <div class="src">Medium</div>
+      <h3>The AI Engineer's Trilemma: Latency, Cost, and Accuracy</h3>
+      <a href="https://medium.com/@pablo.julian.rosa/the-ai-engineers-trilemma-when-integrating-llms-latency-cost-and-accuracy-ab775cd25055" target="_blank" rel="noopener">Read it &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="concept pad" id="c10">
+  <div class="concept-num"><span>10</span> &middot; Frontier</div>
+  <div>
+    <h2>Model adaptation <span class="muted">strategies.</span></h2>
+    <p class="lede">Four ways to make a general model do your specific job, and knowing which one to reach for is the whole skill.</p>
+    <p>In-context learning, just showing it examples in the prompt, is free and instant and where you should always start. Retrieval gives it knowledge it never had, and it is what you want when the facts change. Fine-tuning teaches it a behaviour or a format, not facts, and people reach for it far too early. Distillation trains a small cheap model to imitate a big expensive one, which is how you buy back latency and cost once quality is already proven.</p>
+    <p>The mistake almost everyone makes is fine-tuning to fix a knowledge gap that retrieval would have closed in an afternoon. Get this decision right and you save months.</p>
+    <div class="chips"><span class="chip">fine-tuning</span><span class="chip">in-context learning</span><span class="chip">RAG</span><span class="chip">distillation</span></div>
+    <div class="read">
+      <div class="src">Medium</div>
+      <h3>Fine-Tuning vs RAG vs Distillation: gym, library, or clone yourself</h3>
+      <a href="https://medium.com/@vasraabijeeth/fine-tuning-vs-rag-vs-distillation-when-llms-hit-the-gym-the-library-or-just-clone-themselves-a19f3bb9f908" target="_blank" rel="noopener">Read it &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="step pad" id="next">
+  <div class="step-kicker"><span>11</span> &middot; What to do now</div>
+  <div>
+    <div class="rule"></div>
+    <h2>Pick one. <span class="muted">Find it in your own work.</span></h2>
+    <p class="lede">Reading ten articles changes nothing on its own. Reading one and then going to look for that concept inside something you have built changes how you see every AI system after it.</p>
+    <ul>
+      <li><strong>If you have shipped nothing yet:</strong> start at 01 and 02. Harness and evals are the two that make everything after them possible.</li>
+      <li><strong>If you have a RAG app that is "mostly good":</strong> go straight to 03 and 04. It is almost always retrieval, and you probably have no retrieval metrics.</li>
+      <li><strong>If something is live and you are nervous about it:</strong> 05, 06 and 08. Traces, permission boundaries, and the failure catalogue.</li>
+      <li><strong>If you are in the room where the money is discussed:</strong> 07 and 09. Cost attribution and the iron triangle are the two that make you fluent with the business.</li>
+    </ul>
+    <p>Then use the words. Half of being in the top 1% is being able to say "that is a retrieval eval problem, not a model problem" in a meeting, and being right.</p>
+  </div>
+</section>
+
+<section class="closeblock pad">
+  <h2>See what's possible. <span class="muted">Then build it.</span></h2>
+  <p>You're on the list now. Every week you'll get five useful things I made with AI, with the prompt or workflow behind each one. This list was one of them.</p>
+  <a href="/">Back to the site</a>
+</section>
+
+</div>
+
+<footer class="pad"><span>Art of the Possible&reg;</span><span>New things are possible every day. &middot; 2026</span></footer>
+</div>
+
+<script>
+(function () {
+  var API = 'https://theaotp-gate.theaotp.workers.dev';
+  var KEY = 'aotp_top1_unlocked';
+  var kit = document.getElementById('kit');
+  var gate = document.getElementById('gate');
+  var form = document.getElementById('gate-form');
+  var status = document.getElementById('gate-status');
+
+  function unlock() {
+    kit.hidden = false;
+    gate.hidden = true;
+    try { localStorage.setItem(KEY, '1'); } catch (e) {}
+  }
+
+  try { if (localStorage.getItem(KEY) === '1') unlock(); } catch (e) {}
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    var email = document.getElementById('gate-email').value.trim().toLowerCase();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      status.textContent = 'That email looks off. Try again.';
+      return;
+    }
+    status.textContent = 'One sec…';
+    fetch(API + '/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email }),
+    }).then(function (response) {
+      return response.json().catch(function () { return {}; }).then(function (data) {
+        if (!response.ok) {
+          var err = new Error('subscribe failed');
+          err.status = response.status;
+          err.detail = data && data.detail;
+          throw err;
+        }
+        return data;
+      });
+    }).then(function (data) {
+      status.textContent = data && data.new
+        ? 'Unlocked. Check your inbox to confirm your subscription to the letter.'
+        : 'Welcome back. Unlocked.';
+      unlock();
+      window.scrollTo({ top: document.getElementById('how').offsetTop - 40, behavior: 'smooth' });
+    }).catch(function (err) {
+      if (err && err.status === 400) {
+        status.textContent = 'That email was rejected' + (err.detail ? ' (' + err.detail + ')' : '') + '. Try a different address.';
+      } else {
+        status.textContent = 'Something broke on our end. Try again in a minute, or subscribe on the homepage and DM me on Instagram for the list.';
+      }
+    });
+  });
+})();
+</script>
+</body></html>
