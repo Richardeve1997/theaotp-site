@@ -79,6 +79,14 @@ footer{display:flex;justify-content:space-between;gap:20px;border-top:1px solid 
 .promptbox pre{margin:0;padding:26px 28px;overflow-x:auto;font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:13px;line-height:1.75;white-space:pre-wrap;color:var(--ink)}
 .copybtn{position:absolute;top:0;right:0;border:0;cursor:pointer;background:var(--ink);color:var(--paper);font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding:12px 18px}
 .copybtn:hover{opacity:.85}
+.sources{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:26px;margin:28px 0 0;max-width:900px}
+.vid{min-width:0}
+.vid .frame{position:relative;padding-top:56.25%;background:#f3f3ef;border:1px solid var(--rule)}
+.vid iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0;display:block}
+.vid .src{font-family:var(--display);font-weight:700;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:14px 0 0}
+.vid h3{font-size:17px;margin:6px 0 0;line-height:1.2;letter-spacing:-.02em}
+.vid p{color:var(--soft);font-size:14.5px;margin:8px 0 0;max-width:46ch}
+@media(max-width:800px){.sources{grid-template-columns:1fr;gap:34px}}
 table{border-collapse:collapse;width:100%;max-width:720px;margin:22px 0;font-size:14.5px}
 th,td{text-align:left;padding:12px 14px 12px 0;border-bottom:1px solid var(--rule);vertical-align:top;color:var(--soft)}
 th{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
@@ -116,27 +124,53 @@ td:first-child{color:var(--ink);font-weight:600;white-space:nowrap;padding-right
 <div id="kit" hidden>
 
 <section class="step pad" id="first">
-  <div class="step-kicker"><span>00</span> &middot; How to use this</div>
+  <div class="step-kicker"><span>00</span> &middot; The sources</div>
+  <div>
+    <div class="rule"></div>
+    <h2>Everything here <span class="muted">comes from these three.</span></h2>
+    <p class="lede">LangChain's own documentation and their two videos. Watch them here, and treat the rest of this page as my notes on top.</p>
+    <div class="read">
+      <div class="src">LangChain Docs</div>
+      <h3>Managed Deep Agents overview</h3>
+      <a href="https://docs.langchain.com/langsmith/python/managed-deep-agents-overview" target="_blank" rel="noopener">Read it &rarr;</a>
+    </div>
+    <div class="sources">
+      <div class="vid">
+        <div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/yi-XZnAVFJg" title="Managed Deep Agents explained in 20 minutes" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+        <p class="src">LangChain &middot; YouTube</p>
+        <h3>Managed Deep Agents explained in 20 minutes</h3>
+        <p>The full architecture, end to end. This is the one the Reel was built from. The walkthrough starts around <a href="https://www.youtube.com/watch?v=yi-XZnAVFJg&amp;t=398s" target="_blank" rel="noopener">6:38</a>.</p>
+      </div>
+      <div class="vid">
+        <div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/OpFXXSsEIBo" title="Build a social media agent with Managed Deep Agents" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+        <p class="src">LangChain &middot; YouTube</p>
+        <h3>Build a social media agent with Managed Deep Agents</h3>
+        <p>A real agent built from an empty directory to something running on a schedule. Pair it with the quickstart in 04.</p>
+      </div>
+    </div>
+    <div class="note">All three are LangChain's own work, linked to the original. I did not write any of it, I am not affiliated with LangChain, and I do not earn anything from it. It is simply the clearest route I found from agent demo to agent in production.</div>
+  </div>
+</section>
+
+<section class="step pad" id="how">
+  <div class="step-kicker"><span>01</span> &middot; How to use this</div>
   <div>
     <div class="rule"></div>
     <h2>Read one, <span class="muted">then ship one.</span></h2>
     <p class="lede">The whole point of Managed Deep Agents is that you stop making architecture decisions and start describing behaviour, so this page is ordered to get you to a deployed agent, not to a full understanding.</p>
-    <p>Sections 01 and 02 are the mental model: what the platform actually is and which block does what. Section 03 is the quickstart, which takes about ten minutes and ends with a live deployment URL. Section 04 is where it becomes useful rather than impressive. Sections 05 and 06 are LangChain's own videos, and 07 is the instruction to hand your coding agent.</p>
+    <p>Sections 02 and 03 are the mental model: what the platform actually is and which block does what. Section 04 is the quickstart, which takes about ten minutes and ends with a live deployment URL. Section 05 is where it becomes useful rather than impressive. Section 06 is the instruction to hand your coding agent.</p>
     <ol class="index">
-      <li><span class="n">01</span><a href="#c1">What Managed Deep Agents actually is</a></li>
-      <li><span class="n">02</span><a href="#c2">The blocks, and what each one replaces</a></li>
-      <li><span class="n">03</span><a href="#c3">Ship one in about ten minutes</a></li>
-      <li><span class="n">04</span><a href="#c4">Tool, memory, schedule: the tutorial</a></li>
-      <li><span class="n">05</span><a href="#c5">The 20 minute explainer</a></li>
-      <li><span class="n">06</span><a href="#c6">Watch one get built end to end</a></li>
-      <li><span class="n">07</span><a href="#c7">The instruction for Claude or Codex</a></li>
+      <li><span class="n">02</span><a href="#c1">What Managed Deep Agents actually is</a></li>
+      <li><span class="n">03</span><a href="#c2">The blocks, and what each one replaces</a></li>
+      <li><span class="n">04</span><a href="#c3">Ship one in about ten minutes</a></li>
+      <li><span class="n">05</span><a href="#c4">Tool, memory, schedule: the tutorial</a></li>
+      <li><span class="n">06</span><a href="#c7">The instruction for Claude or Codex</a></li>
     </ol>
-    <div class="note">Every document and video linked below is LangChain's own work, linked to the original. I did not write any of it, I am not affiliated with LangChain, and I do not earn anything from it. It is simply the clearest route I found from agent demo to agent in production.</div>
   </div>
 </section>
 
 <section class="concept pad" id="c1">
-  <div class="concept-num"><span>01</span> &middot; The model</div>
+  <div class="concept-num"><span>02</span> &middot; The model</div>
   <div>
     <h2>What Managed Deep Agents <span class="muted">actually is.</span></h2>
     <p class="lede">Two layers: a harness that runs the agent loop, and a managed runtime that hosts it, so there is nothing to provision and nothing to keep alive.</p>
@@ -152,7 +186,7 @@ td:first-child{color:var(--ink);font-weight:600;white-space:nowrap;padding-right
 </section>
 
 <section class="concept pad" id="c2">
-  <div class="concept-num"><span>02</span> &middot; The blocks</div>
+  <div class="concept-num"><span>03</span> &middot; The blocks</div>
   <div>
     <h2>Every block, <span class="muted">and what it replaces.</span></h2>
     <p class="lede">This is the diagram from the Reel, written out. Each capability is a file or a directory in the project, which is why a coding agent can assemble it for you.</p>
@@ -179,7 +213,7 @@ td:first-child{color:var(--ink);font-weight:600;white-space:nowrap;padding-right
 </section>
 
 <section class="step pad" id="c3">
-  <div class="step-kicker"><span>03</span> &middot; The quickstart</div>
+  <div class="step-kicker"><span>04</span> &middot; The quickstart</div>
   <div>
     <div class="rule"></div>
     <h2>Ship one <span class="muted">in about ten minutes.</span></h2>
@@ -210,7 +244,7 @@ mda deploy .</code></div>
 </section>
 
 <section class="concept pad" id="c4">
-  <div class="concept-num"><span>04</span> &middot; The tutorial</div>
+  <div class="concept-num"><span>05</span> &middot; The tutorial</div>
   <div>
     <h2>Tool, memory, schedule: <span class="muted">the part that matters.</span></h2>
     <p class="lede">The quickstart gives you a deployed agent. This tutorial gives you one that remembers what it learned and shows up on its own on a weekday morning.</p>
@@ -225,37 +259,8 @@ mda deploy .</code></div>
   </div>
 </section>
 
-<section class="concept pad" id="c5">
-  <div class="concept-num"><span>05</span> &middot; The explainer</div>
-  <div>
-    <h2>The whole platform <span class="muted">in 20 minutes.</span></h2>
-    <p class="lede">If you only have time for one thing on this page, make it this. It is the source the Reel was built from.</p>
-    <p>LangChain walks the architecture end to end: the agent loop, the Context Hub holding instructions, skills and memory, the sandbox, the connectors, and the channels. Watching someone move through it in order is what makes the diagram stop being a diagram.</p>
-    <div class="read">
-      <div class="src">LangChain &middot; YouTube</div>
-      <h3>Managed Deep Agents explained in 20 minutes</h3>
-      <a href="https://www.youtube.com/watch?v=yi-XZnAVFJg" target="_blank" rel="noopener">Watch it &rarr;</a>
-    </div>
-    <div class="note">Short on time? The architecture walkthrough starts around <a href="https://www.youtube.com/watch?v=yi-XZnAVFJg&amp;t=398s" target="_blank" rel="noopener">6:38</a>.</div>
-  </div>
-</section>
-
-<section class="concept pad" id="c6">
-  <div class="concept-num"><span>06</span> &middot; The build</div>
-  <div>
-    <h2>Watch one get built <span class="muted">end to end.</span></h2>
-    <p class="lede">A real agent, not a hello world, from empty directory to something running on a schedule.</p>
-    <p>Pair this with the quickstart. Read the commands first so the shape is familiar, then watch the build and notice how much of the session is spent on what the agent should do rather than on how to host it. That ratio is the entire pitch.</p>
-    <div class="read">
-      <div class="src">LangChain &middot; YouTube</div>
-      <h3>Build a social media agent with Managed Deep Agents</h3>
-      <a href="https://youtu.be/OpFXXSsEIBo" target="_blank" rel="noopener">Watch it &rarr;</a>
-    </div>
-  </div>
-</section>
-
 <section class="step pad" id="c7">
-  <div class="step-kicker"><span>07</span> &middot; The instruction</div>
+  <div class="step-kicker"><span>06</span> &middot; The instruction</div>
   <div>
     <div class="rule"></div>
     <h2>Tell your coding agent <span class="muted">to use it.</span></h2>
@@ -292,16 +297,16 @@ and wait for me to confirm before you generate any code.</pre></div>
 </section>
 
 <section class="step pad" id="next">
-  <div class="step-kicker"><span>08</span> &middot; What to do now</div>
+  <div class="step-kicker"><span>07</span> &middot; What to do now</div>
   <div>
     <div class="rule"></div>
     <h2>Pick one. <span class="muted">Use it today.</span></h2>
     <p class="lede">Reading the docs is not the outcome. A deployed agent that runs itself on Monday morning is the outcome.</p>
     <ul>
-      <li><strong>If you have never built an agent:</strong> start at 05, watch the explainer, then run the quickstart in 03 exactly as written. Change nothing on the first pass.</li>
-      <li><strong>If you already have an agent held together with cron jobs and glue:</strong> start at 02, find the blocks you have hand-built, and port those first. Schedules and memory are usually the fastest wins.</li>
-      <li><strong>If you build with Claude or Codex:</strong> go straight to 07, paste the instruction, and describe the job. Let it tell you which blocks it needs before it writes anything.</li>
-      <li><strong>If you have twenty minutes and no laptop:</strong> 05, at 1.5x. It is the highest ratio of understanding to time on this page.</li>
+      <li><strong>If you have never built an agent:</strong> start at 00, watch the 20 minute explainer, then run the quickstart in 04 exactly as written. Change nothing on the first pass.</li>
+      <li><strong>If you already have an agent held together with cron jobs and glue:</strong> start at 03, find the blocks you have hand-built, and port those first. Schedules and memory are usually the fastest wins.</li>
+      <li><strong>If you build with Claude or Codex:</strong> go straight to 06, paste the instruction, and describe the job. Let it tell you which blocks it needs before it writes anything.</li>
+      <li><strong>If you have twenty minutes and no laptop:</strong> the 20 minute explainer in 00, at 1.5x. It is the highest ratio of understanding to time on this page.</li>
     </ul>
   </div>
 </section>
