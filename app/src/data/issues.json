@@ -1,6 +1,244 @@
 [
   {
     "schemaVersion": 1,
+    "issueNumber": 2,
+    "slug": "2026-08-18-the-scaffolding-not-the-model",
+    "status": "draft",
+    "publishedAt": "2026-08-18T07:00:00Z",
+    "subject": "An open-source agent just edged out humans",
+    "preheader": "Prime Agent beat the human ARC-AGI-3 benchmark, loops replaced prompts, and my own numbers prove the compounding case.",
+    "title": {
+      "lead": "The leap didn't come from a new model.",
+      "muted": "It came from the scaffolding around it."
+    },
+    "dek": "A weekly field note from Art of the Possible.",
+    "editorNote": [
+      "Every story this week is the same story told five ways: the model isn't where the action is any more, the scaffolding around it is. An open-source harness just nudged past the human benchmark on ARC-AGI-3 without any ARC-specific training. A template library turned 'loop engineering' from a viral thread into something you can install. And my own Instagram numbers went from 152 views to 6,593 in three months while my editing skills stayed exactly the same.",
+      "If you take one thing from this issue: start using AI somewhere it only gets you halfway today. The harnesses, loops, and context you build around it are what turn 50% into 90% by the next model release."
+    ],
+    "sourceWindow": {
+      "from": "2026-08-05T00:00:00Z",
+      "to": "2026-08-18T07:00:00Z",
+      "selectedSlugs": [
+        "prime-agent-arc-agi-3",
+        "loopany-loop-templates",
+        "three-months-ai-difference",
+        "ai-good-at-everything",
+        "niche-ai-mastery"
+      ]
+    },
+    "stories": [
+      {
+        "order": 1,
+        "sourceSlug": "prime-agent-arc-agi-3",
+        "category": "Agents",
+        "title": {
+          "lead": "An agent just edged out humans on ARC-AGI-3.",
+          "muted": "The breakthrough is the harness, not the model."
+        },
+        "hook": "Prime Agent scored 95.5% on the benchmark built to test human-like reasoning; the human baseline is 95.4%.",
+        "whatShipped": [
+          "Prime Intellect released Prime Agent, a self-improving agent harness that can rewrite its own prompts, memories, and skills, and spawn new sub-agents as it works. On the ARC-AGI-3 public demo it reports 95.5%, slightly above the 95.4% human benchmark, running on Opus 5 with no ARC-specific training. For context: when ARC-AGI-3 launched four months ago, frontier models were barely reaching 30%, and the much-loved OpenClaw scores about 5% on the community leaderboard."
+        ],
+        "whyItMatters": "ARC-AGI-1 stood unbeaten for five years. ARC-AGI-2 fell within a year. ARC-AGI-3 fell in four months, and the jump came from the harness layer, not a new model. The scaffolding around a model can now change its performance more than the model itself. ARC Prize notes community ARC-AGI-3 scores are self-reported.",
+        "lever": {
+          "label": "Build on the repo",
+          "body": "The whole harness is open source. Clone it and point the self-improving loop at your own hardest long-running tasks.",
+          "url": "https://github.com/PrimeIntellect-ai/prime-agent"
+        },
+        "takeaways": [
+          "Current frontier models alone score under 30% on ARC-AGI-3; the harness closed the gap to human level.",
+          "Self-rewriting prompts, memories, and skills mean the agent gets smarter as it runs."
+        ],
+        "media": {
+          "type": "poster",
+          "poster": "/media/issues/2026-08-18-the-scaffolding-not-the-model/prime-agent-arc-agi-3.jpg",
+          "alt": "Rich on camera with the ARC-AGI-3 score chart showing Prime Agent at 95.5% above the 95.4% human baseline",
+          "aspectRatio": "9:16",
+          "canonicalUrl": "",
+          "embedUrl": "",
+          "videoUrl": "",
+          "needsPublicUrl": true
+        },
+        "links": [
+          {
+            "label": "Prime Agent on GitHub",
+            "url": "https://github.com/PrimeIntellect-ai/prime-agent",
+            "type": "source"
+          },
+          {
+            "label": "ARC-AGI-3 benchmark",
+            "url": "https://arcprize.org/arc-agi/3",
+            "type": "source"
+          }
+        ],
+        "emailSummary": "An open-source, self-improving agent harness reports 95.5% on ARC-AGI-3's public demo, a hair above the 95.4% human benchmark, with no ARC-specific training. The leap came from the harness layer, and you can build on the repo today.",
+        "treatment": "lead"
+      },
+      {
+        "order": 2,
+        "sourceSlug": "loopany-loop-templates",
+        "category": "Workflow",
+        "title": {
+          "lead": "Stop using AI like a chatbot.",
+          "muted": "Build loops that run your business instead."
+        },
+        "hook": "Loopany packages 'loop engineering' into templates that act, review their own results, and self-improve.",
+        "whatShipped": [
+          "Loopany, built by Jason Zhou (whose 'loop engineering is the future, not prompt engineering' thread pulled 510K views on X), is a template library of AI loops for growth, operations, coding, and day-to-day grind work. Every loop is four simple parts: a trigger that runs the agent on a schedule, a task file defining what good looks like, a memory file where results and learnings accumulate, and a process that folds that memory back into the task file so the loop genuinely improves each cycle."
+        ],
+        "whyItMatters": "A chatbot forgets you between sessions. A loop compounds: I'm running the SEO loop on my own page, and it finds keywords, drafts the blogs, and monitors results after publishing, getting better at all three as the memory file grows.",
+        "lever": {
+          "label": "Install a loop",
+          "body": "Pick one template that matches a weekly chore, wire the trigger + task file + memory file + update step, and let it run for a month before judging it.",
+          "url": "https://loopany.ai/templates"
+        },
+        "takeaways": [
+          "Trigger, task file, memory file, self-update: every useful loop is those four things.",
+          "The self-update step is the one most people skip, and it is the whole point."
+        ],
+        "media": {
+          "type": "poster",
+          "poster": "/media/issues/2026-08-18-the-scaffolding-not-the-model/loopany-loop-templates.jpg",
+          "alt": "Rich beneath an animated four-node cycle diagram: trigger, task file, memory file, self-update",
+          "aspectRatio": "9:16",
+          "canonicalUrl": "",
+          "embedUrl": "",
+          "videoUrl": "",
+          "needsPublicUrl": true
+        },
+        "links": [
+          {
+            "label": "Loopany templates",
+            "url": "https://loopany.ai/templates",
+            "type": "source"
+          }
+        ],
+        "emailSummary": "Loopany turns loop engineering into installable templates. Four parts per loop: a scheduled trigger, a task file, a memory file, and a step that folds learnings back in so the loop improves every cycle.",
+        "treatment": "standard"
+      },
+      {
+        "order": 3,
+        "sourceSlug": "three-months-ai-difference",
+        "category": "Receipts",
+        "title": {
+          "lead": "152 views to 6,593 in three months.",
+          "muted": "My editing skills didn't change. The models did."
+        },
+        "hook": "Two of my own Reels, side by side, with the real numbers on screen.",
+        "whatShipped": [
+          "I put my first AI-edited Reel from May next to one from last week: 152 views versus 6,593. I edit the same way for both, dumping raw footage in and letting AI produce the video largely independently. The main thing that changed in between was the models. The funny part: that first video was me arguing that compounding is the reason to start using AI early, and it just proved its own thesis."
+        ],
+        "whyItMatters": "If you wait for AI to be perfect at a task before adopting it, you also skip the period where your accumulated feedback and context push a 50% result to 70-80%. Then the next model release lands on top of your scaffolding, not on zero.",
+        "lever": {
+          "label": "The instruction",
+          "body": "Pick something AI can't quite do for you yet and start doing it anyway. You're building the context that future model releases will multiply.",
+          "url": "https://theaotp.com"
+        },
+        "takeaways": [
+          "Adopt at 50% quality; compound to 90% through feedback plus model releases.",
+          "The receipts are real: same editor, same pipeline, 43x the views."
+        ],
+        "media": {
+          "type": "poster",
+          "poster": "/media/issues/2026-08-18-the-scaffolding-not-the-model/three-months-ai-difference.jpg",
+          "alt": "Two Instagram Reels side by side labelled 152 views, 3 months ago and 6,593 views, last week",
+          "aspectRatio": "9:16",
+          "canonicalUrl": "",
+          "embedUrl": "",
+          "videoUrl": "",
+          "needsPublicUrl": true
+        },
+        "links": [],
+        "emailSummary": "Same editor, same AI-driven pipeline, three months apart: 152 views versus 6,593. The compounding argument from my first video just proved itself on my own account.",
+        "treatment": "standard"
+      },
+      {
+        "order": 4,
+        "sourceSlug": "ai-good-at-everything",
+        "category": "Playbook",
+        "title": {
+          "lead": "Good at everything comes down to three things.",
+          "muted": "Context, skills, automations."
+        },
+        "hook": "One setup pattern that works for work, relationships, learning, and fitness alike.",
+        "whatShipped": [
+          "The whole playbook in one Reel. One: context engineering, a file system per life domain, with instructions for AI to pull relevant context into conversations and update the files as it learns. Two: skills, training the AI to do a task exactly how you would; if you repeat a task more than twice, make it a skill. Three: automations, scheduled tasks in Claude, so routine weekly work kicks off on its own and your life starts running on autopilot."
+        ],
+        "whyItMatters": "This is the personal version of the harness story: the person who wins with AI isn't the one with the best prompts, it's the one whose context, skills, and schedules are already in place when the next model arrives.",
+        "lever": {
+          "label": "The rule of thumb",
+          "body": "Repeating a task more than twice? Turn it into a skill. Doing it weekly? Turn it into a scheduled task.",
+          "url": "https://theaotp.com"
+        },
+        "takeaways": [
+          "One file system per domain of your life, kept current by the AI itself.",
+          "Skills encode how you do things; automations decide when they happen."
+        ],
+        "media": {
+          "type": "poster",
+          "poster": "/media/issues/2026-08-18-the-scaffolding-not-the-model/ai-good-at-everything.jpg",
+          "alt": "Rich as a silhouette over an editorial photo collage, with the line: how to become freaking good at everything",
+          "aspectRatio": "9:16",
+          "canonicalUrl": "",
+          "embedUrl": "",
+          "videoUrl": "",
+          "needsPublicUrl": true
+        },
+        "links": [],
+        "emailSummary": "Context engineering, skills, and scheduled automations: the three-part setup pattern that makes AI compound in any domain of your life.",
+        "treatment": "standard"
+      },
+      {
+        "order": 5,
+        "sourceSlug": "niche-ai-mastery",
+        "category": "Depth",
+        "title": {
+          "lead": "Let me guess.",
+          "muted": "You've never heard of any of these."
+        },
+        "hook": "Ten niche AI references, rattled off in one breath, that separate depth from feed-level fluency.",
+        "whatShipped": [
+          "Ten names in fourteen seconds: LangGraph, Gavin Baker, NVIDIA NIMs, fine-tuning, Dwarkesh Patel, harness engineering, JEPA, latent space, model adaptation strategies, and Greenline. Each one gets a card with a one-line 'what it is' as it's spoken. It's a self-test: how many could you explain to a colleague?"
+        ],
+        "whyItMatters": "Generic AI content teaches you the same five tools everyone already knows. The compounding advantage lives one layer down, in the harnesses, architectures, and voices that shape what ships six months from now.",
+        "lever": {
+          "label": "The self-test",
+          "body": "Count how many of the ten you could actually explain. Pick the two you couldn't and go one layer deep on each this week.",
+          "url": "https://theaotp.com/upskill/"
+        },
+        "takeaways": [
+          "Fluency with the feed is not depth; these ten are a quick depth audit."
+        ],
+        "media": {
+          "type": "poster",
+          "poster": "/media/issues/2026-08-18-the-scaffolding-not-the-model/niche-ai-mastery.jpg",
+          "alt": "Rich in a rounded picture-in-picture with rapid-fire cards naming ten niche AI references",
+          "aspectRatio": "9:16",
+          "canonicalUrl": "",
+          "embedUrl": "",
+          "videoUrl": "",
+          "needsPublicUrl": true
+        },
+        "links": [
+          {
+            "label": "The upskill list",
+            "url": "https://theaotp.com/upskill/",
+            "type": "source"
+          }
+        ],
+        "emailSummary": "Ten niche AI references in one breath, LangGraph to JEPA to Greenline. A fourteen-second depth audit: how many could you explain?",
+        "treatment": "utility"
+      }
+    ],
+    "seo": {
+      "title": "The scaffolding, not the model | Art of the Possible",
+      "description": "Prime Agent edges out humans on ARC-AGI-3, loop engineering gets a template library, and three months of model progress shows up in my own view counts.",
+      "image": "/media/issues/2026-08-18-the-scaffolding-not-the-model/prime-agent-arc-agi-3.jpg"
+    }
+  },
+  {
+    "schemaVersion": 1,
     "issueNumber": 1,
     "slug": "2026-07-11-ai-left-the-chat-box",
     "status": "draft",
