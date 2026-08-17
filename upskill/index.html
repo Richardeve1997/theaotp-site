@@ -1,0 +1,374 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Upskill List | Art of the Possible</title>
+<meta name="description" content="The ten niche AI references from the Reel, each explained in plain English with one link that actually teaches it.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://theaotp.com/upskill/">
+<link rel="icon" href="/qualia-symbol.png">
+<meta property="og:title" content="The Upskill List | Art of the Possible">
+<meta property="og:description" content="Ten AI references you have heard of and never gone deep on, with the link for each.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#fdfdfb;--canvas:#e9e9e6;--rule:#e4e4e0;--ink:#121210;--muted:#9c9c96;--soft:#52524d;--azure:#0096ff;--display:'Inter Tight','Helvetica Neue',Arial,sans-serif;--ui:Inter,'Helvetica Neue',Arial,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--ui);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.page{max-width:1280px;margin:0 auto;background:var(--paper);min-height:100vh}
+.pad{padding-left:clamp(22px,4.5vw,58px);padding-right:clamp(22px,4.5vw,58px)}
+nav{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--rule);padding-top:25px;padding-bottom:25px}
+.lockup{display:flex;align-items:center;gap:11px;text-decoration:none}.lockup img{width:25px;height:25px}
+.wordmark{font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:.055em;text-transform:uppercase}
+.navlinks{display:flex;gap:24px;font-size:14px}.navlinks a{text-decoration:none;color:var(--soft)}.navlinks a:hover{color:var(--ink)}
+.eyebrow{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
+h1,h2,h3{font-family:var(--display);letter-spacing:-.038em;line-height:1.01;margin:0}
+h1{font-size:clamp(42px,6.2vw,82px);max-width:15ch}
+.muted{color:var(--muted)}
+.kit-head{padding-top:90px;padding-bottom:58px}
+.dek{max-width:58ch;color:var(--soft);margin:24px 0 0;font-size:17px}
+.gate{border-top:1px solid var(--ink);padding-top:44px;padding-bottom:80px}
+.gate-grid{display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px}
+.gate h2{font-size:clamp(26px,3vw,38px);max-width:22ch}
+.gate p{max-width:56ch;color:var(--soft)}
+.gate form{display:flex;align-items:stretch;border-bottom:2px solid var(--ink);max-width:480px;margin-top:26px}
+.gate input{min-width:0;flex:1;border:0;background:transparent;padding:15px 0;font:inherit;color:var(--ink);outline:none}
+.gate input::placeholder{color:var(--muted)}
+.gate button{border:0;background:transparent;cursor:pointer;padding:0 2px 0 24px;font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+.gate button:hover{opacity:.6}
+.gate-small{font-size:13px;color:var(--muted);margin-top:14px}
+.gate-status{font-size:13px;color:var(--ink);min-height:1.3em;margin-top:6px}
+.step{display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px;border-top:1px solid var(--ink);padding-top:56px;padding-bottom:72px}
+.step-kicker{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.step h2{font-size:clamp(30px,3.8vw,50px);max-width:18ch}
+.step .lede{font-family:var(--display);font-size:19px;font-weight:600;line-height:1.35;max-width:54ch;margin:18px 0 26px}
+.step p{color:var(--soft);max-width:64ch}
+.step ul{color:var(--soft);max-width:64ch;padding-left:20px}
+.step li{margin-bottom:9px}
+.rule{height:3px;width:52px;background:var(--azure);margin:0 0 20px}
+.note{border-left:3px solid var(--muted);padding:2px 0 2px 18px;margin:26px 0;max-width:62ch;color:var(--soft);font-size:15px}
+.index{list-style:none;padding:0;margin:26px 0 0;max-width:66ch;counter-reset:idx}
+.index li{border-top:1px solid var(--rule);padding:14px 0;display:flex;gap:18px;align-items:baseline;font-size:15.5px;color:var(--soft)}
+.index .n{font-family:var(--display);font-weight:700;font-size:13px;color:var(--azure);min-width:26px}
+.index a{text-decoration:none;font-family:var(--display);font-weight:600;font-size:17px;color:var(--ink);letter-spacing:-.01em}
+.index a:hover{border-bottom:2px solid var(--azure)}
+.concept{border-top:1px solid var(--ink);padding-top:52px;padding-bottom:60px;display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px;scroll-margin-top:20px}
+.concept-num{font-family:var(--display);font-weight:800;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.concept-num span{color:var(--azure)}
+.concept h2{font-size:clamp(28px,3.4vw,44px);max-width:20ch}
+.concept .lede{font-family:var(--display);font-size:19px;font-weight:600;line-height:1.35;max-width:54ch;margin:18px 0 22px}
+.concept p{color:var(--soft);max-width:64ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 0}
+.chip{font-family:var(--display);font-weight:600;font-size:12.5px;letter-spacing:.02em;color:var(--soft);background:#f3f3ef;padding:6px 11px;border-radius:3px}
+.read{border:1px solid var(--rule);border-left:7px solid var(--azure);padding:22px 24px;margin:26px 0 0;max-width:720px}
+.read .src{font-family:var(--display);font-weight:700;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.read h3{font-size:19px;margin:8px 0 14px;max-width:44ch;line-height:1.2}
+.read a{display:inline-block;font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;border-bottom:2px solid var(--azure);padding-bottom:2px}
+.read a:hover{color:var(--azure)}
+.read.soon{border-left-color:var(--muted);background:#f7f7f4}
+.read.soon h3{margin-bottom:8px}
+.soon-tag{display:inline-block;font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);border-bottom:2px solid var(--rule);padding-bottom:2px}
+.closeblock{background:var(--ink);color:var(--paper);padding-top:82px;padding-bottom:88px}
+.closeblock h2{font-size:clamp(36px,5vw,64px);max-width:15ch}
+.closeblock .muted{color:#b7b7b1}
+.closeblock p{max-width:56ch;color:#b7b7b1;margin-top:20px}
+.closeblock a{display:inline-block;margin-top:30px;background:var(--paper);color:var(--ink);padding:14px 22px;text-decoration:none;font-family:var(--display);font-weight:700}
+footer{display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--rule);padding-top:28px;padding-bottom:32px;color:var(--soft);font-size:13px}
+[hidden]{display:none!important}
+@media(max-width:800px){.navlinks{display:none}.kit-head{padding-top:58px}.gate-grid,.step,.concept{grid-template-columns:1fr;gap:18px}.gate-grid>*,.step>*,.concept>*{min-width:0}}
+</style></head><body>
+<div class="page">
+<nav class="pad"><a class="lockup" href="/"><img src="/qualia-symbol.png" alt=""><span class="wordmark">Art of the Possible<sup>&reg;</sup></span></a><div class="navlinks"><a href="/">Home</a><a href="/letters/">Archive</a><a href="/#about">About</a></div></nav>
+
+<header class="kit-head pad">
+  <div class="eyebrow">The Upskill List &middot; From the Reel</div>
+  <h1 style="margin-top:26px">Ten things you've heard of <span class="muted">and never gone deep on.</span></h1>
+  <p class="dek">You commented "upskill". Here it is. All ten references from the Reel, each one explained in plain English, with a single link that actually teaches it rather than a search result. Nine are other people's work, linked to the original. The tenth is mine, and it is not ready yet. No course, no upsell.</p>
+</header>
+
+<section class="gate pad" id="gate">
+  <div class="gate-grid">
+    <div class="eyebrow">Unlock the list</div>
+    <div>
+      <h2>Drop your email and all ten unlock on this page.</h2>
+      <p>You'll also get the weekly letter: five useful things I made with AI, with the prompts and workflows inside. Unsubscribe any time.</p>
+      <form id="gate-form" novalidate>
+        <label for="gate-email" style="position:absolute;left:-9999px">Email address</label>
+        <input id="gate-email" type="email" name="email" placeholder="you@somewhere.com" autocomplete="email" required>
+        <button type="submit">Unlock</button>
+      </form>
+      <p class="gate-status" id="gate-status" aria-live="polite"></p>
+      <p class="gate-small">Already on the list? Enter the same email and it unlocks without subscribing you twice.</p>
+      <noscript><p class="gate-small">This page needs JavaScript to unlock. Or just subscribe on <a href="/">the homepage</a> and reply to any letter for the list.</p></noscript>
+    </div>
+  </div>
+</section>
+
+<!-- EVERYTHING OF VALUE LIVES INSIDE #kit. Nothing valuable outside it. -->
+<div id="kit" hidden>
+
+<section class="step pad" id="first">
+  <div class="step-kicker"><span>00</span> &middot; How to use this</div>
+  <div>
+    <div class="rule"></div>
+    <h2>Pick two. <span class="muted">Ignore the other eight.</span></h2>
+    <p class="lede">Recognising ten names does nothing for you. Understanding two of them properly is what changes the quality of the decisions you make next month.</p>
+    <p>They fall into three groups. One, three, four, six, seven and nine are things you build or tune, so read those if you are hands-on. Two, five and eight are people and publications, so follow those if your job is staying ahead rather than shipping. Ten is mine and it is not out yet.</p>
+    <ol class="index">
+      <li><span class="n">01</span><a href="#c1">LangGraph</a></li>
+      <li><span class="n">02</span><a href="#c2">Gavin Baker</a></li>
+      <li><span class="n">03</span><a href="#c3">NVIDIA NIMs</a></li>
+      <li><span class="n">04</span><a href="#c4">Fine tuning</a></li>
+      <li><span class="n">05</span><a href="#c5">Dwarkesh Patel</a></li>
+      <li><span class="n">06</span><a href="#c6">Harness engineering</a></li>
+      <li><span class="n">07</span><a href="#c7">JEPA</a></li>
+      <li><span class="n">08</span><a href="#c8">Latent Space</a></li>
+      <li><span class="n">09</span><a href="#c9">Model adaptation strategies</a></li>
+      <li><span class="n">10</span><a href="#c10">Greenline</a></li>
+    </ol>
+    <div class="note">Everything linked below is someone else's work, pointed at the original. I did not write any of it and I do not earn anything from it. It is simply the clearest explanation I found for each one.</div>
+  </div>
+</section>
+
+<section class="concept pad" id="c1">
+  <div class="concept-num"><span>01</span> &middot; Build</div>
+  <div>
+    <h2>LangGraph</h2>
+    <p class="lede">The framework you reach for when your agent needs to be a system rather than a loop with a prompt in it.</p>
+    <p>LangChain describes it as a low-level orchestration framework and runtime for long-running, stateful agents. The important word is stateful. It lets you mix deterministic hand-written logic with model-driven decisions inside one graph, which means you can force the parts that must be reliable to be reliable, and leave judgement to the model only where judgement is actually needed. Persistence and human-in-the-loop are built in rather than bolted on.</p>
+    <p>Most agent projects that stall do so because the control flow lives in prompt text. This is the answer to that.</p>
+    <div class="chips"><span class="chip">Stateful agents</span><span class="chip">Graph control flow</span><span class="chip">Human in the loop</span></div>
+    <div class="read">
+      <div class="src">LangChain Docs</div>
+      <h3>LangGraph overview</h3>
+      <a href="https://docs.langchain.com/oss/python/langgraph/overview" target="_blank" rel="noopener">Read it &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="concept pad" id="c2">
+  <div class="concept-num"><span>02</span> &middot; Follow</div>
+  <div>
+    <h2>Gavin Baker</h2>
+    <p class="lede">The person to read when you want to know whether the AI money is actually going anywhere, rather than whether the demo was impressive.</p>
+    <p>Managing Partner and CIO of Atreides Management. He started covering NVIDIA as an investor around the turn of the millennium, which gives him a longer view of the compute cycle than almost anyone talking about it now. He is worth following specifically because he argues about supply chains, capex and margins rather than capability demos, and that is the layer where most predictions about AI actually get settled.</p>
+    <p>His running commentary is on X as <a href="https://x.com/GavinSBaker" target="_blank" rel="noopener">@GavinSBaker</a>. Start with the long-form conversation below.</p>
+    <div class="chips"><span class="chip">Semiconductors</span><span class="chip">Compute economics</span><span class="chip">Atreides Management</span></div>
+    <div class="read">
+      <div class="src">Invest Like the Best &middot; EP.385</div>
+      <h3>Gavin Baker: AI, Semiconductors, and the Robotic Frontier</h3>
+      <a href="https://podcasts.apple.com/us/podcast/gavin-baker-ai-semiconductors-and-the-robotic-frontier/id1154105909?i=1000666758592" target="_blank" rel="noopener">Listen &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="concept pad" id="c3">
+  <div class="concept-num"><span>03</span> &middot; Build</div>
+  <div>
+    <h2>NVIDIA NIMs</h2>
+    <p class="lede">Prebuilt inference microservices, so running a model yourself stops being an infrastructure project.</p>
+    <p>NIM microservices wrap a model in a GPU-accelerated, industry-standard API and tune the serving stack for each model and GPU combination. You get a container and an endpoint instead of a week of CUDA versions, batching strategies and latency tuning.</p>
+    <p>This matters if your organisation cannot send data to a hosted API. NIMs are the shortest route from "we have to self-host" to "it is serving traffic".</p>
+    <div class="chips"><span class="chip">Self-hosted inference</span><span class="chip">Standard APIs</span><span class="chip">Latency and throughput</span></div>
+    <div class="read">
+      <div class="src">NVIDIA Developer</div>
+      <h3>NVIDIA NIM for Developers</h3>
+      <a href="https://developer.nvidia.com/nim" target="_blank" rel="noopener">Read it &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="concept pad" id="c4">
+  <div class="concept-num"><span>04</span> &middot; Build</div>
+  <div>
+    <h2>Fine tuning</h2>
+    <p class="lede">Continuing training on a small, specific dataset so the model gets good at your task instead of everyone's.</p>
+    <p>Mechanically it is identical to pretraining except you start from trained weights rather than random ones, which is why it needs far less compute, data and time than people assume. The Hugging Face tutorial below walks the whole loop: tokenise, load the checkpoint, set the training arguments, train, push.</p>
+    <p>The judgement call is not how to do it, it is when. Most problems people reach for fine tuning to solve are retrieval problems or prompt problems. Read this one alongside 09.</p>
+    <div class="chips"><span class="chip">Task-specific</span><span class="chip">Trainer API</span><span class="chip">Cheaper than pretraining</span></div>
+    <div class="read">
+      <div class="src">Hugging Face Docs</div>
+      <h3>Fine-tuning</h3>
+      <a href="https://huggingface.co/docs/transformers/en/training" target="_blank" rel="noopener">Read it &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="concept pad" id="c5">
+  <div class="concept-num"><span>05</span> &middot; Follow</div>
+  <div>
+    <h2>Dwarkesh Patel</h2>
+    <p class="lede">The interviewer who does enough homework that the researchers he talks to have to think on the spot.</p>
+    <p>The Dwarkesh Podcast is billed as deeply researched interviews, and that is the whole differentiator. Most AI interviews let the guest run their press tour. His questions are specific enough that the conversation goes somewhere the guest has not been fifty times that month, which is where the genuinely new information sits.</p>
+    <p>If you only have one podcast slot a week for AI, this is a better use of it than the news roundups.</p>
+    <div class="chips"><span class="chip">Long-form interviews</span><span class="chip">Researchers and labs</span></div>
+    <div class="read">
+      <div class="src">Dwarkesh Podcast</div>
+      <h3>Deeply researched interviews</h3>
+      <a href="https://www.dwarkesh.com/" target="_blank" rel="noopener">Listen &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="concept pad" id="c6">
+  <div class="concept-num"><span>06</span> &middot; Build</div>
+  <div>
+    <h2>Harness engineering</h2>
+    <p class="lede">The claim that most of your agent's performance is decided by everything wrapped around the model, not the model itself.</p>
+    <p>The harness is the tools you expose, how you describe them, the retry and error handling, the context you assemble, the guardrails, the loop structure. Swap a frontier model into a bad harness and it stays bad. Improve the harness and a cheaper model often clears the bar.</p>
+    <p>This is the single highest-leverage idea on this list for anyone already shipping agents, because it redirects effort from model shopping to the parts you actually control.</p>
+    <div class="chips"><span class="chip">Tool design</span><span class="chip">Context assembly</span><span class="chip">Error handling</span></div>
+    <div class="read">
+      <div class="src">Medium</div>
+      <h3>The Agent Harness: Why 70% of Your AI Agent's Performance Lives Outside the Model</h3>
+      <a href="https://medium.com/@tentenco/the-agent-harness-why-70-of-your-ai-agents-performance-lives-outside-the-model-5093cfe03df1" target="_blank" rel="noopener">Read it &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="concept pad" id="c7">
+  <div class="concept-num"><span>07</span> &middot; Research</div>
+  <div>
+    <h2>JEPA</h2>
+    <p class="lede">Yann LeCun's bet that predicting abstract representations, not pixels or tokens, is the road to models that understand the world.</p>
+    <p>I-JEPA is the first model built on that architecture. Instead of reconstructing missing pixels, it predicts the representation of a missing region from the representation of the rest of the image. It learns semantic features efficiently and without the heavy fine-tuning that comparable approaches need.</p>
+    <p>Worth knowing because it is the most credible technical argument that scaling current language models is not the only path, and because the phrase gets used as shorthand in that debate.</p>
+    <div class="chips"><span class="chip">Self-supervised</span><span class="chip">World models</span><span class="chip">Yann LeCun</span></div>
+    <div class="read">
+      <div class="src">Meta AI</div>
+      <h3>I-JEPA: The first AI model based on Yann LeCun's vision for more human-like AI</h3>
+      <a href="https://ai.meta.com/blog/yann-lecun-ai-model-i-jepa/" target="_blank" rel="noopener">Read it &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="concept pad" id="c8">
+  <div class="concept-num"><span>08</span> &middot; Follow</div>
+  <div>
+    <h2>Latent Space</h2>
+    <p class="lede">The newsletter and podcast written for the people building the systems, not the people reporting on them.</p>
+    <p>It describes itself as the AI Engineer newsletter and covers how leading labs build agents, models, infrastructure and AI for science. The distinction that matters: it is written at the level of someone who has to make the thing work, so the detail survives contact with your actual codebase.</p>
+    <p>Run by swyx and Alessio, with guests including Andrej Karpathy, Simon Willison and Greg Brockman.</p>
+    <div class="chips"><span class="chip">AI engineering</span><span class="chip">Agents and infra</span><span class="chip">Newsletter and podcast</span></div>
+    <div class="read">
+      <div class="src">Latent.Space</div>
+      <h3>The AI Engineer newsletter and podcast</h3>
+      <a href="https://www.latent.space/" target="_blank" rel="noopener">Read it &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="concept pad" id="c9">
+  <div class="concept-num"><span>09</span> &middot; Build</div>
+  <div>
+    <h2>Model adaptation strategies</h2>
+    <p class="lede">Knowing which of fine tuning, retrieval or distillation your problem actually calls for, before you spend a month on the wrong one.</p>
+    <p>They solve different problems. Retrieval gives the model facts it did not have. Fine tuning changes how it behaves and what format it produces. Distillation makes a smaller model imitate a larger one so you can afford to run it. Most teams reach for fine tuning when they needed retrieval, then conclude the technology does not work.</p>
+    <p>The piece below frames it as the gym, the library, or cloning yourself, which is a crude analogy that happens to make the decision obvious.</p>
+    <div class="chips"><span class="chip">Fine tuning vs RAG</span><span class="chip">Distillation</span><span class="chip">Cost and latency</span></div>
+    <div class="read">
+      <div class="src">Medium</div>
+      <h3>Fine-Tuning vs RAG vs Distillation: gym, library, or clone yourself</h3>
+      <a href="https://medium.com/@vasraabijeeth/fine-tuning-vs-rag-vs-distillation-when-llms-hit-the-gym-the-library-or-just-clone-themselves-a19f3bb9f908" target="_blank" rel="noopener">Read it &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="concept pad" id="c10">
+  <div class="concept-num"><span>10</span> &middot; Mine</div>
+  <div>
+    <h2>Greenline</h2>
+    <p class="lede">The tenth one is mine, and it is not ready to show you yet.</p>
+    <p>Nine of these are other people's work and I can point you straight at the source. This one I am building. Rather than write a paragraph that oversells it, I would rather show you the thing.</p>
+    <p>You are on the list now, so you will hear about it there first.</p>
+    <div class="read soon">
+      <div class="src">Art of the Possible</div>
+      <h3>Greenline</h3>
+      <span class="soon-tag">Coming soon</span>
+    </div>
+  </div>
+</section>
+
+<section class="step pad" id="next">
+  <div class="step-kicker"><span>11</span> &middot; What to do now</div>
+  <div>
+    <div class="rule"></div>
+    <h2>Two, properly. <span class="muted">Not ten, vaguely.</span></h2>
+    <p class="lede">Reading is not the outcome. Recognising one of these inside something you have already built is.</p>
+    <ul>
+      <li><strong>If you are shipping agents right now:</strong> start at 06, then 01. Harness engineering will change what you do this week, and LangGraph is where you put it.</li>
+      <li><strong>If you are deciding whether to fine tune:</strong> read 09 first, then 04. In that order. Nine will often tell you not to bother with four.</li>
+      <li><strong>If you self-host or you are told you have to:</strong> 03 is the whole answer.</li>
+      <li><strong>If your job is staying ahead rather than building:</strong> subscribe to 08, add 05 to your podcast list, follow 02. That is a complete AI information diet in three sources.</li>
+      <li><strong>If you want the argument about where this is all going:</strong> 07, then come back and argue with me about it.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="closeblock pad">
+  <h2>See what's possible. <span class="muted">Then build it.</span></h2>
+  <p>You're on the list now. Every week you'll get five useful things I made with AI, with the prompt or workflow behind each one. This list was one of them.</p>
+  <a href="/">Back to the site</a>
+</section>
+
+</div>
+
+<footer class="pad"><span>Art of the Possible&reg;</span><span>New things are possible every day. &middot; 2026</span></footer>
+</div>
+
+<script>
+(function () {
+  var API = 'https://theaotp-gate.theaotp.workers.dev';
+  var KEY = 'aotp_upskill_unlocked';
+  var kit = document.getElementById('kit');
+  var gate = document.getElementById('gate');
+  var form = document.getElementById('gate-form');
+  var status = document.getElementById('gate-status');
+
+  function unlock() {
+    kit.hidden = false;
+    gate.hidden = true;
+    try { localStorage.setItem(KEY, '1'); } catch (e) {}
+  }
+
+  try { if (localStorage.getItem(KEY) === '1') unlock(); } catch (e) {}
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    var email = document.getElementById('gate-email').value.trim().toLowerCase();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      status.textContent = 'That email looks off. Try again.';
+      return;
+    }
+    status.textContent = 'One sec…';
+    fetch(API + '/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email }),
+    }).then(function (response) {
+      return response.json().catch(function () { return {}; }).then(function (data) {
+        if (!response.ok) {
+          var err = new Error('subscribe failed');
+          err.status = response.status;
+          err.detail = data && data.detail;
+          throw err;
+        }
+        return data;
+      });
+    }).then(function (data) {
+      status.textContent = data && data.new
+        ? 'Unlocked. Check your inbox to confirm your subscription to the letter.'
+        : 'Welcome back. Unlocked.';
+      unlock();
+      window.scrollTo({ top: document.getElementById('first').offsetTop - 40, behavior: 'smooth' });
+    }).catch(function (err) {
+      if (err && err.status === 400) {
+        status.textContent = 'That email was rejected' + (err.detail ? ' (' + err.detail + ')' : '') + '. Try a different address.';
+      } else {
+        status.textContent = 'Something broke on our end. Try again in a minute, or subscribe on the homepage and DM me on Instagram for the list.';
+      }
+    });
+  });
+})();
+</script>
+</body></html>
