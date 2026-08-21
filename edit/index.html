@@ -1,0 +1,349 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Edit | Art of the Possible</title>
+<meta name="description" content="The template of the pipeline behind the Reels: idea to finished vertical video, run by Claude Code or Codex skills. Repo plus the onboarding prompt that installs your brand.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://theaotp.com/edit/">
+<link rel="icon" href="/qualia-symbol.png">
+<meta property="og:title" content="Edit | Art of the Possible">
+<meta property="og:description" content="The video pipeline template from the Reel, with the onboarding prompt that makes it yours.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#fdfdfb;--canvas:#e9e9e6;--rule:#e4e4e0;--ink:#121210;--muted:#9c9c96;--soft:#52524d;--azure:#0096ff;--display:'Inter Tight','Helvetica Neue',Arial,sans-serif;--ui:Inter,'Helvetica Neue',Arial,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--ui);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.page{max-width:1280px;margin:0 auto;background:var(--paper);min-height:100vh}
+.pad{padding-left:clamp(22px,4.5vw,58px);padding-right:clamp(22px,4.5vw,58px)}
+nav{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--rule);padding-top:25px;padding-bottom:25px}
+.lockup{display:flex;align-items:center;gap:11px;text-decoration:none}.lockup img{width:25px;height:25px}
+.wordmark{font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:.055em;text-transform:uppercase}
+.navlinks{display:flex;gap:24px;font-size:14px}.navlinks a{text-decoration:none;color:var(--soft)}.navlinks a:hover{color:var(--ink)}
+.eyebrow{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
+h1,h2,h3{font-family:var(--display);letter-spacing:-.038em;line-height:1.01;margin:0}
+h1{font-size:clamp(42px,6.2vw,82px);max-width:15ch}
+.muted{color:var(--muted)}
+.kit-head{padding-top:90px;padding-bottom:58px}
+.dek{max-width:58ch;color:var(--soft);margin:24px 0 0;font-size:17px}
+.gate{border-top:1px solid var(--ink);padding-top:44px;padding-bottom:80px}
+.gate-grid{display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px}
+.gate h2{font-size:clamp(26px,3vw,38px);max-width:22ch}
+.gate p{max-width:56ch;color:var(--soft)}
+.gate form{display:flex;align-items:stretch;border-bottom:2px solid var(--ink);max-width:480px;margin-top:26px}
+.gate input{min-width:0;flex:1;border:0;background:transparent;padding:15px 0;font:inherit;color:var(--ink);outline:none}
+.gate input::placeholder{color:var(--muted)}
+.gate button{border:0;background:transparent;cursor:pointer;padding:0 2px 0 24px;font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+.gate button:hover{opacity:.6}
+.gate-small{font-size:13px;color:var(--muted);margin-top:14px}
+.gate-status{font-size:13px;color:var(--ink);min-height:1.3em;margin-top:6px}
+.step{display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px;border-top:1px solid var(--ink);padding-top:56px;padding-bottom:72px}
+.step-kicker{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.step-kicker span{color:var(--azure)}
+.step h2{font-size:clamp(30px,3.8vw,50px);max-width:18ch}
+.step .lede{font-family:var(--display);font-size:19px;font-weight:600;line-height:1.35;max-width:54ch;margin:18px 0 26px}
+.step p{color:var(--soft);max-width:64ch}
+.step ul,.step ol{color:var(--soft);max-width:64ch;padding-left:20px}
+.step li{margin-bottom:9px}
+.rule{height:3px;width:52px;background:var(--azure);margin:0 0 20px}
+.note{border-left:3px solid var(--muted);padding:2px 0 2px 18px;margin:26px 0;max-width:62ch;color:var(--soft);font-size:15px}
+.read{border:1px solid var(--rule);border-left:7px solid var(--azure);padding:22px 24px;margin:26px 0 0;max-width:720px}
+.read .src{font-family:var(--display);font-weight:700;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.read h3{font-size:19px;margin:8px 0 14px;max-width:44ch;line-height:1.2}
+.read a{display:inline-block;font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;border-bottom:2px solid var(--azure);padding-bottom:2px}
+.read a:hover{color:var(--azure)}
+.checks{list-style:none;padding:0;margin:22px 0 0;max-width:66ch}
+.checks li{border-top:1px solid var(--rule);padding:12px 0;display:flex;gap:16px;align-items:baseline;font-size:15.5px;color:var(--soft)}
+.checks .k{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink);min-width:150px}
+.promptbox{position:relative;margin:26px 0 0;max-width:820px}
+.promptbox pre{margin:0;background:#f7f7f4;border:1px solid var(--rule);border-left:7px solid var(--azure);padding:24px;max-height:520px;overflow:auto;font-size:12.5px;line-height:1.55;white-space:pre-wrap;word-break:break-word;color:var(--ink)}
+.copybtn{position:absolute;top:12px;right:12px;border:1px solid var(--ink);background:var(--paper);cursor:pointer;padding:8px 14px;font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink)}
+.copybtn:hover{background:var(--ink);color:var(--paper)}
+.closeblock{background:var(--ink);color:var(--paper);padding-top:82px;padding-bottom:88px}
+.closeblock h2{font-size:clamp(36px,5vw,64px);max-width:15ch}
+.closeblock .muted{color:#b7b7b1}
+.closeblock p{max-width:56ch;color:#b7b7b1;margin-top:20px}
+.closeblock a{display:inline-block;margin-top:30px;background:var(--paper);color:var(--ink);padding:14px 22px;text-decoration:none;font-family:var(--display);font-weight:700}
+footer{display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--rule);padding-top:28px;padding-bottom:32px;color:var(--soft);font-size:13px}
+[hidden]{display:none!important}
+@media(max-width:800px){.navlinks{display:none}.kit-head{padding-top:58px}.gate-grid,.step{grid-template-columns:1fr;gap:18px}.gate-grid>*,.step>*{min-width:0}.promptbox pre{font-size:12px}}
+</style></head><body>
+<div class="page">
+<nav class="pad"><a class="lockup" href="/"><img src="/qualia-symbol.png" alt=""><span class="wordmark">Art of the Possible<sup>&reg;</sup></span></a><div class="navlinks"><a href="/">Home</a><a href="/letters/">Archive</a><a href="/#about">About</a></div></nav>
+
+<header class="kit-head pad">
+  <div class="eyebrow">Edit &middot; From the Reel</div>
+  <h1 style="margin-top:26px">The system that edits my videos. <span class="muted">Now it's yours.</span></h1>
+  <p class="dek">You commented "edit". This is the actual pipeline behind the Reels on this account: a set of Claude Code skills that takes an idea to a finished vertical video, with animated cards, karaoke captions, a music bed, and a review pass before anything ships. I stripped my brand out, wrote an onboarding prompt that installs yours, and put the whole thing on GitHub. No course, no upsell.</p>
+</header>
+
+<section class="gate pad" id="gate">
+  <div class="gate-grid">
+    <div class="eyebrow">Unlock the kit</div>
+    <div>
+      <h2>Drop your email and the repo plus the onboarding prompt unlock on this page.</h2>
+      <p>You'll also get the weekly letter: five useful things I made with AI, with the prompts and workflows inside. Unsubscribe any time.</p>
+      <form id="gate-form" novalidate>
+        <label for="gate-email" style="position:absolute;left:-9999px">Email address</label>
+        <input id="gate-email" type="email" name="email" placeholder="you@somewhere.com" autocomplete="email" required>
+        <button type="submit">Unlock</button>
+      </form>
+      <p class="gate-status" id="gate-status" aria-live="polite"></p>
+      <p class="gate-small">Already on the list? Enter the same email and it unlocks without subscribing you twice.</p>
+      <noscript><p class="gate-small">This page needs JavaScript to unlock. Or subscribe on <a href="/">the homepage</a> and reply to any letter for the link.</p></noscript>
+    </div>
+  </div>
+</section>
+
+<!-- EVERYTHING OF VALUE LIVES INSIDE #kit. Nothing valuable outside it. -->
+<div id="kit" hidden>
+
+<section class="step pad" id="first">
+  <div class="step-kicker"><span>01</span> &middot; What this is</div>
+  <div>
+    <div class="rule"></div>
+    <h2>A video team <span class="muted">that lives in a repo.</span></h2>
+    <p class="lede">Reel Studio is a template repository. You clone it, open Claude Code or Codex inside it, and talk in plain English. The skills do the rest.</p>
+    <p>The loop it runs: ideas land as ranked concepts, one file each. You pick one and the script skill locks the spoken copy in your voice, then writes the film guide you shoot from. You film on your phone. The animate skill builds concept-diagram cards from your brand tokens and fetches real images for anything you name. The assemble skill cuts the silences, burns karaoke captions word by word, composites the cards, lays a music bed, and finishes one MP4. A caption QA gate and a vision review loop grade it before you post.</p>
+    <p>It also learns. When you say "always do X" or "make this the new standard" mid-edit, the skill updates its own instructions and journals the change. Your standards compound; the tenth video inherits everything the first nine taught it.</p>
+    <p>It works with Claude Code and Codex, and it never posts anything: the pipeline ends at a finished file you publish yourself.</p>
+  </div>
+</section>
+
+<section class="step pad" id="repo">
+  <div class="step-kicker"><span>02</span> &middot; Get the template</div>
+  <div>
+    <div class="rule"></div>
+    <h2>Clone it. <span class="muted">It's free.</span></h2>
+    <p class="lede">Everything from the Reel is in one public template repo: the skills, the editing tools, the self-improvement hooks, and a brand sheet full of placeholders waiting for yours.</p>
+    <div class="read">
+      <div class="src">GitHub &middot; Template repository</div>
+      <h3>reel-studio-template</h3>
+      <a href="https://github.com/Richardeve1997/reel-studio-template" target="_blank" rel="noopener">Get the repo &rarr;</a>
+    </div>
+    <ul style="margin-top:26px">
+      <li><strong>9 skills</strong> for the whole loop: ideate, voice, script, film prep, animate, assemble, review, a router, and a learnings manager.</li>
+      <li><strong>7 media tools</strong>: transcription, silence tightening, karaoke caption tracks, HTML-to-video card rendering, compositing, finishing with music and loudness, and a caption QA gate.</li>
+      <li><strong>Self-improvement built in</strong>: reflector hooks capture your corrections; every skill folds them back into its own instructions.</li>
+      <li><strong>Your brand, not mine</strong>: palette, fonts, and voice live in two files the onboarding prompt fills in for you.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="step pad" id="setup">
+  <div class="step-kicker"><span>03</span> &middot; What you need</div>
+  <div>
+    <div class="rule"></div>
+    <h2>A coding agent <span class="muted">and four installs.</span></h2>
+    <p class="lede">The onboarding prompt checks all of this for you and hands you the exact fix for anything missing. For the curious, the full list:</p>
+    <ul class="checks">
+      <li><span class="k">Claude Code</span><span>or Codex. The agent that runs the skills. This is the only paid thing, and you likely have it already.</span></li>
+      <li><span class="k">ffmpeg</span><span>does every cut, burn, and encode. One brew or apt install.</span></li>
+      <li><span class="k">Python 3.10+</span><span>plus three packages from requirements.txt: faster-whisper, pillow, playwright.</span></li>
+      <li><span class="k">Chromium</span><span>one command via Playwright; renders the animated cards.</span></li>
+      <li><span class="k">GSAP</span><span>fetched locally by a bundled script; powers the card animation.</span></li>
+      <li><span class="k">Optional</span><span>a folder of licensed music for the beds, and a short branded audio sting for the openings.</span></li>
+      <li><span class="k">A phone</span><span>you film vertical takes; the pipeline does not need a camera setup.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="step pad" id="prompt">
+  <div class="step-kicker"><span>04</span> &middot; The onboarding prompt</div>
+  <div>
+    <div class="rule"></div>
+    <h2>Paste this <span class="muted">as your first message.</span></h2>
+    <p class="lede">Clone the repo, start Claude Code or Codex inside it, and paste the prompt below. It checks your machine, interviews you about your brand and voice, writes your tokens, and runs a live smoke test with your colours before you make anything.</p>
+    <p>Budget 10 to 15 minutes. The same prompt ships in the repo as ONBOARDING.md, so you can also just open that file.</p>
+    <div class="promptbox">
+      <button class="copybtn" id="copy-prompt" type="button">Copy prompt</button>
+      <pre id="prompt-text">You are running inside a freshly cloned Reel Studio template repo (you are in its root directory). Onboard the creator now. Work through the steps below IN ORDER, one at a time, conversationally: finish a step, show the result, then move on. Never dump every question at once, and never skip the environment check or the smoke test.
+
+STEP 0: WELCOME
+
+Greet the creator briefly and explain the production loop in five short lines:
+1. Ideas: they say &quot;give me video ideas&quot; and ranked concepts land in pipeline/1-ideas/, one file each.
+2. Script: they pick one; the script skill locks the spoken copy and a film guide in pipeline/2-scripts/.
+3. Film: they shoot on their phone and drop the take into pipeline/3-film/&lt;slug&gt;-take.mp4.
+4. Assemble: animated cards, real fetched images, karaoke captions, and a music bed become one finished MP4 in pipeline/5-renders/.
+5. Review: an automated caption QA gate plus a vision review loop grade the render before they post it, manually, wherever they publish.
+
+STEP 1: ENVIRONMENT CHECK
+
+Run each check below, then print ONE pass/fail table with columns: Check | Status | Fix. For every failure show the exact fix command from this list, offer to run it, and after fixes re-run the failed checks before moving on.
+
+- ffmpeg on PATH. Check: ffmpeg -version
+  Fix: macOS: brew install ffmpeg  |  Debian/Ubuntu: sudo apt install ffmpeg
+- Python 3.10 or newer. Check: python3 --version
+  Fix: install Python 3.10+ from python.org or your package manager.
+- Python packages faster-whisper, pillow, playwright. Check: python3 -c &quot;import faster_whisper, PIL, playwright; print(&#x27;ok&#x27;)&quot;
+  (pip show faster-whisper pillow playwright also works.)
+  Fix: pip install -r requirements.txt
+- Playwright Chromium browser installed. Check/fix in one: python3 -m playwright install chromium
+  (Safe to re-run: it does nothing when the browser is already installed.)
+- brand/vendor/gsap.min.js present. Check: test -s brand/vendor/gsap.min.js &amp;&amp; echo present
+  Fix: offer to run bash bin/fetch_gsap.sh (downloads the official gsap package from the npm registry into brand/vendor/; ask before downloading).
+
+Then mention the two OPTIONAL extras (not failures, just noted in the table or below it):
+- Music library: licensed tracks in mood folders under brand/music/ (for example brand/music/energetic/, brand/music/calm/), logged in brand/music/MUSIC.md. Every finished Reel gets a tone-matched bed; until tracks exist, finishing runs with --music none.
+- Intro sting: a short branded audio riser. If they have one, it mixes over the opening of every Reel via tools/finish.py --sting.
+
+STEP 2: BRAND INTERVIEW
+
+Ask ONE topic at a time and wait for the answer before the next question:
+1. Brand or channel name: what the channel is called.
+2. Instagram handle.
+3. Niche and authority: what the videos are about, and why the creator is credible on it (one or two sentences).
+4. Palette: ask for three hexes: a LIGHT canvas, a near-black ink, and one accent. If they do not have hexes, offer to generate a tasteful light-canvas palette from a colour or mood they name; show the hexes as labelled swatch values and iterate until they approve. The caption plate stays at the default #15130E unless they insist.
+5. Fonts: one display font for headlines, one body font. They must be locally installed or bundled licensed files: card rendering is offline, so a CDN webfont silently falls back to system fonts.
+6. Voice: ask them to paste one to three sample scripts or transcripts of themselves talking. If they have none, ask instead for three adjectives that describe how they sound plus three example sentences written in their voice.
+
+STEP 3: WRITE THE BRAND FILES
+
+- brand/BRAND.md: replace EVERY TODO with their answers (identity table, palette table, type table, voice section). No TODO may survive.
+- brand/tokens.css: mirror the palette and font stacks into --canvas, --ink, --accent, --plate, --font-display, --font-body. BRAND.md and tokens.css must match exactly.
+- brand/VOICE.md: create it ONLY if they pasted samples. Store the raw samples plus a short distilled profile: tone, rhythm, typical sentence shapes, signature openings and closings, things this voice never does.
+Show the creator the finished files (or diffs) and get a confirmation before continuing.
+
+STEP 4: SMOKE TEST
+
+Prove the toolchain end to end using THEIR palette. Work inside pipeline/4-assets/onboarding-test/ (create it and its subfolders).
+
+4a. Branded test card.
+Write pipeline/4-assets/onboarding-test/animations/test-card.html. Requirements:
+- Loads GSAP locally: &lt;script src=&quot;../../../../brand/vendor/gsap.min.js&quot;&gt;&lt;/script&gt;  (never a CDN)
+- Imports the tokens: &lt;link rel=&quot;stylesheet&quot; href=&quot;../../../../brand/tokens.css&quot;&gt;
+- Uses var(--canvas), var(--ink), var(--accent), var(--font-display): for example the brand name fading up on the canvas with an accent bar growing under it.
+- Builds ONE paused GSAP timeline of about 3 seconds exposed as window.tl (the renderer hard-fails without it).
+Render it:
+    python3 tools/render_anim.py pipeline/4-assets/onboarding-test/animations/test-card.html --out pipeline/4-assets/onboarding-test/rendered/test-card.mp4 --seconds 3
+
+4b. Two-word karaoke caption burn.
+- Generate a 3 second mid-grey base clip with silent audio (mid-grey so both the light caption glyphs and the near-black word plate are clearly visible):
+    ffmpeg -y -f lavfi -i color=c=0x777777:s=1080x1920:r=30:d=3 -f lavfi -i anullsrc=r=48000:cl=stereo -t 3 -c:v libx264 -crf 18 -pix_fmt yuv420p -c:a aac pipeline/4-assets/onboarding-test/base.mp4
+- Hand-write pipeline/4-assets/onboarding-test/transcript.json with exactly this content:
+    {&quot;text&quot;: &quot;hello world&quot;, &quot;segments&quot;: [{&quot;start&quot;: 0.4, &quot;end&quot;: 1.6, &quot;text&quot;: &quot;hello world&quot;, &quot;words&quot;: [{&quot;w&quot;: &quot;hello&quot;, &quot;start&quot;: 0.4, &quot;end&quot;: 0.9}, {&quot;w&quot;: &quot;world&quot;, &quot;start&quot;: 1.0, &quot;end&quot;: 1.6}]}]}
+- Render the caption track (writes pipeline/4-assets/onboarding-test/captions.mov):
+    python3 tools/captions.py pipeline/4-assets/onboarding-test --video pipeline/4-assets/onboarding-test/base.mp4
+- Write pipeline/4-assets/onboarding-test/edit.json placing the test card as an overlay inside the safe area:
+    [{&quot;file&quot;: &quot;pipeline/4-assets/onboarding-test/rendered/test-card.mp4&quot;, &quot;from&quot;: 0, &quot;to&quot;: 2, &quot;x&quot;: 90, &quot;y&quot;: 200, &quot;w&quot;: 900}]
+- Composite card and captions over the base:
+    python3 tools/compose.py pipeline/4-assets/onboarding-test/base.mp4 --plan pipeline/4-assets/onboarding-test/edit.json --out pipeline/4-assets/onboarding-test/smoke-test.mp4 --caption-track pipeline/4-assets/onboarding-test/captions.mov
+
+Hand the creator the ABSOLUTE paths to test-card.mp4 and smoke-test.mp4 and ask them to open both and eyeball: their colours and font on the card; in the caption test, the currently spoken word sitting on a dark rounded plate while the other word shows as light glyphs with a soft dark halo, centred low in frame.
+If any command fails, read the error, fix the cause (missing dependency, font path, missing gsap.min.js), and re-run until both files exist. Leave the onboarding-test folder in place as a working reference; it is safe to delete later.
+
+STEP 5: HOW TO WORK THE PIPELINE
+
+Tell the creator:
+- Start a video by saying &quot;give me video ideas&quot; (or name a topic: &quot;give me ideas about X&quot;). From there, talk in plain intent: &quot;script the second one&quot;, &quot;prep it for filming&quot;, &quot;I filmed it, here is the take&quot;, &quot;assemble it&quot;, &quot;review it&quot;. Saying &quot;what&#x27;s next&quot; at any point routes to the current bottleneck. They never need to remember commands or stage names.
+- Filming happens on their phone: vertical, 1080x1920 or better, each take dropped into pipeline/3-film/&lt;slug&gt;-take.mp4.
+- The system LEARNS from corrections. When they say &quot;always do X&quot;, &quot;never do Y&quot;, or &quot;make this the new standard&quot; while a skill is running, that skill updates its own instructions and journals the change in pipeline/_lessons/. Their standards compound over time. House editing defaults (the six-second hook structure, cut cadence, caption style, music levels) live in EDITING.md, and they can tune any of them by saying so.
+
+STEP 6: WHAT IS NOT INCLUDED
+
+Be explicit so expectations are set:
+- No posting, scheduling, analytics, or account integrations. The pipeline ends at exactly one finished MP4 per video in pipeline/5-renders/; the creator uploads it manually wherever they publish.
+- No scraping of other accounts.
+Close by inviting them to start: &quot;Say: give me video ideas.&quot;</pre>
+    </div>
+  </div>
+</section>
+
+<section class="step pad" id="next">
+  <div class="step-kicker"><span>05</span> &middot; What to do now</div>
+  <div>
+    <div class="rule"></div>
+    <h2>One video, <span class="muted">end to end.</span></h2>
+    <p class="lede">The template proves itself on the first run. Do the smallest complete loop before you tune anything.</p>
+    <ol>
+      <li>Clone the repo and run the onboarding prompt to the end, including the smoke test.</li>
+      <li>Say "give me video ideas" and pick the one you could film today.</li>
+      <li>Lock the script, shoot the take on your phone, and say "assemble it".</li>
+      <li>Watch the review loop grade your video, then post the MP4 yourself.</li>
+      <li>From then on, correct it like an editor: "captions higher", "cut faster", "never use that transition". It remembers.</li>
+    </ol>
+    <div class="note">The template is the basics of my system, not a frozen copy of it. Mine keeps evolving because I keep correcting it; yours will too. That is the point.</div>
+  </div>
+</section>
+
+<section class="closeblock pad">
+  <h2>See what's possible. <span class="muted">Then build it.</span></h2>
+  <p>You're on the list now. Every week you'll get five useful things I made with AI, with the prompt or workflow behind each one. This template was one of them.</p>
+  <a href="/">Back to the site</a>
+</section>
+
+</div>
+
+<footer class="pad"><span>Art of the Possible&reg;</span><span>New things are possible every day. &middot; 2026</span></footer>
+</div>
+
+<script>
+(function () {
+  var API = 'https://theaotp-gate.theaotp.workers.dev';
+  var KEY = 'aotp_edit_unlocked';
+  var kit = document.getElementById('kit');
+  var gate = document.getElementById('gate');
+  var form = document.getElementById('gate-form');
+  var status = document.getElementById('gate-status');
+
+  function unlock() {
+    kit.hidden = false;
+    gate.hidden = true;
+    try { localStorage.setItem(KEY, '1'); } catch (e) {}
+  }
+
+  try { if (localStorage.getItem(KEY) === '1') unlock(); } catch (e) {}
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    var email = document.getElementById('gate-email').value.trim().toLowerCase();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      status.textContent = 'That email looks off. Try again.';
+      return;
+    }
+    status.textContent = 'One sec\u2026';
+    fetch(API + '/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email }),
+    }).then(function (response) {
+      return response.json().catch(function () { return {}; }).then(function (data) {
+        if (!response.ok) {
+          var err = new Error('subscribe failed');
+          err.status = response.status;
+          err.detail = data && data.detail;
+          throw err;
+        }
+        return data;
+      });
+    }).then(function (data) {
+      status.textContent = data && data.new
+        ? 'Unlocked. Check your inbox to confirm your subscription to the letter.'
+        : 'Welcome back. Unlocked.';
+      unlock();
+      window.scrollTo({ top: document.getElementById('first').offsetTop - 40, behavior: 'smooth' });
+    }).catch(function (err) {
+      if (err && err.status === 400) {
+        status.textContent = 'That email was rejected' + (err.detail ? ' (' + err.detail + ')' : '') + '. Try a different address.';
+      } else {
+        status.textContent = 'Something broke on our end. Try again in a minute, or subscribe on the homepage and DM me on Instagram for the link.';
+      }
+    });
+  });
+
+  var copyBtn = document.getElementById('copy-prompt');
+  if (copyBtn) copyBtn.addEventListener('click', function () {
+    var text = document.getElementById('prompt-text').textContent;
+    function done(ok) {
+      copyBtn.textContent = ok ? 'Copied' : 'Select + copy manually';
+      setTimeout(function () { copyBtn.textContent = 'Copy prompt'; }, 2200);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(false); });
+    } else { done(false); }
+  });
+})();
+</script>
+</body></html>
