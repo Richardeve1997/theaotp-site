@@ -1,0 +1,368 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Self-improving skills | Art of the Possible</title>
+<meta name="description" content="The one prompt that sets up a self-improving skills loop for Claude Code and Codex: a criteria file per skill, a self-check on every run, and your feedback folded back into the skill.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://theaotp.com/skills/">
+<link rel="icon" href="/qualia-symbol.png">
+<meta property="og:title" content="Self-improving skills | Art of the Possible">
+<meta property="og:description" content="The setup prompt behind the WikiSkill Reel. Criteria per skill, self-check every run, feedback that compounds.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#fdfdfb;--canvas:#e9e9e6;--rule:#e4e4e0;--ink:#121210;--muted:#9c9c96;--soft:#52524d;--azure:#0096ff;--display:'Inter Tight','Helvetica Neue',Arial,sans-serif;--ui:Inter,'Helvetica Neue',Arial,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--ui);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.page{max-width:1280px;margin:0 auto;background:var(--paper);min-height:100vh}
+.pad{padding-left:clamp(22px,4.5vw,58px);padding-right:clamp(22px,4.5vw,58px)}
+nav{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--rule);padding-top:25px;padding-bottom:25px}
+.lockup{display:flex;align-items:center;gap:11px;text-decoration:none}.lockup img{width:25px;height:25px}
+.wordmark{font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:.055em;text-transform:uppercase}
+.navlinks{display:flex;gap:24px;font-size:14px}.navlinks a{text-decoration:none;color:var(--soft)}.navlinks a:hover{color:var(--ink)}
+.eyebrow{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
+h1,h2,h3{font-family:var(--display);letter-spacing:-.038em;line-height:1.01;margin:0}
+h1{font-size:clamp(42px,6.2vw,82px);max-width:15ch}
+.muted{color:var(--muted)}
+.kit-head{padding-top:90px;padding-bottom:58px}
+.dek{max-width:58ch;color:var(--soft);margin:24px 0 0;font-size:17px}
+.gate{border-top:1px solid var(--ink);padding-top:44px;padding-bottom:80px}
+.gate-grid{display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px}
+.gate h2{font-size:clamp(26px,3vw,38px);max-width:22ch}
+.gate p{max-width:56ch;color:var(--soft)}
+.gate form{display:flex;align-items:stretch;border-bottom:2px solid var(--ink);max-width:480px;margin-top:26px}
+.gate input{min-width:0;flex:1;border:0;background:transparent;padding:15px 0;font:inherit;color:var(--ink);outline:none}
+.gate input::placeholder{color:var(--muted)}
+.gate button{border:0;background:transparent;cursor:pointer;padding:0 2px 0 24px;font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+.gate button:hover{opacity:.6}
+.gate-small{font-size:13px;color:var(--muted);margin-top:14px}
+.gate-status{font-size:13px;color:var(--ink);min-height:1.3em;margin-top:6px}
+.step{display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px;border-top:1px solid var(--ink);padding-top:56px;padding-bottom:72px}
+.step-kicker{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.step-kicker span{color:var(--azure)}
+.step h2{font-size:clamp(30px,3.8vw,50px);max-width:18ch}
+.step .lede{font-family:var(--display);font-size:19px;font-weight:600;line-height:1.35;max-width:54ch;margin:18px 0 26px}
+.step p{color:var(--soft);max-width:64ch}
+.step ul,.step ol{color:var(--soft);max-width:64ch;padding-left:20px}
+.step li{margin-bottom:9px}
+.rule{height:3px;width:52px;background:var(--azure);margin:0 0 20px}
+.note{border-left:3px solid var(--muted);padding:2px 0 2px 18px;margin:26px 0;max-width:62ch;color:var(--soft);font-size:15px}
+.read{border:1px solid var(--rule);border-left:7px solid var(--azure);padding:22px 24px;margin:26px 0 0;max-width:720px}
+.read .src{font-family:var(--display);font-weight:700;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.read h3{font-size:19px;margin:8px 0 14px;max-width:44ch;line-height:1.2}
+.read a{display:inline-block;font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;border-bottom:2px solid var(--azure);padding-bottom:2px}
+.read a:hover{color:var(--azure)}
+.closeblock{background:var(--ink);color:var(--paper);padding-top:82px;padding-bottom:88px}
+.closeblock h2{font-size:clamp(36px,5vw,64px);max-width:15ch}
+.closeblock .muted{color:#b7b7b1}
+.closeblock p{max-width:56ch;color:#b7b7b1;margin-top:20px}
+.closeblock a{display:inline-block;margin-top:30px;background:var(--paper);color:var(--ink);padding:14px 22px;text-decoration:none;font-family:var(--display);font-weight:700}
+footer{display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--rule);padding-top:28px;padding-bottom:32px;color:var(--soft);font-size:13px}
+[hidden]{display:none!important}
+.promptbox{position:relative;background:#f3f3ef;border-left:7px solid var(--ink);margin-top:26px;max-width:820px}
+.promptbox pre{margin:0;padding:26px 28px 26px 28px;padding-right:120px;overflow-x:auto;font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:13px;line-height:1.75;white-space:pre-wrap;color:var(--ink)}
+.copybtn{position:absolute;top:0;right:0;border:0;cursor:pointer;background:var(--ink);color:var(--paper);font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding:12px 18px}
+.copybtn:hover{opacity:.85}
+table{border-collapse:collapse;width:100%;max-width:720px;margin:22px 0;font-size:14.5px}
+th,td{text-align:left;padding:12px 14px 12px 0;border-bottom:1px solid var(--rule);vertical-align:top;color:var(--soft)}
+th{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+td:first-child{color:var(--ink);font-weight:600;white-space:nowrap;padding-right:24px}
+/* diagrams + screenshots */
+.diagram{margin:26px 0 8px;max-width:820px}
+.diagram svg{width:100%;height:auto;display:block}
+.cap{font-family:var(--display);font-weight:600;font-size:13px;color:var(--muted);letter-spacing:.01em;margin:8px 0 0;max-width:820px}
+.shot{margin:26px 0 0;max-width:900px}
+.shot img{width:100%;height:auto;display:block;border-radius:10px;box-shadow:0 18px 40px rgba(18,18,16,.14)}
+.shot.paper img{border:1px solid var(--rule);border-radius:4px;box-shadow:none;background:#fff}
+.shots2{display:grid;grid-template-columns:1fr 1fr;gap:22px;max-width:900px;margin-top:26px}
+.shots2 .shot{margin:0}
+@media(max-width:800px){.navlinks{display:none}.kit-head{padding-top:58px}.gate-grid,.step{grid-template-columns:1fr;gap:18px}.gate-grid>*,.step>*{min-width:0}.copybtn{position:static;display:inline-block;margin:0 0 0 28px}.promptbox pre{padding-right:28px}td:first-child{white-space:normal}.shots2{grid-template-columns:1fr}}
+</style></head><body>
+<div class="page">
+<nav class="pad"><a class="lockup" href="/"><img src="/qualia-symbol.png" alt=""><span class="wordmark">Art of the Possible<sup>&reg;</sup></span></a><div class="navlinks"><a href="/">Home</a><a href="/letters/">Archive</a><a href="/#about">About</a></div></nav>
+
+<header class="kit-head pad">
+  <div class="eyebrow">Self-improving skills &middot; From the Reel</div>
+  <h1 style="margin-top:26px">Skills that get better <span class="muted">every time you run them.</span></h1>
+  <p class="dek">You commented "SKILLS". Here it is. One prompt that sets up the loop from the video inside your own Claude Code or Codex repo: a criteria file for every skill, a self-check on every run, and your feedback written back into the skill so it never forgets. Plus screenshots of the real thing running on my machine and the Google paper it borrows from. No course, no upsell.</p>
+</header>
+
+<section class="gate pad" id="gate">
+  <div class="gate-grid">
+    <div class="eyebrow">Unlock the setup</div>
+    <div>
+      <h2>Drop your email and the prompt, the diagrams and the screenshots unlock on this page.</h2>
+      <p>You'll also get the weekly letter: five useful things I made with AI, with the prompts and workflows inside. Unsubscribe any time.</p>
+      <form id="gate-form" novalidate>
+        <label for="gate-email" style="position:absolute;left:-9999px">Email address</label>
+        <input id="gate-email" type="email" name="email" placeholder="you@somewhere.com" autocomplete="email" required>
+        <button type="submit">Unlock</button>
+      </form>
+      <p class="gate-status" id="gate-status" aria-live="polite"></p>
+      <p class="gate-small">Already on the list? Enter the same email and it unlocks without subscribing you twice.</p>
+      <noscript><p class="gate-small">This page needs JavaScript to unlock. Or just subscribe on <a href="/">the homepage</a> and reply to any letter for the setup.</p></noscript>
+    </div>
+  </div>
+</section>
+
+<!-- EVERYTHING OF VALUE LIVES INSIDE #kit. Nothing valuable outside it. -->
+<div id="kit" hidden>
+
+<section class="step pad" id="first">
+  <div class="step-kicker"><span>01</span> &middot; The idea</div>
+  <div>
+    <div class="rule"></div>
+    <h2>Stop correcting the same mistake <span class="muted">twice.</span></h2>
+    <p class="lede">A skill is a file that tells your agent how to do a job. Most people write it once and then correct the agent in chat forever. The fix is a loop that writes the correction back into the file.</p>
+    <p>Google Research published the version that started this, called WikiSkill. One agent runs the skill. A second agent reads the traces of that run and writes what went right and what went wrong into a wiki that never resets. A third agent reads the wiki and proposes an edit to the skill. A fourth tests the edit on a held-out set and promotes it if the score goes up, or rolls it back if it does not. The lesson stays in the wiki either way, so a rejected idea informs the next attempt.</p>
+    <div class="diagram" aria-label="Google's WikiSkill loop">
+      <svg viewBox="0 0 820 250" xmlns="http://www.w3.org/2000/svg" font-family="Inter Tight, Helvetica Neue, Arial, sans-serif">
+        <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" fill="#121210"/></marker></defs>
+        <g font-size="15" font-weight="700" fill="#121210" text-anchor="middle">
+          <rect x="20" y="70" width="160" height="64" rx="6" fill="#fdfdfb" stroke="#121210" stroke-width="1.5"/>
+          <text x="100" y="97">1 &middot; RUN</text><text x="100" y="118" font-size="12" font-weight="500" fill="#52524d">agent does the task</text>
+          <rect x="230" y="70" width="160" height="64" rx="6" fill="#fdfdfb" stroke="#121210" stroke-width="1.5"/>
+          <text x="310" y="97">2 &middot; OBSERVE</text><text x="310" y="118" font-size="12" font-weight="500" fill="#52524d">a second agent reads the run</text>
+          <rect x="440" y="70" width="160" height="64" rx="6" fill="#fdfdfb" stroke="#121210" stroke-width="1.5"/>
+          <text x="520" y="97">3 &middot; PROPOSE</text><text x="520" y="118" font-size="12" font-weight="500" fill="#52524d">edit to the skill</text>
+          <rect x="650" y="70" width="150" height="64" rx="6" fill="#fdfdfb" stroke="#121210" stroke-width="1.5"/>
+          <text x="725" y="97">4 &middot; TEST</text><text x="725" y="118" font-size="12" font-weight="500" fill="#52524d">promote or roll back</text>
+        </g>
+        <g stroke="#121210" stroke-width="1.5" fill="none" marker-end="url(#ah)">
+          <path d="M180 102H228"/><path d="M390 102H438"/><path d="M600 102H648"/>
+          <path d="M725 134V190H100V136"/>
+        </g>
+        <rect x="255" y="170" width="310" height="40" rx="20" fill="#0096ff"/>
+        <text x="410" y="196" font-size="14" font-weight="700" fill="#fff" text-anchor="middle">the wiki of lessons, never reset</text>
+        <path d="M310 134V168" stroke="#0096ff" stroke-width="2" fill="none"/>
+        <path d="M520 168V134" stroke="#0096ff" stroke-width="2" fill="none" marker-end="url(#ah)"/>
+        <text x="410" y="236" font-size="12" fill="#9c9c96" text-anchor="middle">next iteration starts with a better skill and a fuller wiki</text>
+      </svg>
+    </div>
+    <p class="cap">Google's loop, redrawn. Four agents, three folders on disk (raw traces, the wiki, the skills).</p>
+    <div class="note">Credit where it is due: this is a Google Research paper, not a shipped Google product, and I did not write it. Authors are Liyan Tang, Cyrus Rashtchian, Chun-Sung Ferng, Andrew Tomkins, Da-Cheng Juan and Tu Vu. The only code on GitHub is a third-party reimplementation, linked in section 05. I earn nothing from either.</div>
+  </div>
+</section>
+
+<section class="step pad" id="mine">
+  <div class="step-kicker"><span>02</span> &middot; My version</div>
+  <div>
+    <div class="rule"></div>
+    <h2>Your feedback is the training data, <span class="muted">not just the agent's.</span></h2>
+    <p class="lede">WikiSkill learns from the agent watching itself. Mine learns from that and from every correction I type in chat. Two files carry it: the skill, and a criteria file that says what good looks like.</p>
+    <p>Every skill in my repo has a criteria file next to it. When the skill runs, it scores its own output against those lines before it hands anything back, and it iterates until the checks pass. When I correct it in chat, the correction is split in two. If I said how the job should be done, the skill file changes. If I said what a good result looks like, the criteria file gets a line. Both write a dated entry into a lessons journal, and a short digest of the newest entries is injected into every new session, so the agent starts each day already knowing what I corrected yesterday.</p>
+    <div class="diagram" aria-label="My loop: skill, criteria, feedback">
+      <svg viewBox="0 0 820 330" xmlns="http://www.w3.org/2000/svg" font-family="Inter Tight, Helvetica Neue, Arial, sans-serif">
+        <defs><marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" fill="#121210"/></marker><marker id="ahb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" fill="#0096ff"/></marker></defs>
+        <g font-size="15" font-weight="700" fill="#121210" text-anchor="middle">
+          <rect x="20" y="30" width="200" height="70" rx="6" fill="#fdfdfb" stroke="#121210" stroke-width="1.5"/>
+          <text x="120" y="60">SKILL.md</text><text x="120" y="82" font-size="12" font-weight="500" fill="#52524d">how to do the work</text>
+          <rect x="20" y="150" width="200" height="70" rx="6" fill="#fdfdfb" stroke="#121210" stroke-width="1.5"/>
+          <text x="120" y="180">criteria.md</text><text x="120" y="202" font-size="12" font-weight="500" fill="#52524d">what good looks like</text>
+          <rect x="380" y="90" width="180" height="70" rx="6" fill="#fdfdfb" stroke="#121210" stroke-width="1.5"/>
+          <text x="470" y="120">RUN</text><text x="470" y="142" font-size="12" font-weight="500" fill="#52524d">then self-check</text>
+          <rect x="620" y="90" width="180" height="70" rx="6" fill="#121210"/>
+          <text x="710" y="120" fill="#fdfdfb">OUTPUT</text><text x="710" y="142" font-size="12" font-weight="500" fill="#b7b7b1">only when checks pass</text>
+        </g>
+        <g stroke="#121210" stroke-width="1.5" fill="none" marker-end="url(#ah2)">
+          <path d="M220 65C300 65 300 125 378 125"/>
+          <path d="M220 185C300 185 300 125 378 125"/>
+          <path d="M560 125H618"/>
+        </g>
+        <path d="M520 160C520 215 420 215 420 160" stroke="#121210" stroke-width="1.5" fill="none" marker-end="url(#ah2)"/>
+        <text x="470" y="236" font-size="12" fill="#52524d" text-anchor="middle">iterate until every criterion passes</text>
+        <rect x="20" y="270" width="200" height="40" rx="20" fill="#0096ff"/>
+        <text x="120" y="296" font-size="14" font-weight="700" fill="#fff" text-anchor="middle">your correction in chat</text>
+        <g stroke="#0096ff" stroke-width="2" fill="none" marker-end="url(#ahb)">
+          <path d="M120 270V224"/>
+          <path d="M220 290C275 290 275 102 214 102"/>
+        </g>
+        <text x="134" y="252" font-size="11.5" font-weight="600" fill="#0096ff" text-anchor="start">"this is what good looks like"</text>
+        <text x="282" y="200" font-size="11.5" font-weight="600" fill="#0096ff" text-anchor="start">"do it like this"</text>
+      </svg>
+    </div>
+    <p class="cap">One correction, two possible destinations. The skill file learns the process, the criteria file learns the bar.</p>
+    <p>The part WikiSkill does with a fourth agent, I do with two small hooks. A session-start hook prints the newest lessons. A stop hook runs a cheap model over the last few messages after every turn and folds any correction I gave into the right file, in case the skill itself did not. That is the whole system. Plain Markdown, no database, works the same in Claude Code and Codex.</p>
+  </div>
+</section>
+
+<section class="step pad" id="prompt">
+  <div class="step-kicker"><span>03</span> &middot; The prompt</div>
+  <div>
+    <div class="rule"></div>
+    <h2>Paste this once <span class="muted">in your repo.</span></h2>
+    <p class="lede">Open Claude Code or Codex at the root of a repo that already has a few skills, paste the whole thing, and read every diff it shows you before you say yes.</p>
+    <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>You are setting up a self-improvement loop for the skills in this repo. It is modelled on Google Research's WikiSkill (arXiv 2608.27454), but driven by MY feedback as well as the agent's own observations. Work in this order and show me every diff before you write it.
+
+1. INVENTORY. List every skill in .claude/skills/*/SKILL.md (Codex: .agents/skills). One line each: what it produces and who reads the output.
+
+2. CRITERIA FILE PER SKILL. Create evals/&lt;skill&gt;/criteria.md, seeded only from rules that already exist in that SKILL.md, in CLAUDE.md / AGENTS.md, or in my past corrections in this conversation. One atomic line per criterion, each tagged:
+   - [verifiable] plus the exact command or check that proves it (exit 0 = pass)
+   - [judged] for a quality bar you will score by looking at the real output
+   Never duplicate a line. A new rule replaces the line it contradicts. Add evals/README.md explaining the format and the two tags.
+
+3. SELF-EVAL CONTRACT. Append to every SKILL.md a section "## Self-eval (end of every run)": before yielding, run every [verifiable] check (a failure is a veto), score every [judged] line against the ACTUAL output (never intentions), print a short pass/fail table, fix and re-score on any failure, max 3 iterations, then ship with any remaining failure flagged explicitly, never silently.
+
+4. SELF-IMPROVEMENT CONTRACT. Append "## Self-improvement (every run)": scan this conversation for corrections or strong validations I gave while the skill was active ("don't...", "always...", "make this the standard", "yes exactly, keep that"). Split each one into its two halves and write only the halves that exist: HOW the job should be done goes into SKILL.md (replace the rule it contradicts, never append a duplicate); WHAT GOOD LOOKS LIKE goes into evals/&lt;skill&gt;/criteria.md as one line. Either way, append a dated entry to pipeline/_lessons/&lt;skill&gt;.md with four fields: trigger (my words, quoted), promoted to (file and section), rule added, why. Journal friction even when there was no correction: a default that fought you, a check that was missing, an instruction that was ambiguous.
+
+5. JOURNAL + DIGEST. Create pipeline/_lessons/README.md describing that entry format, and bin/lessons_digest.sh, which prints the newest 12 "## &lt;date&gt; - &lt;headline&gt;" lines across pipeline/_lessons/*.md.
+
+6. HOOKS (Claude Code). In .claude/settings.json add two hooks:
+   - SessionStart: run bin/lessons_digest.sh, so every session opens with the freshest corrections already in context.
+   - Stop: an async agent hook on a small fast model with this prompt: "You are the reflector for this repo. Scan the last few user messages for corrections ('don't', 'stop', 'never', 'going forward', 'always', 'fix and update') or strong validations ('yes exactly, keep doing that'). Ignore typos and one-off clarifications. Decide which SKILL.md the lesson shapes; if you cannot tell, journal only. If it generalises, edit that SKILL.md (replace the contradicted rule) and/or add one line to evals/&lt;skill&gt;/criteria.md, then append the four-field entry to pipeline/_lessons/&lt;skill&gt;.md. Never edit code. Never touch files outside .claude/skills, evals and pipeline/_lessons."
+   If I also use Codex, add a short note to AGENTS.md: it has no hook runner, so it must run bin/lessons_digest.sh itself at session start and honour the same two contracts.
+
+7. STEERING. Add a small /learnings skill that can show the last lessons, undo one, remove one, or blocklist a topic the reflector should ignore, so I stay in control of what the loop writes.
+
+8. PROVE IT. Run one skill end to end and show me its pass/fail table. Then take this fake correction, "always put the summary first", and show me the SKILL.md diff, the criteria line, and the journal entry it produces.
+
+Rules: plain Markdown only. Never invent a rule I did not give or that is not already in this repo. Show me every edit before you write it. When in doubt, journal instead of promoting.</pre></div>
+    <div class="note">Read the diffs. Step 2 is where it matters most: the criteria it seeds should be things you would actually check, not a wish list. Delete anything you would not defend.</div>
+  </div>
+</section>
+
+<section class="step pad" id="installed">
+  <div class="step-kicker"><span>04</span> &middot; What it looks like installed</div>
+  <div>
+    <div class="rule"></div>
+    <h2>Six screenshots <span class="muted">from my repo.</span></h2>
+    <p class="lede">This is the loop running on the pipeline that makes my videos. Same files the prompt will create for you, filled in by a few months of corrections.</p>
+    <p>The layout. Skills, criteria and lessons sit in three folders, and one shell script prints the digest.</p>
+    <div class="shot"><img src="img/shot-tree.png" alt="Repo layout: .claude/settings.json with the two hooks, .claude/skills with SKILL.md files, evals/ with criteria.md per skill, pipeline/_lessons/ journals, bin/lessons_digest.sh" loading="lazy"></div>
+    <p style="margin-top:34px">The contract at the end of every skill. Self-eval scores the output before it ships. Self-improvement folds your corrections back in.</p>
+    <div class="shot"><img src="img/shot-skill-selfeval.png" alt="The Self-eval and Self-improvement sections at the end of a SKILL.md file" loading="lazy"></div>
+    <p style="margin-top:34px">A criteria file. Verifiable lines name the command that proves them. Judged lines are the bar the model scores itself against.</p>
+    <div class="shot"><img src="img/shot-criteria.png" alt="evals/ig-script/criteria.md with [verifiable] and [judged] lines" loading="lazy"></div>
+    <p style="margin-top:34px">The two hooks. Session start prints the digest. Stop runs the reflector on a small model after every turn.</p>
+    <div class="shot"><img src="img/shot-stop-hook.png" alt=".claude/settings.json showing the SessionStart digest hook and the Stop reflector agent hook" loading="lazy"></div>
+    <p style="margin-top:34px">What a lesson looks like once it is written. My words, where the rule went, the rule, and why.</p>
+    <div class="shot"><img src="img/shot-lessons.png" alt="A dated journal entry in pipeline/_lessons/ig-assemble.md with trigger, promoted to, rule added and why" loading="lazy"></div>
+    <p style="margin-top:34px">And the digest every new session opens with. The agent reads yesterday's corrections before I type a word.</p>
+    <div class="shot"><img src="img/shot-session-digest.png" alt="Terminal output of bin/lessons_digest.sh listing the newest lessons across skills" loading="lazy"></div>
+  </div>
+</section>
+
+<section class="step pad" id="paper">
+  <div class="step-kicker"><span>05</span> &middot; The paper</div>
+  <div>
+    <div class="rule"></div>
+    <h2>The numbers <span class="muted">Google reported.</span></h2>
+    <p class="lede">Averaged over five benchmarks, WikiSkill lifted Gemini 3.5 Flash from 49.5 to 68.1. A 9B model with evolved skills beat a 27B model without them.</p>
+    <table>
+      <tr><th>Model</th><th>No skills</th><th>WikiSkill</th></tr>
+      <tr><td>Gemini 3.5 Flash</td><td>49.5</td><td>68.1</td></tr>
+      <tr><td>Qwen 3.6 27B</td><td>39.4</td><td>63.3</td></tr>
+      <tr><td>Gemma 4 31B</td><td>41.3</td><td>54.9</td></tr>
+      <tr><td>Qwen 3.5 9B</td><td>29.9</td><td>47.4</td></tr>
+    </table>
+    <p>The ablation is the part to remember. Remove the persistent wiki and the score drops from 63.7 to 48.7. The knowledge base that never resets is the whole point, which is why the lessons journal in the prompt above is not optional.</p>
+    <div class="shot paper"><img src="img/wikiskill-paper-diagram.png" alt="Figure from the WikiSkill paper: three layers on disk (raw traces, wiki, skills) and four agents (Inference, Wiki Maintainer, Skill Proposer, Gating and Rollback)" loading="lazy"></div>
+    <p class="cap">The paper's own figure. Three folders on disk and four agents around them.</p>
+    <div class="shot paper"><img src="img/wikiskill-wiki-demo.png" alt="Example wiki contents from the paper: skill-impact.md with rejected and accepted iterations, logs.md, pattern files, and the resulting SKILL.md and PURPOSE.md" loading="lazy"></div>
+    <p class="cap">What the wiki contains. It looks a lot like a Claude Code skills folder, which is not a coincidence.</p>
+    <div class="read">
+      <div class="src">Google Research &middot; arXiv, 27 Aug 2026</div>
+      <h3>WikiSkill: Compiling Agent Experience into Persistent Knowledge for Skill Evolution</h3>
+      <a href="https://arxiv.org/abs/2608.27454" target="_blank" rel="noopener">Read the paper &rarr;</a>
+    </div>
+    <div class="read">
+      <div class="src">Third-party reimplementation &middot; MIT &middot; not an official Google project</div>
+      <h3>kenhuangus/wikiskill on GitHub</h3>
+      <a href="https://github.com/kenhuangus/wikiskill" target="_blank" rel="noopener">See the code &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="step pad" id="next">
+  <div class="step-kicker"><span>06</span> &middot; What to do now</div>
+  <div>
+    <div class="rule"></div>
+    <h2>Pick one. <span class="muted">Do it today.</span></h2>
+    <p class="lede">Reading this does nothing. The loop only compounds once it is installed and you start correcting the agent in chat like you normally would.</p>
+    <ul>
+      <li><strong>If you already have skills in a repo:</strong> paste the prompt from 03, approve the diffs, then give it one real correction and check the journal entry appeared.</li>
+      <li><strong>If you have no skills yet:</strong> write one first. Take the task you repeat most, ask the agent to write a SKILL.md for it, run it twice, then come back to 03.</li>
+      <li><strong>If you use Codex, not Claude Code:</strong> everything works, only the hooks in step 6 are Claude-specific. The AGENTS.md note covers the gap, you run the digest yourself.</li>
+      <li><strong>If it writes a rule you disagree with:</strong> that is what the /learnings skill in step 7 is for. Undo it, and blocklist the topic if it keeps coming back.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="closeblock pad">
+  <h2>See what's possible. <span class="muted">Then build it.</span></h2>
+  <p>You're on the list now. Every week you'll get five useful things I made with AI, with the prompt or workflow behind each one. This setup was one of them.</p>
+  <a href="/">Back to the site</a>
+</section>
+
+</div>
+
+<footer class="pad"><span>Art of the Possible&reg;</span><span>New things are possible every day. &middot; 2026</span></footer>
+</div>
+
+<script>
+(function () {
+  var API = 'https://theaotp-gate.theaotp.workers.dev';
+  var KEY = 'aotp_skills_unlocked';
+  var kit = document.getElementById('kit');
+  var gate = document.getElementById('gate');
+  var form = document.getElementById('gate-form');
+  var status = document.getElementById('gate-status');
+
+  function unlock() {
+    kit.hidden = false;
+    gate.hidden = true;
+    try { localStorage.setItem(KEY, '1'); } catch (e) {}
+  }
+
+  try { if (localStorage.getItem(KEY) === '1') unlock(); } catch (e) {}
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    var email = document.getElementById('gate-email').value.trim().toLowerCase();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      status.textContent = 'That email looks off. Try again.';
+      return;
+    }
+    status.textContent = 'One sec…';
+    fetch(API + '/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email }),
+    }).then(function (response) {
+      return response.json().catch(function () { return {}; }).then(function (data) {
+        if (!response.ok) {
+          var err = new Error('subscribe failed');
+          err.status = response.status;
+          err.detail = data && data.detail;
+          throw err;
+        }
+        return data;
+      });
+    }).then(function (data) {
+      status.textContent = data && data.new
+        ? 'Unlocked. Check your inbox to confirm your subscription to the letter.'
+        : 'Welcome back. Unlocked.';
+      unlock();
+      window.scrollTo({ top: document.getElementById('first').offsetTop - 40, behavior: 'smooth' });
+    }).catch(function (err) {
+      if (err && err.status === 400) {
+        status.textContent = 'That email was rejected' + (err.detail ? ' (' + err.detail + ')' : '') + '. Try a different address.';
+      } else {
+        status.textContent = 'Something broke on our end. Try again in a minute, or subscribe on the homepage and DM me on Instagram for the setup.';
+      }
+    });
+  });
+
+  document.querySelectorAll('[data-copy]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      var pre = button.parentElement.querySelector('pre');
+      navigator.clipboard.writeText(pre.textContent).then(function () {
+        button.textContent = 'Copied';
+        setTimeout(function () { button.textContent = 'Copy'; }, 1600);
+      });
+    });
+  });
+})();
+</script>
+</body></html>
