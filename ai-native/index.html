@@ -1,0 +1,373 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The AI Native Reading List | Art of the Possible</title>
+<meta name="description" content="Ten things an AI native company has, each explained and handed off to one source from the companies doing it.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://theaotp.com/ai-native/">
+<link rel="icon" href="/qualia-symbol.png">
+<meta property="og:title" content="The AI Native Reading List | Art of the Possible">
+<meta property="og:description" content="Ten things an AI native company has, with one source for each.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#fdfdfb;--canvas:#e9e9e6;--rule:#e4e4e0;--ink:#121210;--muted:#9c9c96;--soft:#52524d;--azure:#0096ff;--display:'Inter Tight','Helvetica Neue',Arial,sans-serif;--ui:Inter,'Helvetica Neue',Arial,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--ui);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.page{max-width:1280px;margin:0 auto;background:var(--paper);min-height:100vh}
+.pad{padding-left:clamp(22px,4.5vw,58px);padding-right:clamp(22px,4.5vw,58px)}
+nav{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--rule);padding-top:25px;padding-bottom:25px}
+.lockup{display:flex;align-items:center;gap:11px;text-decoration:none}.lockup img{width:25px;height:25px}
+.wordmark{font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:.055em;text-transform:uppercase}
+.navlinks{display:flex;gap:24px;font-size:14px}.navlinks a{text-decoration:none;color:var(--soft)}.navlinks a:hover{color:var(--ink)}
+.eyebrow{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
+h1,h2,h3{font-family:var(--display);letter-spacing:-.038em;line-height:1.01;margin:0}
+h1{font-size:clamp(42px,6.2vw,82px);max-width:15ch}
+.muted{color:var(--muted)}
+.kit-head{padding-top:90px;padding-bottom:58px}
+.dek{max-width:58ch;color:var(--soft);margin:24px 0 0;font-size:17px}
+.gate{border-top:1px solid var(--ink);padding-top:44px;padding-bottom:80px}
+.gate-grid{display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px}
+.gate h2{font-size:clamp(26px,3vw,38px);max-width:22ch}
+.gate p{max-width:56ch;color:var(--soft)}
+.gate form{display:flex;align-items:stretch;border-bottom:2px solid var(--ink);max-width:480px;margin-top:26px}
+.gate input{min-width:0;flex:1;border:0;background:transparent;padding:15px 0;font:inherit;color:var(--ink);outline:none}
+.gate input::placeholder{color:var(--muted)}
+.gate button{border:0;background:transparent;cursor:pointer;padding:0 2px 0 24px;font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+.gate button:hover{opacity:.6}
+.gate-small{font-size:13px;color:var(--muted);margin-top:14px}
+.gate-status{font-size:13px;color:var(--ink);min-height:1.3em;margin-top:6px}
+.step{display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px;border-top:1px solid var(--ink);padding-top:56px;padding-bottom:72px}
+.step-kicker{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.step h2{font-size:clamp(30px,3.8vw,50px);max-width:18ch}
+.step .lede{font-family:var(--display);font-size:19px;font-weight:600;line-height:1.35;max-width:54ch;margin:18px 0 26px}
+.step p{color:var(--soft);max-width:64ch}
+.step ul{color:var(--soft);max-width:64ch;padding-left:20px}
+.step li{margin-bottom:9px}
+.rule{height:3px;width:52px;background:var(--azure);margin:0 0 20px}
+.note{border-left:3px solid var(--muted);padding:2px 0 2px 18px;margin:26px 0;max-width:62ch;color:var(--soft);font-size:15px}
+.index{list-style:none;padding:0;margin:26px 0 0;max-width:66ch;counter-reset:idx}
+.index li{border-top:1px solid var(--rule);padding:14px 0;display:flex;gap:18px;align-items:baseline;font-size:15.5px;color:var(--soft)}
+.index .n{font-family:var(--display);font-weight:700;font-size:13px;color:var(--azure);min-width:26px}
+.index a{text-decoration:none;font-family:var(--display);font-weight:600;font-size:17px;color:var(--ink);letter-spacing:-.01em}
+.index a:hover{border-bottom:2px solid var(--azure)}
+.concept{border-top:1px solid var(--ink);padding-top:52px;padding-bottom:60px;display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px;scroll-margin-top:20px}
+.concept-num{font-family:var(--display);font-weight:800;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.concept-num span{color:var(--azure)}
+.concept h2{font-size:clamp(28px,3.4vw,44px);max-width:20ch}
+.concept .lede{font-family:var(--display);font-size:19px;font-weight:600;line-height:1.35;max-width:54ch;margin:18px 0 22px}
+.concept p{color:var(--soft);max-width:64ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 0}
+.chip{font-family:var(--display);font-weight:600;font-size:12.5px;letter-spacing:.02em;color:var(--soft);background:#f3f3ef;padding:6px 11px;border-radius:3px}
+.read{border:1px solid var(--rule);border-left:7px solid var(--azure);padding:22px 24px;margin:26px 0 0;max-width:720px}
+.read .src{font-family:var(--display);font-weight:700;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.read h3{font-size:19px;margin:8px 0 14px;max-width:44ch;line-height:1.2}
+.read a{display:inline-block;font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;border-bottom:2px solid var(--azure);padding-bottom:2px}
+.read a:hover{color:var(--azure)}
+.closeblock{background:var(--ink);color:var(--paper);padding-top:82px;padding-bottom:88px}
+.closeblock h2{font-size:clamp(36px,5vw,64px);max-width:15ch}
+.closeblock .muted{color:#b7b7b1}
+.closeblock p{max-width:56ch;color:#b7b7b1;margin-top:20px}
+.closeblock a{display:inline-block;margin-top:30px;background:var(--paper);color:var(--ink);padding:14px 22px;text-decoration:none;font-family:var(--display);font-weight:700}
+footer{display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--rule);padding-top:28px;padding-bottom:32px;color:var(--soft);font-size:13px}
+[hidden]{display:none!important}
+@media(max-width:800px){.navlinks{display:none}.kit-head{padding-top:58px}.gate-grid,.step,.concept{grid-template-columns:1fr;gap:18px}.gate-grid>*,.step>*,.concept>*{min-width:0}}
+</style></head><body>
+<div class="page">
+<nav class="pad"><a class="lockup" href="/"><img src="/qualia-symbol.png" alt=""><span class="wordmark">Art of the Possible<sup>&reg;</sup></span></a><div class="navlinks"><a href="/">Home</a><a href="/letters/">Archive</a><a href="/#about">About</a></div></nav>
+
+<header class="kit-head pad">
+  <div class="eyebrow">The AI Native Reading List &middot; From the Reel</div>
+  <h1 style="margin-top:26px">Ten things. <span class="muted">Ten sources.</span></h1>
+  <p class="dek">You commented "AI NATIVE". Here it is. The ten things every company needs before it can call itself AI native, each explained in plain English and then handed to one source from a company already doing it: Anthropic, OpenAI, Google, Shopify, Meta. No course, no upsell. Just the list, the reasoning, and where to go deep on each one.</p>
+</header>
+
+<section class="gate pad" id="gate">
+  <div class="gate-grid">
+    <div class="eyebrow">Unlock the list</div>
+    <div>
+      <h2>Drop your email and all ten unlock on this page.</h2>
+      <p>You'll also get the weekly letter: five useful things I made with AI, with the prompts and workflows inside. Unsubscribe any time.</p>
+      <form id="gate-form" novalidate>
+        <label for="gate-email" style="position:absolute;left:-9999px">Email address</label>
+        <input id="gate-email" type="email" name="email" placeholder="you@somewhere.com" autocomplete="email" required>
+        <button type="submit">Unlock</button>
+      </form>
+      <p class="gate-status" id="gate-status" aria-live="polite"></p>
+      <p class="gate-small">Already on the list? Enter the same email and it unlocks without subscribing you twice.</p>
+      <noscript><p class="gate-small">This page needs JavaScript to unlock. Or just subscribe on <a href="/">the homepage</a> and reply to any letter for the list.</p></noscript>
+    </div>
+  </div>
+</section>
+
+<!-- EVERYTHING OF VALUE LIVES INSIDE #kit. Nothing valuable outside it. -->
+<div id="kit" hidden>
+
+<section class="step pad" id="first">
+  <div class="step-kicker"><span>00</span> &middot; How to use this</div>
+  <div>
+    <div class="rule"></div>
+    <h2>Score yourself first. <span class="muted">Then read.</span></h2>
+    <p class="lede">Go down the list and give your company a yes or no on each one. Most companies I talk to get two or three. The gap between that number and ten is the work.</p>
+    <p>The order matters. One to five are the foundation: where work happens, what the agents know, and how that knowledge moves around. Six to eight are what keep it honest once it is running. Nine and ten are the two that separate companies using AI from companies that own their AI.</p>
+    <ol class="index">
+      <li><span class="n">01</span><a href="#c1">Work starts and ends in a co-work agent tool</a></li>
+      <li><span class="n">02</span><a href="#c2">Every function has its skills</a></li>
+      <li><span class="n">03</span><a href="#c3">One central knowledge base</a></li>
+      <li><span class="n">04</span><a href="#c4">Specialised knowledge bases per team and project</a></li>
+      <li><span class="n">05</span><a href="#c5">Skills and knowledge work in every tool</a></li>
+      <li><span class="n">06</span><a href="#c6">Every use improves the agent</a></li>
+      <li><span class="n">07</span><a href="#c7">Tests and evals define good output</a></li>
+      <li><span class="n">08</span><a href="#c8">Cost and tokens are measured</a></li>
+      <li><span class="n">09</span><a href="#c9">Non-technical people build in a sandbox</a></li>
+      <li><span class="n">10</span><a href="#c10">Own your intelligence</a></li>
+    </ol>
+    <div class="note">Every link below is someone else's work, linked to the original. I did not write them and I earn nothing from them. Where I could, I picked the company's own write-up over commentary about it.</div>
+  </div>
+</section>
+
+<section class="concept pad" id="c1">
+  <div class="concept-num"><span>01</span> &middot; Foundation</div>
+  <div>
+    <h2>Work starts and ends <span class="muted">in a co-work agent tool.</span></h2>
+    <p class="lede">Not just coding. Every piece of knowledge work begins inside an agent that can read your files, run your tools and finish the job, and it ends there too.</p>
+    <p>The tell of an AI native company is where a task lives. If the brief, the draft, the research and the final output all pass through an agentic tool like Claude Code, Codex or Cursor, the company has one place where work compounds. If people copy answers out of a chat window into a document, the AI is a helper, not the workplace.</p>
+    <p>Anthropic wrote up how their own teams do this, and the interesting part is that the legal, marketing and data teams show up alongside engineering.</p>
+    <div class="chips"><span class="chip">agentic tools</span><span class="chip">coding and knowledge work</span><span class="chip">one place work compounds</span></div>
+    <div class="read">
+      <div class="src">Anthropic</div>
+      <h3>How Anthropic teams use Claude Code</h3>
+      <a href="https://claude.com/blog/how-anthropic-teams-use-claude-code" target="_blank" rel="noopener">Read it &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="concept pad" id="c2">
+  <div class="concept-num"><span>02</span> &middot; Foundation</div>
+  <div>
+    <h2>Every function <span class="muted">has its skills.</span></h2>
+    <p class="lede">A skill is a written, reusable procedure an agent can load and follow. Marketing, sales, finance, ops and support each need a full set covering every workflow they run and every key output they produce.</p>
+    <p>Prompts get typed once and lost. A skill is a file in a folder: what the task is, how to do it, what good looks like, and any scripts or templates it needs. Once a function has its workflows written down this way, any person and any agent in the company can run them the same way. That is what turns individual AI use into company capability.</p>
+    <p>Anthropic's engineering post on Agent Skills is the clearest description of the format, and the same folder structure now works across most of the major agent tools.</p>
+    <div class="chips"><span class="chip">SKILL.md</span><span class="chip">one per workflow</span><span class="chip">one per key output</span></div>
+    <div class="read">
+      <div class="src">Anthropic Engineering</div>
+      <h3>Equipping agents for the real world with Agent Skills</h3>
+      <a href="https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills" target="_blank" rel="noopener">Read it &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="concept pad" id="c3">
+  <div class="concept-num"><span>03</span> &middot; Foundation</div>
+  <div>
+    <h2>One central <span class="muted">knowledge base.</span></h2>
+    <p class="lede">All of the company's structured data and unstructured data, in one place an agent can reach.</p>
+    <p>Structured means the tables: CRM, finance, product data. Unstructured means everything else: documents, Slack threads, email, PDFs, tickets. An AI native company has connected both into a single searchable layer, with the same permissions the source systems already enforce, so an agent answers from the company's actual context rather than from the model's general knowledge.</p>
+    <p>OpenAI's company knowledge launch is a good picture of what this looks like from the user's side: one question, answered across every connected tool, with the sources linked.</p>
+    <div class="chips"><span class="chip">structured</span><span class="chip">unstructured</span><span class="chip">permission-aware</span></div>
+    <div class="read">
+      <div class="src">OpenAI</div>
+      <h3>Work smarter with your company knowledge in ChatGPT</h3>
+      <a href="https://openai.com/index/introducing-company-knowledge/" target="_blank" rel="noopener">Read it &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="concept pad" id="c4">
+  <div class="concept-num"><span>04</span> &middot; Foundation</div>
+  <div>
+    <h2>Specialised knowledge bases <span class="muted">per team and project.</span></h2>
+    <p class="lede">The central base is the source. Each team and each key project then gets its own scoped slice, because an agent with everything in context does worse than an agent with the right things.</p>
+    <p>Context is a budget. Pour the whole company into every request and the agent drowns in noise, costs more and answers worse. The fix is smaller knowledge bases carved from the central one: the sales team's, the onboarding project's, the pricing project's. Each holds what that work needs and nothing else, and each stays in sync with the master.</p>
+    <p>Anthropic's context engineering post explains why this matters at the level of the model, which is the argument you need when someone asks why one big base is not enough.</p>
+    <div class="chips"><span class="chip">scoped context</span><span class="chip">per team</span><span class="chip">per project</span></div>
+    <div class="read">
+      <div class="src">Anthropic Engineering</div>
+      <h3>Effective context engineering for AI agents</h3>
+      <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents" target="_blank" rel="noopener">Read it &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="concept pad" id="c5">
+  <div class="concept-num"><span>05</span> &middot; Foundation</div>
+  <div>
+    <h2>Skills and knowledge <span class="muted">work in every tool.</span></h2>
+    <p class="lede">Whatever AI tool someone opens, the company's skills and knowledge bases are already there, and passing them to a colleague takes seconds.</p>
+    <p>If a skill only works in one product, or the knowledge base only answers inside one chat window, you have built a silo with an AI label on it. AI native companies expose their knowledge and their tools through open connectors so Claude, ChatGPT, Cursor, Copilot and the internal agents all read from the same place. Sharing a skill with a teammate should be a file, not a training session.</p>
+    <p>The Model Context Protocol is the standard most of this now runs on. Anthropic's announcement is short and explains the idea in one diagram.</p>
+    <div class="chips"><span class="chip">MCP</span><span class="chip">any tool</span><span class="chip">shareable</span></div>
+    <div class="read">
+      <div class="src">Anthropic</div>
+      <h3>Introducing the Model Context Protocol</h3>
+      <a href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener">Read it &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="concept pad" id="c6">
+  <div class="concept-num"><span>06</span> &middot; Keep it honest</div>
+  <div>
+    <h2>Every use <span class="muted">improves the agent.</span></h2>
+    <p class="lede">A feedback loop: each time someone uses a skill or an agent, the correction they make gets written back into the skill, so the next run is better without anyone scheduling a rewrite.</p>
+    <p>Most companies improve their AI in big manual passes, if at all. The native version is continuous. The agent runs, a person corrects it, the correction becomes a line in the skill file or a new check in its evaluation, and the version number ticks up. Over a few months the skills reflect exactly how your company works, because your company taught them.</p>
+    <p>Google Research published the mechanism as a paper. It is the most concrete description I have found of an agent compiling its own experience into persistent knowledge.</p>
+    <div class="chips"><span class="chip">correction to file</span><span class="chip">version ticks up</span><span class="chip">no scheduled rewrites</span></div>
+    <div class="read">
+      <div class="src">Google Research (arXiv)</div>
+      <h3>WikiSkill: Compiling Agent Experience into Persistent Knowledge for Skill Evolution</h3>
+      <a href="https://arxiv.org/abs/2608.27454" target="_blank" rel="noopener">Read it &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="concept pad" id="c7">
+  <div class="concept-num"><span>07</span> &middot; Keep it honest</div>
+  <div>
+    <h2>Tests and evals <span class="muted">define good output.</span></h2>
+    <p class="lede">Every key workflow has a written definition of what good looks like and a set of checks that run against it. Without that, "the agent got better" is an opinion.</p>
+    <p>An eval is a list of real inputs with known good outputs, plus the rules an output has to satisfy: has a source, has the price, under two hundred words, whatever the workflow needs. Run it every time the skill changes. A failing check sends the output back for revision before a person ever sees it. This is the same discipline software teams already use for code, applied to the work the agents produce.</p>
+    <p>Anthropic's guide is written for people building agents, but the first half applies to any workflow you care about.</p>
+    <div class="chips"><span class="chip">golden set</span><span class="chip">pass or fail checks</span><span class="chip">run on every change</span></div>
+    <div class="read">
+      <div class="src">Anthropic Engineering</div>
+      <h3>Demystifying evals for AI agents</h3>
+      <a href="https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents" target="_blank" rel="noopener">Read it &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="concept pad" id="c8">
+  <div class="concept-num"><span>08</span> &middot; Keep it honest</div>
+  <div>
+    <h2>Cost and tokens <span class="muted">are measured.</span></h2>
+    <p class="lede">Token spend is tracked at the team level, the individual level, and for every critical high volume workflow. One monthly bill from the provider is not measurement.</p>
+    <p>Tokens are the new cloud bill, and they behave the same way: invisible until someone tags them. AI native companies tag every call with the team, the person, the workflow and the prompt version, so they can see that Tuesday was expensive and which agent step caused it. That is what makes efficiency work possible at all. You cannot shrink a cost you cannot attribute.</p>
+    <p>Braintrust's playbook is the most practical walk-through of the attribution model I have seen, down to the fields to log.</p>
+    <div class="chips"><span class="chip">per team</span><span class="chip">per person</span><span class="chip">per workflow</span></div>
+    <div class="read">
+      <div class="src">Braintrust</div>
+      <h3>How to track LLM costs (2026): A playbook for per-user, per-feature, and per-agent-run attribution</h3>
+      <a href="https://www.braintrust.dev/articles/how-to-track-llm-costs-2026" target="_blank" rel="noopener">Read it &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="concept pad" id="c9">
+  <div class="concept-num"><span>09</span> &middot; Own it</div>
+  <div>
+    <h2>Non-technical people <span class="muted">build in a sandbox.</span></h2>
+    <p class="lede">A democratised development process: the ops manager, not an engineer, can build a proof of concept product, inside a sandbox that has governance and guardrails already built in.</p>
+    <p>The blocker is never whether a non-engineer can build something with AI now. They can. The blocker is whether the company has a safe place for them to do it: approved models, scoped data access, an audit log, and a quick way to deploy an internal tool without a ticket. Put the rails in and the proofs of concept appear on their own. Leave them out and either nothing ships or something ships that should not have.</p>
+    <p>Shopify has done this at company scale. The write-up covers their LLM proxy, the drag-and-drop deployment tool, and the fact that non-engineers needed different tools from engineers.</p>
+    <div class="chips"><span class="chip">approved models</span><span class="chip">data access</span><span class="chip">audit log</span><span class="chip">quick deploy</span></div>
+    <div class="read">
+      <div class="src">Bessemer Venture Partners, with Shopify</div>
+      <h3>Shopify's strategy for AI-first engineering</h3>
+      <a href="https://www.bvp.com/assets/uploads/2026/04/Shopifys-strategy-for-AI-first-engineering-1.pdf" target="_blank" rel="noopener">Read it &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="concept pad" id="c10">
+  <div class="concept-num"><span>10</span> &middot; Own it</div>
+  <div>
+    <h2>Own your <span class="muted">intelligence.</span></h2>
+    <p class="lede">For the high volume, critical workflows that give you a competitive advantage, you have started fine-tuning open source models on your own first-party data.</p>
+    <p>Renting a frontier model is the right default for almost everything. But a small number of workflows are the business: the ones that run thousands of times a day and encode how your company does the thing better than competitors. For those, a fine-tuned open model trained on your data is cheaper per call, faster, and yours. Nobody can price it up or switch it off, and it keeps learning from data nobody else has.</p>
+    <p>Meta's Llama fine-tuning guide is the practical starting point: what the methods are, how much data you actually need, and how to run it.</p>
+    <div class="chips"><span class="chip">open weights</span><span class="chip">first-party data</span><span class="chip">critical workflows only</span></div>
+    <div class="read">
+      <div class="src">Meta, llama.com</div>
+      <h3>Fine-tuning | How-to guides</h3>
+      <a href="https://www.llama.com/docs/how-to-guides/fine-tuning/" target="_blank" rel="noopener">Read it &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="step pad" id="next">
+  <div class="step-kicker"><span>11</span> &middot; What to do now</div>
+  <div>
+    <div class="rule"></div>
+    <h2>Pick the lowest number <span class="muted">you scored no on.</span></h2>
+    <p class="lede">Reading ten links changes nothing. Fixing the first gap on the list changes how every item after it works.</p>
+    <ul>
+      <li><strong>If your team still copies answers out of a chat window:</strong> start at 01. Move one real workflow into an agentic tool this week and do not move it back.</li>
+      <li><strong>If you have the tool but every prompt is typed fresh:</strong> 02, then 06. Write the first skill, then make correcting it the habit.</li>
+      <li><strong>If the agents keep answering from general knowledge:</strong> 03, 04 and 05. Connect the data, scope it, and make it reachable from every tool.</li>
+      <li><strong>If it works but nobody can prove it:</strong> 07 and 08. Evals and cost tracking are how you keep the budget next year.</li>
+      <li><strong>If you have all of that:</strong> 09 and 10. Open the sandbox to the whole company, then pick the one workflow worth owning outright.</li>
+    </ul>
+    <p>If your company is not moving on seven through ten soon, I would be concerned. Those are the ones that take longest to build and are hardest to buy.</p>
+  </div>
+</section>
+
+<section class="closeblock pad">
+  <h2>See what's possible. <span class="muted">Then build it.</span></h2>
+  <p>You're on the list now. Every week you'll get five useful things I made with AI, with the prompt or workflow behind each one. This list was one of them.</p>
+  <a href="/">Back to the site</a>
+</section>
+
+</div>
+
+<footer class="pad"><span>Art of the Possible&reg;</span><span>New things are possible every day. &middot; 2026</span></footer>
+</div>
+
+<script>
+(function () {
+  var API = 'https://theaotp-gate.theaotp.workers.dev';
+  var KEY = 'aotp_ai-native_unlocked';
+  var kit = document.getElementById('kit');
+  var gate = document.getElementById('gate');
+  var form = document.getElementById('gate-form');
+  var status = document.getElementById('gate-status');
+
+  function unlock() {
+    kit.hidden = false;
+    gate.hidden = true;
+    try { localStorage.setItem(KEY, '1'); } catch (e) {}
+  }
+
+  try { if (localStorage.getItem(KEY) === '1') unlock(); } catch (e) {}
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    var email = document.getElementById('gate-email').value.trim().toLowerCase();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      status.textContent = 'That email looks off. Try again.';
+      return;
+    }
+    status.textContent = 'One sec…';
+    fetch(API + '/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email }),
+    }).then(function (response) {
+      return response.json().catch(function () { return {}; }).then(function (data) {
+        if (!response.ok) {
+          var err = new Error('subscribe failed');
+          err.status = response.status;
+          err.detail = data && data.detail;
+          throw err;
+        }
+        return data;
+      });
+    }).then(function (data) {
+      status.textContent = data && data.new
+        ? 'Unlocked. Check your inbox to confirm your subscription to the letter.'
+        : 'Welcome back. Unlocked.';
+      unlock();
+      window.scrollTo({ top: document.getElementById('first').offsetTop - 40, behavior: 'smooth' });
+    }).catch(function (err) {
+      if (err && err.status === 400) {
+        status.textContent = 'That email was rejected' + (err.detail ? ' (' + err.detail + ')' : '') + '. Try a different address.';
+      } else {
+        status.textContent = 'Something broke on our end. Try again in a minute, or subscribe on the homepage and DM me on Instagram for the list.';
+      }
+    });
+  });
+})();
+</script>
+</body></html>
