@@ -1,0 +1,288 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Simplify Kit | Art of the Possible</title>
+<meta name="description" content="The ponytail repo, how the seven-rung ladder works, the measured numbers, and the install steps for Claude Code and Codex.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://theaotp.com/simplify/">
+<link rel="icon" href="/qualia-symbol.png">
+<meta property="og:title" content="The Simplify Kit | Art of the Possible">
+<meta property="og:description" content="The repo that stops your agent over-building. The ladder, the numbers, the install steps.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#fdfdfb;--canvas:#e9e9e6;--rule:#e4e4e0;--ink:#121210;--muted:#9c9c96;--soft:#52524d;--azure:#0096ff;--display:'Inter Tight','Helvetica Neue',Arial,sans-serif;--ui:Inter,'Helvetica Neue',Arial,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--ui);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.page{max-width:1280px;margin:0 auto;background:var(--paper);min-height:100vh}
+.pad{padding-left:clamp(22px,4.5vw,58px);padding-right:clamp(22px,4.5vw,58px)}
+nav{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--rule);padding-top:25px;padding-bottom:25px}
+.lockup{display:flex;align-items:center;gap:11px;text-decoration:none}.lockup img{width:25px;height:25px}
+.wordmark{font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:.055em;text-transform:uppercase}
+.navlinks{display:flex;gap:24px;font-size:14px}.navlinks a{text-decoration:none;color:var(--soft)}.navlinks a:hover{color:var(--ink)}
+.eyebrow{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
+h1,h2,h3{font-family:var(--display);letter-spacing:-.038em;line-height:1.01;margin:0}
+h1{font-size:clamp(42px,6.2vw,82px);max-width:15ch}
+.muted{color:var(--muted)}
+.kit-head{padding-top:90px;padding-bottom:58px}
+.dek{max-width:58ch;color:var(--soft);margin:24px 0 0;font-size:17px}
+.gate{border-top:1px solid var(--ink);padding-top:44px;padding-bottom:80px}
+.gate-grid{display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px}
+.gate h2{font-size:clamp(26px,3vw,38px);max-width:22ch}
+.gate p{max-width:56ch;color:var(--soft)}
+.gate form{display:flex;align-items:stretch;border-bottom:2px solid var(--ink);max-width:480px;margin-top:26px}
+.gate input{min-width:0;flex:1;border:0;background:transparent;padding:15px 0;font:inherit;color:var(--ink);outline:none}
+.gate input::placeholder{color:var(--muted)}
+.gate button{border:0;background:transparent;cursor:pointer;padding:0 2px 0 24px;font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+.gate button:hover{opacity:.6}
+.gate-small{font-size:13px;color:var(--muted);margin-top:14px}
+.gate-status{font-size:13px;color:var(--ink);min-height:1.3em;margin-top:6px}
+.step{display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px;border-top:1px solid var(--ink);padding-top:56px;padding-bottom:72px}
+.step-kicker{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.step h2{font-size:clamp(30px,3.8vw,50px);max-width:18ch}
+.step .lede{font-family:var(--display);font-size:19px;font-weight:600;line-height:1.35;max-width:54ch;margin:18px 0 26px}
+.step p{color:var(--soft);max-width:64ch}
+.step ul{color:var(--soft);max-width:64ch;padding-left:20px}
+.step li{margin-bottom:9px}
+.rule{height:3px;width:52px;background:var(--azure);margin:0 0 20px}
+.note{border-left:3px solid var(--muted);padding:2px 0 2px 18px;margin:26px 0;max-width:62ch;color:var(--soft);font-size:15px}
+.index{list-style:none;padding:0;margin:26px 0 0;max-width:66ch;counter-reset:idx}
+.index li{border-top:1px solid var(--rule);padding:14px 0;display:flex;gap:18px;align-items:baseline;font-size:15.5px;color:var(--soft)}
+.index .n{font-family:var(--display);font-weight:700;font-size:13px;color:var(--azure);min-width:26px}
+.index a{text-decoration:none;font-family:var(--display);font-weight:600;font-size:17px;color:var(--ink);letter-spacing:-.01em}
+.index a:hover{border-bottom:2px solid var(--azure)}
+.concept{border-top:1px solid var(--ink);padding-top:52px;padding-bottom:60px;display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px;scroll-margin-top:20px}
+.concept-num{font-family:var(--display);font-weight:800;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.concept-num span{color:var(--azure)}
+.concept h2{font-size:clamp(28px,3.4vw,44px);max-width:20ch}
+.concept .lede{font-family:var(--display);font-size:19px;font-weight:600;line-height:1.35;max-width:54ch;margin:18px 0 22px}
+.concept p{color:var(--soft);max-width:64ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 0}
+.chip{font-family:var(--display);font-weight:600;font-size:12.5px;letter-spacing:.02em;color:var(--soft);background:#f3f3ef;padding:6px 11px;border-radius:3px}
+.read{border:1px solid var(--rule);border-left:7px solid var(--azure);padding:22px 24px;margin:26px 0 0;max-width:720px}
+.read .src{font-family:var(--display);font-weight:700;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.read h3{font-size:19px;margin:8px 0 14px;max-width:44ch;line-height:1.2}
+.read a{display:inline-block;font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;border-bottom:2px solid var(--azure);padding-bottom:2px}
+.read a:hover{color:var(--azure)}
+.closeblock{background:var(--ink);color:var(--paper);padding-top:82px;padding-bottom:88px}
+.closeblock h2{font-size:clamp(36px,5vw,64px);max-width:15ch}
+.closeblock .muted{color:#b7b7b1}
+.closeblock p{max-width:56ch;color:#b7b7b1;margin-top:20px}
+.closeblock a{display:inline-block;margin-top:30px;background:var(--paper);color:var(--ink);padding:14px 22px;text-decoration:none;font-family:var(--display);font-weight:700}
+footer{display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--rule);padding-top:28px;padding-bottom:32px;color:var(--soft);font-size:13px}
+[hidden]{display:none!important}
+@media(max-width:800px){.navlinks{display:none}.kit-head{padding-top:58px}.gate-grid,.step,.concept{grid-template-columns:1fr;gap:18px}.gate-grid>*,.step>*,.concept>*{min-width:0}}
+
+/* --- prompt-kit / field-notes payloads: keep these, delete what you don't use --- */
+.cmd{background:#f3f3ef;border-left:7px solid var(--ink);padding:20px 24px;margin:22px 0;max-width:720px;overflow-x:auto}
+.cmd code{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:13.5px;line-height:1.8;white-space:pre;display:block}
+.termshot{background:#15130e;color:#e8e6df;padding:20px 24px;margin:22px 0;max-width:720px;overflow-x:auto;font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:13px;line-height:1.9;white-space:pre}
+.termshot .g{color:#7ee081}.termshot .y{color:#e8c85c}.termshot .r{color:#ec6a5e}.termshot .d{color:#8c8475}
+.promptbox{position:relative;background:#f3f3ef;border-left:7px solid var(--ink);margin-top:26px;max-width:820px}
+.promptbox pre{margin:0;padding:26px 28px;overflow-x:auto;font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:13px;line-height:1.75;white-space:pre-wrap;color:var(--ink)}
+.copybtn{position:absolute;top:0;right:0;border:0;cursor:pointer;background:var(--ink);color:var(--paper);font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding:12px 18px}
+.copybtn:hover{opacity:.85}
+.lessons{list-style:none;padding:0;margin:26px 0 0;max-width:66ch}
+.lessons li{border-top:1px solid var(--rule);padding:20px 0;margin:0;color:var(--soft)}
+.lessons strong{display:block;font-family:var(--display);font-size:17px;color:var(--ink);margin-bottom:6px;letter-spacing:-.01em}
+table{border-collapse:collapse;width:100%;max-width:720px;margin:22px 0;font-size:14.5px}
+th,td{text-align:left;padding:12px 14px 12px 0;border-bottom:1px solid var(--rule);vertical-align:top;color:var(--soft)}
+th{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+td:first-child{color:var(--ink);font-weight:600;white-space:nowrap;padding-right:24px}
+@media(max-width:800px){.copybtn{position:static;display:inline-block;margin:0 0 0 28px}td:first-child{white-space:normal}}
+.cmd{background:#f3f3ef;border-left:7px solid var(--ink);margin-top:22px;max-width:820px;padding:20px 24px;font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:13.5px;line-height:1.8;overflow-x:auto;color:var(--ink)}
+.cmd code{white-space:pre}
+.read{border-top:1px solid var(--rule);margin-top:22px;padding-top:16px;max-width:64ch}
+.read .src{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.read h3{font-size:19px;margin:6px 0 8px;letter-spacing:-.02em}
+.read a{font-family:var(--display);font-weight:700;font-size:14px;text-decoration:none;border-bottom:2px solid var(--azure)}
+.ladder{list-style:none;padding:0;margin:22px 0;max-width:64ch;counter-reset:rung}
+.ladder li{border-top:1px solid var(--rule);padding:14px 0 14px 44px;position:relative;color:var(--soft)}
+.ladder li::before{counter-increment:rung;content:counter(rung);position:absolute;left:0;top:12px;width:28px;height:28px;border-radius:50%;background:var(--azure);color:#fff;font-family:var(--display);font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center}
+.ladder strong{color:var(--ink)}
+.fig{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;max-width:820px;margin:22px 0 6px}
+.fig div{border-top:2px solid var(--ink);padding-top:12px}
+.fig b{display:block;font-family:var(--display);font-weight:800;font-size:32px;letter-spacing:-.03em;line-height:1;color:var(--ink)}
+.fig span{display:block;margin-top:8px;font-size:13.5px;color:var(--soft);line-height:1.4}
+@media(max-width:800px){.fig{grid-template-columns:1fr 1fr}.concept>*,.ladder li{min-width:0}}
+</style></head><body>
+<div class="page">
+<nav class="pad"><a class="lockup" href="/"><img src="/qualia-symbol.png" alt=""><span class="wordmark">Art of the Possible<sup>&reg;</sup></span></a><div class="navlinks"><a href="/">Home</a><a href="/letters/">Archive</a><a href="/#about">About</a></div></nav>
+
+<header class="kit-head pad">
+  <div class="eyebrow">The Simplify Kit &middot; From the Reel</div>
+  <h1 style="margin-top:26px">The senior engineer <span class="muted">who deletes your code.</span></h1>
+  <p class="dek">You commented "Simplify". Here it is: the repo, the seven-rung ladder it makes your agent climb before it writes anything, the measured numbers, and the install steps for Claude Code and Codex. No course, no upsell.</p>
+</header>
+
+<section class="gate pad" id="gate">
+  <div class="gate-grid">
+    <div class="eyebrow">Unlock the kit</div>
+    <div>
+      <h2>Drop your email and the repo, the ladder and the install unlock on this page.</h2>
+      <p>You'll also get the weekly letter: five useful things I made with AI, with the prompts and workflows inside. Unsubscribe any time.</p>
+      <form id="gate-form" novalidate>
+        <label for="gate-email" style="position:absolute;left:-9999px">Email address</label>
+        <input id="gate-email" type="email" name="email" placeholder="you@somewhere.com" autocomplete="email" required>
+        <button type="submit">Unlock</button>
+      </form>
+      <p class="gate-status" id="gate-status" aria-live="polite"></p>
+      <p class="gate-small">Already on the list? Enter the same email and it unlocks without subscribing you twice.</p>
+      <noscript><p class="gate-small">This page needs JavaScript to unlock. Or just subscribe on <a href="/">the homepage</a> and reply to any letter for the kit.</p></noscript>
+    </div>
+  </div>
+</section>
+
+<div id="kit" hidden>
+
+<section class="step pad" id="first">
+  <div class="step-kicker"><span>01</span> &middot; The repo</div>
+  <div>
+    <div class="rule"></div>
+    <h2>DietrichGebert/ponytail. <span class="muted">He says nothing. He writes one line.</span></h2>
+    <p class="lede">A skill for Claude Code, Codex and 18 other agents that stops the model from over-building. Ask for a date picker and a bare agent installs a library, writes a wrapper component, adds a stylesheet. With ponytail it writes <code>&lt;input type="date"&gt;</code> and stops.</p>
+    <p>MIT licensed, over 130,000 stars, works with 20 agents. Trending on GitHub the week I filmed this.</p>
+    <div class="read">
+      <div class="src">GitHub</div>
+      <h3>DietrichGebert/ponytail</h3>
+      <a href="https://github.com/DietrichGebert/ponytail" target="_blank" rel="noopener">Open the repo &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="step pad" id="ladder">
+  <div class="step-kicker"><span>02</span> &middot; How it works</div>
+  <div>
+    <div class="rule"></div>
+    <h2>Seven rungs. <span class="muted">Stop at the first one that holds.</span></h2>
+    <p class="lede">Before it writes a line, the agent checks each rung in order and stops the moment one of them answers the problem.</p>
+    <ol class="ladder">
+      <li><strong>Does this need to exist?</strong> No: skip it. YAGNI.</li>
+      <li><strong>Already in this codebase?</strong> Reuse it, don't rewrite it.</li>
+      <li><strong>Stdlib does it?</strong> Use the standard library.</li>
+      <li><strong>Native platform feature?</strong> Use it.</li>
+      <li><strong>Installed dependency?</strong> Use it.</li>
+      <li><strong>One line?</strong> One line.</li>
+      <li><strong>Only then:</strong> the minimum that actually works.</li>
+    </ol>
+    <div class="note">It reads the code the change touches and traces the real flow first. It is lazy about the solution, never about understanding the problem. Trust-boundary validation, data-loss handling, security and accessibility are never on the chopping block, that's the part a bare "write fewer lines" prompt drops.</div>
+  </div>
+</section>
+
+<section class="step pad" id="numbers">
+  <div class="step-kicker"><span>03</span> &middot; The numbers</div>
+  <div>
+    <div class="rule"></div>
+    <h2>Measured on a real agent. <span class="muted">Not a single-shot demo.</span></h2>
+    <p class="lede">A headless Claude Code session editing a real FastAPI + React repo, 12 feature tickets, the same agent with and without the skill, scored on the actual git diff.</p>
+    <div class="fig">
+      <div><b>-54%</b><span>Lines of code, mean across 12 tasks. Reaches -94% where the agent over-builds, near zero where the code is already minimal.</span></div>
+      <div><b>-22% / -20%</b><span>Tokens and cost, versus the same agent with no skill.</span></div>
+      <div><b>100%</b><span>Safety on the adversarial tier, the same as no skill at all. A bare "write fewer lines" prompt drops to 95%.</span></div>
+    </div>
+    <div class="read">
+      <div class="src">GitHub</div>
+      <h3>Full benchmark writeup and method</h3>
+      <a href="https://github.com/DietrichGebert/ponytail/blob/main/benchmarks/results/2026-06-18-agentic.md" target="_blank" rel="noopener">Read it &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="step pad" id="install">
+  <div class="step-kicker"><span>04</span> &middot; Install, both agents</div>
+  <div>
+    <div class="rule"></div>
+    <h2>Claude Code, <span class="muted">then Codex.</span></h2>
+    <p class="lede">Needs `node` on your PATH, that is the whole prerequisite. Pick whichever agent you use.</p>
+    <p>Claude Code, two separate prompts (the install needs both):</p>
+    <div class="cmd"><code>/plugin marketplace add DietrichGebert/ponytail
+/plugin install ponytail@ponytail</code></div>
+    <p style="margin-top:22px">Codex:</p>
+    <div class="cmd"><code>codex plugin marketplace add DietrichGebert/ponytail
+codex plugin add ponytail@ponytail</code></div>
+    <div class="note">On Codex, run <code>codex</code> then open <code>/hooks</code>, review and trust its two lifecycle hooks, and start a new thread. If node is not on your PATH the skill still installs, it just stays quiet instead of activating automatically on every prompt.</div>
+  </div>
+</section>
+
+<section class="step pad" id="next">
+  <div class="step-kicker"><span>05</span> &middot; What to do now</div>
+  <div>
+    <div class="rule"></div>
+    <h2>Give it a real feature. <span class="muted">Not a toy prompt.</span></h2>
+    <p class="lede">The gap only shows up on a task with a real over-build trap: a picker, a form, a settings panel. A trivial task shows almost nothing.</p>
+    <ul>
+      <li><strong>If you have not installed it yet:</strong> run the two Claude Code commands above, then ask for something you would normally reach for a library on, a date picker, a color picker, a dropdown.</li>
+      <li><strong>If you already feel your agent over-builds:</strong> pick your last PR that felt bloated, revert it, and redo it with ponytail on. Diff the two.</li>
+      <li><strong>If you manage a team using AI agents:</strong> the benchmark method is public. Run it on your own repo before deciding whether the numbers transfer to your codebase.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="closeblock pad">
+  <h2>See what's possible. <span class="muted">Then build it.</span></h2>
+  <p>You're on the list now. Every week you'll get five useful things I made with AI, with the prompt or workflow behind each one. This kit was one of them.</p>
+  <a href="/">Back to the site</a>
+</section>
+
+</div>
+
+<footer class="pad"><span>Art of the Possible&reg;</span><span>New things are possible every day. &middot; 2026</span></footer>
+</div>
+<script>
+(function () {
+  var API = 'https://theaotp-gate.theaotp.workers.dev';
+  var KEY = 'aotp_simplify_unlocked';
+  var kit = document.getElementById('kit');
+  var gate = document.getElementById('gate');
+  var form = document.getElementById('gate-form');
+  var status = document.getElementById('gate-status');
+
+  function unlock() {
+    kit.hidden = false;
+    gate.hidden = true;
+    try { localStorage.setItem(KEY, '1'); } catch (e) {}
+  }
+
+  try { if (localStorage.getItem(KEY) === '1') unlock(); } catch (e) {}
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    var email = document.getElementById('gate-email').value.trim().toLowerCase();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      status.textContent = 'That email looks off. Try again.';
+      return;
+    }
+    status.textContent = 'One sec…';
+    fetch(API + '/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email }),
+    }).then(function (response) {
+      return response.json().catch(function () { return {}; }).then(function (data) {
+        if (!response.ok) {
+          var err = new Error('subscribe failed');
+          err.status = response.status;
+          err.detail = data && data.detail;
+          throw err;
+        }
+        return data;
+      });
+    }).then(function (data) {
+      status.textContent = data && data.new
+        ? 'Unlocked. Check your inbox to confirm your subscription to the letter.'
+        : 'Welcome back. Unlocked.';
+      unlock();
+      window.scrollTo({ top: document.getElementById('first').offsetTop - 40, behavior: 'smooth' });
+    }).catch(function (err) {
+      if (err && err.status === 400) {
+        status.textContent = 'That email was rejected' + (err.detail ? ' (' + err.detail + ')' : '') + '. Try a different address.';
+      } else {
+        status.textContent = 'Something broke on our end. Try again in a minute, or subscribe on the homepage and DM me on Instagram for the kit.';
+      }
+    });
+  });
+
+})();
+</script>
+</body></html>
