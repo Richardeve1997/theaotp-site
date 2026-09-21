@@ -106,7 +106,8 @@ td:first-child{color:var(--ink);font-weight:600;white-space:nowrap;padding-right
 .fig b{display:block;font-family:var(--display);font-weight:800;font-size:32px;letter-spacing:-.03em;line-height:1;color:var(--ink)}
 .fig span{display:block;margin-top:8px;font-size:13.5px;color:var(--soft);line-height:1.4}
 @media(max-width:800px){.fig{grid-template-columns:1fr 1fr}.concept>*,.ladder li{min-width:0}}
-</style></head><body>
+</style><script src="/f.js"></script>
+</head><body>
 <div class="page">
 <nav class="pad"><a class="lockup" href="/"><img src="/qualia-symbol.png" alt=""><span class="wordmark">Art of the Possible<sup>&reg;</sup></span></a><div class="navlinks"><a href="/">Home</a><a href="/letters/">Archive</a><a href="/#about">About</a></div></nav>
 
@@ -257,7 +258,7 @@ codex plugin add ponytail@ponytail</code></div>
     fetch(API + '/subscribe', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: email }),
+      body: JSON.stringify({ email: email, ctx: window.aotpCtx ? window.aotpCtx() : null }),
     }).then(function (response) {
       return response.json().catch(function () { return {}; }).then(function (data) {
         if (!response.ok) {

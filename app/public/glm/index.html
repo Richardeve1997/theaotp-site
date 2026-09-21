@@ -94,7 +94,8 @@ td:first-child{color:var(--ink);font-weight:600;white-space:nowrap;padding-right
 .embed-shell{max-width:420px;margin-top:10px;border:1px solid var(--rule);background:#fff}
 .embed-shell iframe{display:block;width:100%;height:760px;border:0}
 .embed-fallback{font-size:13px;color:var(--muted);margin-top:10px}
-</style></head><body>
+</style><script src="/f.js"></script>
+</head><body>
 <div class="page">
 <nav class="pad"><a class="lockup" href="/"><img src="/qualia-symbol.png" alt=""><span class="wordmark">Art of the Possible<sup>®</sup></span></a><div class="navlinks"><a href="/">Home</a><a href="/letters/">Archive</a><a href="/#about">About</a></div></nav>
 
@@ -271,7 +272,7 @@ export ANTHROPIC_DEFAULT_HAIKU_MODEL=glm-5.3-flash</pre></div>
     fetch(API + '/subscribe', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: email }),
+      body: JSON.stringify({ email: email, ctx: window.aotpCtx ? window.aotpCtx() : null }),
     }).then(function (response) {
       return response.json().catch(function () { return {}; }).then(function (data) {
         if (!response.ok) {

@@ -76,7 +76,8 @@ h1{font-size:clamp(42px,6.2vw,82px);max-width:15ch}
 footer{display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--rule);padding-top:28px;padding-bottom:32px;color:var(--soft);font-size:13px}
 [hidden]{display:none!important}
 @media(max-width:800px){.navlinks{display:none}.kit-head{padding-top:58px}.gate-grid,.step,.concept{grid-template-columns:1fr;gap:18px}.gate-grid>*,.step>*,.concept>*{min-width:0}}
-</style></head><body>
+</style><script src="/f.js"></script>
+</head><body>
 <div class="page">
 <nav class="pad"><a class="lockup" href="/"><img src="/qualia-symbol.png" alt=""><span class="wordmark">Art of the Possible<sup>&reg;</sup></span></a><div class="navlinks"><a href="/">Home</a><a href="/letters/">Archive</a><a href="/#about">About</a></div></nav>
 
@@ -344,7 +345,7 @@ footer{display:flex;justify-content:space-between;gap:20px;border-top:1px solid 
     fetch(API + '/subscribe', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: email }),
+      body: JSON.stringify({ email: email, ctx: window.aotpCtx ? window.aotpCtx() : null }),
     }).then(function (response) {
       return response.json().catch(function () { return {}; }).then(function (data) {
         if (!response.ok) {

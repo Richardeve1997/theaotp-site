@@ -78,7 +78,8 @@ td:first-child{color:var(--ink);font-weight:600;white-space:nowrap;padding-right
 .shots2{display:grid;grid-template-columns:1fr 1fr;gap:22px;max-width:900px;margin-top:26px}
 .shots2 .shot{margin:0}
 @media(max-width:800px){.navlinks{display:none}.kit-head{padding-top:58px}.gate-grid,.step{grid-template-columns:1fr;gap:18px}.gate-grid>*,.step>*{min-width:0}.copybtn{position:static;display:inline-block;margin:0 0 0 28px}.promptbox pre{padding-right:28px}td:first-child{white-space:normal}.shots2{grid-template-columns:1fr}}
-</style></head><body>
+</style><script src="/f.js"></script>
+</head><body>
 <div class="page">
 <nav class="pad"><a class="lockup" href="/"><img src="/qualia-symbol.png" alt=""><span class="wordmark">Art of the Possible<sup>&reg;</sup></span></a><div class="navlinks"><a href="/">Home</a><a href="/letters/">Archive</a><a href="/#about">About</a></div></nav>
 
@@ -328,7 +329,7 @@ Rules: plain Markdown only. Never invent a rule I did not give or that is not al
     fetch(API + '/subscribe', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: email }),
+      body: JSON.stringify({ email: email, ctx: window.aotpCtx ? window.aotpCtx() : null }),
     }).then(function (response) {
       return response.json().catch(function () { return {}; }).then(function (data) {
         if (!response.ok) {

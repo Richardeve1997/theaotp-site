@@ -91,7 +91,8 @@ th,td{text-align:left;padding:12px 14px 12px 0;border-bottom:1px solid var(--rul
 th{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
 td:first-child{color:var(--ink);font-weight:600;white-space:nowrap;padding-right:24px}
 @media(max-width:800px){.copybtn{position:static;display:inline-block;margin:0 0 0 28px}td:first-child{white-space:normal}}
-</style></head><body>
+</style><script src="/f.js"></script>
+</head><body>
 <div class="page">
 <nav class="pad"><a class="lockup" href="/"><img src="/qualia-symbol.png" alt=""><span class="wordmark">Art of the Possible<sup>&reg;</sup></span></a><div class="navlinks"><a href="/">Home</a><a href="/letters/">Archive</a><a href="/#about">About</a></div></nav>
 
@@ -175,7 +176,7 @@ The person responsible for replying on launch day:</pre></div><p>This is a plann
     fetch(API + '/subscribe', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: email }),
+      body: JSON.stringify({ email: email, ctx: window.aotpCtx ? window.aotpCtx() : null }),
     }).then(function (response) {
       return response.json().catch(function () { return {}; }).then(function (data) {
         if (!response.ok) {
