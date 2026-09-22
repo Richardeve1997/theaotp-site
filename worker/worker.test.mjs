@@ -29,7 +29,7 @@ function fakeDb({ fail = false } = {}) {
 function stubButtondown(replies) {
   const calls = [];
   globalThis.fetch = async (url, init) => {
-    calls.push({ url, headers: init.headers, body: JSON.parse(init.body) });
+    calls.push({ url, method: init.method || 'GET', headers: init.headers, body: init.body ? JSON.parse(init.body) : null });
     const [status, body] = replies.shift();
     return new Response(typeof body === 'string' ? body : JSON.stringify(body), { status });
   };
@@ -49,15 +49,17 @@ async function post(path, body, { env = {}, origin = ORIGIN, agent = 'Mozilla/5.
 }
 
 const CTX = { vid: 'vabc123', src: 'fx9k2a', t: '', page: '/fix/' };
+const ALREADY = [400, { detail: 'That email address is already subscribed.' }];
+const emailLabel = (DB) => DB.writes.find((w) => w.sql.startsWith('INSERT INTO events')).args[6];
 
-test('new subscriber unlocks, carries the page and campaign into Buttondown, and is recorded', async () => {
+test('a new signup is created as an active subscriber, attributed, recorded, and remembered', async () => {
   const calls = stubButtondown([[201, {}]]);
   const DB = fakeDb();
   const res = await post('/subscribe', { email: ' Person@Example.com ', ctx: CTX }, { env: { DB } });
-  assert.deepEqual(await res.json(), { ok: true, new: true });
+  assert.deepEqual(await res.json(), { ok: true, new: true, member: true });
   assert.equal(calls.length, 1);
   assert.deepEqual(calls[0].body, {
-    email_address: 'person@example.com', ip_address: '203.0.113.9',
+    email_address: 'person@example.com', ip_address: '203.0.113.9', type: 'regular',
     referrer_url: 'https://theaotp.com/fix/', utm_source: 'instagram', utm_medium: 'dm', utm_campaign: 'fx9k2a',
   });
   const event = DB.writes.find((w) => w.sql.startsWith('INSERT INTO events'));
@@ -67,42 +69,84 @@ test('new subscriber unlocks, carries the page and campaign into Buttondown, and
   assert.equal(link.args[2], 'vabc123');
 });
 
-test('a page cached before tracking shipped (no ctx) still subscribes exactly as before', async () => {
+test('a page cached before tracking shipped (no ctx) still subscribes', async () => {
   const calls = stubButtondown([[201, {}]]);
   const DB = fakeDb();
   const res = await post('/subscribe', { email: 'old@example.com' }, { env: { DB } });
-  assert.deepEqual(await res.json(), { ok: true, new: true });
-  assert.deepEqual(calls[0].body, { email_address: 'old@example.com', ip_address: '203.0.113.9', referrer_url: 'https://theaotp.com' });
+  assert.deepEqual(await res.json(), { ok: true, new: true, member: true });
+  assert.deepEqual(calls[0].body, { email_address: 'old@example.com', ip_address: '203.0.113.9', referrer_url: 'https://theaotp.com', type: 'regular' });
   assert.equal(DB.writes.length, 0);
 });
 
-test('already subscribed counts as success and is recorded as returning', async () => {
-  stubButtondown([[400, { detail: 'That email address is already subscribed.' }]]);
-  const DB = fakeDb();
-  const res = await post('/subscribe', { email: 'back@example.com', ctx: CTX }, { env: { DB } });
-  assert.deepEqual(await res.json(), { ok: true, new: false });
-  assert.equal(DB.writes.find((w) => w.sql.startsWith('INSERT INTO events')).args[6], 'returning');
+test('if Buttondown refuses an active signup, fall back to its double opt-in and say so', async () => {
+  const calls = stubButtondown([[400, { detail: 'type may not be set' }], [201, {}]]);
+  const res = await post('/subscribe', { email: 'new@example.com', ctx: CTX });
+  assert.deepEqual(await res.json(), { ok: true, new: true, member: false });
+  assert.equal(calls[0].body.type, 'regular');
+  assert.equal(calls[1].body.type, undefined);
 });
 
-test('firewall false positive retries once with the bypass header', async () => {
+test('a confirmed subscriber who re-enters is left alone, recorded as returning, remembered', async () => {
+  const calls = stubButtondown([ALREADY, [200, { type: 'regular' }]]);
+  const DB = fakeDb();
+  const res = await post('/subscribe', { email: 'back@example.com', ctx: CTX }, { env: { DB } });
+  assert.deepEqual(await res.json(), { ok: true, new: false, member: true });
+  assert.deepEqual(calls.map((c) => c.method), ['POST', 'GET']);
+  assert.equal(emailLabel(DB), 'returning');
+});
+
+test('an unconfirmed subscriber who re-enters is activated on the spot', async () => {
+  const calls = stubButtondown([ALREADY, [200, { type: 'unactivated' }], [200, { type: 'regular' }]]);
+  const DB = fakeDb();
+  const res = await post('/subscribe', { email: 'old+kit@example.com', ctx: CTX }, { env: { DB } });
+  assert.deepEqual(await res.json(), { ok: true, new: false, member: true });
+  assert.deepEqual(calls.map((c) => c.method), ['POST', 'GET', 'PATCH']);
+  assert.equal(calls[2].url, 'https://api.buttondown.com/v1/subscribers/old%2Bkit%40example.com');
+  assert.deepEqual(calls[2].body, { type: 'regular' });
+  assert.equal(emailLabel(DB), 'reactivated');
+});
+
+test('unsubscribed or blocked people are never switched back on, and are not asked again', async () => {
+  for (const type of ['unsubscribed', 'blocked', 'complained', 'undeliverable']) {
+    const calls = stubButtondown([ALREADY, [200, { type }]]);
+    const res = await post('/subscribe', { email: 'gone@example.com', ctx: CTX }, { env: { DB: fakeDb() } });
+    assert.deepEqual(calls.map((c) => c.method), ['POST', 'GET'], type);
+    assert.deepEqual(await res.json(), { ok: true, new: false, member: true }, type);
+  }
+});
+
+test('a failed activation still unlocks the page, records the re-entry, and asks again next time', async () => {
+  for (const replies of [[ALREADY, [500, 'upstream error']], [ALREADY, [200, { type: 'unactivated' }], [500, 'upstream error']]]) {
+    stubButtondown(replies);
+    const DB = fakeDb();
+    const res = await post('/subscribe', { email: 'back@example.com', ctx: CTX }, { env: { DB } });
+    assert.deepEqual(await res.json(), { ok: true, new: false, member: false });
+    assert.equal(emailLabel(DB), 'returning');
+  }
+});
+
+test('firewall false positive retries once with the bypass header, still as an active signup', async () => {
   const calls = stubButtondown([[400, { detail: 'This subscriber was blocked by your firewall' }], [201, {}]]);
   const res = await post('/subscribe', { email: 'fw@example.com', ctx: CTX });
-  assert.deepEqual(await res.json(), { ok: true, new: true });
+  assert.deepEqual(await res.json(), { ok: true, new: true, member: true });
   assert.equal(calls.length, 2);
   assert.equal(calls[1].headers['X-Buttondown-Bypass-Firewall'], 'true');
+  assert.equal(calls[1].body.type, 'regular');
 });
 
 test('a rejected address surfaces the reason and records nothing', async () => {
-  stubButtondown([[400, { detail: 'undeliverable' }]]);
+  const calls = stubButtondown([[400, { detail: 'undeliverable' }], [400, { detail: 'undeliverable' }]]);
   const DB = fakeDb();
   const res = await post('/subscribe', { email: 'bad@example.com', ctx: CTX }, { env: { DB } });
   assert.equal(res.status, 400);
   assert.deepEqual(await res.json(), { error: 'rejected', detail: 'undeliverable' });
+  assert.equal(calls.length, 2);
   assert.equal(DB.writes.length, 0);
 });
 
 test("an address Buttondown's stricter validator refuses (422) reads as rejected, not as an outage", async () => {
-  stubButtondown([[422, { detail: [{ type: 'string_pattern_mismatch', loc: ['body', 'payload', 'email_address'] }] }]]);
+  const bad = [422, { detail: [{ type: 'string_pattern_mismatch', loc: ['body', 'payload', 'email_address'] }] }];
+  stubButtondown([bad, bad]);
   const res = await post('/subscribe', { email: 'a@b.c', ctx: CTX });
   assert.equal(res.status, 400);
   assert.deepEqual(await res.json(), { error: 'rejected', detail: '' });
@@ -118,10 +162,10 @@ test('an invalid email never reaches Buttondown', async () => {
 test('a broken or missing database never changes the signup response', async () => {
   stubButtondown([[201, {}]]);
   const down = await post('/subscribe', { email: 'a@example.com', ctx: CTX }, { env: { DB: fakeDb({ fail: true }) } });
-  assert.deepEqual(await down.json(), { ok: true, new: true });
+  assert.deepEqual(await down.json(), { ok: true, new: true, member: true });
   stubButtondown([[201, {}]]);
   const none = await post('/subscribe', { email: 'b@example.com', ctx: CTX });
-  assert.deepEqual(await none.json(), { ok: true, new: true });
+  assert.deepEqual(await none.json(), { ok: true, new: true, member: true });
 });
 
 test('a hostile ctx is dropped field by field, not stored', async () => {

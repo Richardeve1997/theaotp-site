@@ -1,7 +1,10 @@
 // theaotp.com email gate + funnel tracking — Cloudflare Worker
 // Endpoints:
-//   POST /subscribe  {email, ctx?}  -> adds to Buttondown (already-subscribed counts as success)
-//                                      and links the email to the visitor's funnel history
+//   POST /subscribe  {email, ctx?}  -> adds to Buttondown as an ACTIVE subscriber (typing the
+//                                      email into a kit form is the opt-in). Already-subscribed
+//                                      counts as success and activates an old unconfirmed
+//                                      record. Links the email to the visitor's funnel history
+//                                      and answers {ok, new, member}.
 //   POST /e          {vid, type, page, src?, t?, label?, meta?}  -> records one page event
 // Secret required: BUTTONDOWN_API_KEY  (wrangler secret put BUTTONDOWN_API_KEY)
 // Binding (optional): DB -> D1 database `aotp-funnel` (schema.sql). Tracking is best-effort:
@@ -55,11 +58,28 @@ async function record(env, ctx, type, label, meta) {
   ]);
 }
 
-async function recordEmail(env, ctx, email, isNew) {
+async function recordEmail(env, ctx, email, isNew, activated) {
   if (!env.DB || !ctx.vid) return;
-  await record(env, ctx, 'email', isNew ? 'new' : 'returning');
+  await record(env, ctx, 'email', isNew ? 'new' : activated ? 'reactivated' : 'returning');
   await env.DB.prepare('UPDATE visitors SET email = ?1, email_ts = COALESCE(email_ts, ?2) WHERE vid = ?3')
     .bind(email, new Date().toISOString(), ctx.vid).run();
+}
+
+// Opt-in policy (Rich, 2026-09-22): typing your email into a kit form IS the opt-in. Nobody on
+// this list ever clicked Buttondown's double opt-in email (0 of 171), so new signups are created
+// `regular`, and an old `unactivated` record is switched to `regular` when its owner re-enters.
+// People who unsubscribed, were blocked, complained or bounced are never switched back on.
+//
+// Returns { activated, settled }. `settled` means there is nothing left to gain by asking this
+// person for their email again, so the page may remember them as a member. It stays false when
+// the lookup or the activation failed, which makes the next visit ask once more and retry.
+async function activateOnReentry(bd, email) {
+  const path = `/subscribers/${encodeURIComponent(email)}`;
+  const found = await bd(path);
+  if (!found.ok) return { activated: false, settled: false };
+  if ((await found.json()).type !== 'unactivated') return { activated: false, settled: true };
+  const changed = (await bd(path, { method: 'PATCH', body: JSON.stringify({ type: 'regular' }) })).ok;
+  return { activated: changed, settled: changed };
 }
 
 // Tracking must never break the gate: swallow and log every failure.
@@ -95,12 +115,13 @@ export default {
     if (!EMAIL_RE.test(email))
       return new Response(JSON.stringify({ error: 'invalid email' }), { status: 400, headers });
 
-    const bd = (path, init = {}) =>
+    const bd = (path, { bypass, ...init } = {}) =>
       fetch(`https://api.buttondown.com/v1${path}`, {
         ...init,
         headers: {
           Authorization: `Token ${env.BUTTONDOWN_API_KEY}`,
           'Content-Type': 'application/json',
+          ...(bypass ? { 'X-Buttondown-Bypass-Firewall': 'true' } : {}),
         },
       });
 
@@ -108,40 +129,49 @@ export default {
       const ctx = context(body.ctx);
       // Forward the real visitor IP + referrer so Buttondown's firewall doesn't
       // see every signup as coming from one Cloudflare datacenter IP. The referrer
-      // now carries the kit page path, and the campaign rides in utm_campaign, so
+      // carries the kit page path, and the campaign rides in utm_campaign, so
       // the source of every subscriber is visible inside Buttondown too.
-      const payload = JSON.stringify({
+      const fields = {
         email_address: email,
         ip_address: request.headers.get('CF-Connecting-IP') || undefined,
         referrer_url: (ALLOWED_ORIGINS.includes(origin) ? origin : 'https://theaotp.com') + (ctx.page || ''),
         utm_source: ctx.src ? 'instagram' : undefined,
         utm_medium: ctx.src ? 'dm' : undefined,
         utm_campaign: ctx.src || undefined,
-      });
-      let res = await bd('/subscribers', { method: 'POST', body: payload });
-      if (res.status === 400 && /firewall/i.test(await res.clone().text())) {
+      };
+      const create = async (subscriber) => {
+        const payload = JSON.stringify(subscriber);
+        const first = await bd('/subscribers', { method: 'POST', body: payload });
+        if (first.status !== 400 || !/firewall/i.test(await first.clone().text())) return first;
         // False positive from Buttondown's rate-heuristic firewall (all our
         // signups share one worker egress IP). Retry via the documented
         // trusted-source bypass; Buttondown caps it at 5/hour per newsletter.
-        res = await fetch('https://api.buttondown.com/v1/subscribers', {
-          method: 'POST',
-          headers: {
-            Authorization: `Token ${env.BUTTONDOWN_API_KEY}`,
-            'Content-Type': 'application/json',
-            'X-Buttondown-Bypass-Firewall': 'true',
-          },
-          body: payload,
-        });
+        return bd('/subscribers', { method: 'POST', body: payload, bypass: true });
+      };
+
+      // The record is created active (see activateOnReentry for the policy). Should Buttondown
+      // ever refuse that shape, fall back to its double opt-in signup rather than close the
+      // gate; `member: false` then makes the page say "check your inbox" and ask again later.
+      let active = true;
+      let res = await create({ ...fields, type: 'regular' });
+      if ((res.status === 400 || res.status === 422) && !/already|firewall/i.test(await res.clone().text())) {
+        active = false;
+        res = await create(fields);
       }
+      // `member` tells the page whether this person is now on the list for good and may be
+      // remembered, so no kit page asks them for an email again (see /f.js).
       // 201 = new subscriber; 400 with "already subscribed" also counts as success
       if (res.status === 201) {
         later(recordEmail(env, ctx, email, true));
-        return new Response(JSON.stringify({ ok: true, new: true }), { headers });
+        return new Response(JSON.stringify({ ok: true, new: true, member: active }), { headers });
       }
       const text = await res.text();
       if (res.status === 400 && /already/i.test(text)) {
-        later(recordEmail(env, ctx, email, false));
-        return new Response(JSON.stringify({ ok: true, new: false }), { headers });
+        // Awaited, not deferred: the page needs `member` in this response. A failed
+        // activation still unlocks the page and still records the re-entry.
+        const reentry = await activateOnReentry(bd, email).catch(() => ({ activated: false, settled: false }));
+        later(recordEmail(env, ctx, email, false, reentry.activated));
+        return new Response(JSON.stringify({ ok: true, new: false, member: reentry.settled }), { headers });
       }
       if (res.status === 400 || res.status === 422) {
         // Surface Buttondown's reason (e.g. blocked/undeliverable address) instead of a generic 502.

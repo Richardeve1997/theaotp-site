@@ -284,9 +284,10 @@ export ANTHROPIC_DEFAULT_HAIKU_MODEL=glm-5.3-flash</pre></div>
         return data;
       });
     }).then(function (data) {
-      status.textContent = data && data.new
-        ? 'Unlocked. Check your inbox to confirm your subscription to the letter.'
-        : 'Welcome back. Unlocked.';
+      if (window.aotpSubscribed) window.aotpSubscribed(data);
+      status.textContent = !(data && data.new) ? 'Welcome back. Unlocked.'
+        : data.member === false ? 'Unlocked. Check your inbox to confirm your subscription to the letter.'
+        : 'Unlocked. You\'re on the list for the weekly letter.';
       unlock();
       window.scrollTo({ top: document.getElementById('what').offsetTop - 40, behavior: 'smooth' });
     }).catch(function (err) {

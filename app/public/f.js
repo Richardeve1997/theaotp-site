@@ -1,33 +1,39 @@
 // theaotp.com funnel script. Loaded synchronously in <head> by every kit page, BEFORE the
 // page's own gate script, so it can do two jobs:
-//   1. Remember a member. Anyone who has unlocked one kit page in this browser never sees
-//      an email form again on any other kit page.
+//   1. Remember a member. Anyone the gate worker has confirmed on the list never sees an
+//      email form again on any kit page in this browser. Older unlock flags do not count:
+//      those people were never confirmed (double opt-in was on and nobody completed it), so
+//      they are asked once more, and that re-entry activates them.
 //   2. Report the page half of the funnel (visit, unlock, clicks, scroll, time) to the gate
 //      worker, tagged with the campaign code the Instagram DM link carried (?s=).
 // It never reads or sends the email address; the gate form does that itself and passes
 // window.aotpCtx() alongside so the worker can join the two.
 (function () {
   var API = 'https://theaotp-gate.theaotp.workers.dev';
-  var MEMBER = 'aotp_member';
+  var MEMBER = 'aotp_member'; // '2' = confirmed by the worker since 2026-09-22; the older '1' does not count
   var path = location.pathname.replace(/index\.html$/, '');
   var slug = path.split('/').filter(Boolean)[0] || '';
   var page = slug ? '/' + slug + '/' : '/';
 
   function get(key) { try { return localStorage.getItem(key); } catch (e) { return null; } }
   function set(key, value) { try { localStorage.setItem(key, value); } catch (e) {} }
+  function drop(key) { try { localStorage.removeItem(key); } catch (e) {} }
 
-  // 1. Returning member: any earlier unlock on this site counts.
-  var returning = get(MEMBER) === '1';
-  if (!returning) {
+  // 1. Member? Only a form success the worker confirmed counts (see aotpSubscribed below).
+  var member = get(MEMBER) === '2';
+  var seenBefore = member || get(MEMBER) === '1';
+  if (!seenBefore) {
     try {
       for (var i = 0; i < localStorage.length; i++) {
-        if (/^aotp_.+_unlocked$/.test(localStorage.key(i) || '')) { returning = true; break; }
+        if (/^aotp_.+_unlocked$/.test(localStorage.key(i) || '')) { seenBefore = true; break; }
       }
     } catch (e) {}
   }
-  if (returning && slug) {
-    set(MEMBER, '1');
-    set('aotp_' + slug + '_unlocked', '1'); // the page's own gate script reads this key next
+  if (slug) {
+    // The page's own gate script reads this key next: open the kit for a member, and put
+    // everyone else through the form, which subscribes them or activates their old record.
+    if (member) set('aotp_' + slug + '_unlocked', '1');
+    else drop('aotp_' + slug + '_unlocked');
   }
 
   // 2. Campaign code (?s=) and per-person token (?t=) from the DM link.
@@ -64,6 +70,18 @@
 
   window.aotpCtx = function () { return { vid: vid, src: src, t: token, page: page }; };
 
+  // The page calls this with the worker's /subscribe answer, before it opens the kit.
+  // member:true  = on the list for good, never ask in this browser again.
+  // member:false = not settled (unconfirmed, or the activation failed): ask once more next time.
+  var verdict;
+  window.aotpSubscribed = function (data) {
+    // No `member` in the answer means an older worker: leave the verdict open, so the
+    // form-unlock rule below applies, exactly as for a page cached before this script.
+    if (!data || data.member === undefined) return;
+    verdict = !!data.member;
+    if (verdict) set(MEMBER, '2');
+  };
+
   function send(type, label, meta) {
     if (quiet || !vid) return;
     var body = JSON.stringify({ vid: vid, type: type, page: page, src: src, t: token, label: label || '', meta: meta || null });
@@ -74,12 +92,17 @@
     } catch (e) {}
   }
 
-  send('visit', returning ? 'returning' : 'new', { ref: (document.referrer || '').slice(0, 200), q: query });
+  send('visit', seenBefore ? 'returning' : 'new', { ref: (document.referrer || '').slice(0, 200), q: query });
 
   function ready() {
     var kit = document.getElementById('kit');
     if (kit) {
-      var unlocked = function (how) { set(MEMBER, '1'); send('unlock', how); };
+      var unlocked = function (how) {
+        // A page cached from before aotpSubscribed existed never calls it; treat its form
+        // success as membership rather than asking that person on every page.
+        if (how === 'form' && verdict !== false) set(MEMBER, '2');
+        send('unlock', how);
+      };
       if (!kit.hidden) unlocked('returning');
       else if (window.MutationObserver) {
         var watcher = new MutationObserver(function () {
