@@ -9,6 +9,33 @@ binding = "DB"
 database_name = "aotp-funnel"
 database_id = "cd93fe07-7af8-4fc9-bf0b-e7e9c72ebde5"
 
+# Cost safety (docs/research/cloudflare-cost-safety.md in the Flywheel repo). The worker checks
+# these; a missing binding means no limit, never a closed gate. Needs wrangler 4.36 or later.
+[[ratelimits]]
+name = "BEACON_PER_IP"         # page events per visitor IP
+namespace_id = "1001"
+simple = { limit = 60, period = 60 }
+
+[[ratelimits]]
+name = "SUBSCRIBE_PER_IP"      # email signups per visitor IP
+namespace_id = "1002"
+simple = { limit = 10, period = 60 }
+
+[[ratelimits]]
+name = "D1_WRITE_BUDGET"       # one global key: tracking writes across every visitor
+namespace_id = "1003"
+simple = { limit = 150, period = 60 }
+
+# Log one request in ten, enough to debug without paying for every beacon.
+[observability]
+enabled = true
+head_sampling_rate = 0.1
+
+# Workers Paid only (the Free plan already caps CPU at 10 ms). Uncomment after upgrading, and
+# set it a few times the p99 CPU on the Worker's metrics tab.
+# [limits]
+# cpu_ms = 50
+
 # Deploy:
 #   cd worker
 #   npx wrangler login

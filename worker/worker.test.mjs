@@ -198,6 +198,83 @@ test('page events are stored for real visitors on our own origin only', async ()
   }
 });
 
+// Stub Workers Rate Limiting binding: `allow` decides each answer, `keys` records what was counted.
+function fakeLimiter(allow = true) {
+  const keys = [];
+  return {
+    keys,
+    limit: async ({ key }) => {
+      keys.push(key);
+      if (allow === 'throw') throw new Error('limiter down');
+      return { success: typeof allow === 'function' ? allow(keys.length) : allow };
+    },
+  };
+}
+
+const BEACON = { vid: 'vabc123', type: 'visit', page: '/fix/', src: 'fx9k2a', t: '' };
+
+test('page events over the per-IP limit are dropped quietly, counted by visitor IP', async () => {
+  const DB = fakeDb();
+  const BEACON_PER_IP = fakeLimiter(false);
+  const res = await post('/e', BEACON, { env: { DB, BEACON_PER_IP } });
+  assert.equal(res.status, 204);
+  assert.equal(DB.writes.length, 0);
+  assert.deepEqual(BEACON_PER_IP.keys, ['203.0.113.9']);
+});
+
+test('page events stop when the global database write budget is spent', async () => {
+  const DB = fakeDb();
+  const D1_WRITE_BUDGET = fakeLimiter((n) => n <= 1);
+  await post('/e', BEACON, { env: { DB, BEACON_PER_IP: fakeLimiter(), D1_WRITE_BUDGET } });
+  await post('/e', BEACON, { env: { DB, BEACON_PER_IP: fakeLimiter(), D1_WRITE_BUDGET } });
+  assert.equal(DB.writes.filter((w) => w.sql.startsWith('INSERT INTO events')).length, 1);
+  assert.deepEqual(D1_WRITE_BUDGET.keys, ['all', 'all']);
+});
+
+test('a signup over the per-IP limit is refused before Buttondown is called', async () => {
+  const calls = stubButtondown([]);
+  const SUBSCRIBE_PER_IP = fakeLimiter(false);
+  const res = await post('/subscribe', { email: 'a@example.com', ctx: CTX }, { env: { SUBSCRIBE_PER_IP } });
+  assert.equal(res.status, 429);
+  assert.deepEqual(await res.json(), { error: 'too many requests' });
+  assert.equal(calls.length, 0);
+  assert.deepEqual(SUBSCRIBE_PER_IP.keys, ['203.0.113.9']);
+});
+
+test('a broken limiter never closes the gate or stops tracking', async () => {
+  stubButtondown([[201, {}]]);
+  const DB = fakeDb();
+  const env = { DB, BEACON_PER_IP: fakeLimiter('throw'), D1_WRITE_BUDGET: fakeLimiter('throw'), SUBSCRIBE_PER_IP: fakeLimiter('throw') };
+  const signup = await post('/subscribe', { email: 'a@example.com', ctx: CTX }, { env });
+  assert.deepEqual(await signup.json(), { ok: true, new: true, member: true });
+  await post('/e', BEACON, { env });
+  assert.ok(DB.writes.some((w) => w.args[2] === 'visit'));
+});
+
+test('bodies over 2 KB are refused before parsing: quiet for events, 413 for signups', async () => {
+  const calls = stubButtondown([]);
+  const DB = fakeDb();
+  const padded = 'x'.repeat(2100);
+  const beacon = await post('/e', { ...BEACON, label: padded }, { env: { DB } });
+  assert.equal(beacon.status, 204);
+  assert.equal(DB.writes.length, 0);
+  const signup = await post('/subscribe', { email: 'a@example.com', ctx: { ...CTX, page: padded } });
+  assert.equal(signup.status, 413);
+  assert.deepEqual(await signup.json(), { error: 'too large' });
+  assert.equal(calls.length, 0);
+});
+
+test('a declared Content-Length over 2 KB is refused without reading the body', async () => {
+  const request = new Request('https://gate.test/subscribe', {
+    method: 'POST',
+    headers: { Origin: ORIGIN, 'Content-Length': '999999' },
+    body: JSON.stringify({ email: 'a@example.com' }),
+  });
+  const res = await worker.fetch(request, {}, {});
+  assert.equal(res.status, 413);
+  assert.equal(request.bodyUsed, false);
+});
+
 test('routing: GET is refused, unknown paths 404, preflight answers', async () => {
   const get = await worker.fetch(new Request('https://gate.test/subscribe'), {}, {});
   assert.equal(get.status, 405);

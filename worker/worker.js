@@ -9,6 +9,9 @@
 // Secret required: BUTTONDOWN_API_KEY  (wrangler secret put BUTTONDOWN_API_KEY)
 // Binding (optional): DB -> D1 database `aotp-funnel` (schema.sql). Tracking is best-effort:
 // a missing binding or a failed write NEVER changes the /subscribe response.
+// Rate limit bindings (optional, wrangler.toml [[ratelimits]]): BEACON_PER_IP and SUBSCRIBE_PER_IP
+// count per visitor IP; D1_WRITE_BUDGET is one global key that caps tracking writes, so a flood
+// can't fill the database or run up the bill. Bodies over MAX_BODY are refused before parsing.
 
 const ALLOWED_ORIGINS = [
   'https://theaotp.com',
@@ -32,6 +35,8 @@ function cors(origin) {
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const EVENT_TYPES = ['visit', 'unlock', 'click', 'scroll', 'time'];
 const BOT_RE = /bot|crawl|spider|preview|facebookexternalhit|slurp|whatsapp|headless|lighthouse/i;
+// Real bodies are well under 1 KB (an event with a full label and meta is about 1.5 KB).
+const MAX_BODY = 2048;
 
 const clip = (value, max) => (typeof value === 'string' ? value.slice(0, max) : '');
 // vid / src / token are opaque ids minted by f.js or by our own link builder.
@@ -85,6 +90,17 @@ async function activateOnReentry(bd, email) {
 // Tracking must never break the gate: swallow and log every failure.
 const safely = (promise) => promise.catch((err) => console.log('funnel write failed', String(err)));
 
+// A missing or failing limiter lets the request through: the limits protect the bill, and must
+// never be the reason a real signup or visit is lost.
+async function allowed(limiter, key) {
+  if (!limiter || !key) return true;
+  try {
+    return (await limiter.limit({ key })).success;
+  } catch {
+    return true;
+  }
+}
+
 export default {
   async fetch(request, env, execution) {
     const origin = request.headers.get('Origin') || '';
@@ -96,10 +112,20 @@ export default {
       return new Response(JSON.stringify({ error: 'POST only' }), { status: 405, headers });
 
     const url = new URL(request.url);
+    const ip = request.headers.get('CF-Connecting-IP') || '';
+    // Beacons can't show an error, so an oversized one is dropped quietly like any other junk.
+    const tooLarge = () =>
+      url.pathname === '/e'
+        ? new Response(null, { status: 204, headers })
+        : new Response(JSON.stringify({ error: 'too large' }), { status: 413, headers });
+    if (Number(request.headers.get('Content-Length') || 0) > MAX_BODY) return tooLarge();
+    const text = await request.text();
+    if (text.length > MAX_BODY) return tooLarge();
+
     let body = {};
     try {
       // /e arrives via sendBeacon as text/plain, so parse the text ourselves.
-      body = JSON.parse(await request.text()) || {};
+      body = JSON.parse(text) || {};
     } catch {}
 
     if (url.pathname === '/e') {
@@ -107,7 +133,11 @@ export default {
       const known = ALLOWED_ORIGINS.includes(origin);
       const bot = BOT_RE.test(request.headers.get('User-Agent') || '');
       if (known && !bot && ctx.vid && EVENT_TYPES.includes(body.type))
-        later(record(env, ctx, body.type, clip(body.label, 200), body.meta));
+        // Limits are checked after the 204 goes back, so a visitor never waits on them.
+        later((async () => {
+          if (!(await allowed(env.BEACON_PER_IP, ip)) || !(await allowed(env.D1_WRITE_BUDGET, 'all'))) return;
+          await record(env, ctx, body.type, clip(body.label, 200), body.meta);
+        })());
       return new Response(null, { status: 204, headers });
     }
 
@@ -126,6 +156,8 @@ export default {
       });
 
     if (url.pathname === '/subscribe') {
+      if (!(await allowed(env.SUBSCRIBE_PER_IP, ip)))
+        return new Response(JSON.stringify({ error: 'too many requests' }), { status: 429, headers });
       const ctx = context(body.ctx);
       // Forward the real visitor IP + referrer so Buttondown's firewall doesn't
       // see every signup as coming from one Cloudflare datacenter IP. The referrer
@@ -133,7 +165,7 @@ export default {
       // the source of every subscriber is visible inside Buttondown too.
       const fields = {
         email_address: email,
-        ip_address: request.headers.get('CF-Connecting-IP') || undefined,
+        ip_address: ip || undefined,
         referrer_url: (ALLOWED_ORIGINS.includes(origin) ? origin : 'https://theaotp.com') + (ctx.page || ''),
         utm_source: ctx.src ? 'instagram' : undefined,
         utm_medium: ctx.src ? 'dm' : undefined,
