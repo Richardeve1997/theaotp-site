@@ -60,10 +60,10 @@ td:first-child{color:var(--ink);font-weight:600;white-space:nowrap;padding-right
 .gate-grid{display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px}
 .gate h2{font-size:clamp(26px,3vw,38px);max-width:22ch}
 .gate p{max-width:56ch;color:var(--soft)}
-.gate form{display:flex;align-items:stretch;border-bottom:2px solid var(--ink);max-width:480px;margin-top:26px}
-.gate input{min-width:0;flex:1;border:0;background:transparent;padding:15px 0;font:inherit;color:var(--ink);outline:none}
+.gate form{display:flex;flex-wrap:wrap;align-items:stretch;max-width:480px;margin-top:26px}
+.gate input{min-width:0;flex:1 1 100%;border:0;border-bottom:2px solid var(--ink);background:transparent;padding:15px 0;font:inherit;color:var(--ink);outline:none}
 .gate input::placeholder{color:var(--muted)}
-.gate button{border:0;background:transparent;cursor:pointer;padding:0 2px 0 24px;font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+.gate button{border:0;background:transparent;cursor:pointer;padding:16px 0 4px;text-align:left;font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
 .gate button:hover{opacity:.6}
 .gate-small{font-size:13px;color:var(--muted);margin-top:14px}
 .gate-status{font-size:13px;color:var(--ink);min-height:1.3em;margin-top:6px}
@@ -91,7 +91,7 @@ footer{display:flex;justify-content:space-between;gap:20px;border-top:1px solid 
       <form id="gate-form" novalidate>
         <label for="gate-email" style="position:absolute;left:-9999px">Email address</label>
         <input id="gate-email" type="email" name="email" placeholder="you@somewhere.com" autocomplete="email" required>
-        <button type="submit">Unlock</button>
+        <button type="submit">Unlock the guide and subscribe to AOTP</button>
       </form>
       <p class="gate-status" id="gate-status" aria-live="polite"></p>
       <p class="gate-small">Already on the list? Enter the same email and it unlocks without subscribing you twice.</p>
