@@ -1,0 +1,366 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PM kit | Art of the Possible</title>
+<meta name="description" content="28 product management skills built from Lenny's Podcast, plus a knowledge base you can ask any product question.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://theaotp.com/pm/">
+<link rel="icon" href="/qualia-symbol.png">
+<meta property="og:title" content="PM kit | Art of the Possible">
+<meta property="og:description" content="28 PM skills from Lenny's Podcast and a knowledge base you can ask.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+:root{--paper:#fdfdfb;--canvas:#e9e9e6;--rule:#e4e4e0;--ink:#121210;--muted:#9c9c96;--soft:#52524d;--azure:#0096ff;--display:'Inter Tight','Helvetica Neue',Arial,sans-serif;--ui:Inter,'Helvetica Neue',Arial,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--ui);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.page{max-width:1280px;margin:0 auto;background:var(--paper);min-height:100vh}
+.pad{padding-left:clamp(22px,4.5vw,58px);padding-right:clamp(22px,4.5vw,58px)}
+nav{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--rule);padding-top:25px;padding-bottom:25px}
+.lockup{display:flex;align-items:center;gap:11px;text-decoration:none}.lockup img{width:25px;height:25px}
+.wordmark{font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:.055em;text-transform:uppercase}
+.navlinks{display:flex;gap:24px;font-size:14px}.navlinks a{text-decoration:none;color:var(--soft)}.navlinks a:hover{color:var(--ink)}
+.eyebrow{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
+h1,h2,h3{font-family:var(--display);letter-spacing:-.038em;line-height:1.01;margin:0}
+h1{font-size:clamp(42px,6.2vw,82px);max-width:15ch}
+.muted{color:var(--muted)}
+.kit-head{padding-top:90px;padding-bottom:58px}
+.dek{max-width:58ch;color:var(--soft);margin:24px 0 0;font-size:17px}
+.gate{border-top:1px solid var(--ink);padding-top:44px;padding-bottom:80px}
+.gate-grid{display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px}
+.gate h2{font-size:clamp(26px,3vw,38px);max-width:22ch}
+.gate p{max-width:56ch;color:var(--soft)}
+.gate form{display:flex;flex-wrap:wrap;align-items:stretch;max-width:480px;margin-top:26px}
+.gate input{min-width:0;flex:1 1 100%;border:0;border-bottom:2px solid var(--ink);background:transparent;padding:15px 0;font:inherit;color:var(--ink);outline:none}
+.gate input::placeholder{color:var(--muted)}
+.gate button{border:0;background:transparent;cursor:pointer;padding:16px 0 4px;text-align:left;font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+.gate button:hover{opacity:.6}
+.gate-small{font-size:13px;color:var(--muted);margin-top:14px}
+.gate-status{font-size:13px;color:var(--ink);min-height:1.3em;margin-top:6px}
+.step{display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px;border-top:1px solid var(--ink);padding-top:56px;padding-bottom:72px}
+.step-kicker{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.step h2{font-size:clamp(30px,3.8vw,50px);max-width:18ch}
+.step .lede{font-family:var(--display);font-size:19px;font-weight:600;line-height:1.35;max-width:54ch;margin:18px 0 26px}
+.step p{color:var(--soft);max-width:64ch}
+.step ul{color:var(--soft);max-width:64ch;padding-left:20px}
+.step li{margin-bottom:9px}
+.rule{height:3px;width:52px;background:var(--azure);margin:0 0 20px}
+.note{border-left:3px solid var(--muted);padding:2px 0 2px 18px;margin:26px 0;max-width:62ch;color:var(--soft);font-size:15px}
+.index{list-style:none;padding:0;margin:26px 0 0;max-width:66ch;counter-reset:idx}
+.index li{border-top:1px solid var(--rule);padding:14px 0;display:flex;gap:18px;align-items:baseline;font-size:15.5px;color:var(--soft)}
+.index .n{font-family:var(--display);font-weight:700;font-size:13px;color:var(--azure);min-width:26px}
+.index a{text-decoration:none;font-family:var(--display);font-weight:600;font-size:17px;color:var(--ink);letter-spacing:-.01em}
+.index a:hover{border-bottom:2px solid var(--azure)}
+.concept{border-top:1px solid var(--ink);padding-top:52px;padding-bottom:60px;display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px;scroll-margin-top:20px}
+.concept-num{font-family:var(--display);font-weight:800;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.concept-num span{color:var(--azure)}
+.concept h2{font-size:clamp(28px,3.4vw,44px);max-width:20ch}
+.concept .lede{font-family:var(--display);font-size:19px;font-weight:600;line-height:1.35;max-width:54ch;margin:18px 0 22px}
+.concept p{color:var(--soft);max-width:64ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 0}
+.chip{font-family:var(--display);font-weight:600;font-size:12.5px;letter-spacing:.02em;color:var(--soft);background:#f3f3ef;padding:6px 11px;border-radius:3px}
+.read{border:1px solid var(--rule);border-left:7px solid var(--azure);padding:22px 24px;margin:26px 0 0;max-width:720px}
+.read .src{font-family:var(--display);font-weight:700;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.read h3{font-size:19px;margin:8px 0 14px;max-width:44ch;line-height:1.2}
+.read a{display:inline-block;font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;border-bottom:2px solid var(--azure);padding-bottom:2px}
+.read a:hover{color:var(--azure)}
+.closeblock{background:var(--ink);color:var(--paper);padding-top:82px;padding-bottom:88px}
+.closeblock h2{font-size:clamp(36px,5vw,64px);max-width:15ch}
+.closeblock .muted{color:#b7b7b1}
+.closeblock p{max-width:56ch;color:#b7b7b1;margin-top:20px}
+.closeblock a{display:inline-block;margin-top:30px;background:var(--paper);color:var(--ink);padding:14px 22px;text-decoration:none;font-family:var(--display);font-weight:700}
+footer{display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--rule);padding-top:28px;padding-bottom:32px;color:var(--soft);font-size:13px}
+[hidden]{display:none!important}
+@media(max-width:800px){.navlinks{display:none}.kit-head{padding-top:58px}.gate-grid,.step,.concept{grid-template-columns:1fr;gap:18px}.gate-grid>*,.step>*,.concept>*{min-width:0}}
+
+.cmd{background:#f3f3ef;border-left:7px solid var(--ink);padding:20px 24px;margin:22px 0;max-width:720px;overflow-x:auto}
+.cmd code{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:13.5px;line-height:1.8;white-space:pre;display:block}
+.termshot{background:#15130e;color:#e8e6df;padding:20px 24px;margin:22px 0;max-width:720px;overflow-x:auto;font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:13px;line-height:1.9;white-space:pre}
+.termshot .g{color:#7ee081}.termshot .y{color:#e8c85c}.termshot .r{color:#ec6a5e}.termshot .d{color:#8c8475}
+.promptbox{position:relative;background:#f3f3ef;border-left:7px solid var(--ink);margin-top:26px;max-width:820px}
+.promptbox pre{margin:0;padding:26px 28px;overflow-x:auto;font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:13px;line-height:1.75;white-space:pre-wrap;color:var(--ink)}
+.copybtn{position:absolute;top:0;right:0;border:0;cursor:pointer;background:var(--ink);color:var(--paper);font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding:12px 18px}
+.copybtn:hover{opacity:.85}
+.lessons{list-style:none;padding:0;margin:26px 0 0;max-width:66ch}
+.lessons li{border-top:1px solid var(--rule);padding:20px 0;margin:0;color:var(--soft)}
+.lessons strong{display:block;font-family:var(--display);font-size:17px;color:var(--ink);margin-bottom:6px;letter-spacing:-.01em}
+table{border-collapse:collapse;width:100%;max-width:720px;margin:22px 0;font-size:14.5px}
+th,td{text-align:left;padding:12px 14px 12px 0;border-bottom:1px solid var(--rule);vertical-align:top;color:var(--soft)}
+th{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+td:first-child{color:var(--ink);font-weight:600;white-space:nowrap;padding-right:24px}
+@media(max-width:800px){.copybtn{position:static;display:inline-block;margin:0 0 0 28px}td:first-child{white-space:normal}}
+.dl{display:flex;flex-wrap:wrap;align-items:center;gap:18px 28px;border:1px solid var(--rule);border-left:7px solid var(--azure);padding:24px 26px;margin:28px 0 0;max-width:720px}
+.dl-btn{display:inline-block;background:var(--ink);color:var(--paper);padding:15px 24px;text-decoration:none;font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:.03em}
+.dl-btn:hover{opacity:.85}
+.dl-meta{font-size:14px;color:var(--soft);line-height:1.5}
+.dl-meta strong{display:block;color:var(--ink);font-family:var(--display);font-size:16px}
+.index code,.step p code,.step li code{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f3ef;padding:1px 5px;border-radius:3px}
+.index .sk{display:block}
+.stage-h{font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase;margin:40px 0 0;color:var(--ink)}
+.stage-h span{color:var(--muted)}
+</style><script src="/f.js"></script>
+</head><body>
+<div class="page">
+<nav class="pad"><a class="lockup" href="/"><img src="/qualia-symbol.png" alt=""><span class="wordmark">Art of the Possible<sup>&reg;</sup></span></a><div class="navlinks"><a href="/">Home</a><a href="/letters/">Archive</a><a href="/#about">About</a></div></nav>
+
+<header class="kit-head pad">
+  <div class="eyebrow">PM kit &middot; From the Reel</div>
+  <h1 style="margin-top:26px">28 PM skills. <span class="muted">Plus a Lenny's Podcast brain you can ask.</span></h1>
+  <p class="dek">You commented "PM". Here it is. Two things: the free GitHub repo of 28 product management skills built from Lenny's Podcast, and a knowledge base I made so you can ask any product question and get answers from Lenny's guests, with the episode cited. No course, no upsell.</p>
+</header>
+
+<section class="gate pad" id="gate">
+  <div class="gate-grid">
+    <div class="eyebrow">Unlock the kit</div>
+    <div>
+      <h2>Drop your email and both unlock on this page.</h2>
+      <p>You'll also get the weekly letter: five useful things I made with AI, with the prompts and workflows inside. Unsubscribe any time.</p>
+      <form id="gate-form" novalidate>
+        <label for="gate-email" style="position:absolute;left:-9999px">Email address</label>
+        <input id="gate-email" type="email" name="email" placeholder="you@somewhere.com" autocomplete="email" required>
+        <button type="submit">Unlock the guide and subscribe to AOTP</button>
+      </form>
+      <p class="gate-status" id="gate-status" aria-live="polite"></p>
+      <p class="gate-small">Already on the list? Enter the same email and it unlocks without subscribing you twice.</p>
+      <noscript><p class="gate-small">This page needs JavaScript to unlock. Or just subscribe on <a href="/">the homepage</a> and reply to any letter for the kit.</p></noscript>
+    </div>
+  </div>
+</section>
+
+<!-- EVERYTHING OF VALUE LIVES INSIDE #kit. Nothing valuable outside it. -->
+<div id="kit" hidden>
+
+<section class="step pad" id="first">
+  <div class="step-kicker"><span>01</span> &middot; The skills repo</div>
+  <div>
+    <div class="rule"></div>
+    <h2>28 skills from Lenny's guests. <span class="muted">Free and open source.</span></h2>
+    <p class="lede">Each skill turns one area of product management into instructions your AI assistant follows while you work.</p>
+    <p>The repo is called Awesome PM Skills. Every skill is a folder with a <code>SKILL.md</code> file inside: the frameworks, decision trees, templates and real examples for one part of the job, credited to the guests they came from. Brian Chesky, Shreyas Doshi, Marty Cagan, Kevin Weil, April Dunford and many more. The README says the skills draw on 300+ episodes, using the public transcript archive from ChatPRD.</p>
+    <p>You don't read these like a course. You install them, then work as normal. When you ask Claude Code to scope an MVP, it can pull in the scoping skill. When you ask for an exec update, it reaches for the memo skill.</p>
+    <div class="note">I didn't write these. Udi Menkes built and maintains the repo under the MIT license, and I earn nothing from it. The frameworks belong to the guests who shared them on Lenny's Podcast.</div>
+    <div class="read">
+      <div class="src">GitHub &middot; menkesu/awesome-pm-skills</div>
+      <h3>Awesome PM Skills: 28 skills built from Lenny's Podcast</h3>
+      <a href="https://github.com/menkesu/awesome-pm-skills" target="_blank" rel="noopener">Open the repo &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="step pad" id="install">
+  <div class="step-kicker"><span>02</span> &middot; Install</div>
+  <div>
+    <div class="rule"></div>
+    <h2>Two minutes. <span class="muted">One copy command.</span></h2>
+    <p class="lede">Claude Code loads skills from a <code>.claude/skills</code> folder, so the job is to clone the repo and copy the skill folders there.</p>
+    <p>The repo's own README says to clone it into your workspace, but its "Get started" snippet still has a placeholder URL. Use the real one below. Run this from the project you want the skills in:</p>
+    <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>git clone https://github.com/menkesu/awesome-pm-skills.git
+mkdir -p .claude/skills
+for d in awesome-pm-skills/*/; do [ -f "$d/SKILL.md" ] &amp;&amp; cp -R "${d%/}" .claude/skills/; done</pre></div>
+    <p style="margin-top:22px">That copies every folder that has a <code>SKILL.md</code> and skips the images folder. Want the skills in every project? Swap <code>.claude/skills</code> for <code>~/.claude/skills</code>.</p>
+    <p><strong>Using Codex?</strong> Same loop, different folder. Codex looks for project skills in <code>.agents/skills</code>:</p>
+    <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>mkdir -p .agents/skills
+for d in awesome-pm-skills/*/; do [ -f "$d/SKILL.md" ] &amp;&amp; cp -R "${d%/}" .agents/skills/; done</pre></div>
+    <p style="margin-top:22px"><strong>Then use them.</strong> Tell the assistant what you're working on and it picks the skills that fit. If one doesn't kick in, name it: "Use the zero-to-launch skill" or "Use Shreyas Doshi's LNO framework on this".</p>
+    <div class="note">You'll get 29 folders, not 28. The extra one, <code>one-step-better-ai-pm</code>, is a newer add-on that pulls daily briefs from the author's GenAI PM newsletter. It needs a free GenAI PM subscription and a <code>GENAIPM_EMAIL</code> environment variable. Skip it if you just want the Lenny skills.</div>
+  </div>
+</section>
+
+<section class="step pad" id="skills">
+  <div class="step-kicker"><span>03</span> &middot; The 28 skills</div>
+  <div>
+    <div class="rule"></div>
+    <h2>Five stages. <span class="muted">Master the last two.</span></h2>
+    <p class="lede">Here they are sorted into the five stages from the Reel, so you can go straight to the part of the job you want to get better at.</p>
+    <p>The repo's README groups the same 28 skills into seven "modes". This is my grouping, not the author's. Each name links to its folder on GitHub.</p>
+
+    <div class="stage-h">Strategy <span>&middot; deciding what to build</span></div>
+    <ol class="index">
+      <li><span class="n">01</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/strategic-build" target="_blank" rel="noopener">strategic-build</a>The LNO framework: is this leverage work or overhead? (Shreyas Doshi, Marty Cagan)</span></li>
+      <li><span class="n">02</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/strategy-frameworks" target="_blank" rel="noopener">strategy-frameworks</a>Product strategy with Crossing the Chasm and Playing to Win.</span></li>
+      <li><span class="n">03</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/decision-frameworks" target="_blank" rel="noopener">decision-frameworks</a>Structured calls on hard decisions. (Annie Duke, Ben Horowitz)</span></li>
+      <li><span class="n">04</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/prioritization-craft" target="_blank" rel="noopener">prioritization-craft</a>Feature prioritization, including RICE. (Shreyas Doshi)</span></li>
+      <li><span class="n">05</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/okr-frameworks" target="_blank" rel="noopener">okr-frameworks</a>Goal setting the Google OKR way. (Christina Wodtke)</span></li>
+    </ol>
+
+    <div class="stage-h">Building <span>&middot; the right problem, then the prototype</span></div>
+    <ol class="index">
+      <li><span class="n">06</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/zero-to-launch" target="_blank" rel="noopener">zero-to-launch</a>Idea to prototype, the OpenAI, Figma and Airbnb way.</span></li>
+      <li><span class="n">07</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/continuous-discovery" target="_blank" rel="noopener">continuous-discovery</a>Weekly customer contact and opportunity solution trees. (Teresa Torres)</span></li>
+      <li><span class="n">08</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/jtbd-building" target="_blank" rel="noopener">jtbd-building</a>Design around the job the customer is hiring you for. (Bob Moesta)</span></li>
+      <li><span class="n">09</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/design-first-dev" target="_blank" rel="noopener">design-first-dev</a>Craft quality standards. (Brian Chesky, Dylan Field)</span></li>
+      <li><span class="n">10</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/ai-product-patterns" target="_blank" rel="noopener">ai-product-patterns</a>AI-native product development. (Kevin Weil, OpenAI)</span></li>
+      <li><span class="n">11</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/ai-startup-building" target="_blank" rel="noopener">ai-startup-building</a>The AI startup playbook. (Dan Shipper, Brandon Chu)</span></li>
+      <li><span class="n">12</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/quality-speed" target="_blank" rel="noopener">quality-speed</a>When to polish and when to move. (Dylan Field, Brian Chesky)</span></li>
+      <li><span class="n">13</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/ship-decisions" target="_blank" rel="noopener">ship-decisions</a>Ship it or iterate? (Shreyas Doshi, Marty Cagan, Tobi Lutke)</span></li>
+    </ol>
+
+    <div class="stage-h">Go to market <span>&middot; winning attention</span></div>
+    <ol class="index">
+      <li><span class="n">14</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/positioning-craft" target="_blank" rel="noopener">positioning-craft</a>Product positioning. (April Dunford)</span></li>
+      <li><span class="n">15</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/launch-execution" target="_blank" rel="noopener">launch-execution</a>Go-to-market and launch plans. (April Dunford, Brian Chesky)</span></li>
+      <li><span class="n">16</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/growth-embedded" target="_blank" rel="noopener">growth-embedded</a>Growth loops and viral mechanics. (YC, Elena Verna)</span></li>
+    </ol>
+
+    <div class="stage-h">Measurement <span>&middot; data and feedback, on a loop</span></div>
+    <ol class="index">
+      <li><span class="n">17</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/metrics-frameworks" target="_blank" rel="noopener">metrics-frameworks</a>North Star metrics and AARRR. (Lenny's frameworks, Meta)</span></li>
+      <li><span class="n">18</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/user-feedback-system" target="_blank" rel="noopener">user-feedback-system</a>Measuring product-market fit. (Superhuman, YC)</span></li>
+      <li><span class="n">19</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/exp-driven-dev" target="_blank" rel="noopener">exp-driven-dev</a>A/B testing and experimentation. (Ronny Kohavi, Netflix)</span></li>
+    </ol>
+
+    <div class="stage-h">Communication and leadership <span>&middot; keeping the team aligned</span></div>
+    <ol class="index">
+      <li><span class="n">20</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/strategic-storytelling" target="_blank" rel="noopener">strategic-storytelling</a>Product narratives. (Andy Raskin, Nancy Duarte)</span></li>
+      <li><span class="n">21</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/exec-comms" target="_blank" rel="noopener">exec-comms</a>Executive memos: the Amazon 6-pager and the Stripe format.</span></li>
+      <li><span class="n">22</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/confident-speaking" target="_blank" rel="noopener">confident-speaking</a>Presentations and pitches. (Matt Abrahams)</span></li>
+      <li><span class="n">23</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/influence-craft" target="_blank" rel="noopener">influence-craft</a>Power and influence. (Jeffrey Pfeffer)</span></li>
+      <li><span class="n">24</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/stakeholder-craft" target="_blank" rel="noopener">stakeholder-craft</a>Feedback and working relationships. (Kim Scott, Carole Robin)</span></li>
+      <li><span class="n">25</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/workplace-navigation" target="_blank" rel="noopener">workplace-navigation</a>Handling difficult colleagues. (Anneka Gupta)</span></li>
+      <li><span class="n">26</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/culture-craft" target="_blank" rel="noopener">culture-craft</a>Building a culture of excellence. (David Singleton, Dharmesh Shah)</span></li>
+      <li><span class="n">27</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/career-growth" target="_blank" rel="noopener">career-growth</a>PM career advancement. (Ami Vora and 40+ career episodes)</span></li>
+      <li><span class="n">28</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/strategic-pm" target="_blank" rel="noopener">strategic-pm</a>Becoming a strategic PM. (Anneka Gupta)</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="step pad" id="kb">
+  <div class="step-kicker"><span>04</span> &middot; The knowledge base</div>
+  <div>
+    <div class="rule"></div>
+    <h2>Ask Lenny's guests. <span class="muted">Get the episode back.</span></h2>
+    <p class="lede">Ask any product question and get an answer built from what Lenny's guests actually said, with every point credited to the guest and the episode.</p>
+    <p>I went through 35 recent episodes of Lenny's Podcast and turned each one into a one-page digest: the key lessons, the frameworks, a few short quotes and a link to the full episode on YouTube. Boris Cherny, Cat Wu, Elena Verna, Simon Willison, Marc Andreessen, Molly Graham and 29 more.</p>
+    <p>The zip also has a skill called <code>lenny-wisdom</code>. It tells your assistant how to use the digests: find the right three to six episodes, answer with citations, show where the guests disagree, and end with what to do next. Pressure-test a pitch, a roadmap or a pricing idea against the same people.</p>
+    <div class="dl">
+      <a class="dl-btn" href="/pm/lennys-podcast-knowledge-base.zip" download>Download the knowledge base (.zip)</a>
+      <div class="dl-meta"><strong>lennys-podcast-knowledge-base.zip</strong>176 KB &middot; 35 digests, an index, the skill and a setup guide</div>
+    </div>
+    <p style="margin-top:26px"><strong>What's inside:</strong></p>
+    <ul>
+      <li><code>index.md</code>: every episode with its topics, a "start here, by question" table and the themes that run across episodes.</li>
+      <li><code>episodes/&lt;slug&gt;/summary.md</code>: one digest per episode.</li>
+      <li><code>all-episodes.md</code>: all 35 digests in one file, for tools that want fewer uploads.</li>
+      <li><code>lenny-wisdom/SKILL.md</code>: the skill for Claude Code (it works in Codex too).</li>
+      <li><code>README.md</code>: the setup guide below, in more detail.</li>
+    </ul>
+    <div class="note">What it covers: 35 episodes from December 2025 to May 2026. These are digests, not full transcripts. For the back catalogue, the full transcripts of hundreds of older episodes are free in the public archive at <a href="https://github.com/ChatPRD/lennys-podcast-transcripts" target="_blank" rel="noopener">ChatPRD/lennys-podcast-transcripts</a>. Most digests were made from YouTube auto-captions, so check the episode before you quote anyone in public.</div>
+  </div>
+</section>
+
+<section class="step pad" id="setup">
+  <div class="step-kicker"><span>05</span> &middot; Set it up</div>
+  <div>
+    <div class="rule"></div>
+    <h2>Pick your tool. <span class="muted">Claude Code, Claude or ChatGPT.</span></h2>
+    <p class="lede">Claude Code gets the full skill. Claude and ChatGPT get the same knowledge as project files plus a short instruction.</p>
+    <p><strong>Claude Code.</strong> Unzip into your project, so you have <code>your-project/lennys-podcast-knowledge-base/</code>. Then copy the skill in:</p>
+    <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>mkdir -p .claude/skills
+cp -R lennys-podcast-knowledge-base/lenny-wisdom .claude/skills/</pre></div>
+    <p style="margin-top:22px">Start Claude Code in that project and ask: "What would Lenny's guests say about pricing an AI feature?" Or call it by name with <code>/lenny-wisdom</code>. In Codex, copy the same folder into <code>.agents/skills/</code> instead.</p>
+    <p><strong>A Claude Project.</strong> Create a Project in Claude, add <code>index.md</code> and <code>all-episodes.md</code> to the project knowledge, and paste the instruction below into the project instructions.</p>
+    <p><strong>ChatGPT.</strong> Create a Project, add the same two files and paste the same instruction. Building a custom GPT instead? Put the instruction in Instructions and the two files under Knowledge. Custom GPTs limit how many knowledge files you can add, which is why the combined file is there.</p>
+    <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>Answer my questions using only the Lenny's Podcast digests in this project's knowledge.
+Start from index.md to find the 3 to 6 most relevant episodes, then read their digests.
+Credit every point to the guest and the episode. Show where guests disagree, not just
+where they agree. If the digests don't cover my question, say so and label your own
+reasoning as yours. Answer in this shape: Take, What the guests say, Counter-signals
+and risks, What to do next.</pre></div>
+  </div>
+</section>
+
+<section class="step pad" id="next">
+  <div class="step-kicker"><span>06</span> &middot; What to do now</div>
+  <div>
+    <div class="rule"></div>
+    <h2>Pick one. <span class="muted">Use it today.</span></h2>
+    <p class="lede">Installing skills doesn't make you a better PM. Using them on a real decision this week does.</p>
+    <ul>
+      <li><strong>If you're new to product:</strong> install the repo and start with <code>zero-to-launch</code> on a side project. Then ask the knowledge base "what do Lenny's guests say a great PM does in the AI era?"</li>
+      <li><strong>If you already have a roadmap:</strong> run <code>prioritization-craft</code> and <code>strategic-build</code> over it, then ask the knowledge base to pressure-test the top item.</li>
+      <li><strong>If you have to present or persuade this week:</strong> go to the last stage. <code>exec-comms</code> for the memo, <code>influence-craft</code> for the room.</li>
+      <li><strong>If you're launching something:</strong> <code>positioning-craft</code> first, then <code>launch-execution</code>.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="closeblock pad">
+  <h2>See what's possible. <span class="muted">Then build it.</span></h2>
+  <p>You're on the list now. Every week you'll get five useful things I made with AI, with the prompt or workflow behind each one. This kit was one of them.</p>
+  <a href="/">Back to the site</a>
+</section>
+
+</div>
+
+<footer class="pad"><span>Art of the Possible&reg;</span><span>New things are possible every day. &middot; 2026</span></footer>
+</div>
+
+<script>
+(function () {
+  var API = 'https://theaotp-gate.theaotp.workers.dev';
+  var KEY = 'aotp_pm_unlocked';
+  var kit = document.getElementById('kit');
+  var gate = document.getElementById('gate');
+  var form = document.getElementById('gate-form');
+  var status = document.getElementById('gate-status');
+
+  function unlock() {
+    kit.hidden = false;
+    gate.hidden = true;
+    try { localStorage.setItem(KEY, '1'); } catch (e) {}
+  }
+
+  try { if (localStorage.getItem(KEY) === '1') unlock(); } catch (e) {}
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    var email = document.getElementById('gate-email').value.trim().toLowerCase();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      status.textContent = 'That email looks off. Try again.';
+      return;
+    }
+    status.textContent = 'One sec…';
+    fetch(API + '/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, ctx: window.aotpCtx ? window.aotpCtx() : null }),
+    }).then(function (response) {
+      return response.json().catch(function () { return {}; }).then(function (data) {
+        if (!response.ok) {
+          var err = new Error('subscribe failed');
+          err.status = response.status;
+          err.detail = data && data.detail;
+          throw err;
+        }
+        return data;
+      });
+    }).then(function (data) {
+      if (window.aotpSubscribed) window.aotpSubscribed(data);
+      status.textContent = !(data && data.new) ? 'Welcome back. Unlocked.'
+        : data.member === false ? 'Unlocked. Check your inbox to confirm your subscription to the letter.'
+        : 'Unlocked. You\'re on the list for the weekly letter.';
+      unlock();
+      window.scrollTo({ top: document.getElementById('first').offsetTop - 40, behavior: 'smooth' });
+    }).catch(function (err) {
+      if (err && err.status === 400) {
+        status.textContent = 'That email was rejected' + (err.detail ? ' (' + err.detail + ')' : '') + '. Try a different address.';
+      } else {
+        status.textContent = 'Something broke on our end. Try again in a minute, or subscribe on the homepage and DM me on Instagram for the kit.';
+      }
+    });
+  });
+
+  document.querySelectorAll('[data-copy]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      var pre = button.parentElement.querySelector('pre');
+      navigator.clipboard.writeText(pre.textContent).then(function () {
+        button.textContent = 'Copied';
+        setTimeout(function () { button.textContent = 'Copy'; }, 1600);
+      });
+    });
+  });
+})();
+</script>
+</body></html>
