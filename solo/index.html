@@ -1,0 +1,469 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Solo Founder Stack | Art of the Possible</title>
+<meta name="description" content="Five GitHub skill repos, one per business function, with the install for Claude Code and Codex and a setup that puts all five in one project.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://theaotp.com/solo/">
+<link rel="icon" href="/qualia-symbol.png">
+<meta property="og:title" content="The Solo Founder Stack | Art of the Possible">
+<meta property="og:description" content="Five skill repos for a one-person business, with install steps for Claude Code and Codex.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<!--
+Sources (all read 2026-09-26):
+  https://github.com/menkesu/awesome-pm-skills (README has no install section; skills are top-level folders with SKILL.md)
+  https://github.com/mattpocock/skills (README "Installation (30-second setup)")
+  https://github.com/nextlevelbuilder/ui-ux-pro-max-skill (README "Installation"; cli/assets/templates/platforms/codex.json -> .agents/skills/ui-ux-pro-max)
+  https://github.com/coreyhaines31/marketingskills (README "Installation" options 1-3)
+  https://github.com/sickn33/agentic-awesome-skills (README "Direct skill install"; skills/customer-support/SKILL.md; skills/helpdesk-automation/SKILL.md)
+  Star counts + images: content-intelligence pipeline/5-script/assets/solo-billionaire-stack/sources/SOURCES.md
+-->
+<style>
+:root{--paper:#fdfdfb;--canvas:#e9e9e6;--rule:#e4e4e0;--ink:#121210;--muted:#9c9c96;--soft:#52524d;--azure:#0096ff;--display:'Inter Tight','Helvetica Neue',Arial,sans-serif;--ui:Inter,'Helvetica Neue',Arial,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--ui);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.page{max-width:1280px;margin:0 auto;background:var(--paper);min-height:100vh}
+.pad{padding-left:clamp(22px,4.5vw,58px);padding-right:clamp(22px,4.5vw,58px)}
+nav{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--rule);padding-top:25px;padding-bottom:25px}
+.lockup{display:flex;align-items:center;gap:11px;text-decoration:none}.lockup img{width:25px;height:25px}
+.wordmark{font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:.055em;text-transform:uppercase}
+.navlinks{display:flex;gap:24px;font-size:14px}.navlinks a{text-decoration:none;color:var(--soft)}.navlinks a:hover{color:var(--ink)}
+.eyebrow{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
+h1,h2,h3{font-family:var(--display);letter-spacing:-.038em;line-height:1.01;margin:0}
+h1{font-size:clamp(42px,6.2vw,82px);max-width:15ch}
+.muted{color:var(--muted)}
+.kit-head{padding-top:90px;padding-bottom:58px}
+.dek{max-width:58ch;color:var(--soft);margin:24px 0 0;font-size:17px}
+.gate{border-top:1px solid var(--ink);padding-top:44px;padding-bottom:80px}
+.gate-grid{display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px}
+.gate h2{font-size:clamp(26px,3vw,38px);max-width:22ch}
+.gate p{max-width:56ch;color:var(--soft)}
+.gate form{display:flex;flex-wrap:wrap;align-items:stretch;max-width:480px;margin-top:26px}
+.gate input{min-width:0;flex:1 1 100%;border:0;border-bottom:2px solid var(--ink);background:transparent;padding:15px 0;font:inherit;color:var(--ink);outline:none}
+.gate input::placeholder{color:var(--muted)}
+.gate button{border:0;background:transparent;cursor:pointer;padding:16px 0 4px;text-align:left;font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+.gate button:hover{opacity:.6}
+.gate-small{font-size:13px;color:var(--muted);margin-top:14px}
+.gate-status{font-size:13px;color:var(--ink);min-height:1.3em;margin-top:6px}
+.step{display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px;border-top:1px solid var(--ink);padding-top:56px;padding-bottom:72px}
+.step-kicker{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.step h2{font-size:clamp(30px,3.8vw,50px);max-width:18ch}
+.step .lede{font-family:var(--display);font-size:19px;font-weight:600;line-height:1.35;max-width:54ch;margin:18px 0 26px}
+.step p{color:var(--soft);max-width:64ch}
+.step ul,.step ol{color:var(--soft);max-width:64ch;padding-left:20px}
+.step li{margin-bottom:9px}
+.rule{height:3px;width:52px;background:var(--azure);margin:0 0 20px}
+.note{border-left:3px solid var(--muted);padding:2px 0 2px 18px;margin:26px 0;max-width:62ch;color:var(--soft);font-size:15px}
+.index{list-style:none;padding:0;margin:26px 0 0;max-width:66ch;counter-reset:idx}
+.index li{border-top:1px solid var(--rule);padding:14px 0;display:flex;gap:18px;align-items:baseline;font-size:15.5px;color:var(--soft)}
+.index .n{font-family:var(--display);font-weight:700;font-size:13px;color:var(--azure);min-width:26px}
+.index a{text-decoration:none;font-family:var(--display);font-weight:600;font-size:17px;color:var(--ink);letter-spacing:-.01em}
+.index a:hover{border-bottom:2px solid var(--azure)}
+.index .st{margin-left:auto;font-size:13px;color:var(--muted);white-space:nowrap}
+.concept{border-top:1px solid var(--ink);padding-top:52px;padding-bottom:60px;display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px;scroll-margin-top:20px}
+.concept-num{font-family:var(--display);font-weight:800;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.concept-num span{color:var(--azure)}
+.concept h2{font-size:clamp(28px,3.4vw,44px);max-width:20ch}
+.concept .lede{font-family:var(--display);font-size:19px;font-weight:600;line-height:1.35;max-width:54ch;margin:18px 0 22px}
+.concept p{color:var(--soft);max-width:64ch}
+.concept ul{color:var(--soft);max-width:64ch;padding-left:20px}
+.concept li{margin-bottom:9px}
+.read{border:1px solid var(--rule);border-left:7px solid var(--azure);padding:22px 24px;margin:30px 0 0;max-width:720px}
+.read .src{font-family:var(--display);font-weight:700;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.read h3{font-size:19px;margin:8px 0 14px;max-width:44ch;line-height:1.2;overflow-wrap:anywhere}
+.read a{display:inline-block;font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;border-bottom:2px solid var(--azure);padding-bottom:2px}
+.read a:hover{color:var(--azure)}
+.closeblock{background:var(--ink);color:var(--paper);padding-top:82px;padding-bottom:88px}
+.closeblock h2{font-size:clamp(36px,5vw,64px);max-width:15ch}
+.closeblock .muted{color:#b7b7b1}
+.closeblock p{max-width:56ch;color:#b7b7b1;margin-top:20px}
+.closeblock a{display:inline-block;margin-top:30px;background:var(--paper);color:var(--ink);padding:14px 22px;text-decoration:none;font-family:var(--display);font-weight:700}
+footer{display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--rule);padding-top:28px;padding-bottom:32px;color:var(--soft);font-size:13px}
+[hidden]{display:none!important}
+.promptbox{position:relative;background:#f3f3ef;border-left:7px solid var(--ink);margin-top:14px;max-width:820px}
+.promptbox pre{margin:0;padding:26px 28px;padding-right:110px;overflow-x:auto;font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:13px;line-height:1.75;white-space:pre-wrap;overflow-wrap:anywhere;color:var(--ink)}
+.copybtn{position:absolute;top:0;right:0;border:0;cursor:pointer;background:var(--ink);color:var(--paper);font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding:12px 18px}
+.copybtn:hover{opacity:.85}
+code{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f3ef;padding:1px 5px;border-radius:3px;white-space:nowrap}
+.shot{margin:4px 0 26px;max-width:720px}
+.shot img{width:100%;height:auto;display:block;border:1px solid var(--rule);border-radius:6px;background:#fff}
+.cap{font-size:13px;color:var(--muted);margin:8px 0 0;max-width:64ch}
+.inst{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);margin:30px 0 0}
+.inst span{color:var(--azure)}
+.try{list-style:none;padding:0!important;margin:14px 0 0;max-width:66ch}
+.try li{border-top:1px solid var(--rule);padding:14px 0;margin:0!important;color:var(--soft)}
+.try strong{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:14.5px;color:var(--ink);margin-right:6px}
+@media(max-width:800px){.navlinks{display:none}.kit-head{padding-top:58px}.gate-grid,.step,.concept{grid-template-columns:1fr;gap:18px}.gate-grid>*,.step>*,.concept>*{min-width:0}.copybtn{position:static;display:inline-block;margin:0 0 0 28px}.promptbox pre{padding-right:28px}.index li{flex-wrap:wrap;gap:4px 18px}.index .st{margin-left:44px;width:100%}code{white-space:normal;overflow-wrap:anywhere}}
+</style><script src="/f.js"></script>
+</head><body>
+<div class="page">
+<nav class="pad"><a class="lockup" href="/"><img src="/qualia-symbol.png" alt=""><span class="wordmark">Art of the Possible<sup>&reg;</sup></span></a><div class="navlinks"><a href="/">Home</a><a href="/letters/">Archive</a><a href="/#about">About</a></div></nav>
+
+<header class="kit-head pad">
+  <div class="eyebrow">The Solo Founder Stack &middot; From the Reel</div>
+  <h1 style="margin-top:26px">Five repos. <span class="muted">One person running the whole business.</span></h1>
+  <p class="dek">You commented "SOLO". Here it is. Five GitHub repos of agent skills, one for each part of a business: product, engineering, design, marketing and customer support. For each one you get the exact install for Claude Code and for Codex, the skills to try first, and then a short setup that puts all five into one project. There's no course here and nothing to buy.</p>
+</header>
+
+<section class="gate pad" id="gate">
+  <div class="gate-grid">
+    <div class="eyebrow">Unlock the stack</div>
+    <div>
+      <h2>Drop your email and the whole stack unlocks on this page.</h2>
+      <p>You'll also get the weekly letter: five useful things I made with AI, with the prompts and workflows inside. Unsubscribe any time.</p>
+      <form id="gate-form" novalidate>
+        <label for="gate-email" style="position:absolute;left:-9999px">Email address</label>
+        <input id="gate-email" type="email" name="email" placeholder="you@somewhere.com" autocomplete="email" required>
+        <button type="submit">Unlock the guide and subscribe to AOTP</button>
+      </form>
+      <p class="gate-status" id="gate-status" aria-live="polite"></p>
+      <p class="gate-small">Already on the list? Enter the same email and it unlocks without subscribing you twice.</p>
+      <noscript><p class="gate-small">This page needs JavaScript to unlock. Or just subscribe on <a href="/">the homepage</a> and reply to any letter for the stack.</p></noscript>
+    </div>
+  </div>
+</section>
+
+<!-- EVERYTHING OF VALUE LIVES INSIDE #kit. Nothing valuable outside it. -->
+<div id="kit" hidden>
+
+<section class="step pad" id="first">
+  <div class="step-kicker"><span>01</span> &middot; The stack</div>
+  <div>
+    <div class="rule"></div>
+    <h2>Five jobs. <span class="muted">One repo for each.</span></h2>
+    <p class="lede">On its own, an AI model is still pretty limited. Give it the right skills and one person can do the work of 50 to 100 people.</p>
+    <p>A skill is a folder with a <code>SKILL.md</code> file in it that tells your agent how to do one job well. Claude Code reads project skills from <code>.claude/skills/</code>. Codex reads them from <code>.agents/skills/</code>. Every install below puts the files in one of those two places, or adds them as a Claude Code plugin.</p>
+    <ol class="index">
+      <li><span class="n">02</span><a href="#c1">Product: menkesu/awesome-pm-skills</a><span class="st">406 stars</span></li>
+      <li><span class="n">03</span><a href="#c2">Engineering: mattpocock/skills</a><span class="st">269.6k stars</span></li>
+      <li><span class="n">04</span><a href="#c3">Design: nextlevelbuilder/ui-ux-pro-max-skill</a><span class="st">130.6k stars</span></li>
+      <li><span class="n">05</span><a href="#c4">Marketing: coreyhaines31/marketingskills</a><span class="st">51.5k stars</span></li>
+      <li><span class="n">06</span><a href="#c5">Customer support: sickn33/agentic-awesome-skills</a><span class="st">46.9k stars</span></li>
+    </ol>
+    <div class="note">I didn't write any of these repos and I earn nothing from them. The credit goes to their authors, linked in each section. Star counts are from GitHub on 26 September 2026. A skill is a set of instructions your agent may act on later, so read a <code>SKILL.md</code> before you install it.</div>
+  </div>
+</section>
+
+<section class="concept pad" id="c1">
+  <div class="concept-num"><span>02</span> &middot; Product</div>
+  <div>
+    <h2>Product. <span class="muted">Pick the problems worth solving.</span></h2>
+    <p class="lede">28 product management skills built from Lenny's Podcast transcripts, so your agent helps you work out which customer problems are worth solving before you build anything.</p>
+    <div class="shot"><img src="img/product.webp" width="1024" height="506" alt="Awesome PM Skills banner: 28 skills built from Lenny's Podcast" loading="lazy"></div>
+    <p>This is the number one skill of the future. Developing your own taste around which customer problems are worth solving is the whole game right now. The skills carry frameworks from guests like Brian Chesky, Shreyas Doshi, Marty Cagan and Teresa Torres. Built by Udi Menkes.</p>
+    <p>The README has no install command. Each skill is a top-level folder with a <code>SKILL.md</code> inside, so you clone the repo and copy those folders across. The loop skips the <code>images</code> folder.</p>
+    <p class="inst"><span>Claude Code</span> &middot; into .claude/skills</p>
+    <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>git clone https://github.com/menkesu/awesome-pm-skills.git
+mkdir -p .claude/skills
+for d in awesome-pm-skills/*/; do [ -f "$d/SKILL.md" ] &amp;&amp; cp -R "${d%/}" .claude/skills/; done</pre></div>
+    <p class="inst"><span>Codex</span> &middot; into .agents/skills</p>
+    <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>git clone https://github.com/menkesu/awesome-pm-skills.git
+mkdir -p .agents/skills
+for d in awesome-pm-skills/*/; do [ -f "$d/SKILL.md" ] &amp;&amp; cp -R "${d%/}" .agents/skills/; done</pre></div>
+    <div class="note">The loop also copies <code>one-step-better-ai-pm</code>, which needs a free GenAI PM subscription and a <code>GENAIPM_EMAIL</code> environment variable. Delete that folder if you don't want it. Once the copy is done you can delete the cloned <code>awesome-pm-skills</code> folder too.</div>
+    <p class="inst">Try these first</p>
+    <ul class="try">
+      <li><strong>zero-to-launch</strong> The idea-to-prototype playbook. Start here for anything new.</li>
+      <li><strong>strategic-build</strong> The LNO framework, which asks whether a task is leverage work or just busywork.</li>
+      <li><strong>continuous-discovery</strong> Weekly customer contact and opportunity solution trees, from Teresa Torres.</li>
+    </ul>
+    <p>You don't call them by name. Tell your agent what you're working on ("I'm starting a new AI feature") and it pulls in the right ones.</p>
+    <div class="read">
+      <div class="src">GitHub &middot; 406 stars</div>
+      <h3>menkesu/awesome-pm-skills</h3>
+      <a href="https://github.com/menkesu/awesome-pm-skills" target="_blank" rel="noopener">Open the repo &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="concept pad" id="c2">
+  <div class="concept-num"><span>03</span> &middot; Engineering</div>
+  <div>
+    <h2>Engineering. <span class="muted">Stop vibe coding.</span></h2>
+    <p class="lede">Small, composable engineering skills that give your agent a proper development process, so you can do agentic engineering even if you're not technical.</p>
+    <div class="shot"><img src="img/engineering.webp" width="738" height="388" alt="Skills for Real Engineers banner from Matt Pocock's skills repo" loading="lazy"></div>
+    <p>Matt Pocock uses these every day. They make the agent question you before it builds, write a failing test before it writes code, and keep the codebase easy to change. The README gives two ways in. Pick one: installing both leaves you with every skill twice.</p>
+    <p class="inst"><span>Claude Code</span> &middot; official plugin, updates itself</p>
+    <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>claude plugins install mattpocock-skills</pre></div>
+    <p>Or from inside a session: <code>/plugin install mattpocock-skills</code>. It's in Claude Code's official marketplace, so there's nothing to add first.</p>
+    <p class="inst"><span>Codex</span> &middot; editable files in your project</p>
+    <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>npx skills@latest add mattpocock/skills</pre></div>
+    <p>The installer asks which skills you want and which agent to install them on. Choose Codex, and make sure <code>setup-matt-pocock-skills</code> is one of the skills you take.</p>
+    <p><strong>Then, in either agent:</strong> run <code>/setup-matt-pocock-skills</code> once per repo. It asks which issue tracker you use (GitHub, Linear or local files), which labels you use for triage, and where to save the docs it creates.</p>
+    <p class="inst">Try these first</p>
+    <ul class="try">
+      <li><strong>/grill-with-docs</strong> The agent interviews you about what you're building before it starts, and writes down the shared vocabulary in <code>CONTEXT.md</code>. Matt says to use it every time you make a change.</li>
+      <li><strong>/tdd</strong> Red, green, refactor. The agent writes a failing test first, then makes it pass.</li>
+      <li><strong>/diagnosing-bugs</strong> A step-by-step debugging loop for hard bugs, ending in a regression test.</li>
+    </ul>
+    <p>Not sure which one fits? <code>/ask-matt</code> routes you to the right skill.</p>
+    <div class="read">
+      <div class="src">GitHub &middot; 269.6k stars</div>
+      <h3>mattpocock/skills</h3>
+      <a href="https://github.com/mattpocock/skills" target="_blank" rel="noopener">Open the repo &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="concept pad" id="c3">
+  <div class="concept-num"><span>04</span> &middot; Design</div>
+  <div>
+    <h2>Design. <span class="muted">No AI slop.</span></h2>
+    <p class="lede">One design skill that builds a design system for your product, so every screen your customer sees looks deliberate and none of it looks like AI slop.</p>
+    <div class="shot"><img src="img/design.webp" width="1187" height="525" alt="UI UX Pro Max, Design Intelligence: a searchable database of UI styles, colour palettes, font pairings, chart types and UX guidelines" loading="lazy"></div>
+    <p>UI UX Pro Max works out a pattern, style, colours, type and effects for your kind of product, plus a list of things to avoid. In the README's own example that list includes "AI purple/pink gradients". It needs Python 3 on your machine for its search script.</p>
+    <p class="inst"><span>Claude Code</span> &middot; two commands inside a session</p>
+    <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>/plugin marketplace add nextlevelbuilder/ui-ux-pro-max-skill
+/plugin install ui-ux-pro-max@ui-ux-pro-max-skill</pre></div>
+    <p>Or use the CLI the README recommends, from your project folder: <code>npm install -g ui-ux-pro-max-cli</code> then <code>uipro init --ai claude</code>.</p>
+    <p class="inst"><span>Codex</span> &middot; installs to .agents/skills/ui-ux-pro-max</p>
+    <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>npm install -g ui-ux-pro-max-cli
+uipro init --ai codex</pre></div>
+    <p class="inst">Try these first</p>
+    <ul class="try">
+      <li><strong>Just ask</strong> "Build a landing page for my SaaS product." The skill switches on by itself for UI work.</li>
+      <li><strong>--design-system --persist</strong> Generate a design system and save it to <code>design-system/myapp/MASTER.md</code>, so every later page follows it.</li>
+      <li><strong>--page</strong> Add a page-specific override on top of the master file, such as a dashboard.</li>
+    </ul>
+    <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>python3 .claude/skills/ui-ux-pro-max/scripts/search.py "SaaS dashboard" --design-system --persist -p "MyApp"
+python3 .claude/skills/ui-ux-pro-max/scripts/search.py "SaaS dashboard" --design-system --persist -p "MyApp" --page "dashboard"</pre></div>
+    <p>Those paths assume the CLI install for Claude Code. On Codex, swap <code>.claude/skills</code> for <code>.agents/skills</code>.</p>
+    <div class="read">
+      <div class="src">GitHub &middot; 130.6k stars</div>
+      <h3>nextlevelbuilder/ui-ux-pro-max-skill</h3>
+      <a href="https://github.com/nextlevelbuilder/ui-ux-pro-max-skill" target="_blank" rel="noopener">Open the repo &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="concept pad" id="c4">
+  <div class="concept-num"><span>05</span> &middot; Marketing</div>
+  <div>
+    <h2>Marketing. <span class="muted">Run your growth.</span></h2>
+    <p class="lede">50 marketing skills covering SEO, copywriting, conversion and paid ads, and all of them read one shared document about your product, so the advice fits your business.</p>
+    <div class="shot"><img src="img/marketing.webp" width="1200" height="630" alt="Marketing Skills: AI agent skills for conversion, copywriting, SEO, analytics, ads and growth" loading="lazy"></div>
+    <p>Built by Corey Haines. The <code>product-marketing</code> skill is the foundation. Every other skill checks it first to learn your product, audience and positioning.</p>
+    <p class="inst"><span>Claude Code</span> &middot; into .claude/skills</p>
+    <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>npx skills add coreyhaines31/marketingskills -a claude-code</pre></div>
+    <p>The README says to name the agent with <code>-a claude-code</code>. Without it, the installer can drop the skills in <code>.agents/skills/</code>, which Claude Code doesn't read. The plugin route works too: <code>/plugin marketplace add coreyhaines31/marketingskills</code> then <code>/plugin install marketing-skills</code>.</p>
+    <p class="inst"><span>Codex</span> &middot; clone and copy into .agents/skills</p>
+    <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>git clone https://github.com/coreyhaines31/marketingskills.git
+mkdir -p .agents/skills
+cp -r marketingskills/skills/* .agents/skills/</pre></div>
+    <p class="inst">Try these first</p>
+    <ul class="try">
+      <li><strong>product-marketing</strong> Run this one first. It writes the context file about your product that the other skills read.</li>
+      <li><strong>seo-audit</strong> Audits your site and diagnoses SEO problems.</li>
+      <li><strong>ads</strong> Paid campaigns on Google Ads, Meta, LinkedIn and X.</li>
+    </ul>
+    <div class="read">
+      <div class="src">GitHub &middot; 51.5k stars</div>
+      <h3>coreyhaines31/marketingskills</h3>
+      <a href="https://github.com/coreyhaines31/marketingskills" target="_blank" rel="noopener">Open the repo &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="concept pad" id="c5">
+  <div class="concept-num"><span>06</span> &middot; Customer support</div>
+  <div>
+    <h2>Support. <span class="muted">The basics of a support chatbot.</span></h2>
+    <p class="lede">One customer support skill from a library of more than 2,400, which gives your agent a support specialist's playbook for setting up a chatbot, ticketing and a help centre.</p>
+    <div class="shot"><img src="img/support.webp" width="1200" height="400" alt="Agentic Awesome Skills README hero image" loading="lazy"></div>
+    <p class="cap">The repo was renamed from antigravity-awesome-skills. Its banner still carries the old name.</p>
+    <p>You don't need the whole library for this. Install the one skill, <code>customer-support</code>. It covers chatbot setup, ticket routing and auto-tagging, and building a knowledge base and FAQ from what customers actually ask. The library's installer takes <code>--skills</code> to pick exact skills and <code>--path</code> to choose the folder. Add <code>--dry-run</code> to preview first, then run it again without it.</p>
+    <p class="inst"><span>Claude Code</span> &middot; into .claude/skills</p>
+    <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>npx agentic-awesome-skills --path .claude/skills --skills customer-support --dry-run
+npx agentic-awesome-skills --path .claude/skills --skills customer-support</pre></div>
+    <p class="inst"><span>Codex</span> &middot; into .agents/skills</p>
+    <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>npx agentic-awesome-skills --path .agents/skills --skills customer-support --dry-run
+npx agentic-awesome-skills --path .agents/skills --skills customer-support</pre></div>
+    <div class="note">The library tags this skill <code>risk: critical</code>. Before you install, run its audit, which reads the skill without running it.</div>
+    <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>npx agentic-awesome-skills audit --skills customer-support</pre></div>
+    <p class="inst">Try these first</p>
+    <ul class="try">
+      <li><strong>customer-support</strong> Ask it to plan your first support chatbot: which questions it answers, when it hands over to you, and how tickets get logged.</li>
+      <li><strong>helpdesk-automation</strong> Only if you use HelpDesk. It manages tickets, views and canned responses through Composio's Rube MCP.</li>
+    </ul>
+    <div class="read">
+      <div class="src">GitHub &middot; 46.9k stars</div>
+      <h3>sickn33/agentic-awesome-skills</h3>
+      <a href="https://github.com/sickn33/agentic-awesome-skills" target="_blank" rel="noopener">Open the repo &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="step pad" id="setup">
+  <div class="step-kicker"><span>07</span> &middot; Set up your stack</div>
+  <div>
+    <div class="rule"></div>
+    <h2>All five in one project. <span class="muted">One agent sees everything.</span></h2>
+    <p class="lede">Put every function in the same project folder, so one agent can see the whole business at once.</p>
+    <ol>
+      <li>Open a terminal where you keep your projects. The first line of each block below makes a <code>my-business</code> folder and moves into it.</li>
+      <li>Pick one agent: Claude Code or Codex. Run the block for that agent below. Two installers stop to ask you questions (Matt's skills in Codex, and the marketing skills), so answer them as you go.</li>
+      <li>Open your agent in that folder and run <code>/setup-matt-pocock-skills</code> once.</li>
+      <li>Paste the prompt at the bottom of this section. It checks the install and plans your first week.</li>
+    </ol>
+    <p class="inst"><span>Claude Code</span> &middot; the whole stack</p>
+    <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>mkdir -p my-business &amp;&amp; cd my-business &amp;&amp; git init
+mkdir -p .claude/skills
+
+# 1. Product
+git clone https://github.com/menkesu/awesome-pm-skills.git
+for d in awesome-pm-skills/*/; do [ -f "$d/SKILL.md" ] &amp;&amp; cp -R "${d%/}" .claude/skills/; done
+
+# 2. Engineering
+claude plugins install mattpocock-skills
+
+# 3. Design
+npm install -g ui-ux-pro-max-cli
+uipro init --ai claude
+
+# 4. Marketing
+npx skills add coreyhaines31/marketingskills -a claude-code
+
+# 5. Customer support
+npx agentic-awesome-skills audit --skills customer-support
+npx agentic-awesome-skills --path .claude/skills --skills customer-support</pre></div>
+    <p class="inst"><span>Codex</span> &middot; the whole stack</p>
+    <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>mkdir -p my-business &amp;&amp; cd my-business &amp;&amp; git init
+mkdir -p .agents/skills
+
+# 1. Product
+git clone https://github.com/menkesu/awesome-pm-skills.git
+for d in awesome-pm-skills/*/; do [ -f "$d/SKILL.md" ] &amp;&amp; cp -R "${d%/}" .agents/skills/; done
+
+# 2. Engineering (choose Codex, and take setup-matt-pocock-skills)
+npx skills@latest add mattpocock/skills
+
+# 3. Design
+npm install -g ui-ux-pro-max-cli
+uipro init --ai codex
+
+# 4. Marketing
+git clone https://github.com/coreyhaines31/marketingskills.git
+cp -r marketingskills/skills/* .agents/skills/
+
+# 5. Customer support
+npx agentic-awesome-skills audit --skills customer-support
+npx agentic-awesome-skills --path .agents/skills --skills customer-support</pre></div>
+    <p>Once everything is copied you can delete the cloned <code>awesome-pm-skills</code> and <code>marketingskills</code> folders.</p>
+    <p class="inst">Then paste this into Claude Code or Codex</p>
+    <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>You are my operating partner for a one-person business. This project should have five sets of skills installed:
+
+- Product: awesome-pm-skills (zero-to-launch, strategic-build, continuous-discovery and the rest)
+- Engineering: mattpocock/skills (grill-with-docs, tdd, diagnosing-bugs and the rest)
+- Design: ui-ux-pro-max
+- Marketing: marketingskills (product-marketing, seo-audit, ads and the rest)
+- Customer support: customer-support
+
+1. Check the install. Look in .claude/skills (Claude Code) or .agents/skills (Codex), and at any installed plugins. For each of the five functions, tell me whether it's there and list the skill names you found. If anything is missing, give me the exact command to fix it and stop.
+
+2. Ask me up to five questions about the business: what I sell, who it's for, where it's at today, and what I want done in the next 30 days. Wait for my answers.
+
+3. Plan my first week with one function per day. Monday is product, Tuesday engineering, Wednesday design, Thursday marketing and Friday customer support. For each day, tell me which skill you'll use, what we'll have at the end of the day, and how we'll know it worked. Keep each day to one focused task.
+
+4. Finish by telling me what to note at the end of each day about what worked and what didn't, so we can improve the skills themselves next week.</pre></div>
+    <p class="inst">If you only install one</p>
+    <ul>
+      <li><strong>If you have an idea but no product:</strong> start with product and run zero-to-launch.</li>
+      <li><strong>If you're building and it keeps breaking:</strong> start with engineering and use /tdd.</li>
+      <li><strong>If it works but looks generic:</strong> start with design and persist a design system.</li>
+      <li><strong>If nobody knows your product exists:</strong> start with marketing and run product-marketing.</li>
+      <li><strong>If customers already email you:</strong> start with customer support.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="step pad" id="harness">
+  <div class="step-kicker"><span>08</span> &middot; Why it compounds</div>
+  <div>
+    <div class="rule"></div>
+    <h2>The skills are the start. <span class="muted">The loop is what compounds.</span></h2>
+    <p class="lede">A personal harness starts with a foundational set of skills and a self-improvement loop, and then it compounds on real-world learnings.</p>
+    <p>These five repos are the foundation. They're other people's playbooks, written for everyone. What makes them yours is the loop. Every time a skill gets something wrong for your business, fix its <code>SKILL.md</code> and write down why. A month later the skills know your customers, your product and your standards.</p>
+    <p>That's how I run my own content pipeline. It's never been easier to dive in. Install one repo today and use it on real work.</p>
+  </div>
+</section>
+
+<section class="closeblock pad">
+  <h2>See what's possible. <span class="muted">Then build it.</span></h2>
+  <p>You're on the list now. Every week you'll get five useful things I made with AI, with the prompt or workflow behind each one. This stack was one of them.</p>
+  <a href="/">Back to the site</a>
+</section>
+
+</div>
+
+<footer class="pad"><span>Art of the Possible&reg;</span><span>New things are possible every day. &middot; 2026</span></footer>
+</div>
+
+<script>
+(function () {
+  var API = 'https://theaotp-gate.theaotp.workers.dev';
+  var KEY = 'aotp_solo_unlocked';
+  var kit = document.getElementById('kit');
+  var gate = document.getElementById('gate');
+  var form = document.getElementById('gate-form');
+  var status = document.getElementById('gate-status');
+
+  function unlock() {
+    kit.hidden = false;
+    gate.hidden = true;
+    try { localStorage.setItem(KEY, '1'); } catch (e) {}
+  }
+
+  try { if (localStorage.getItem(KEY) === '1') unlock(); } catch (e) {}
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    var email = document.getElementById('gate-email').value.trim().toLowerCase();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      status.textContent = 'That email looks off. Try again.';
+      return;
+    }
+    status.textContent = 'One sec…';
+    fetch(API + '/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, ctx: window.aotpCtx ? window.aotpCtx() : null }),
+    }).then(function (response) {
+      return response.json().catch(function () { return {}; }).then(function (data) {
+        if (!response.ok) {
+          var err = new Error('subscribe failed');
+          err.status = response.status;
+          err.detail = data && data.detail;
+          throw err;
+        }
+        return data;
+      });
+    }).then(function (data) {
+      if (window.aotpSubscribed) window.aotpSubscribed(data);
+      status.textContent = !(data && data.new) ? 'Welcome back. Unlocked.'
+        : data.member === false ? 'Unlocked. Check your inbox to confirm your subscription to the letter.'
+        : 'Unlocked. You\'re on the list for the weekly letter.';
+      unlock();
+      window.scrollTo({ top: document.getElementById('first').offsetTop - 40, behavior: 'smooth' });
+    }).catch(function (err) {
+      if (err && err.status === 400) {
+        status.textContent = 'That email was rejected' + (err.detail ? ' (' + err.detail + ')' : '') + '. Try a different address.';
+      } else {
+        status.textContent = 'Something broke on our end. Try again in a minute, or subscribe on the homepage and DM me on Instagram for the stack.';
+      }
+    });
+  });
+
+  document.querySelectorAll('[data-copy]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      var pre = button.parentElement.querySelector('pre');
+      navigator.clipboard.writeText(pre.textContent).then(function () {
+        button.textContent = 'Copied';
+        setTimeout(function () { button.textContent = 'Copy'; }, 1600);
+      });
+    });
+  });
+})();
+</script>
+</body></html>
