@@ -1,0 +1,447 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Learn From Any Creator Skill | Art of the Possible</title>
+<meta name="description" content="A Claude Code and Codex skill that turns any Instagram creator's Reels and free guides into skills for your own work, plus a tested prompt to try it on my page first.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://theaotp.com/learn/">
+<link rel="icon" href="/qualia-symbol.png">
+<meta property="og:title" content="The Learn From Any Creator Skill | Art of the Possible">
+<meta property="og:description" content="A skill that turns a creator's Reels and guides into skills for Claude Code and Codex.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<!--
+Sources (both copied verbatim into #kit, 2026-09-27):
+  content-intelligence pipeline/5-script/assets/creator-to-skills/kit/learn-from-creator/SKILL.md  (section 03 + /learn/learn-from-creator/SKILL.md download)
+  content-intelligence pipeline/5-script/assets/creator-to-skills/prompt/aotp-page-to-skills.md     (section 05, tested live 2026-09-27)
+Credits: https://github.com/yt-dlp/yt-dlp  https://github.com/SYSTRAN/faster-whisper  Claude in Chrome: https://claude.ai/chrome
+-->
+<style>:root{--paper:#fdfdfb;--canvas:#e9e9e6;--rule:#e4e4e0;--ink:#121210;--muted:#9c9c96;--soft:#52524d;--azure:#0096ff;--display:'Inter Tight','Helvetica Neue',Arial,sans-serif;--ui:Inter,'Helvetica Neue',Arial,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--ui);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.page{max-width:1280px;margin:0 auto;background:var(--paper);min-height:100vh}
+.pad{padding-left:clamp(22px,4.5vw,58px);padding-right:clamp(22px,4.5vw,58px)}
+nav{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--rule);padding-top:25px;padding-bottom:25px}
+.lockup{display:flex;align-items:center;gap:11px;text-decoration:none}.lockup img{width:25px;height:25px}
+.wordmark{font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:.055em;text-transform:uppercase}
+.navlinks{display:flex;gap:24px;font-size:14px}.navlinks a{text-decoration:none;color:var(--soft)}.navlinks a:hover{color:var(--ink)}
+.eyebrow{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
+h1,h2,h3{font-family:var(--display);letter-spacing:-.038em;line-height:1.01;margin:0}
+h1{font-size:clamp(42px,6.2vw,82px);max-width:15ch}
+.muted{color:var(--muted)}
+.kit-head{padding-top:90px;padding-bottom:58px}
+.dek{max-width:58ch;color:var(--soft);margin:24px 0 0;font-size:17px}
+.gate{border-top:1px solid var(--ink);padding-top:44px;padding-bottom:80px}
+.gate-grid{display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px}
+.gate h2{font-size:clamp(26px,3vw,38px);max-width:22ch}
+.gate p{max-width:56ch;color:var(--soft)}
+.gate form{display:flex;flex-wrap:wrap;align-items:stretch;max-width:480px;margin-top:26px}
+.gate input{min-width:0;flex:1 1 100%;border:0;border-bottom:2px solid var(--ink);background:transparent;padding:15px 0;font:inherit;color:var(--ink);outline:none}
+.gate input::placeholder{color:var(--muted)}
+.gate button{border:0;background:transparent;cursor:pointer;padding:16px 0 4px;text-align:left;font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+.gate button:hover{opacity:.6}
+.gate-small{font-size:13px;color:var(--muted);margin-top:14px}
+.gate-status{font-size:13px;color:var(--ink);min-height:1.3em;margin-top:6px}
+.step{display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px;border-top:1px solid var(--ink);padding-top:56px;padding-bottom:72px}
+.step-kicker{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.step h2{font-size:clamp(30px,3.8vw,50px);max-width:18ch}
+.step .lede{font-family:var(--display);font-size:19px;font-weight:600;line-height:1.35;max-width:54ch;margin:18px 0 26px}
+.step p{color:var(--soft);max-width:64ch}
+.step ul,.step ol{color:var(--soft);max-width:64ch;padding-left:20px}
+.step li{margin-bottom:9px}
+.rule{height:3px;width:52px;background:var(--azure);margin:0 0 20px}
+.note{border-left:3px solid var(--muted);padding:2px 0 2px 18px;margin:26px 0;max-width:62ch;color:var(--soft);font-size:15px}
+.index{list-style:none;padding:0;margin:26px 0 0;max-width:66ch;counter-reset:idx}
+.index li{border-top:1px solid var(--rule);padding:14px 0;display:flex;gap:18px;align-items:baseline;font-size:15.5px;color:var(--soft)}
+.index .n{font-family:var(--display);font-weight:700;font-size:13px;color:var(--azure);min-width:26px}
+.index a{text-decoration:none;font-family:var(--display);font-weight:600;font-size:17px;color:var(--ink);letter-spacing:-.01em}
+.index a:hover{border-bottom:2px solid var(--azure)}
+.index .st{margin-left:auto;font-size:13px;color:var(--muted);white-space:nowrap}
+.concept{border-top:1px solid var(--ink);padding-top:52px;padding-bottom:60px;display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px;scroll-margin-top:20px}
+.concept-num{font-family:var(--display);font-weight:800;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.concept-num span{color:var(--azure)}
+.concept h2{font-size:clamp(28px,3.4vw,44px);max-width:20ch}
+.concept .lede{font-family:var(--display);font-size:19px;font-weight:600;line-height:1.35;max-width:54ch;margin:18px 0 22px}
+.concept p{color:var(--soft);max-width:64ch}
+.concept ul{color:var(--soft);max-width:64ch;padding-left:20px}
+.concept li{margin-bottom:9px}
+.read{border:1px solid var(--rule);border-left:7px solid var(--azure);padding:22px 24px;margin:30px 0 0;max-width:720px}
+.read .src{font-family:var(--display);font-weight:700;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.read h3{font-size:19px;margin:8px 0 14px;max-width:44ch;line-height:1.2;overflow-wrap:anywhere}
+.read a{display:inline-block;font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;border-bottom:2px solid var(--azure);padding-bottom:2px}
+.read a:hover{color:var(--azure)}
+.closeblock{background:var(--ink);color:var(--paper);padding-top:82px;padding-bottom:88px}
+.closeblock h2{font-size:clamp(36px,5vw,64px);max-width:15ch}
+.closeblock .muted{color:#b7b7b1}
+.closeblock p{max-width:56ch;color:#b7b7b1;margin-top:20px}
+.closeblock a{display:inline-block;margin-top:30px;background:var(--paper);color:var(--ink);padding:14px 22px;text-decoration:none;font-family:var(--display);font-weight:700}
+footer{display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--rule);padding-top:28px;padding-bottom:32px;color:var(--soft);font-size:13px}
+[hidden]{display:none!important}
+.promptbox{position:relative;background:#f3f3ef;border-left:7px solid var(--ink);margin-top:14px;max-width:820px}
+.promptbox pre{margin:0;padding:26px 28px;padding-right:110px;overflow-x:auto;font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:13px;line-height:1.75;white-space:pre-wrap;overflow-wrap:anywhere;color:var(--ink)}
+.copybtn{position:absolute;top:0;right:0;border:0;cursor:pointer;background:var(--ink);color:var(--paper);font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding:12px 18px}
+.copybtn:hover{opacity:.85}
+code{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f3ef;padding:1px 5px;border-radius:3px;white-space:nowrap}
+.shot{margin:4px 0 26px;max-width:720px}
+.shot img{width:100%;height:auto;display:block;border:1px solid var(--rule);border-radius:6px;background:#fff}
+.cap{font-size:13px;color:var(--muted);margin:8px 0 0;max-width:64ch}
+.inst{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);margin:30px 0 0}
+.inst span{color:var(--azure)}
+.try{list-style:none;padding:0!important;margin:14px 0 0;max-width:66ch}
+.try li{border-top:1px solid var(--rule);padding:14px 0;margin:0!important;color:var(--soft)}
+.try strong{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:14.5px;color:var(--ink);margin-right:6px}
+@media(max-width:800px){.navlinks{display:none}.kit-head{padding-top:58px}.gate-grid,.step,.concept{grid-template-columns:1fr;gap:18px}.gate-grid>*,.step>*,.concept>*{min-width:0}.copybtn{position:static;display:inline-block;margin:0 0 0 28px}.promptbox pre{padding-right:28px}.index li{flex-wrap:wrap;gap:4px 18px}.index .st{margin-left:44px;width:100%}code{white-space:normal;overflow-wrap:anywhere}}
+/* --- learn kit additions --- */
+.lessons{list-style:none;padding:0;margin:26px 0 0;max-width:66ch}
+.lessons li{border-top:1px solid var(--rule);padding:20px 0;margin:0;color:var(--soft)}
+.lessons strong{display:block;font-family:var(--display);font-size:17px;color:var(--ink);margin-bottom:6px;letter-spacing:-.01em}
+table{border-collapse:collapse;width:100%;max-width:720px;margin:22px 0;font-size:14.5px}
+th,td{text-align:left;padding:12px 14px 12px 0;border-bottom:1px solid var(--rule);vertical-align:top;color:var(--soft)}
+th{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+td:first-child{color:var(--ink);font-weight:600;white-space:nowrap;padding-right:24px}
+td code{white-space:normal;overflow-wrap:anywhere}
+@media(max-width:800px){td:first-child{white-space:normal}}
+.dl{display:flex;flex-wrap:wrap;align-items:center;gap:18px 28px;border:1px solid var(--rule);border-left:7px solid var(--azure);padding:24px 26px;margin:28px 0 0;max-width:720px}
+.dl-btn{display:inline-block;background:var(--ink);color:var(--paper);padding:15px 24px;text-decoration:none;font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:.03em}
+.dl-btn:hover{opacity:.85}
+.dl-meta{font-size:14px;color:var(--soft);line-height:1.5}
+.dl-meta strong{display:block;color:var(--ink);font-family:var(--display);font-size:16px}
+.lessons .k{font-family:var(--display);font-weight:700;color:var(--azure);margin-right:8px}
+.promptbox.tall pre{max-height:560px;overflow-y:auto}
+td a{text-decoration:none;border-bottom:2px solid var(--azure)}
+.note a{text-decoration:none;border-bottom:2px solid var(--azure)}
+</style><script src="/f.js"></script>
+</head><body>
+<div class="page">
+<nav class="pad"><a class="lockup" href="/"><img src="/qualia-symbol.png" alt=""><span class="wordmark">Art of the Possible<sup>&reg;</sup></span></a><div class="navlinks"><a href="/">Home</a><a href="/letters/">Archive</a><a href="/#about">About</a></div></nav>
+
+<header class="kit-head pad">
+  <div class="eyebrow">The Learn From Any Creator Skill &middot; From the Reel</div>
+  <h1 style="margin-top:26px">Any creator's Reels. <span class="muted">Turned into skills you can use.</span></h1>
+  <p class="dek">You commented "LEARN". Here it is. A skill for Claude Code and Codex that goes to any creator's Instagram page, downloads their Reels, pulls out what they teach, collects the guides they give away and writes the useful parts into skills in your setup. You also get the prompt I tested on my own page, so you can watch it work before you point it at anyone else. There's no course here and nothing to buy.</p>
+</header>
+
+<section class="gate pad" id="gate">
+  <div class="gate-grid">
+    <div class="eyebrow">Unlock the skill</div>
+    <div>
+      <h2>Drop your email and the skill unlocks on this page.</h2>
+      <p>You'll also get the weekly letter: five useful things I made with AI, with the prompts and workflows inside. Unsubscribe any time.</p>
+      <form id="gate-form" novalidate>
+        <label for="gate-email" style="position:absolute;left:-9999px">Email address</label>
+        <input id="gate-email" type="email" name="email" placeholder="you@somewhere.com" autocomplete="email" required>
+        <button type="submit">Unlock the guide and subscribe to AOTP</button>
+      </form>
+      <p class="gate-status" id="gate-status" aria-live="polite"></p>
+      <p class="gate-small">Already on the list? Enter the same email and it unlocks without subscribing you twice.</p>
+      <noscript><p class="gate-small">This page needs JavaScript to unlock. Or just subscribe on <a href="/">the homepage</a> and reply to any letter for the skill.</p></noscript>
+    </div>
+  </div>
+</section>
+
+<!-- EVERYTHING OF VALUE LIVES INSIDE #kit. Nothing valuable outside it. -->
+<div id="kit" hidden>
+
+<section class="step pad" id="first">
+  <div class="step-kicker"><span>01</span> &middot; What it does</div>
+  <div>
+    <div class="rule"></div>
+    <h2>Eight steps. <span class="muted">All from what the creator said.</span></h2>
+    <p class="lede">You name a creator and what you want to get better at. Claude does the scrolling, downloading, transcribing and commenting, then writes the skills.</p>
+    <ul class="lessons">
+      <li><strong><span class="k">1</span>It asks first.</strong>Which creator, what you're trying to get better at, how many Reels (20 by default), which email to use when a guide page asks for one, and whether it can follow, like, save and comment from your account. It shows you every comment before it posts. No creator in mind? It finds some for you.</li>
+      <li><strong><span class="k">2</span>It sets up.</strong>It checks for ffmpeg, yt-dlp and faster-whisper, installs whatever is missing, and makes a working folder for the creator.</li>
+      <li><strong><span class="k">3</span>It collects the Reels.</strong>It opens the creator's page in your Chrome, follows them, saves the latest Reel links and captions, then likes and saves each Reel.</li>
+      <li><strong><span class="k">4</span>It downloads and transcribes.</strong>yt-dlp downloads each video and faster-whisper writes the transcript. If a download fails, it notes it and moves on.</li>
+      <li><strong><span class="k">5</span>It finds the guides.</strong>Every "comment X", "DM me X" or "link in bio for X" goes on a list with what the creator promised, marked against what you want to learn.</li>
+      <li><strong><span class="k">6</span>It comments and collects.</strong>For each guide you approve, it comments the keyword, checks your DMs, opens the guide and saves the whole unlocked page.</li>
+      <li><strong><span class="k">7</span>It writes the skills.</strong>It groups the lessons by the job they help with, keeps only the ones that serve your goal, and writes a <code>SKILL.md</code> for each, with the creator's exact prompts and a <code>Why:</code> line citing the Reel or guide.</li>
+      <li><strong><span class="k">8</span>It reports back.</strong>You get the skills it made and where each came from, the five tips that matter most for you, and one thing to try today.</li>
+    </ul>
+    <div class="note">It works from what the creator actually said and shared. The skill tells Claude never to invent a lesson, step or link, and never to guess a guide's URL. If a guide says to install someone else's repo or skill, Claude lists it and asks you before installing anything.</div>
+  </div>
+</section>
+
+<section class="step pad" id="install">
+  <div class="step-kicker"><span>02</span> &middot; Install it</div>
+  <div>
+    <div class="rule"></div>
+    <h2>One file. <span class="muted">In the folder your agent reads.</span></h2>
+    <p class="lede">A skill is a single <code>SKILL.md</code> file in a folder your agent reads. Put this one there and it switches on when you say "learn from @handle".</p>
+    <p class="inst"><span>Claude Code</span> &middot; paste this prompt</p>
+    <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>Create the file ~/.claude/skills/learn-from-creator/SKILL.md (make the folders if they don't exist), put the text I paste below into it exactly as written, then tell me the skill is installed.</pre></div>
+    <p>Paste that prompt, then paste the skill from section 03 straight underneath it and send them as one message.</p>
+    <p class="inst"><span>Or in a terminal</span> &middot; downloads the same file</p>
+    <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>mkdir -p ~/.claude/skills/learn-from-creator &amp;&amp; curl -fsSL https://theaotp.com/learn/learn-from-creator/SKILL.md -o ~/.claude/skills/learn-from-creator/SKILL.md</pre></div>
+    <p class="inst">Or put it there yourself</p>
+    <table>
+      <tr><th>Agent</th><th>Where the file goes</th></tr>
+      <tr><td>Claude Code</td><td><code>~/.claude/skills/learn-from-creator/SKILL.md</code></td></tr>
+      <tr><td>Codex</td><td><code>~/.agents/skills/learn-from-creator/SKILL.md</code>, or <code>.agents/skills/learn-from-creator/SKILL.md</code> inside one project</td></tr>
+    </table>
+    <div class="dl">
+      <a class="dl-btn" href="/learn/learn-from-creator/SKILL.md" download="SKILL.md">Download SKILL.md</a>
+      <div class="dl-meta"><strong>learn-from-creator/SKILL.md</strong>5 KB &middot; the same text as section 03</div>
+    </div>
+    <div class="note">On Codex, the skill still says to write new skills to <code>~/.claude/skills/</code>. Tell Codex to write them to <code>~/.agents/skills/</code> instead. If Claude Code or Codex was already open when you installed it, restart it so it picks up the new skill.</div>
+  </div>
+</section>
+
+<section class="step pad" id="skill">
+  <div class="step-kicker"><span>03</span> &middot; The skill</div>
+  <div>
+    <div class="rule"></div>
+    <h2>The whole skill. <span class="muted">Read it before you install it.</span></h2>
+    <p class="lede">This is the full <code>SKILL.md</code>. Read it first, so you know exactly what it will do with your Instagram account.</p>
+    <div class="promptbox tall"><button class="copybtn" data-copy>Copy</button><pre>---
+name: learn-from-creator
+description: Turn an Instagram creator's Reels and the guides they give away into Claude skills you can use in your own work. Use when I say "learn from @handle", "turn this creator into skills", "what does @handle teach", or ask you to find creators who teach a skill I want to build.
+---
+
+# Learn from a creator
+
+You take a creator's recent Instagram Reels, pull out what they teach, collect the free guides they offer ("comment X and I'll send you Y"), and turn the useful parts into skills in `~/.claude/skills/`. You work from what the creator actually said and shared. Never invent a lesson, step or link.
+
+## 1. Ask first, then wait for my answers
+
+1. **Which creator?** An Instagram handle. If I don't have one, ask what I want to learn and go to step 1b.
+2. **What am I trying to get better at?** One or two sentences, such as "running ads for my bakery" or "using Claude Code for data analysis". Everything after this gets filtered through it.
+3. **How many Reels?** Default to the 20 most recent.
+4. **Which email should you use when a guide page asks for one?** It has to be a real address. Most pages reject made-up ones.
+5. **Can you follow, like, save and comment from my Instagram account?** Show me each comment before you post it.
+
+### 1b. Finding creators (only if I didn't name one)
+
+Search Instagram and the web for creators who teach what I said I want to learn. Look for people who show their work on screen and give away guides, prompts or templates. Show me up to five, each with one line on what they teach and a link to a Reel that proves it, then let me pick.
+
+## 2. Set up
+
+- Check for, and install if missing: `ffmpeg` and `yt-dlp` (on a Mac, use Homebrew), plus the `faster-whisper` Python package. Install faster-whisper in a virtual environment in the working folder (`python3 -m venv .venv`), or run it with `uv`, so it doesn't fight the system Python.
+- I need to be logged in to Instagram in Chrome. Drive the browser with the Claude in Chrome extension. If it isn't connected, tell me to install it from claude.ai/chrome and wait.
+- Make a working folder `learning/&lt;handle&gt;/` with `videos/`, `transcripts/` and `guides/` inside it.
+
+## 3. Collect the Reels
+
+1. Open `instagram.com/&lt;handle&gt;` and follow the account if I'm not already following it.
+2. Open the Reels tab and collect the most recent N Reel links, newest first. The grid loads slowly, so scroll one screen at a time and wait for new tiles. Save each link and its full caption to `reels.md`.
+3. Open each Reel at `instagram.com/p/&lt;shortcode&gt;/` (the post opens with its buttons), like it and save it with the bookmark icon. Skip any that are already liked or saved.
+
+## 4. Download and transcribe
+
+Download each Reel with `yt-dlp -o "videos/%(id)s.%(ext)s" --write-info-json &lt;link&gt;` (add `--cookies-from-browser chrome` if Instagram blocks it). Transcribe each one with faster-whisper (`small.en` is enough) and save the caption plus transcript to `transcripts/&lt;shortcode&gt;.md`. If a download fails, note it and keep going.
+
+## 5. Find the guides
+
+Read every transcript and caption. Whenever the creator says "comment X", "DM me X" or "link in bio for X", record the Reel, the keyword and what they promised. Show me the list, marking the ones that match what I want to get better at.
+
+## 6. Comment and collect
+
+1. For each guide I approve, comment exactly the keyword on its Reel. Click the **Post** button (pressing Enter doesn't always post) and check the comment appears under my name. Leave about a minute between comments so Instagram doesn't flag the account.
+2. Open `instagram.com/direct/inbox` and check **Requests** too. Creators' automations reply by DM, usually within a minute.
+3. If a DM asks me to confirm I follow and mentions a button, stop and ask me to tap it in the Instagram app on my phone. Those buttons don't show up on the Instagram website, and typing the words doesn't work. The guide arrives in the same chat once I've tapped it.
+4. Open each guide link. If the page asks for an email, use the one I gave you. Save the whole unlocked page (text, prompts, code blocks and links) to `guides/&lt;keyword&gt;.md`.
+5. If a guide hasn't arrived after a few minutes, move on and check again at the end. Never guess a guide's URL.
+
+## 7. Write the skills
+
+Group the lessons from the transcripts and guides by the job they help with, and keep only the groups that serve what I want to get better at. For each group, write `~/.claude/skills/&lt;name&gt;/SKILL.md`:
+
+- a short, clear `name` and a `description` that says when to use it
+- the steps, keeping the creator's exact prompts, commands and settings
+- a `Why:` line citing the Reel link or guide each part came from
+
+Don't add steps that aren't in the source material. If a guide tells you to install someone else's repo or skill, list it and ask me before installing it, and read its SKILL.md first.
+
+## 8. Report back
+
+Tell me which skills you made, what each is for and where it came from. Then give me the five tips from these Reels that matter most for what I want to get better at, and the one thing I should try today.
+</pre></div>
+  </div>
+</section>
+
+<section class="step pad" id="steer">
+  <div class="step-kicker"><span>04</span> &middot; Steer it</div>
+  <div>
+    <div class="rule"></div>
+    <h2>Tell it what you want. <span class="muted">Then it knows what to look for.</span></h2>
+    <p class="lede">Your answer to "what am I trying to get better at?" decides which guides it comments for, which lessons it keeps and which skills it writes.</p>
+    <p>Name the job, who it's for and the tool you use. A vague answer gets you vague skills.</p>
+    <table>
+      <tr><th>Vague</th><th>Better</th></tr>
+      <tr><td>"Marketing"</td><td>"Running Instagram ads for my bakery"</td></tr>
+      <tr><td>"AI"</td><td>"Using Claude Code to clean and analyse the spreadsheets my sales team sends me"</td></tr>
+      <tr><td>"Content"</td><td>"Writing hooks for short videos about personal finance"</td></tr>
+      <tr><td>"Productivity"</td><td>"Automating the onboarding emails I send new clients"</td></tr>
+    </table>
+    <p><strong>No creator in mind?</strong> Leave the handle out and tell it what you want to learn. Step 1b searches Instagram and the web for creators who teach it and show their work, lists up to five with a Reel that proves each one, and lets you pick. You can ask in one line: "Find me creators who teach Claude Code for data analysis, then learn from the one I pick."</p>
+  </div>
+</section>
+
+<section class="step pad" id="try">
+  <div class="step-kicker"><span>05</span> &middot; Try it on my page</div>
+  <div>
+    <div class="rule"></div>
+    <h2>Start with mine. <span class="muted">It's already been tested.</span></h2>
+    <p class="lede">This prompt runs the same steps on @artofthepossible.ai. I tested it live on 27 September 2026.</p>
+    <p>Paste it into Claude Code or Codex. It asks you three questions and waits for your answers. Then it follows me, collects my last 20 Reels, comments for the guides that match what you want, and turns what it finds into skills.</p>
+    <div class="promptbox tall"><button class="copybtn" data-copy>Copy</button><pre>I want to learn everything @artofthepossible.ai teaches on Instagram and turn it into skills you can use in my work. Work through the steps below in order.
+
+Before you start, ask me three things and wait for my answers:
+1. What do I want to get better at with AI? (Use this to decide which lessons and guides matter most.)
+2. Which email should you use when a guide page asks for one? (It has to be a real address. The pages reject made-up ones.)
+3. Am I OK with you following @artofthepossible.ai and liking, saving and commenting on his Reels from my Instagram account? Show me each comment before you post it.
+
+Step 0. Set up what you need
+- Check for, and install if missing: ffmpeg and yt-dlp (on a Mac, use Homebrew), plus the faster-whisper Python package for transcripts. Install faster-whisper inside a virtual environment in the working folder (python3 -m venv .venv), or run it with uv, so it doesn't fight the system Python.
+- I need to be logged in to Instagram in Chrome. Use the Claude in Chrome extension to drive the browser. If it isn't connected, tell me how to install it (claude.ai/chrome) and wait.
+- Make a working folder called aotp-learning with videos/, transcripts/, guides/ and skills/ inside it.
+
+Step 1. Follow
+Open instagram.com/artofthepossible.ai and follow the account if I'm not already following it.
+
+Step 2. Collect the last 20 Reels
+Open the Reels tab and collect the 20 most recent Reel links, newest first. The grid loads slowly, so scroll a screen at a time and wait for new tiles. For each one save the link and the full caption to reels.md.
+
+Step 2b. Like and save
+Open each of the 20 Reels (use the instagram.com/p/&lt;shortcode&gt;/ link so the post opens with its buttons), like it and save it with the bookmark icon. Skip any that are already liked or saved.
+
+Step 3. Download and transcribe
+Download each Reel with yt-dlp (add --cookies-from-browser chrome if Instagram blocks the download). Transcribe each one with faster-whisper and save the text to transcripts/&lt;shortcode&gt;.md. If a download fails, skip that Reel, note it, and keep going.
+
+Step 4. Find the guides
+Read every transcript and caption. Whenever Rich says "comment X" or "DM me X", record the keyword and what he promised to send. List them all for me.
+
+Step 5. Comment
+For each guide that matches what I told you I want to learn, show me the keyword and wait for my OK. Then comment exactly that keyword on the Reel. Click the Post button to send it (pressing Enter doesn't always post), and check that the comment appears under your name. Post one comment per Reel and pause about a minute between comments so Instagram doesn't flag the account.
+
+Step 6. Collect the guides from my DMs
+Open instagram.com/direct/inbox (check Requests too). Each comment triggers a DM from @artofthepossible.ai. If the first DM asks you to confirm you follow, stop and ask me to tap the "I'm following" button in the Instagram app on my phone. That button doesn't show up on the Instagram website, and typing the words doesn't work. Once I've tapped it, the guide link arrives in the same chat. Open each link, enter the email I gave you when the page asks, and save the whole unlocked page (text, prompts, code and links) to guides/&lt;keyword&gt;.md. If a DM hasn't arrived after a few minutes, move on and check again at the end.
+
+Step 7. Turn it into skills
+Group the lessons from the transcripts and the guides by the job they help with. For each group, write a Claude Code skill at ~/.claude/skills/&lt;name&gt;/SKILL.md. Give it a clear name and a description that says when to use it. Keep the exact prompts and steps from the guides, and add a short "Why" line citing the Reel or guide it came from. Don't invent steps that aren't in the source material.
+
+Step 8. Report back
+Tell me which skills you made and which Reel or guide each came from. Then give me the five tips from these videos that matter most for what I said I want to get better at, and the first thing I should try today.
+</pre></div>
+  </div>
+</section>
+
+<section class="step pad" id="needs">
+  <div class="step-kicker"><span>06</span> &middot; What it needs</div>
+  <div>
+    <div class="rule"></div>
+    <h2>What it needs. <span class="muted">And where you step in.</span></h2>
+    <p class="lede">It runs on your computer with free tools, and it stops and asks when it hits something only you can do.</p>
+    <table>
+      <tr><th>You need</th><th>What it's for</th></tr>
+      <tr><td><a href="https://github.com/yt-dlp/yt-dlp" target="_blank" rel="noopener">yt-dlp</a></td><td>Downloads the Reels.</td></tr>
+      <tr><td>ffmpeg</td><td>Handles the video and audio files.</td></tr>
+      <tr><td><a href="https://github.com/SYSTRAN/faster-whisper" target="_blank" rel="noopener">faster-whisper</a></td><td>Transcribes each Reel on your own machine.</td></tr>
+      <tr><td>Claude in Chrome</td><td>Lets Claude drive your browser. Install it from <a href="https://claude.ai/chrome" target="_blank" rel="noopener">claude.ai/chrome</a>.</td></tr>
+      <tr><td>Instagram in Chrome</td><td>Be logged in, because it follows, likes, saves and comments as you.</td></tr>
+    </table>
+    <p>If yt-dlp or ffmpeg is missing, the skill installs it (with Homebrew on a Mac). It puts faster-whisper in a virtual environment inside the working folder, so it doesn't fight your system Python.</p>
+    <p class="inst">Where it stops</p>
+    <ul>
+      <li>Some creators' DMs ask you to tap an "I'm following" button. That button only shows in the Instagram app on your phone, and typing the words doesn't work, so Claude stops and asks you to tap it. The guide arrives in the same chat once you have.</li>
+      <li>Guide pages need a real email. Most reject made-up addresses, so give it one you check.</li>
+      <li>It shows you each comment before it posts, and leaves about a minute between comments so Instagram doesn't flag your account.</li>
+    </ul>
+    <div class="note">yt-dlp and faster-whisper are other people's open source projects. I didn't write them and I earn nothing from them. Credit goes to their maintainers: <a href="https://github.com/yt-dlp/yt-dlp" target="_blank" rel="noopener">github.com/yt-dlp/yt-dlp</a> and <a href="https://github.com/SYSTRAN/faster-whisper" target="_blank" rel="noopener">github.com/SYSTRAN/faster-whisper</a>.</div>
+  </div>
+</section>
+
+<section class="step pad" id="next">
+  <div class="step-kicker"><span>07</span> &middot; What to do now</div>
+  <div>
+    <div class="rule"></div>
+    <h2>Pick one. <span class="muted">Run it today.</span></h2>
+    <p class="lede">Run it once today, on one creator, with one clear goal.</p>
+    <ul>
+      <li><strong>If you want to see it work first:</strong> paste the prompt from section 05 and run it on my page.</li>
+      <li><strong>If you already learn from someone:</strong> install the skill (section 02) and say "learn from @theirhandle".</li>
+      <li><strong>If you don't know who to learn from:</strong> install it and tell it what you want to get better at. It finds the creators for you.</li>
+      <li><strong>If you use Codex:</strong> put the file in <code>~/.agents/skills/</code> and tell it to write the new skills there too.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="closeblock pad">
+  <h2>See what's possible. <span class="muted">Then build it.</span></h2>
+  <p>You're on the list now. Every week you'll get five useful things I made with AI, with the prompt or workflow behind each one. This skill was one of them.</p>
+  <a href="/">Back to the site</a>
+</section>
+
+</div>
+
+<footer class="pad"><span>Art of the Possible&reg;</span><span>New things are possible every day. &middot; 2026</span></footer>
+</div>
+
+<script>
+(function () {
+  var API = 'https://theaotp-gate.theaotp.workers.dev';
+  var KEY = 'aotp_learn_unlocked';
+  var kit = document.getElementById('kit');
+  var gate = document.getElementById('gate');
+  var form = document.getElementById('gate-form');
+  var status = document.getElementById('gate-status');
+
+  function unlock() {
+    kit.hidden = false;
+    gate.hidden = true;
+    try { localStorage.setItem(KEY, '1'); } catch (e) {}
+  }
+
+  try { if (localStorage.getItem(KEY) === '1') unlock(); } catch (e) {}
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    var email = document.getElementById('gate-email').value.trim().toLowerCase();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      status.textContent = 'That email looks off. Try again.';
+      return;
+    }
+    status.textContent = 'One sec…';
+    fetch(API + '/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, ctx: window.aotpCtx ? window.aotpCtx() : null }),
+    }).then(function (response) {
+      return response.json().catch(function () { return {}; }).then(function (data) {
+        if (!response.ok) {
+          var err = new Error('subscribe failed');
+          err.status = response.status;
+          err.detail = data && data.detail;
+          throw err;
+        }
+        return data;
+      });
+    }).then(function (data) {
+      if (window.aotpSubscribed) window.aotpSubscribed(data);
+      status.textContent = !(data && data.new) ? 'Welcome back. Unlocked.'
+        : data.member === false ? 'Unlocked. Check your inbox to confirm your subscription to the letter.'
+        : 'Unlocked. You\'re on the list for the weekly letter.';
+      unlock();
+      window.scrollTo({ top: document.getElementById('first').offsetTop - 40, behavior: 'smooth' });
+    }).catch(function (err) {
+      if (err && err.status === 400) {
+        status.textContent = 'That email was rejected' + (err.detail ? ' (' + err.detail + ')' : '') + '. Try a different address.';
+      } else {
+        status.textContent = 'Something broke on our end. Try again in a minute, or subscribe on the homepage and DM me on Instagram for the skill.';
+      }
+    });
+  });
+
+  document.querySelectorAll('[data-copy]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      var pre = button.parentElement.querySelector('pre');
+      navigator.clipboard.writeText(pre.textContent).then(function () {
+        button.textContent = 'Copied';
+        setTimeout(function () { button.textContent = 'Copy'; }, 1600);
+      });
+    });
+  });
+})();
+</script>
+</body></html>
