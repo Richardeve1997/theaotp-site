@@ -12,7 +12,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <!--
 Sources (both copied verbatim into #kit, 2026-09-27):
-  content-intelligence pipeline/5-script/assets/creator-to-skills/kit/learn-from-creator/SKILL.md  (section 03 + /learn/learn-from-creator/SKILL.md download)
+  content-intelligence pipeline/5-script/assets/creator-to-skills/kit/learn-from-creator/SKILL.md  (section 03 + learn-from-creator/SKILL.md inside /learn/learn-from-creator.zip)
   content-intelligence pipeline/5-script/assets/creator-to-skills/prompt/aotp-page-to-skills.md     (section 05, tested live 2026-09-27)
 Credits: https://github.com/yt-dlp/yt-dlp  https://github.com/SYSTRAN/faster-whisper  Claude in Chrome: https://claude.ai/chrome
 -->
@@ -173,7 +173,7 @@ td a{text-decoration:none;border-bottom:2px solid var(--azure)}
     <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>Create the file ~/.claude/skills/learn-from-creator/SKILL.md (make the folders if they don't exist), put the text I paste below into it exactly as written, then tell me the skill is installed.</pre></div>
     <p>Paste that prompt, then paste the skill from section 03 straight underneath it and send them as one message.</p>
     <p class="inst"><span>Or in a terminal</span> &middot; downloads the same file</p>
-    <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>mkdir -p ~/.claude/skills/learn-from-creator &amp;&amp; curl -fsSL https://theaotp.com/learn/learn-from-creator/SKILL.md -o ~/.claude/skills/learn-from-creator/SKILL.md</pre></div>
+    <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>mkdir -p ~/.claude/skills &amp;&amp; cd ~/.claude/skills &amp;&amp; curl -fsSLO https://theaotp.com/learn/learn-from-creator.zip &amp;&amp; unzip -o learn-from-creator.zip &amp;&amp; rm learn-from-creator.zip</pre></div>
     <p class="inst">Or put it there yourself</p>
     <table>
       <tr><th>Agent</th><th>Where the file goes</th></tr>
@@ -181,8 +181,8 @@ td a{text-decoration:none;border-bottom:2px solid var(--azure)}
       <tr><td>Codex</td><td><code>~/.agents/skills/learn-from-creator/SKILL.md</code>, or <code>.agents/skills/learn-from-creator/SKILL.md</code> inside one project</td></tr>
     </table>
     <div class="dl">
-      <a class="dl-btn" href="/learn/learn-from-creator/SKILL.md" download="SKILL.md">Download SKILL.md</a>
-      <div class="dl-meta"><strong>learn-from-creator/SKILL.md</strong>5 KB &middot; the same text as section 03</div>
+      <a class="dl-btn" href="/learn/learn-from-creator.zip" download>Download the skill (.zip)</a>
+      <div class="dl-meta"><strong>learn-from-creator.zip</strong>3 KB &middot; one folder with the <code>SKILL.md</code> from section 03. Unzip it into your skills folder.</div>
     </div>
     <div class="note">On Codex, the skill still says to write new skills to <code>~/.claude/skills/</code>. Tell Codex to write them to <code>~/.agents/skills/</code> instead. If Claude Code or Codex was already open when you installed it, restart it so it picks up the new skill.</div>
   </div>
