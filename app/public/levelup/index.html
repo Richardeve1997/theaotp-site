@@ -1,0 +1,363 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Level Up Kit | Art of the Possible</title>
+<meta name="description" content="The prompt from the Reel that turns your repeated AI work into skills and scheduled tasks, plus a list of common ones to consider.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://theaotp.com/levelup/">
+<link rel="icon" href="/qualia-symbol.png">
+<meta property="og:title" content="The Level Up Kit | Art of the Possible">
+<meta property="og:description" content="A prompt and a list of skills and scheduled tasks.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<!--
+Sources (2026-09-29):
+  Prompt copied verbatim: content-intelligence pipeline/5-script/assets/level-up-skills-scheduled-tasks/prompt/level-up-prompt.md (section 01)
+  Claude chat search (paid plans, Settings > Memory > "Search and reference chats"), memory: https://support.claude.com/en/articles/11817273-use-claude-s-chat-search-and-memory-to-build-on-previous-context
+  Claude skills (Free..Enterprise, Settings > Capabilities code execution, Customize > Skills, + > + Create skill > Upload a skill, ZIP): https://support.claude.com/en/articles/12512180-use-skills-in-claude
+  Claude scheduled tasks (paid plans, "Every Monday at 9 AM..." then Schedule, Scheduled sidebar, run remotely, connectors, local files run locally): https://support.claude.com/en/articles/13854387-schedule-recurring-tasks-in-claude-cowork
+  Claude Code personal skills ~/.claude/skills/<skill-name>/SKILL.md: https://code.claude.com/docs/en/skills
+  Claude Code Desktop local tasks (Code tab > Routines > New routine > Local; Weekly day+time; app open + awake; ask for first of month): https://code.claude.com/docs/en/desktop-scheduled-tasks
+  ChatGPT memory (Settings > Personalization > Memory, Reference chat history): https://help.openai.com/en/articles/8590148-memory-in-chatgpt (read in Chrome; curl 403)
+  ChatGPT/Codex skills ($skill-creator, @skill-creator in ChatGPT Work, $HOME/.agents/skills, desktop app Skills sidebar): https://learn.chatgpt.com/docs/build-skills
+  ChatGPT/Codex scheduled tasks (web Chat/Work + desktop app, Scheduled, CLI has no scheduling UI): https://learn.chatgpt.com/docs/automations?surface=app
+  Section 03 list items are AOTP suggestions, not vendor claims.
+-->
+<style>:root{--paper:#fdfdfb;--canvas:#e9e9e6;--rule:#e4e4e0;--ink:#121210;--muted:#9c9c96;--soft:#52524d;--azure:#0096ff;--display:'Inter Tight','Helvetica Neue',Arial,sans-serif;--ui:Inter,'Helvetica Neue',Arial,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--ui);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.page{max-width:1280px;margin:0 auto;background:var(--paper);min-height:100vh}
+.pad{padding-left:clamp(22px,4.5vw,58px);padding-right:clamp(22px,4.5vw,58px)}
+nav{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--rule);padding-top:25px;padding-bottom:25px}
+.lockup{display:flex;align-items:center;gap:11px;text-decoration:none}.lockup img{width:25px;height:25px}
+.wordmark{font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:.055em;text-transform:uppercase}
+.navlinks{display:flex;gap:24px;font-size:14px}.navlinks a{text-decoration:none;color:var(--soft)}.navlinks a:hover{color:var(--ink)}
+.eyebrow{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
+h1,h2,h3{font-family:var(--display);letter-spacing:-.038em;line-height:1.01;margin:0}
+h1{font-size:clamp(42px,6.2vw,82px);max-width:15ch}
+.muted{color:var(--muted)}
+.kit-head{padding-top:90px;padding-bottom:58px}
+.dek{max-width:58ch;color:var(--soft);margin:24px 0 0;font-size:17px}
+.gate{border-top:1px solid var(--ink);padding-top:44px;padding-bottom:80px}
+.gate-grid{display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px}
+.gate h2{font-size:clamp(26px,3vw,38px);max-width:22ch}
+.gate p{max-width:56ch;color:var(--soft)}
+.gate form{display:flex;flex-wrap:wrap;align-items:stretch;max-width:480px;margin-top:26px}
+.gate input{min-width:0;flex:1 1 100%;border:0;border-bottom:2px solid var(--ink);background:transparent;padding:15px 0;font:inherit;color:var(--ink);outline:none}
+.gate input::placeholder{color:var(--muted)}
+.gate button{border:0;background:transparent;cursor:pointer;padding:16px 0 4px;text-align:left;font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+.gate button:hover{opacity:.6}
+.gate-small{font-size:13px;color:var(--muted);margin-top:14px}
+.gate-status{font-size:13px;color:var(--ink);min-height:1.3em;margin-top:6px}
+.step{display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px;border-top:1px solid var(--ink);padding-top:56px;padding-bottom:72px}
+.step-kicker{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.step h2{font-size:clamp(30px,3.8vw,50px);max-width:18ch}
+.step .lede{font-family:var(--display);font-size:19px;font-weight:600;line-height:1.35;max-width:54ch;margin:18px 0 26px}
+.step p{color:var(--soft);max-width:64ch}
+.step ul,.step ol{color:var(--soft);max-width:64ch;padding-left:20px}
+.step li{margin-bottom:9px}
+.rule{height:3px;width:52px;background:var(--azure);margin:0 0 20px}
+.note{border-left:3px solid var(--muted);padding:2px 0 2px 18px;margin:26px 0;max-width:62ch;color:var(--soft);font-size:15px}
+.index{list-style:none;padding:0;margin:26px 0 0;max-width:66ch;counter-reset:idx}
+.index li{border-top:1px solid var(--rule);padding:14px 0;display:flex;gap:18px;align-items:baseline;font-size:15.5px;color:var(--soft)}
+.index .n{font-family:var(--display);font-weight:700;font-size:13px;color:var(--azure);min-width:26px}
+.index a{text-decoration:none;font-family:var(--display);font-weight:600;font-size:17px;color:var(--ink);letter-spacing:-.01em}
+.index a:hover{border-bottom:2px solid var(--azure)}
+.index .st{margin-left:auto;font-size:13px;color:var(--muted);white-space:nowrap}
+.concept{border-top:1px solid var(--ink);padding-top:52px;padding-bottom:60px;display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px;scroll-margin-top:20px}
+.concept-num{font-family:var(--display);font-weight:800;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.concept-num span{color:var(--azure)}
+.concept h2{font-size:clamp(28px,3.4vw,44px);max-width:20ch}
+.concept .lede{font-family:var(--display);font-size:19px;font-weight:600;line-height:1.35;max-width:54ch;margin:18px 0 22px}
+.concept p{color:var(--soft);max-width:64ch}
+.concept ul{color:var(--soft);max-width:64ch;padding-left:20px}
+.concept li{margin-bottom:9px}
+.read{border:1px solid var(--rule);border-left:7px solid var(--azure);padding:22px 24px;margin:30px 0 0;max-width:720px}
+.read .src{font-family:var(--display);font-weight:700;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.read h3{font-size:19px;margin:8px 0 14px;max-width:44ch;line-height:1.2;overflow-wrap:anywhere}
+.read a{display:inline-block;font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;border-bottom:2px solid var(--azure);padding-bottom:2px}
+.read a:hover{color:var(--azure)}
+.closeblock{background:var(--ink);color:var(--paper);padding-top:82px;padding-bottom:88px}
+.closeblock h2{font-size:clamp(36px,5vw,64px);max-width:15ch}
+.closeblock .muted{color:#b7b7b1}
+.closeblock p{max-width:56ch;color:#b7b7b1;margin-top:20px}
+.closeblock a{display:inline-block;margin-top:30px;background:var(--paper);color:var(--ink);padding:14px 22px;text-decoration:none;font-family:var(--display);font-weight:700}
+footer{display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--rule);padding-top:28px;padding-bottom:32px;color:var(--soft);font-size:13px}
+[hidden]{display:none!important}
+.promptbox{position:relative;background:#f3f3ef;border-left:7px solid var(--ink);margin-top:14px;max-width:820px}
+.promptbox pre{margin:0;padding:26px 28px;padding-right:110px;overflow-x:auto;font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:13px;line-height:1.75;white-space:pre-wrap;overflow-wrap:anywhere;color:var(--ink)}
+.copybtn{position:absolute;top:0;right:0;border:0;cursor:pointer;background:var(--ink);color:var(--paper);font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding:12px 18px}
+.copybtn:hover{opacity:.85}
+code{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f3ef;padding:1px 5px;border-radius:3px;white-space:nowrap}
+.shot{margin:4px 0 26px;max-width:720px}
+.shot img{width:100%;height:auto;display:block;border:1px solid var(--rule);border-radius:6px;background:#fff}
+.cap{font-size:13px;color:var(--muted);margin:8px 0 0;max-width:64ch}
+.inst{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);margin:30px 0 0}
+.inst span{color:var(--azure)}
+.try{list-style:none;padding:0!important;margin:14px 0 0;max-width:66ch}
+.try li{border-top:1px solid var(--rule);padding:14px 0;margin:0!important;color:var(--soft)}
+.try strong{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:14.5px;color:var(--ink);margin-right:6px}
+@media(max-width:800px){.navlinks{display:none}.kit-head{padding-top:58px}.gate-grid,.step,.concept{grid-template-columns:1fr;gap:18px}.gate-grid>*,.step>*,.concept>*{min-width:0}.copybtn{position:static;display:inline-block;margin:0 0 0 28px}.promptbox pre{padding-right:28px}.index li{flex-wrap:wrap;gap:4px 18px}.index .st{margin-left:44px;width:100%}code{white-space:normal;overflow-wrap:anywhere}}
+/* --- learn kit additions --- */
+.lessons{list-style:none;padding:0;margin:26px 0 0;max-width:66ch}
+.lessons li{border-top:1px solid var(--rule);padding:20px 0;margin:0;color:var(--soft)}
+.lessons strong{display:block;font-family:var(--display);font-size:17px;color:var(--ink);margin-bottom:6px;letter-spacing:-.01em}
+table{border-collapse:collapse;width:100%;max-width:720px;margin:22px 0;font-size:14.5px}
+th,td{text-align:left;padding:12px 14px 12px 0;border-bottom:1px solid var(--rule);vertical-align:top;color:var(--soft)}
+th{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+td:first-child{color:var(--ink);font-weight:600;white-space:nowrap;padding-right:24px}
+td code{white-space:normal;overflow-wrap:anywhere}
+@media(max-width:800px){td:first-child{white-space:normal}}
+.dl{display:flex;flex-wrap:wrap;align-items:center;gap:18px 28px;border:1px solid var(--rule);border-left:7px solid var(--azure);padding:24px 26px;margin:28px 0 0;max-width:720px}
+.dl-btn{display:inline-block;background:var(--ink);color:var(--paper);padding:15px 24px;text-decoration:none;font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:.03em}
+.dl-btn:hover{opacity:.85}
+.dl-meta{font-size:14px;color:var(--soft);line-height:1.5}
+.dl-meta strong{display:block;color:var(--ink);font-family:var(--display);font-size:16px}
+.lessons .k{font-family:var(--display);font-weight:700;color:var(--azure);margin-right:8px}
+.promptbox.tall pre{max-height:560px;overflow-y:auto}
+td a{text-decoration:none;border-bottom:2px solid var(--azure)}
+.note a{text-decoration:none;border-bottom:2px solid var(--azure)}
+</style><script src="/f.js"></script>
+</head><body>
+<div class="page">
+<nav class="pad"><a class="lockup" href="/"><img src="/qualia-symbol.png" alt=""><span class="wordmark">Art of the Possible<sup>&reg;</sup></span></a><div class="navlinks"><a href="/">Home</a><a href="/letters/">Archive</a><a href="/#about">About</a></div></nav>
+
+<header class="kit-head pad">
+  <div class="eyebrow">The Level Up Kit &middot; From the Reel</div>
+  <h1 style="margin-top:26px">Good AI users build skills. <span class="muted">Great ones get AI to build them.</span></h1>
+  <p class="dek">You commented "LEVEL UP". Here it is. The prompt from the Reel, word for word. It works in any AI tool. Below it: how to run it, where the results go, and a list of common skills and scheduled tasks worth setting up. There's no course here and nothing to buy.</p>
+</header>
+
+<section class="gate pad" id="gate">
+  <div class="gate-grid">
+    <div class="eyebrow">Unlock the prompt</div>
+    <div>
+      <h2>Drop your email and the prompt and the list unlock on this page.</h2>
+      <p>You'll also get the weekly letter: five useful things I made with AI, with the prompts and workflows inside. Unsubscribe any time.</p>
+      <form id="gate-form" novalidate>
+        <label for="gate-email" style="position:absolute;left:-9999px">Email address</label>
+        <input id="gate-email" type="email" name="email" placeholder="you@somewhere.com" autocomplete="email" required>
+        <button type="submit">Unlock the guide and subscribe to AOTP</button>
+      </form>
+      <p class="gate-status" id="gate-status" aria-live="polite"></p>
+      <p class="gate-small">Already on the list? Enter the same email and it unlocks without subscribing you twice.</p>
+      <noscript><p class="gate-small">This page needs JavaScript to unlock. Or just subscribe on <a href="/">the homepage</a> and reply to any letter for the prompt.</p></noscript>
+    </div>
+  </div>
+</section>
+
+<!-- EVERYTHING OF VALUE LIVES INSIDE #kit. Nothing valuable outside it. -->
+<div id="kit" hidden>
+
+<section class="step pad" id="first">
+  <div class="step-kicker"><span>01</span> &middot; The prompt</div>
+  <div>
+    <div class="rule"></div>
+    <h2>One prompt. <span class="muted">Your whole history.</span></h2>
+    <p class="lede">Paste this into Claude, ChatGPT or Codex. It reads back through your past chats, finds the work you keep repeating, and asks you before it builds anything.</p>
+    <p>Repeated work becomes a skill. A skill is a saved set of instructions your AI follows every time, so you stop explaining the same deck or report from scratch. Work tied to a day or a time becomes a scheduled task, which runs on its own. Checking your tools and planning the week every Monday? That becomes a task that runs at 8am on Monday.</p>
+    <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>Look through my whole conversation history with you and find the work I keep doing by hand. I want the repeated work turned into skills and my weekly routines turned into scheduled tasks.
+
+1. Read my history
+Go through every past conversation you can reach. Use your chat search or memory tools, and if you can read files, check my saved session logs too. Tell me how far back you got.
+
+2. Find the repeated work (skills)
+Look for anything I've asked for three or more times in the same way: the same kind of deck, document, report, email or analysis, made with roughly the same steps.
+For each one, write down:
+- what I make and how often
+- the steps I follow, in order
+- what a good result looks like, using my best past example
+- the inputs I give you each time
+
+3. Find the routines (scheduled tasks)
+Look for work tied to a day or a time: things I do every Monday, at the end of each week, before a regular meeting or at the start of each month.
+For each one, write down:
+- what I do and when
+- which tools and sources I check
+- what I end up with
+- the day and time it should run
+
+4. Show me the list
+Give me one table of the top 10, ranked by the hours each would save me a month. For each item, say whether it should be a skill or a scheduled task, how many times you found it, and one conversation where it came up. Then stop and ask me which ones to build.
+
+5. Build the ones I approve
+For each skill I pick, write a SKILL.md with a name, one line on when to use it, the steps in order, the output format and my best example. If you can create skills yourself, do it. If you can't, give me the full file to paste in.
+For each scheduled task I pick, write the exact prompt it should run, when it runs and where the result goes. If you can schedule tasks yourself, set it up and confirm it. If you can't, tell me how to set it up in the tool I'm using.
+
+Rules
+- Only use what's really in my history. Never invent a pattern.
+- If something is unclear, ask me before you build it.
+- Keep each skill and each task to one job.</pre></div>
+    <div class="note">It only uses what's in your history. If it finds nothing that repeats, it says so. It won't invent a pattern to fill the table.</div>
+  </div>
+</section>
+
+<section class="step pad" id="run">
+  <div class="step-kicker"><span>02</span> &middot; How to run it</div>
+  <div>
+    <div class="rule"></div>
+    <h2>Four steps. <span class="muted">Then you pick.</span></h2>
+    <p class="lede">The prompt can only find what it can see. So the first step is making sure it can see your history.</p>
+    <ul class="lessons">
+      <li><strong><span class="k">1</span>Let it see your history.</strong>In Claude, searching past chats is on paid plans (Pro, Max, Team, Enterprise). Go to Settings &gt; Memory and check "Search and reference chats" is on. In ChatGPT, open Settings &gt; Personalization &gt; Memory and turn on "Reference chat history" if your account shows it. In Claude Code or Codex, start it in the folder you work in most, so it can read your files.</li>
+      <li><strong><span class="k">2</span>Paste the prompt into a new chat.</strong>Send it as it is. It tells you how far back it could read. If that's only a couple of weeks, the list will be short. Run it again in a month.</li>
+      <li><strong><span class="k">3</span>Pick from the top 10.</strong>It stops with one table, ranked by hours saved a month, and a count of how often it found each one. Something it found six times beats something it found three. Pick two or three to start, not all ten.</li>
+      <li><strong><span class="k">4</span>Approve the builds.</strong>For each one you pick, it writes a SKILL.md or the exact prompt for a scheduled task. If your tool lets it create them itself, it does. If not, it hands you the file. Where each one goes is below.</li>
+    </ul>
+
+    <p class="inst">Where skills go</p>
+    <table>
+      <tr><th>Tool</th><th>What to do</th></tr>
+      <tr><td>Claude app</td><td>Turn on "Code execution and file creation" in Settings &gt; Capabilities. Then Customize &gt; Skills, click "+", then "+ Create skill", then "Upload a skill". It takes the skill folder as a ZIP file. Skills work on the free plan too.</td></tr>
+      <tr><td>Claude Code</td><td>Save each one as <code>~/.claude/skills/&lt;name&gt;/SKILL.md</code>. It's then available in all your projects on that machine.</td></tr>
+      <tr><td>Codex</td><td>Type <code>$skill-creator</code> and it walks you through it. Or save the folder in <code>~/.agents/skills</code> so it works in any repo.</td></tr>
+      <tr><td>ChatGPT</td><td>Standalone skills live in the ChatGPT desktop app, under Skills in the sidebar. In ChatGPT Work, type <code>@skill-creator</code>.</td></tr>
+    </table>
+
+    <p class="inst">Where scheduled tasks go</p>
+    <table>
+      <tr><th>Tool</th><th>What to do</th></tr>
+      <tr><td>Claude</td><td>Paid plans. Describe the task with a day and a time, like "Every Monday at 8 AM, &hellip;". Check the name, schedule and instructions it proposes, then click "Schedule". Every task sits under "Scheduled" in the left sidebar, and they run even when your computer is asleep.</td></tr>
+      <tr><td>Claude Code Desktop</td><td>In the Code tab, open Routines, click "New routine" and choose Local. Weekly lets you pick a day and a time. Local tasks only run while the app is open and your computer is awake.</td></tr>
+      <tr><td>ChatGPT and Codex</td><td>When your workspace has them turned on, create them from Chat or ChatGPT Work on the web, or in the ChatGPT desktop app, and review runs in Scheduled. The Codex CLI has no scheduling screen, so set the task up in ChatGPT once the prompt works.</td></tr>
+    </table>
+    <div class="note">Menus change and vary by plan and region. If a setting isn't there, it may not be on your account yet. The prompt already covers that: when it can't create something itself, it gives you the file or tells you how to set it up. Sources: Anthropic on <a href="https://support.claude.com/en/articles/11817273-use-claude-s-chat-search-and-memory-to-build-on-previous-context" target="_blank" rel="noopener">chat search and memory</a>, <a href="https://support.claude.com/en/articles/12512180-use-skills-in-claude" target="_blank" rel="noopener">skills in Claude</a>, <a href="https://support.claude.com/en/articles/13854387-schedule-recurring-tasks-in-claude-cowork" target="_blank" rel="noopener">scheduled tasks</a>, <a href="https://code.claude.com/docs/en/skills" target="_blank" rel="noopener">Claude Code skills</a> and <a href="https://code.claude.com/docs/en/desktop-scheduled-tasks" target="_blank" rel="noopener">Claude Code scheduled tasks</a>. OpenAI on <a href="https://help.openai.com/en/articles/8590148-memory-in-chatgpt" target="_blank" rel="noopener">memory</a>, <a href="https://learn.chatgpt.com/docs/build-skills" target="_blank" rel="noopener">skills</a> and <a href="https://learn.chatgpt.com/docs/automations?surface=app" target="_blank" rel="noopener">scheduled tasks</a>.</div>
+  </div>
+</section>
+
+<section class="step pad" id="list">
+  <div class="step-kicker"><span>03</span> &middot; The list</div>
+  <div>
+    <div class="rule"></div>
+    <h2>What to build. <span class="muted">24 to consider.</span></h2>
+    <p class="lede">Your own history decides what goes first. Use this list to spot what the prompt missed, or to get started if your history is thin.</p>
+
+    <p class="inst"><span>A</span> &middot; Skills: things you make over and over</p>
+    <ul class="lessons">
+      <li><strong><span class="k">01</span>Client proposal</strong>Turns call notes and a brief into your proposal layout, with your pricing, scope and case studies. For consultants, agencies and freelancers.</li>
+      <li><strong><span class="k">02</span>Branded slide deck</strong>Builds a deck from an outline in your template, fonts and colours, with your usual slide order. For anyone who presents every week.</li>
+      <li><strong><span class="k">03</span>Meeting notes to actions</strong>Turns a transcript into decisions, owners and due dates in the same format every time. For managers and project leads.</li>
+      <li><strong><span class="k">04</span>Client status update</strong>Takes your notes and task list and writes the weekly update in your voice and your headings. For account managers and PMs.</li>
+      <li><strong><span class="k">05</span>Content repurposer</strong>Turns one long post, talk or video transcript into a LinkedIn post, a newsletter section and a short script, in your voice. For creators and marketers.</li>
+      <li><strong><span class="k">06</span>Email replies in your voice</strong>Drafts replies to the emails you get every week (pricing questions, intro requests, a polite no) from your best past replies. For founders and anyone with a busy inbox.</li>
+      <li><strong><span class="k">07</span>Pre-meeting research brief</strong>Researches a company or person and returns one page under fixed headings: who they are, what they've said lately, what to ask. For sales, recruiters and investors.</li>
+      <li><strong><span class="k">08</span>Spreadsheet to summary</strong>Reads an export and writes a one-page summary: the three numbers that moved, and the likely reason. For ops, finance and founders.</li>
+      <li><strong><span class="k">09</span>Brand voice check</strong>Checks any draft against your brand guide, swaps the words you never use and flags claims you can't back up. For marketing teams.</li>
+      <li><strong><span class="k">10</span>Process doc writer</strong>Turns rough notes or a walkthrough transcript into a numbered how-to your team can follow. For ops and team leads.</li>
+      <li><strong><span class="k">11</span>Hiring pack</strong>Writes the job ad, the interview questions and a scoring sheet from a short role brief, in your company's format. For hiring managers.</li>
+      <li><strong><span class="k">12</span>Customer answer</strong>Answers common customer questions from your help docs and policies, and flags anything it can't answer instead of guessing. For small business owners and support teams.</li>
+    </ul>
+
+    <p class="inst"><span>B</span> &middot; Scheduled tasks: things tied to a day or a time</p>
+    <ul class="lessons">
+      <li><strong><span class="k">01</span>Monday week plan</strong>Every Monday at 8am, checks your calendar, inbox and task list, then gives you the week's top three priorities and what to prep. For everyone.</li>
+      <li><strong><span class="k">02</span>Weekly pipeline review</strong>Every Monday at 8am, pulls open deals from your CRM, flags the ones with no activity in two weeks and drafts a follow-up for each. For sales leads and founders.</li>
+      <li><strong><span class="k">03</span>Morning brief</strong>Every weekday at 7am, summarises the last 24 hours of email, Slack and calendar, with anything that needs a reply today at the top. For managers.</li>
+      <li><strong><span class="k">04</span>Meeting prep</strong>Every weekday at 8am, writes a short brief for each external meeting that day: who they are and where you left things last time. For sales and consultants.</li>
+      <li><strong><span class="k">05</span>Follow-up sweep</strong>Every Thursday at 3pm, finds emails you sent that got no reply in five days and drafts a short nudge for each. For anyone who chases replies.</li>
+      <li><strong><span class="k">06</span>Friday wrap-up</strong>Every Friday at 4pm, lists what got done this week from your tasks and sent mail, and drafts the update for your manager or team. For team leads.</li>
+      <li><strong><span class="k">07</span>Industry digest</strong>Every Monday at 7am, finds the five stories that matter in your field this week, one line each with the link. For anyone who needs to stay current.</li>
+      <li><strong><span class="k">08</span>Competitor watch</strong>Every Wednesday at 9am, checks competitors' sites, pricing pages and news, and lists only what changed. For founders and marketers.</li>
+      <li><strong><span class="k">09</span>Content ideas</strong>Every Monday at 9am, pulls the questions people are asking in your niche and your best recent posts, and gives you five ideas for the week. For creators.</li>
+      <li><strong><span class="k">10</span>Month-end numbers</strong>On the 1st of each month at 9am, pulls last month's figures from your spreadsheet and writes a summary against the month before. For founders, ops and finance.</li>
+      <li><strong><span class="k">11</span>Overdue invoice chase</strong>Every Monday at 10am, lists invoices past their due date and drafts a polite reminder for each. For freelancers and small businesses.</li>
+      <li><strong><span class="k">12</span>Folder tidy-up</strong>Every Friday at 5pm, sorts, renames and files everything in your downloads or shared folder. For everyone.</li>
+    </ul>
+    <div class="note">A scheduled task can only check the tools it can reach. In Claude, scheduled tasks use the connectors you've set up, so connect your calendar, email or CRM first. Tasks that need files on your computer only run locally, so the computer has to be on. If your tool's schedule picker has no monthly option, ask for "the 1st of each month" in plain words.</div>
+  </div>
+</section>
+
+<section class="step pad" id="next">
+  <div class="step-kicker"><span>04</span> &middot; What to do now</div>
+  <div>
+    <div class="rule"></div>
+    <h2>Run it today. <span class="muted">Build two.</span></h2>
+    <p class="lede">One skill and one scheduled task is enough to start. You'll feel the second one on the first Monday it runs.</p>
+    <ul>
+      <li><strong>If you use Claude or ChatGPT every day:</strong> check the history setting in section 02, paste the prompt, and build the top skill and the top scheduled task from its table.</li>
+      <li><strong>If your history is thin:</strong> pick one skill and one task from section 03 and ask your AI to build them with you. Run the prompt again in a month.</li>
+      <li><strong>If you live in Claude Code or Codex:</strong> tell it to write the skills straight into your skills folder and test each one on a real job before you keep it.</li>
+      <li><strong>If you're on a free plan:</strong> skills work on Claude's free plan. Searching past chats and scheduled tasks need a paid plan in Claude, so start with a skill.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="closeblock pad">
+  <h2>See what's possible. <span class="muted">Then build it.</span></h2>
+  <p>You're on the list now. Every week you'll get five useful things I made with AI, with the prompt or workflow behind each one. This prompt was one of them.</p>
+  <a href="/">Back to the site</a>
+</section>
+
+</div>
+
+<footer class="pad"><span>Art of the Possible&reg;</span><span>New things are possible every day. &middot; 2026</span></footer>
+</div>
+
+<script>
+(function () {
+  var API = 'https://theaotp-gate.theaotp.workers.dev';
+  var KEY = 'aotp_levelup_unlocked';
+  var kit = document.getElementById('kit');
+  var gate = document.getElementById('gate');
+  var form = document.getElementById('gate-form');
+  var status = document.getElementById('gate-status');
+
+  function unlock() {
+    kit.hidden = false;
+    gate.hidden = true;
+    try { localStorage.setItem(KEY, '1'); } catch (e) {}
+  }
+
+  try { if (localStorage.getItem(KEY) === '1') unlock(); } catch (e) {}
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    var email = document.getElementById('gate-email').value.trim().toLowerCase();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      status.textContent = 'That email looks off. Try again.';
+      return;
+    }
+    status.textContent = 'One sec…';
+    fetch(API + '/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, ctx: window.aotpCtx ? window.aotpCtx() : null }),
+    }).then(function (response) {
+      return response.json().catch(function () { return {}; }).then(function (data) {
+        if (!response.ok) {
+          var err = new Error('subscribe failed');
+          err.status = response.status;
+          err.detail = data && data.detail;
+          throw err;
+        }
+        return data;
+      });
+    }).then(function (data) {
+      if (window.aotpSubscribed) window.aotpSubscribed(data);
+      status.textContent = !(data && data.new) ? 'Welcome back. Unlocked.'
+        : data.member === false ? 'Unlocked. Check your inbox to confirm your subscription to the letter.'
+        : 'Unlocked. You\'re on the list for the weekly letter.';
+      unlock();
+      window.scrollTo({ top: document.getElementById('first').offsetTop - 40, behavior: 'smooth' });
+    }).catch(function (err) {
+      if (err && err.status === 400) {
+        status.textContent = 'That email was rejected' + (err.detail ? ' (' + err.detail + ')' : '') + '. Try a different address.';
+      } else {
+        status.textContent = 'Something broke on our end. Try again in a minute, or subscribe on the homepage and DM me on Instagram for the prompt.';
+      }
+    });
+  });
+
+  document.querySelectorAll('[data-copy]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      var pre = button.parentElement.querySelector('pre');
+      navigator.clipboard.writeText(pre.textContent).then(function () {
+        button.textContent = 'Copied';
+        setTimeout(function () { button.textContent = 'Copy'; }, 1600);
+      });
+    });
+  });
+})();
+</script>
+</body></html>
