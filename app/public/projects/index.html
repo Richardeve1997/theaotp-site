@@ -1,0 +1,364 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Project Memory Kit | Art of the Possible</title>
+<meta name="description" content="The Claude Projects memory prompt from the Reel, plus a step-by-step guide to set it up so your context carries over from chat to chat.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://theaotp.com/projects/">
+<link rel="icon" href="/qualia-symbol.png">
+<meta property="og:title" content="The Project Memory Kit | Art of the Possible">
+<meta property="og:description" content="A prompt and setup guide for Claude Projects.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<!--
+Sources (2026-09-28):
+  Prompt copied verbatim: content-intelligence pipeline/5-script/assets/claude-projects-memory/prompt/project-memory-prompt.md (section 01)
+  UI steps: https://support.claude.com/en/articles/9519177-how-can-i-create-and-manage-projects  (Projects sidebar / claude.ai/projects, "+ New Project", name+description not visible to Claude, "+" to add content, "Set project instructions" / "Save instructions", context not shared across chats unless in project knowledge, free = max five projects)
+  Plans, beta Library: https://support.claude.com/en/articles/9517075-what-are-projects
+  RAG, descriptive filenames, add and remove content any time: https://support.claude.com/en/articles/11473015-retrieval-augmented-generation-rag-for-projects
+  Newer layout (Instructions pencil, Files "+" menu: Upload from device / Add text content): Anthropic, "Getting started with projects in Claude.ai" https://www.youtube.com/watch?v=GJ5jTgcbRHA (2:50, 3:09)
+  Pattern: https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f
+-->
+<style>:root{--paper:#fdfdfb;--canvas:#e9e9e6;--rule:#e4e4e0;--ink:#121210;--muted:#9c9c96;--soft:#52524d;--azure:#0096ff;--display:'Inter Tight','Helvetica Neue',Arial,sans-serif;--ui:Inter,'Helvetica Neue',Arial,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--ui);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.page{max-width:1280px;margin:0 auto;background:var(--paper);min-height:100vh}
+.pad{padding-left:clamp(22px,4.5vw,58px);padding-right:clamp(22px,4.5vw,58px)}
+nav{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--rule);padding-top:25px;padding-bottom:25px}
+.lockup{display:flex;align-items:center;gap:11px;text-decoration:none}.lockup img{width:25px;height:25px}
+.wordmark{font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:.055em;text-transform:uppercase}
+.navlinks{display:flex;gap:24px;font-size:14px}.navlinks a{text-decoration:none;color:var(--soft)}.navlinks a:hover{color:var(--ink)}
+.eyebrow{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
+h1,h2,h3{font-family:var(--display);letter-spacing:-.038em;line-height:1.01;margin:0}
+h1{font-size:clamp(42px,6.2vw,82px);max-width:15ch}
+.muted{color:var(--muted)}
+.kit-head{padding-top:90px;padding-bottom:58px}
+.dek{max-width:58ch;color:var(--soft);margin:24px 0 0;font-size:17px}
+.gate{border-top:1px solid var(--ink);padding-top:44px;padding-bottom:80px}
+.gate-grid{display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px}
+.gate h2{font-size:clamp(26px,3vw,38px);max-width:22ch}
+.gate p{max-width:56ch;color:var(--soft)}
+.gate form{display:flex;flex-wrap:wrap;align-items:stretch;max-width:480px;margin-top:26px}
+.gate input{min-width:0;flex:1 1 100%;border:0;border-bottom:2px solid var(--ink);background:transparent;padding:15px 0;font:inherit;color:var(--ink);outline:none}
+.gate input::placeholder{color:var(--muted)}
+.gate button{border:0;background:transparent;cursor:pointer;padding:16px 0 4px;text-align:left;font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+.gate button:hover{opacity:.6}
+.gate-small{font-size:13px;color:var(--muted);margin-top:14px}
+.gate-status{font-size:13px;color:var(--ink);min-height:1.3em;margin-top:6px}
+.step{display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px;border-top:1px solid var(--ink);padding-top:56px;padding-bottom:72px}
+.step-kicker{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.step h2{font-size:clamp(30px,3.8vw,50px);max-width:18ch}
+.step .lede{font-family:var(--display);font-size:19px;font-weight:600;line-height:1.35;max-width:54ch;margin:18px 0 26px}
+.step p{color:var(--soft);max-width:64ch}
+.step ul,.step ol{color:var(--soft);max-width:64ch;padding-left:20px}
+.step li{margin-bottom:9px}
+.rule{height:3px;width:52px;background:var(--azure);margin:0 0 20px}
+.note{border-left:3px solid var(--muted);padding:2px 0 2px 18px;margin:26px 0;max-width:62ch;color:var(--soft);font-size:15px}
+.index{list-style:none;padding:0;margin:26px 0 0;max-width:66ch;counter-reset:idx}
+.index li{border-top:1px solid var(--rule);padding:14px 0;display:flex;gap:18px;align-items:baseline;font-size:15.5px;color:var(--soft)}
+.index .n{font-family:var(--display);font-weight:700;font-size:13px;color:var(--azure);min-width:26px}
+.index a{text-decoration:none;font-family:var(--display);font-weight:600;font-size:17px;color:var(--ink);letter-spacing:-.01em}
+.index a:hover{border-bottom:2px solid var(--azure)}
+.index .st{margin-left:auto;font-size:13px;color:var(--muted);white-space:nowrap}
+.concept{border-top:1px solid var(--ink);padding-top:52px;padding-bottom:60px;display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px;scroll-margin-top:20px}
+.concept-num{font-family:var(--display);font-weight:800;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.concept-num span{color:var(--azure)}
+.concept h2{font-size:clamp(28px,3.4vw,44px);max-width:20ch}
+.concept .lede{font-family:var(--display);font-size:19px;font-weight:600;line-height:1.35;max-width:54ch;margin:18px 0 22px}
+.concept p{color:var(--soft);max-width:64ch}
+.concept ul{color:var(--soft);max-width:64ch;padding-left:20px}
+.concept li{margin-bottom:9px}
+.read{border:1px solid var(--rule);border-left:7px solid var(--azure);padding:22px 24px;margin:30px 0 0;max-width:720px}
+.read .src{font-family:var(--display);font-weight:700;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.read h3{font-size:19px;margin:8px 0 14px;max-width:44ch;line-height:1.2;overflow-wrap:anywhere}
+.read a{display:inline-block;font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;border-bottom:2px solid var(--azure);padding-bottom:2px}
+.read a:hover{color:var(--azure)}
+.closeblock{background:var(--ink);color:var(--paper);padding-top:82px;padding-bottom:88px}
+.closeblock h2{font-size:clamp(36px,5vw,64px);max-width:15ch}
+.closeblock .muted{color:#b7b7b1}
+.closeblock p{max-width:56ch;color:#b7b7b1;margin-top:20px}
+.closeblock a{display:inline-block;margin-top:30px;background:var(--paper);color:var(--ink);padding:14px 22px;text-decoration:none;font-family:var(--display);font-weight:700}
+footer{display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--rule);padding-top:28px;padding-bottom:32px;color:var(--soft);font-size:13px}
+[hidden]{display:none!important}
+.promptbox{position:relative;background:#f3f3ef;border-left:7px solid var(--ink);margin-top:14px;max-width:820px}
+.promptbox pre{margin:0;padding:26px 28px;padding-right:110px;overflow-x:auto;font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:13px;line-height:1.75;white-space:pre-wrap;overflow-wrap:anywhere;color:var(--ink)}
+.copybtn{position:absolute;top:0;right:0;border:0;cursor:pointer;background:var(--ink);color:var(--paper);font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding:12px 18px}
+.copybtn:hover{opacity:.85}
+code{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f3ef;padding:1px 5px;border-radius:3px;white-space:nowrap}
+.shot{margin:4px 0 26px;max-width:720px}
+.shot img{width:100%;height:auto;display:block;border:1px solid var(--rule);border-radius:6px;background:#fff}
+.cap{font-size:13px;color:var(--muted);margin:8px 0 0;max-width:64ch}
+.inst{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);margin:30px 0 0}
+.inst span{color:var(--azure)}
+.try{list-style:none;padding:0!important;margin:14px 0 0;max-width:66ch}
+.try li{border-top:1px solid var(--rule);padding:14px 0;margin:0!important;color:var(--soft)}
+.try strong{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:14.5px;color:var(--ink);margin-right:6px}
+@media(max-width:800px){.navlinks{display:none}.kit-head{padding-top:58px}.gate-grid,.step,.concept{grid-template-columns:1fr;gap:18px}.gate-grid>*,.step>*,.concept>*{min-width:0}.copybtn{position:static;display:inline-block;margin:0 0 0 28px}.promptbox pre{padding-right:28px}.index li{flex-wrap:wrap;gap:4px 18px}.index .st{margin-left:44px;width:100%}code{white-space:normal;overflow-wrap:anywhere}}
+/* --- learn kit additions --- */
+.lessons{list-style:none;padding:0;margin:26px 0 0;max-width:66ch}
+.lessons li{border-top:1px solid var(--rule);padding:20px 0;margin:0;color:var(--soft)}
+.lessons strong{display:block;font-family:var(--display);font-size:17px;color:var(--ink);margin-bottom:6px;letter-spacing:-.01em}
+table{border-collapse:collapse;width:100%;max-width:720px;margin:22px 0;font-size:14.5px}
+th,td{text-align:left;padding:12px 14px 12px 0;border-bottom:1px solid var(--rule);vertical-align:top;color:var(--soft)}
+th{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+td:first-child{color:var(--ink);font-weight:600;white-space:nowrap;padding-right:24px}
+td code{white-space:normal;overflow-wrap:anywhere}
+@media(max-width:800px){td:first-child{white-space:normal}}
+.dl{display:flex;flex-wrap:wrap;align-items:center;gap:18px 28px;border:1px solid var(--rule);border-left:7px solid var(--azure);padding:24px 26px;margin:28px 0 0;max-width:720px}
+.dl-btn{display:inline-block;background:var(--ink);color:var(--paper);padding:15px 24px;text-decoration:none;font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:.03em}
+.dl-btn:hover{opacity:.85}
+.dl-meta{font-size:14px;color:var(--soft);line-height:1.5}
+.dl-meta strong{display:block;color:var(--ink);font-family:var(--display);font-size:16px}
+.lessons .k{font-family:var(--display);font-weight:700;color:var(--azure);margin-right:8px}
+.promptbox.tall pre{max-height:560px;overflow-y:auto}
+td a{text-decoration:none;border-bottom:2px solid var(--azure)}
+.note a{text-decoration:none;border-bottom:2px solid var(--azure)}
+</style><script src="/f.js"></script>
+</head><body>
+<div class="page">
+<nav class="pad"><a class="lockup" href="/"><img src="/qualia-symbol.png" alt=""><span class="wordmark">Art of the Possible<sup>&reg;</sup></span></a><div class="navlinks"><a href="/">Home</a><a href="/letters/">Archive</a><a href="/#about">About</a></div></nav>
+
+<header class="kit-head pad">
+  <div class="eyebrow">The Project Memory Kit &middot; From the Reel</div>
+  <h1 style="margin-top:26px">Claude forgets. <span class="muted">Your project doesn't have to.</span></h1>
+  <p class="dek">You commented "PROJECTS". Here it is. The prompt from the Reel, word for word, plus a step-by-step guide to setting it up in Claude's Projects feature: where to paste it, what to upload, and the three messages that keep it up to date. Projects work on the free plan too. There's no course here and nothing to buy.</p>
+</header>
+
+<section class="gate pad" id="gate">
+  <div class="gate-grid">
+    <div class="eyebrow">Unlock the prompt</div>
+    <div>
+      <h2>Drop your email and the prompt and guide unlock on this page.</h2>
+      <p>You'll also get the weekly letter: five useful things I made with AI, with the prompts and workflows inside. Unsubscribe any time.</p>
+      <form id="gate-form" novalidate>
+        <label for="gate-email" style="position:absolute;left:-9999px">Email address</label>
+        <input id="gate-email" type="email" name="email" placeholder="you@somewhere.com" autocomplete="email" required>
+        <button type="submit">Unlock the guide and subscribe to AOTP</button>
+      </form>
+      <p class="gate-status" id="gate-status" aria-live="polite"></p>
+      <p class="gate-small">Already on the list? Enter the same email and it unlocks without subscribing you twice.</p>
+      <noscript><p class="gate-small">This page needs JavaScript to unlock. Or just subscribe on <a href="/">the homepage</a> and reply to any letter for the prompt.</p></noscript>
+    </div>
+  </div>
+</section>
+
+<!-- EVERYTHING OF VALUE LIVES INSIDE #kit. Nothing valuable outside it. -->
+<div id="kit" hidden>
+
+<section class="step pad" id="first">
+  <div class="step-kicker"><span>01</span> &middot; The prompt</div>
+  <div>
+    <div class="rule"></div>
+    <h2>One prompt. <span class="muted">Three jobs.</span></h2>
+    <p class="lede">This goes in your project's instructions, not in a chat. Claude uses it in every chat inside the project.</p>
+    <p>It gives Claude three jobs. Keep your files in one structure it can find its way around. Save new work and new uploads back into the right place. Review the whole thing so nothing goes stale or contradicts itself.</p>
+    <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>You manage the knowledge in this project. Treat the project files as a small wiki you keep organised, so you can find anything fast and nothing important gets lost between chats.
+
+1. Keep one structure
+Everything lives in three layers:
+- index.md: one line per topic, saying what it covers and which summary file holds it. Read this first in every chat.
+- Summaries: one short file per topic (clients.md, offers.md, brand.md). The key facts, decisions and open questions, with a pointer to the full documents behind them.
+- Full documents: the originals I upload, left unchanged.
+When you need context, read index.md, then the right summary, and open a full document only when the summary isn't enough. If the structure doesn't exist yet, build it from the files in this project and show it to me before you save it.
+
+2. Save back after every piece of work
+At the end of any chat where we decide something, learn something or make something, and whenever I upload a new document:
+- Work out which topic it belongs to.
+- Update that summary with what changed: the decision, the date and where it came from.
+- Add or update its line in index.md.
+- If it's a new topic, make a new summary and add it to the index.
+If you can edit the project files, do it. If you can't, give me each updated file in full and tell me exactly which file to replace. Never leave important context sitting only in a chat.
+
+3. Keep it clean
+Every time you read a summary, check it against what you know now. When I ask for a review, or about once a week, go through the whole structure and:
+- flag anything stale, with the date it was last true
+- find facts that contradict each other and ask me which one is right
+- merge duplicate topics and drop what's no longer useful
+- keep each summary short enough to read in a minute
+Show me the changes as a short list before you save them.
+
+Rules
+- Never delete an original document.
+- Never invent a fact to fill a gap. Write "unknown" and ask me.
+- Date every decision.
+- Keep file names short and lowercase, like pricing.md.</pre></div>
+    <div class="note">The file names in it (clients.md, offers.md, brand.md) are examples. Claude names your topics from what you upload.</div>
+  </div>
+</section>
+
+<section class="step pad" id="setup">
+  <div class="step-kicker"><span>02</span> &middot; Set it up</div>
+  <div>
+    <div class="rule"></div>
+    <h2>Set it up once. <span class="muted">Three steps.</span></h2>
+    <p class="lede">All of this happens in Claude on the web. Projects are on every plan, and a free account gets up to five.</p>
+    <ul class="lessons">
+      <li><strong><span class="k">1</span>Create the project.</strong>Click "Projects" in the left sidebar, or go straight to <a href="https://claude.ai/projects" target="_blank" rel="noopener">claude.ai/projects</a>. Click "+ New Project" in the top right. Give it a name and a description. Claude can't see either, so write them for yourself.</li>
+      <li><strong><span class="k">2</span>Paste the prompt into the instructions.</strong>On the project page, click "Set project instructions". In the newer layout it's the pencil next to Instructions. Paste the prompt from section 01 and click "Save instructions".</li>
+      <li><strong><span class="k">3</span>Add your main documents.</strong>Click the "+" next to Files. Choose "Upload from device" for files, or "Add text content" to paste text in. Start with the things you explain to Claude over and over: your offer, your clients, your brand, the plan you're working to.</li>
+    </ul>
+    <div class="note">Why the rest of this guide exists: Anthropic's help centre says context is not shared between chats in a project unless it's added to the project knowledge. Your files carry over from chat to chat. The chats themselves don't.</div>
+    <p>On a paid plan, once your files get close to the context limit, Claude switches on RAG and searches your files instead of reading them all. Anthropic's advice for that mode is clear, descriptive file names. A short index and one summary per topic give it exactly that.</p>
+  </div>
+</section>
+
+<section class="step pad" id="index">
+  <div class="step-kicker"><span>03</span> &middot; First chat</div>
+  <div>
+    <div class="rule"></div>
+    <h2>Build the index. <span class="muted">Before anything else.</span></h2>
+    <p class="lede">Start a new chat inside the project and send this. Claude reads what you uploaded and shows you the structure before anything gets saved.</p>
+    <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>Read every file in this project's knowledge. Using the structure in your instructions, plan index.md and one short summary file per topic. Show me the index and the list of summaries first. Once I say go, give me each file in full with its exact file name so I can add it to the project.</pre></div>
+    <p>Read the index it shows you. Merge topics that belong together, rename anything unclear, then tell it to go.</p>
+    <p>Save each file it gives you under the name it used (index.md, clients.md and so on) and add it with "Upload from device". If you'd rather paste, "Add text content" in the same menu works too. Leave your original documents where they are. The prompt tells Claude never to delete one.</p>
+  </div>
+</section>
+
+<section class="step pad" id="save">
+  <div class="step-kicker"><span>04</span> &middot; Save back</div>
+  <div>
+    <div class="rule"></div>
+    <h2>Save it back. <span class="muted">Every time.</span></h2>
+    <p class="lede">Only what's in the project files carries over to the next chat. So end every useful chat with this.</p>
+    <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>Save back what we did in this chat. Tell me which topic it belongs to, then give me the updated summary file and the updated index.md in full, with the exact file names to replace. Date anything we decided.</pre></div>
+    <p>Just uploaded a new document? Say so in the chat ("I just added pricing.pdf") and send the same message. Claude works out where it belongs and updates the summary and the index.</p>
+    <p class="inst">Swapping in the new file</p>
+    <p>Here's the honest bit. Anthropic's help docs say you can add and remove project files at any time. They don't say Claude can edit your project files from a chat. So in a normal project, Claude hands you the updated file and you swap it in. The prompt already covers this: if Claude can't edit the files, it gives you each one in full and tells you which file to replace.</p>
+    <ul class="lessons">
+      <li><strong><span class="k">1</span>Copy the updated file.</strong>Take the whole file Claude gives you, not just the lines that changed.</li>
+      <li><strong><span class="k">2</span>Remove the old version.</strong>Delete that file from Files on the project page. Only the summary or index it replaces, never an original document.</li>
+      <li><strong><span class="k">3</span>Add the new one under the same name.</strong>Use "Upload from device" or "Add text content", same as before.</li>
+    </ul>
+    <div class="note">Anthropic is also rolling out a new version of projects in beta, starting with Claude Code for some Pro and Max users. There, the project's Library collects the files you add and the files Claude produces. If your setup lets Claude write to the project's files, the prompt tells it to do that itself.</div>
+  </div>
+</section>
+
+<section class="step pad" id="review">
+  <div class="step-kicker"><span>05</span> &middot; Once a week</div>
+  <div>
+    <div class="rule"></div>
+    <h2>Review it. <span class="muted">Before it goes stale.</span></h2>
+    <p class="lede">An old fact is worse than a missing one, because Claude will use it without blinking. Once a week, start a new chat in the project and send this.</p>
+    <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>Run the weekly review from your instructions. Go through index.md and every summary. List anything stale with the date it was last true, any facts that contradict each other, and any topics to merge or drop. Ask me which version is right for each contradiction. Once I've answered, give me every changed file in full with its exact file name.</pre></div>
+    <p>Answer its questions, then swap the changed files in the same way as section 04. Put it in your calendar. This is the step that keeps the rest useful.</p>
+  </div>
+</section>
+
+<section class="step pad" id="why">
+  <div class="step-kicker"><span>06</span> &middot; Why this works</div>
+  <div>
+    <div class="rule"></div>
+    <h2>Not my idea. <span class="muted">Karpathy's.</span></h2>
+    <p class="lede">The structure comes from Andrej Karpathy's LLM wiki. I didn't invent it. I turned it into a prompt for Claude Projects.</p>
+    <p>His gist describes three layers. Raw sources that never change. A wiki of markdown pages the model writes and keeps up to date. And a schema that tells the model how the wiki is organised. An index.md is the catalogue it reads first, and a regular "lint" pass looks for contradictions between pages and claims that newer sources have replaced.</p>
+    <table>
+      <tr><th>In his gist</th><th>In your project</th></tr>
+      <tr><td>Raw sources</td><td>The documents you upload, left unchanged</td></tr>
+      <tr><td>The wiki</td><td>index.md plus one short summary per topic</td></tr>
+      <tr><td>The schema</td><td>The prompt in your project instructions</td></tr>
+      <tr><td>Lint</td><td>The weekly review in section 05</td></tr>
+    </table>
+    <p>Claude reads a short index, then the one summary it needs, and opens a full document only when the summary isn't enough. That's less to search and less to get wrong. His point is that the tedious part of a knowledge base is the bookkeeping. You hand that to Claude and keep the decisions.</p>
+    <div class="read">
+      <div class="src">Andrej Karpathy &middot; GitHub Gist</div>
+      <h3>LLM Wiki</h3>
+      <a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f" target="_blank" rel="noopener">Read it &rarr;</a>
+    </div>
+    <div class="note">This is Andrej Karpathy's work. I didn't write it and I earn nothing from it. Read the original, it's worth it.</div>
+  </div>
+</section>
+
+<section class="step pad" id="next">
+  <div class="step-kicker"><span>07</span> &middot; What to do now</div>
+  <div>
+    <div class="rule"></div>
+    <h2>Pick one. <span class="muted">Set it up today.</span></h2>
+    <p class="lede">Set it up on one project today. It gets useful from the second chat onwards.</p>
+    <ul>
+      <li><strong>If you don't have a project yet:</strong> do section 02 with three documents, then send the first-chat message from section 03.</li>
+      <li><strong>If you already have a project full of files:</strong> paste the prompt into its instructions and send the first-chat message. Your existing files become the raw sources.</li>
+      <li><strong>If you're on the free plan:</strong> you get five projects, so start with the one you open most.</li>
+      <li><strong>If it's already running:</strong> save the section 04 and 05 messages somewhere you'll see them. The system only works if you send them.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="closeblock pad">
+  <h2>See what's possible. <span class="muted">Then build it.</span></h2>
+  <p>You're on the list now. Every week you'll get five useful things I made with AI, with the prompt or workflow behind each one. This prompt was one of them.</p>
+  <a href="/">Back to the site</a>
+</section>
+
+</div>
+
+<footer class="pad"><span>Art of the Possible&reg;</span><span>New things are possible every day. &middot; 2026</span></footer>
+</div>
+
+<script>
+(function () {
+  var API = 'https://theaotp-gate.theaotp.workers.dev';
+  var KEY = 'aotp_projects_unlocked';
+  var kit = document.getElementById('kit');
+  var gate = document.getElementById('gate');
+  var form = document.getElementById('gate-form');
+  var status = document.getElementById('gate-status');
+
+  function unlock() {
+    kit.hidden = false;
+    gate.hidden = true;
+    try { localStorage.setItem(KEY, '1'); } catch (e) {}
+  }
+
+  try { if (localStorage.getItem(KEY) === '1') unlock(); } catch (e) {}
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    var email = document.getElementById('gate-email').value.trim().toLowerCase();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      status.textContent = 'That email looks off. Try again.';
+      return;
+    }
+    status.textContent = 'One sec…';
+    fetch(API + '/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, ctx: window.aotpCtx ? window.aotpCtx() : null }),
+    }).then(function (response) {
+      return response.json().catch(function () { return {}; }).then(function (data) {
+        if (!response.ok) {
+          var err = new Error('subscribe failed');
+          err.status = response.status;
+          err.detail = data && data.detail;
+          throw err;
+        }
+        return data;
+      });
+    }).then(function (data) {
+      if (window.aotpSubscribed) window.aotpSubscribed(data);
+      status.textContent = !(data && data.new) ? 'Welcome back. Unlocked.'
+        : data.member === false ? 'Unlocked. Check your inbox to confirm your subscription to the letter.'
+        : 'Unlocked. You\'re on the list for the weekly letter.';
+      unlock();
+      window.scrollTo({ top: document.getElementById('first').offsetTop - 40, behavior: 'smooth' });
+    }).catch(function (err) {
+      if (err && err.status === 400) {
+        status.textContent = 'That email was rejected' + (err.detail ? ' (' + err.detail + ')' : '') + '. Try a different address.';
+      } else {
+        status.textContent = 'Something broke on our end. Try again in a minute, or subscribe on the homepage and DM me on Instagram for the prompt.';
+      }
+    });
+  });
+
+  document.querySelectorAll('[data-copy]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      var pre = button.parentElement.querySelector('pre');
+      navigator.clipboard.writeText(pre.textContent).then(function () {
+        button.textContent = 'Copied';
+        setTimeout(function () { button.textContent = 'Copy'; }, 1600);
+      });
+    });
+  });
+})();
+</script>
+</body></html>
