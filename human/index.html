@@ -1,0 +1,486 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PM 101 kit | Art of the Possible</title>
+<meta name="description" content="Product management 101 from the Reel: the three-step loop, 28 free PM skills built from Lenny&#39;s Podcast, and a knowledge base you can ask any product question.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://theaotp.com/human/">
+<link rel="icon" href="/qualia-symbol.png">
+<meta property="og:title" content="PM 101 kit | Art of the Possible">
+<meta property="og:description" content="Product management 101 from the Reel, with 28 free PM skills.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&amp;family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&amp;family=Geist+Mono:wght@400&amp;display=swap" rel="stylesheet">
+<!--
+  Clear Sky kit template (AOTP design system approved by Rich 2026-09-30).
+  Source of truth: content-intelligence assets/brand/clear-sky/{DESIGN.md,tokens.css,board.html}.
+  Filled example: assets/brand/clear-sky/sample-guide.html.
+  Never retune the sky. No old accent blue, no blue buttons, no two-tone headlines, no bold display, no shadows, no em dashes.
+-->
+<style>
+:root{
+  --sand:#EFEBE7;--ink:#08070B;--graphite:#39383D;--ash:#909092;--ice:#BEC4D2;--ice-3:#E2E4EC;--glacier-2:#F3F4F6;--deep-ocean:#034C7C;--light-blue:#A5D4F2;--white:#FFFFFF;
+  /* The measured sky compressed into 0-75%, then white sand. Locked: paste, never retune. */
+  --g-sky-page:linear-gradient(180deg,#043761 0%,#024F80 9.375%,#026AA1 18.75%,#0282C0 28.125%,#1199D7 37.5%,#3EA9DA 46.875%,#6DB9DC 56.25%,#9DCBDD 65.625%,#CBDBDF 75%,#EFEBE7 100%);
+  --display:'Inter Tight','Helvetica Neue',Arial,sans-serif;--ui:'Inter','Helvetica Neue',Arial,sans-serif;--mono:'Geist Mono',ui-monospace,'SF Mono',Menlo,monospace;
+  --gutter:clamp(16px,4.5vw,64px);
+  --spark:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0C12.8 7.2 16.8 11.2 24 12C16.8 12.8 12.8 16.8 12 24C11.2 16.8 7.2 12.8 0 12C7.2 11.2 11.2 7.2 12 0Z'/%3E%3C/svg%3E");
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--sand);color:var(--ink);font:400 16px/1.6 var(--ui);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:var(--deep-ocean);text-underline-offset:3px;text-decoration-thickness:1px}
+button,input{font:inherit}button,a,input{-webkit-tap-highlight-color:transparent}
+strong,b{font-weight:600;color:var(--ink)}
+:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+.page{min-height:100vh;overflow-x:clip}
+/* Full-bleed backgrounds, content held to 1440 with 64px gutters (16px on phones). */
+.pad{padding-left:max(var(--gutter),calc((100% - 1440px)/2 + var(--gutter)));padding-right:max(var(--gutter),calc((100% - 1440px)/2 + var(--gutter)))}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance;overflow-wrap:break-word}
+p,li{text-wrap:pretty}
+
+/* Sparkle label: four-point sparkle + Geist Mono caps. */
+.eyebrow,.inst,.inside .lbl{display:block;font:400 11px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase}
+.eyebrow::before,.inst::before,.inside .lbl::before,.inside li::before{content:"";display:inline-block;width:.82em;height:.82em;margin-right:.75em;vertical-align:-.04em;background:currentColor;-webkit-mask:var(--spark) center/contain no-repeat;mask:var(--spark) center/contain no-repeat}
+
+/* ---- The sky. Rows are 37.5 / 3.75 / 58.75 of the box, so white type always sits where the sky is
+   at t <= 0.5 (white display, 32px+) and ink always starts at t >= 0.55, however the headline wraps. ---- */
+.sky{display:grid;grid-template-rows:37.5fr 3.75fr 58.75fr;background:var(--g-sky-page)}
+.sky-hi{grid-row:1;display:flex;flex-direction:column;justify-content:space-between;color:var(--white)}
+.sky-lo{grid-row:3;color:var(--ink)}
+nav{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:76px}
+.lockup{display:flex;align-items:center;color:var(--white);text-decoration:none}.lockup svg{display:block;height:22px;width:auto}
+.navlinks{display:flex;gap:28px;font:400 14px/1 var(--ui)}.navlinks a{color:var(--white);text-decoration:none}.navlinks a:hover{text-decoration:underline}
+.kit-head h1{margin-top:clamp(28px,4.2vw,64px);font-size:clamp(44px,5.7vw,84px);line-height:.96;letter-spacing:-.045em;max-width:13em}
+.kit-head .sky-lo{padding-bottom:clamp(40px,5vw,72px)}
+.dek{max-width:56ch;margin:14px 0 0;font:400 clamp(16px,1.5vw,20px)/1.5 var(--ui);letter-spacing:-.01em;color:var(--ink)}
+
+/* ---- The gate: a glacier card on sand. ---- */
+.gate{padding-top:8px;padding-bottom:clamp(56px,7vw,96px)}
+.gate-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(28px,5vw,72px);align-items:start;background:var(--glacier-2);border-radius:12px;padding:clamp(22px,3.4vw,48px)}
+.gate-grid>*,.step>*,.concept>*{min-width:0}
+.gate .eyebrow{color:var(--graphite)}
+.gate h2{margin-top:18px;font-size:clamp(30px,3vw,42px);line-height:1.04;letter-spacing:-.03em;max-width:17ch}
+.gate-intro p{max-width:48ch;margin:18px 0 0;color:var(--graphite)}
+.gate form{display:grid;gap:10px}
+.gate input{width:100%;min-width:0;height:52px;border:1px solid var(--ink);border-radius:999px;background:transparent;padding:0 22px;color:var(--ink);font-size:16px}
+.gate input::placeholder{color:var(--graphite);opacity:1}
+.gate input:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.gate button{width:100%;min-height:52px;border:0;border-radius:999px;background:var(--ink);color:var(--white);cursor:pointer;padding:14px 22px;font:500 16px/1.25 var(--ui);letter-spacing:-.005em;text-align:center;text-wrap:balance}
+.gate button:hover{background:var(--graphite)}
+.gate-status{margin:12px 0 0;font-size:14px;color:var(--ink)}.gate-status:empty{margin:0}
+.gate-small{margin:14px 0 0;font-size:13.5px;line-height:1.55;color:var(--graphite)}
+.inside{margin-top:26px;border-top:1px solid var(--ice);padding-top:16px}
+.inside .lbl{color:var(--graphite)}
+.inside ul{list-style:none;padding:0;margin:12px 0 0;display:grid;gap:8px}
+.inside li{font-size:15px;line-height:1.45;padding-left:1.6em;text-indent:-1.6em}
+.inside li::before{width:10px;height:10px;margin-right:calc(1.6em - 10px);vertical-align:0}
+
+/* ---- Sections: a mono-and-numeral rail, one reading column, 1px ice hairlines. ---- */
+.step,.concept{position:relative;display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px;padding-top:52px;padding-bottom:72px;scroll-margin-top:24px}
+.step::before,.concept::before,footer::before{content:"";position:absolute;top:0;left:max(var(--gutter),calc((100% - 1440px)/2 + var(--gutter)));right:max(var(--gutter),calc((100% - 1440px)/2 + var(--gutter)));height:1px;background:var(--ice)}
+.step-kicker,.concept-num{font:400 11px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--graphite)}
+.step-kicker span,.concept-num span{display:block;margin-bottom:14px;font:400 64px/.8 var(--display);letter-spacing:-.06em;color:var(--ink)}
+.step h2,.concept h2{font-size:clamp(34px,3.6vw,50px);line-height:1.02;letter-spacing:-.03em;max-width:20ch}
+.step .lede,.concept .lede{max-width:54ch;margin:20px 0 24px;font:400 20px/1.5 var(--ui);letter-spacing:-.01em;color:var(--ink)}
+.step p,.concept p{max-width:64ch;color:var(--graphite)}
+.step ul,.step ol,.concept ul{max-width:64ch;padding-left:20px;color:var(--graphite)}
+.step li,.concept li{margin-bottom:10px}
+.step li::marker,.concept li::marker{color:var(--ash)}
+.note{max-width:62ch;margin:30px 0;border-top:1px solid var(--ice);padding-top:14px;font-size:14.5px;line-height:1.6;color:var(--graphite)}
+table+.note{margin-top:18px;border-top:0;padding-top:0}
+.step .inst{margin:44px 0 0;color:var(--ink)}
+
+/* Reading-list payload */
+.index{list-style:none;padding:0!important;margin:26px 0 0;max-width:66ch}
+.index li{border-top:1px solid var(--ice);padding:16px 0;margin:0;display:flex;gap:18px;align-items:baseline;font-size:15px;color:var(--graphite)}
+.index .n{min-width:26px;font:400 11px var(--mono);letter-spacing:.1em;color:var(--graphite)}
+.index a{font:400 21px/1.2 var(--display);letter-spacing:-.02em;color:var(--ink);text-decoration:none}.index a:hover{text-decoration:underline}
+.index .st{margin-left:auto;font:400 10.5px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--graphite)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 0}
+.chip{display:inline-flex;align-items:center;height:24px;padding:0 9px;border-radius:5px;background:var(--ice-3);font:400 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.read{max-width:760px;margin:26px 0 0;background:var(--glacier-2);border-radius:12px;padding:20px 22px 22px}
+.read .src{font:400 10.5px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--graphite)}
+.read h3{max-width:40ch;margin:10px 0 16px;font-size:24px;line-height:1.12;letter-spacing:-.025em}
+.read a{display:inline-flex;align-items:center;height:28px;padding:0 13px;border:1px solid var(--ink);border-radius:999px;font:400 10.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink);text-decoration:none}
+.read a:hover{background:var(--ink);color:var(--white)}
+
+/* ---- The close: the sky again, white headline high, ink low, settling into sand. ---- */
+.closeblock .sky-hi{padding-top:clamp(64px,8vw,112px)}
+.closeblock h2{font-size:clamp(40px,5.2vw,76px);line-height:.98;letter-spacing:-.04em;max-width:15ch}
+.closeblock .sky-lo{padding-bottom:clamp(48px,6vw,88px)}
+.closeblock p{max-width:52ch;margin:0;font:400 clamp(17px,1.5vw,19px)/1.55 var(--ui);color:var(--ink)}
+.closeblock a{display:inline-flex;align-items:center;justify-content:center;height:52px;margin-top:24px;padding:0 26px;border-radius:999px;background:var(--ink);color:var(--white);font:500 16px/1 var(--ui);text-decoration:none}
+.closeblock a:hover{background:var(--graphite)}
+footer{position:relative;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px 24px;padding-top:26px;padding-bottom:34px;font:400 10.5px/1.6 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--graphite)}
+[hidden]{display:none!important}
+
+/* --- prompt-kit / field-notes / how-to payloads: keep these, delete what you don't use --- */
+.promptbox{max-width:760px;margin-top:26px;background:var(--glacier-2);border-radius:12px;padding-top:12px}
+.copybtn{display:block;margin:0 12px 0 auto;min-height:32px;padding:0 14px;border:1px solid var(--ink);border-radius:999px;background:transparent;color:var(--ink);cursor:pointer;font:400 10.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase}
+.copybtn:hover{background:var(--ink);color:var(--white)}
+.promptbox pre{margin:12px 0 0;border-top:1px solid var(--ice);padding:20px 26px 26px;overflow-x:auto;font:400 13px/1.8 var(--mono);white-space:pre-wrap;overflow-wrap:anywhere;color:var(--ink)}
+.promptbox.code pre{white-space:pre;overflow-wrap:normal}
+.promptbox.tall pre{max-height:560px;overflow-y:auto}
+.cmd,.termshot{max-width:760px;margin:24px 0;border-radius:12px;padding:20px 24px;overflow-x:auto}
+.cmd{background:var(--glacier-2)}.cmd code{display:block;padding:0;background:none;font:400 13px/1.8 var(--mono);white-space:pre}
+.termshot{background:var(--ink);color:var(--sand);font:400 13px/1.9 var(--mono);white-space:pre}
+.termshot .g{color:var(--light-blue)}.termshot .y,.termshot .r{color:var(--white)}.termshot .d{color:var(--ash)}
+code{font-family:var(--mono);font-size:.86em;background:var(--ice-3);padding:1px 5px;border-radius:4px;white-space:nowrap;color:var(--ink)}
+.lessons{list-style:none;padding:0!important;margin:26px 0 0;max-width:66ch}
+.lessons li{position:relative;border-top:1px solid var(--ice);padding:22px 0 22px 72px;margin:0;color:var(--graphite)}
+.lessons strong{display:block;margin-bottom:8px;font:400 23px/1.2 var(--display);letter-spacing:-.02em;color:var(--ink)}
+.lessons .k{position:absolute;left:0;top:22px;font:400 40px/.84 var(--display);letter-spacing:-.05em;color:var(--ink)}
+table{border-collapse:collapse;width:100%;max-width:760px;margin:20px 0;font-size:14.5px}
+th,td{text-align:left;padding:14px 16px 14px 0;border-bottom:1px solid var(--ice);vertical-align:top;color:var(--graphite)}
+th{border-bottom-color:var(--ink);font:400 10.5px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+td:first-child{width:26%;padding-right:24px;color:var(--ink);font-weight:500}td code{white-space:normal;overflow-wrap:anywhere}
+.shot{max-width:760px;margin:26px 0}
+.shot img{display:block;width:100%;height:auto;border:1px solid var(--ice);border-radius:6px;background:var(--white)}
+.cap{max-width:64ch;margin:10px 0 0;font-size:13.5px;line-height:1.5;color:var(--graphite)}
+.dl{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px 28px;max-width:760px;margin:28px 0 0;background:var(--glacier-2);border-radius:12px;padding:22px 24px}
+.dl-meta{font-size:14px;line-height:1.5;color:var(--graphite)}.dl-meta strong{display:block;font:400 21px/1.2 var(--display);letter-spacing:-.02em}
+.dl-btn{display:inline-flex;align-items:center;height:52px;padding:0 26px;border-radius:999px;background:var(--ink);color:var(--white);font:500 16px/1 var(--ui);text-decoration:none}.dl-btn:hover{background:var(--graphite)}
+.cmdlist{list-style:none;padding:0!important;margin:28px 0 0;max-width:760px}
+.cmdlist li{display:grid;grid-template-columns:34px minmax(0,1fr);gap:14px;border-top:1px solid var(--ice);padding:20px 0;margin:0}
+.cmdlist li>*{min-width:0}.cmdlist .n{padding-top:9px;font:400 11px/1 var(--mono);letter-spacing:.1em;color:var(--graphite)}
+.cmdlist p{margin:10px 0 0}
+.kc{display:inline-flex;align-items:center;gap:12px;max-width:100%;min-height:32px;padding:4px 6px 4px 12px;border:1px solid var(--ink);border-radius:999px;background:transparent;color:var(--ink);cursor:pointer;text-align:left}
+.kc code{padding:0;background:none;font-size:14px;white-space:normal;overflow-wrap:anywhere}
+.kc .cp{padding:4px 9px;border-radius:999px;background:var(--ice-3);font:400 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase}
+.kc:hover .cp,.kc.done .cp{background:var(--ink);color:var(--white)}
+.where{display:inline-block;margin-left:12px;font:400 10.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--graphite)}
+.try{list-style:none;padding:0!important;margin:14px 0 0;max-width:66ch}
+.try li{border-top:1px solid var(--ice);padding:14px 0;margin:0;color:var(--graphite)}
+.try strong{margin-right:6px;font:400 14px var(--mono)}
+
+/* /human/ additions: skill index names on their own line, stage labels, cards with a line of body copy. */
+.index .sk{display:block;margin-bottom:4px}
+.step .inst span{color:var(--graphite)}
+.step .inst+.index{margin-top:14px}
+.promptbox+p{margin-top:22px}
+.read p{max-width:60ch;margin:0 0 18px;color:var(--graphite)}
+.read h3{margin-bottom:12px}
+.read+.read{margin-top:14px}
+.lessons code a,.lessons a code{color:var(--deep-ocean)}
+
+@media(max-width:920px){.gate-grid{grid-template-columns:1fr}}
+@media(max-width:800px){
+  nav{min-height:64px}.lockup svg{height:17px}.navlinks{gap:16px;font-size:13px}
+  .gate{padding-top:0}
+  .gate-grid,.step,.concept{grid-template-columns:1fr;gap:22px}.gate-grid>*,.step>*,.concept>*{min-width:0}
+  .step,.concept{padding-top:34px;padding-bottom:48px}
+  .step-kicker span,.concept-num span{display:inline-block;margin:0 12px 0 0;font-size:44px;vertical-align:-.02em}
+  .step .lede,.concept .lede{font-size:18px}
+  .lessons li{padding-left:54px}.lessons .k{font-size:32px;top:24px}
+  .promptbox pre{padding:18px 18px 22px}.index li{flex-wrap:wrap}.index .st{margin-left:44px;width:100%}
+  code{white-space:normal;overflow-wrap:anywhere}th,td{padding-right:12px}td:first-child{width:32%}
+}
+@media(max-width:480px){.lockup svg{height:15px}.navlinks{gap:14px;font-size:12.5px}.kit-head h1 br{display:none}.gate-grid{padding:24px 16px}.gate button{padding-left:12px;padding-right:12px;font-size:14.5px}}
+@media(max-width:380px){.gate button{font-size:14px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style><script src="/f.js"></script>
+</head><body>
+<div class="page">
+<header class="kit-head sky pad">
+  <div class="sky-hi">
+    <nav><a class="lockup" href="/"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 897 112" role="img" aria-label="Art of the Possible"><title>Art of the Possible</title><g fill="#FFFFFF"><path transform="scale(0.448)" d="M93.301 48.471A34.601 34.601 0 1 1 156.699 48.471A34.601 34.601 0 0 0 93.301 48.471ZM156.699 48.471A34.601 34.601 0 1 1 201.529 93.301A34.601 34.601 0 0 0 156.699 48.471ZM201.529 93.301A34.601 34.601 0 1 1 156.699 48.471A34.601 34.601 0 0 0 201.529 93.301ZM201.529 93.301A34.601 34.601 0 1 1 201.529 156.699A34.601 34.601 0 0 0 201.529 93.301ZM201.529 156.699A34.601 34.601 0 1 1 156.699 201.529A34.601 34.601 0 0 0 201.529 156.699ZM156.699 201.529A34.601 34.601 0 1 1 201.529 156.699A34.601 34.601 0 0 0 156.699 201.529ZM156.699 201.529A34.601 34.601 0 1 1 93.301 201.529A34.601 34.601 0 0 0 156.699 201.529ZM93.301 201.529A34.601 34.601 0 1 1 48.471 156.699A34.601 34.601 0 0 0 93.301 201.529ZM48.471 156.699A34.601 34.601 0 1 1 93.301 201.529A34.601 34.601 0 0 0 48.471 156.699ZM48.471 156.699A34.601 34.601 0 1 1 48.471 93.301A34.601 34.601 0 0 0 48.471 156.699ZM48.471 93.301A34.601 34.601 0 1 1 93.301 48.471A34.601 34.601 0 0 0 48.471 93.301ZM93.301 48.471A34.601 34.601 0 1 1 48.471 93.301A34.601 34.601 0 0 0 93.301 48.471Z"/><path transform="translate(160 80.736)" d="M11.7 0H0.49L17.57 -49.47H31.04L48.09 0H36.91L24.49 -38.17H24.09ZM11.04 -19.44H37.49V-11.3H11.04ZM51.08 0V-49.47H70.57Q76.2 -49.47 80.16 -47.48Q84.12 -45.48 86.22 -41.85Q88.32 -38.21 88.32 -33.31Q88.32 -28.38 86.2 -24.84Q84.07 -21.29 80.04 -19.41Q76.01 -17.53 70.31 -17.53H57.27V-25.94H68.6Q71.63 -25.94 73.62 -26.76Q75.6 -27.59 76.58 -29.22Q77.55 -30.85 77.55 -33.31Q77.55 -35.78 76.57 -37.47Q75.59 -39.15 73.6 -40.02Q71.62 -40.89 68.58 -40.89H61.52V0ZM78.54 0 66.5 -22.52H77.78L90.09 0ZM90.95 -40.85V-49.47H131.58V-40.85H116.44V0H106.12V-40.85ZM170.54 0.66Q163.97 0.66 158.72 -2.32Q153.46 -5.31 150.41 -10.99Q147.36 -16.66 147.36 -24.7Q147.36 -32.8 150.41 -38.49Q153.46 -44.18 158.72 -47.16Q163.97 -50.14 170.54 -50.14Q177.12 -50.14 182.35 -47.16Q187.59 -44.18 190.64 -38.49Q193.69 -32.8 193.69 -24.7Q193.69 -16.64 190.64 -10.97Q187.59 -5.29 182.35 -2.31Q177.12 0.66 170.54 0.66ZM170.54 -8.58Q174.35 -8.58 177.16 -10.44Q179.98 -12.29 181.54 -15.89Q183.09 -19.49 183.09 -24.7Q183.09 -29.95 181.54 -33.57Q179.98 -37.18 177.16 -39.04Q174.35 -40.89 170.54 -40.89Q166.76 -40.89 163.93 -39.04Q161.1 -37.18 159.53 -33.57Q157.96 -29.95 157.96 -24.7Q157.96 -19.49 159.53 -15.89Q161.1 -12.29 163.93 -10.44Q166.76 -8.58 170.54 -8.58ZM198.51 0V-49.47H231.26V-40.85H208.95V-27.25H229.08V-18.79H208.95V0ZM246.36 -40.85V-49.47H286.99V-40.85H271.85V0H261.53V-40.85ZM290.8 0V-49.47H301.24V-29.06H322.46V-49.47H332.9V0H322.46V-20.44H301.24V0ZM338.59 0V-49.47H371.94V-40.85H349.03V-29.22H370.19V-20.76H349.03V-8.62H372V0ZM390.19 0V-49.47H409.68Q415.31 -49.47 419.27 -47.33Q423.23 -45.19 425.33 -41.4Q427.43 -37.61 427.43 -32.69Q427.43 -27.76 425.31 -24Q423.18 -20.25 419.15 -18.14Q415.12 -16.03 409.43 -16.03H396.99V-24.41H407.71Q410.74 -24.41 412.73 -25.46Q414.71 -26.52 415.69 -28.38Q416.66 -30.25 416.66 -32.69Q416.66 -35.18 415.69 -37.02Q414.71 -38.86 412.72 -39.88Q410.73 -40.89 407.69 -40.89H400.63V0ZM453.6 0.66Q447.03 0.66 441.78 -2.32Q436.52 -5.31 433.47 -10.99Q430.43 -16.66 430.43 -24.7Q430.43 -32.8 433.47 -38.49Q436.52 -44.18 441.78 -47.16Q447.03 -50.14 453.6 -50.14Q460.18 -50.14 465.42 -47.16Q470.65 -44.18 473.7 -38.49Q476.75 -32.8 476.75 -24.7Q476.75 -16.64 473.7 -10.97Q470.65 -5.29 465.42 -2.31Q460.18 0.66 453.6 0.66ZM453.6 -8.58Q457.41 -8.58 460.23 -10.44Q463.05 -12.29 464.6 -15.89Q466.15 -19.49 466.15 -24.7Q466.15 -29.95 464.6 -33.57Q463.05 -37.18 460.23 -39.04Q457.41 -40.89 453.6 -40.89Q449.82 -40.89 446.99 -39.04Q444.17 -37.18 442.6 -33.57Q441.03 -29.95 441.03 -24.7Q441.03 -19.49 442.6 -15.89Q444.17 -12.29 446.99 -10.44Q449.82 -8.58 453.6 -8.58ZM499.91 0.7Q493.92 0.7 489.49 -1.13Q485.06 -2.96 482.58 -6.57Q480.1 -10.19 479.96 -15.54H490.08Q490.27 -13.07 491.53 -11.4Q492.8 -9.74 494.93 -8.9Q497.06 -8.06 499.79 -8.06Q502.45 -8.06 504.43 -8.83Q506.4 -9.6 507.49 -10.98Q508.57 -12.36 508.57 -14.18Q508.57 -15.84 507.58 -16.96Q506.6 -18.08 504.73 -18.89Q502.85 -19.69 500.15 -20.32L494.75 -21.65Q488.5 -23.15 484.89 -26.41Q481.28 -29.68 481.28 -35.17Q481.28 -39.66 483.71 -43.02Q486.14 -46.38 490.37 -48.26Q494.61 -50.14 500.02 -50.14Q505.54 -50.14 509.64 -48.25Q513.75 -46.36 516.05 -43Q518.35 -39.64 518.43 -35.25H508.36Q508.09 -38.16 505.89 -39.78Q503.7 -41.4 499.94 -41.4Q497.4 -41.4 495.62 -40.68Q493.84 -39.97 492.92 -38.71Q492 -37.45 492 -35.83Q492 -34.09 493.06 -32.91Q494.11 -31.74 495.9 -31Q497.68 -30.25 499.81 -29.74L504.23 -28.66Q507.45 -27.93 510.16 -26.72Q512.87 -25.5 514.88 -23.74Q516.89 -21.99 517.99 -19.6Q519.09 -17.22 519.09 -14.13Q519.09 -9.61 516.81 -6.27Q514.53 -2.94 510.24 -1.12Q505.96 0.7 499.91 0.7ZM541.53 0.7Q535.54 0.7 531.11 -1.13Q526.68 -2.96 524.2 -6.57Q521.72 -10.19 521.58 -15.54H531.7Q531.89 -13.07 533.16 -11.4Q534.42 -9.74 536.55 -8.9Q538.68 -8.06 541.41 -8.06Q544.08 -8.06 546.05 -8.83Q548.02 -9.6 549.11 -10.98Q550.19 -12.36 550.19 -14.18Q550.19 -15.84 549.21 -16.96Q548.22 -18.08 546.35 -18.89Q544.47 -19.69 541.77 -20.32L536.37 -21.65Q530.12 -23.15 526.51 -26.41Q522.9 -29.68 522.9 -35.17Q522.9 -39.66 525.33 -43.02Q527.76 -46.38 531.99 -48.26Q536.23 -50.14 541.64 -50.14Q547.16 -50.14 551.26 -48.25Q555.37 -46.36 557.67 -43Q559.97 -39.64 560.05 -35.25H549.98Q549.71 -38.16 547.51 -39.78Q545.32 -41.4 541.56 -41.4Q539.02 -41.4 537.24 -40.68Q535.46 -39.97 534.54 -38.71Q533.62 -37.45 533.62 -35.83Q533.62 -34.09 534.68 -32.91Q535.74 -31.74 537.52 -31Q539.3 -30.25 541.43 -29.74L545.85 -28.66Q549.07 -27.93 551.78 -26.72Q554.49 -25.5 556.5 -23.74Q558.51 -21.99 559.61 -19.6Q560.71 -17.22 560.71 -14.13Q560.71 -9.61 558.43 -6.27Q556.15 -2.94 551.87 -1.12Q547.58 0.7 541.53 0.7ZM575.25 -49.47V0H564.81V-49.47ZM580.93 0V-49.47H600.73Q606.18 -49.47 609.83 -47.85Q613.48 -46.22 615.32 -43.36Q617.15 -40.5 617.15 -36.8Q617.15 -33.89 615.98 -31.71Q614.81 -29.52 612.8 -28.13Q610.78 -26.74 608.2 -26.16V-25.66Q611.03 -25.55 613.51 -24.08Q615.99 -22.6 617.53 -19.97Q619.08 -17.33 619.08 -13.67Q619.08 -9.75 617.14 -6.66Q615.21 -3.57 611.43 -1.78Q607.64 0 602.06 0ZM591.37 -8.54H599.91Q604.27 -8.54 606.29 -10.23Q608.31 -11.93 608.31 -14.7Q608.31 -16.77 607.32 -18.34Q606.33 -19.92 604.5 -20.82Q602.67 -21.71 600.16 -21.71H591.37ZM591.37 -28.77H599.14Q601.27 -28.77 602.96 -29.53Q604.64 -30.29 605.61 -31.69Q606.58 -33.1 606.58 -35.05Q606.58 -37.71 604.69 -39.36Q602.8 -41.01 599.34 -41.01H591.37ZM622.95 0V-49.47H633.39V-8.62H654.6V0ZM658.66 0V-49.47H692.01V-40.85H669.1V-29.22H690.26V-20.76H669.1V-8.62H692.06V0ZM708.66 -22.11V-39.91H717.37Q719.06 -39.94 720.47 -39.25Q721.88 -38.56 722.72 -37.24Q723.56 -35.93 723.56 -34.07Q723.56 -32.17 722.69 -30.82Q721.81 -29.47 720.37 -28.79Q718.94 -28.12 717.18 -28.12H711.19V-31.48H716.19Q717.2 -31.46 717.94 -32.11Q718.68 -32.75 718.68 -34.06Q718.68 -35.37 717.94 -35.95Q717.19 -36.52 716.21 -36.54H713.29V-22.11ZM720.04 -30.35 724.13 -22.11H719.02L715.23 -30.35ZM715.63 -11.49Q711.65 -11.49 708.14 -13Q704.64 -14.51 701.98 -17.17Q699.33 -19.82 697.84 -23.33Q696.35 -26.83 696.35 -30.81Q696.35 -34.8 697.84 -38.3Q699.33 -41.8 701.98 -44.46Q704.64 -47.12 708.14 -48.63Q711.65 -50.14 715.63 -50.14Q719.65 -50.14 723.15 -48.63Q726.65 -47.12 729.31 -44.46Q731.97 -41.8 733.46 -38.3Q734.95 -34.8 734.95 -30.81Q734.95 -26.83 733.46 -23.33Q731.97 -19.82 729.32 -17.17Q726.67 -14.51 723.16 -13Q719.65 -11.49 715.63 -11.49ZM715.63 -16.61Q719.59 -16.61 722.82 -18.52Q726.05 -20.43 727.97 -23.66Q729.88 -26.88 729.87 -30.81Q729.88 -34.74 727.96 -37.97Q726.05 -41.2 722.81 -43.12Q719.57 -45.03 715.63 -45.01Q711.72 -45.03 708.49 -43.12Q705.26 -41.2 703.34 -37.97Q701.43 -34.74 701.43 -30.82Q701.43 -26.89 703.35 -23.66Q705.26 -20.43 708.49 -18.52Q711.71 -16.61 715.63 -16.61Z"/></g></svg></a><div class="navlinks"><a href="/">Home</a><a href="/letters/">Archive</a><a href="/#about">About</a></div></nav>
+        <h1>Knowing what people want stays human.<br> Here&#39;s the 101.</h1>
+  </div>
+  <div class="sky-lo">
+    <div class="eyebrow">PM 101 kit &middot; From the Reel</div>
+    <p class="dek">You commented "HUMAN". Here it is. Sam Altman says knowing what people want is a fundamentally human thing, no matter how smart AI gets. Product management is the job built on exactly that, and this is the 101: the loop from the Reel, a free GitHub repo of 28 product management skills, and a knowledge base you can ask any product question. No course, no upsell.</p>
+  </div>
+</header>
+
+<section class="gate pad" id="gate">
+  <div class="gate-grid">
+    <div class="gate-intro">
+      <div class="eyebrow">Unlock the kit</div>
+      <h2>Drop your email and the whole kit unlocks on this page.</h2>
+      <p>You'll also get the weekly letter: five useful things I made with AI, with the prompts and workflows inside. Unsubscribe any time.</p>
+    </div>
+    <div class="gate-act">
+      <form id="gate-form" novalidate>
+        <label for="gate-email" class="sr-only">Email address</label>
+        <input id="gate-email" type="email" name="email" placeholder="you@somewhere.com" autocomplete="email" required>
+        <button type="submit">Unlock the guide and subscribe to AOTP</button>
+      </form>
+      <p class="gate-status" id="gate-status" aria-live="polite"></p>
+      <p class="gate-small">Already on the list? Enter the same email and it unlocks without subscribing you twice.</p>
+      <noscript><p class="gate-small">This page needs JavaScript to unlock. Or just subscribe on <a href="/">the homepage</a> and reply to any letter for the kit.</p></noscript>
+      <div class="inside">
+        <div class="lbl">What unlocks</div>
+        <ul><li>The three-step loop from the Reel</li><li>The 28-skill repo and how to install it</li><li>A Lenny&#39;s Podcast knowledge base (.zip)</li><li>The Reel&#39;s sources</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EVERYTHING OF VALUE LIVES INSIDE #kit. Nothing valuable outside it. -->
+<div id="kit" hidden>
+
+<section class="step pad" id="first">
+  <div class="step-kicker"><span>01</span> The loop</div>
+  <div>
+    <h2>Three steps, run on a loop.</h2>
+    <p class="lede">Product management is understanding what people need, then building technology that solves it.</p>
+    <p>AI keeps getting better at executing ideas and building things. So the part to focus on is the other half: making sure the things you build are things people actually want and need. The job runs as a three-step loop, and it always starts with people.</p>
+    <ul class="lessons">
+      <li><strong><span class="k">1</span>User research.</strong>Ask the right questions to understand people&#39;s goals, their motivations and what they&#39;re trying to achieve. Then ask what gets in the way of them getting there. Those are the problems worth solving. Skill to start with: <a href="https://github.com/menkesu/awesome-pm-skills/tree/main/continuous-discovery" target="_blank" rel="noopener"><code>continuous-discovery</code></a>, weekly customer contact and opportunity solution trees from Teresa Torres.</li>
+      <li><strong><span class="k">2</span>Build.</strong>Work with engineers to define the minimum viable solution, the smallest thing that solves the problems you found. Skill to start with: <a href="https://github.com/menkesu/awesome-pm-skills/tree/main/zero-to-launch" target="_blank" rel="noopener"><code>zero-to-launch</code></a>, idea to prototype the OpenAI, Figma and Airbnb way.</li>
+      <li><strong><span class="k">3</span>Measure.</strong>Watch what happens when people use what you built. Did it solve their problem? Did it help them reach their goal? What you learn goes straight into the next round of research. Skill to start with: <a href="https://github.com/menkesu/awesome-pm-skills/tree/main/metrics-frameworks" target="_blank" rel="noopener"><code>metrics-frameworks</code></a>, North Star metrics and AARRR.</li>
+    </ul>
+    <div class="note">This is the loop I&#39;ve run for over six years as a product manager. The skill on each step is my pick from the repo below, not the repo author&#39;s.</div>
+  </div>
+</section>
+
+<section class="step pad" id="repo">
+  <div class="step-kicker"><span>02</span> The skills repo</div>
+  <div>
+    <h2>28 skills from Lenny&#39;s guests. Free and open source.</h2>
+    <p class="lede">Each skill turns one part of product management into instructions your AI assistant follows while you work.</p>
+    <p>The repo is called Awesome PM Skills. Every skill is a folder with a <code>SKILL.md</code> file inside: the frameworks, decision trees, templates and real examples for one part of the job, credited to the guests they came from. Brian Chesky, Shreyas Doshi, Marty Cagan, Kevin Weil, April Dunford and many more. The README says the skills draw on 300+ episodes, using the public transcript archive from ChatPRD.</p>
+    <p>You don&#39;t read these like a course. You install them into Claude Code or Codex, then work as normal, and the assistant applies them for you. Ask it to scope an MVP and it can pull in <code>zero-to-launch</code>. Ask for an exec update and it reaches for <code>exec-comms</code>. You learn the job while you do it.</p>
+    <div class="note">I didn&#39;t write these. Udi Menkes built and maintains the repo under the MIT license, and I earn nothing from it. The frameworks belong to the guests who shared them on Lenny&#39;s Podcast.</div>
+    <div class="read">
+      <div class="src">GitHub &middot; menkesu/awesome-pm-skills</div>
+      <h3>Awesome PM Skills: 28 skills built from Lenny&#39;s Podcast</h3>
+      <a href="https://github.com/menkesu/awesome-pm-skills" target="_blank" rel="noopener">Open the repo &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="step pad" id="install">
+  <div class="step-kicker"><span>03</span> Install</div>
+  <div>
+    <h2>Two minutes. One copy command.</h2>
+    <p class="lede">Claude Code loads skills from a <code>.claude/skills</code> folder, so the job is to clone the repo and copy the skill folders there.</p>
+    <p>The repo&#39;s own README says to clone it into your workspace, but its "Get started" snippet still has a placeholder URL. Use the real one below. Run this from the project you want the skills in:</p>
+    <div class="promptbox code"><button class="copybtn" data-copy>Copy</button><pre>git clone https://github.com/menkesu/awesome-pm-skills.git
+mkdir -p .claude/skills
+for d in awesome-pm-skills/*/; do [ -f "$d/SKILL.md" ] &amp;&amp; cp -R "${d%/}" .claude/skills/; done</pre></div>
+    <p>That copies every folder that has a <code>SKILL.md</code> and skips the images folder. Want the skills in every project? Swap <code>.claude/skills</code> for <code>~/.claude/skills</code>.</p>
+    <p><strong>Using Codex?</strong> Same loop, different folder. Codex looks for project skills in <code>.agents/skills</code>:</p>
+    <div class="promptbox code"><button class="copybtn" data-copy>Copy</button><pre>mkdir -p .agents/skills
+for d in awesome-pm-skills/*/; do [ -f "$d/SKILL.md" ] &amp;&amp; cp -R "${d%/}" .agents/skills/; done</pre></div>
+    <p><strong>Then use them.</strong> Tell the assistant what you&#39;re working on and it picks the skills that fit. If one doesn&#39;t kick in, name it: "Use the zero-to-launch skill" or "Use Shreyas Doshi&#39;s LNO framework on this".</p>
+    <div class="note">You&#39;ll get 29 folders, not 28. The extra one, <code>one-step-better-ai-pm</code>, is a newer add-on that pulls daily briefs from the author&#39;s GenAI PM newsletter. It needs a free GenAI PM subscription and a <code>GENAIPM_EMAIL</code> environment variable. Skip it if you just want the Lenny skills.</div>
+  </div>
+</section>
+
+<section class="step pad" id="skills">
+  <div class="step-kicker"><span>04</span> The 28 skills</div>
+  <div>
+    <h2>Five stages. Find your gap.</h2>
+    <p class="lede">Here they are sorted into five stages of the job, so you can go straight to the part you want to get better at.</p>
+    <p>The repo&#39;s README groups the same 28 skills into seven "modes". This grouping is mine, not the author&#39;s. Each name links to its folder on GitHub.</p>
+    <p class="inst">Strategy <span>&middot; deciding what to build</span></p>
+    <ol class="index">
+      <li><span class="n">01</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/strategic-build" target="_blank" rel="noopener">strategic-build</a>The LNO framework: is this leverage work or overhead? (Shreyas Doshi, Marty Cagan)</span></li>
+      <li><span class="n">02</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/strategy-frameworks" target="_blank" rel="noopener">strategy-frameworks</a>Product strategy with Crossing the Chasm and Playing to Win.</span></li>
+      <li><span class="n">03</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/decision-frameworks" target="_blank" rel="noopener">decision-frameworks</a>Structured calls on hard decisions. (Annie Duke, Ben Horowitz)</span></li>
+      <li><span class="n">04</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/prioritization-craft" target="_blank" rel="noopener">prioritization-craft</a>Feature prioritization, including RICE. (Shreyas Doshi)</span></li>
+      <li><span class="n">05</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/okr-frameworks" target="_blank" rel="noopener">okr-frameworks</a>Goal setting the Google OKR way. (Christina Wodtke)</span></li>
+    </ol>
+    <p class="inst">Building <span>&middot; the right problem, then the prototype</span></p>
+    <ol class="index">
+      <li><span class="n">06</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/zero-to-launch" target="_blank" rel="noopener">zero-to-launch</a>Idea to prototype, the OpenAI, Figma and Airbnb way.</span></li>
+      <li><span class="n">07</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/continuous-discovery" target="_blank" rel="noopener">continuous-discovery</a>Weekly customer contact and opportunity solution trees. (Teresa Torres)</span></li>
+      <li><span class="n">08</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/jtbd-building" target="_blank" rel="noopener">jtbd-building</a>Design around the job the customer is hiring you for. (Bob Moesta)</span></li>
+      <li><span class="n">09</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/design-first-dev" target="_blank" rel="noopener">design-first-dev</a>Craft quality standards. (Brian Chesky, Dylan Field)</span></li>
+      <li><span class="n">10</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/ai-product-patterns" target="_blank" rel="noopener">ai-product-patterns</a>AI-native product development. (Kevin Weil, OpenAI)</span></li>
+      <li><span class="n">11</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/ai-startup-building" target="_blank" rel="noopener">ai-startup-building</a>The AI startup playbook. (Dan Shipper, Brandon Chu)</span></li>
+      <li><span class="n">12</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/quality-speed" target="_blank" rel="noopener">quality-speed</a>When to polish and when to move. (Dylan Field, Brian Chesky)</span></li>
+      <li><span class="n">13</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/ship-decisions" target="_blank" rel="noopener">ship-decisions</a>Ship it or iterate? (Shreyas Doshi, Marty Cagan, Tobi Lutke)</span></li>
+    </ol>
+    <p class="inst">Go to market <span>&middot; winning attention</span></p>
+    <ol class="index">
+      <li><span class="n">14</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/positioning-craft" target="_blank" rel="noopener">positioning-craft</a>Product positioning. (April Dunford)</span></li>
+      <li><span class="n">15</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/launch-execution" target="_blank" rel="noopener">launch-execution</a>Go-to-market and launch plans. (April Dunford, Brian Chesky)</span></li>
+      <li><span class="n">16</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/growth-embedded" target="_blank" rel="noopener">growth-embedded</a>Growth loops and viral mechanics. (YC, Elena Verna)</span></li>
+    </ol>
+    <p class="inst">Measurement <span>&middot; data and feedback, on a loop</span></p>
+    <ol class="index">
+      <li><span class="n">17</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/metrics-frameworks" target="_blank" rel="noopener">metrics-frameworks</a>North Star metrics and AARRR. (Lenny&#39;s frameworks, Meta)</span></li>
+      <li><span class="n">18</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/user-feedback-system" target="_blank" rel="noopener">user-feedback-system</a>Measuring product-market fit. (Superhuman, YC)</span></li>
+      <li><span class="n">19</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/exp-driven-dev" target="_blank" rel="noopener">exp-driven-dev</a>A/B testing and experimentation. (Ronny Kohavi, Netflix)</span></li>
+    </ol>
+    <p class="inst">Communication and leadership <span>&middot; keeping the team aligned</span></p>
+    <ol class="index">
+      <li><span class="n">20</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/strategic-storytelling" target="_blank" rel="noopener">strategic-storytelling</a>Product narratives. (Andy Raskin, Nancy Duarte)</span></li>
+      <li><span class="n">21</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/exec-comms" target="_blank" rel="noopener">exec-comms</a>Executive memos: the Amazon 6-pager and the Stripe format.</span></li>
+      <li><span class="n">22</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/confident-speaking" target="_blank" rel="noopener">confident-speaking</a>Presentations and pitches. (Matt Abrahams)</span></li>
+      <li><span class="n">23</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/influence-craft" target="_blank" rel="noopener">influence-craft</a>Power and influence. (Jeffrey Pfeffer)</span></li>
+      <li><span class="n">24</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/stakeholder-craft" target="_blank" rel="noopener">stakeholder-craft</a>Feedback and working relationships. (Kim Scott, Carole Robin)</span></li>
+      <li><span class="n">25</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/workplace-navigation" target="_blank" rel="noopener">workplace-navigation</a>Handling difficult colleagues. (Anneka Gupta)</span></li>
+      <li><span class="n">26</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/culture-craft" target="_blank" rel="noopener">culture-craft</a>Building a culture of excellence. (David Singleton, Dharmesh Shah)</span></li>
+      <li><span class="n">27</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/career-growth" target="_blank" rel="noopener">career-growth</a>PM career advancement. (Ami Vora and 40+ career episodes)</span></li>
+      <li><span class="n">28</span><span><a class="sk" href="https://github.com/menkesu/awesome-pm-skills/tree/main/strategic-pm" target="_blank" rel="noopener">strategic-pm</a>Becoming a strategic PM. (Anneka Gupta)</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="step pad" id="kb">
+  <div class="step-kicker"><span>05</span> The knowledge base</div>
+  <div>
+    <h2>Ask Lenny&#39;s guests. Get the episode back.</h2>
+    <p class="lede">Ask any product question and get an answer built from what Lenny&#39;s guests actually said, with every point credited to the guest and the episode.</p>
+    <p>I went through 35 recent episodes of Lenny&#39;s Podcast and turned each one into a one-page digest: the key lessons, the frameworks, a few short quotes and a link to the full episode on YouTube. Boris Cherny, Cat Wu, Elena Verna, Simon Willison, Marc Andreessen, Molly Graham and 29 more.</p>
+    <p>The zip also has a skill called <code>lenny-wisdom</code>. It tells your assistant how to use the digests: find the right three to six episodes, answer with citations, show where the guests disagree, and end with what to do next. Pressure-test a pitch, a roadmap or a pricing idea against the same people.</p>
+    <div class="dl">
+      <div class="dl-meta"><strong>lennys-podcast-knowledge-base.zip</strong>176 KB &middot; 35 digests, an index, the skill and a setup guide</div>
+      <a class="dl-btn" href="/pm/lennys-podcast-knowledge-base.zip" download>Download the knowledge base</a>
+    </div>
+    <p style="margin-top:26px"><strong>What&#39;s inside:</strong></p>
+    <ul>
+      <li><code>index.md</code>: every episode with its topics, a "start here, by question" table and the themes that run across episodes.</li>
+      <li><code>episodes/&lt;slug&gt;/summary.md</code>: one digest per episode.</li>
+      <li><code>all-episodes.md</code>: all 35 digests in one file, for tools that want fewer uploads.</li>
+      <li><code>lenny-wisdom/SKILL.md</code>: the skill for Claude Code (it works in Codex too).</li>
+      <li><code>README.md</code>: the setup guide below, in more detail.</li>
+    </ul>
+    <div class="note">What it covers: 35 episodes from December 2025 to May 2026. These are digests, not full transcripts. For the back catalogue, the full transcripts of hundreds of older episodes are free in the public archive at <a href="https://github.com/ChatPRD/lennys-podcast-transcripts" target="_blank" rel="noopener">ChatPRD/lennys-podcast-transcripts</a>. Most digests were made from YouTube auto-captions, so check the episode before you quote anyone in public.</div>
+  </div>
+</section>
+
+<section class="step pad" id="setup">
+  <div class="step-kicker"><span>06</span> Set it up</div>
+  <div>
+    <h2>Pick your tool. Claude Code, Claude or ChatGPT.</h2>
+    <p class="lede">Claude Code gets the full skill. Claude and ChatGPT get the same knowledge as project files plus a short instruction.</p>
+    <p><strong>Claude Code.</strong> Unzip into your project, so you have <code>your-project/lennys-podcast-knowledge-base/</code>. Then copy the skill in:</p>
+    <div class="promptbox code"><button class="copybtn" data-copy>Copy</button><pre>mkdir -p .claude/skills
+cp -R lennys-podcast-knowledge-base/lenny-wisdom .claude/skills/</pre></div>
+    <p>Start Claude Code in that project and ask: "What would Lenny&#39;s guests say about pricing an AI feature?" Or call it by name with <code>/lenny-wisdom</code>. In Codex, copy the same folder into <code>.agents/skills/</code> instead.</p>
+    <p><strong>A Claude Project.</strong> Create a Project in Claude, add <code>index.md</code> and <code>all-episodes.md</code> to the project knowledge, and paste the instruction below into the project instructions.</p>
+    <p><strong>ChatGPT.</strong> Create a Project, add the same two files and paste the same instruction. Building a custom GPT instead? Put the instruction in Instructions and the two files under Knowledge. Custom GPTs limit how many knowledge files you can add, which is why the combined file is there.</p>
+    <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>Answer my questions using only the Lenny&#39;s Podcast digests in this project&#39;s knowledge.
+Start from index.md to find the 3 to 6 most relevant episodes, then read their digests.
+Credit every point to the guest and the episode. Show where guests disagree, not just
+where they agree. If the digests don&#39;t cover my question, say so and label your own
+reasoning as yours. Answer in this shape: Take, What the guests say, Counter-signals
+and risks, What to do next.</pre></div>
+  </div>
+</section>
+
+<section class="step pad" id="sources">
+  <div class="step-kicker"><span>07</span> The sources</div>
+  <div>
+    <h2>Check the Reel yourself.</h2>
+    <p class="lede">The quote and both salaries in the Reel come from these three pages.</p>
+    <div class="read">
+      <div class="src">YouTube &middot; Sources Podcast</div>
+      <h3>Sam Altman on AI job loss</h3>
+      <p>"We have such a great intuition as the world evolves for what people want. I think that&#39;s a fundamentally human thing, no matter how smart AI gets."</p>
+      <a href="https://www.youtube.com/shorts/D7L_dHJ-SUQ" target="_blank" rel="noopener">Watch the clip &rarr;</a>
+    </div>
+    <div class="read">
+      <div class="src">OpenAI &middot; Job posting</div>
+      <h3>Product Manager, Core Models</h3>
+      <p>Pay on the posting: $347K to $490K, and the role offers equity.</p>
+      <a href="https://jobs.ashbyhq.com/openai/33b8effb-b048-4934-a279-87fff192a330" target="_blank" rel="noopener">Open the posting &rarr;</a>
+    </div>
+    <div class="read">
+      <div class="src">Anthropic &middot; Job posting</div>
+      <h3>Product Manager, Claude Tag</h3>
+      <p>Annual salary on the posting: $385,000 to $460,000 USD.</p>
+      <a href="https://job-boards.greenhouse.io/anthropic/jobs/5251866008" target="_blank" rel="noopener">Open the posting &rarr;</a>
+    </div>
+    <div class="note">I checked all three on 1 October 2026. Job postings close and pay bands change, so the pages may look different when you open them.</div>
+  </div>
+</section>
+
+<section class="step pad" id="next">
+  <div class="step-kicker"><span>08</span> What to do now</div>
+  <div>
+    <h2>Pick one. Use it today.</h2>
+    <p class="lede">Installing skills doesn&#39;t make you a better PM. Running the loop on a real problem this week does.</p>
+    <ul>
+      <li><strong>If you&#39;re new to product:</strong> start at step one. Use <code>continuous-discovery</code> to plan your questions, then talk to one real person about their problem. After that, ask the knowledge base "what do Lenny&#39;s guests say a great PM does in the AI era?"</li>
+      <li><strong>If you already build with Claude Code or Codex:</strong> step two is covered. Put your time into steps one and three: <code>continuous-discovery</code> before you build, <code>metrics-frameworks</code> before you launch.</li>
+      <li><strong>If you already have a roadmap:</strong> run <code>prioritization-craft</code> and <code>strategic-build</code> over it, then ask the knowledge base to pressure-test the top item.</li>
+      <li><strong>If you have to present or persuade this week:</strong> <code>exec-comms</code> for the memo, <code>influence-craft</code> for the room.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="closeblock sky pad">
+  <div class="sky-hi"><h2>See what&#39;s possible. Then build it.</h2></div>
+  <div class="sky-lo">
+    <p>You&#39;re on the list now. Every week you&#39;ll get five useful things I made with AI, with the prompt or workflow behind each one. This kit was one of them.</p>
+    <a href="/">Back to the site</a>
+  </div>
+</section>
+
+</div>
+
+<footer class="pad"><span>Art of the Possible&reg;</span><span>New things are possible every day. &middot; 2026</span></footer>
+</div>
+
+<script>
+(function () {
+  var API = 'https://theaotp-gate.theaotp.workers.dev';
+  var KEY = 'aotp_human_unlocked';
+  var kit = document.getElementById('kit');
+  var gate = document.getElementById('gate');
+  var form = document.getElementById('gate-form');
+  var status = document.getElementById('gate-status');
+
+  function unlock() {
+    kit.hidden = false;
+    gate.hidden = true;
+    try { localStorage.setItem(KEY, '1'); } catch (e) {}
+  }
+
+  try { if (localStorage.getItem(KEY) === '1') unlock(); } catch (e) {}
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    var email = document.getElementById('gate-email').value.trim().toLowerCase();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      status.textContent = 'That email looks off. Try again.';
+      return;
+    }
+    status.textContent = 'One sec…';
+    fetch(API + '/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, ctx: window.aotpCtx ? window.aotpCtx() : null }),
+    }).then(function (response) {
+      return response.json().catch(function () { return {}; }).then(function (data) {
+        if (!response.ok) {
+          var err = new Error('subscribe failed');
+          err.status = response.status;
+          err.detail = data && data.detail;
+          throw err;
+        }
+        return data;
+      });
+    }).then(function (data) {
+      if (window.aotpSubscribed) window.aotpSubscribed(data);
+      status.textContent = !(data && data.new) ? 'Welcome back. Unlocked.'
+        : data.member === false ? 'Unlocked. Check your inbox to confirm your subscription to the letter.'
+        : 'Unlocked. You\'re on the list for the weekly letter.';
+      unlock();
+      window.scrollTo({ top: document.getElementById('first').offsetTop - 40, behavior: 'smooth' });
+    }).catch(function (err) {
+      if (err && err.status === 400) {
+        status.textContent = 'That email was rejected' + (err.detail ? ' (' + err.detail + ')' : '') + '. Try a different address.';
+      } else {
+        status.textContent = 'Something broke on our end. Try again in a minute, or subscribe on the homepage and DM me on Instagram for the kit.';
+      }
+    });
+  });
+
+  document.querySelectorAll('[data-copy]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      var pre = button.parentElement.querySelector('pre');
+      navigator.clipboard.writeText(pre.textContent).then(function () {
+        button.textContent = 'Copied';
+        setTimeout(function () { button.textContent = 'Copy'; }, 1600);
+      });
+    });
+  });
+})();
+</script>
+</body></html>
