@@ -1,0 +1,641 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>September models kit | Art of the Possible</title>
+<meta name="description" content="Every model from the September Reel, linked to the company that made it, with tips from each vendor's docs and step-by-step setup for the ones you can run yourself.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://theaotp.com/new/">
+<link rel="icon" href="/qualia-symbol.png">
+<meta property="og:title" content="September models kit | Art of the Possible">
+<meta property="og:description" content="Every model from the September Reel, with local setup for the open ones.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&amp;family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&amp;family=Geist+Mono:wght@400&amp;display=swap" rel="stylesheet">
+<!--
+  Clear Sky kit template (AOTP design system approved by Rich 2026-09-30).
+  Source of truth: content-intelligence assets/brand/clear-sky/{DESIGN.md,tokens.css,board.html}.
+  Filled example: assets/brand/clear-sky/sample-guide.html.
+  Never retune the sky. No old accent blue, no blue buttons, no two-tone headlines, no bold display, no shadows, no em dashes.
+-->
+<style>
+:root{
+  --sand:#EFEBE7;--ink:#08070B;--graphite:#39383D;--ash:#909092;--ice:#BEC4D2;--ice-3:#E2E4EC;--glacier-2:#F3F4F6;--deep-ocean:#034C7C;--light-blue:#A5D4F2;--white:#FFFFFF;
+  /* The measured sky compressed into 0-75%, then white sand. Locked: paste, never retune. */
+  --g-sky-page:linear-gradient(180deg,#043761 0%,#024F80 9.375%,#026AA1 18.75%,#0282C0 28.125%,#1199D7 37.5%,#3EA9DA 46.875%,#6DB9DC 56.25%,#9DCBDD 65.625%,#CBDBDF 75%,#EFEBE7 100%);
+  --display:'Inter Tight','Helvetica Neue',Arial,sans-serif;--ui:'Inter','Helvetica Neue',Arial,sans-serif;--mono:'Geist Mono',ui-monospace,'SF Mono',Menlo,monospace;
+  --gutter:clamp(16px,4.5vw,64px);
+  --spark:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0C12.8 7.2 16.8 11.2 24 12C16.8 12.8 12.8 16.8 12 24C11.2 16.8 7.2 12.8 0 12C7.2 11.2 11.2 7.2 12 0Z'/%3E%3C/svg%3E");
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--sand);color:var(--ink);font:400 16px/1.6 var(--ui);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:var(--deep-ocean);text-underline-offset:3px;text-decoration-thickness:1px}
+button,input{font:inherit}button,a,input{-webkit-tap-highlight-color:transparent}
+strong,b{font-weight:600;color:var(--ink)}
+:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+.page{min-height:100vh;overflow-x:clip}
+/* Full-bleed backgrounds, content held to 1440 with 64px gutters (16px on phones). */
+.pad{padding-left:max(var(--gutter),calc((100% - 1440px)/2 + var(--gutter)));padding-right:max(var(--gutter),calc((100% - 1440px)/2 + var(--gutter)))}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance;overflow-wrap:break-word}
+p,li{text-wrap:pretty}
+
+/* Sparkle label: four-point sparkle + Geist Mono caps. */
+.eyebrow,.inst,.inside .lbl{display:block;font:400 11px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase}
+.eyebrow::before,.inst::before,.inside .lbl::before,.inside li::before{content:"";display:inline-block;width:.82em;height:.82em;margin-right:.75em;vertical-align:-.04em;background:currentColor;-webkit-mask:var(--spark) center/contain no-repeat;mask:var(--spark) center/contain no-repeat}
+
+/* ---- The sky. Rows are 37.5 / 3.75 / 58.75 of the box, so white type always sits where the sky is
+   at t <= 0.5 (white display, 32px+) and ink always starts at t >= 0.55, however the headline wraps. ---- */
+.sky{display:grid;grid-template-rows:37.5fr 3.75fr 58.75fr;background:var(--g-sky-page)}
+.sky-hi{grid-row:1;display:flex;flex-direction:column;justify-content:space-between;color:var(--white)}
+.sky-lo{grid-row:3;color:var(--ink)}
+nav{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:76px}
+.lockup{display:flex;align-items:center;color:var(--white);text-decoration:none}.lockup svg{display:block;height:22px;width:auto}
+.navlinks{display:flex;gap:28px;font:400 14px/1 var(--ui)}.navlinks a{color:var(--white);text-decoration:none}.navlinks a:hover{text-decoration:underline}
+.kit-head h1{margin-top:clamp(28px,4.2vw,64px);font-size:clamp(44px,5.7vw,84px);line-height:.96;letter-spacing:-.045em;max-width:13em}
+.kit-head .sky-lo{padding-bottom:clamp(40px,5vw,72px)}
+.dek{max-width:56ch;margin:14px 0 0;font:400 clamp(16px,1.5vw,20px)/1.5 var(--ui);letter-spacing:-.01em;color:var(--ink)}
+
+/* ---- The gate: a glacier card on sand. ---- */
+.gate{padding-top:8px;padding-bottom:clamp(56px,7vw,96px)}
+.gate-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(28px,5vw,72px);align-items:start;background:var(--glacier-2);border-radius:12px;padding:clamp(22px,3.4vw,48px)}
+.gate-grid>*,.step>*,.concept>*{min-width:0}
+.gate .eyebrow{color:var(--graphite)}
+.gate h2{margin-top:18px;font-size:clamp(30px,3vw,42px);line-height:1.04;letter-spacing:-.03em;max-width:17ch}
+.gate-intro p{max-width:48ch;margin:18px 0 0;color:var(--graphite)}
+.gate form{display:grid;gap:10px}
+.gate input{width:100%;min-width:0;height:52px;border:1px solid var(--ink);border-radius:999px;background:transparent;padding:0 22px;color:var(--ink);font-size:16px}
+.gate input::placeholder{color:var(--graphite);opacity:1}
+.gate input:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.gate button{width:100%;min-height:52px;border:0;border-radius:999px;background:var(--ink);color:var(--white);cursor:pointer;padding:14px 22px;font:500 16px/1.25 var(--ui);letter-spacing:-.005em;text-align:center;text-wrap:balance}
+.gate button:hover{background:var(--graphite)}
+.gate-status{margin:12px 0 0;font-size:14px;color:var(--ink)}.gate-status:empty{margin:0}
+.gate-small{margin:14px 0 0;font-size:13.5px;line-height:1.55;color:var(--graphite)}
+.inside{margin-top:26px;border-top:1px solid var(--ice);padding-top:16px}
+.inside .lbl{color:var(--graphite)}
+.inside ul{list-style:none;padding:0;margin:12px 0 0;display:grid;gap:8px}
+.inside li{font-size:15px;line-height:1.45;padding-left:1.6em;text-indent:-1.6em}
+.inside li::before{width:10px;height:10px;margin-right:calc(1.6em - 10px);vertical-align:0}
+
+/* ---- Sections: a mono-and-numeral rail, one reading column, 1px ice hairlines. ---- */
+.step,.concept{position:relative;display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px;padding-top:52px;padding-bottom:72px;scroll-margin-top:24px}
+.step::before,.concept::before,footer::before{content:"";position:absolute;top:0;left:max(var(--gutter),calc((100% - 1440px)/2 + var(--gutter)));right:max(var(--gutter),calc((100% - 1440px)/2 + var(--gutter)));height:1px;background:var(--ice)}
+.step-kicker,.concept-num{font:400 11px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--graphite)}
+.step-kicker span,.concept-num span{display:block;margin-bottom:14px;font:400 64px/.8 var(--display);letter-spacing:-.06em;color:var(--ink)}
+.step h2,.concept h2{font-size:clamp(34px,3.6vw,50px);line-height:1.02;letter-spacing:-.03em;max-width:20ch}
+.step .lede,.concept .lede{max-width:54ch;margin:20px 0 24px;font:400 20px/1.5 var(--ui);letter-spacing:-.01em;color:var(--ink)}
+.step p,.concept p{max-width:64ch;color:var(--graphite)}
+.step ul,.step ol,.concept ul{max-width:64ch;padding-left:20px;color:var(--graphite)}
+.step li,.concept li{margin-bottom:10px}
+.step li::marker,.concept li::marker{color:var(--ash)}
+.note{max-width:62ch;margin:30px 0;border-top:1px solid var(--ice);padding-top:14px;font-size:14.5px;line-height:1.6;color:var(--graphite)}
+table+.note{margin-top:18px;border-top:0;padding-top:0}
+.step .inst{margin:44px 0 0;color:var(--ink)}
+
+/* Reading-list payload */
+.index{list-style:none;padding:0!important;margin:26px 0 0;max-width:66ch}
+.index li{border-top:1px solid var(--ice);padding:16px 0;margin:0;display:flex;gap:18px;align-items:baseline;font-size:15px;color:var(--graphite)}
+.index .n{min-width:26px;font:400 11px var(--mono);letter-spacing:.1em;color:var(--graphite)}
+.index a{font:400 21px/1.2 var(--display);letter-spacing:-.02em;color:var(--ink);text-decoration:none}.index a:hover{text-decoration:underline}
+.index .st{margin-left:auto;font:400 10.5px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--graphite)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 0}
+.chip{display:inline-flex;align-items:center;height:24px;padding:0 9px;border-radius:5px;background:var(--ice-3);font:400 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.read{max-width:760px;margin:26px 0 0;background:var(--glacier-2);border-radius:12px;padding:20px 22px 22px}
+.read .src{font:400 10.5px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--graphite)}
+.read h3{max-width:40ch;margin:10px 0 16px;font-size:24px;line-height:1.12;letter-spacing:-.025em}
+.read a{display:inline-flex;align-items:center;height:28px;padding:0 13px;border:1px solid var(--ink);border-radius:999px;font:400 10.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink);text-decoration:none}
+.read a:hover{background:var(--ink);color:var(--white)}
+
+/* ---- The close: the sky again, white headline high, ink low, settling into sand. ---- */
+.closeblock .sky-hi{padding-top:clamp(64px,8vw,112px)}
+.closeblock h2{font-size:clamp(40px,5.2vw,76px);line-height:.98;letter-spacing:-.04em;max-width:15ch}
+.closeblock .sky-lo{padding-bottom:clamp(48px,6vw,88px)}
+.closeblock p{max-width:52ch;margin:0;font:400 clamp(17px,1.5vw,19px)/1.55 var(--ui);color:var(--ink)}
+.closeblock a{display:inline-flex;align-items:center;justify-content:center;height:52px;margin-top:24px;padding:0 26px;border-radius:999px;background:var(--ink);color:var(--white);font:500 16px/1 var(--ui);text-decoration:none}
+.closeblock a:hover{background:var(--graphite)}
+footer{position:relative;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px 24px;padding-top:26px;padding-bottom:34px;font:400 10.5px/1.6 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--graphite)}
+[hidden]{display:none!important}
+
+/* --- prompt-kit / field-notes / how-to payloads: keep these, delete what you don't use --- */
+.promptbox{max-width:760px;margin-top:26px;background:var(--glacier-2);border-radius:12px;padding-top:12px}
+.copybtn{display:block;margin:0 12px 0 auto;min-height:32px;padding:0 14px;border:1px solid var(--ink);border-radius:999px;background:transparent;color:var(--ink);cursor:pointer;font:400 10.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase}
+.copybtn:hover{background:var(--ink);color:var(--white)}
+.promptbox pre{margin:12px 0 0;border-top:1px solid var(--ice);padding:20px 26px 26px;overflow-x:auto;font:400 13px/1.8 var(--mono);white-space:pre-wrap;overflow-wrap:anywhere;color:var(--ink)}
+.promptbox.code pre{white-space:pre;overflow-wrap:normal}
+.promptbox.tall pre{max-height:560px;overflow-y:auto}
+.cmd,.termshot{max-width:760px;margin:24px 0;border-radius:12px;padding:20px 24px;overflow-x:auto}
+.cmd{background:var(--glacier-2)}.cmd code{display:block;padding:0;background:none;font:400 13px/1.8 var(--mono);white-space:pre}
+.termshot{background:var(--ink);color:var(--sand);font:400 13px/1.9 var(--mono);white-space:pre}
+.termshot .g{color:var(--light-blue)}.termshot .y,.termshot .r{color:var(--white)}.termshot .d{color:var(--ash)}
+code{font-family:var(--mono);font-size:.86em;background:var(--ice-3);padding:1px 5px;border-radius:4px;white-space:nowrap;color:var(--ink)}
+.lessons{list-style:none;padding:0!important;margin:26px 0 0;max-width:66ch}
+.lessons li{position:relative;border-top:1px solid var(--ice);padding:22px 0 22px 72px;margin:0;color:var(--graphite)}
+.lessons strong{display:block;margin-bottom:8px;font:400 23px/1.2 var(--display);letter-spacing:-.02em;color:var(--ink)}
+.lessons .k{position:absolute;left:0;top:22px;font:400 40px/.84 var(--display);letter-spacing:-.05em;color:var(--ink)}
+table{border-collapse:collapse;width:100%;max-width:760px;margin:20px 0;font-size:14.5px}
+th,td{text-align:left;padding:14px 16px 14px 0;border-bottom:1px solid var(--ice);vertical-align:top;color:var(--graphite)}
+th{border-bottom-color:var(--ink);font:400 10.5px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+td:first-child{width:26%;padding-right:24px;color:var(--ink);font-weight:500}td code{white-space:normal;overflow-wrap:anywhere}
+.shot{max-width:760px;margin:26px 0}
+.shot img{display:block;width:100%;height:auto;border:1px solid var(--ice);border-radius:6px;background:var(--white)}
+.cap{max-width:64ch;margin:10px 0 0;font-size:13.5px;line-height:1.5;color:var(--graphite)}
+.dl{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px 28px;max-width:760px;margin:28px 0 0;background:var(--glacier-2);border-radius:12px;padding:22px 24px}
+.dl-meta{font-size:14px;line-height:1.5;color:var(--graphite)}.dl-meta strong{display:block;font:400 21px/1.2 var(--display);letter-spacing:-.02em}
+.dl-btn{display:inline-flex;align-items:center;height:52px;padding:0 26px;border-radius:999px;background:var(--ink);color:var(--white);font:500 16px/1 var(--ui);text-decoration:none}.dl-btn:hover{background:var(--graphite)}
+.cmdlist{list-style:none;padding:0!important;margin:28px 0 0;max-width:760px}
+.cmdlist li{display:grid;grid-template-columns:34px minmax(0,1fr);gap:14px;border-top:1px solid var(--ice);padding:20px 0;margin:0}
+.cmdlist li>*{min-width:0}.cmdlist .n{padding-top:9px;font:400 11px/1 var(--mono);letter-spacing:.1em;color:var(--graphite)}
+.cmdlist p{margin:10px 0 0}
+.kc{display:inline-flex;align-items:center;gap:12px;max-width:100%;min-height:32px;padding:4px 6px 4px 12px;border:1px solid var(--ink);border-radius:999px;background:transparent;color:var(--ink);cursor:pointer;text-align:left}
+.kc code{padding:0;background:none;font-size:14px;white-space:normal;overflow-wrap:anywhere}
+.kc .cp{padding:4px 9px;border-radius:999px;background:var(--ice-3);font:400 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase}
+.kc:hover .cp,.kc.done .cp{background:var(--ink);color:var(--white)}
+.where{display:inline-block;margin-left:12px;font:400 10.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--graphite)}
+.try{list-style:none;padding:0!important;margin:14px 0 0;max-width:66ch}
+.try li{border-top:1px solid var(--ice);padding:14px 0;margin:0;color:var(--graphite)}
+.try strong{margin-right:6px;font:400 14px var(--mono)}
+
+/* /new/ additions: index names on their own line, cards with a line of body copy, code blocks inside lists. */
+.index .sk{display:block;margin-bottom:4px}
+.promptbox+p{margin-top:22px}
+.lessons .promptbox{margin-top:16px}
+.step li .promptbox{margin-bottom:6px}
+.read p{max-width:60ch;margin:0 0 18px;color:var(--graphite)}
+.read h3{margin-bottom:12px}
+.read+.read{margin-top:14px}
+.read p code{white-space:normal}
+@media(max-width:920px){.gate-grid{grid-template-columns:1fr}}
+@media(max-width:800px){
+  nav{min-height:64px}.lockup svg{height:17px}.navlinks{gap:16px;font-size:13px}
+  .gate{padding-top:0}
+  .gate-grid,.step,.concept{grid-template-columns:1fr;gap:22px}.gate-grid>*,.step>*,.concept>*{min-width:0}
+  .step,.concept{padding-top:34px;padding-bottom:48px}
+  .step-kicker span,.concept-num span{display:inline-block;margin:0 12px 0 0;font-size:44px;vertical-align:-.02em}
+  .step .lede,.concept .lede{font-size:18px}
+  .lessons li{padding-left:54px}.lessons .k{font-size:32px;top:24px}
+  .promptbox pre{padding:18px 18px 22px}.index li{flex-wrap:wrap}.index .st{margin-left:44px;width:100%}
+  code{white-space:normal;overflow-wrap:anywhere}th,td{padding-right:12px}td:first-child{width:32%}
+}
+@media(max-width:480px){.lockup svg{height:15px}.navlinks{gap:14px;font-size:12.5px}.kit-head h1 br{display:none}.gate-grid{padding:24px 16px}.gate button{padding-left:12px;padding-right:12px;font-size:14.5px}}
+@media(max-width:380px){.gate button{font-size:14px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style><script src="/f.js"></script>
+</head><body>
+<div class="page">
+<header class="kit-head sky pad">
+  <div class="sky-hi">
+    <nav><a class="lockup" href="/"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 897 112" role="img" aria-label="Art of the Possible"><title>Art of the Possible</title><g fill="#FFFFFF"><path transform="scale(0.448)" d="M93.301 48.471A34.601 34.601 0 1 1 156.699 48.471A34.601 34.601 0 0 0 93.301 48.471ZM156.699 48.471A34.601 34.601 0 1 1 201.529 93.301A34.601 34.601 0 0 0 156.699 48.471ZM201.529 93.301A34.601 34.601 0 1 1 156.699 48.471A34.601 34.601 0 0 0 201.529 93.301ZM201.529 93.301A34.601 34.601 0 1 1 201.529 156.699A34.601 34.601 0 0 0 201.529 93.301ZM201.529 156.699A34.601 34.601 0 1 1 156.699 201.529A34.601 34.601 0 0 0 201.529 156.699ZM156.699 201.529A34.601 34.601 0 1 1 201.529 156.699A34.601 34.601 0 0 0 156.699 201.529ZM156.699 201.529A34.601 34.601 0 1 1 93.301 201.529A34.601 34.601 0 0 0 156.699 201.529ZM93.301 201.529A34.601 34.601 0 1 1 48.471 156.699A34.601 34.601 0 0 0 93.301 201.529ZM48.471 156.699A34.601 34.601 0 1 1 93.301 201.529A34.601 34.601 0 0 0 48.471 156.699ZM48.471 156.699A34.601 34.601 0 1 1 48.471 93.301A34.601 34.601 0 0 0 48.471 156.699ZM48.471 93.301A34.601 34.601 0 1 1 93.301 48.471A34.601 34.601 0 0 0 48.471 93.301ZM93.301 48.471A34.601 34.601 0 1 1 48.471 93.301A34.601 34.601 0 0 0 93.301 48.471Z"/><path transform="translate(160 80.736)" d="M11.7 0H0.49L17.57 -49.47H31.04L48.09 0H36.91L24.49 -38.17H24.09ZM11.04 -19.44H37.49V-11.3H11.04ZM51.08 0V-49.47H70.57Q76.2 -49.47 80.16 -47.48Q84.12 -45.48 86.22 -41.85Q88.32 -38.21 88.32 -33.31Q88.32 -28.38 86.2 -24.84Q84.07 -21.29 80.04 -19.41Q76.01 -17.53 70.31 -17.53H57.27V-25.94H68.6Q71.63 -25.94 73.62 -26.76Q75.6 -27.59 76.58 -29.22Q77.55 -30.85 77.55 -33.31Q77.55 -35.78 76.57 -37.47Q75.59 -39.15 73.6 -40.02Q71.62 -40.89 68.58 -40.89H61.52V0ZM78.54 0 66.5 -22.52H77.78L90.09 0ZM90.95 -40.85V-49.47H131.58V-40.85H116.44V0H106.12V-40.85ZM170.54 0.66Q163.97 0.66 158.72 -2.32Q153.46 -5.31 150.41 -10.99Q147.36 -16.66 147.36 -24.7Q147.36 -32.8 150.41 -38.49Q153.46 -44.18 158.72 -47.16Q163.97 -50.14 170.54 -50.14Q177.12 -50.14 182.35 -47.16Q187.59 -44.18 190.64 -38.49Q193.69 -32.8 193.69 -24.7Q193.69 -16.64 190.64 -10.97Q187.59 -5.29 182.35 -2.31Q177.12 0.66 170.54 0.66ZM170.54 -8.58Q174.35 -8.58 177.16 -10.44Q179.98 -12.29 181.54 -15.89Q183.09 -19.49 183.09 -24.7Q183.09 -29.95 181.54 -33.57Q179.98 -37.18 177.16 -39.04Q174.35 -40.89 170.54 -40.89Q166.76 -40.89 163.93 -39.04Q161.1 -37.18 159.53 -33.57Q157.96 -29.95 157.96 -24.7Q157.96 -19.49 159.53 -15.89Q161.1 -12.29 163.93 -10.44Q166.76 -8.58 170.54 -8.58ZM198.51 0V-49.47H231.26V-40.85H208.95V-27.25H229.08V-18.79H208.95V0ZM246.36 -40.85V-49.47H286.99V-40.85H271.85V0H261.53V-40.85ZM290.8 0V-49.47H301.24V-29.06H322.46V-49.47H332.9V0H322.46V-20.44H301.24V0ZM338.59 0V-49.47H371.94V-40.85H349.03V-29.22H370.19V-20.76H349.03V-8.62H372V0ZM390.19 0V-49.47H409.68Q415.31 -49.47 419.27 -47.33Q423.23 -45.19 425.33 -41.4Q427.43 -37.61 427.43 -32.69Q427.43 -27.76 425.31 -24Q423.18 -20.25 419.15 -18.14Q415.12 -16.03 409.43 -16.03H396.99V-24.41H407.71Q410.74 -24.41 412.73 -25.46Q414.71 -26.52 415.69 -28.38Q416.66 -30.25 416.66 -32.69Q416.66 -35.18 415.69 -37.02Q414.71 -38.86 412.72 -39.88Q410.73 -40.89 407.69 -40.89H400.63V0ZM453.6 0.66Q447.03 0.66 441.78 -2.32Q436.52 -5.31 433.47 -10.99Q430.43 -16.66 430.43 -24.7Q430.43 -32.8 433.47 -38.49Q436.52 -44.18 441.78 -47.16Q447.03 -50.14 453.6 -50.14Q460.18 -50.14 465.42 -47.16Q470.65 -44.18 473.7 -38.49Q476.75 -32.8 476.75 -24.7Q476.75 -16.64 473.7 -10.97Q470.65 -5.29 465.42 -2.31Q460.18 0.66 453.6 0.66ZM453.6 -8.58Q457.41 -8.58 460.23 -10.44Q463.05 -12.29 464.6 -15.89Q466.15 -19.49 466.15 -24.7Q466.15 -29.95 464.6 -33.57Q463.05 -37.18 460.23 -39.04Q457.41 -40.89 453.6 -40.89Q449.82 -40.89 446.99 -39.04Q444.17 -37.18 442.6 -33.57Q441.03 -29.95 441.03 -24.7Q441.03 -19.49 442.6 -15.89Q444.17 -12.29 446.99 -10.44Q449.82 -8.58 453.6 -8.58ZM499.91 0.7Q493.92 0.7 489.49 -1.13Q485.06 -2.96 482.58 -6.57Q480.1 -10.19 479.96 -15.54H490.08Q490.27 -13.07 491.53 -11.4Q492.8 -9.74 494.93 -8.9Q497.06 -8.06 499.79 -8.06Q502.45 -8.06 504.43 -8.83Q506.4 -9.6 507.49 -10.98Q508.57 -12.36 508.57 -14.18Q508.57 -15.84 507.58 -16.96Q506.6 -18.08 504.73 -18.89Q502.85 -19.69 500.15 -20.32L494.75 -21.65Q488.5 -23.15 484.89 -26.41Q481.28 -29.68 481.28 -35.17Q481.28 -39.66 483.71 -43.02Q486.14 -46.38 490.37 -48.26Q494.61 -50.14 500.02 -50.14Q505.54 -50.14 509.64 -48.25Q513.75 -46.36 516.05 -43Q518.35 -39.64 518.43 -35.25H508.36Q508.09 -38.16 505.89 -39.78Q503.7 -41.4 499.94 -41.4Q497.4 -41.4 495.62 -40.68Q493.84 -39.97 492.92 -38.71Q492 -37.45 492 -35.83Q492 -34.09 493.06 -32.91Q494.11 -31.74 495.9 -31Q497.68 -30.25 499.81 -29.74L504.23 -28.66Q507.45 -27.93 510.16 -26.72Q512.87 -25.5 514.88 -23.74Q516.89 -21.99 517.99 -19.6Q519.09 -17.22 519.09 -14.13Q519.09 -9.61 516.81 -6.27Q514.53 -2.94 510.24 -1.12Q505.96 0.7 499.91 0.7ZM541.53 0.7Q535.54 0.7 531.11 -1.13Q526.68 -2.96 524.2 -6.57Q521.72 -10.19 521.58 -15.54H531.7Q531.89 -13.07 533.16 -11.4Q534.42 -9.74 536.55 -8.9Q538.68 -8.06 541.41 -8.06Q544.08 -8.06 546.05 -8.83Q548.02 -9.6 549.11 -10.98Q550.19 -12.36 550.19 -14.18Q550.19 -15.84 549.21 -16.96Q548.22 -18.08 546.35 -18.89Q544.47 -19.69 541.77 -20.32L536.37 -21.65Q530.12 -23.15 526.51 -26.41Q522.9 -29.68 522.9 -35.17Q522.9 -39.66 525.33 -43.02Q527.76 -46.38 531.99 -48.26Q536.23 -50.14 541.64 -50.14Q547.16 -50.14 551.26 -48.25Q555.37 -46.36 557.67 -43Q559.97 -39.64 560.05 -35.25H549.98Q549.71 -38.16 547.51 -39.78Q545.32 -41.4 541.56 -41.4Q539.02 -41.4 537.24 -40.68Q535.46 -39.97 534.54 -38.71Q533.62 -37.45 533.62 -35.83Q533.62 -34.09 534.68 -32.91Q535.74 -31.74 537.52 -31Q539.3 -30.25 541.43 -29.74L545.85 -28.66Q549.07 -27.93 551.78 -26.72Q554.49 -25.5 556.5 -23.74Q558.51 -21.99 559.61 -19.6Q560.71 -17.22 560.71 -14.13Q560.71 -9.61 558.43 -6.27Q556.15 -2.94 551.87 -1.12Q547.58 0.7 541.53 0.7ZM575.25 -49.47V0H564.81V-49.47ZM580.93 0V-49.47H600.73Q606.18 -49.47 609.83 -47.85Q613.48 -46.22 615.32 -43.36Q617.15 -40.5 617.15 -36.8Q617.15 -33.89 615.98 -31.71Q614.81 -29.52 612.8 -28.13Q610.78 -26.74 608.2 -26.16V-25.66Q611.03 -25.55 613.51 -24.08Q615.99 -22.6 617.53 -19.97Q619.08 -17.33 619.08 -13.67Q619.08 -9.75 617.14 -6.66Q615.21 -3.57 611.43 -1.78Q607.64 0 602.06 0ZM591.37 -8.54H599.91Q604.27 -8.54 606.29 -10.23Q608.31 -11.93 608.31 -14.7Q608.31 -16.77 607.32 -18.34Q606.33 -19.92 604.5 -20.82Q602.67 -21.71 600.16 -21.71H591.37ZM591.37 -28.77H599.14Q601.27 -28.77 602.96 -29.53Q604.64 -30.29 605.61 -31.69Q606.58 -33.1 606.58 -35.05Q606.58 -37.71 604.69 -39.36Q602.8 -41.01 599.34 -41.01H591.37ZM622.95 0V-49.47H633.39V-8.62H654.6V0ZM658.66 0V-49.47H692.01V-40.85H669.1V-29.22H690.26V-20.76H669.1V-8.62H692.06V0ZM708.66 -22.11V-39.91H717.37Q719.06 -39.94 720.47 -39.25Q721.88 -38.56 722.72 -37.24Q723.56 -35.93 723.56 -34.07Q723.56 -32.17 722.69 -30.82Q721.81 -29.47 720.37 -28.79Q718.94 -28.12 717.18 -28.12H711.19V-31.48H716.19Q717.2 -31.46 717.94 -32.11Q718.68 -32.75 718.68 -34.06Q718.68 -35.37 717.94 -35.95Q717.19 -36.52 716.21 -36.54H713.29V-22.11ZM720.04 -30.35 724.13 -22.11H719.02L715.23 -30.35ZM715.63 -11.49Q711.65 -11.49 708.14 -13Q704.64 -14.51 701.98 -17.17Q699.33 -19.82 697.84 -23.33Q696.35 -26.83 696.35 -30.81Q696.35 -34.8 697.84 -38.3Q699.33 -41.8 701.98 -44.46Q704.64 -47.12 708.14 -48.63Q711.65 -50.14 715.63 -50.14Q719.65 -50.14 723.15 -48.63Q726.65 -47.12 729.31 -44.46Q731.97 -41.8 733.46 -38.3Q734.95 -34.8 734.95 -30.81Q734.95 -26.83 733.46 -23.33Q731.97 -19.82 729.32 -17.17Q726.67 -14.51 723.16 -13Q719.65 -11.49 715.63 -11.49ZM715.63 -16.61Q719.59 -16.61 722.82 -18.52Q726.05 -20.43 727.97 -23.66Q729.88 -26.88 729.87 -30.81Q729.88 -34.74 727.96 -37.97Q726.05 -41.2 722.81 -43.12Q719.57 -45.03 715.63 -45.01Q711.72 -45.03 708.49 -43.12Q705.26 -41.2 703.34 -37.97Q701.43 -34.74 701.43 -30.82Q701.43 -26.89 703.35 -23.66Q705.26 -20.43 708.49 -18.52Q711.71 -16.61 715.63 -16.61Z"/></g></svg></a><div class="navlinks"><a href="/">Home</a><a href="/letters/">Archive</a><a href="/#about">About</a></div></nav>
+    <h1>Eight new models.<br> Here's how to use them.</h1>
+  </div>
+  <div class="sky-lo">
+    <div class="eyebrow">September models kit &middot; From the Reel</div>
+    <p class="dek">You commented "NEW". Here it is. Every model from the Reel is here, linked to the company that made it, along with how to get the most out of each one and step-by-step setup for the ones you can run on your own machine. I added the two big releases that landed after I filmed it, too. No course, no upsell.</p>
+  </div>
+</header>
+
+<section class="gate pad" id="gate">
+  <div class="gate-grid">
+    <div class="gate-intro">
+      <div class="eyebrow">Unlock the kit</div>
+      <h2>Drop your email and the whole kit unlocks on this page.</h2>
+      <p>You'll also get the weekly letter: five useful things I made with AI, with the prompts and workflows inside. Unsubscribe any time.</p>
+    </div>
+    <div class="gate-act">
+      <form id="gate-form" novalidate>
+        <label for="gate-email" class="sr-only">Email address</label>
+        <input id="gate-email" type="email" name="email" placeholder="you@somewhere.com" autocomplete="email" required>
+        <button type="submit">Unlock the guide and subscribe to AOTP</button>
+      </form>
+      <p class="gate-status" id="gate-status" aria-live="polite"></p>
+      <p class="gate-small">Already on the list? Enter the same email and it unlocks without subscribing you twice.</p>
+      <noscript><p class="gate-small">This page needs JavaScript to unlock. Or just subscribe on <a href="/">the homepage</a> and reply to any letter for the kit.</p></noscript>
+      <div class="inside">
+        <div class="lbl">What unlocks</div>
+        <ul><li>All eight models, linked to the source</li><li>Local setup for Bonsai 2, Qwen-Image-2.1 and DeepSeek</li><li>How to get the most out of each one</li><li>What landed after I filmed it</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EVERYTHING OF VALUE LIVES INSIDE #kit. Nothing valuable outside it. -->
+<div id="kit" hidden>
+
+<section class="step pad" id="first">
+  <div class="step-kicker"><span>01</span> The list</div>
+  <div>
+    <h2>One month. Eight models.</h2>
+    <p class="lede">Here's every model I named in the Reel, in release order, each linked to the launch post from the company that made it.</p>
+    <p>The dates are the ones each company printed on its own launch page. Prices are per million tokens. You can download three of these and run them yourself. The other five you use through an app or an API.</p>
+    <ol class="index">
+      <li><span class="n">01</span><span><a class="sk" href="https://api-docs.deepseek.com/news/news260910/" target="_blank" rel="noopener">DeepSeek V4.1 Flash</a>DeepSeek. Open weights under MIT, a 1M-token context, and $0.15 per million input tokens off-peak.</span><span class="st">Sep 10 &middot; Open weights</span></li>
+      <li><span class="n">02</span><span><a class="sk" href="https://prismml.com/news/bonsai-2-27b" target="_blank" rel="noopener">Ternary Bonsai 2 27B</a>PrismML. A 27B model in 5.9 GB that runs on a laptop or a single GPU. Apache 2.0.</span><span class="st">Sep 17 &middot; Local</span></li>
+      <li><span class="n">03</span><span><a class="sk" href="https://qwen.ai/blog?id=qwen-image-2.1" target="_blank" rel="noopener">Qwen-Image-2.1</a>Qwen. Makes and edits images, transparent backgrounds included. Research licence.</span><span class="st">Sep 20 &middot; Local</span></li>
+      <li><span class="n">04</span><span><a class="sk" href="https://x.ai/news/grok-4-7" target="_blank" rel="noopener">Grok 4.7</a>SpaceXAI. Coding and knowledge work, trained on multi-hour tasks. $2 in, $6 out.</span><span class="st">Sep 21 &middot; API + Cursor</span></li>
+      <li><span class="n">05</span><span><a class="sk" href="https://openai.com/index/introducing-gpt-6-sol-and-luna/" target="_blank" rel="noopener">GPT-6 Sol</a>OpenAI. A faster, cheaper GPT-6 for difficult work. $2 in, $10 out.</span><span class="st">Sep 22 &middot; ChatGPT + API</span></li>
+      <li><span class="n">06</span><span><a class="sk" href="https://openai.com/index/introducing-gpt-6-sol-and-luna/" target="_blank" rel="noopener">GPT-6 Luna</a>OpenAI. The low-cost GPT-6. $0.10 in, $0.50 out.</span><span class="st">Sep 22 &middot; ChatGPT + API</span></li>
+      <li><span class="n">07</span><span><a class="sk" href="https://www.anthropic.com/claude-opus-5-5" target="_blank" rel="noopener">Claude Opus 5.5</a>Anthropic. Built for complex work that needs careful judgment. $4 in, $20 out.</span><span class="st">Sep 22 &middot; Claude + API</span></li>
+      <li><span class="n">08</span><span><a class="sk" href="https://www.anthropic.com/claude-sonnet-5-5" target="_blank" rel="noopener">Claude Sonnet 5.5</a>Anthropic. Faster and cheaper, strongest at well-scoped everyday work. $2 in, $10 out.</span><span class="st">Sep 28 &middot; Claude + API</span></li>
+    </ol>
+    <div class="note">I don't earn anything from any link on this page. Every one goes to the company's own page, its docs or its official repo.</div>
+  </div>
+</section>
+
+<section class="step pad" id="bonsai">
+  <div class="step-kicker"><span>02</span> Bonsai 2 &middot; local</div>
+  <div>
+    <h2>Bonsai 2. A 27B model on your laptop.</h2>
+    <p class="lede">Ternary Bonsai 2 27B fits a 27B-class model into 5.9 GB, and PrismML says it keeps 98.2% of the full-size model's benchmark score.</p>
+    <p>PrismML built it from Qwen3.8 27B and stored the language model's weights as one of three values: -1, 0 or +1. That's how a model that takes about 54 GB at full precision fits in 5.9 GB. It reads text and images, has a 262K-token context window, and is released under the Apache 2.0 licence. It runs on a Mac, on Windows or Linux with a GPU, or on a CPU alone, and your prompts stay on your machine.</p>
+
+    <p class="inst">Set it up on a Mac or Linux</p>
+    <p>PrismML's demo repo does the whole install. Open a terminal and run:</p>
+    <div class="promptbox code"><button class="copybtn" data-copy>Copy</button><pre>git clone https://github.com/PrismML-Eng/Bonsai-demo.git
+cd Bonsai-demo
+./setup.sh</pre></div>
+    <p>That fetches the model and the right llama.cpp build for your machine. Then start the chat server and open <code>http://localhost:8080</code> in your browser:</p>
+    <div class="promptbox code"><button class="copybtn" data-copy>Copy</button><pre>./scripts/start_llama_server.sh</pre></div>
+    <p>That one local page gives you chat, image input and tool calling.</p>
+
+    <p class="inst">Set it up on Windows</p>
+    <p>Same repo, PowerShell instead:</p>
+    <div class="promptbox code"><button class="copybtn" data-copy>Copy</button><pre>git clone https://github.com/PrismML-Eng/Bonsai-demo.git
+cd Bonsai-demo
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+.\setup.ps1</pre></div>
+    <p>Then start the server and open <code>http://localhost:8080</code>:</p>
+    <div class="promptbox code"><button class="copybtn" data-copy>Copy</button><pre>.\scripts\start_llama_server.ps1</pre></div>
+
+    <p class="inst">Get the most out of it</p>
+    <ul class="lessons">
+      <li><strong><span class="k">1</span>Turn the thinking down for everyday questions.</strong>It's a reasoning model and thinks at <code>xhigh</code> effort by default, which is most of the wait on slower machines. In the chat page, click the lightbulb in the message box and pick a lower Reasoning effort. To make <code>medium</code> the default for the whole server, start it like this. PrismML says medium thinks noticeably less and is about as accurate.
+        <div class="promptbox code"><button class="copybtn" data-copy>Copy</button><pre>./scripts/start_llama_server.sh --chat-template-kwargs '{"reasoning_effort":"medium"}'</pre></div></li>
+      <li><strong><span class="k">2</span>Give it room to answer.</strong>It thinks before it answers, so a small output cap ends it mid-thought. PrismML suggests <code>-n 16384</code> or more, or a high <code>max_tokens</code> if you call it from your own code. If you do, skip <code>reasoning_effort: "low"</code>: it isn't supported and behaves close to <code>xhigh</code>.</li>
+      <li><strong><span class="k">3</span>Skip the extras if you only want chat.</strong>The setup script also installs Open WebUI and a code interpreter, which add a few GB and most of the wait. Set <code>BONSAI_OPENWEBUI=0</code> and <code>BONSAI_CODE_INTERPRETER=0</code> to skip them.</li>
+      <li><strong><span class="k">4</span>Use the 4-bit cache for long documents.</strong><code>BONSAI_KV4=1</code> cuts KV-cache memory roughly 3.5x, which matters once you push the context toward its 262K limit.</li>
+      <li><strong><span class="k">5</span>Use PrismML's build, not stock llama.cpp.</strong>Stock llama.cpp can't run these files yet, and one format loads anyway and produces gibberish. The setup script installs the right build for you.</li>
+    </ul>
+    <div class="note">The download is 7.8 GB, because the demo defaults to a packing of the weights that reads prompts faster, plus the file that handles images. Speed depends on your hardware. PrismML measured up to 46.8 tokens a second on an M5 Max laptop and up to 143 on an NVIDIA RTX 5090.</div>
+    <div class="read">
+      <div class="src">GitHub &middot; PrismML-Eng/Bonsai-demo</div>
+      <h3>Bonsai demo: setup, run scripts and troubleshooting</h3>
+      <p>PrismML calls this repo the source of truth for running the model. The FAQ covers memory and GPU detection problems.</p>
+      <a href="https://github.com/PrismML-Eng/Bonsai-demo" target="_blank" rel="noopener">Open the repo &rarr;</a>
+    </div>
+    <div class="read">
+      <div class="src">Hugging Face &middot; prism-ml</div>
+      <h3>Ternary-Bonsai-2-27B-gguf model card</h3>
+      <p>Sizes, recommended settings, and speed on different GPUs and Macs.</p>
+      <a href="https://huggingface.co/prism-ml/Ternary-Bonsai-2-27B-gguf" target="_blank" rel="noopener">Open the model card &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="step pad" id="qwen">
+  <div class="step-kicker"><span>03</span> Qwen-Image &middot; local</div>
+  <div>
+    <h2>Qwen-Image-2.1. Images and edits on your own GPU.</h2>
+    <p class="lede">Qwen-Image-2.1 makes and edits images in one model, including images with transparent backgrounds, and the weights are free to download.</p>
+    <p>In the Reel I called it Qwen Image 2.5. The release is Qwen-Image-2.1, so search for that name. The image generation part has 7B parameters and makes 2K images natively. It takes up to 10 reference images, so you can turn six portraits into one group photo or build an outfit from five product shots. You can also circle part of a picture and say what to change there.</p>
+    <div class="note">Read the licence before you use it for work. Qwen-Image-2.1 is under the Qwen Research License, which allows research and evaluation only. Commercial use needs a separate licence from Qwen, and the licence file says how to ask.</div>
+
+    <p class="inst">Try it before you install</p>
+    <p>Qwen runs a free demo on Hugging Face. Try a few prompts there first so you know it's worth the download: <a href="https://huggingface.co/spaces/Qwen/Qwen-Image-2.1" target="_blank" rel="noopener">Qwen-Image-2.1 demo</a>.</p>
+
+    <p class="inst">Option 1: ComfyUI, no code</p>
+    <ul class="lessons">
+      <li><strong><span class="k">1</span>Get ComfyUI.</strong>Qwen says <a href="https://github.com/Comfy-Org/ComfyUI" target="_blank" rel="noopener">ComfyUI</a> has supported Qwen-Image-2.1 natively since launch day.</li>
+      <li><strong><span class="k">2</span>Download the model files.</strong>Get them from <a href="https://huggingface.co/Comfy-Org/Qwen-Image-2.1" target="_blank" rel="noopener">Comfy-Org/Qwen-Image-2.1</a> on Hugging Face and put each one where that page says, inside your ComfyUI folder: <code>models/diffusion_models</code>, <code>models/text_encoders</code> and <code>models/vae</code>.</li>
+      <li><strong><span class="k">3</span>Load a workflow.</strong>Open the <a href="https://github.com/Comfy-Org/workflow_templates/blob/main/templates/image_qwen_image_2_1_t2i.json" target="_blank" rel="noopener">text to image</a> or <a href="https://github.com/Comfy-Org/workflow_templates/blob/main/templates/image_qwen_image_2_1_image_edit.json" target="_blank" rel="noopener">image edit</a> workflow. These are the examples Qwen's README links.</li>
+    </ul>
+
+    <p class="inst">Option 2: Python, with Diffusers</p>
+    <p>This is Qwen's own quick start. It runs on an NVIDIA GPU, because the example sends the model to CUDA. Install the libraries first:</p>
+    <div class="promptbox code"><button class="copybtn" data-copy>Copy</button><pre>pip install "torch&gt;=2.4.0"
+pip install "transformers&gt;=5.17"
+pip install git+https://github.com/huggingface/diffusers
+pip install accelerate
+pip install pillow</pre></div>
+    <p>I added the quotes around the first two lines. Without them your shell reads <code>&gt;</code> as "write to a file" and leaves a stray file behind.</p>
+    <p>Then save this as <code>qwen_t2i.py</code> and run <code>python qwen_t2i.py</code>. The first run pulls the weights from Hugging Face.</p>
+    <div class="promptbox code"><button class="copybtn" data-copy>Copy</button><pre>import torch
+from diffusers import QwenImage21Pipeline
+
+pipe = QwenImage21Pipeline.from_pretrained(
+    "Qwen/Qwen-Image-2.1", torch_dtype=torch.bfloat16
+).to("cuda")
+
+image = pipe(
+    prompt="A neon shop sign that reads \"QWEN IMAGE 2.1\", rainy night, reflections on wet pavement",
+    num_inference_steps=40,
+    generator=torch.Generator("cuda").manual_seed(42),
+).images[0]
+
+image.save("t2i_example.png")</pre></div>
+    <p>Short on GPU memory? Qwen gives one switch for that: load the pipeline without <code>.to("cuda")</code> and turn on CPU offload. Qwen doesn't publish a minimum VRAM figure.</p>
+    <div class="promptbox code"><button class="copybtn" data-copy>Copy</button><pre>pipe = QwenImage21Pipeline.from_pretrained(
+    "Qwen/Qwen-Image-2.1", torch_dtype=torch.bfloat16
+)
+pipe.enable_model_cpu_offload()</pre></div>
+
+    <p class="inst">Get the most out of it</p>
+    <ul class="lessons">
+      <li><strong><span class="k">1</span>Let Qwen write the long prompt.</strong>For best results Qwen recommends its prompt rewriting models, which expand a short prompt into a detailed one. There's one for <a href="https://huggingface.co/Qwen/Qwen-Image-2.1-PE-T2I" target="_blank" rel="noopener">text to image</a> and one for <a href="https://huggingface.co/Qwen/Qwen-Image-2.1-PE-I2I" target="_blank" rel="noopener">editing</a>.</li>
+      <li><strong><span class="k">2</span>Use the transparency prompt.</strong>For a transparent background, this is the format Qwen recommends:
+        <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>This is an RGBA image with transparency. &lt;your description&gt;. The image has alpha channel and the background is transparent.</pre></div></li>
+      <li><strong><span class="k">3</span>Use its native sizes.</strong>2048 &times; 2048 for square, 1536 &times; 2752 for 9:16 and 2752 &times; 1536 for 16:9. The README lists the rest.</li>
+      <li><strong><span class="k">4</span>Start at 40 steps.</strong>It's Qwen's default and every example in the README uses it.</li>
+      <li><strong><span class="k">5</span>Edit by circling.</strong>Draw circles or paint over an area and describe the change. If you don't want marks on the picture, pass the original image and a separate mask instead.</li>
+    </ul>
+    <div class="read">
+      <div class="src">GitHub &middot; QwenLM/Qwen-Image-2.1</div>
+      <h3>Qwen-Image-2.1: README, quick start and licence</h3>
+      <p>Editing with several reference images, the prompt rewriter, and vLLM and SGLang serving.</p>
+      <a href="https://github.com/QwenLM/Qwen-Image-2.1" target="_blank" rel="noopener">Open the repo &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="step pad" id="deepseek">
+  <div class="step-kicker"><span>04</span> DeepSeek &middot; open weights</div>
+  <div>
+    <h2>DeepSeek V4.1 Flash. Open weights, priced for agents.</h2>
+    <p class="lede">DeepSeek V4.1 Flash is open weights under MIT, but at 552B parameters most people will get more out of it through DeepSeek's API.</p>
+    <p>It's a mixture-of-experts model that uses just 8B active parameters for input and 16B for output, with a 1M-token context and image input. DeepSeek says tests by multiple parties put it ahead of the bigger V4-Pro on performance, cost and speed, and it's phasing V4-Pro out. Its KV cache needs a quarter of the memory of the last generation's. That matters for agents, because cache-hit charges are often a large share of what an agent costs to run.</p>
+    <table>
+      <tr><th>Per 1M tokens</th><th>Off-peak</th><th>Peak</th></tr>
+      <tr><td>Input, cache hit</td><td>$0.003</td><td>$0.006</td></tr>
+      <tr><td>Input, cache miss</td><td>$0.15</td><td>$0.30</td></tr>
+      <tr><td>Output</td><td>$0.60</td><td>$1.20</td></tr>
+    </table>
+    <div class="note">Peak hours are 01:00 to 04:00 and 06:00 to 10:00 UTC, Monday to Friday. Every other hour is off-peak, including weekends and Chinese public holidays. Prices are from <a href="https://api-docs.deepseek.com/quick_start/pricing" target="_blank" rel="noopener">DeepSeek's pricing page</a>, which says they can change. In the API the model is called <code>deepseek-flash</code>.</div>
+
+    <p class="inst">Use it inside Claude Code</p>
+    <p>DeepSeek's docs include a setup that points Claude Code at DeepSeek's API, so you keep Claude Code's agent and DeepSeek does the thinking. Get an API key from the <a href="https://platform.deepseek.com/api_keys" target="_blank" rel="noopener">DeepSeek Platform</a>, then run this in your terminal on a Mac or Linux:</p>
+    <div class="promptbox code"><button class="copybtn" data-copy>Copy</button><pre>export ANTHROPIC_BASE_URL=https://api.deepseek.com/anthropic
+export ANTHROPIC_AUTH_TOKEN=&lt;your DeepSeek API Key&gt;
+export ANTHROPIC_MODEL=deepseek-flash[1m]
+export ANTHROPIC_DEFAULT_OPUS_MODEL=deepseek-flash[1m]
+export ANTHROPIC_DEFAULT_SONNET_MODEL=deepseek-flash[1m]
+export ANTHROPIC_DEFAULT_HAIKU_MODEL=deepseek-flash
+export CLAUDE_CODE_SUBAGENT_MODEL=deepseek-flash
+export CLAUDE_CODE_EFFORT_LEVEL=max
+export CLAUDE_CODE_AUTO_COMPACT_WINDOW=786432</pre></div>
+    <p>Then go into your project and start Claude Code:</p>
+    <div class="promptbox code"><button class="copybtn" data-copy>Copy</button><pre>cd /path/to/my-project
+claude</pre></div>
+    <p>The Windows version of those commands is on <a href="https://api-docs.deepseek.com/quick_start/agent_integrations/claude_code" target="_blank" rel="noopener">the same DeepSeek page</a>. Web search works too: DeepSeek runs it through its own API and bills the extra tokens. The docs have guides for Codex, OpenCode and other agents as well.</p>
+
+    <p class="inst">Run the weights yourself</p>
+    <p>You can if you have a multi-GPU server. DeepSeek's own code is in the inference folder of the model repo, and DeepSeek calls it "a readable reference implementation rather than a production serving engine". Its example splits the model across 8 GPUs (<code>MP=8</code>). From that folder, install, convert the Hugging Face weights, then chat:</p>
+    <div class="promptbox code"><button class="copybtn" data-copy>Copy</button><pre>python -m pip install -r requirements.txt</pre></div>
+    <div class="promptbox code"><button class="copybtn" data-copy>Copy</button><pre>export HF_CKPT_PATH=/path/to/DeepSeek-V4.1-Flash-HF
+export SAVE_PATH=/path/to/DeepSeek-V4.1-Flash-TP8
+export MP=8
+
+python convert.py \
+  --hf-ckpt-path "${HF_CKPT_PATH}" \
+  --save-path "${SAVE_PATH}" \
+  --model-parallel "${MP}" \
+  --expert-dtype fp4 \
+  --tokenizer-path "${HF_CKPT_PATH}"</pre></div>
+    <div class="promptbox code"><button class="copybtn" data-copy>Copy</button><pre>export CKPT_PATH=/path/to/DeepSeek-V4.1-Flash-TP8
+export MP=8
+
+torchrun --nproc-per-node "${MP}" generate.py \
+  --ckpt-path "${CKPT_PATH}" \
+  --config config.json \
+  --interactive \
+  --temperature 0.6</pre></div>
+    <p>For your own client, the model card recommends temperature 1.0, top_p 0.95 or 1.0, and room for at least 256K output tokens. The chat example above uses 0.6.</p>
+    <div class="note">DeepSeek doesn't list a minimum spec on the model card. My suggestion: unless you already run a GPU server, use the API. Hugging Face also lists community quantizations for llama.cpp, Ollama and LM Studio. DeepSeek didn't make those, so check who did before you download one.</div>
+    <div class="read">
+      <div class="src">Hugging Face &middot; deepseek-ai</div>
+      <h3>DeepSeek-V4.1-Flash model card and weights</h3>
+      <p>The architecture, benchmark tables, recommended settings and the inference folder.</p>
+      <a href="https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash" target="_blank" rel="noopener">Open the model card &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="step pad" id="grok">
+  <div class="step-kicker"><span>05</span> Grok 4.7</div>
+  <div>
+    <h2>Grok 4.7. Built for the long jobs.</h2>
+    <p class="lede">SpaceXAI trained Grok 4.7 on problems that take many hours to complete, and says it works longer on hard tasks and checks its own work more carefully.</p>
+    <p>It's SpaceXAI's most capable model for coding and knowledge work. It costs $2 per million input tokens and $6 per million output, with a 500K-token context window, and SpaceXAI says it's twice as fast at half the price of comparable models.</p>
+
+    <p class="inst">Where to use it</p>
+    <ul>
+      <li>Grok Build, SpaceXAI's coding agent. It runs on Grok 4.7 by default and you can try it free. Install it from your terminal:
+        <div class="promptbox code"><button class="copybtn" data-copy>Copy</button><pre>curl -fsSL https://x.ai/cli/install.sh | bash</pre></div></li>
+      <li>Cursor, on all plans.</li>
+      <li>The xAI API, as <code>grok-4.7</code>, or through OpenRouter, Vercel and Cloudflare.</li>
+    </ul>
+
+    <p class="inst">Get the most out of it</p>
+    <ul class="lessons">
+      <li><strong><span class="k">1</span>Pick the reasoning level.</strong>Over the API you can set low, medium, high or xhigh. High is the default.</li>
+      <li><strong><span class="k">2</span>Set a prompt cache key.</strong>SpaceXAI "highly recommends" a <code>prompt_cache_key</code> on the Responses API. It sends a conversation's requests to the same server, which makes cache hits reliable. Without it you often pay full input price.</li>
+      <li><strong><span class="k">3</span>Use Fast when speed beats cost.</strong>Grok 4.7 Fast is the same model on faster servers at twice the token price. It's only in Cursor and Grok Build.</li>
+      <li><strong><span class="k">4</span>Turn on search for anything current.</strong>Its knowledge stops at May 2026. In the API, enable the Web Search or X Search tools when you need live information.</li>
+    </ul>
+    <div class="read">
+      <div class="src">docs.x.ai &middot; SpaceXAI</div>
+      <h3>Grok 4.7 developer guide</h3>
+      <p>Code samples, context size, pricing, caching and where the model is available.</p>
+      <a href="https://docs.x.ai/developers/grok-4-7" target="_blank" rel="noopener">Read the guide &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="step pad" id="gpt6">
+  <div class="step-kicker"><span>06</span> GPT-6 Sol + Luna</div>
+  <div>
+    <h2>GPT-6 Sol and Luna. GPT-6 for less.</h2>
+    <p class="lede">OpenAI trained Sol and Luna with methods similar to GPT-6 Astra's, then priced them 50% below GPT-5.6's promotional rates.</p>
+    <table>
+      <tr><th>Per 1M tokens</th><th>Input</th><th>Output</th></tr>
+      <tr><td>GPT-6 Sol</td><td>$2</td><td>$10</td></tr>
+      <tr><td>GPT-6 Luna</td><td>$0.10</td><td>$0.50</td></tr>
+    </table>
+
+    <p class="inst">Which one to pick</p>
+    <p>Pick Sol for hard work. OpenAI pitches it at difficult work tasks, with higher usage limits and lower cost. Pick Luna when you run a lot of requests: on OpenAI's factuality test, Luna at higher effort matches GPT-5.6 Sol at about a hundredth of the cost. For the hardest work, OpenAI still calls GPT-6 Astra its best model across the board.</p>
+
+    <p class="inst">Where to use them</p>
+    <p>In ChatGPT Work and Codex on Plus, Pro, Business, Enterprise and Edu. Free and Go users get Luna in the desktop app. OpenAI says they aren't in Chat yet. In the API they're <code>gpt-6-sol</code> and <code>gpt-6-luna</code>.</p>
+
+    <p class="inst">Get the most out of them</p>
+    <ul class="lessons">
+      <li><strong><span class="k">1</span>Build around the cache.</strong>OpenAI improved prompt caching for GPT-6 and gives a 90% discount on cached input reads.</li>
+      <li><strong><span class="k">2</span>Change effort without losing the cache.</strong>You can raise reasoning effort for a hard step, lower it for a quick follow-up, and switch tools on or off, and the earlier context stays cached.</li>
+    </ul>
+    <div class="note">OpenAI has since shipped GPT-6.1 Sol, an upgrade to Sol at the same price. It's in section 08.</div>
+    <div class="read">
+      <div class="src">OpenAI</div>
+      <h3>Introducing GPT-6 Sol and Luna</h3>
+      <p>The launch post, with benchmarks, pricing and availability.</p>
+      <a href="https://openai.com/index/introducing-gpt-6-sol-and-luna/" target="_blank" rel="noopener">Read it &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="step pad" id="claude">
+  <div class="step-kicker"><span>07</span> Claude 5.5</div>
+  <div>
+    <h2>Claude 5.5. Opus for judgment, Sonnet for speed.</h2>
+    <p class="lede">Anthropic builds Opus 5.5 for complex work that needs careful judgment, and Sonnet 5.5 for well-scoped everyday tasks.</p>
+    <table>
+      <tr><th>Per 1M tokens</th><th>Input</th><th>Output</th><th>Cache reads</th></tr>
+      <tr><td>Opus 5.5</td><td>$4</td><td>$20</td><td>$0.20</td></tr>
+      <tr><td>Sonnet 5.5</td><td>$2</td><td>$10</td><td>$0.20</td></tr>
+    </table>
+    <p>Both are on every platform, including AWS, Google Cloud and Microsoft Azure. In the API they're <code>claude-opus-5-5</code> and <code>claude-sonnet-5-5</code>.</p>
+
+    <p class="inst">Opus 5.5</p>
+    <p>Anthropic says it performs at the level of Claude Fable 5.1 on most work and costs 40% less to run than Opus 5. It's particularly good at long, sprawling jobs like codebase-wide migrations and audits. Anthropic also raised the five-hour usage limits on Pro, Max, Team and seat-based Enterprise plans.</p>
+
+    <p class="inst">Sonnet 5.5</p>
+    <p>It's strongest at fixing bugs and making polished documents, slides and spreadsheets, and it runs 30%+ faster than Sonnet 5. On Anthropic's own table it beats Opus 5.5 on one benchmark, Terminal-Bench 4.0, at 70.6% to 66.4%. Anthropic says Opus 5.5 is still clearly stronger at complex, open-ended work.</p>
+
+    <p class="inst">Get the most out of them</p>
+    <ul class="lessons">
+      <li><strong><span class="k">1</span>Set the effort yourself.</strong>On the API, Opus 5.5 runs at medium effort unless you set it (Opus 5 ran at high). Sonnet 5.5 defaults to medium in the Claude apps and high on the Claude Platform. My suggestion: turn effort up for the long, hard jobs and leave it at medium for quick ones.</li>
+      <li><strong><span class="k">2</span>Plan with Opus, build with Sonnet.</strong>One early tester quoted on Anthropic's Sonnet page said that once Opus 5.5 sets the architecture, they'd trust Sonnet 5.5 to implement it.</li>
+      <li><strong><span class="k">3</span>Use fast mode when you're waiting on it.</strong>Opus 5.5 has a fast mode in Claude Code and on the Claude Platform, up to 2.5x faster, at $8 per million input tokens and $40 per million output.</li>
+      <li><strong><span class="k">4</span>Leave thinking on.</strong>Opus 5.5 always thinks, and the API rejects a request that turns thinking off. Use the effort setting to control how deep it goes.</li>
+    </ul>
+    <div class="read">
+      <div class="src">Anthropic</div>
+      <h3>Introducing Claude Opus 5.5</h3>
+      <a href="https://www.anthropic.com/claude-opus-5-5" target="_blank" rel="noopener">Read it &rarr;</a>
+    </div>
+    <div class="read">
+      <div class="src">Anthropic</div>
+      <h3>Introducing Claude Sonnet 5.5</h3>
+      <a href="https://www.anthropic.com/claude-sonnet-5-5" target="_blank" rel="noopener">Read it &rarr;</a>
+    </div>
+    <div class="read">
+      <div class="src">Claude Platform Docs</div>
+      <h3>What's new in Claude Opus 5.5</h3>
+      <p>For developers: the breaking changes, effort defaults and pricing details.</p>
+      <a href="https://platform.claude.com/docs/en/models/opus-5-5/whats-new-opus-5-5" target="_blank" rel="noopener">Read the docs &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="step pad" id="since">
+  <div class="step-kicker"><span>08</span> Since I filmed this</div>
+  <div>
+    <h2>Two more landed after I filmed.</h2>
+    <p class="lede">The Reel already needs an update. OpenAI upgraded Sol, and Google announced Gemini 4 Argon.</p>
+    <div class="read">
+      <div class="src">OpenAI &middot; Sep 29</div>
+      <h3>GPT-6.1 Sol</h3>
+      <p>An upgrade to GPT-6 Sol. OpenAI says it nearly matches GPT-6 Astra on agentic coding, computer use and professional work at a fifth of Astra's standard prices. It costs the same as GPT-6 Sol, $2 in and $10 out per million tokens, and cached input drops to $0.10. It's in ChatGPT Work and Codex for Plus, Pro, Business, Enterprise and Edu, and in the API as <code>gpt-6.1-sol</code>. OpenAI also said a GPT-6.1 Sol Ultrafast, with up to 8x faster generation in Codex, would follow in the coming days.</p>
+      <a href="https://openai.com/index/introducing-gpt-6-1-sol/" target="_blank" rel="noopener">Read it &rarr;</a>
+    </div>
+    <div class="read">
+      <div class="src">Google &middot; Sep 30</div>
+      <h3>Gemini 4 Argon</h3>
+      <p>Google's new frontier model, with a 1M-token output limit, up from 64K. You can't use it yet. It's rolling out first to trusted cyber defenders through Google's Fairwind Program. The wider release to developers, enterprises and consumers starts with paid API customers and Google AI Ultra subscribers. The intro price is $2 per million input tokens and $10 per million output. After the intro period it rises to $4 and $20, and Google hasn't said how long the intro lasts.</p>
+      <a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/" target="_blank" rel="noopener">Read it &rarr;</a>
+    </div>
+    <div class="note">I checked both against the companies' own launch posts on 2 October 2026.</div>
+  </div>
+</section>
+
+<section class="step pad" id="next">
+  <div class="step-kicker"><span>09</span> What to do now</div>
+  <div>
+    <h2>Pick one. Use it today.</h2>
+    <p class="lede">Reading about eight models changes nothing. Pick the one that fits your work and put a real task through it today.</p>
+    <ul>
+      <li><strong>If you want a private model on your laptop:</strong> start at 02, Bonsai 2. One setup script, then you're chatting.</li>
+      <li><strong>If you make images and have an NVIDIA GPU:</strong> start at 03, Qwen-Image-2.1. Try the free demo first.</li>
+      <li><strong>If you code with agents and watch the bill:</strong> start at 04 and run DeepSeek V4.1 Flash inside Claude Code.</li>
+      <li><strong>If you run long coding jobs in Cursor:</strong> start at 05 and try Grok 4.7.</li>
+      <li><strong>If you live in ChatGPT or Codex:</strong> start at 06, then go straight to GPT-6.1 Sol in 08.</li>
+      <li><strong>If your work is complex and needs careful judgment:</strong> start at 07 with Opus 5.5.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="closeblock sky pad">
+  <div class="sky-hi"><h2>See what's possible. Then build it.</h2></div>
+  <div class="sky-lo">
+    <p>You're on the list now. Every week you'll get five useful things I made with AI, with the prompt or workflow behind each one. This kit was one of them.</p>
+    <a href="/">Back to the site</a>
+  </div>
+</section>
+
+</div>
+
+<footer class="pad"><span>Art of the Possible&reg;</span><span>New things are possible every day. &middot; 2026</span></footer>
+</div>
+
+<script>
+(function () {
+  var API = 'https://theaotp-gate.theaotp.workers.dev';
+  var KEY = 'aotp_new_unlocked';
+  var kit = document.getElementById('kit');
+  var gate = document.getElementById('gate');
+  var form = document.getElementById('gate-form');
+  var status = document.getElementById('gate-status');
+
+  function unlock() {
+    kit.hidden = false;
+    gate.hidden = true;
+    try { localStorage.setItem(KEY, '1'); } catch (e) {}
+  }
+
+  try { if (localStorage.getItem(KEY) === '1') unlock(); } catch (e) {}
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    var email = document.getElementById('gate-email').value.trim().toLowerCase();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      status.textContent = 'That email looks off. Try again.';
+      return;
+    }
+    status.textContent = 'One sec…';
+    fetch(API + '/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, ctx: window.aotpCtx ? window.aotpCtx() : null }),
+    }).then(function (response) {
+      return response.json().catch(function () { return {}; }).then(function (data) {
+        if (!response.ok) {
+          var err = new Error('subscribe failed');
+          err.status = response.status;
+          err.detail = data && data.detail;
+          throw err;
+        }
+        return data;
+      });
+    }).then(function (data) {
+      if (window.aotpSubscribed) window.aotpSubscribed(data);
+      status.textContent = !(data && data.new) ? 'Welcome back. Unlocked.'
+        : data.member === false ? 'Unlocked. Check your inbox to confirm your subscription to the letter.'
+        : 'Unlocked. You\'re on the list for the weekly letter.';
+      unlock();
+      window.scrollTo({ top: document.getElementById('first').offsetTop - 40, behavior: 'smooth' });
+    }).catch(function (err) {
+      if (err && err.status === 400) {
+        status.textContent = 'That email was rejected' + (err.detail ? ' (' + err.detail + ')' : '') + '. Try a different address.';
+      } else {
+        status.textContent = 'Something broke on our end. Try again in a minute, or subscribe on the homepage and DM me on Instagram for the kit.';
+      }
+    });
+  });
+
+  document.querySelectorAll('[data-copy]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      var pre = button.parentElement.querySelector('pre');
+      navigator.clipboard.writeText(pre.textContent).then(function () {
+        button.textContent = 'Copied';
+        setTimeout(function () { button.textContent = 'Copy'; }, 1600);
+      });
+    });
+  });
+})();
+</script>
+</body></html>
