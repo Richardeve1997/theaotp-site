@@ -162,6 +162,19 @@ td:first-child{width:26%;padding-right:24px;color:var(--ink);font-weight:500}td 
 .read h3{margin-bottom:12px}
 .read+.read{margin-top:14px}
 .read p code{white-space:normal}
+/* Rich, 2026-10-02: "can you make all the buttons blue gradient. and the big numbers too". The Clear Sky
+   sky action (assets/brand/clear-sky/DESIGN.md s10.1, tokens --sky-action / --sky-action-hover) on EVERY button
+   here, and the same gradient set into the big numerals. White button text never sits on anything lighter
+   than #026AA1 (5.9 : 1). */
+:root{--sky-action:linear-gradient(120deg,#043761 0%,#024F80 50%,#026AA1 100%);--sky-action-hover:linear-gradient(120deg,#043761 0%,#024F80 100%)}
+.gate button{background:var(--sky-action)}
+.gate button:hover{background:var(--sky-action-hover)}
+.gate button:focus-visible,.copybtn:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.copybtn{border-color:transparent;background:var(--sky-action);color:var(--white)}
+.copybtn:hover{background:var(--sky-action-hover);color:var(--white)}
+.step-kicker span,.concept-num span,.lessons .k{background:var(--sky-action);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.step-kicker span,.concept-num span{display:table}
+@media(max-width:800px){.step-kicker span,.concept-num span{display:inline-block}}
 @media(max-width:920px){.gate-grid{grid-template-columns:1fr}}
 @media(max-width:800px){
   nav{min-height:64px}.lockup svg{height:17px}.navlinks{gap:16px;font-size:13px}
