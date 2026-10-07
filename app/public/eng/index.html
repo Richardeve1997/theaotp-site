@@ -1,0 +1,540 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Matt and Lauren Kit | Art of the Possible</title>
+<meta name="description" content="Matt Pocock's skills, Lauren Tan's pstack, the commands that install both, and the two habits from their talk.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://theaotp.com/eng/">
+<link rel="icon" href="/qualia-symbol.png">
+<meta property="og:title" content="The Matt and Lauren Kit | Art of the Possible">
+<meta property="og:description" content="Matt Pocock's skills, Lauren Tan's pstack, the commands that install both, and the two habits from their talk.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&amp;family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&amp;family=Geist+Mono:wght@400&amp;display=swap" rel="stylesheet">
+<!--
+  Clear Sky kit template (AOTP design system approved by Rich 2026-09-30).
+  Source of truth: content-intelligence assets/brand/clear-sky/{DESIGN.md,tokens.css,board.html}.
+  Filled example: assets/brand/clear-sky/sample-guide.html.
+  White on blue, ink on sand (Rich, 2026-10-03: "black never over the blue, if we use black its over white").
+  Every button wears the sky action and the big numerals the sky numeral fill. Never retune the sky's stops.
+  No old accent blue, no two-tone headlines, no bold display, no shadows, no em dashes.
+-->
+<!--
+  Sources (read 2026-10-08; every command, link and name on this page comes from these):
+  https://github.com/mattpocock/skills (README.md: installation, /setup-matt-pocock-skills, /grill-me, /grill-with-docs)
+  https://github.com/cursor/plugins/tree/main/pstack (README.md: /add-plugin pstack, /setup-pstack, /poteto-mode, /poteto-help, /recall, /reflect, /create-verification-skill)
+  https://github.com/cursor/plugins/tree/main/pstack/docs/guide
+  https://github.com/microsoft/playwright-mcp (README.md: claude mcp add playwright npx @playwright/mcp@latest)
+  https://www.youtube.com/watch?v=MN9dGgmLyso (Matt Pocock live stream, 2 Oct 2026, 1:05:35)
+  Local record: pipeline/5-script/assets/p-stack/sources/SOURCES.md
+-->
+<style>
+:root{
+  --sand:#EFEBE7;--ink:#08070B;--graphite:#39383D;--ash:#909092;--ice:#BEC4D2;--ice-3:#E2E4EC;--glacier-2:#F3F4F6;--deep-ocean:#034C7C;--light-blue:#A5D4F2;--white:#FFFFFF;
+  /* Sky action: every button and button-like link, now an obvious two-tone (Rich, 2026-10-03: "Not enough gradient in
+     the buttons"). Same values as tokens.css: deep blue at the left into bright cerulean at the right end, 100deg.
+     Everything from 0 to 95% is #027DBA or darker, so white clears 4.5:1 there; only the last 5%, the cap, brightens to
+     #0A8FCF (3.5:1). Keep every label out of the cap: the template's paddings do (gate submit 22px, 12px on phones;
+     small pills 18px), and the worst glyph pixel measures 4.59:1 on the phone gate. Hover deepens every point of the
+     ramp. On sand and glacier the fill is its own edge; on the dark close it adds a 1px white ring. */
+  --g-sky-action:linear-gradient(100deg,#034A7A 0%,#026AA1 50%,#027DBA 95%,#0A8FCF 100%);
+  --g-sky-action-hover:linear-gradient(100deg,#043761 0%,#025F92 50%,#0274AD 95%,#0282C0 100%);
+  /* Sky numeral, FINAL (DESIGN.md 10.5): the deep end of the sky run top to bottom at 180deg, dark at the top like
+     the sky, as the text fill of the big display numerals ("and the big numbers too"). Same value and name as
+     tokens.css, so kit pages match the homepage. Display sizes only (32px and up): the lightest stop, #0282C0, is
+     3.5:1 on sand; #026AA1 is 4.9:1. */
+  --g-sky-numeral:linear-gradient(180deg,#043761 0%,#024F80 35%,#026AA1 70%,#0282C0 100%);
+  --display:'Inter Tight','Helvetica Neue',Arial,sans-serif;--ui:'Inter','Helvetica Neue',Arial,sans-serif;--mono:'Geist Mono',ui-monospace,'SF Mono',Menlo,monospace;
+  --gutter:clamp(16px,4.5vw,64px);
+  --spark:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0C12.8 7.2 16.8 11.2 24 12C16.8 12.8 12.8 16.8 12 24C11.2 16.8 7.2 12.8 0 12C7.2 11.2 11.2 7.2 12 0Z'/%3E%3C/svg%3E");
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--sand);color:var(--ink);font:400 16px/1.6 var(--ui);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:var(--deep-ocean);text-underline-offset:3px;text-decoration-thickness:1px}
+button,input{font:inherit}button,a,input{-webkit-tap-highlight-color:transparent}
+strong,b{font-weight:600;color:var(--ink)}
+:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+.page{min-height:100vh;overflow-x:clip;display:flex;flex-direction:column}
+.page>footer{margin-top:auto}
+/* Full-bleed backgrounds, content held to 1440 with 64px gutters (16px on phones). */
+.pad{padding-left:max(var(--gutter),calc((100% - 1440px)/2 + var(--gutter)));padding-right:max(var(--gutter),calc((100% - 1440px)/2 + var(--gutter)))}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance;overflow-wrap:break-word}
+p,li{text-wrap:pretty}
+
+/* Sparkle label: four-point sparkle + Geist Mono caps. */
+.eyebrow,.inst{display:block;font:400 11px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase}
+.eyebrow::before,.inst::before,.unlocks ul li::before{content:"";display:inline-block;width:.82em;height:.82em;margin-right:.75em;vertical-align:-.04em;background:currentColor;-webkit-mask:var(--spark) center/contain no-repeat;mask:var(--spark) center/contain no-repeat}
+
+/* ---- The head: white on the deep sky (Rich, 2026-10-03: "black never over the blue"; on /team/: "too much space under
+   the heading, and also make the sub text white and move to RHS"). Everything in it is white: the lockup, the nav, the
+   label line, the h1 and the dek. It all sits in the deep stretch, #043761 to #026AA1, where white measures 5.8:1 or
+   better. From 900px the heading is on the left and the dek on the right, bottoms aligned; below 900px they stack.
+   Under the content the sky runs through the rest of its measured stops, in order and evenly, to sand inside --fade,
+   an empty strip, so no type ever sits on the pale tail. Pad inside .kit-hero, never in the fade. ---- */
+.kit-head{--fade:clamp(96px,9vw,136px);padding-bottom:var(--fade);color:var(--white);background:linear-gradient(180deg,#043761 0%,#024F80 calc((100% - var(--fade))*.5),#026AA1 calc(100% - var(--fade)),#0282C0 calc(100% - var(--fade)*6/7),#1199D7 calc(100% - var(--fade)*5/7),#3EA9DA calc(100% - var(--fade)*4/7),#6DB9DC calc(100% - var(--fade)*3/7),#9DCBDD calc(100% - var(--fade)*2/7),#CBDBDF calc(100% - var(--fade)/7),#EFEBE7 100%)}
+nav{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:76px}
+.lockup{display:flex;align-items:center;color:var(--white);text-decoration:none}.lockup svg{display:block;height:22px;width:auto}
+.navlinks{display:flex;gap:28px;font:400 14px/1 var(--ui)}.navlinks a{color:var(--white);text-decoration:none}.navlinks a:hover{text-decoration:underline}
+.kit-head a:focus-visible{outline-color:var(--white)}
+.kit-hero{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);column-gap:clamp(40px,5.5vw,96px);align-items:end;padding-top:clamp(32px,4vw,60px);padding-bottom:clamp(32px,3.4vw,48px)}
+.kit-head .eyebrow{margin-bottom:18px;color:var(--white)}
+.kit-head h1{font-size:clamp(42px,4.8vw,70px);line-height:.98;letter-spacing:-.045em;text-wrap:pretty}
+.dek{max-width:46ch;margin:0;font:400 clamp(16px,1.3vw,19px)/1.55 var(--ui);letter-spacing:-.005em;color:var(--white)}
+/* The line an unlocked page shows (the shared unlock, /guides/unlock.js): ink on sand, under the head. */
+.subbed{margin:0;padding-top:clamp(18px,2vw,28px);padding-bottom:16px;font:400 14px/1.5 var(--ui);color:var(--graphite)}
+.subbed::before{content:"";display:inline-block;width:.82em;height:.82em;margin-right:.6em;vertical-align:-.04em;background:currentColor;-webkit-mask:var(--spark) center/contain no-repeat;mask:var(--spark) center/contain no-repeat}
+.subbed a{margin-left:.35em;color:var(--deep-ocean);white-space:nowrap}
+
+/* ---- The gate: a glacier card on sand, led by THIS guide (Rich, 2026-10-02: "make each page that asks for the
+   persons email address to unlock the guide more compelling ... emphasising current guide"). The featured shelf from
+   /guides/ (DESIGN.md 10.7) shows this guide's cover large under a "This guide" tag, the other guides beside it.
+   The copy names this guide first, then every other guide, then the weekly letter. Desktop: shelf left; copy, the
+   three unlocks and the form right. Under 920px: shelf, copy, form, then the unlocks. If /guides/shelf.js cannot load
+   (file://, another host: the script's onerror adds .no-shelf) or the shelf fails, the column goes and the card is
+   copy | form. ---- */
+.gate{padding-top:8px;padding-bottom:clamp(56px,7vw,96px)}
+.gate-grid{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);grid-template-rows:auto auto auto 1fr;grid-template-areas:"shelf intro" "shelf list" "shelf act" "shelf .";column-gap:clamp(28px,4.5vw,72px);align-items:start;background:var(--glacier-2);border-radius:12px;padding:clamp(22px,3.4vw,48px)}
+.gate-grid>*,.step>*,.concept>*{min-width:0}
+.gate-shelf{grid-area:shelf;align-self:center}.gate-intro{grid-area:intro}.unlocks{grid-area:list}.gate-act{grid-area:act}
+.gate-grid.no-shelf,.gate-grid:has([data-aotp-shelf-state="failed"]){grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);grid-template-rows:auto 1fr;grid-template-areas:"intro act" "list act"}
+.gate-grid.no-shelf>.gate-shelf,.gate-grid:has([data-aotp-shelf-state="failed"])>.gate-shelf{display:none}
+.gate .eyebrow{color:var(--graphite)}
+.gate h2{margin-top:18px;font-size:clamp(30px,3vw,42px);line-height:1.04;letter-spacing:-.03em;max-width:17ch}
+.gate-intro p{max-width:48ch;margin:16px 0 0;color:var(--graphite)}
+/* What the one email opens, in this order: this guide (named in display type, "Opens now", its sections), every
+   other guide, the weekly letter. The 01 02 03 are small mono counters, not sky numerals. */
+.unlocks{list-style:none;margin:26px 0 28px;padding:0;max-width:52ch}
+.unlocks>li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:0 12px;margin:0;border-top:1px solid var(--ice);padding:13px 0;font-size:14.5px;line-height:1.5;color:var(--graphite)}
+.unlocks>li:last-child{border-bottom:1px solid var(--ice)}
+.unlocks .n{padding-top:3px;font:400 11px/1.4 var(--mono);letter-spacing:.1em;color:var(--graphite)}
+.unlocks b{display:block;margin-bottom:2px;font:500 16px/1.35 var(--ui);color:var(--ink)}
+.unlocks .this .n{padding-top:7px}
+.unlocks .this b{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin-bottom:8px;font:400 clamp(22px,2vw,26px)/1.1 var(--display);letter-spacing:-.025em}
+.unlocks .now{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:5px;background:var(--ice-3);font:400 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.unlocks ul{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.unlocks ul li{padding-left:1.6em;text-indent:-1.6em;color:var(--ink)}
+.gate form{display:grid;gap:10px}
+.gate input{width:100%;min-width:0;height:52px;border:1px solid var(--ink);border-radius:999px;background:transparent;padding:0 22px;color:var(--ink);font-size:16px}
+.gate input::placeholder{color:var(--graphite);opacity:1}
+.gate input:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.gate button{width:100%;min-height:52px;border:0;border-radius:999px;background:var(--g-sky-action);color:var(--white);cursor:pointer;padding:14px 22px;font:500 16px/1.25 var(--ui);letter-spacing:-.005em;text-align:center;text-wrap:balance}
+.gate button:hover{background:var(--g-sky-action-hover)}
+/* Buttons on sand and glacier: hover deepens the sky action, focus is a 2px ink ring (the white label would vanish as a ring on sand). */
+.gate button:focus-visible,.copybtn:focus-visible,.read a:focus-visible,.dl-btn:focus-visible,.kc:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.gate-status{margin:12px 0 0;font-size:14px;color:var(--ink)}.gate-status:empty{margin:0}
+.gate-small{margin:14px 0 0;font-size:13.5px;line-height:1.55;color:var(--graphite)}
+.unlocks ul li::before{width:10px;height:10px;margin-right:calc(1.6em - 10px);vertical-align:0}
+
+/* ---- Sections: a mono-and-numeral rail, one reading column, 1px ice hairlines. ---- */
+.step,.concept{position:relative;display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px;padding-top:52px;padding-bottom:72px;scroll-margin-top:24px}
+.step::before,.concept::before{content:"";position:absolute;top:0;left:max(var(--gutter),calc((100% - 1440px)/2 + var(--gutter)));right:max(var(--gutter),calc((100% - 1440px)/2 + var(--gutter)));height:1px;background:var(--ice)}
+.step-kicker,.concept-num{font:400 11px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--graphite)}
+.step-kicker span,.concept-num span{display:table;padding:.1em .1em .1em 0;margin:-.1em -.1em calc(14px - .1em) 0;font:400 64px/.8 var(--display);letter-spacing:-.06em;color:var(--deep-ocean)}
+.step h2,.concept h2{font-size:clamp(34px,3.6vw,50px);line-height:1.02;letter-spacing:-.03em;max-width:20ch}
+.step .lede,.concept .lede{max-width:54ch;margin:20px 0 24px;font:400 20px/1.5 var(--ui);letter-spacing:-.01em;color:var(--ink)}
+.step p,.concept p{max-width:64ch;color:var(--graphite)}
+.step ul,.step ol,.concept ul{max-width:64ch;padding-left:20px;color:var(--graphite)}
+.step li,.concept li{margin-bottom:10px}
+.step li::marker,.concept li::marker{color:var(--ash)}
+.note{max-width:62ch;margin:30px 0;border-top:1px solid var(--ice);padding-top:14px;font-size:14.5px;line-height:1.6;color:var(--graphite)}
+table+.note{margin-top:18px;border-top:0;padding-top:0}
+.step .inst{margin:44px 0 0;color:var(--ink)}
+
+/* Reading-list payload */
+.index{list-style:none;padding:0!important;margin:26px 0 0;max-width:66ch}
+.index li{border-top:1px solid var(--ice);padding:16px 0;margin:0;display:flex;gap:18px;align-items:baseline;font-size:15px;color:var(--graphite)}
+.index .n{min-width:26px;font:400 11px var(--mono);letter-spacing:.1em;color:var(--graphite)}
+.index a{font:400 21px/1.2 var(--display);letter-spacing:-.02em;color:var(--ink);text-decoration:none}.index a:hover{text-decoration:underline}
+.index .st{margin-left:auto;font:400 10.5px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--graphite)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 0}
+.chip{display:inline-flex;align-items:center;height:24px;padding:0 9px;border-radius:5px;background:var(--ice-3);font:400 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.read{max-width:760px;margin:26px 0 0;background:var(--glacier-2);border-radius:12px;padding:20px 22px 22px}
+.read .src{font:400 10.5px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--graphite)}
+.read h3{max-width:40ch;margin:10px 0 16px;font-size:24px;line-height:1.12;letter-spacing:-.025em}
+.read a{display:inline-flex;align-items:center;height:28px;padding:0 18px;border-radius:999px;background:var(--g-sky-action);font:400 10.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--white);text-decoration:none}
+.read a:hover{background:var(--g-sky-action-hover)}
+
+/* ---- The close IS the footer: one short block on the reversed sky, sand at the top and #043761 at the bottom (Rich,
+   2026-10-02: "make the footer smaller and reverse the gradient so dark blue at the bottom"), with everything in it
+   white on the dark stretch (Rich, 2026-10-03: "black never over the blue"). The run from sand to #026AA1 (the
+   measured stops, in order and evenly) happens inside --fade, an empty strip at the top. The headline, the "on the
+   list" line, the white-ringed pill, the lockup and the mono line all sit below it, on #026AA1 to #043761, where white
+   measures 5.8:1 or better. It sits outside #kit so gated visitors get it too; .close-kit only shows once #kit is
+   unlocked. Keep it short: no second headline, button or form. ---- */
+.closeblock{--fade:clamp(64px,6vw,88px);padding-top:calc(var(--fade) + clamp(22px,2.4vw,32px));padding-bottom:clamp(20px,1.8vw,26px);color:var(--white);background:linear-gradient(180deg,#EFEBE7 0%,#CBDBDF calc(var(--fade)/7),#9DCBDD calc(var(--fade)*2/7),#6DB9DC calc(var(--fade)*3/7),#3EA9DA calc(var(--fade)*4/7),#1199D7 calc(var(--fade)*5/7),#0282C0 calc(var(--fade)*6/7),#026AA1 var(--fade),#024F80 calc(var(--fade) + (100% - var(--fade))*.5),#043761 100%)}
+.close-top{display:flex;align-items:flex-end;justify-content:space-between;gap:18px 40px}
+.closeblock h2{font-size:clamp(28px,3vw,44px);line-height:1.02;letter-spacing:-.035em;color:var(--white)}
+.close-kit{max-width:64ch;margin:10px 0 0;font:400 clamp(15px,1.2vw,17px)/1.5 var(--ui);color:var(--white)}
+#kit[hidden]~.closeblock .close-kit{display:none}
+/* The pill is the sky action ringed in 1px white: on the dark sky the fill alone has no edge (it is cut from the same
+   blues), the white ring measures 5.8:1 or better there. */
+.close-btn{display:inline-flex;align-items:center;flex:none;height:40px;padding:0 20px;border:1px solid var(--white);border-radius:999px;background:var(--g-sky-action);color:var(--white);font:500 15px/1 var(--ui);text-decoration:none;white-space:nowrap}
+.close-btn:hover{background:var(--g-sky-action-hover);text-decoration:underline}
+.closeblock a:focus-visible{outline:2px solid var(--white);outline-offset:3px}
+.close-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 24px;margin-top:clamp(22px,2.4vw,32px)}
+.close-row svg{display:block;height:22px;width:auto;flex:none}
+.close-foot{margin:0;font:400 10.5px/1.6 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--white)}
+.close-foot .nw{white-space:nowrap}
+[hidden]{display:none!important}
+/* A subscriber's page opens before first paint: the head script below sets .aotp-subscribed on <html> from the same
+   storage the gate script reads, so the gate never flashes while /guides/unlock.js loads. */
+.aotp-subscribed #gate{display:none!important}
+.aotp-subscribed #kit[hidden],.aotp-subscribed #subbed[hidden]{display:block!important}
+
+/* --- prompt-kit / field-notes / how-to payloads: keep these, delete what you don't use --- */
+.promptbox{max-width:760px;margin-top:26px;background:var(--glacier-2);border-radius:12px;padding-top:12px}
+.copybtn{display:block;margin:0 12px 0 auto;min-height:32px;padding:0 18px;border:0;border-radius:999px;background:var(--g-sky-action);color:var(--white);cursor:pointer;font:400 10.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase}
+.copybtn:hover{background:var(--g-sky-action-hover)}
+.promptbox pre{margin:12px 0 0;border-top:1px solid var(--ice);padding:20px 26px 26px;overflow-x:auto;font:400 13px/1.8 var(--mono);white-space:pre-wrap;overflow-wrap:anywhere;color:var(--ink)}
+.promptbox.code pre{white-space:pre;overflow-wrap:normal}
+.promptbox.tall pre{max-height:560px;overflow-y:auto}
+.cmd,.termshot{max-width:760px;margin:24px 0;border-radius:12px;padding:20px 24px;overflow-x:auto}
+.cmd{background:var(--glacier-2)}.cmd code{display:block;padding:0;background:none;font:400 13px/1.8 var(--mono);white-space:pre}
+.termshot{background:var(--ink);color:var(--sand);font:400 13px/1.9 var(--mono);white-space:pre}
+.termshot .g{color:var(--light-blue)}.termshot .y,.termshot .r{color:var(--white)}.termshot .d{color:var(--ash)}
+code{font-family:var(--mono);font-size:.86em;background:var(--ice-3);padding:1px 5px;border-radius:4px;white-space:nowrap;color:var(--ink)}
+.lessons{list-style:none;padding:0!important;margin:26px 0 0;max-width:66ch}
+.lessons li{position:relative;border-top:1px solid var(--ice);padding:22px 0 22px 72px;margin:0;color:var(--graphite)}
+.lessons strong{display:block;margin-bottom:8px;font:400 23px/1.2 var(--display);letter-spacing:-.02em;color:var(--ink)}
+.lessons .k{position:absolute;left:0;top:22px;padding:.1em .1em .1em 0;margin:-.1em -.1em -.1em 0;font:400 40px/.84 var(--display);letter-spacing:-.05em;color:var(--deep-ocean)}
+.sky-num{display:inline-block;padding:.1em .1em .1em 0;margin:-.1em -.1em -.1em 0;font-family:var(--display);font-weight:400;color:var(--deep-ocean)}
+/* Sky numerals (Rich, 2026-10-02: "and the big numbers too"): every big display numeral (the rail numerals above,
+   .lessons .k, any stat figure you add as .sky-num) takes --g-sky-numeral as its text fill, painted on its own glyph box
+   (display:table shrinks the rail numeral to its digits). The box is padded .1em right, top and bottom with matching
+   negative margins (DESIGN.md 10.5): background-clip:text paints only inside the box, and the tight tracking and line
+   height would otherwise clip the last digit, or the top and tail of a "$". Without background-clip:text, in print and
+   under forced colors it is solid deep ocean. Small numbers (.cmdlist .n, .index .n, mono labels) stay as they are. */
+@supports (-webkit-background-clip:text) or (background-clip:text){
+  .step-kicker span,.concept-num span,.lessons .k,.sky-num{background:var(--g-sky-numeral);background-size:100% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+}
+table{border-collapse:collapse;width:100%;max-width:760px;margin:20px 0;font-size:14.5px}
+th,td{text-align:left;padding:14px 16px 14px 0;border-bottom:1px solid var(--ice);vertical-align:top;color:var(--graphite)}
+th{border-bottom-color:var(--ink);font:400 10.5px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+td:first-child{width:26%;padding-right:24px;color:var(--ink);font-weight:500}td code{white-space:normal;overflow-wrap:anywhere}
+.shot{max-width:760px;margin:26px 0}
+.shot img{display:block;width:100%;height:auto;border:1px solid var(--ice);border-radius:6px;background:var(--white)}
+.cap{max-width:64ch;margin:10px 0 0;font-size:13.5px;line-height:1.5;color:var(--graphite)}
+.dl{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px 28px;max-width:760px;margin:28px 0 0;background:var(--glacier-2);border-radius:12px;padding:22px 24px}
+.dl-meta{font-size:14px;line-height:1.5;color:var(--graphite)}.dl-meta strong{display:block;font:400 21px/1.2 var(--display);letter-spacing:-.02em}
+.dl-btn{display:inline-flex;align-items:center;height:52px;padding:0 26px;border-radius:999px;background:var(--g-sky-action);color:var(--white);font:500 16px/1 var(--ui);text-decoration:none}.dl-btn:hover{background:var(--g-sky-action-hover)}
+.cmdlist{list-style:none;padding:0!important;margin:28px 0 0;max-width:760px}
+.cmdlist li{display:grid;grid-template-columns:34px minmax(0,1fr);gap:14px;border-top:1px solid var(--ice);padding:20px 0;margin:0}
+.cmdlist li>*{min-width:0}.cmdlist .n{padding-top:9px;font:400 11px/1 var(--mono);letter-spacing:.1em;color:var(--graphite)}
+.cmdlist p{margin:10px 0 0}
+/* .kc is 16px round, not a 999px pill: one line is still a full pill (32px tall), but a command that wraps onto three
+   lines keeps its corners square enough that no white glyph falls off the fill onto sand. */
+.kc{display:inline-flex;align-items:center;gap:12px;max-width:100%;min-height:32px;padding:5px 12px 5px 13px;border:0;border-radius:16px;background:var(--g-sky-action);color:var(--white);cursor:pointer;text-align:left}
+.kc code{padding:0;background:none;font-size:14px;white-space:normal;overflow-wrap:anywhere;color:var(--white)}
+.kc .cp{flex:none;padding:3px 8px;border:1px solid var(--white);border-radius:999px;font:400 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase}
+.kc:hover,.kc.done{background:var(--g-sky-action-hover)}
+.kc:hover .cp,.kc.done .cp{background:var(--white);color:var(--ink)}
+/* A long command makes a wide chip, and its "Copy" pill sits at the far right, inside the bright cap of the ramp. The
+   chip paints the same --g-sky-action 10% wider than itself, so the cap always falls outside it and the pill's label
+   stays on #027BB8 or darker. */
+.kc,.kc:hover,.kc.done{background-size:110% 100%;background-repeat:no-repeat}
+.where{display:inline-block;margin-left:12px;font:400 10.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--graphite)}
+.try{list-style:none;padding:0!important;margin:14px 0 0;max-width:66ch}
+.try li{border-top:1px solid var(--ice);padding:14px 0;margin:0;color:var(--graphite)}
+.try strong{margin-right:6px;font:400 14px var(--mono)}
+
+@media(max-width:900px){
+  .kit-hero{grid-template-columns:minmax(0,1fr);row-gap:22px}
+}
+@media(max-width:920px){
+  .gate-grid{grid-template-columns:minmax(0,1fr);grid-template-rows:none;grid-template-areas:"shelf" "intro" "act" "list";row-gap:22px}
+  .gate-grid.no-shelf,.gate-grid:has([data-aotp-shelf-state="failed"]){grid-template-columns:minmax(0,1fr);grid-template-rows:none;grid-template-areas:"intro" "act" "list"}
+  .unlocks{margin:4px 0 0}
+}
+@media(max-width:800px){
+  nav{min-height:64px}.lockup svg,.close-row svg{height:17px}.navlinks{gap:16px;font-size:13px}
+  .kit-head{--fade:88px}.closeblock{--fade:56px}
+  .close-top{flex-direction:column;align-items:flex-start}
+  .gate{padding-top:0}
+  .gate-grid,.step,.concept{grid-template-columns:1fr;gap:22px}.gate-grid>*,.step>*,.concept>*{min-width:0}
+  .step,.concept{padding-top:34px;padding-bottom:48px}
+  .step-kicker span,.concept-num span{display:inline-block;margin:-.1em calc(12px - .1em) -.1em 0;font-size:44px;vertical-align:-.02em}
+  .step .lede,.concept .lede{font-size:18px}
+  .lessons li{padding-left:54px}.lessons .k{font-size:32px;top:24px}
+  .promptbox pre{padding:18px 18px 22px}.index li{flex-wrap:wrap}.index .st{margin-left:44px;width:100%}
+  code{white-space:normal;overflow-wrap:anywhere}th,td{padding-right:12px}td:first-child{width:32%}
+}
+@media(max-width:480px){.lockup svg,.close-row svg{height:15px}.navlinks{gap:14px;font-size:12.5px}.kit-head h1 br{display:none}.gate-grid{padding:24px 16px}.gate button{padding-left:12px;padding-right:12px;font-size:14.5px}}
+@media(max-width:380px){.gate button{font-size:14px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+/* Print drops backgrounds, so a gradient-filled numeral would print blank and every white label on a sky or a sky
+   action would print as faint grey. Paper gets ink: deep ocean numerals, hairline ink pills, ink type where the sky
+   was. Forced colors drops gradients too: the numerals and pills take the system colours (the border gives a
+   borderless pill its edge back). Keep this last in the sheet so it beats every rule above it. */
+@media print,(forced-colors:active){
+  .step-kicker span,.concept-num span,.lessons .k,.sky-num{background:none;color:var(--deep-ocean);-webkit-text-fill-color:currentColor}
+  .gate button,.copybtn,.read a,.dl-btn,.kc,.kc.done,.kc .cp,.kc.done .cp,.close-btn{background:none;color:var(--ink);border:1px solid var(--ink)}
+  .kc code{color:var(--ink)}
+}
+@media print{
+  .kit-head,.kit-head .eyebrow,.kit-head h1,.dek,.lockup,.navlinks a,.closeblock,.closeblock h2,.close-kit,.close-foot{color:var(--ink)}
+  .lockup svg g,.close-row svg g{fill:var(--ink)}
+}
+</style><script src="/f.js"></script>
+<script>try{if(/(?:^|;\s*)aotp_subscriber=[^;\s]/.test(document.cookie)||localStorage.getItem('aotp_subscriber')||localStorage.getItem('aotp_member')==='2')document.documentElement.classList.add('aotp-subscribed')}catch(e){}</script>
+</head><body>
+<div class="page">
+<header class="kit-head pad">
+  <nav><a class="lockup" href="/"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 897 112" role="img" aria-label="Art of the Possible"><title>Art of the Possible</title><g fill="#FFFFFF"><path transform="scale(0.448)" d="M93.301 48.471A34.601 34.601 0 1 1 156.699 48.471A34.601 34.601 0 0 0 93.301 48.471ZM156.699 48.471A34.601 34.601 0 1 1 201.529 93.301A34.601 34.601 0 0 0 156.699 48.471ZM201.529 93.301A34.601 34.601 0 1 1 156.699 48.471A34.601 34.601 0 0 0 201.529 93.301ZM201.529 93.301A34.601 34.601 0 1 1 201.529 156.699A34.601 34.601 0 0 0 201.529 93.301ZM201.529 156.699A34.601 34.601 0 1 1 156.699 201.529A34.601 34.601 0 0 0 201.529 156.699ZM156.699 201.529A34.601 34.601 0 1 1 201.529 156.699A34.601 34.601 0 0 0 156.699 201.529ZM156.699 201.529A34.601 34.601 0 1 1 93.301 201.529A34.601 34.601 0 0 0 156.699 201.529ZM93.301 201.529A34.601 34.601 0 1 1 48.471 156.699A34.601 34.601 0 0 0 93.301 201.529ZM48.471 156.699A34.601 34.601 0 1 1 93.301 201.529A34.601 34.601 0 0 0 48.471 156.699ZM48.471 156.699A34.601 34.601 0 1 1 48.471 93.301A34.601 34.601 0 0 0 48.471 156.699ZM48.471 93.301A34.601 34.601 0 1 1 93.301 48.471A34.601 34.601 0 0 0 48.471 93.301ZM93.301 48.471A34.601 34.601 0 1 1 48.471 93.301A34.601 34.601 0 0 0 93.301 48.471Z"/><path transform="translate(160 80.736)" d="M11.7 0H0.49L17.57 -49.47H31.04L48.09 0H36.91L24.49 -38.17H24.09ZM11.04 -19.44H37.49V-11.3H11.04ZM51.08 0V-49.47H70.57Q76.2 -49.47 80.16 -47.48Q84.12 -45.48 86.22 -41.85Q88.32 -38.21 88.32 -33.31Q88.32 -28.38 86.2 -24.84Q84.07 -21.29 80.04 -19.41Q76.01 -17.53 70.31 -17.53H57.27V-25.94H68.6Q71.63 -25.94 73.62 -26.76Q75.6 -27.59 76.58 -29.22Q77.55 -30.85 77.55 -33.31Q77.55 -35.78 76.57 -37.47Q75.59 -39.15 73.6 -40.02Q71.62 -40.89 68.58 -40.89H61.52V0ZM78.54 0 66.5 -22.52H77.78L90.09 0ZM90.95 -40.85V-49.47H131.58V-40.85H116.44V0H106.12V-40.85ZM170.54 0.66Q163.97 0.66 158.72 -2.32Q153.46 -5.31 150.41 -10.99Q147.36 -16.66 147.36 -24.7Q147.36 -32.8 150.41 -38.49Q153.46 -44.18 158.72 -47.16Q163.97 -50.14 170.54 -50.14Q177.12 -50.14 182.35 -47.16Q187.59 -44.18 190.64 -38.49Q193.69 -32.8 193.69 -24.7Q193.69 -16.64 190.64 -10.97Q187.59 -5.29 182.35 -2.31Q177.12 0.66 170.54 0.66ZM170.54 -8.58Q174.35 -8.58 177.16 -10.44Q179.98 -12.29 181.54 -15.89Q183.09 -19.49 183.09 -24.7Q183.09 -29.95 181.54 -33.57Q179.98 -37.18 177.16 -39.04Q174.35 -40.89 170.54 -40.89Q166.76 -40.89 163.93 -39.04Q161.1 -37.18 159.53 -33.57Q157.96 -29.95 157.96 -24.7Q157.96 -19.49 159.53 -15.89Q161.1 -12.29 163.93 -10.44Q166.76 -8.58 170.54 -8.58ZM198.51 0V-49.47H231.26V-40.85H208.95V-27.25H229.08V-18.79H208.95V0ZM246.36 -40.85V-49.47H286.99V-40.85H271.85V0H261.53V-40.85ZM290.8 0V-49.47H301.24V-29.06H322.46V-49.47H332.9V0H322.46V-20.44H301.24V0ZM338.59 0V-49.47H371.94V-40.85H349.03V-29.22H370.19V-20.76H349.03V-8.62H372V0ZM390.19 0V-49.47H409.68Q415.31 -49.47 419.27 -47.33Q423.23 -45.19 425.33 -41.4Q427.43 -37.61 427.43 -32.69Q427.43 -27.76 425.31 -24Q423.18 -20.25 419.15 -18.14Q415.12 -16.03 409.43 -16.03H396.99V-24.41H407.71Q410.74 -24.41 412.73 -25.46Q414.71 -26.52 415.69 -28.38Q416.66 -30.25 416.66 -32.69Q416.66 -35.18 415.69 -37.02Q414.71 -38.86 412.72 -39.88Q410.73 -40.89 407.69 -40.89H400.63V0ZM453.6 0.66Q447.03 0.66 441.78 -2.32Q436.52 -5.31 433.47 -10.99Q430.43 -16.66 430.43 -24.7Q430.43 -32.8 433.47 -38.49Q436.52 -44.18 441.78 -47.16Q447.03 -50.14 453.6 -50.14Q460.18 -50.14 465.42 -47.16Q470.65 -44.18 473.7 -38.49Q476.75 -32.8 476.75 -24.7Q476.75 -16.64 473.7 -10.97Q470.65 -5.29 465.42 -2.31Q460.18 0.66 453.6 0.66ZM453.6 -8.58Q457.41 -8.58 460.23 -10.44Q463.05 -12.29 464.6 -15.89Q466.15 -19.49 466.15 -24.7Q466.15 -29.95 464.6 -33.57Q463.05 -37.18 460.23 -39.04Q457.41 -40.89 453.6 -40.89Q449.82 -40.89 446.99 -39.04Q444.17 -37.18 442.6 -33.57Q441.03 -29.95 441.03 -24.7Q441.03 -19.49 442.6 -15.89Q444.17 -12.29 446.99 -10.44Q449.82 -8.58 453.6 -8.58ZM499.91 0.7Q493.92 0.7 489.49 -1.13Q485.06 -2.96 482.58 -6.57Q480.1 -10.19 479.96 -15.54H490.08Q490.27 -13.07 491.53 -11.4Q492.8 -9.74 494.93 -8.9Q497.06 -8.06 499.79 -8.06Q502.45 -8.06 504.43 -8.83Q506.4 -9.6 507.49 -10.98Q508.57 -12.36 508.57 -14.18Q508.57 -15.84 507.58 -16.96Q506.6 -18.08 504.73 -18.89Q502.85 -19.69 500.15 -20.32L494.75 -21.65Q488.5 -23.15 484.89 -26.41Q481.28 -29.68 481.28 -35.17Q481.28 -39.66 483.71 -43.02Q486.14 -46.38 490.37 -48.26Q494.61 -50.14 500.02 -50.14Q505.54 -50.14 509.64 -48.25Q513.75 -46.36 516.05 -43Q518.35 -39.64 518.43 -35.25H508.36Q508.09 -38.16 505.89 -39.78Q503.7 -41.4 499.94 -41.4Q497.4 -41.4 495.62 -40.68Q493.84 -39.97 492.92 -38.71Q492 -37.45 492 -35.83Q492 -34.09 493.06 -32.91Q494.11 -31.74 495.9 -31Q497.68 -30.25 499.81 -29.74L504.23 -28.66Q507.45 -27.93 510.16 -26.72Q512.87 -25.5 514.88 -23.74Q516.89 -21.99 517.99 -19.6Q519.09 -17.22 519.09 -14.13Q519.09 -9.61 516.81 -6.27Q514.53 -2.94 510.24 -1.12Q505.96 0.7 499.91 0.7ZM541.53 0.7Q535.54 0.7 531.11 -1.13Q526.68 -2.96 524.2 -6.57Q521.72 -10.19 521.58 -15.54H531.7Q531.89 -13.07 533.16 -11.4Q534.42 -9.74 536.55 -8.9Q538.68 -8.06 541.41 -8.06Q544.08 -8.06 546.05 -8.83Q548.02 -9.6 549.11 -10.98Q550.19 -12.36 550.19 -14.18Q550.19 -15.84 549.21 -16.96Q548.22 -18.08 546.35 -18.89Q544.47 -19.69 541.77 -20.32L536.37 -21.65Q530.12 -23.15 526.51 -26.41Q522.9 -29.68 522.9 -35.17Q522.9 -39.66 525.33 -43.02Q527.76 -46.38 531.99 -48.26Q536.23 -50.14 541.64 -50.14Q547.16 -50.14 551.26 -48.25Q555.37 -46.36 557.67 -43Q559.97 -39.64 560.05 -35.25H549.98Q549.71 -38.16 547.51 -39.78Q545.32 -41.4 541.56 -41.4Q539.02 -41.4 537.24 -40.68Q535.46 -39.97 534.54 -38.71Q533.62 -37.45 533.62 -35.83Q533.62 -34.09 534.68 -32.91Q535.74 -31.74 537.52 -31Q539.3 -30.25 541.43 -29.74L545.85 -28.66Q549.07 -27.93 551.78 -26.72Q554.49 -25.5 556.5 -23.74Q558.51 -21.99 559.61 -19.6Q560.71 -17.22 560.71 -14.13Q560.71 -9.61 558.43 -6.27Q556.15 -2.94 551.87 -1.12Q547.58 0.7 541.53 0.7ZM575.25 -49.47V0H564.81V-49.47ZM580.93 0V-49.47H600.73Q606.18 -49.47 609.83 -47.85Q613.48 -46.22 615.32 -43.36Q617.15 -40.5 617.15 -36.8Q617.15 -33.89 615.98 -31.71Q614.81 -29.52 612.8 -28.13Q610.78 -26.74 608.2 -26.16V-25.66Q611.03 -25.55 613.51 -24.08Q615.99 -22.6 617.53 -19.97Q619.08 -17.33 619.08 -13.67Q619.08 -9.75 617.14 -6.66Q615.21 -3.57 611.43 -1.78Q607.64 0 602.06 0ZM591.37 -8.54H599.91Q604.27 -8.54 606.29 -10.23Q608.31 -11.93 608.31 -14.7Q608.31 -16.77 607.32 -18.34Q606.33 -19.92 604.5 -20.82Q602.67 -21.71 600.16 -21.71H591.37ZM591.37 -28.77H599.14Q601.27 -28.77 602.96 -29.53Q604.64 -30.29 605.61 -31.69Q606.58 -33.1 606.58 -35.05Q606.58 -37.71 604.69 -39.36Q602.8 -41.01 599.34 -41.01H591.37ZM622.95 0V-49.47H633.39V-8.62H654.6V0ZM658.66 0V-49.47H692.01V-40.85H669.1V-29.22H690.26V-20.76H669.1V-8.62H692.06V0ZM708.66 -22.11V-39.91H717.37Q719.06 -39.94 720.47 -39.25Q721.88 -38.56 722.72 -37.24Q723.56 -35.93 723.56 -34.07Q723.56 -32.17 722.69 -30.82Q721.81 -29.47 720.37 -28.79Q718.94 -28.12 717.18 -28.12H711.19V-31.48H716.19Q717.2 -31.46 717.94 -32.11Q718.68 -32.75 718.68 -34.06Q718.68 -35.37 717.94 -35.95Q717.19 -36.52 716.21 -36.54H713.29V-22.11ZM720.04 -30.35 724.13 -22.11H719.02L715.23 -30.35ZM715.63 -11.49Q711.65 -11.49 708.14 -13Q704.64 -14.51 701.98 -17.17Q699.33 -19.82 697.84 -23.33Q696.35 -26.83 696.35 -30.81Q696.35 -34.8 697.84 -38.3Q699.33 -41.8 701.98 -44.46Q704.64 -47.12 708.14 -48.63Q711.65 -50.14 715.63 -50.14Q719.65 -50.14 723.15 -48.63Q726.65 -47.12 729.31 -44.46Q731.97 -41.8 733.46 -38.3Q734.95 -34.8 734.95 -30.81Q734.95 -26.83 733.46 -23.33Q731.97 -19.82 729.32 -17.17Q726.67 -14.51 723.16 -13Q719.65 -11.49 715.63 -11.49ZM715.63 -16.61Q719.59 -16.61 722.82 -18.52Q726.05 -20.43 727.97 -23.66Q729.88 -26.88 729.87 -30.81Q729.88 -34.74 727.96 -37.97Q726.05 -41.2 722.81 -43.12Q719.57 -45.03 715.63 -45.01Q711.72 -45.03 708.49 -43.12Q705.26 -41.2 703.34 -37.97Q701.43 -34.74 701.43 -30.82Q701.43 -26.89 703.35 -23.66Q705.26 -20.43 708.49 -18.52Q711.71 -16.61 715.63 -16.61Z"/></g></svg></a><div class="navlinks"><a href="/">Home</a><a href="/letters/">Archive</a><a href="/#about">About</a></div></nav>
+  <!-- Everything in the head is white on the deep sky. The heading left, the dek right from 900px; they stack on phones. -->
+  <div class="kit-hero">
+    <div>
+      <div class="eyebrow">The Matt and Lauren Kit &middot; From the Reel</div>
+      <!-- One colour. The two slots are legacy names: write one headline, never two tones. Two sentences? Put <br> after the first ("skills.<br> Great"); phones drop the break. -->
+      <h1>Matt and Lauren's setups.<br> Copy them today.</h1>
+    </div>
+    <p class="dek">You commented "eng". Here it is. Matt Pocock's skills, Lauren Tan's pstack, the commands that install both, and the two habits from their talk. Both libraries are theirs, not mine. No course, no upsell.</p>
+  </div>
+</header>
+
+<section class="gate pad" id="gate">
+  <div class="gate-grid">
+    <!-- The featured shelf (DESIGN.md 10.7): this guide's cover large under a "This guide" tag, every other guide beside it,
+         served from /guides/ on theaotp.com. Its cover is /guides/covers/eng.svg (cover-tools/make_covers.py) and the
+         guide belongs in /guides/guides.json + guides-all.json; with no cover the shelf shows the other guides alone.
+         Where /guides/ does not resolve (file://, another host) onerror drops the column and the card is copy | form. -->
+    <div class="gate-shelf">
+      <link rel="stylesheet" href="/guides/shelf.css">
+      <div data-aotp-shelf="featured" data-featured="eng" data-title="The Matt and Lauren Kit"></div>
+      <script src="/guides/shelf.js" defer onerror="this.closest('.gate-grid').classList.add('no-shelf')"></script>
+    </div>
+    <!-- Copy order: THIS guide by name, then every other guide, then the weekly letter (Rich, 2026-10-02). -->
+    <div class="gate-intro">
+      <div class="eyebrow">Free guide &middot; one email</div>
+      <h2>Unlock The Matt and Lauren Kit.</h2>
+      <p>Leave your email and this guide opens right here. The same email opens every other guide on the shelf and signs you up for the weekly letter.</p>
+    </div>
+    <ol class="unlocks">
+      <!-- Item 01 names this guide and two to four of its sections in plain words, never the payload itself. -->
+      <li class="this"><span class="n">01</span><div><b>The Matt and Lauren Kit <span class="now">Opens now</span></b><ul><li>The two libraries</li><li>Install Matt's skills and pstack</li><li>The two habits from the talk</li></ul></div></li>
+      <li><span class="n">02</span><div><b>Every other guide</b>Prompt kits, setup guides and reading lists from my other Reels. The same email opens them all.</div></li>
+      <li><span class="n">03</span><div><b>The weekly letter</b>Five useful things I made with AI each week, with the prompts and workflows inside. Unsubscribe any time.</div></li>
+    </ol>
+    <div class="gate-act">
+      <form id="gate-form" novalidate>
+        <label for="gate-email" class="sr-only">Email address</label>
+        <input id="gate-email" type="email" name="email" placeholder="you@somewhere.com" autocomplete="email" required>
+        <button type="submit">Unlock the guide and subscribe to AOTP</button>
+      </form>
+      <p class="gate-status" id="gate-status" aria-live="polite"></p>
+      <p class="gate-small">Already on the list? Enter the same email and it unlocks without subscribing you twice.</p>
+      <noscript><p class="gate-small">This page needs JavaScript to unlock. Or just subscribe on <a href="/">the homepage</a> and reply to any letter for the Matt and Lauren kit.</p></noscript>
+    </div>
+  </div>
+</section>
+
+<!-- The shared unlock's line (/guides/unlock.js): shown once the page is open, never with the gate. -->
+<p class="subbed pad" id="subbed" hidden>You're subscribed, so every guide is open.<a href="#gate" id="gate-reset">Use a different email</a></p>
+
+<!-- EVERYTHING OF VALUE LIVES INSIDE #kit. Nothing valuable outside it. -->
+<div id="kit" hidden>
+
+<section class="step pad" id="libraries">
+  <div class="step-kicker"><span>01</span>The libraries</div>
+  <div>
+    <h2>The two libraries from the Reel.</h2>
+    <p class="lede">Matt Pocock's skills and Lauren Tan's pstack are both free on GitHub. Copy them, change them, make them yours.</p>
+    <p>Matt's repo is a set of small agent skills he uses every day to do real engineering. pstack is the set Lauren uses every day to ship high quality code. Each one is a folder of plain files you can read before you install anything.</p>
+    <div class="read"><div class="src">GitHub &middot; mattpocock/skills</div><h3>Skills for real engineers: Matt's own agent skills</h3><a href="https://github.com/mattpocock/skills" target="_blank" rel="noopener">Open the repo &rarr;</a></div>
+    <div class="read"><div class="src">GitHub &middot; cursor/plugins &middot; pstack</div><h3>pstack: the skills Lauren Tan uses to ship high quality code</h3><a href="https://github.com/cursor/plugins/tree/main/pstack" target="_blank" rel="noopener">Open pstack &rarr;</a></div>
+    <div class="read"><div class="src">YouTube &middot; Matt Pocock &middot; 1:05:35</div><h3>Matt's live stream with Lauren Tan (poteto), 2 October 2026</h3><a href="https://www.youtube.com/watch?v=MN9dGgmLyso" target="_blank" rel="noopener">Watch the talk &rarr;</a></div>
+    <div class="note">I didn't build either library and I earn nothing from them. Matt and Lauren make them, and every command on this page comes from their READMEs.</div>
+  </div>
+</section>
+<section class="step pad" id="matt">
+  <div class="step-kicker"><span>02</span>Matt's skills</div>
+  <div>
+    <h2>Install Matt's skills.</h2>
+    <p class="lede">Two ways in. Pick the one that matches your agent.</p>
+    <p><strong>Claude Code.</strong> Run this inside a session:</p>
+    <div class="promptbox code"><button class="copybtn" data-copy>Copy</button><pre>/plugin install mattpocock-skills</pre></div>
+    <p><strong>Codex and other agents.</strong> This copies the skills into your repo as plain files you own:</p>
+    <div class="promptbox code"><button class="copybtn" data-copy>Copy</button><pre>npx skills@latest add mattpocock/skills</pre></div>
+    <p>The installer lets you choose which skills to take. Make sure <code>setup-matt-pocock-skills</code> is one of them.</p>
+    <p>Then run this once per repo. It asks which issue tracker you use, which labels you put on tickets and where to save docs:</p>
+    <div class="promptbox code"><button class="copybtn" data-copy>Copy</button><pre>/setup-matt-pocock-skills</pre></div>
+    <p>Start with <code>/grill-with-docs</code> for code, or <code>/grill-me</code> for anything else. The agent asks you detailed questions about what you're building before it writes a line. Matt calls them his most popular skills and says to use them every time you want to make a change.</p>
+  </div>
+</section>
+<section class="step pad" id="pstack">
+  <div class="step-kicker"><span>03</span>Lauren's pstack</div>
+  <div>
+    <h2>Install pstack.</h2>
+    <p class="lede">pstack is a Cursor plugin. Two steps and you're running.</p>
+    <p>In Cursor, add the plugin:</p>
+    <div class="promptbox code"><button class="copybtn" data-copy>Copy</button><pre>/add-plugin pstack</pre></div>
+    <p>Run <code>/setup-pstack</code> once. It asks you to pick a reasoning budget and which models you want. After that, use <code>/poteto-mode</code> whenever a task needs rigor. It reads your request, picks a playbook and runs the other skills as the task needs them. An example from the README:</p>
+    <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>/poteto-mode this pr has a subtle bug where the scroll drifts every 750ms even when idle. repro first, then fix and verify.</pre></div>
+    <p>Stuck? Ask <code>/poteto-help</code>. The pstack guide walks you through a first real task, from setup and prompting through verification and overnight runs.</p>
+    <div class="read"><div class="src">GitHub &middot; pstack guide</div><h3>A first real task, start to finish</h3><a href="https://github.com/cursor/plugins/tree/main/pstack/docs/guide" target="_blank" rel="noopener">Open the guide &rarr;</a></div>
+  </div>
+</section>
+<section class="step pad" id="habits">
+  <div class="step-kicker"><span>04</span>The two habits</div>
+  <div>
+    <h2>The two habits from the talk.</h2>
+    <p class="lede">Neither needs a new tool. Both change how much you can trust your agent.</p>
+    <ul class="lessons">
+      <li><strong><span class="k">1</span>Let your agent test its own work.</strong>Without a browser, your agent can't click through your app, so you end up copy-pasting errors back and forth. Give it a browser and it can try the app like a user, then show you proof.</li>
+    </ul>
+    <div class="promptbox code"><button class="copybtn" data-copy>Copy</button><pre>claude mcp add playwright npx @playwright/mcp@latest</pre></div>
+    <p>That adds Microsoft's Playwright MCP to Claude Code, so the agent can drive a real browser. Then give it a standing rule:</p>
+    <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>Test it like a user. Click through the app yourself and show me screenshots before you say it's done.</pre></div>
+    <p>pstack also has <code>/create-verification-skill</code>. It builds a verify skill inside your project, for an app that has no scripted way to prove it works.</p>
+    <div class="read"><div class="src">GitHub &middot; microsoft/playwright-mcp</div><h3>Playwright MCP: a browser tool for AI agents</h3><a href="https://github.com/microsoft/playwright-mcp" target="_blank" rel="noopener">Open the repo &rarr;</a></div>
+    <ul class="lessons">
+      <li><strong><span class="k">2</span>Block out time every week to improve your setup.</strong>Look at how you actually worked, find what slowed you down and fix it. You don't have to do the digging by hand. Ask your agent to read your past conversations:</li>
+    </ul>
+    <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>Review my past work. Find bottlenecks. Propose fixes.</pre></div>
+    <p>pstack has two skills for this. <code>/recall</code> rebuilds your recent context from your own chat history. <code>/reflect</code> turns a long task into a skill edit, so the next run starts from what you learned.</p>
+  </div>
+</section>
+<section class="step pad" id="next">
+  <div class="step-kicker"><span>05</span>What to do now</div>
+  <div>
+    <h2>Pick one. Start today.</h2>
+    <p class="lede">Installing is the easy part. Using it on a real task is what shows you the difference.</p>
+    <ul>
+      <li><strong>If you use Claude Code or Codex:</strong> install Matt's skills in section 02, run the setup, then try <code>/grill-with-docs</code> on your next change.</li>
+      <li><strong>If you use Cursor:</strong> add pstack in section 03 and run <code>/poteto-mode</code> on your next task.</li>
+      <li><strong>If your agent says it's done and it isn't:</strong> give it the browser from habit 1 in section 04.</li>
+      <li><strong>If your setup feels stale:</strong> block out an hour this week and paste the review prompt from habit 2.</li>
+    </ul>
+  </div>
+</section>
+
+</div>
+
+<!-- The close and the footer are one block on the reversed sky, outside #kit so gated visitors get it too, everything
+     in it white on the dark stretch. .close-kit only shows once #kit is unlocked (CSS: #kit[hidden]~.closeblock .close-kit). -->
+<footer class="closeblock pad">
+  <div class="close-top">
+    <div>
+      <h2>See what's possible. Then build it.</h2>
+      <p class="close-kit">You're on the list now: five useful things I made with AI each week, and how I made them.</p>
+    </div>
+    <a class="close-btn" href="/">Back to the site</a>
+  </div>
+  <div class="close-row"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 897 112" role="img" aria-label="Art of the Possible"><title>Art of the Possible</title><g fill="#FFFFFF"><path transform="scale(0.448)" d="M93.301 48.471A34.601 34.601 0 1 1 156.699 48.471A34.601 34.601 0 0 0 93.301 48.471ZM156.699 48.471A34.601 34.601 0 1 1 201.529 93.301A34.601 34.601 0 0 0 156.699 48.471ZM201.529 93.301A34.601 34.601 0 1 1 156.699 48.471A34.601 34.601 0 0 0 201.529 93.301ZM201.529 93.301A34.601 34.601 0 1 1 201.529 156.699A34.601 34.601 0 0 0 201.529 93.301ZM201.529 156.699A34.601 34.601 0 1 1 156.699 201.529A34.601 34.601 0 0 0 201.529 156.699ZM156.699 201.529A34.601 34.601 0 1 1 201.529 156.699A34.601 34.601 0 0 0 156.699 201.529ZM156.699 201.529A34.601 34.601 0 1 1 93.301 201.529A34.601 34.601 0 0 0 156.699 201.529ZM93.301 201.529A34.601 34.601 0 1 1 48.471 156.699A34.601 34.601 0 0 0 93.301 201.529ZM48.471 156.699A34.601 34.601 0 1 1 93.301 201.529A34.601 34.601 0 0 0 48.471 156.699ZM48.471 156.699A34.601 34.601 0 1 1 48.471 93.301A34.601 34.601 0 0 0 48.471 156.699ZM48.471 93.301A34.601 34.601 0 1 1 93.301 48.471A34.601 34.601 0 0 0 48.471 93.301ZM93.301 48.471A34.601 34.601 0 1 1 48.471 93.301A34.601 34.601 0 0 0 93.301 48.471Z"/><path transform="translate(160 80.736)" d="M11.7 0H0.49L17.57 -49.47H31.04L48.09 0H36.91L24.49 -38.17H24.09ZM11.04 -19.44H37.49V-11.3H11.04ZM51.08 0V-49.47H70.57Q76.2 -49.47 80.16 -47.48Q84.12 -45.48 86.22 -41.85Q88.32 -38.21 88.32 -33.31Q88.32 -28.38 86.2 -24.84Q84.07 -21.29 80.04 -19.41Q76.01 -17.53 70.31 -17.53H57.27V-25.94H68.6Q71.63 -25.94 73.62 -26.76Q75.6 -27.59 76.58 -29.22Q77.55 -30.85 77.55 -33.31Q77.55 -35.78 76.57 -37.47Q75.59 -39.15 73.6 -40.02Q71.62 -40.89 68.58 -40.89H61.52V0ZM78.54 0 66.5 -22.52H77.78L90.09 0ZM90.95 -40.85V-49.47H131.58V-40.85H116.44V0H106.12V-40.85ZM170.54 0.66Q163.97 0.66 158.72 -2.32Q153.46 -5.31 150.41 -10.99Q147.36 -16.66 147.36 -24.7Q147.36 -32.8 150.41 -38.49Q153.46 -44.18 158.72 -47.16Q163.97 -50.14 170.54 -50.14Q177.12 -50.14 182.35 -47.16Q187.59 -44.18 190.64 -38.49Q193.69 -32.8 193.69 -24.7Q193.69 -16.64 190.64 -10.97Q187.59 -5.29 182.35 -2.31Q177.12 0.66 170.54 0.66ZM170.54 -8.58Q174.35 -8.58 177.16 -10.44Q179.98 -12.29 181.54 -15.89Q183.09 -19.49 183.09 -24.7Q183.09 -29.95 181.54 -33.57Q179.98 -37.18 177.16 -39.04Q174.35 -40.89 170.54 -40.89Q166.76 -40.89 163.93 -39.04Q161.1 -37.18 159.53 -33.57Q157.96 -29.95 157.96 -24.7Q157.96 -19.49 159.53 -15.89Q161.1 -12.29 163.93 -10.44Q166.76 -8.58 170.54 -8.58ZM198.51 0V-49.47H231.26V-40.85H208.95V-27.25H229.08V-18.79H208.95V0ZM246.36 -40.85V-49.47H286.99V-40.85H271.85V0H261.53V-40.85ZM290.8 0V-49.47H301.24V-29.06H322.46V-49.47H332.9V0H322.46V-20.44H301.24V0ZM338.59 0V-49.47H371.94V-40.85H349.03V-29.22H370.19V-20.76H349.03V-8.62H372V0ZM390.19 0V-49.47H409.68Q415.31 -49.47 419.27 -47.33Q423.23 -45.19 425.33 -41.4Q427.43 -37.61 427.43 -32.69Q427.43 -27.76 425.31 -24Q423.18 -20.25 419.15 -18.14Q415.12 -16.03 409.43 -16.03H396.99V-24.41H407.71Q410.74 -24.41 412.73 -25.46Q414.71 -26.52 415.69 -28.38Q416.66 -30.25 416.66 -32.69Q416.66 -35.18 415.69 -37.02Q414.71 -38.86 412.72 -39.88Q410.73 -40.89 407.69 -40.89H400.63V0ZM453.6 0.66Q447.03 0.66 441.78 -2.32Q436.52 -5.31 433.47 -10.99Q430.43 -16.66 430.43 -24.7Q430.43 -32.8 433.47 -38.49Q436.52 -44.18 441.78 -47.16Q447.03 -50.14 453.6 -50.14Q460.18 -50.14 465.42 -47.16Q470.65 -44.18 473.7 -38.49Q476.75 -32.8 476.75 -24.7Q476.75 -16.64 473.7 -10.97Q470.65 -5.29 465.42 -2.31Q460.18 0.66 453.6 0.66ZM453.6 -8.58Q457.41 -8.58 460.23 -10.44Q463.05 -12.29 464.6 -15.89Q466.15 -19.49 466.15 -24.7Q466.15 -29.95 464.6 -33.57Q463.05 -37.18 460.23 -39.04Q457.41 -40.89 453.6 -40.89Q449.82 -40.89 446.99 -39.04Q444.17 -37.18 442.6 -33.57Q441.03 -29.95 441.03 -24.7Q441.03 -19.49 442.6 -15.89Q444.17 -12.29 446.99 -10.44Q449.82 -8.58 453.6 -8.58ZM499.91 0.7Q493.92 0.7 489.49 -1.13Q485.06 -2.96 482.58 -6.57Q480.1 -10.19 479.96 -15.54H490.08Q490.27 -13.07 491.53 -11.4Q492.8 -9.74 494.93 -8.9Q497.06 -8.06 499.79 -8.06Q502.45 -8.06 504.43 -8.83Q506.4 -9.6 507.49 -10.98Q508.57 -12.36 508.57 -14.18Q508.57 -15.84 507.58 -16.96Q506.6 -18.08 504.73 -18.89Q502.85 -19.69 500.15 -20.32L494.75 -21.65Q488.5 -23.15 484.89 -26.41Q481.28 -29.68 481.28 -35.17Q481.28 -39.66 483.71 -43.02Q486.14 -46.38 490.37 -48.26Q494.61 -50.14 500.02 -50.14Q505.54 -50.14 509.64 -48.25Q513.75 -46.36 516.05 -43Q518.35 -39.64 518.43 -35.25H508.36Q508.09 -38.16 505.89 -39.78Q503.7 -41.4 499.94 -41.4Q497.4 -41.4 495.62 -40.68Q493.84 -39.97 492.92 -38.71Q492 -37.45 492 -35.83Q492 -34.09 493.06 -32.91Q494.11 -31.74 495.9 -31Q497.68 -30.25 499.81 -29.74L504.23 -28.66Q507.45 -27.93 510.16 -26.72Q512.87 -25.5 514.88 -23.74Q516.89 -21.99 517.99 -19.6Q519.09 -17.22 519.09 -14.13Q519.09 -9.61 516.81 -6.27Q514.53 -2.94 510.24 -1.12Q505.96 0.7 499.91 0.7ZM541.53 0.7Q535.54 0.7 531.11 -1.13Q526.68 -2.96 524.2 -6.57Q521.72 -10.19 521.58 -15.54H531.7Q531.89 -13.07 533.16 -11.4Q534.42 -9.74 536.55 -8.9Q538.68 -8.06 541.41 -8.06Q544.08 -8.06 546.05 -8.83Q548.02 -9.6 549.11 -10.98Q550.19 -12.36 550.19 -14.18Q550.19 -15.84 549.21 -16.96Q548.22 -18.08 546.35 -18.89Q544.47 -19.69 541.77 -20.32L536.37 -21.65Q530.12 -23.15 526.51 -26.41Q522.9 -29.68 522.9 -35.17Q522.9 -39.66 525.33 -43.02Q527.76 -46.38 531.99 -48.26Q536.23 -50.14 541.64 -50.14Q547.16 -50.14 551.26 -48.25Q555.37 -46.36 557.67 -43Q559.97 -39.64 560.05 -35.25H549.98Q549.71 -38.16 547.51 -39.78Q545.32 -41.4 541.56 -41.4Q539.02 -41.4 537.24 -40.68Q535.46 -39.97 534.54 -38.71Q533.62 -37.45 533.62 -35.83Q533.62 -34.09 534.68 -32.91Q535.74 -31.74 537.52 -31Q539.3 -30.25 541.43 -29.74L545.85 -28.66Q549.07 -27.93 551.78 -26.72Q554.49 -25.5 556.5 -23.74Q558.51 -21.99 559.61 -19.6Q560.71 -17.22 560.71 -14.13Q560.71 -9.61 558.43 -6.27Q556.15 -2.94 551.87 -1.12Q547.58 0.7 541.53 0.7ZM575.25 -49.47V0H564.81V-49.47ZM580.93 0V-49.47H600.73Q606.18 -49.47 609.83 -47.85Q613.48 -46.22 615.32 -43.36Q617.15 -40.5 617.15 -36.8Q617.15 -33.89 615.98 -31.71Q614.81 -29.52 612.8 -28.13Q610.78 -26.74 608.2 -26.16V-25.66Q611.03 -25.55 613.51 -24.08Q615.99 -22.6 617.53 -19.97Q619.08 -17.33 619.08 -13.67Q619.08 -9.75 617.14 -6.66Q615.21 -3.57 611.43 -1.78Q607.64 0 602.06 0ZM591.37 -8.54H599.91Q604.27 -8.54 606.29 -10.23Q608.31 -11.93 608.31 -14.7Q608.31 -16.77 607.32 -18.34Q606.33 -19.92 604.5 -20.82Q602.67 -21.71 600.16 -21.71H591.37ZM591.37 -28.77H599.14Q601.27 -28.77 602.96 -29.53Q604.64 -30.29 605.61 -31.69Q606.58 -33.1 606.58 -35.05Q606.58 -37.71 604.69 -39.36Q602.8 -41.01 599.34 -41.01H591.37ZM622.95 0V-49.47H633.39V-8.62H654.6V0ZM658.66 0V-49.47H692.01V-40.85H669.1V-29.22H690.26V-20.76H669.1V-8.62H692.06V0ZM708.66 -22.11V-39.91H717.37Q719.06 -39.94 720.47 -39.25Q721.88 -38.56 722.72 -37.24Q723.56 -35.93 723.56 -34.07Q723.56 -32.17 722.69 -30.82Q721.81 -29.47 720.37 -28.79Q718.94 -28.12 717.18 -28.12H711.19V-31.48H716.19Q717.2 -31.46 717.94 -32.11Q718.68 -32.75 718.68 -34.06Q718.68 -35.37 717.94 -35.95Q717.19 -36.52 716.21 -36.54H713.29V-22.11ZM720.04 -30.35 724.13 -22.11H719.02L715.23 -30.35ZM715.63 -11.49Q711.65 -11.49 708.14 -13Q704.64 -14.51 701.98 -17.17Q699.33 -19.82 697.84 -23.33Q696.35 -26.83 696.35 -30.81Q696.35 -34.8 697.84 -38.3Q699.33 -41.8 701.98 -44.46Q704.64 -47.12 708.14 -48.63Q711.65 -50.14 715.63 -50.14Q719.65 -50.14 723.15 -48.63Q726.65 -47.12 729.31 -44.46Q731.97 -41.8 733.46 -38.3Q734.95 -34.8 734.95 -30.81Q734.95 -26.83 733.46 -23.33Q731.97 -19.82 729.32 -17.17Q726.67 -14.51 723.16 -13Q719.65 -11.49 715.63 -11.49ZM715.63 -16.61Q719.59 -16.61 722.82 -18.52Q726.05 -20.43 727.97 -23.66Q729.88 -26.88 729.87 -30.81Q729.88 -34.74 727.96 -37.97Q726.05 -41.2 722.81 -43.12Q719.57 -45.03 715.63 -45.01Q711.72 -45.03 708.49 -43.12Q705.26 -41.2 703.34 -37.97Q701.43 -34.74 701.43 -30.82Q701.43 -26.89 703.35 -23.66Q705.26 -20.43 708.49 -18.52Q711.71 -16.61 715.63 -16.61Z"/></g></svg><p class="close-foot">New things are possible every day. <span class="nw">&middot; 2026</span></p></div>
+</footer>
+</div>
+
+
+
+<!-- The shared unlock: one email opens every guide in this browser, so nobody types it twice (Rich, 2026-10-03:
+     "People should not have to re-enter their email"). Load it before the gate code. -->
+<script src="/guides/unlock.js"></script>
+<script>
+(function () {
+  var API = 'https://theaotp-gate.theaotp.workers.dev';
+  var KEY = 'aotp_eng_unlocked';
+  var kit = document.getElementById('kit');
+  var gate = document.getElementById('gate');
+  var form = document.getElementById('gate-form');
+  var status = document.getElementById('gate-status');
+  var subbed = document.getElementById('subbed');
+
+  // window.AOTPUnlock comes from /guides/unlock.js. Where that file cannot load (file://, another host) the same
+  // contract runs inline: "aotp_subscriber" ({"at": ISO time}, never the email) or a member the worker confirmed
+  // ("aotp_member" = "2", set by /f.js) opens every guide. An old aotp_<slug>_unlocked flag on its own does not
+  // (those people never confirmed, so they are asked once more). A settled submit writes "aotp_subscriber" plus this
+  // page's key; "Use a different email" clears them all.
+  var U = window.AOTPUnlock || (function () {
+    var SUB = 'aotp_subscriber', MEMBER = 'aotp_member', PAGE = /^aotp_.+_unlocked$/;
+    function stamp() { return JSON.stringify({ at: new Date().toISOString() }); }
+    function keys() { var out = []; try { for (var i = 0; i < localStorage.length; i++) out.push(localStorage.key(i) || ''); } catch (e) {} return out; }
+    return {
+      isSubscribed: function () {
+        try {
+          if (localStorage.getItem(SUB)) return true;
+          var member = localStorage.getItem(MEMBER) === '2';
+          if (member) localStorage.setItem(SUB, stamp());
+          return member;
+        } catch (e) { return false; }
+      },
+      remember: function (key, answer) {
+        try { if (!(answer && answer.member === false)) localStorage.setItem(SUB, stamp()); localStorage.setItem(key, '1'); } catch (e) {}
+      },
+      forget: function () { keys().forEach(function (k) { if (k === SUB || k === MEMBER || PAGE.test(k)) { try { localStorage.removeItem(k); } catch (e) {} } }); }
+    };
+  })();
+
+  function unlock() {
+    kit.hidden = false;
+    gate.hidden = true;
+    subbed.hidden = false;
+  }
+
+  var open = U.isSubscribed();
+  document.documentElement.classList.toggle('aotp-subscribed', open);
+  if (open) unlock();
+
+  // "Use a different email": lock every guide in this browser again and show the form here, without a reload.
+  document.getElementById('gate-reset').addEventListener('click', function (event) {
+    event.preventDefault();
+    U.forget();
+    document.documentElement.classList.remove('aotp-subscribed');
+    kit.hidden = true;
+    subbed.hidden = true;
+    gate.hidden = false;
+    status.textContent = '';
+    gate.scrollIntoView({ block: 'start' });
+    document.getElementById('gate-email').focus({ preventScroll: true });
+  });
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    var email = document.getElementById('gate-email').value.trim().toLowerCase();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      status.textContent = 'That email looks off. Try again.';
+      return;
+    }
+    status.textContent = 'One sec…';
+    fetch(API + '/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, ctx: window.aotpCtx ? window.aotpCtx() : null }),
+    }).then(function (response) {
+      return response.json().catch(function () { return {}; }).then(function (data) {
+        if (!response.ok) {
+          var err = new Error('subscribe failed');
+          err.status = response.status;
+          err.detail = data && data.detail;
+          throw err;
+        }
+        return data;
+      });
+    }).then(function (data) {
+      if (window.aotpSubscribed) window.aotpSubscribed(data);
+      U.remember(KEY, data);
+      status.textContent = !(data && data.new) ? 'Welcome back. Unlocked.'
+        : data.member === false ? 'Unlocked. Check your inbox to confirm your subscription to the letter.'
+        : 'Unlocked. You\'re on the list for the weekly letter.';
+      unlock();
+      window.scrollTo({ top: subbed.offsetTop - 24, behavior: 'smooth' });
+    }).catch(function (err) {
+      if (err && err.status === 400) {
+        status.textContent = 'That email was rejected' + (err.detail ? ' (' + err.detail + ')' : '') + '. Try a different address.';
+      } else {
+        status.textContent = 'Something broke on our end. Try again in a minute, or subscribe on the homepage and DM me on Instagram for the Matt and Lauren kit.';
+      }
+    });
+  });
+
+  document.querySelectorAll('[data-copy]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      var pre = button.parentElement.querySelector('pre');
+      navigator.clipboard.writeText(pre.textContent).then(function () {
+        button.textContent = 'Copied';
+        setTimeout(function () { button.textContent = 'Copy'; }, 1600);
+      });
+    });
+  });
+
+})();
+</script>
+</body></html>
