@@ -1,0 +1,696 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cal AI playbook | Art of the Possible</title>
+<meta name="description" content="Zach Yadegari&#x27;s four-move playbook from the Reel, with the source next to every number, plus every interview of his I could find, with working links.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://theaotp.com/cal/">
+<link rel="icon" href="/qualia-symbol.png">
+<meta property="og:title" content="Cal AI playbook | Art of the Possible">
+<meta property="og:description" content="Zach Yadegari&#x27;s four-move playbook from the Reel, with the source next to every number, plus every interview of his I could find, with working links.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&amp;family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&amp;family=Geist+Mono:wght@400&amp;display=swap" rel="stylesheet">
+<!--
+  Clear Sky kit template (AOTP design system approved by Rich 2026-09-30).
+  Source of truth: content-intelligence assets/brand/clear-sky/{DESIGN.md,tokens.css,board.html}.
+  Filled example: assets/brand/clear-sky/sample-guide.html.
+  White on blue, ink on sand (Rich, 2026-10-03: "black never over the blue, if we use black its over white").
+  Every button wears the sky action and the big numerals the sky numeral fill. Never retune the sky's stops.
+  No old accent blue, no two-tone headlines, no bold display, no shadows, no em dashes.
+-->
+<!--
+  Sources (checked 2026-10-12; every link, number and quote on this page comes from these): TechCrunch (2025-03-16, 2026-03-02,
+    2026-09-24, 2026-10-08), Inc., Fortune and CEO Insider, plus Zach Yadegari's own interviews on My First Million, Top Founders
+    with Nathan Latka and CNBC Make It, and a clip from TheBrettWay Clips. Quotes are marked re-listened in SOURCES.md or checked
+    against the YouTube auto-captions with the time of each line. The ledger with every URL, title, status and the claim map is in
+    content-intelligence pipeline/5-script/assets/cal-ai-founder-persona-10m/kit-page/sources.md
+-->
+<style>
+:root{
+  --sand:#EFEBE7;--ink:#08070B;--graphite:#39383D;--ash:#909092;--ice:#BEC4D2;--ice-3:#E2E4EC;--glacier-2:#F3F4F6;--deep-ocean:#034C7C;--light-blue:#A5D4F2;--white:#FFFFFF;
+  /* Sky action: every button and button-like link, now an obvious two-tone (Rich, 2026-10-03: "Not enough gradient in
+     the buttons"). Same values as tokens.css: deep blue at the left into bright cerulean at the right end, 100deg.
+     Everything from 0 to 95% is #027DBA or darker, so white clears 4.5:1 there; only the last 5%, the cap, brightens to
+     #0A8FCF (3.5:1). Keep every label out of the cap: the template's paddings do (gate submit 22px, 12px on phones;
+     small pills 18px), and the worst glyph pixel measures 4.59:1 on the phone gate. Hover deepens every point of the
+     ramp. On sand and glacier the fill is its own edge; on the dark close it adds a 1px white ring. */
+  --g-sky-action:linear-gradient(100deg,#034A7A 0%,#026AA1 50%,#027DBA 95%,#0A8FCF 100%);
+  --g-sky-action-hover:linear-gradient(100deg,#043761 0%,#025F92 50%,#0274AD 95%,#0282C0 100%);
+  /* Sky numeral, FINAL (DESIGN.md 10.5): the deep end of the sky run top to bottom at 180deg, dark at the top like
+     the sky, as the text fill of the big display numerals ("and the big numbers too"). Same value and name as
+     tokens.css, so kit pages match the homepage. Display sizes only (32px and up): the lightest stop, #0282C0, is
+     3.5:1 on sand; #026AA1 is 4.9:1. */
+  --g-sky-numeral:linear-gradient(180deg,#043761 0%,#024F80 35%,#026AA1 70%,#0282C0 100%);
+  --display:'Inter Tight','Helvetica Neue',Arial,sans-serif;--ui:'Inter','Helvetica Neue',Arial,sans-serif;--mono:'Geist Mono',ui-monospace,'SF Mono',Menlo,monospace;
+  --gutter:clamp(16px,4.5vw,64px);
+  --spark:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0C12.8 7.2 16.8 11.2 24 12C16.8 12.8 12.8 16.8 12 24C11.2 16.8 7.2 12.8 0 12C7.2 11.2 11.2 7.2 12 0Z'/%3E%3C/svg%3E");
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--sand);color:var(--ink);font:400 16px/1.6 var(--ui);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:var(--deep-ocean);text-underline-offset:3px;text-decoration-thickness:1px}
+button,input{font:inherit}button,a,input{-webkit-tap-highlight-color:transparent}
+strong,b{font-weight:600;color:var(--ink)}
+:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+.page{min-height:100vh;overflow-x:clip;display:flex;flex-direction:column}
+.page>footer{margin-top:auto}
+/* Full-bleed backgrounds, content held to 1440 with 64px gutters (16px on phones). */
+.pad{padding-left:max(var(--gutter),calc((100% - 1440px)/2 + var(--gutter)));padding-right:max(var(--gutter),calc((100% - 1440px)/2 + var(--gutter)))}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance;overflow-wrap:break-word}
+p,li{text-wrap:pretty}
+
+/* Sparkle label: four-point sparkle + Geist Mono caps. */
+.eyebrow,.inst{display:block;font:400 11px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase}
+.eyebrow::before,.inst::before,.unlocks ul li::before{content:"";display:inline-block;width:.82em;height:.82em;margin-right:.75em;vertical-align:-.04em;background:currentColor;-webkit-mask:var(--spark) center/contain no-repeat;mask:var(--spark) center/contain no-repeat}
+
+/* ---- The head: white on the deep sky (Rich, 2026-10-03: "black never over the blue"; on /team/: "too much space under
+   the heading, and also make the sub text white and move to RHS"). Everything in it is white: the lockup, the nav, the
+   label line, the h1 and the dek. It all sits in the deep stretch, #043761 to #026AA1, where white measures 5.8:1 or
+   better. From 900px the heading is on the left and the dek on the right, bottoms aligned; below 900px they stack.
+   Under the content the sky runs through the rest of its measured stops, in order and evenly, to sand inside --fade,
+   an empty strip, so no type ever sits on the pale tail. Pad inside .kit-hero, never in the fade. ---- */
+.kit-head{--fade:clamp(96px,9vw,136px);padding-bottom:var(--fade);color:var(--white);background:linear-gradient(180deg,#043761 0%,#024F80 calc((100% - var(--fade))*.5),#026AA1 calc(100% - var(--fade)),#0282C0 calc(100% - var(--fade)*6/7),#1199D7 calc(100% - var(--fade)*5/7),#3EA9DA calc(100% - var(--fade)*4/7),#6DB9DC calc(100% - var(--fade)*3/7),#9DCBDD calc(100% - var(--fade)*2/7),#CBDBDF calc(100% - var(--fade)/7),#EFEBE7 100%)}
+nav{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:76px}
+.lockup{display:flex;align-items:center;color:var(--white);text-decoration:none}.lockup svg{display:block;height:22px;width:auto}
+.navlinks{display:flex;gap:28px;font:400 14px/1 var(--ui)}.navlinks a{color:var(--white);text-decoration:none}.navlinks a:hover{text-decoration:underline}
+.kit-head a:focus-visible{outline-color:var(--white)}
+.kit-hero{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);column-gap:clamp(40px,5.5vw,96px);align-items:end;padding-top:clamp(32px,4vw,60px);padding-bottom:clamp(32px,3.4vw,48px)}
+.kit-head .eyebrow{margin-bottom:18px;color:var(--white)}
+.kit-head h1{font-size:clamp(42px,4.8vw,70px);line-height:.98;letter-spacing:-.045em;text-wrap:pretty}
+.dek{max-width:46ch;margin:0;font:400 clamp(16px,1.3vw,19px)/1.55 var(--ui);letter-spacing:-.005em;color:var(--white)}
+/* The line an unlocked page shows (the shared unlock, /guides/unlock.js): ink on sand, under the head. */
+.subbed{margin:0;padding-top:clamp(18px,2vw,28px);padding-bottom:16px;font:400 14px/1.5 var(--ui);color:var(--graphite)}
+.subbed::before{content:"";display:inline-block;width:.82em;height:.82em;margin-right:.6em;vertical-align:-.04em;background:currentColor;-webkit-mask:var(--spark) center/contain no-repeat;mask:var(--spark) center/contain no-repeat}
+.subbed a{margin-left:.35em;color:var(--deep-ocean);white-space:nowrap}
+
+/* ---- The gate: a glacier card on sand, led by THIS guide (Rich, 2026-10-02: "make each page that asks for the
+   persons email address to unlock the guide more compelling ... emphasising current guide"). The featured shelf from
+   /guides/ (DESIGN.md 10.7) shows this guide's cover large under a "This guide" tag, the other guides beside it.
+   The copy names this guide first, then every other guide, then the weekly letter. Desktop: shelf left; copy, the
+   three unlocks and the form right. Under 920px: shelf, copy, form, then the unlocks. If /guides/shelf.js cannot load
+   (file://, another host: the script's onerror adds .no-shelf) or the shelf fails, the column goes and the card is
+   copy | form. ---- */
+.gate{padding-top:8px;padding-bottom:clamp(56px,7vw,96px)}
+.gate-grid{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);grid-template-rows:auto auto auto 1fr;grid-template-areas:"shelf intro" "shelf list" "shelf act" "shelf .";column-gap:clamp(28px,4.5vw,72px);align-items:start;background:var(--glacier-2);border-radius:12px;padding:clamp(22px,3.4vw,48px)}
+.gate-grid>*,.step>*,.concept>*{min-width:0}
+.gate-shelf{grid-area:shelf;align-self:center}.gate-intro{grid-area:intro}.unlocks{grid-area:list}.gate-act{grid-area:act}
+.gate-grid.no-shelf,.gate-grid:has([data-aotp-shelf-state="failed"]){grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);grid-template-rows:auto 1fr;grid-template-areas:"intro act" "list act"}
+.gate-grid.no-shelf>.gate-shelf,.gate-grid:has([data-aotp-shelf-state="failed"])>.gate-shelf{display:none}
+.gate .eyebrow{color:var(--graphite)}
+.gate h2{margin-top:18px;font-size:clamp(30px,3vw,42px);line-height:1.04;letter-spacing:-.03em;max-width:17ch}
+.gate-intro p{max-width:48ch;margin:16px 0 0;color:var(--graphite)}
+/* What the one email opens, in this order: this guide (named in display type, "Opens now", its sections), every
+   other guide, the weekly letter. The 01 02 03 are small mono counters, not sky numerals. */
+.unlocks{list-style:none;margin:26px 0 28px;padding:0;max-width:52ch}
+.unlocks>li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:0 12px;margin:0;border-top:1px solid var(--ice);padding:13px 0;font-size:14.5px;line-height:1.5;color:var(--graphite)}
+.unlocks>li:last-child{border-bottom:1px solid var(--ice)}
+.unlocks .n{padding-top:3px;font:400 11px/1.4 var(--mono);letter-spacing:.1em;color:var(--graphite)}
+.unlocks b{display:block;margin-bottom:2px;font:500 16px/1.35 var(--ui);color:var(--ink)}
+.unlocks .this .n{padding-top:7px}
+.unlocks .this b{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin-bottom:8px;font:400 clamp(22px,2vw,26px)/1.1 var(--display);letter-spacing:-.025em}
+.unlocks .now{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:5px;background:var(--ice-3);font:400 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.unlocks ul{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.unlocks ul li{padding-left:1.6em;text-indent:-1.6em;color:var(--ink)}
+.gate form{display:grid;gap:10px}
+.gate input{width:100%;min-width:0;height:52px;border:1px solid var(--ink);border-radius:999px;background:transparent;padding:0 22px;color:var(--ink);font-size:16px}
+.gate input::placeholder{color:var(--graphite);opacity:1}
+.gate input:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.gate button{width:100%;min-height:52px;border:0;border-radius:999px;background:var(--g-sky-action);color:var(--white);cursor:pointer;padding:14px 22px;font:500 16px/1.25 var(--ui);letter-spacing:-.005em;text-align:center;text-wrap:balance}
+.gate button:hover{background:var(--g-sky-action-hover)}
+/* Buttons on sand and glacier: hover deepens the sky action, focus is a 2px ink ring (the white label would vanish as a ring on sand). */
+.gate button:focus-visible,.copybtn:focus-visible,.read a:focus-visible,.dl-btn:focus-visible,.kc:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.gate-status{margin:12px 0 0;font-size:14px;color:var(--ink)}.gate-status:empty{margin:0}
+.gate-small{margin:14px 0 0;font-size:13.5px;line-height:1.55;color:var(--graphite)}
+.unlocks ul li::before{width:10px;height:10px;margin-right:calc(1.6em - 10px);vertical-align:0}
+
+/* ---- Sections: a mono-and-numeral rail, one reading column, 1px ice hairlines. ---- */
+.step,.concept{position:relative;display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px;padding-top:52px;padding-bottom:72px;scroll-margin-top:24px}
+.step::before,.concept::before{content:"";position:absolute;top:0;left:max(var(--gutter),calc((100% - 1440px)/2 + var(--gutter)));right:max(var(--gutter),calc((100% - 1440px)/2 + var(--gutter)));height:1px;background:var(--ice)}
+.step-kicker,.concept-num{font:400 11px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--graphite)}
+.step-kicker span,.concept-num span{display:table;padding:.1em .1em .1em 0;margin:-.1em -.1em calc(14px - .1em) 0;font:400 64px/.8 var(--display);letter-spacing:-.06em;color:var(--deep-ocean)}
+.step h2,.concept h2{font-size:clamp(34px,3.6vw,50px);line-height:1.02;letter-spacing:-.03em;max-width:20ch}
+.step .lede,.concept .lede{max-width:54ch;margin:20px 0 24px;font:400 20px/1.5 var(--ui);letter-spacing:-.01em;color:var(--ink)}
+.step p,.concept p{max-width:64ch;color:var(--graphite)}
+.step ul,.step ol,.concept ul{max-width:64ch;padding-left:20px;color:var(--graphite)}
+.step li,.concept li{margin-bottom:10px}
+.step li::marker,.concept li::marker{color:var(--ash)}
+.note{max-width:62ch;margin:30px 0;border-top:1px solid var(--ice);padding-top:14px;font-size:14.5px;line-height:1.6;color:var(--graphite)}
+table+.note{margin-top:18px;border-top:0;padding-top:0}
+.step .inst{margin:44px 0 0;color:var(--ink)}
+
+/* Reading-list payload */
+.index{list-style:none;padding:0!important;margin:26px 0 0;max-width:66ch}
+.index li{border-top:1px solid var(--ice);padding:16px 0;margin:0;display:flex;gap:18px;align-items:baseline;font-size:15px;color:var(--graphite)}
+.index .n{min-width:26px;font:400 11px var(--mono);letter-spacing:.1em;color:var(--graphite)}
+.index a{font:400 21px/1.2 var(--display);letter-spacing:-.02em;color:var(--ink);text-decoration:none}.index a:hover{text-decoration:underline}
+.index .st{margin-left:auto;font:400 10.5px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--graphite)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 0}
+.chip{display:inline-flex;align-items:center;height:24px;padding:0 9px;border-radius:5px;background:var(--ice-3);font:400 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.read{max-width:760px;margin:26px 0 0;background:var(--glacier-2);border-radius:12px;padding:20px 22px 22px}
+.read .src{font:400 10.5px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--graphite)}
+.read h3{max-width:40ch;margin:10px 0 16px;font-size:24px;line-height:1.12;letter-spacing:-.025em}
+.read a{display:inline-flex;align-items:center;height:28px;padding:0 18px;border-radius:999px;background:var(--g-sky-action);font:400 10.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--white);text-decoration:none}
+.read a:hover{background:var(--g-sky-action-hover)}
+
+/* ---- The close IS the footer: one short block on the reversed sky, sand at the top and #043761 at the bottom (Rich,
+   2026-10-02: "make the footer smaller and reverse the gradient so dark blue at the bottom"), with everything in it
+   white on the dark stretch (Rich, 2026-10-03: "black never over the blue"). The run from sand to #026AA1 (the
+   measured stops, in order and evenly) happens inside --fade, an empty strip at the top. The headline, the "on the
+   list" line, the white-ringed pill, the lockup and the mono line all sit below it, on #026AA1 to #043761, where white
+   measures 5.8:1 or better. It sits outside #kit so gated visitors get it too; .close-kit only shows once #kit is
+   unlocked. Keep it short: no second headline, button or form. ---- */
+.closeblock{--fade:clamp(64px,6vw,88px);padding-top:calc(var(--fade) + clamp(22px,2.4vw,32px));padding-bottom:clamp(20px,1.8vw,26px);color:var(--white);background:linear-gradient(180deg,#EFEBE7 0%,#CBDBDF calc(var(--fade)/7),#9DCBDD calc(var(--fade)*2/7),#6DB9DC calc(var(--fade)*3/7),#3EA9DA calc(var(--fade)*4/7),#1199D7 calc(var(--fade)*5/7),#0282C0 calc(var(--fade)*6/7),#026AA1 var(--fade),#024F80 calc(var(--fade) + (100% - var(--fade))*.5),#043761 100%)}
+.close-top{display:flex;align-items:flex-end;justify-content:space-between;gap:18px 40px}
+.closeblock h2{font-size:clamp(28px,3vw,44px);line-height:1.02;letter-spacing:-.035em;color:var(--white)}
+.close-kit{max-width:64ch;margin:10px 0 0;font:400 clamp(15px,1.2vw,17px)/1.5 var(--ui);color:var(--white)}
+#kit[hidden]~.closeblock .close-kit{display:none}
+/* The pill is the sky action ringed in 1px white: on the dark sky the fill alone has no edge (it is cut from the same
+   blues), the white ring measures 5.8:1 or better there. */
+.close-btn{display:inline-flex;align-items:center;flex:none;height:40px;padding:0 20px;border:1px solid var(--white);border-radius:999px;background:var(--g-sky-action);color:var(--white);font:500 15px/1 var(--ui);text-decoration:none;white-space:nowrap}
+.close-btn:hover{background:var(--g-sky-action-hover);text-decoration:underline}
+.closeblock a:focus-visible{outline:2px solid var(--white);outline-offset:3px}
+.close-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 24px;margin-top:clamp(22px,2.4vw,32px)}
+.close-row svg{display:block;height:22px;width:auto;flex:none}
+.close-foot{margin:0;font:400 10.5px/1.6 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--white)}
+.close-foot .nw{white-space:nowrap}
+[hidden]{display:none!important}
+/* A subscriber's page opens before first paint: the head script below sets .aotp-subscribed on <html> from the same
+   storage the gate script reads, so the gate never flashes while /guides/unlock.js loads. */
+.aotp-subscribed #gate{display:none!important}
+.aotp-subscribed #kit[hidden],.aotp-subscribed #subbed[hidden]{display:block!important}
+
+/* --- prompt-kit / field-notes / how-to payloads: keep these, delete what you don't use --- */
+.promptbox{max-width:760px;margin-top:26px;background:var(--glacier-2);border-radius:12px;padding-top:12px}
+.copybtn{display:block;margin:0 12px 0 auto;min-height:32px;padding:0 18px;border:0;border-radius:999px;background:var(--g-sky-action);color:var(--white);cursor:pointer;font:400 10.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase}
+.copybtn:hover{background:var(--g-sky-action-hover)}
+.promptbox pre{margin:12px 0 0;border-top:1px solid var(--ice);padding:20px 26px 26px;overflow-x:auto;font:400 13px/1.8 var(--mono);white-space:pre-wrap;overflow-wrap:anywhere;color:var(--ink)}
+.promptbox.code pre{white-space:pre;overflow-wrap:normal}
+.promptbox.tall pre{max-height:560px;overflow-y:auto}
+.cmd,.termshot{max-width:760px;margin:24px 0;border-radius:12px;padding:20px 24px;overflow-x:auto}
+.cmd{background:var(--glacier-2)}.cmd code{display:block;padding:0;background:none;font:400 13px/1.8 var(--mono);white-space:pre}
+.termshot{background:var(--ink);color:var(--sand);font:400 13px/1.9 var(--mono);white-space:pre}
+.termshot .g{color:var(--light-blue)}.termshot .y,.termshot .r{color:var(--white)}.termshot .d{color:var(--ash)}
+code{font-family:var(--mono);font-size:.86em;background:var(--ice-3);padding:1px 5px;border-radius:4px;white-space:nowrap;color:var(--ink)}
+.lessons{list-style:none;padding:0!important;margin:26px 0 0;max-width:66ch}
+.lessons li{position:relative;border-top:1px solid var(--ice);padding:22px 0 22px 72px;margin:0;color:var(--graphite)}
+.lessons strong{display:block;margin-bottom:8px;font:400 23px/1.2 var(--display);letter-spacing:-.02em;color:var(--ink)}
+.lessons .k{position:absolute;left:0;top:22px;padding:.1em .1em .1em 0;margin:-.1em -.1em -.1em 0;font:400 40px/.84 var(--display);letter-spacing:-.05em;color:var(--deep-ocean)}
+.sky-num{display:inline-block;padding:.1em .1em .1em 0;margin:-.1em -.1em -.1em 0;font-family:var(--display);font-weight:400;color:var(--deep-ocean)}
+/* Sky numerals (Rich, 2026-10-02: "and the big numbers too"): every big display numeral (the rail numerals above,
+   .lessons .k, any stat figure you add as .sky-num) takes --g-sky-numeral as its text fill, painted on its own glyph box
+   (display:table shrinks the rail numeral to its digits). The box is padded .1em right, top and bottom with matching
+   negative margins (DESIGN.md 10.5): background-clip:text paints only inside the box, and the tight tracking and line
+   height would otherwise clip the last digit, or the top and tail of a "$". Without background-clip:text, in print and
+   under forced colors it is solid deep ocean. Small numbers (.cmdlist .n, .index .n, mono labels) stay as they are. */
+@supports (-webkit-background-clip:text) or (background-clip:text){
+  .step-kicker span,.concept-num span,.lessons .k,.sky-num{background:var(--g-sky-numeral);background-size:100% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+}
+table{border-collapse:collapse;width:100%;max-width:760px;margin:20px 0;font-size:14.5px}
+th,td{text-align:left;padding:14px 16px 14px 0;border-bottom:1px solid var(--ice);vertical-align:top;color:var(--graphite)}
+th{border-bottom-color:var(--ink);font:400 10.5px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+td:first-child{width:26%;padding-right:24px;color:var(--ink);font-weight:500}td code{white-space:normal;overflow-wrap:anywhere}
+.shot{max-width:760px;margin:26px 0}
+.shot img{display:block;width:100%;height:auto;border:1px solid var(--ice);border-radius:6px;background:var(--white)}
+.cap{max-width:64ch;margin:10px 0 0;font-size:13.5px;line-height:1.5;color:var(--graphite)}
+.dl{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px 28px;max-width:760px;margin:28px 0 0;background:var(--glacier-2);border-radius:12px;padding:22px 24px}
+.dl-meta{font-size:14px;line-height:1.5;color:var(--graphite)}.dl-meta strong{display:block;font:400 21px/1.2 var(--display);letter-spacing:-.02em}
+.dl-btn{display:inline-flex;align-items:center;height:52px;padding:0 26px;border-radius:999px;background:var(--g-sky-action);color:var(--white);font:500 16px/1 var(--ui);text-decoration:none}.dl-btn:hover{background:var(--g-sky-action-hover)}
+.cmdlist{list-style:none;padding:0!important;margin:28px 0 0;max-width:760px}
+.cmdlist li{display:grid;grid-template-columns:34px minmax(0,1fr);gap:14px;border-top:1px solid var(--ice);padding:20px 0;margin:0}
+.cmdlist li>*{min-width:0}.cmdlist .n{padding-top:9px;font:400 11px/1 var(--mono);letter-spacing:.1em;color:var(--graphite)}
+.cmdlist p{margin:10px 0 0}
+/* .kc is 16px round, not a 999px pill: one line is still a full pill (32px tall), but a command that wraps onto three
+   lines keeps its corners square enough that no white glyph falls off the fill onto sand. */
+.kc{display:inline-flex;align-items:center;gap:12px;max-width:100%;min-height:32px;padding:5px 12px 5px 13px;border:0;border-radius:16px;background:var(--g-sky-action);color:var(--white);cursor:pointer;text-align:left}
+.kc code{padding:0;background:none;font-size:14px;white-space:normal;overflow-wrap:anywhere;color:var(--white)}
+.kc .cp{flex:none;padding:3px 8px;border:1px solid var(--white);border-radius:999px;font:400 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase}
+.kc:hover,.kc.done{background:var(--g-sky-action-hover)}
+.kc:hover .cp,.kc.done .cp{background:var(--white);color:var(--ink)}
+/* A long command makes a wide chip, and its "Copy" pill sits at the far right, inside the bright cap of the ramp. The
+   chip paints the same --g-sky-action 10% wider than itself, so the cap always falls outside it and the pill's label
+   stays on #027BB8 or darker. */
+.kc,.kc:hover,.kc.done{background-size:110% 100%;background-repeat:no-repeat}
+.where{display:inline-block;margin-left:12px;font:400 10.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--graphite)}
+.try{list-style:none;padding:0!important;margin:14px 0 0;max-width:66ch}
+.try li{border-top:1px solid var(--ice);padding:14px 0;margin:0;color:var(--graphite)}
+.try strong{margin-right:6px;font:400 14px var(--mono)}
+
+@media(max-width:900px){
+  .kit-hero{grid-template-columns:minmax(0,1fr);row-gap:22px}
+}
+@media(max-width:920px){
+  .gate-grid{grid-template-columns:minmax(0,1fr);grid-template-rows:none;grid-template-areas:"shelf" "intro" "act" "list";row-gap:22px}
+  .gate-grid.no-shelf,.gate-grid:has([data-aotp-shelf-state="failed"]){grid-template-columns:minmax(0,1fr);grid-template-rows:none;grid-template-areas:"intro" "act" "list"}
+  .unlocks{margin:4px 0 0}
+}
+@media(max-width:800px){
+  nav{min-height:64px}.lockup svg,.close-row svg{height:17px}.navlinks{gap:16px;font-size:13px}
+  .kit-head{--fade:88px}.closeblock{--fade:56px}
+  .close-top{flex-direction:column;align-items:flex-start}
+  .gate{padding-top:0}
+  .gate-grid,.step,.concept{grid-template-columns:1fr;gap:22px}.gate-grid>*,.step>*,.concept>*{min-width:0}
+  .step,.concept{padding-top:34px;padding-bottom:48px}
+  .step-kicker span,.concept-num span{display:inline-block;margin:-.1em calc(12px - .1em) -.1em 0;font-size:44px;vertical-align:-.02em}
+  .step .lede,.concept .lede{font-size:18px}
+  .lessons li{padding-left:54px}.lessons .k{font-size:32px;top:24px}
+  .promptbox pre{padding:18px 18px 22px}.index li{flex-wrap:wrap}.index .st{margin-left:44px;width:100%}
+  code{white-space:normal;overflow-wrap:anywhere}th,td{padding-right:12px}td:first-child{width:32%}
+}
+@media(max-width:480px){.lockup svg,.close-row svg{height:15px}.navlinks{gap:14px;font-size:12.5px}.kit-head h1 br{display:none}.gate-grid{padding:24px 16px}.gate button{padding-left:12px;padding-right:12px;font-size:14.5px}}
+@media(max-width:380px){.gate button{font-size:14px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+/* Print drops backgrounds, so a gradient-filled numeral would print blank and every white label on a sky or a sky
+   action would print as faint grey. Paper gets ink: deep ocean numerals, hairline ink pills, ink type where the sky
+   was. Forced colors drops gradients too: the numerals and pills take the system colours (the border gives a
+   borderless pill its edge back). Keep this last in the sheet so it beats every rule above it. */
+@media print,(forced-colors:active){
+  .step-kicker span,.concept-num span,.lessons .k,.sky-num{background:none;color:var(--deep-ocean);-webkit-text-fill-color:currentColor}
+  .gate button,.copybtn,.read a,.dl-btn,.kc,.kc.done,.kc .cp,.kc.done .cp,.close-btn{background:none;color:var(--ink);border:1px solid var(--ink)}
+  .kc code{color:var(--ink)}
+}
+@media print{
+  .kit-head,.kit-head .eyebrow,.kit-head h1,.dek,.lockup,.navlinks a,.closeblock,.closeblock h2,.close-kit,.close-foot{color:var(--ink)}
+  .lockup svg g,.close-row svg g{fill:var(--ink)}
+}
+</style><script src="/f.js"></script>
+<script>try{if(/(?:^|;\s*)aotp_subscriber=[^;\s]/.test(document.cookie)||localStorage.getItem('aotp_subscriber')||localStorage.getItem('aotp_member')==='2')document.documentElement.classList.add('aotp-subscribed')}catch(e){}</script>
+</head><body>
+<div class="page">
+<header class="kit-head pad">
+  <nav><a class="lockup" href="/"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 897 112" role="img" aria-label="Art of the Possible"><title>Art of the Possible</title><g fill="#FFFFFF"><path transform="scale(0.448)" d="M93.301 48.471A34.601 34.601 0 1 1 156.699 48.471A34.601 34.601 0 0 0 93.301 48.471ZM156.699 48.471A34.601 34.601 0 1 1 201.529 93.301A34.601 34.601 0 0 0 156.699 48.471ZM201.529 93.301A34.601 34.601 0 1 1 156.699 48.471A34.601 34.601 0 0 0 201.529 93.301ZM201.529 93.301A34.601 34.601 0 1 1 201.529 156.699A34.601 34.601 0 0 0 201.529 93.301ZM201.529 156.699A34.601 34.601 0 1 1 156.699 201.529A34.601 34.601 0 0 0 201.529 156.699ZM156.699 201.529A34.601 34.601 0 1 1 201.529 156.699A34.601 34.601 0 0 0 156.699 201.529ZM156.699 201.529A34.601 34.601 0 1 1 93.301 201.529A34.601 34.601 0 0 0 156.699 201.529ZM93.301 201.529A34.601 34.601 0 1 1 48.471 156.699A34.601 34.601 0 0 0 93.301 201.529ZM48.471 156.699A34.601 34.601 0 1 1 93.301 201.529A34.601 34.601 0 0 0 48.471 156.699ZM48.471 156.699A34.601 34.601 0 1 1 48.471 93.301A34.601 34.601 0 0 0 48.471 156.699ZM48.471 93.301A34.601 34.601 0 1 1 93.301 48.471A34.601 34.601 0 0 0 48.471 93.301ZM93.301 48.471A34.601 34.601 0 1 1 48.471 93.301A34.601 34.601 0 0 0 93.301 48.471Z"/><path transform="translate(160 80.736)" d="M11.7 0H0.49L17.57 -49.47H31.04L48.09 0H36.91L24.49 -38.17H24.09ZM11.04 -19.44H37.49V-11.3H11.04ZM51.08 0V-49.47H70.57Q76.2 -49.47 80.16 -47.48Q84.12 -45.48 86.22 -41.85Q88.32 -38.21 88.32 -33.31Q88.32 -28.38 86.2 -24.84Q84.07 -21.29 80.04 -19.41Q76.01 -17.53 70.31 -17.53H57.27V-25.94H68.6Q71.63 -25.94 73.62 -26.76Q75.6 -27.59 76.58 -29.22Q77.55 -30.85 77.55 -33.31Q77.55 -35.78 76.57 -37.47Q75.59 -39.15 73.6 -40.02Q71.62 -40.89 68.58 -40.89H61.52V0ZM78.54 0 66.5 -22.52H77.78L90.09 0ZM90.95 -40.85V-49.47H131.58V-40.85H116.44V0H106.12V-40.85ZM170.54 0.66Q163.97 0.66 158.72 -2.32Q153.46 -5.31 150.41 -10.99Q147.36 -16.66 147.36 -24.7Q147.36 -32.8 150.41 -38.49Q153.46 -44.18 158.72 -47.16Q163.97 -50.14 170.54 -50.14Q177.12 -50.14 182.35 -47.16Q187.59 -44.18 190.64 -38.49Q193.69 -32.8 193.69 -24.7Q193.69 -16.64 190.64 -10.97Q187.59 -5.29 182.35 -2.31Q177.12 0.66 170.54 0.66ZM170.54 -8.58Q174.35 -8.58 177.16 -10.44Q179.98 -12.29 181.54 -15.89Q183.09 -19.49 183.09 -24.7Q183.09 -29.95 181.54 -33.57Q179.98 -37.18 177.16 -39.04Q174.35 -40.89 170.54 -40.89Q166.76 -40.89 163.93 -39.04Q161.1 -37.18 159.53 -33.57Q157.96 -29.95 157.96 -24.7Q157.96 -19.49 159.53 -15.89Q161.1 -12.29 163.93 -10.44Q166.76 -8.58 170.54 -8.58ZM198.51 0V-49.47H231.26V-40.85H208.95V-27.25H229.08V-18.79H208.95V0ZM246.36 -40.85V-49.47H286.99V-40.85H271.85V0H261.53V-40.85ZM290.8 0V-49.47H301.24V-29.06H322.46V-49.47H332.9V0H322.46V-20.44H301.24V0ZM338.59 0V-49.47H371.94V-40.85H349.03V-29.22H370.19V-20.76H349.03V-8.62H372V0ZM390.19 0V-49.47H409.68Q415.31 -49.47 419.27 -47.33Q423.23 -45.19 425.33 -41.4Q427.43 -37.61 427.43 -32.69Q427.43 -27.76 425.31 -24Q423.18 -20.25 419.15 -18.14Q415.12 -16.03 409.43 -16.03H396.99V-24.41H407.71Q410.74 -24.41 412.73 -25.46Q414.71 -26.52 415.69 -28.38Q416.66 -30.25 416.66 -32.69Q416.66 -35.18 415.69 -37.02Q414.71 -38.86 412.72 -39.88Q410.73 -40.89 407.69 -40.89H400.63V0ZM453.6 0.66Q447.03 0.66 441.78 -2.32Q436.52 -5.31 433.47 -10.99Q430.43 -16.66 430.43 -24.7Q430.43 -32.8 433.47 -38.49Q436.52 -44.18 441.78 -47.16Q447.03 -50.14 453.6 -50.14Q460.18 -50.14 465.42 -47.16Q470.65 -44.18 473.7 -38.49Q476.75 -32.8 476.75 -24.7Q476.75 -16.64 473.7 -10.97Q470.65 -5.29 465.42 -2.31Q460.18 0.66 453.6 0.66ZM453.6 -8.58Q457.41 -8.58 460.23 -10.44Q463.05 -12.29 464.6 -15.89Q466.15 -19.49 466.15 -24.7Q466.15 -29.95 464.6 -33.57Q463.05 -37.18 460.23 -39.04Q457.41 -40.89 453.6 -40.89Q449.82 -40.89 446.99 -39.04Q444.17 -37.18 442.6 -33.57Q441.03 -29.95 441.03 -24.7Q441.03 -19.49 442.6 -15.89Q444.17 -12.29 446.99 -10.44Q449.82 -8.58 453.6 -8.58ZM499.91 0.7Q493.92 0.7 489.49 -1.13Q485.06 -2.96 482.58 -6.57Q480.1 -10.19 479.96 -15.54H490.08Q490.27 -13.07 491.53 -11.4Q492.8 -9.74 494.93 -8.9Q497.06 -8.06 499.79 -8.06Q502.45 -8.06 504.43 -8.83Q506.4 -9.6 507.49 -10.98Q508.57 -12.36 508.57 -14.18Q508.57 -15.84 507.58 -16.96Q506.6 -18.08 504.73 -18.89Q502.85 -19.69 500.15 -20.32L494.75 -21.65Q488.5 -23.15 484.89 -26.41Q481.28 -29.68 481.28 -35.17Q481.28 -39.66 483.71 -43.02Q486.14 -46.38 490.37 -48.26Q494.61 -50.14 500.02 -50.14Q505.54 -50.14 509.64 -48.25Q513.75 -46.36 516.05 -43Q518.35 -39.64 518.43 -35.25H508.36Q508.09 -38.16 505.89 -39.78Q503.7 -41.4 499.94 -41.4Q497.4 -41.4 495.62 -40.68Q493.84 -39.97 492.92 -38.71Q492 -37.45 492 -35.83Q492 -34.09 493.06 -32.91Q494.11 -31.74 495.9 -31Q497.68 -30.25 499.81 -29.74L504.23 -28.66Q507.45 -27.93 510.16 -26.72Q512.87 -25.5 514.88 -23.74Q516.89 -21.99 517.99 -19.6Q519.09 -17.22 519.09 -14.13Q519.09 -9.61 516.81 -6.27Q514.53 -2.94 510.24 -1.12Q505.96 0.7 499.91 0.7ZM541.53 0.7Q535.54 0.7 531.11 -1.13Q526.68 -2.96 524.2 -6.57Q521.72 -10.19 521.58 -15.54H531.7Q531.89 -13.07 533.16 -11.4Q534.42 -9.74 536.55 -8.9Q538.68 -8.06 541.41 -8.06Q544.08 -8.06 546.05 -8.83Q548.02 -9.6 549.11 -10.98Q550.19 -12.36 550.19 -14.18Q550.19 -15.84 549.21 -16.96Q548.22 -18.08 546.35 -18.89Q544.47 -19.69 541.77 -20.32L536.37 -21.65Q530.12 -23.15 526.51 -26.41Q522.9 -29.68 522.9 -35.17Q522.9 -39.66 525.33 -43.02Q527.76 -46.38 531.99 -48.26Q536.23 -50.14 541.64 -50.14Q547.16 -50.14 551.26 -48.25Q555.37 -46.36 557.67 -43Q559.97 -39.64 560.05 -35.25H549.98Q549.71 -38.16 547.51 -39.78Q545.32 -41.4 541.56 -41.4Q539.02 -41.4 537.24 -40.68Q535.46 -39.97 534.54 -38.71Q533.62 -37.45 533.62 -35.83Q533.62 -34.09 534.68 -32.91Q535.74 -31.74 537.52 -31Q539.3 -30.25 541.43 -29.74L545.85 -28.66Q549.07 -27.93 551.78 -26.72Q554.49 -25.5 556.5 -23.74Q558.51 -21.99 559.61 -19.6Q560.71 -17.22 560.71 -14.13Q560.71 -9.61 558.43 -6.27Q556.15 -2.94 551.87 -1.12Q547.58 0.7 541.53 0.7ZM575.25 -49.47V0H564.81V-49.47ZM580.93 0V-49.47H600.73Q606.18 -49.47 609.83 -47.85Q613.48 -46.22 615.32 -43.36Q617.15 -40.5 617.15 -36.8Q617.15 -33.89 615.98 -31.71Q614.81 -29.52 612.8 -28.13Q610.78 -26.74 608.2 -26.16V-25.66Q611.03 -25.55 613.51 -24.08Q615.99 -22.6 617.53 -19.97Q619.08 -17.33 619.08 -13.67Q619.08 -9.75 617.14 -6.66Q615.21 -3.57 611.43 -1.78Q607.64 0 602.06 0ZM591.37 -8.54H599.91Q604.27 -8.54 606.29 -10.23Q608.31 -11.93 608.31 -14.7Q608.31 -16.77 607.32 -18.34Q606.33 -19.92 604.5 -20.82Q602.67 -21.71 600.16 -21.71H591.37ZM591.37 -28.77H599.14Q601.27 -28.77 602.96 -29.53Q604.64 -30.29 605.61 -31.69Q606.58 -33.1 606.58 -35.05Q606.58 -37.71 604.69 -39.36Q602.8 -41.01 599.34 -41.01H591.37ZM622.95 0V-49.47H633.39V-8.62H654.6V0ZM658.66 0V-49.47H692.01V-40.85H669.1V-29.22H690.26V-20.76H669.1V-8.62H692.06V0ZM708.66 -22.11V-39.91H717.37Q719.06 -39.94 720.47 -39.25Q721.88 -38.56 722.72 -37.24Q723.56 -35.93 723.56 -34.07Q723.56 -32.17 722.69 -30.82Q721.81 -29.47 720.37 -28.79Q718.94 -28.12 717.18 -28.12H711.19V-31.48H716.19Q717.2 -31.46 717.94 -32.11Q718.68 -32.75 718.68 -34.06Q718.68 -35.37 717.94 -35.95Q717.19 -36.52 716.21 -36.54H713.29V-22.11ZM720.04 -30.35 724.13 -22.11H719.02L715.23 -30.35ZM715.63 -11.49Q711.65 -11.49 708.14 -13Q704.64 -14.51 701.98 -17.17Q699.33 -19.82 697.84 -23.33Q696.35 -26.83 696.35 -30.81Q696.35 -34.8 697.84 -38.3Q699.33 -41.8 701.98 -44.46Q704.64 -47.12 708.14 -48.63Q711.65 -50.14 715.63 -50.14Q719.65 -50.14 723.15 -48.63Q726.65 -47.12 729.31 -44.46Q731.97 -41.8 733.46 -38.3Q734.95 -34.8 734.95 -30.81Q734.95 -26.83 733.46 -23.33Q731.97 -19.82 729.32 -17.17Q726.67 -14.51 723.16 -13Q719.65 -11.49 715.63 -11.49ZM715.63 -16.61Q719.59 -16.61 722.82 -18.52Q726.05 -20.43 727.97 -23.66Q729.88 -26.88 729.87 -30.81Q729.88 -34.74 727.96 -37.97Q726.05 -41.2 722.81 -43.12Q719.57 -45.03 715.63 -45.01Q711.72 -45.03 708.49 -43.12Q705.26 -41.2 703.34 -37.97Q701.43 -34.74 701.43 -30.82Q701.43 -26.89 703.35 -23.66Q705.26 -20.43 708.49 -18.52Q711.71 -16.61 715.63 -16.61Z"/></g></svg></a><div class="navlinks"><a href="/">Home</a><a href="/letters/">Archive</a><a href="/#about">About</a></div></nav>
+  <!-- Everything in the head is white on the deep sky. The heading left, the dek right from 900px; they stack on phones. -->
+  <div class="kit-hero">
+    <div>
+      <div class="eyebrow">Cal AI playbook &middot; From the Reel</div>
+      <!-- One colour. The two slots are legacy names: write one headline, never two tones. Two sentences? Put <br> after the first ("skills.<br> Great"); phones drop the break. -->
+      <h1>The Cal&nbsp;AI playbook, plus every interview I could find.</h1>
+    </div>
+    <p class="dek">You commented "cal". Here it is. The four moves from the Reel, written up so you can use them in your own business, with the source next to every number. Then every Zach Yadegari interview I could find, with working links. The moves are Zach's. The write-up is mine. No course, no upsell.</p>
+  </div>
+</header>
+
+<section class="gate pad" id="gate">
+  <div class="gate-grid">
+    <!-- The featured shelf (DESIGN.md 10.7): this guide's cover large under a "This guide" tag, every other guide beside it,
+         served from /guides/ on theaotp.com. /guides/ is not on main yet, so this page has no cover and no guides.json row; when it
+         merges, add /guides/covers/cal.svg (cover-tools/make_covers.py) and a row in guides.json and guides-all.json. With no cover
+         the shelf shows the other guides alone. Where /guides/ does not resolve (file://, another host) onerror drops the column
+         and the card is copy | form. -->
+    <div class="gate-shelf">
+      <link rel="stylesheet" href="/guides/shelf.css">
+      <div data-aotp-shelf="featured" data-featured="cal" data-title="Cal AI playbook"></div>
+      <script src="/guides/shelf.js" defer onerror="this.closest('.gate-grid').classList.add('no-shelf')"></script>
+    </div>
+    <!-- Copy order: THIS guide by name, then every other guide, then the weekly letter (Rich, 2026-10-02). -->
+    <div class="gate-intro">
+      <div class="eyebrow">Free guide &middot; one email</div>
+      <h2>Unlock the Cal&nbsp;AI playbook.</h2>
+      <p>Leave your email and this guide opens right here. The same email opens every other guide on the shelf and signs you up for the weekly letter.</p>
+    </div>
+    <ol class="unlocks">
+      <!-- Item 01 names this guide and two to four of its sections in plain words, never the payload itself. -->
+      <li class="this"><span class="n">01</span><div><b>Cal&nbsp;AI playbook <span class="now">Opens now</span></b><ul><li>The four moves, with sources</li><li>How to use each move in your business</li><li>Every interview I could find</li></ul></div></li>
+      <li><span class="n">02</span><div><b>Every other guide</b>Prompt kits, setup guides and reading lists from my other Reels. The same email opens them all.</div></li>
+      <li><span class="n">03</span><div><b>The weekly letter</b>Five useful things I made with AI each week, with the prompts and workflows inside. Unsubscribe any time.</div></li>
+    </ol>
+    <div class="gate-act">
+      <form id="gate-form" novalidate>
+        <label for="gate-email" class="sr-only">Email address</label>
+        <input id="gate-email" type="email" name="email" placeholder="you@somewhere.com" autocomplete="email" required>
+        <button type="submit">Unlock the guide and subscribe to AOTP</button>
+      </form>
+      <p class="gate-status" id="gate-status" aria-live="polite"></p>
+      <p class="gate-small">Already on the list? Enter the same email and it unlocks without subscribing you twice.</p>
+      <noscript><p class="gate-small">This page needs JavaScript to unlock. Or just subscribe on <a href="/">the homepage</a> and reply to any letter for the Cal AI playbook.</p></noscript>
+    </div>
+  </div>
+</section>
+
+<!-- The shared unlock's line (/guides/unlock.js): shown once the page is open, never with the gate. -->
+<p class="subbed pad" id="subbed" hidden>You're subscribed, so every guide is open.<a href="#gate" id="gate-reset">Use a different email</a></p>
+
+<!-- EVERYTHING OF VALUE LIVES INSIDE #kit. Nothing valuable outside it. -->
+<div id="kit" hidden>
+
+<section class="step pad" id="numbers">
+  <div class="step-kicker"><span>01</span>The numbers</div>
+  <div>
+    <h2>The numbers, and where they come from.</h2>
+    <p class="lede">Every figure in the Reel has a source. Here they are, along with the places where sources disagree.</p>
+    <table>
+      <tr><th>The figure</th><th>Where it comes from</th></tr>
+      <tr><td>19 now, 17 at launch</td><td><a href="https://techcrunch.com/2026/10/08/cal-ais-19-year-old-founder-just-raised-10m-for-his-new-ai-startup/" target="_blank" rel="noopener">TechCrunch</a> calls him a 19-year-old founder (8 Oct 2026). <a href="https://www.youtube.com/watch?v=OsN_MJopMxc" target="_blank" rel="noopener">CNBC Make It</a> says Cal&nbsp;AI launched in May 2024, when he was 17 (6 Sep 2025).</td></tr>
+      <tr><td>$10&nbsp;million raised</td><td><a href="https://techcrunch.com/2026/10/08/cal-ais-19-year-old-founder-just-raised-10m-for-his-new-ai-startup/" target="_blank" rel="noopener">TechCrunch</a>, 8 Oct 2026: Persona has raised $10&nbsp;million, led by Vine Ventures. His own <a href="https://www.youtube.com/watch?v=n0JY66f4Ibw" target="_blank" rel="noopener">launch video</a> from 15 Sep has $5M in the title, so I use TechCrunch's figure.</td></tr>
+      <tr><td>Over $30&nbsp;million a year</td><td><a href="https://techcrunch.com/2026/03/02/myfitnesspal-has-acquired-cal-ai-the-viral-calorie-app-built-by-teens/" target="_blank" rel="noopener">TechCrunch</a>, 2 Mar 2026: over $30&nbsp;million in annual revenue in under two years, MyFitnessPal told TechCrunch. That's a minimum. <a href="https://www.inc.com/aaron-mok/this-19-year-old-founder-just-raised-10-million-to-build-an-ai-assistant-you-can-wear/91416946" target="_blank" rel="noopener">Inc.</a> reports $40&nbsp;million in a 12-month period, and the title of <a href="https://www.youtube.com/watch?v=wgTOoJ_UkmQ" target="_blank" rel="noopener">My First Million #802</a> says $50m. I use the figure that names its source.</td></tr>
+      <tr><td>Over 15 million downloads, then the sale</td><td><a href="https://techcrunch.com/2026/03/02/myfitnesspal-has-acquired-cal-ai-the-viral-calorie-app-built-by-teens/" target="_blank" rel="noopener">TechCrunch</a>, 2 Mar 2026, again from MyFitnessPal. MyFitnessPal bought Cal&nbsp;AI for an undisclosed sum. The deal closed in December 2025 and TechCrunch reported it on 2 March 2026.</td></tr>
+      <tr><td>About $2&nbsp;million a month from creators</td><td>Zach, on <a href="https://www.youtube.com/watch?v=wgTOoJ_UkmQ&amp;t=2043s" target="_blank" rel="noopener">My First Million #802</a> (5 Mar 2026, about 34:03). In the Reel I said his first $2&nbsp;million. His words are about $2&nbsp;million a month, so that is the figure here.</td></tr>
+      <tr><td>Persona today</td><td><a href="https://techcrunch.com/2026/10/08/cal-ais-19-year-old-founder-just-raised-10m-for-his-new-ai-startup/" target="_blank" rel="noopener">TechCrunch</a>, 8 Oct 2026: a free beta you use over iMessage, with a few thousand beta users. The $179 band is a pre-order, expected in December. TechCrunch also says an app is in the works.</td></tr>
+    </table>
+    <div class="note">I didn't build Cal&nbsp;AI or Persona, I earn nothing from either, and I'm not affiliated with Cal&nbsp;AI, MyFitnessPal or Persona. The moves are Zach Yadegari's. The write-up and the ways to use each one are mine.</div>
+  </div>
+</section>
+
+<section class="step pad" id="one-feature">
+  <div class="step-kicker"><span>02</span>Move 1</div>
+  <div>
+    <h2>Build one narrow feature first.</h2>
+    <p class="lede">Cal&nbsp;AI's first version did one thing. You took a photo of your food and it told you the calories.</p>
+    <p>Zach described version one on <a href="https://www.youtube.com/watch?v=6NZ8-WQGb-g&amp;t=909s" target="_blank" rel="noopener">My First Million #687</a> (17 Mar 2025, about 15:09). You took a picture, it told you the calories, and it showed a daily breakdown. "That was it. One feature." He says they added more features once they saw people liked it. In a Q&amp;A with <a href="https://ceoinsider.io/interview/zach-yadegari" target="_blank" rel="noopener">CEO Insider</a> he gives the same blueprint: one feature, take a picture of food and get the calories, and build the whole app around it.</p>
+    <p>Persona is narrow in a different way. <a href="https://techcrunch.com/2026/10/08/cal-ais-19-year-old-founder-just-raised-10m-for-his-new-ai-startup/" target="_blank" rel="noopener">TechCrunch</a> says it can order food or rides, take notes, book travel and answer emails, so the jobs are broad. The narrow part is the way in: it launched as a free beta you use by text message in iMessage, and an app is in the works.</p>
+    <div class="read">
+      <div class="src">YouTube &middot; My First Million &middot; 17 Mar 2025</div>
+      <h3>You’re One AI Idea Away From Changing Your Life</h3>
+      <a href="https://www.youtube.com/watch?v=6NZ8-WQGb-g&amp;t=867s" target="_blank" rel="noopener">Watch from 14:27 &rarr;</a>
+    </div>
+
+    <p class="inst">Use it in your business</p>
+    <ul>
+      <li><strong>Name the one job.</strong> Write what your product does for a customer in one sentence. If the sentence needs "and", you have two features.</li>
+      <li><strong>Cut everything else from version one.</strong> Cal&nbsp;AI's first version had the photo, the calories and a daily breakdown. That was all.</li>
+      <li><strong>Add the next feature after people use the first.</strong> Zach's order was build it, see that people like it, then add more.</li>
+    </ul>
+    <div class="note">Cal&nbsp;AI is more than one feature today. Its <a href="https://apps.apple.com/us/app/cal-ai-calorie-tracker/id6480417616" target="_blank" rel="noopener">App Store screenshots</a> show progress charts and friend groups too. The move is about version one.</div>
+  </div>
+</section>
+
+<section class="step pad" id="models">
+  <div class="step-kicker"><span>03</span>Move 2</div>
+  <div>
+    <h2>Don't train a model. Build a new way to use one.</h2>
+    <p class="lede">Cal&nbsp;AI didn't train its own AI. It built an app around models that already existed.</p>
+    <p>Zach told <a href="https://www.youtube.com/watch?v=x_hP76-nXFw&amp;t=88s" target="_blank" rel="noopener">Nathan Latka</a> (uploaded 5 Jun 2025, about 1:28) that the app is only possible now because of AI, mainly through APIs like ChatGPT: "We did not train our own model to do this." On <a href="https://www.youtube.com/watch?v=6NZ8-WQGb-g&amp;t=867s" target="_blank" rel="noopener">My First Million #687</a> he said people dismiss apps like Cal&nbsp;AI as AI wrappers, and that it's true they started as one. He calls starting that way "something all apps should do" (about 14:27) and compares it to dropshipping: prove the idea on someone else's product, then build your own once it works.</p>
+    <p>The early build leaned on ChatGPT. <a href="https://techcrunch.com/2025/03/16/photo-calorie-app-cal-ai-downloaded-over-a-million-times-was-built-by-two-teenagers/" target="_blank" rel="noopener">TechCrunch</a> reported in March 2025 that the app used models from Anthropic and OpenAI, plus RAG (the model checks reference data) to improve accuracy. Zach told TechCrunch that different models are better with different foods.</p>
+    <p>Persona's new way in is a $179 wristband: press its button, or flick your wrist, and talk to the assistant. TechCrunch says the model runs in Persona's cloud, not on the device. The band is a <a href="https://yourpersona.com/band" target="_blank" rel="noopener">pre-order</a>, expected in December.</p>
+    <div class="read">
+      <div class="src">TechCrunch &middot; 16 Mar 2025</div>
+      <h3>Photo calorie app Cal AI, downloaded over a million times, was built by two teenagers</h3>
+      <a href="https://techcrunch.com/2025/03/16/photo-calorie-app-cal-ai-downloaded-over-a-million-times-was-built-by-two-teenagers/" target="_blank" rel="noopener">Read it &rarr;</a>
+    </div>
+
+    <p class="inst">Use it in your business</p>
+    <ul>
+      <li><strong>Rent the model.</strong> Call an existing one through its API. Zach says starting this way is something all apps should do.</li>
+      <li><strong>Shrink what you ask the customer for.</strong> Cal&nbsp;AI asks for a photo. Persona asks for a text. What is the smallest thing your customer can give you to get the result?</li>
+      <li><strong>Spend your effort on the experience.</strong> The screen, the thread or the device is the part customers see. Design that.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="step pad" id="creators">
+  <div class="step-kicker"><span>04</span>Move 3</div>
+  <div>
+    <h2>Pay real people to use it on camera.</h2>
+    <p class="lede">Creators were Cal&nbsp;AI's biggest channel. Zach says they took it to about $2&nbsp;million a month.</p>
+    <p>On <a href="https://www.youtube.com/watch?v=wgTOoJ_UkmQ&amp;t=2043s" target="_blank" rel="noopener">My First Million #802</a> (5 Mar 2026, about 34:03), Zach says influencer marketing started Cal&nbsp;AI and took it really far, to about $2&nbsp;million a month. Then growth plateaued. What got them past it, he says, was performance ads on Instagram, TikTok and Facebook, and ads fuel most of the growth now.</p>
+    <p>He said the same thing to <a href="https://www.youtube.com/watch?v=x_hP76-nXFw&amp;t=826s" target="_blank" rel="noopener">Nathan Latka</a> in 2025: influencers on TikTok and Instagram were the biggest channel, with about 250 on retainer, each working Cal&nbsp;AI into their content every month (about 13:46). In the <a href="https://ceoinsider.io/interview/zach-yadegari" target="_blank" rel="noopener">CEO Insider</a> Q&amp;A he says creators get full creative freedom. Cal&nbsp;AI only asks them to include the app naturally in their usual content.</p>
+    <div class="read">
+      <div class="src">YouTube &middot; My First Million &middot; 5 Mar 2026</div>
+      <h3>Zach is 18 &amp; made $50m from an app. Here's the brutal breakdown of how he did it (and you can too)</h3>
+      <a href="https://www.youtube.com/watch?v=wgTOoJ_UkmQ&amp;t=2043s" target="_blank" rel="noopener">Watch from 34:03 &rarr;</a>
+    </div>
+
+    <p class="inst">How the deals work</p>
+    <p>In a <a href="https://www.youtube.com/watch?v=mSlvEjHQEFM" target="_blank" rel="noopener">2:41 clip</a> posted by TheBrettWay Clips (11 Oct 2026), Zach explains how he prices a creator. The clip's description calls the pricing an illustrative example and says rates and results vary, so treat the prices as a model, not as Cal&nbsp;AI's rates.</p>
+    <ul class="lessons">
+      <li><strong><span class="k">1</span>Work out what a thousand views is worth.</strong>What you pay per thousand views has to stay below what you earn per thousand views.</li>
+      <li><strong><span class="k">2</span>Predict the views.</strong>Look at the creator's recent videos for other brands and estimate what yours will get. The clip's example is a creator whose last ten videos average 50,000&nbsp;views.</li>
+      <li><strong><span class="k">3</span>Pay for the video upfront.</strong>At $2 per thousand views, 50,000&nbsp;views comes to about $100. Creators usually push back and ask for more.</li>
+      <li><strong><span class="k">4</span>Offer a bundle or a view floor.</strong>Zach offers four videos paid upfront. He says that brings the price down a lot and gets the creator posting every month. The other option is a minimum-view clause: you pay what they ask, and they guarantee the views or keep posting.</li>
+    </ul>
+    <div class="read">
+      <div class="src">YouTube &middot; TheBrettWay Clips &middot; 11 Oct 2026</div>
+      <h3>The Four-Video Deal Cal AI Offers Creators</h3>
+      <a href="https://www.youtube.com/watch?v=mSlvEjHQEFM" target="_blank" rel="noopener">Watch the clip &rarr;</a>
+    </div>
+
+    <p class="inst">What the posts look like</p>
+    <p>The posts I looked at all have the same shape: a creator points a phone at a meal and the app shows the result. Make the result easy to film. Then get the product on screen early. Alfie Dickens, who built the influencer program behind Cal&nbsp;AI, says one of its biggest rules is to get the app on screen inside the first 15 seconds (<a href="https://www.youtube.com/watch?v=l0vswWcGmMs&amp;t=1341s" target="_blank" rel="noopener">Superwall</a>, 25 Aug 2026, about 22:21). Here are five public creator posts. <a href="https://www.calai.app/" target="_blank" rel="noopener">calai.app</a> also has a section called "Used by your favorite fitness influencers".</p>
+    <ul>
+      <li><a href="https://www.youtube.com/shorts/PBNp2g2rLEM" target="_blank" rel="noopener">Tylerbtopg (19 Dec 2024)</a></li>
+      <li><a href="https://www.youtube.com/shorts/XcN8O6IlI6E" target="_blank" rel="noopener">Linna (2 Sep 2025)</a></li>
+      <li><a href="https://www.youtube.com/shorts/UTZo6MlrZRM" target="_blank" rel="noopener">Akram Benyahia (20 Jan 2026)</a></li>
+      <li><a href="https://www.youtube.com/shorts/qaed8WJQmJ0" target="_blank" rel="noopener">Pau Fit Shorts (20 Jan 2026)</a></li>
+      <li><a href="https://www.youtube.com/shorts/mNqgZEaIs1o" target="_blank" rel="noopener">Tashinga (30 Jun 2026)</a></li>
+    </ul>
+
+    <p class="inst">Use it in your business</p>
+    <ul>
+      <li><strong>Run the per-view math before you pay anyone.</strong> If what you'd pay per thousand views is more than a thousand views earns you, don't make the deal.</li>
+      <li><strong>Give creators something they can film in one take.</strong> Cal&nbsp;AI shows its result in seconds. What does your product show?</li>
+      <li><strong>Plan for a ceiling.</strong> Creators took Cal&nbsp;AI to about $2&nbsp;million a month. Then growth plateaued until paid ads picked up.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="step pad" id="funnels">
+  <div class="step-kicker"><span>05</span>Move 4</div>
+  <div>
+    <h2>Test everything. Think in funnels.</h2>
+    <p class="lede">Zach says moving the sign-up screen from the start of onboarding to the end was the biggest change.</p>
+    <p>Nathan Latka asked what he had eliminated from traditional onboarding flows to cut friction. <a href="https://www.youtube.com/watch?v=x_hP76-nXFw&amp;t=689s" target="_blank" rel="noopener">Zach's answer</a> (about 11:29) was moving the sign-in screens to the end, because there was a lot of drop-off there: "That was the biggest by far." In the Reel I said users were bought in by then. Zach's own explanation is close. Some of the questions his team added to onboarding, like which diet you follow, didn't change what the user got, and conversion still went up. His hypothesis is that the user invests more time (about 7:57).</p>
+    <p>They kept stacking tests. A "thank you for trusting us" screen raised conversion. So did a screen saying you'll lose weight faster with Cal&nbsp;AI. Animating those screens raised it again. He calls the whole thing a game of making hypotheses and testing them (about 8:12 to 8:36). He's candid that the team mostly ran on intuition at first and now tests every new feature.</p>
+    <p>His tools were Mixpanel for tests and Superwall for paywalls, and the team ran hundreds of paywall tests (about 8:55 and 10:31 to 11:10). Zach's estimate was that 20 to 25 percent of new users went into a trial or paid (about 9:46).</p>
+    <div class="read">
+      <div class="src">YouTube &middot; Top Founders with Nathan Latka &middot; 5 Jun 2025</div>
+      <h3>CalAI Acquired by MyFitnessPal: 6 Steps he Used to hit $30m Revenue</h3>
+      <a href="https://www.youtube.com/watch?v=x_hP76-nXFw&amp;t=438s" target="_blank" rel="noopener">Watch from 7:18 &rarr;</a>
+    </div>
+
+    <p class="inst">The onboarding, screen by screen</p>
+    <p>These are the onboarding screens shown in that interview (uploaded 5 Jun 2025), in order. The current app may differ. Each link jumps to the screen.</p>
+    <ol class="index">
+      <li><span class="n">01</span><a href="https://www.youtube.com/watch?v=x_hP76-nXFw&amp;t=438s" target="_blank" rel="noopener">Choose your gender</a><span class="st">7:18</span></li>
+      <li><span class="n">02</span><a href="https://www.youtube.com/watch?v=x_hP76-nXFw&amp;t=445s" target="_blank" rel="noopener">Where did you hear about us?</a><span class="st">7:25</span></li>
+      <li><span class="n">03</span><a href="https://www.youtube.com/watch?v=x_hP76-nXFw&amp;t=452s" target="_blank" rel="noopener">Cal AI creates long-term results</a><span class="st">7:32</span></li>
+      <li><span class="n">04</span><a href="https://www.youtube.com/watch?v=x_hP76-nXFw&amp;t=461s" target="_blank" rel="noopener">Height and weight</a><span class="st">7:41</span></li>
+      <li><span class="n">05</span><a href="https://www.youtube.com/watch?v=x_hP76-nXFw&amp;t=474s" target="_blank" rel="noopener">What is your goal?</a><span class="st">7:54</span></li>
+      <li><span class="n">06</span><a href="https://www.youtube.com/watch?v=x_hP76-nXFw&amp;t=493s" target="_blank" rel="noopener">Thank you for trusting us</a><span class="st">8:13</span></li>
+      <li><span class="n">07</span><a href="https://www.youtube.com/watch?v=x_hP76-nXFw&amp;t=515s" target="_blank" rel="noopener">Give us a rating</a><span class="st">8:35</span></li>
+      <li><span class="n">08</span><a href="https://www.youtube.com/watch?v=x_hP76-nXFw&amp;t=574s" target="_blank" rel="noopener">We're setting everything up for you</a><span class="st">9:34</span></li>
+      <li><span class="n">09</span><a href="https://www.youtube.com/watch?v=x_hP76-nXFw&amp;t=585s" target="_blank" rel="noopener">Your custom plan is ready</a><span class="st">9:45</span></li>
+      <li><span class="n">10</span><a href="https://www.youtube.com/watch?v=x_hP76-nXFw&amp;t=597s" target="_blank" rel="noopener">The free-trial paywall</a><span class="st">9:57</span></li>
+      <li><span class="n">11</span><a href="https://www.youtube.com/watch?v=x_hP76-nXFw&amp;t=646s" target="_blank" rel="noopener">The one-time offer</a><span class="st">10:46</span></li>
+      <li><span class="n">12</span><a href="https://www.youtube.com/watch?v=x_hP76-nXFw&amp;t=670s" target="_blank" rel="noopener">Create an account, now at the end</a><span class="st">11:10</span></li>
+      <li><span class="n">13</span><a href="https://www.youtube.com/watch?v=x_hP76-nXFw&amp;t=684s" target="_blank" rel="noopener">The home screen</a><span class="st">11:24</span></li>
+    </ol>
+
+    <p class="inst">Use it in your business</p>
+    <ul>
+      <li><strong>Move the account request to the end.</strong> Ask for the sign-up, or the card, after the customer has put in the effort. Test it against your current order.</li>
+      <li><strong>Write the hypothesis, then test it.</strong> Zach's team added questions, then two screens, then animation, and tested each one.</li>
+      <li><strong>Try adding a question.</strong> At Cal&nbsp;AI, questions that changed nothing in the app still lifted conversion. It may not hold for you, so test it.</li>
+    </ul>
+    <div class="note">This fits a consumer app with a free trial. If you sell to businesses, test the new order before you copy it.</div>
+  </div>
+</section>
+
+<section class="step pad" id="interviews">
+  <div class="step-kicker"><span>06</span>Interviews</div>
+  <div>
+    <h2>Every interview I could find.</h2>
+    <p class="lede">I can't prove it's every interview he has given. These are the ones I found and checked on 12 October 2026.</p>
+    <p>Each link loads. He is the one being interviewed or speaking in every item except the last group, which comes from his team. If you only have time for three, start with <a href="https://www.youtube.com/watch?v=6NZ8-WQGb-g&amp;t=867s" target="_blank" rel="noopener">My First Million #687 at 14:27</a> for the early product and the AI wrapper, <a href="https://www.youtube.com/watch?v=x_hP76-nXFw&amp;t=438s" target="_blank" rel="noopener">Nathan Latka at 7:18</a> for the onboarding and the tests, and <a href="https://www.youtube.com/watch?v=wgTOoJ_UkmQ&amp;t=2043s" target="_blank" rel="noopener">My First Million #802 at 34:03</a> for creators, then ads.</p>
+
+    <p class="inst">Video and podcast interviews</p>
+    <table>
+      <tr><th>Where</th><th>Interview</th></tr>
+      <tr><td>My First Million</td><td><a href="https://www.youtube.com/watch?v=wgTOoJ_UkmQ" target="_blank" rel="noopener">Zach is 18 &amp; made $50m from an app. Here's the brutal breakdown of how he did it (and you can too)</a><br>Episode 802 &middot; 5 Mar 2026 &middot; 1:08:08</td></tr>
+      <tr><td>Brett Malinowski</td><td><a href="https://www.youtube.com/watch?v=5fQ-JyHggBI" target="_blank" rel="noopener">Zach Yadegari: Selling Cal Ai for millions at 18-years-old</a><br>2 Mar 2026 &middot; 1:04:24</td></tr>
+      <tr><td>Starter Story</td><td><a href="https://www.youtube.com/watch?v=sAr9FWEQZAk" target="_blank" rel="noopener">I Spent 24 Hours With iOS Millionaires</a><br>With his co-founder Blake Anderson &middot; 16 Aug 2026 &middot; 13:35</td></tr>
+      <tr><td>CNBC Make It</td><td><a href="https://www.youtube.com/watch?v=OsN_MJopMxc" target="_blank" rel="noopener">How I Built A $1.4 Million/Month AI App At Age 18</a><br>6 Sep 2025 &middot; 9:15</td></tr>
+      <tr><td>Relentless</td><td><a href="https://www.youtube.com/watch?v=KLCh7rtCLFs" target="_blank" rel="noopener">#40 - WTF is App Mafia - 18/yo earning $45M/yr building apps</a><br>A group interview with the other App Mafia members &middot; 23 Aug 2025 &middot; 1:43:08</td></tr>
+      <tr><td>Internet Empires with Ish Verduzco</td><td><a href="https://www.youtube.com/watch?v=Swt_kmp1zrk" target="_blank" rel="noopener">He Built a $30M AI App in High School (Cal AI Founder)</a><br>29 Jul 2025 &middot; 59:03</td></tr>
+      <tr><td>Blake Anderson</td><td><a href="https://www.youtube.com/watch?v=EFE6V80O5WQ" target="_blank" rel="noopener">Brain Chips are Coming: 18 Year Old Tech Founder - Zach Yadegari</a><br>22 Jun 2025 &middot; 1:07:11</td></tr>
+      <tr><td>Top Founders with Nathan Latka</td><td><a href="https://www.youtube.com/watch?v=x_hP76-nXFw" target="_blank" rel="noopener">CalAI Acquired by MyFitnessPal: 6 Steps he Used to hit $30m Revenue</a><br>5 Jun 2025 &middot; 20:18</td></tr>
+      <tr><td>Jack Neel Podcast</td><td><a href="https://www.youtube.com/watch?v=qDuzzrQKP_M" target="_blank" rel="noopener">App Expert: How to Build Viral Apps in 30 Days, Make Millions at 17, and Retire Before College</a><br>19 Apr 2025 &middot; 2:07:38</td></tr>
+      <tr><td>My First Million</td><td><a href="https://www.youtube.com/watch?v=6NZ8-WQGb-g" target="_blank" rel="noopener">You’re One AI Idea Away From Changing Your Life</a><br>Episode 687 &middot; 17 Mar 2025 &middot; 1:11:37</td></tr>
+      <tr><td>Omar Waseem</td><td><a href="https://www.youtube.com/watch?v=8Z3T0FrtNrM" target="_blank" rel="noopener">How To Make $1.1M a Month With AI Apps (No Paid Ads) | Zach Yadegari</a><br>3 Jan 2025 &middot; 37:01</td></tr>
+      <tr><td>Brett Malinowski</td><td><a href="https://www.youtube.com/watch?v=t0U3UREdjmo" target="_blank" rel="noopener">The 17-Year-Old Who Built a $1.12M/Month Ai App | Zach Yadegari</a><br>28 Nov 2024 &middot; 1:21:21</td></tr>
+      <tr><td>Clock Speed</td><td><a href="https://www.youtube.com/watch?v=NSFu83G-rbA" target="_blank" rel="noopener">Meet The 17-Year-Old Making $1M/Month With AI</a><br>23 Nov 2024 &middot; 42:28</td></tr>
+      <tr><td>Maker Manager Money</td><td><a href="https://www.youtube.com/watch?v=ndeNvssyhJQ" target="_blank" rel="noopener">Zach Yadegari - 16-year-old founder, CEO, and developer</a><br>About his earlier gaming site, Totally Science &middot; 4 Nov 2024 &middot; 54:42</td></tr>
+    </table>
+
+    <p class="inst">On TV</p>
+    <table>
+      <tr><th>Where</th><th>Segment</th></tr>
+      <tr><td>Good Morning America</td><td><a href="https://www.youtube.com/watch?v=RI_TMeBM5uc" target="_blank" rel="noopener">High School founder builds million dollar fitness app</a><br>24 May 2025 &middot; 2:29</td></tr>
+      <tr><td>Fox Business</td><td><a href="https://www.youtube.com/watch?v=8V8_MKw2QKM" target="_blank" rel="noopener">CAL AI: NY high school senior making waves in tech world with calorie-counting app</a><br>On Maria Bartiromo's Wall Street &middot; 10 May 2025 &middot; 4:05</td></tr>
+      <tr><td>Fox News</td><td><a href="https://www.youtube.com/watch?v=5u08zrnLvMI" target="_blank" rel="noopener">How teen AI app developer got denied from 15 colleges</a><br>4 May 2025 &middot; 2:30</td></tr>
+      <tr><td>Mirror Now</td><td><a href="https://www.youtube.com/watch?v=0Q0WMebdKew" target="_blank" rel="noopener">Zach Yadegari | Cal Ai | 17-Year-Old CEO Builds Nutrition App Worth $I2M</a><br>4 Nov 2024 &middot; 2:59</td></tr>
+    </table>
+
+    <p class="inst">His own talks and videos</p>
+    <table>
+      <tr><th>Where</th><th>Talk or video</th></tr>
+      <tr><td>TechCrunch Disrupt</td><td><a href="https://techcrunch.com/2026/09/24/techcrunch-disrupt-2026-cal-ais-zach-yadegari-on-how-to-create-viral-growth-and-capitalize-on-it/" target="_blank" rel="noopener">How to Create Viral Growth and Capitalize On It</a><br>Builders Stage fireside chat &middot; San Francisco &middot; 13 to 15 Oct 2026 &middot; the link is TechCrunch's announcement</td></tr>
+      <tr><td>Zach Yadegari</td><td><a href="https://www.youtube.com/watch?v=_KRzGP6X0wo" target="_blank" rel="noopener">How I bootstrapped and sold an app worth millions at 18 | Zach Yadegari</a><br>His Forbes 30 Under 30 talk &middot; 27 Apr 2026 &middot; 9:06</td></tr>
+      <tr><td>Zach Yadegari</td><td><a href="https://www.youtube.com/watch?v=n0JY66f4Ibw" target="_blank" rel="noopener">I raised $5M to build an ai company to compete with Open AI.</a><br>His Persona launch video &middot; 15 Sep 2026 &middot; 1:24</td></tr>
+      <tr><td>Zach Yadegari</td><td><a href="https://www.youtube.com/@zach_yadegari" target="_blank" rel="noopener">His YouTube channel</a><br>Everything else he has posted himself</td></tr>
+    </table>
+
+    <p class="inst">In print</p>
+    <table>
+      <tr><th>Where</th><th>Article</th></tr>
+      <tr><td>TechCrunch</td><td><a href="https://techcrunch.com/2026/10/08/cal-ais-19-year-old-founder-just-raised-10m-for-his-new-ai-startup/" target="_blank" rel="noopener">Cal AI's 19-year-old founder just raised $10M for his new AI startup</a><br>By Julie Bort &middot; 8 Oct 2026</td></tr>
+      <tr><td>Inc.</td><td><a href="https://www.inc.com/aaron-mok/this-19-year-old-founder-just-raised-10-million-to-build-an-ai-assistant-you-can-wear/91416946" target="_blank" rel="noopener">This 19-Year-Old Founder Just Raised $10 Million to Build an AI Assistant You Can Wear</a><br>By Aaron Mok &middot; 8 Oct 2026</td></tr>
+      <tr><td>Inc.</td><td><a href="https://www.inc.com/ben-sherry/he-built-an-ai-app-in-high-school-made-40m-and-sold-to-myfitnesspal-now-hes-aiming-even-bigger/91307748" target="_blank" rel="noopener">He Built an AI App in High School, Made $40 Million, and Sold to MyFitnessPal, Now He's Aiming Even Higher</a><br>By Ben Sherry &middot; 2 Mar 2026</td></tr>
+      <tr><td>Fortune</td><td><a href="https://fortune.com/2025/09/27/gen-z-founder-treats-college-like-vacation-30-million-app-by-18/" target="_blank" rel="noopener">This Ivy League reject taught himself to code at 7, built a $30m app by 18 and is treating college like a $100k vacation</a><br>By Jessica Coacci &middot; 27 Sep 2025</td></tr>
+      <tr><td>TechCrunch</td><td><a href="https://techcrunch.com/2025/03/16/photo-calorie-app-cal-ai-downloaded-over-a-million-times-was-built-by-two-teenagers/" target="_blank" rel="noopener">Photo calorie app Cal AI, downloaded over a million times, was built by two teenagers</a><br>By Julie Bort &middot; 16 Mar 2025</td></tr>
+      <tr><td>CEO Insider</td><td><a href="https://ceoinsider.io/interview/zach-yadegari" target="_blank" rel="noopener">Interview with Zach Yadegari, CEO of Cal AI</a><br>Written Q&amp;A &middot; the page says 8 Jun 2024, but it quotes $2&nbsp;million in a month and 250 creators, so it is later</td></tr>
+    </table>
+
+    <p class="inst">From the Cal&nbsp;AI team, not Zach</p>
+    <table>
+      <tr><th>Where</th><th>Interview</th></tr>
+      <tr><td>Superwall</td><td><a href="https://www.youtube.com/watch?v=l0vswWcGmMs" target="_blank" rel="noopener">Meet The Marketing Genius Behind Cal AI</a><br>With Alfie Dickens, who built the influencer program behind Cal&nbsp;AI &middot; 25 Aug 2026 &middot; 51:43</td></tr>
+      <tr><td>Subversive</td><td><a href="https://www.youtube.com/watch?v=gB0C7NA5fXo" target="_blank" rel="noopener">How Cal AI Hit $50M ARR in 2 Years by Nailing Product/Channel Fit on TikTok</a><br>With Daniel Heintzman, Head of Product at Cal&nbsp;AI &middot; 14 May 2026 &middot; 51:55</td></tr>
+    </table>
+  </div>
+</section>
+
+<section class="step pad" id="next">
+  <div class="step-kicker"><span>07</span>What to do now</div>
+  <div>
+    <h2>Pick one move. Run it this week.</h2>
+    <p class="lede">Reading it is the easy part. Start where you are.</p>
+    <ul>
+      <li><strong>If your product tries to do too much:</strong> start at 02 and write down the one job.</li>
+      <li><strong>If you're about to train your own model:</strong> start at 03 and check whether an existing one will do.</li>
+      <li><strong>If you have a product and no audience:</strong> start at 04 and do the per-view math before you pay a creator.</li>
+      <li><strong>If people start your sign-up and don't finish:</strong> start at 05 and test moving the account request to the end.</li>
+      <li><strong>If you want it from Zach himself:</strong> start with the three interviews at the top of 06.</li>
+    </ul>
+  </div>
+</section>
+
+</div>
+
+<!-- The close and the footer are one block on the reversed sky, outside #kit so gated visitors get it too, everything
+     in it white on the dark stretch. .close-kit only shows once #kit is unlocked (CSS: #kit[hidden]~.closeblock .close-kit). -->
+<footer class="closeblock pad">
+  <div class="close-top">
+    <div>
+      <h2>See what's possible. Then build it.</h2>
+      <p class="close-kit">You're on the list now: five useful things I made with AI each week, and how I made them.</p>
+    </div>
+    <a class="close-btn" href="/">Back to the site</a>
+  </div>
+  <div class="close-row"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 897 112" role="img" aria-label="Art of the Possible"><title>Art of the Possible</title><g fill="#FFFFFF"><path transform="scale(0.448)" d="M93.301 48.471A34.601 34.601 0 1 1 156.699 48.471A34.601 34.601 0 0 0 93.301 48.471ZM156.699 48.471A34.601 34.601 0 1 1 201.529 93.301A34.601 34.601 0 0 0 156.699 48.471ZM201.529 93.301A34.601 34.601 0 1 1 156.699 48.471A34.601 34.601 0 0 0 201.529 93.301ZM201.529 93.301A34.601 34.601 0 1 1 201.529 156.699A34.601 34.601 0 0 0 201.529 93.301ZM201.529 156.699A34.601 34.601 0 1 1 156.699 201.529A34.601 34.601 0 0 0 201.529 156.699ZM156.699 201.529A34.601 34.601 0 1 1 201.529 156.699A34.601 34.601 0 0 0 156.699 201.529ZM156.699 201.529A34.601 34.601 0 1 1 93.301 201.529A34.601 34.601 0 0 0 156.699 201.529ZM93.301 201.529A34.601 34.601 0 1 1 48.471 156.699A34.601 34.601 0 0 0 93.301 201.529ZM48.471 156.699A34.601 34.601 0 1 1 93.301 201.529A34.601 34.601 0 0 0 48.471 156.699ZM48.471 156.699A34.601 34.601 0 1 1 48.471 93.301A34.601 34.601 0 0 0 48.471 156.699ZM48.471 93.301A34.601 34.601 0 1 1 93.301 48.471A34.601 34.601 0 0 0 48.471 93.301ZM93.301 48.471A34.601 34.601 0 1 1 48.471 93.301A34.601 34.601 0 0 0 93.301 48.471Z"/><path transform="translate(160 80.736)" d="M11.7 0H0.49L17.57 -49.47H31.04L48.09 0H36.91L24.49 -38.17H24.09ZM11.04 -19.44H37.49V-11.3H11.04ZM51.08 0V-49.47H70.57Q76.2 -49.47 80.16 -47.48Q84.12 -45.48 86.22 -41.85Q88.32 -38.21 88.32 -33.31Q88.32 -28.38 86.2 -24.84Q84.07 -21.29 80.04 -19.41Q76.01 -17.53 70.31 -17.53H57.27V-25.94H68.6Q71.63 -25.94 73.62 -26.76Q75.6 -27.59 76.58 -29.22Q77.55 -30.85 77.55 -33.31Q77.55 -35.78 76.57 -37.47Q75.59 -39.15 73.6 -40.02Q71.62 -40.89 68.58 -40.89H61.52V0ZM78.54 0 66.5 -22.52H77.78L90.09 0ZM90.95 -40.85V-49.47H131.58V-40.85H116.44V0H106.12V-40.85ZM170.54 0.66Q163.97 0.66 158.72 -2.32Q153.46 -5.31 150.41 -10.99Q147.36 -16.66 147.36 -24.7Q147.36 -32.8 150.41 -38.49Q153.46 -44.18 158.72 -47.16Q163.97 -50.14 170.54 -50.14Q177.12 -50.14 182.35 -47.16Q187.59 -44.18 190.64 -38.49Q193.69 -32.8 193.69 -24.7Q193.69 -16.64 190.64 -10.97Q187.59 -5.29 182.35 -2.31Q177.12 0.66 170.54 0.66ZM170.54 -8.58Q174.35 -8.58 177.16 -10.44Q179.98 -12.29 181.54 -15.89Q183.09 -19.49 183.09 -24.7Q183.09 -29.95 181.54 -33.57Q179.98 -37.18 177.16 -39.04Q174.35 -40.89 170.54 -40.89Q166.76 -40.89 163.93 -39.04Q161.1 -37.18 159.53 -33.57Q157.96 -29.95 157.96 -24.7Q157.96 -19.49 159.53 -15.89Q161.1 -12.29 163.93 -10.44Q166.76 -8.58 170.54 -8.58ZM198.51 0V-49.47H231.26V-40.85H208.95V-27.25H229.08V-18.79H208.95V0ZM246.36 -40.85V-49.47H286.99V-40.85H271.85V0H261.53V-40.85ZM290.8 0V-49.47H301.24V-29.06H322.46V-49.47H332.9V0H322.46V-20.44H301.24V0ZM338.59 0V-49.47H371.94V-40.85H349.03V-29.22H370.19V-20.76H349.03V-8.62H372V0ZM390.19 0V-49.47H409.68Q415.31 -49.47 419.27 -47.33Q423.23 -45.19 425.33 -41.4Q427.43 -37.61 427.43 -32.69Q427.43 -27.76 425.31 -24Q423.18 -20.25 419.15 -18.14Q415.12 -16.03 409.43 -16.03H396.99V-24.41H407.71Q410.74 -24.41 412.73 -25.46Q414.71 -26.52 415.69 -28.38Q416.66 -30.25 416.66 -32.69Q416.66 -35.18 415.69 -37.02Q414.71 -38.86 412.72 -39.88Q410.73 -40.89 407.69 -40.89H400.63V0ZM453.6 0.66Q447.03 0.66 441.78 -2.32Q436.52 -5.31 433.47 -10.99Q430.43 -16.66 430.43 -24.7Q430.43 -32.8 433.47 -38.49Q436.52 -44.18 441.78 -47.16Q447.03 -50.14 453.6 -50.14Q460.18 -50.14 465.42 -47.16Q470.65 -44.18 473.7 -38.49Q476.75 -32.8 476.75 -24.7Q476.75 -16.64 473.7 -10.97Q470.65 -5.29 465.42 -2.31Q460.18 0.66 453.6 0.66ZM453.6 -8.58Q457.41 -8.58 460.23 -10.44Q463.05 -12.29 464.6 -15.89Q466.15 -19.49 466.15 -24.7Q466.15 -29.95 464.6 -33.57Q463.05 -37.18 460.23 -39.04Q457.41 -40.89 453.6 -40.89Q449.82 -40.89 446.99 -39.04Q444.17 -37.18 442.6 -33.57Q441.03 -29.95 441.03 -24.7Q441.03 -19.49 442.6 -15.89Q444.17 -12.29 446.99 -10.44Q449.82 -8.58 453.6 -8.58ZM499.91 0.7Q493.92 0.7 489.49 -1.13Q485.06 -2.96 482.58 -6.57Q480.1 -10.19 479.96 -15.54H490.08Q490.27 -13.07 491.53 -11.4Q492.8 -9.74 494.93 -8.9Q497.06 -8.06 499.79 -8.06Q502.45 -8.06 504.43 -8.83Q506.4 -9.6 507.49 -10.98Q508.57 -12.36 508.57 -14.18Q508.57 -15.84 507.58 -16.96Q506.6 -18.08 504.73 -18.89Q502.85 -19.69 500.15 -20.32L494.75 -21.65Q488.5 -23.15 484.89 -26.41Q481.28 -29.68 481.28 -35.17Q481.28 -39.66 483.71 -43.02Q486.14 -46.38 490.37 -48.26Q494.61 -50.14 500.02 -50.14Q505.54 -50.14 509.64 -48.25Q513.75 -46.36 516.05 -43Q518.35 -39.64 518.43 -35.25H508.36Q508.09 -38.16 505.89 -39.78Q503.7 -41.4 499.94 -41.4Q497.4 -41.4 495.62 -40.68Q493.84 -39.97 492.92 -38.71Q492 -37.45 492 -35.83Q492 -34.09 493.06 -32.91Q494.11 -31.74 495.9 -31Q497.68 -30.25 499.81 -29.74L504.23 -28.66Q507.45 -27.93 510.16 -26.72Q512.87 -25.5 514.88 -23.74Q516.89 -21.99 517.99 -19.6Q519.09 -17.22 519.09 -14.13Q519.09 -9.61 516.81 -6.27Q514.53 -2.94 510.24 -1.12Q505.96 0.7 499.91 0.7ZM541.53 0.7Q535.54 0.7 531.11 -1.13Q526.68 -2.96 524.2 -6.57Q521.72 -10.19 521.58 -15.54H531.7Q531.89 -13.07 533.16 -11.4Q534.42 -9.74 536.55 -8.9Q538.68 -8.06 541.41 -8.06Q544.08 -8.06 546.05 -8.83Q548.02 -9.6 549.11 -10.98Q550.19 -12.36 550.19 -14.18Q550.19 -15.84 549.21 -16.96Q548.22 -18.08 546.35 -18.89Q544.47 -19.69 541.77 -20.32L536.37 -21.65Q530.12 -23.15 526.51 -26.41Q522.9 -29.68 522.9 -35.17Q522.9 -39.66 525.33 -43.02Q527.76 -46.38 531.99 -48.26Q536.23 -50.14 541.64 -50.14Q547.16 -50.14 551.26 -48.25Q555.37 -46.36 557.67 -43Q559.97 -39.64 560.05 -35.25H549.98Q549.71 -38.16 547.51 -39.78Q545.32 -41.4 541.56 -41.4Q539.02 -41.4 537.24 -40.68Q535.46 -39.97 534.54 -38.71Q533.62 -37.45 533.62 -35.83Q533.62 -34.09 534.68 -32.91Q535.74 -31.74 537.52 -31Q539.3 -30.25 541.43 -29.74L545.85 -28.66Q549.07 -27.93 551.78 -26.72Q554.49 -25.5 556.5 -23.74Q558.51 -21.99 559.61 -19.6Q560.71 -17.22 560.71 -14.13Q560.71 -9.61 558.43 -6.27Q556.15 -2.94 551.87 -1.12Q547.58 0.7 541.53 0.7ZM575.25 -49.47V0H564.81V-49.47ZM580.93 0V-49.47H600.73Q606.18 -49.47 609.83 -47.85Q613.48 -46.22 615.32 -43.36Q617.15 -40.5 617.15 -36.8Q617.15 -33.89 615.98 -31.71Q614.81 -29.52 612.8 -28.13Q610.78 -26.74 608.2 -26.16V-25.66Q611.03 -25.55 613.51 -24.08Q615.99 -22.6 617.53 -19.97Q619.08 -17.33 619.08 -13.67Q619.08 -9.75 617.14 -6.66Q615.21 -3.57 611.43 -1.78Q607.64 0 602.06 0ZM591.37 -8.54H599.91Q604.27 -8.54 606.29 -10.23Q608.31 -11.93 608.31 -14.7Q608.31 -16.77 607.32 -18.34Q606.33 -19.92 604.5 -20.82Q602.67 -21.71 600.16 -21.71H591.37ZM591.37 -28.77H599.14Q601.27 -28.77 602.96 -29.53Q604.64 -30.29 605.61 -31.69Q606.58 -33.1 606.58 -35.05Q606.58 -37.71 604.69 -39.36Q602.8 -41.01 599.34 -41.01H591.37ZM622.95 0V-49.47H633.39V-8.62H654.6V0ZM658.66 0V-49.47H692.01V-40.85H669.1V-29.22H690.26V-20.76H669.1V-8.62H692.06V0ZM708.66 -22.11V-39.91H717.37Q719.06 -39.94 720.47 -39.25Q721.88 -38.56 722.72 -37.24Q723.56 -35.93 723.56 -34.07Q723.56 -32.17 722.69 -30.82Q721.81 -29.47 720.37 -28.79Q718.94 -28.12 717.18 -28.12H711.19V-31.48H716.19Q717.2 -31.46 717.94 -32.11Q718.68 -32.75 718.68 -34.06Q718.68 -35.37 717.94 -35.95Q717.19 -36.52 716.21 -36.54H713.29V-22.11ZM720.04 -30.35 724.13 -22.11H719.02L715.23 -30.35ZM715.63 -11.49Q711.65 -11.49 708.14 -13Q704.64 -14.51 701.98 -17.17Q699.33 -19.82 697.84 -23.33Q696.35 -26.83 696.35 -30.81Q696.35 -34.8 697.84 -38.3Q699.33 -41.8 701.98 -44.46Q704.64 -47.12 708.14 -48.63Q711.65 -50.14 715.63 -50.14Q719.65 -50.14 723.15 -48.63Q726.65 -47.12 729.31 -44.46Q731.97 -41.8 733.46 -38.3Q734.95 -34.8 734.95 -30.81Q734.95 -26.83 733.46 -23.33Q731.97 -19.82 729.32 -17.17Q726.67 -14.51 723.16 -13Q719.65 -11.49 715.63 -11.49ZM715.63 -16.61Q719.59 -16.61 722.82 -18.52Q726.05 -20.43 727.97 -23.66Q729.88 -26.88 729.87 -30.81Q729.88 -34.74 727.96 -37.97Q726.05 -41.2 722.81 -43.12Q719.57 -45.03 715.63 -45.01Q711.72 -45.03 708.49 -43.12Q705.26 -41.2 703.34 -37.97Q701.43 -34.74 701.43 -30.82Q701.43 -26.89 703.35 -23.66Q705.26 -20.43 708.49 -18.52Q711.71 -16.61 715.63 -16.61Z"/></g></svg><p class="close-foot">New things are possible every day. <span class="nw">&middot; 2026</span></p></div>
+</footer>
+</div>
+
+
+
+<!-- The shared unlock: one email opens every guide in this browser, so nobody types it twice (Rich, 2026-10-03:
+     "People should not have to re-enter their email"). Load it before the gate code. -->
+<script src="/guides/unlock.js"></script>
+<script>
+(function () {
+  var API = 'https://theaotp-gate.theaotp.workers.dev';
+  var KEY = 'aotp_cal_unlocked';
+  var kit = document.getElementById('kit');
+  var gate = document.getElementById('gate');
+  var form = document.getElementById('gate-form');
+  var status = document.getElementById('gate-status');
+  var subbed = document.getElementById('subbed');
+
+  // window.AOTPUnlock comes from /guides/unlock.js. Where that file cannot load (file://, another host) the same
+  // contract runs inline: "aotp_subscriber" ({"at": ISO time}, never the email) or a member the worker confirmed
+  // ("aotp_member" = "2", set by /f.js) opens every guide. An old aotp_<slug>_unlocked flag on its own does not
+  // (those people never confirmed, so they are asked once more). A settled submit writes "aotp_subscriber" plus this
+  // page's key; "Use a different email" clears them all.
+  var U = window.AOTPUnlock || (function () {
+    var SUB = 'aotp_subscriber', MEMBER = 'aotp_member', PAGE = /^aotp_.+_unlocked$/;
+    function stamp() { return JSON.stringify({ at: new Date().toISOString() }); }
+    function keys() { var out = []; try { for (var i = 0; i < localStorage.length; i++) out.push(localStorage.key(i) || ''); } catch (e) {} return out; }
+    return {
+      isSubscribed: function () {
+        try {
+          if (localStorage.getItem(SUB)) return true;
+          var member = localStorage.getItem(MEMBER) === '2';
+          if (member) localStorage.setItem(SUB, stamp());
+          return member;
+        } catch (e) { return false; }
+      },
+      remember: function (key, answer) {
+        try { if (!(answer && answer.member === false)) localStorage.setItem(SUB, stamp()); localStorage.setItem(key, '1'); } catch (e) {}
+      },
+      forget: function () { keys().forEach(function (k) { if (k === SUB || k === MEMBER || PAGE.test(k)) { try { localStorage.removeItem(k); } catch (e) {} } }); }
+    };
+  })();
+
+  function unlock() {
+    kit.hidden = false;
+    gate.hidden = true;
+    subbed.hidden = false;
+  }
+
+  var open = U.isSubscribed();
+  document.documentElement.classList.toggle('aotp-subscribed', open);
+  if (open) unlock();
+
+  // "Use a different email": lock every guide in this browser again and show the form here, without a reload.
+  document.getElementById('gate-reset').addEventListener('click', function (event) {
+    event.preventDefault();
+    U.forget();
+    document.documentElement.classList.remove('aotp-subscribed');
+    kit.hidden = true;
+    subbed.hidden = true;
+    gate.hidden = false;
+    status.textContent = '';
+    gate.scrollIntoView({ block: 'start' });
+    document.getElementById('gate-email').focus({ preventScroll: true });
+  });
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    var email = document.getElementById('gate-email').value.trim().toLowerCase();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      status.textContent = 'That email looks off. Try again.';
+      return;
+    }
+    status.textContent = 'One sec…';
+    fetch(API + '/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, ctx: window.aotpCtx ? window.aotpCtx() : null }),
+    }).then(function (response) {
+      return response.json().catch(function () { return {}; }).then(function (data) {
+        if (!response.ok) {
+          var err = new Error('subscribe failed');
+          err.status = response.status;
+          err.detail = data && data.detail;
+          throw err;
+        }
+        return data;
+      });
+    }).then(function (data) {
+      if (window.aotpSubscribed) window.aotpSubscribed(data);
+      U.remember(KEY, data);
+      status.textContent = !(data && data.new) ? 'Welcome back. Unlocked.'
+        : data.member === false ? 'Unlocked. Check your inbox to confirm your subscription to the letter.'
+        : 'Unlocked. You\'re on the list for the weekly letter.';
+      unlock();
+      window.scrollTo({ top: subbed.offsetTop - 24, behavior: 'smooth' });
+    }).catch(function (err) {
+      if (err && err.status === 400) {
+        status.textContent = 'That email was rejected' + (err.detail ? ' (' + err.detail + ')' : '') + '. Try a different address.';
+      } else {
+        status.textContent = 'Something broke on our end. Try again in a minute, or subscribe on the homepage and DM me on Instagram for the Cal AI playbook.';
+      }
+    });
+  });
+
+  document.querySelectorAll('[data-copy]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      var pre = button.parentElement.querySelector('pre');
+      navigator.clipboard.writeText(pre.textContent).then(function () {
+        button.textContent = 'Copied';
+        setTimeout(function () { button.textContent = 'Copy'; }, 1600);
+      });
+    });
+  });
+
+})();
+</script>
+</body></html>
