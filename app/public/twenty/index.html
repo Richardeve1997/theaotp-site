@@ -1,0 +1,763 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Twenty CRM setup guide | Art of the Possible</title>
+<meta name="description" content="The link to Twenty, the free open-source Salesforce alternative, plus a full setup guide: cloud or Docker, importing your contacts, a deal pipeline, workflows and AI, and an honest cost comparison.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://theaotp.com/twenty/">
+<link rel="icon" href="/qualia-symbol.png">
+<meta property="og:title" content="Twenty CRM setup guide | Art of the Possible">
+<meta property="og:description" content="The link to Twenty, the free open-source Salesforce alternative, plus a full setup guide: cloud or Docker, importing your contacts, a deal pipeline, workflows and AI, and an honest cost comparison.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&amp;family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&amp;family=Geist+Mono:wght@400&amp;display=swap" rel="stylesheet">
+<!--
+  Clear Sky kit template (AOTP design system approved by Rich 2026-09-30).
+  Source of truth: content-intelligence assets/brand/clear-sky/{DESIGN.md,tokens.css,board.html}.
+  Filled example: assets/brand/clear-sky/sample-guide.html.
+  White on blue, ink on sand (Rich, 2026-10-03: "black never over the blue, if we use black its over white").
+  Every button wears the sky action and the big numerals the sky numeral fill. Never retune the sky's stops.
+  No old accent blue, no two-tone headlines, no bold display, no shadows, no em dashes.
+-->
+<!--
+  Sources (read 2026-10-19; every link, name, command and number on this page comes from these):
+  content-intelligence pipeline/5-script/assets/twenty-open-source-salesforce/ sources/{FOOTAGE,SOURCES}.md, caption.md,
+    edits/_bases/twenty-open-source-salesforce-base.lines.txt (the Reel's words; CTA keyword REPO)
+  gh api repos/twentyhq/twenty on 2026-10-19: 58,522 stars, created 2022-12-01, description "The open alternative to Salesforce, designed for AI."
+  docs.twenty.com read as .md on 2026-10-19: getting-started/quickstart, developers/self-host/capabilities/{docker-compose,upgrade-guide},
+    user-guide/billing/capabilities/pricing-plans, user-guide/data-migration/how-tos/{migrating-from-other-crms,import-contacts-via-csv},
+    user-guide/views-pipelines/how-tos/set-up-a-sales-pipeline, user-guide/workflows/{overview,capabilities/workflow-triggers,
+    capabilities/workflow-credits,how-tos/crm-automations/closed-won-automations,how-tos/crm-automations/detect-stale-opportunities},
+    user-guide/ai/{overview,capabilities/ai-agents,capabilities/ai-chatbot,how-tos/ai-faq}, getting-started/core-concepts/{ai,workflows}
+  twenty.com/pricing and twenty.com/compare-pricing/salesforce (HTML, 2026-10-19)
+  salesforce.com/sales/pricing/ and salesforce.com/news/stories/salesforce-simplifies-editions-2026/ (HTML, 2026-10-19)
+  Legacy Enterprise $175 / Unlimited $350: UpperEdge 2026-09-23 (also CIO.com via reg4tech, SalesforceDevops.net), per SOURCES.md
+  trailhead.salesforce.com lex_implementation_data_export (Data Export steps, 2026-10-19)
+-->
+<style>
+:root{
+  --sand:#EFEBE7;--ink:#08070B;--graphite:#39383D;--ash:#909092;--ice:#BEC4D2;--ice-3:#E2E4EC;--glacier-2:#F3F4F6;--deep-ocean:#034C7C;--light-blue:#A5D4F2;--white:#FFFFFF;
+  /* Sky action: every button and button-like link, now an obvious two-tone (Rich, 2026-10-03: "Not enough gradient in
+     the buttons"). Same values as tokens.css: deep blue at the left into bright cerulean at the right end, 100deg.
+     Everything from 0 to 95% is #027DBA or darker, so white clears 4.5:1 there; only the last 5%, the cap, brightens to
+     #0A8FCF (3.5:1). Keep every label out of the cap: the template's paddings do (gate submit 22px, 12px on phones;
+     small pills 18px), and the worst glyph pixel measures 4.59:1 on the phone gate. Hover deepens every point of the
+     ramp. On sand and glacier the fill is its own edge; on the dark close it adds a 1px white ring. */
+  --g-sky-action:linear-gradient(100deg,#034A7A 0%,#026AA1 50%,#027DBA 95%,#0A8FCF 100%);
+  --g-sky-action-hover:linear-gradient(100deg,#043761 0%,#025F92 50%,#0274AD 95%,#0282C0 100%);
+  /* Sky numeral, FINAL (DESIGN.md 10.5): the deep end of the sky run top to bottom at 180deg, dark at the top like
+     the sky, as the text fill of the big display numerals ("and the big numbers too"). Same value and name as
+     tokens.css, so kit pages match the homepage. Display sizes only (32px and up): the lightest stop, #0282C0, is
+     3.5:1 on sand; #026AA1 is 4.9:1. */
+  --g-sky-numeral:linear-gradient(180deg,#043761 0%,#024F80 35%,#026AA1 70%,#0282C0 100%);
+  --display:'Inter Tight','Helvetica Neue',Arial,sans-serif;--ui:'Inter','Helvetica Neue',Arial,sans-serif;--mono:'Geist Mono',ui-monospace,'SF Mono',Menlo,monospace;
+  --gutter:clamp(16px,4.5vw,64px);
+  --spark:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0C12.8 7.2 16.8 11.2 24 12C16.8 12.8 12.8 16.8 12 24C11.2 16.8 7.2 12.8 0 12C7.2 11.2 11.2 7.2 12 0Z'/%3E%3C/svg%3E");
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--sand);color:var(--ink);font:400 16px/1.6 var(--ui);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:var(--deep-ocean);text-underline-offset:3px;text-decoration-thickness:1px}
+button,input{font:inherit}button,a,input{-webkit-tap-highlight-color:transparent}
+strong,b{font-weight:600;color:var(--ink)}
+:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+.page{min-height:100vh;overflow-x:clip;display:flex;flex-direction:column}
+.page>footer{margin-top:auto}
+/* Full-bleed backgrounds, content held to 1440 with 64px gutters (16px on phones). */
+.pad{padding-left:max(var(--gutter),calc((100% - 1440px)/2 + var(--gutter)));padding-right:max(var(--gutter),calc((100% - 1440px)/2 + var(--gutter)))}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance;overflow-wrap:break-word}
+p,li{text-wrap:pretty}
+
+/* Sparkle label: four-point sparkle + Geist Mono caps. */
+.eyebrow,.inst{display:block;font:400 11px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase}
+.eyebrow::before,.inst::before,.unlocks ul li::before{content:"";display:inline-block;width:.82em;height:.82em;margin-right:.75em;vertical-align:-.04em;background:currentColor;-webkit-mask:var(--spark) center/contain no-repeat;mask:var(--spark) center/contain no-repeat}
+
+/* ---- The head: white on the deep sky (Rich, 2026-10-03: "black never over the blue"; on /team/: "too much space under
+   the heading, and also make the sub text white and move to RHS"). Everything in it is white: the lockup, the nav, the
+   label line, the h1 and the dek. It all sits in the deep stretch, #043761 to #026AA1, where white measures 5.8:1 or
+   better. From 900px the heading is on the left and the dek on the right, bottoms aligned; below 900px they stack.
+   Under the content the sky runs through the rest of its measured stops, in order and evenly, to sand inside --fade,
+   an empty strip, so no type ever sits on the pale tail. Pad inside .kit-hero, never in the fade. ---- */
+.kit-head{--fade:clamp(96px,9vw,136px);padding-bottom:var(--fade);color:var(--white);background:linear-gradient(180deg,#043761 0%,#024F80 calc((100% - var(--fade))*.5),#026AA1 calc(100% - var(--fade)),#0282C0 calc(100% - var(--fade)*6/7),#1199D7 calc(100% - var(--fade)*5/7),#3EA9DA calc(100% - var(--fade)*4/7),#6DB9DC calc(100% - var(--fade)*3/7),#9DCBDD calc(100% - var(--fade)*2/7),#CBDBDF calc(100% - var(--fade)/7),#EFEBE7 100%)}
+nav{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:76px}
+.lockup{display:flex;align-items:center;color:var(--white);text-decoration:none}.lockup svg{display:block;height:22px;width:auto}
+.navlinks{display:flex;gap:28px;font:400 14px/1 var(--ui)}.navlinks a{color:var(--white);text-decoration:none}.navlinks a:hover{text-decoration:underline}
+.kit-head a:focus-visible{outline-color:var(--white)}
+.kit-hero{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);column-gap:clamp(40px,5.5vw,96px);align-items:end;padding-top:clamp(32px,4vw,60px);padding-bottom:clamp(32px,3.4vw,48px)}
+.kit-head .eyebrow{margin-bottom:18px;color:var(--white)}
+.kit-head h1{font-size:clamp(42px,4.8vw,70px);line-height:.98;letter-spacing:-.045em;text-wrap:pretty}
+.dek{max-width:46ch;margin:0;font:400 clamp(16px,1.3vw,19px)/1.55 var(--ui);letter-spacing:-.005em;color:var(--white)}
+/* The line an unlocked page shows (the shared unlock, /guides/unlock.js): ink on sand, under the head. */
+.subbed{margin:0;padding-top:clamp(18px,2vw,28px);padding-bottom:16px;font:400 14px/1.5 var(--ui);color:var(--graphite)}
+.subbed::before{content:"";display:inline-block;width:.82em;height:.82em;margin-right:.6em;vertical-align:-.04em;background:currentColor;-webkit-mask:var(--spark) center/contain no-repeat;mask:var(--spark) center/contain no-repeat}
+.subbed a{margin-left:.35em;color:var(--deep-ocean);white-space:nowrap}
+
+/* ---- The gate: a glacier card on sand, led by THIS guide (Rich, 2026-10-02: "make each page that asks for the
+   persons email address to unlock the guide more compelling ... emphasising current guide"). The featured shelf from
+   /guides/ (DESIGN.md 10.7) shows this guide's cover large under a "This guide" tag, the other guides beside it.
+   The copy names this guide first, then every other guide, then the weekly letter. Desktop: shelf left; copy, the
+   three unlocks and the form right. Under 920px: shelf, copy, form, then the unlocks. If /guides/shelf.js cannot load
+   (file://, another host: the script's onerror adds .no-shelf) or the shelf fails, the column goes and the card is
+   copy | form. ---- */
+.gate{padding-top:8px;padding-bottom:clamp(56px,7vw,96px)}
+.gate-grid{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);grid-template-rows:auto auto auto 1fr;grid-template-areas:"shelf intro" "shelf list" "shelf act" "shelf .";column-gap:clamp(28px,4.5vw,72px);align-items:start;background:var(--glacier-2);border-radius:12px;padding:clamp(22px,3.4vw,48px)}
+.gate-grid>*,.step>*,.concept>*{min-width:0}
+.gate-shelf{grid-area:shelf;align-self:center}.gate-intro{grid-area:intro}.unlocks{grid-area:list}.gate-act{grid-area:act}
+.gate-grid.no-shelf,.gate-grid:has([data-aotp-shelf-state="failed"]){grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);grid-template-rows:auto 1fr;grid-template-areas:"intro act" "list act"}
+.gate-grid.no-shelf>.gate-shelf,.gate-grid:has([data-aotp-shelf-state="failed"])>.gate-shelf{display:none}
+.gate .eyebrow{color:var(--graphite)}
+.gate h2{margin-top:18px;font-size:clamp(30px,3vw,42px);line-height:1.04;letter-spacing:-.03em;max-width:17ch}
+.gate-intro p{max-width:48ch;margin:16px 0 0;color:var(--graphite)}
+/* What the one email opens, in this order: this guide (named in display type, "Opens now", its sections), every
+   other guide, the weekly letter. The 01 02 03 are small mono counters, not sky numerals. */
+.unlocks{list-style:none;margin:26px 0 28px;padding:0;max-width:52ch}
+.unlocks>li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:0 12px;margin:0;border-top:1px solid var(--ice);padding:13px 0;font-size:14.5px;line-height:1.5;color:var(--graphite)}
+.unlocks>li:last-child{border-bottom:1px solid var(--ice)}
+.unlocks .n{padding-top:3px;font:400 11px/1.4 var(--mono);letter-spacing:.1em;color:var(--graphite)}
+.unlocks b{display:block;margin-bottom:2px;font:500 16px/1.35 var(--ui);color:var(--ink)}
+.unlocks .this .n{padding-top:7px}
+.unlocks .this b{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin-bottom:8px;font:400 clamp(22px,2vw,26px)/1.1 var(--display);letter-spacing:-.025em}
+.unlocks .now{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:5px;background:var(--ice-3);font:400 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.unlocks ul{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.unlocks ul li{padding-left:1.6em;text-indent:-1.6em;color:var(--ink)}
+.gate form{display:grid;gap:10px}
+.gate input{width:100%;min-width:0;height:52px;border:1px solid var(--ink);border-radius:999px;background:transparent;padding:0 22px;color:var(--ink);font-size:16px}
+.gate input::placeholder{color:var(--graphite);opacity:1}
+.gate input:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.gate button{width:100%;min-height:52px;border:0;border-radius:999px;background:var(--g-sky-action);color:var(--white);cursor:pointer;padding:14px 22px;font:500 16px/1.25 var(--ui);letter-spacing:-.005em;text-align:center;text-wrap:balance}
+.gate button:hover{background:var(--g-sky-action-hover)}
+/* Buttons on sand and glacier: hover deepens the sky action, focus is a 2px ink ring (the white label would vanish as a ring on sand). */
+.gate button:focus-visible,.copybtn:focus-visible,.read a:focus-visible,.dl-btn:focus-visible,.kc:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.gate-status{margin:12px 0 0;font-size:14px;color:var(--ink)}.gate-status:empty{margin:0}
+.gate-small{margin:14px 0 0;font-size:13.5px;line-height:1.55;color:var(--graphite)}
+.unlocks ul li::before{width:10px;height:10px;margin-right:calc(1.6em - 10px);vertical-align:0}
+
+/* ---- Sections: a mono-and-numeral rail, one reading column, 1px ice hairlines. ---- */
+.step,.concept{position:relative;display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px;padding-top:52px;padding-bottom:72px;scroll-margin-top:24px}
+.step::before,.concept::before{content:"";position:absolute;top:0;left:max(var(--gutter),calc((100% - 1440px)/2 + var(--gutter)));right:max(var(--gutter),calc((100% - 1440px)/2 + var(--gutter)));height:1px;background:var(--ice)}
+.step-kicker,.concept-num{font:400 11px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--graphite)}
+.step-kicker span,.concept-num span{display:table;padding:.1em .1em .1em 0;margin:-.1em -.1em calc(14px - .1em) 0;font:400 64px/.8 var(--display);letter-spacing:-.06em;color:var(--deep-ocean)}
+.step h2,.concept h2{font-size:clamp(34px,3.6vw,50px);line-height:1.02;letter-spacing:-.03em;max-width:20ch}
+.step .lede,.concept .lede{max-width:54ch;margin:20px 0 24px;font:400 20px/1.5 var(--ui);letter-spacing:-.01em;color:var(--ink)}
+.step p,.concept p{max-width:64ch;color:var(--graphite)}
+.step ul,.step ol,.concept ul{max-width:64ch;padding-left:20px;color:var(--graphite)}
+.step li,.concept li{margin-bottom:10px}
+.step li::marker,.concept li::marker{color:var(--ash)}
+.note{max-width:62ch;margin:30px 0;border-top:1px solid var(--ice);padding-top:14px;font-size:14.5px;line-height:1.6;color:var(--graphite)}
+table+.note{margin-top:18px;border-top:0;padding-top:0}
+.step .inst{margin:44px 0 0;color:var(--ink)}
+
+/* Reading-list payload */
+.index{list-style:none;padding:0!important;margin:26px 0 0;max-width:66ch}
+.index li{border-top:1px solid var(--ice);padding:16px 0;margin:0;display:flex;gap:18px;align-items:baseline;font-size:15px;color:var(--graphite)}
+.index .n{min-width:26px;font:400 11px var(--mono);letter-spacing:.1em;color:var(--graphite)}
+.index a{font:400 21px/1.2 var(--display);letter-spacing:-.02em;color:var(--ink);text-decoration:none}.index a:hover{text-decoration:underline}
+.index .st{margin-left:auto;font:400 10.5px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--graphite)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 0}
+.chip{display:inline-flex;align-items:center;height:24px;padding:0 9px;border-radius:5px;background:var(--ice-3);font:400 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.read{max-width:760px;margin:26px 0 0;background:var(--glacier-2);border-radius:12px;padding:20px 22px 22px}
+.read .src{font:400 10.5px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--graphite)}
+.read h3{max-width:40ch;margin:10px 0 16px;font-size:24px;line-height:1.12;letter-spacing:-.025em}
+.read a{display:inline-flex;align-items:center;height:28px;padding:0 18px;border-radius:999px;background:var(--g-sky-action);font:400 10.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--white);text-decoration:none}
+.read a:hover{background:var(--g-sky-action-hover)}
+
+/* ---- The close IS the footer: one short block on the reversed sky, sand at the top and #043761 at the bottom (Rich,
+   2026-10-02: "make the footer smaller and reverse the gradient so dark blue at the bottom"), with everything in it
+   white on the dark stretch (Rich, 2026-10-03: "black never over the blue"). The run from sand to #026AA1 (the
+   measured stops, in order and evenly) happens inside --fade, an empty strip at the top. The headline, the "on the
+   list" line, the white-ringed pill, the lockup and the mono line all sit below it, on #026AA1 to #043761, where white
+   measures 5.8:1 or better. It sits outside #kit so gated visitors get it too; .close-kit only shows once #kit is
+   unlocked. Keep it short: no second headline, button or form. ---- */
+.closeblock{--fade:clamp(64px,6vw,88px);padding-top:calc(var(--fade) + clamp(22px,2.4vw,32px));padding-bottom:clamp(20px,1.8vw,26px);color:var(--white);background:linear-gradient(180deg,#EFEBE7 0%,#CBDBDF calc(var(--fade)/7),#9DCBDD calc(var(--fade)*2/7),#6DB9DC calc(var(--fade)*3/7),#3EA9DA calc(var(--fade)*4/7),#1199D7 calc(var(--fade)*5/7),#0282C0 calc(var(--fade)*6/7),#026AA1 var(--fade),#024F80 calc(var(--fade) + (100% - var(--fade))*.5),#043761 100%)}
+.close-top{display:flex;align-items:flex-end;justify-content:space-between;gap:18px 40px}
+.closeblock h2{font-size:clamp(28px,3vw,44px);line-height:1.02;letter-spacing:-.035em;color:var(--white)}
+.close-kit{max-width:64ch;margin:10px 0 0;font:400 clamp(15px,1.2vw,17px)/1.5 var(--ui);color:var(--white)}
+#kit[hidden]~.closeblock .close-kit{display:none}
+/* The pill is the sky action ringed in 1px white: on the dark sky the fill alone has no edge (it is cut from the same
+   blues), the white ring measures 5.8:1 or better there. */
+.close-btn{display:inline-flex;align-items:center;flex:none;height:40px;padding:0 20px;border:1px solid var(--white);border-radius:999px;background:var(--g-sky-action);color:var(--white);font:500 15px/1 var(--ui);text-decoration:none;white-space:nowrap}
+.close-btn:hover{background:var(--g-sky-action-hover);text-decoration:underline}
+.closeblock a:focus-visible{outline:2px solid var(--white);outline-offset:3px}
+.close-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 24px;margin-top:clamp(22px,2.4vw,32px)}
+.close-row svg{display:block;height:22px;width:auto;flex:none}
+.close-foot{margin:0;font:400 10.5px/1.6 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--white)}
+.close-foot .nw{white-space:nowrap}
+[hidden]{display:none!important}
+/* A subscriber's page opens before first paint: the head script below sets .aotp-subscribed on <html> from the same
+   storage the gate script reads, so the gate never flashes while /guides/unlock.js loads. */
+.aotp-subscribed #gate{display:none!important}
+.aotp-subscribed #kit[hidden],.aotp-subscribed #subbed[hidden]{display:block!important}
+
+/* --- prompt-kit / field-notes / how-to payloads: keep these, delete what you don't use --- */
+.promptbox{max-width:760px;margin-top:26px;background:var(--glacier-2);border-radius:12px;padding-top:12px}
+.copybtn{display:block;margin:0 12px 0 auto;min-height:32px;padding:0 18px;border:0;border-radius:999px;background:var(--g-sky-action);color:var(--white);cursor:pointer;font:400 10.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase}
+.copybtn:hover{background:var(--g-sky-action-hover)}
+.promptbox pre{margin:12px 0 0;border-top:1px solid var(--ice);padding:20px 26px 26px;overflow-x:auto;font:400 13px/1.8 var(--mono);white-space:pre-wrap;overflow-wrap:anywhere;color:var(--ink)}
+.promptbox.code pre{white-space:pre;overflow-wrap:normal}
+.promptbox.tall pre{max-height:560px;overflow-y:auto}
+.cmd,.termshot{max-width:760px;margin:24px 0;border-radius:12px;padding:20px 24px;overflow-x:auto}
+.cmd{background:var(--glacier-2)}.cmd code{display:block;padding:0;background:none;font:400 13px/1.8 var(--mono);white-space:pre}
+.termshot{background:var(--ink);color:var(--sand);font:400 13px/1.9 var(--mono);white-space:pre}
+.termshot .g{color:var(--light-blue)}.termshot .y,.termshot .r{color:var(--white)}.termshot .d{color:var(--ash)}
+code{font-family:var(--mono);font-size:.86em;background:var(--ice-3);padding:1px 5px;border-radius:4px;white-space:nowrap;color:var(--ink)}
+.lessons{list-style:none;padding:0!important;margin:26px 0 0;max-width:66ch}
+.lessons li{position:relative;border-top:1px solid var(--ice);padding:22px 0 22px 72px;margin:0;color:var(--graphite)}
+.lessons strong{display:block;margin-bottom:8px;font:400 23px/1.2 var(--display);letter-spacing:-.02em;color:var(--ink)}
+.lessons .k{position:absolute;left:0;top:22px;padding:.1em .1em .1em 0;margin:-.1em -.1em -.1em 0;font:400 40px/.84 var(--display);letter-spacing:-.05em;color:var(--deep-ocean)}
+.sky-num{display:inline-block;padding:.1em .1em .1em 0;margin:-.1em -.1em -.1em 0;font-family:var(--display);font-weight:400;color:var(--deep-ocean)}
+/* Sky numerals (Rich, 2026-10-02: "and the big numbers too"): every big display numeral (the rail numerals above,
+   .lessons .k, any stat figure you add as .sky-num) takes --g-sky-numeral as its text fill, painted on its own glyph box
+   (display:table shrinks the rail numeral to its digits). The box is padded .1em right, top and bottom with matching
+   negative margins (DESIGN.md 10.5): background-clip:text paints only inside the box, and the tight tracking and line
+   height would otherwise clip the last digit, or the top and tail of a "$". Without background-clip:text, in print and
+   under forced colors it is solid deep ocean. Small numbers (.cmdlist .n, .index .n, mono labels) stay as they are. */
+@supports (-webkit-background-clip:text) or (background-clip:text){
+  .step-kicker span,.concept-num span,.lessons .k,.sky-num{background:var(--g-sky-numeral);background-size:100% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+}
+table{border-collapse:collapse;width:100%;max-width:760px;margin:20px 0;font-size:14.5px}
+th,td{text-align:left;padding:14px 16px 14px 0;border-bottom:1px solid var(--ice);vertical-align:top;color:var(--graphite)}
+th{border-bottom-color:var(--ink);font:400 10.5px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+td:first-child{width:26%;padding-right:24px;color:var(--ink);font-weight:500}td code{white-space:normal;overflow-wrap:anywhere}
+.shot{max-width:760px;margin:26px 0}
+.shot img{display:block;width:100%;height:auto;border:1px solid var(--ice);border-radius:6px;background:var(--white)}
+.cap{max-width:64ch;margin:10px 0 0;font-size:13.5px;line-height:1.5;color:var(--graphite)}
+.dl{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px 28px;max-width:760px;margin:28px 0 0;background:var(--glacier-2);border-radius:12px;padding:22px 24px}
+.dl-meta{font-size:14px;line-height:1.5;color:var(--graphite)}.dl-meta strong{display:block;font:400 21px/1.2 var(--display);letter-spacing:-.02em}
+.dl-btn{display:inline-flex;align-items:center;height:52px;padding:0 26px;border-radius:999px;background:var(--g-sky-action);color:var(--white);font:500 16px/1 var(--ui);text-decoration:none}.dl-btn:hover{background:var(--g-sky-action-hover)}
+.cmdlist{list-style:none;padding:0!important;margin:28px 0 0;max-width:760px}
+.cmdlist li{display:grid;grid-template-columns:34px minmax(0,1fr);gap:14px;border-top:1px solid var(--ice);padding:20px 0;margin:0}
+.cmdlist li>*{min-width:0}.cmdlist .n{padding-top:9px;font:400 11px/1 var(--mono);letter-spacing:.1em;color:var(--graphite)}
+.cmdlist p{margin:10px 0 0}
+/* .kc is 16px round, not a 999px pill: one line is still a full pill (32px tall), but a command that wraps onto three
+   lines keeps its corners square enough that no white glyph falls off the fill onto sand. */
+.kc{display:inline-flex;align-items:center;gap:12px;max-width:100%;min-height:32px;padding:5px 12px 5px 13px;border:0;border-radius:16px;background:var(--g-sky-action);color:var(--white);cursor:pointer;text-align:left}
+.kc code{padding:0;background:none;font-size:14px;white-space:normal;overflow-wrap:anywhere;color:var(--white)}
+.kc .cp{flex:none;padding:3px 8px;border:1px solid var(--white);border-radius:999px;font:400 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase}
+.kc:hover,.kc.done{background:var(--g-sky-action-hover)}
+.kc:hover .cp,.kc.done .cp{background:var(--white);color:var(--ink)}
+/* A long command makes a wide chip, and its "Copy" pill sits at the far right, inside the bright cap of the ramp. The
+   chip paints the same --g-sky-action 10% wider than itself, so the cap always falls outside it and the pill's label
+   stays on #027BB8 or darker. */
+.kc,.kc:hover,.kc.done{background-size:110% 100%;background-repeat:no-repeat}
+.where{display:inline-block;margin-left:12px;font:400 10.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--graphite)}
+.try{list-style:none;padding:0!important;margin:14px 0 0;max-width:66ch}
+.try li{border-top:1px solid var(--ice);padding:14px 0;margin:0;color:var(--graphite)}
+.try strong{margin-right:6px;font:400 14px var(--mono)}
+
+@media(max-width:900px){
+  .kit-hero{grid-template-columns:minmax(0,1fr);row-gap:22px}
+}
+@media(max-width:920px){
+  .gate-grid{grid-template-columns:minmax(0,1fr);grid-template-rows:none;grid-template-areas:"shelf" "intro" "act" "list";row-gap:22px}
+  .gate-grid.no-shelf,.gate-grid:has([data-aotp-shelf-state="failed"]){grid-template-columns:minmax(0,1fr);grid-template-rows:none;grid-template-areas:"intro" "act" "list"}
+  .unlocks{margin:4px 0 0}
+}
+@media(max-width:800px){
+  nav{min-height:64px}.lockup svg,.close-row svg{height:17px}.navlinks{gap:16px;font-size:13px}
+  .kit-head{--fade:88px}.closeblock{--fade:56px}
+  .close-top{flex-direction:column;align-items:flex-start}
+  .gate{padding-top:0}
+  .gate-grid,.step,.concept{grid-template-columns:1fr;gap:22px}.gate-grid>*,.step>*,.concept>*{min-width:0}
+  .step,.concept{padding-top:34px;padding-bottom:48px}
+  .step-kicker span,.concept-num span{display:inline-block;margin:-.1em calc(12px - .1em) -.1em 0;font-size:44px;vertical-align:-.02em}
+  .step .lede,.concept .lede{font-size:18px}
+  .lessons li{padding-left:54px}.lessons .k{font-size:32px;top:24px}
+  .promptbox pre{padding:18px 18px 22px}.index li{flex-wrap:wrap}.index .st{margin-left:44px;width:100%}
+  code{white-space:normal;overflow-wrap:anywhere}th,td{padding-right:12px}td:first-child{width:32%}
+}
+@media(max-width:480px){.lockup svg,.close-row svg{height:15px}.navlinks{gap:14px;font-size:12.5px}.kit-head h1 br{display:none}.gate-grid{padding:24px 16px}.gate button{padding-left:12px;padding-right:12px;font-size:14.5px}}
+@media(max-width:380px){.gate button{font-size:14px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+/* Print drops backgrounds, so a gradient-filled numeral would print blank and every white label on a sky or a sky
+   action would print as faint grey. Paper gets ink: deep ocean numerals, hairline ink pills, ink type where the sky
+   was. Forced colors drops gradients too: the numerals and pills take the system colours (the border gives a
+   borderless pill its edge back). Keep this last in the sheet so it beats every rule above it. */
+@media print,(forced-colors:active){
+  .step-kicker span,.concept-num span,.lessons .k,.sky-num{background:none;color:var(--deep-ocean);-webkit-text-fill-color:currentColor}
+  .gate button,.copybtn,.read a,.dl-btn,.kc,.kc.done,.kc .cp,.kc.done .cp,.close-btn{background:none;color:var(--ink);border:1px solid var(--ink)}
+  .kc code{color:var(--ink)}
+}
+@media print{
+  .kit-head,.kit-head .eyebrow,.kit-head h1,.dek,.lockup,.navlinks a,.closeblock,.closeblock h2,.close-kit,.close-foot{color:var(--ink)}
+  .lockup svg g,.close-row svg g{fill:var(--ink)}
+}
+</style><script src="/f.js"></script>
+<script>try{if(/(?:^|;\s*)aotp_subscriber=[^;\s]/.test(document.cookie)||localStorage.getItem('aotp_subscriber')||localStorage.getItem('aotp_member')==='2')document.documentElement.classList.add('aotp-subscribed')}catch(e){}</script>
+</head><body>
+<div class="page">
+<header class="kit-head pad">
+  <nav><a class="lockup" href="/"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 897 112" role="img" aria-label="Art of the Possible"><title>Art of the Possible</title><g fill="#FFFFFF"><path transform="scale(0.448)" d="M93.301 48.471A34.601 34.601 0 1 1 156.699 48.471A34.601 34.601 0 0 0 93.301 48.471ZM156.699 48.471A34.601 34.601 0 1 1 201.529 93.301A34.601 34.601 0 0 0 156.699 48.471ZM201.529 93.301A34.601 34.601 0 1 1 156.699 48.471A34.601 34.601 0 0 0 201.529 93.301ZM201.529 93.301A34.601 34.601 0 1 1 201.529 156.699A34.601 34.601 0 0 0 201.529 93.301ZM201.529 156.699A34.601 34.601 0 1 1 156.699 201.529A34.601 34.601 0 0 0 201.529 156.699ZM156.699 201.529A34.601 34.601 0 1 1 201.529 156.699A34.601 34.601 0 0 0 156.699 201.529ZM156.699 201.529A34.601 34.601 0 1 1 93.301 201.529A34.601 34.601 0 0 0 156.699 201.529ZM93.301 201.529A34.601 34.601 0 1 1 48.471 156.699A34.601 34.601 0 0 0 93.301 201.529ZM48.471 156.699A34.601 34.601 0 1 1 93.301 201.529A34.601 34.601 0 0 0 48.471 156.699ZM48.471 156.699A34.601 34.601 0 1 1 48.471 93.301A34.601 34.601 0 0 0 48.471 156.699ZM48.471 93.301A34.601 34.601 0 1 1 93.301 48.471A34.601 34.601 0 0 0 48.471 93.301ZM93.301 48.471A34.601 34.601 0 1 1 48.471 93.301A34.601 34.601 0 0 0 93.301 48.471Z"/><path transform="translate(160 80.736)" d="M11.7 0H0.49L17.57 -49.47H31.04L48.09 0H36.91L24.49 -38.17H24.09ZM11.04 -19.44H37.49V-11.3H11.04ZM51.08 0V-49.47H70.57Q76.2 -49.47 80.16 -47.48Q84.12 -45.48 86.22 -41.85Q88.32 -38.21 88.32 -33.31Q88.32 -28.38 86.2 -24.84Q84.07 -21.29 80.04 -19.41Q76.01 -17.53 70.31 -17.53H57.27V-25.94H68.6Q71.63 -25.94 73.62 -26.76Q75.6 -27.59 76.58 -29.22Q77.55 -30.85 77.55 -33.31Q77.55 -35.78 76.57 -37.47Q75.59 -39.15 73.6 -40.02Q71.62 -40.89 68.58 -40.89H61.52V0ZM78.54 0 66.5 -22.52H77.78L90.09 0ZM90.95 -40.85V-49.47H131.58V-40.85H116.44V0H106.12V-40.85ZM170.54 0.66Q163.97 0.66 158.72 -2.32Q153.46 -5.31 150.41 -10.99Q147.36 -16.66 147.36 -24.7Q147.36 -32.8 150.41 -38.49Q153.46 -44.18 158.72 -47.16Q163.97 -50.14 170.54 -50.14Q177.12 -50.14 182.35 -47.16Q187.59 -44.18 190.64 -38.49Q193.69 -32.8 193.69 -24.7Q193.69 -16.64 190.64 -10.97Q187.59 -5.29 182.35 -2.31Q177.12 0.66 170.54 0.66ZM170.54 -8.58Q174.35 -8.58 177.16 -10.44Q179.98 -12.29 181.54 -15.89Q183.09 -19.49 183.09 -24.7Q183.09 -29.95 181.54 -33.57Q179.98 -37.18 177.16 -39.04Q174.35 -40.89 170.54 -40.89Q166.76 -40.89 163.93 -39.04Q161.1 -37.18 159.53 -33.57Q157.96 -29.95 157.96 -24.7Q157.96 -19.49 159.53 -15.89Q161.1 -12.29 163.93 -10.44Q166.76 -8.58 170.54 -8.58ZM198.51 0V-49.47H231.26V-40.85H208.95V-27.25H229.08V-18.79H208.95V0ZM246.36 -40.85V-49.47H286.99V-40.85H271.85V0H261.53V-40.85ZM290.8 0V-49.47H301.24V-29.06H322.46V-49.47H332.9V0H322.46V-20.44H301.24V0ZM338.59 0V-49.47H371.94V-40.85H349.03V-29.22H370.19V-20.76H349.03V-8.62H372V0ZM390.19 0V-49.47H409.68Q415.31 -49.47 419.27 -47.33Q423.23 -45.19 425.33 -41.4Q427.43 -37.61 427.43 -32.69Q427.43 -27.76 425.31 -24Q423.18 -20.25 419.15 -18.14Q415.12 -16.03 409.43 -16.03H396.99V-24.41H407.71Q410.74 -24.41 412.73 -25.46Q414.71 -26.52 415.69 -28.38Q416.66 -30.25 416.66 -32.69Q416.66 -35.18 415.69 -37.02Q414.71 -38.86 412.72 -39.88Q410.73 -40.89 407.69 -40.89H400.63V0ZM453.6 0.66Q447.03 0.66 441.78 -2.32Q436.52 -5.31 433.47 -10.99Q430.43 -16.66 430.43 -24.7Q430.43 -32.8 433.47 -38.49Q436.52 -44.18 441.78 -47.16Q447.03 -50.14 453.6 -50.14Q460.18 -50.14 465.42 -47.16Q470.65 -44.18 473.7 -38.49Q476.75 -32.8 476.75 -24.7Q476.75 -16.64 473.7 -10.97Q470.65 -5.29 465.42 -2.31Q460.18 0.66 453.6 0.66ZM453.6 -8.58Q457.41 -8.58 460.23 -10.44Q463.05 -12.29 464.6 -15.89Q466.15 -19.49 466.15 -24.7Q466.15 -29.95 464.6 -33.57Q463.05 -37.18 460.23 -39.04Q457.41 -40.89 453.6 -40.89Q449.82 -40.89 446.99 -39.04Q444.17 -37.18 442.6 -33.57Q441.03 -29.95 441.03 -24.7Q441.03 -19.49 442.6 -15.89Q444.17 -12.29 446.99 -10.44Q449.82 -8.58 453.6 -8.58ZM499.91 0.7Q493.92 0.7 489.49 -1.13Q485.06 -2.96 482.58 -6.57Q480.1 -10.19 479.96 -15.54H490.08Q490.27 -13.07 491.53 -11.4Q492.8 -9.74 494.93 -8.9Q497.06 -8.06 499.79 -8.06Q502.45 -8.06 504.43 -8.83Q506.4 -9.6 507.49 -10.98Q508.57 -12.36 508.57 -14.18Q508.57 -15.84 507.58 -16.96Q506.6 -18.08 504.73 -18.89Q502.85 -19.69 500.15 -20.32L494.75 -21.65Q488.5 -23.15 484.89 -26.41Q481.28 -29.68 481.28 -35.17Q481.28 -39.66 483.71 -43.02Q486.14 -46.38 490.37 -48.26Q494.61 -50.14 500.02 -50.14Q505.54 -50.14 509.64 -48.25Q513.75 -46.36 516.05 -43Q518.35 -39.64 518.43 -35.25H508.36Q508.09 -38.16 505.89 -39.78Q503.7 -41.4 499.94 -41.4Q497.4 -41.4 495.62 -40.68Q493.84 -39.97 492.92 -38.71Q492 -37.45 492 -35.83Q492 -34.09 493.06 -32.91Q494.11 -31.74 495.9 -31Q497.68 -30.25 499.81 -29.74L504.23 -28.66Q507.45 -27.93 510.16 -26.72Q512.87 -25.5 514.88 -23.74Q516.89 -21.99 517.99 -19.6Q519.09 -17.22 519.09 -14.13Q519.09 -9.61 516.81 -6.27Q514.53 -2.94 510.24 -1.12Q505.96 0.7 499.91 0.7ZM541.53 0.7Q535.54 0.7 531.11 -1.13Q526.68 -2.96 524.2 -6.57Q521.72 -10.19 521.58 -15.54H531.7Q531.89 -13.07 533.16 -11.4Q534.42 -9.74 536.55 -8.9Q538.68 -8.06 541.41 -8.06Q544.08 -8.06 546.05 -8.83Q548.02 -9.6 549.11 -10.98Q550.19 -12.36 550.19 -14.18Q550.19 -15.84 549.21 -16.96Q548.22 -18.08 546.35 -18.89Q544.47 -19.69 541.77 -20.32L536.37 -21.65Q530.12 -23.15 526.51 -26.41Q522.9 -29.68 522.9 -35.17Q522.9 -39.66 525.33 -43.02Q527.76 -46.38 531.99 -48.26Q536.23 -50.14 541.64 -50.14Q547.16 -50.14 551.26 -48.25Q555.37 -46.36 557.67 -43Q559.97 -39.64 560.05 -35.25H549.98Q549.71 -38.16 547.51 -39.78Q545.32 -41.4 541.56 -41.4Q539.02 -41.4 537.24 -40.68Q535.46 -39.97 534.54 -38.71Q533.62 -37.45 533.62 -35.83Q533.62 -34.09 534.68 -32.91Q535.74 -31.74 537.52 -31Q539.3 -30.25 541.43 -29.74L545.85 -28.66Q549.07 -27.93 551.78 -26.72Q554.49 -25.5 556.5 -23.74Q558.51 -21.99 559.61 -19.6Q560.71 -17.22 560.71 -14.13Q560.71 -9.61 558.43 -6.27Q556.15 -2.94 551.87 -1.12Q547.58 0.7 541.53 0.7ZM575.25 -49.47V0H564.81V-49.47ZM580.93 0V-49.47H600.73Q606.18 -49.47 609.83 -47.85Q613.48 -46.22 615.32 -43.36Q617.15 -40.5 617.15 -36.8Q617.15 -33.89 615.98 -31.71Q614.81 -29.52 612.8 -28.13Q610.78 -26.74 608.2 -26.16V-25.66Q611.03 -25.55 613.51 -24.08Q615.99 -22.6 617.53 -19.97Q619.08 -17.33 619.08 -13.67Q619.08 -9.75 617.14 -6.66Q615.21 -3.57 611.43 -1.78Q607.64 0 602.06 0ZM591.37 -8.54H599.91Q604.27 -8.54 606.29 -10.23Q608.31 -11.93 608.31 -14.7Q608.31 -16.77 607.32 -18.34Q606.33 -19.92 604.5 -20.82Q602.67 -21.71 600.16 -21.71H591.37ZM591.37 -28.77H599.14Q601.27 -28.77 602.96 -29.53Q604.64 -30.29 605.61 -31.69Q606.58 -33.1 606.58 -35.05Q606.58 -37.71 604.69 -39.36Q602.8 -41.01 599.34 -41.01H591.37ZM622.95 0V-49.47H633.39V-8.62H654.6V0ZM658.66 0V-49.47H692.01V-40.85H669.1V-29.22H690.26V-20.76H669.1V-8.62H692.06V0ZM708.66 -22.11V-39.91H717.37Q719.06 -39.94 720.47 -39.25Q721.88 -38.56 722.72 -37.24Q723.56 -35.93 723.56 -34.07Q723.56 -32.17 722.69 -30.82Q721.81 -29.47 720.37 -28.79Q718.94 -28.12 717.18 -28.12H711.19V-31.48H716.19Q717.2 -31.46 717.94 -32.11Q718.68 -32.75 718.68 -34.06Q718.68 -35.37 717.94 -35.95Q717.19 -36.52 716.21 -36.54H713.29V-22.11ZM720.04 -30.35 724.13 -22.11H719.02L715.23 -30.35ZM715.63 -11.49Q711.65 -11.49 708.14 -13Q704.64 -14.51 701.98 -17.17Q699.33 -19.82 697.84 -23.33Q696.35 -26.83 696.35 -30.81Q696.35 -34.8 697.84 -38.3Q699.33 -41.8 701.98 -44.46Q704.64 -47.12 708.14 -48.63Q711.65 -50.14 715.63 -50.14Q719.65 -50.14 723.15 -48.63Q726.65 -47.12 729.31 -44.46Q731.97 -41.8 733.46 -38.3Q734.95 -34.8 734.95 -30.81Q734.95 -26.83 733.46 -23.33Q731.97 -19.82 729.32 -17.17Q726.67 -14.51 723.16 -13Q719.65 -11.49 715.63 -11.49ZM715.63 -16.61Q719.59 -16.61 722.82 -18.52Q726.05 -20.43 727.97 -23.66Q729.88 -26.88 729.87 -30.81Q729.88 -34.74 727.96 -37.97Q726.05 -41.2 722.81 -43.12Q719.57 -45.03 715.63 -45.01Q711.72 -45.03 708.49 -43.12Q705.26 -41.2 703.34 -37.97Q701.43 -34.74 701.43 -30.82Q701.43 -26.89 703.35 -23.66Q705.26 -20.43 708.49 -18.52Q711.71 -16.61 715.63 -16.61Z"/></g></svg></a><div class="navlinks"><a href="/">Home</a><a href="/letters/">Archive</a><a href="/#about">About</a></div></nav>
+  <!-- Everything in the head is white on the deep sky. The heading left, the dek right from 900px; they stack on phones. -->
+  <div class="kit-hero">
+    <div>
+      <div class="eyebrow">Twenty CRM setup guide &middot; From the Reel</div>
+      <!-- One colour. The two slots are legacy names: write one headline, never two tones. Two sentences? Put <br> after the first ("skills.<br> Great"); phones drop the break. -->
+      <h1>Swap Salesforce for Twenty.<br> Here's the full setup.</h1>
+    </div>
+    <p class="dek">You commented "REPO". Here it is. The link to Twenty, the open-source CRM from the Reel, and the full setup guide: cloud or self-hosted, bringing your contacts over, your deal pipeline, a first workflow and the AI. Plus what Salesforce costs next to it. I didn't make Twenty, and none of the links are affiliate links. No course, no upsell.</p>
+  </div>
+</header>
+
+<section class="gate pad" id="gate">
+  <div class="gate-grid">
+    <!-- The featured shelf (DESIGN.md 10.7): this guide's cover large under a "This guide" tag, every other guide beside it,
+         served from /guides/ on theaotp.com. Its cover is /guides/covers/twenty.svg (cover-tools/make_covers.py) and the
+         guide belongs in /guides/guides.json + guides-all.json; with no cover the shelf shows the other guides alone.
+         Where /guides/ does not resolve (file://, another host) onerror drops the column and the card is copy | form. -->
+    <div class="gate-shelf">
+      <link rel="stylesheet" href="/guides/shelf.css">
+      <div data-aotp-shelf="featured" data-featured="twenty" data-title="Twenty CRM setup guide"></div>
+      <script src="/guides/shelf.js" defer onerror="this.closest('.gate-grid').classList.add('no-shelf')"></script>
+    </div>
+    <!-- Copy order: THIS guide by name, then every other guide, then the weekly letter (Rich, 2026-10-02). -->
+    <div class="gate-intro">
+      <div class="eyebrow">Free guide &middot; one email</div>
+      <h2>Unlock the Twenty CRM setup guide.</h2>
+      <p>Leave your email and this guide opens right here. The same email opens every other guide on the shelf and signs you up for the weekly letter.</p>
+    </div>
+    <ol class="unlocks">
+      <!-- Item 01 names this guide and two to four of its sections in plain words, never the payload itself. -->
+      <li class="this"><span class="n">01</span><div><b>Twenty CRM setup guide <span class="now">Opens now</span></b><ul><li>Cloud or self-hosted, with the Docker setup</li><li>Bringing your contacts over from a CSV or Salesforce</li><li>Your pipeline, a first workflow and the AI</li><li>What Salesforce costs next to Twenty</li></ul></div></li>
+      <li><span class="n">02</span><div><b>Every other guide</b>Prompt kits, setup guides and reading lists from my other Reels. The same email opens them all.</div></li>
+      <li><span class="n">03</span><div><b>The weekly letter</b>Five useful things I made with AI each week, with the prompts and workflows inside. Unsubscribe any time.</div></li>
+    </ol>
+    <div class="gate-act">
+      <form id="gate-form" novalidate>
+        <label for="gate-email" class="sr-only">Email address</label>
+        <input id="gate-email" type="email" name="email" placeholder="you@somewhere.com" autocomplete="email" required>
+        <button type="submit">Unlock the guide and subscribe to AOTP</button>
+      </form>
+      <p class="gate-status" id="gate-status" aria-live="polite"></p>
+      <p class="gate-small">Already on the list? Enter the same email and it unlocks without subscribing you twice.</p>
+      <noscript><p class="gate-small">This page needs JavaScript to unlock. Or just subscribe on <a href="/">the homepage</a> and reply to any letter for the Twenty CRM setup guide.</p></noscript>
+    </div>
+  </div>
+</section>
+
+<!-- The shared unlock's line (/guides/unlock.js): shown once the page is open, never with the gate. -->
+<p class="subbed pad" id="subbed" hidden>You're subscribed, so every guide is open.<a href="#gate" id="gate-reset">Use a different email</a></p>
+
+<!-- EVERYTHING OF VALUE LIVES INSIDE #kit. Nothing valuable outside it. -->
+<div id="kit" hidden>
+<section class="step pad" id="start">
+  <div class="step-kicker">Start here</div>
+  <div>
+    <h2>Twenty, in one minute.</h2>
+    <p class="lede">Twenty is a free, open-source CRM. It covers the core jobs most small businesses pay Salesforce for: contacts, companies, a deal pipeline, workflows and AI agents.</p>
+    <p>Here's the link: <a href="https://github.com/twentyhq/twenty" target="_blank" rel="noopener">github.com/twentyhq/twenty</a>. The repo describes itself as "The open alternative to Salesforce, designed for AI." and had 58,522 stars on GitHub on 19 October 2026. The website is <a href="https://twenty.com/" target="_blank" rel="noopener">twenty.com</a>.</p>
+    <ol class="index">
+      <li><span class="n">01</span><a href="#replaces">What it replaces</a><span class="st">Salesforce, mapped</span></li>
+      <li><span class="n">02</span><a href="#cost">What it costs</a><span class="st">Next to Salesforce</span></li>
+      <li><span class="n">03</span><a href="#setup">Setup</a><span class="st">Cloud or Docker</span></li>
+      <li><span class="n">04</span><a href="#first-10">First 10 minutes</a><span class="st">Mailbox and pipeline</span></li>
+      <li><span class="n">05</span><a href="#import">Bring your data</a><span class="st">CSV or Salesforce</span></li>
+      <li><span class="n">06</span><a href="#workflows">Workflows and AI</a><span class="st">Your first automation</span></li>
+      <li><span class="n">07</span><a href="#tips">Tips</a><span class="st">Habits that pay off</span></li>
+      <li><span class="n">08</span><a href="#links">Links</a><span class="st">Everything in one place</span></li>
+    </ol>
+    <div class="note">Twenty isn't new: the repo started in December 2022 and version 1.0 shipped in June 2025. It's free when you host it yourself. Twenty's own cloud is paid, from $9 a user a month. Section 02 has the numbers.</div>
+  </div>
+</section>
+
+<section class="step pad" id="replaces">
+  <div class="step-kicker"><span>01</span>What it replaces</div>
+  <div>
+    <h2>What Twenty replaces.</h2>
+    <p class="lede">Twenty keeps your contacts and companies, tracks deals through a pipeline, automates the repetitive steps and lets AI work on your data.</p>
+    <p>If you're coming from Salesforce, this is how the main records line up, from Twenty's migration guide.</p>
+    <table>
+      <tr><th>In Salesforce</th><th>In Twenty</th></tr>
+      <tr><td>Account</td><td>Company</td></tr>
+      <tr><td>Contact</td><td>People</td></tr>
+      <tr><td>Opportunity</td><td>Opportunity, shown as a kanban pipeline</td></tr>
+      <tr><td>Activity</td><td>Task or Note</td></tr>
+      <tr><td>Custom object</td><td>Custom object (unlimited on every plan)</td></tr>
+    </table>
+    <p>Around those records you get table, kanban and calendar views, a visual workflow builder, an AI chat that answers questions about your data, AI agents inside workflows, email and calendar sync with Google or Microsoft, and REST and GraphQL APIs for your own tools.</p>
+    <div class="note">Where Salesforce still wins, in Twenty's own words: "Salesforce remains the deepest enterprise platform, with an ecosystem for almost everything. At a thousand seats with a dedicated admin team, it is a different conversation." For a small business, the question is whether you use that depth.</div>
+  </div>
+</section>
+
+<section class="step pad" id="cost">
+  <div class="step-kicker"><span>02</span>What it costs</div>
+  <div>
+    <h2>What Salesforce costs, and what Twenty costs.</h2>
+    <p class="lede">Salesforce charges per user, per month, and its AI agents are a paid add-on. Twenty is free if you host it yourself and starts at $9 a user on its cloud.</p>
+
+    <p class="inst">Salesforce Sales Cloud</p>
+    <p>List prices per user per month, billed annually, from <a href="https://www.salesforce.com/sales/pricing/" target="_blank" rel="noopener">Salesforce's pricing page</a> on 19 October 2026.</p>
+    <table>
+      <tr><th>Edition</th><th>Per user, per month</th></tr>
+      <tr><td>Free Suite</td><td>$0</td></tr>
+      <tr><td>Starter Suite</td><td>$25 (billed monthly or annually)</td></tr>
+      <tr><td>Pro Suite</td><td>$100</td></tr>
+      <tr><td>Core</td><td>$195</td></tr>
+      <tr><td>Advanced</td><td>$395</td></tr>
+      <tr><td>Max</td><td>$550</td></tr>
+      <tr><td>Agentforce for Sales</td><td>Add-on, from $125</td></tr>
+    </table>
+
+    <p class="inst">Twenty</p>
+    <p>From <a href="https://twenty.com/pricing" target="_blank" rel="noopener">Twenty's pricing page</a> on 19 October 2026.</p>
+    <table>
+      <tr><th>Plan</th><th>Price</th></tr>
+      <tr><td>Self-hosted</td><td>$0, all Pro features, up to 5 workspaces, community support on Discord</td></tr>
+      <tr><td>Cloud Pro</td><td>$9 per user per month billed yearly, $12 billed monthly</td></tr>
+      <tr><td>Cloud Organization</td><td>$19 per user per month billed yearly, $25 billed monthly. Adds SSO and row-level permissions</td></tr>
+      <tr><td>Enterprise</td><td>From $50k a year</td></tr>
+    </table>
+
+    <p class="inst">The 3 September price change</p>
+    <p>On 3 September 2026 Salesforce replaced its Enterprise, Unlimited and Agentforce 1 editions with Core, Advanced and Max. Core is $195 a user a month. The Enterprise edition it replaced listed at $175, so that's about 11% more. Advanced at $395 replaced Unlimited at $350, about 13% more. Max stayed at $550. The old prices come from <a href="https://upperedge.com/salesforce/salesforce-just-changed-the-game-with-new-product-editions-whats-really-happening/" target="_blank" rel="noopener">UpperEdge's analysis</a>, not from Salesforce.</p>
+    <p>Salesforce frames it as more value, not a price rise. <a href="https://www.salesforce.com/news/stories/salesforce-simplifies-editions-2026/" target="_blank" rel="noopener">Its announcement</a> says existing customers on legacy editions keep their pricing, and each new edition includes a pool of Flex Credits for AI (500,000 a year on Core). AI use beyond the pool is billed, and Agentforce for Sales is sold separately from $125 a user a month. So some AI is bundled now, and the rest costs extra.</p>
+
+    <p class="inst">A worked example: 10 people, list price, one year</p>
+    <table>
+      <tr><th>Option</th><th>Per year</th></tr>
+      <tr><td>Salesforce Core</td><td>$23,400 (10 &times; $195 &times; 12)</td></tr>
+      <tr><td>Core plus Agentforce for Sales</td><td>$38,400 (adds 10 &times; $125 &times; 12)</td></tr>
+      <tr><td>Salesforce Starter Suite</td><td>$3,000</td></tr>
+      <tr><td>Twenty Cloud Organization</td><td>$2,280</td></tr>
+      <tr><td>Twenty Cloud Pro</td><td>$1,080</td></tr>
+      <tr><td>Twenty self-hosted</td><td>$0 in licences. You pay for the server and the time to run it</td></tr>
+    </table>
+    <div class="note">This is my arithmetic on list prices, before tax and before any discount Salesforce negotiates. For a few people who only need contacts and a simple pipeline, Starter Suite at $25 isn't far from Twenty's cloud. The gap opens at Core and above, and again when you add Agentforce.</div>
+    <div class="note">Self-hosting costs nothing in licence fees, but it does take work. You need a server with at least 2 GB of RAM, HTTPS, backups and someone to run updates. Single sign-on, row-level permissions, AI usage data and audit logs need the paid Organization plan even when you self-host. Most of Twenty's code is under the AGPLv3 licence. Using it doesn't affect you, but if you change the code, read the licence first.</div>
+  </div>
+</section>
+
+<section class="step pad" id="setup">
+  <div class="step-kicker"><span>03</span>Setup</div>
+  <div>
+    <h2>Cloud or self-host? Pick one.</h2>
+    <p class="lede">Pick the cloud if you want it working today with no server to look after. Self-host if you want it free and someone on your team is happy running Docker.</p>
+    <ul class="lessons">
+      <li><strong><span class="k">1</span>The cloud: sign up and go.</strong>
+        <p>Go to <a href="https://app.twenty.com" target="_blank" rel="noopener">app.twenty.com</a> and sign up with Google, Microsoft or email. Twenty's quickstart offers a 30-day trial with a card or 7 days without one, both with full access. Then name your workspace. You can change plan or billing period any time in Settings &rarr; Billing.</p>
+      </li>
+      <li><strong><span class="k">2</span>Self-host with Docker: one command.</strong>
+        <p>You need Docker and Docker Compose, installed and up to date, and at least 2 GB of RAM. Docker is a program that runs software in a sealed box, and it works on a Mac, a Windows PC or a Linux server. This is Twenty's one-line installer. Run it in a terminal, the text window where you type commands.</p>
+        <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>bash &lt;(curl -sL https://raw.githubusercontent.com/twentyhq/twenty/main/packages/twenty-docker/scripts/install.sh)</pre></div>
+        <p>When it finishes, open <code>http://localhost:3000</code> in your browser. Trying it on your own laptop first is a good way to see it before you pay for a server.</p>
+      </li>
+      <li><strong><span class="k">3</span>Or do it by hand.</strong>
+        <p>The manual route from the same docs. Download the settings file, make two secrets, put them in <code>.env</code>, then start it.</p>
+        <div class="promptbox code"><button class="copybtn" data-copy>Copy</button><pre>curl -o .env https://raw.githubusercontent.com/twentyhq/twenty/refs/heads/main/packages/twenty-docker/.env.example
+openssl rand -base64 32
+openssl rand -hex 32
+curl -o docker-compose.yml https://raw.githubusercontent.com/twentyhq/twenty/refs/heads/main/packages/twenty-docker/docker-compose.yml
+docker compose up -d</pre></div>
+        <p>Before the last line, open <code>.env</code>. Paste the first secret in as <code>ENCRYPTION_KEY</code> and the second as <code>PG_DATABASE_PASSWORD</code>. The docs say to keep the password free of special characters, which is why it uses the hex one. Keep <code>ENCRYPTION_KEY</code> somewhere safe: lose it and you lose access to every secret stored in the database, such as connected email accounts.</p>
+      </li>
+      <li><strong><span class="k">4</span>Put it on a server your team can reach.</strong>
+        <p>Set <code>SERVER_URL</code> in <code>.env</code> to the address people will use, such as <code>https://crm.yourcompany.com</code>, then restart with <code>docker compose down</code> and <code>docker compose up -d</code>. Twenty recommends a reverse proxy with SSL in front of it, because some features need HTTPS.</p>
+        <p>Back up the database every day. This line from the docs goes in your crontab, the scheduler on Mac and Linux:</p>
+        <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>0 2 * * * docker exec twenty-postgres pg_dump -U postgres twenty &gt; /backups/twenty_$(date +\%Y\%m\%d).sql</pre></div>
+        <p>To upgrade: back up, run <code>docker compose down</code>, change <code>TAG</code> in <code>.env</code> to the new version, then <code>docker compose up -d</code>. Twenty runs the database changes itself when it starts.</p>
+      </li>
+    </ul>
+    <div class="note">Commands from Twenty's <a href="https://docs.twenty.com/developers/self-host/capabilities/docker-compose" target="_blank" rel="noopener">Docker Compose guide</a> and <a href="https://docs.twenty.com/developers/self-host/capabilities/upgrade-guide" target="_blank" rel="noopener">upgrade guide</a>, checked on 19 October 2026. If you'd rather not run a server, Twenty lists certified hosting partners on its site.</div>
+  </div>
+</section>
+
+<section class="step pad" id="first-10">
+  <div class="step-kicker"><span>04</span>First 10 minutes</div>
+  <div>
+    <h2>Your first 10 minutes.</h2>
+    <p class="lede">Connect your mailbox, then build your deal pipeline. That's enough to start using it tomorrow morning.</p>
+    <ul class="lessons">
+      <li><strong><span class="k">1</span>Connect your mailbox first.</strong>
+        <p>Go to Settings &rarr; Accounts and connect your Google or Microsoft account. Twenty imports your emails and calendar events and creates contacts from the people you talk to. Using another provider? The same page takes SMTP for mail and CalDAV for calendars. Twenty's own docs say to start here, because you get real data before you customise anything.</p>
+      </li>
+      <li><strong><span class="k">2</span>Set your deal stages.</strong>
+        <p>Your pipeline's columns come from the Stage field on Opportunities. Go to Settings &rarr; Data Model &rarr; Opportunities &rarr; Stage and rename the stages to match how you sell. The docs suggest five to seven, for example New, Qualified, Meeting, Proposal, Negotiation, Closed Won and Closed Lost.</p>
+      </li>
+      <li><strong><span class="k">3</span>Make the pipeline view.</strong>
+        <p>Open Opportunities, click the view dropdown, then + Add view. Call it "Sales Pipeline", click Create, then choose Kanban under Options. Under Options &rarr; Fields, show Company, Amount, Close Date and Owner. Click the number next to a stage name and pick Sum of Amount to see the value of each column.</p>
+      </li>
+      <li><strong><span class="k">4</span>Add a deal and drag it.</strong>
+        <p>Click + in a stage column to add a deal. When it moves forward, drag the card to the next column. That drag updates the stage, which is what the workflow in section 06 listens for.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="step pad" id="import">
+  <div class="step-kicker"><span>05</span>Bring your data</div>
+  <div>
+    <h2>Bring your contacts in.</h2>
+    <p class="lede">Import companies first, then people, then deals. Each one links to the one before it, so the order matters.</p>
+
+    <p class="inst">From a spreadsheet</p>
+    <ul>
+      <li>Press <code>Cmd+K</code> on a Mac or <code>Ctrl+K</code> on Windows, type "import" and choose Import records. Or open People and click &#8942; &rarr; Import records.</li>
+      <li>Click <strong>Download sample file</strong> first to see the exact columns Twenty expects. It takes CSV, XLSX or XLS, up to 10,000 records per file.</li>
+      <li>Remove duplicates before you upload. Two people can't share an email, and two companies can't share a domain.</li>
+      <li>Write company domains as <code>https://acme.com</code>, not <code>acme.com</code>. It stops duplicates when your email sync starts creating companies too.</li>
+      <li>To link each person to their company, add a <code>companyDomain</code> column and map it to the Company field.</li>
+      <li>Any custom field has to exist in Settings &rarr; Data Model before you import. If your data names an owner for each record, invite your team first.</li>
+    </ul>
+    <p>A People file that links to companies looks like this, from Twenty's guide:</p>
+    <div class="promptbox code"><button class="copybtn" data-copy>Copy</button><pre>firstName,lastName,email,jobTitle,companyDomain
+John,Smith,john@acme.com,CEO,https://acme.com
+Jane,Doe,jane@widgets.co,CTO,https://widgets.co</pre></div>
+    <p>Twenty checks the file before it imports and highlights problem rows in yellow. You can fix a cell right there or skip the row.</p>
+
+    <p class="inst">From Salesforce</p>
+    <ul class="lessons">
+      <li><strong><span class="k">1</span>Export from Salesforce.</strong>
+        <p>In Salesforce Setup, type "Data Export" in the Quick Find box, choose Data Export, then Export Now. Salesforce emails you when a zip of CSV files is ready, and the zip is deleted 48 hours later, so download it quickly. Data Loader, Salesforce's separate app, is the other way out. Trailhead's <a href="https://trailhead.salesforce.com/content/learn/modules/lex_implementation_data_management/lex_implementation_data_export" target="_blank" rel="noopener">Export Data unit</a> walks through both.</p>
+      </li>
+      <li><strong><span class="k">2</span>Clean it before you move it.</strong>
+        <p>Keep active contacts and companies, open deals, the notes that matter and the custom fields you actually use. Leave out contacts with no activity in two years, duplicates and test data. Twenty's migration guide treats the move as a fresh start.</p>
+      </li>
+      <li><strong><span class="k">3</span>Import in order.</strong>
+        <p>Accounts go in as Companies, then Contacts as People, then Opportunities, then notes and tasks. Twenty's comparison page says its importer handles Salesforce exports out of the box. Over 10,000 records, split the file. Over 50,000, the docs recommend the API.</p>
+      </li>
+      <li><strong><span class="k">4</span>Rebuild what doesn't come across.</strong>
+        <p>Views, workflows and permissions don't transfer, and attachments aren't in CSV exports. Keep Salesforce running until you've compared record counts and checked a few people and companies by hand.</p>
+      </li>
+    </ul>
+    <div class="note">Steps from Twenty's <a href="https://docs.twenty.com/user-guide/data-migration/how-tos/migrating-from-other-crms" target="_blank" rel="noopener">migration guide</a> and <a href="https://docs.twenty.com/user-guide/data-migration/how-tos/import-contacts-via-csv" target="_blank" rel="noopener">contacts import guide</a>.</div>
+  </div>
+</section>
+
+<section class="step pad" id="workflows">
+  <div class="step-kicker"><span>06</span>Workflows and AI</div>
+  <div>
+    <h2>Your first workflow, then the AI.</h2>
+    <p class="lede">Start with one automation for a job you do every week. A good first one: when a deal is won, create the onboarding task for you.</p>
+    <ul class="lessons">
+      <li><strong><span class="k">1</span>Create the workflow.</strong>
+        <p>Open Workflows in the sidebar, below your other objects, click + New Record and call it "Deal won".</p>
+      </li>
+      <li><strong><span class="k">2</span>Set the trigger.</strong>
+        <p>Choose Record is Updated, pick Opportunities, and under fields to monitor choose Stage. Now it runs every time a deal changes stage.</p>
+      </li>
+      <li><strong><span class="k">3</span>Only carry on for won deals.</strong>
+        <p>Add a Filter step where the new stage equals your won stage. In Twenty's own example the condition is <code>{{trigger.properties.after.stage}}</code> equals "Closed Won".</p>
+      </li>
+      <li><strong><span class="k">4</span>Create the task.</strong>
+        <p>Add a Create Record step on Tasks. Title it "Onboarding:" followed by the deal name from the variable picker, set it due three days out and link it to the company and the deal.</p>
+      </li>
+      <li><strong><span class="k">5</span>Test it, then switch it on.</strong>
+        <p>Click Test, move a test deal to your won stage and check the task appears. Then toggle the workflow to Active.</p>
+      </li>
+    </ul>
+    <p>From there, Twenty's docs have recipes for <a href="https://docs.twenty.com/user-guide/workflows/how-tos/crm-automations/closed-won-automations" target="_blank" rel="noopener">a fuller deal-won flow</a> and a daily <a href="https://docs.twenty.com/user-guide/workflows/how-tos/crm-automations/detect-stale-opportunities" target="_blank" rel="noopener">stale-deal alert</a>. Workflows use credits when they run, not when you build them. On Twenty's cloud, monthly billing includes 5 credits a month and yearly billing 50 a year. Simple steps use very little; AI and code steps use more.</p>
+
+    <p class="inst">The AI</p>
+    <ul class="lessons">
+      <li><strong><span class="k">1</span>Ask your CRM questions.</strong>
+        <p>The AI chat answers questions about your data in plain English, and it knows which record you're looking at. Examples from Twenty's docs:</p>
+        <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>Which deals have been in Negotiation for more than 30 days?</pre></div>
+        <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>Summarize my interactions with this person</pre></div>
+      </li>
+      <li><strong><span class="k">2</span>Put an AI agent in a workflow.</strong>
+        <p>Add an AI Agent step to any workflow and write the prompt it follows. Twenty's examples: sort inbound leads into categories, enrich company records from public sources, draft follow-up emails from meeting notes and score deals.</p>
+      </li>
+      <li><strong><span class="k">3</span>Decide what the AI can see.</strong>
+        <p>AI agents work inside the same permission system as your team. Give each one a role in Settings &rarr; Members &rarr; Roles to set what it can read and change.</p>
+      </li>
+      <li><strong><span class="k">4</span>Choose the model.</strong>
+        <p>On the cloud, Twenty runs the models on its own accounts and you pick which ones under Settings &rarr; AI. Self-hosted, you bring your own key, and it works on the free plan: add <code>OPENAI_API_KEY</code>, <code>ANTHROPIC_API_KEY</code>, <code>GOOGLE_API_KEY</code>, <code>MISTRAL_API_KEY</code> or <code>XAI_API_KEY</code> in Settings &rarr; Admin Panel &rarr; Configuration Variables, or in <code>.env</code> followed by a restart. An API key is the password that lets Twenty use that provider's AI, and the provider bills you for it.</p>
+      </li>
+    </ul>
+    <div class="note">Twenty's pricing table also lists an MCP server on every plan. MCP is the standard way AI tools such as Claude plug into other apps.</div>
+  </div>
+</section>
+
+<section class="step pad" id="tips">
+  <div class="step-kicker"><span>07</span>Tips</div>
+  <div>
+    <h2>Habits that make a CRM pay for itself.</h2>
+    <p class="lede">A CRM only earns its keep if what's in it is current. None of these take more than a few minutes a day.</p>
+    <ul class="lessons">
+      <li><strong><span class="k">1</span>Let the mailbox do the typing.</strong>
+        <p>With email and calendar connected, every conversation with a customer lands on their record. Nobody has to log a call to keep the history.</p>
+      </li>
+      <li><strong><span class="k">2</span>Give every open deal a close date you believe.</strong>
+        <p>Twenty's own pipeline advice: keep close dates realistic, update deals as they move, and close stale ones promptly. A pipeline full of dead deals tells you nothing.</p>
+      </li>
+      <li><strong><span class="k">3</span>Write down what each stage means.</strong>
+        <p>"Proposal" should mean the same thing to everyone. Clear rules for each stage are what make the column totals worth reading.</p>
+      </li>
+      <li><strong><span class="k">4</span>Build on People, Companies and Opportunities.</strong>
+        <p>Those three show synced emails and meetings. Add a field such as Person Type to sort people, rather than a new object that won't carry the email history.</p>
+      </li>
+      <li><strong><span class="k">5</span>Make two views you'll actually open.</strong>
+        <p>"My Pipeline" filtered to Owner is Me, and "Closing This Month" as a table sorted by close date. Then pick a fixed time each week to go through them.</p>
+      </li>
+      <li><strong><span class="k">6</span>Automate the nag.</strong>
+        <p>Once the deal-won workflow works, add the stale-deal alert. Then the CRM reminds you about cold deals and you don't have to remember.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="step pad" id="links">
+  <div class="step-kicker"><span>08</span>Links</div>
+  <div>
+    <h2>Every link from this guide.</h2>
+    <p class="lede">Twenty's docs are good and change often. When a step here and the docs disagree, follow the docs.</p>
+    <ol class="index">
+      <li><span class="n">01</span><a href="https://github.com/twentyhq/twenty" target="_blank" rel="noopener">Twenty on GitHub</a><span class="st">The repo</span></li>
+      <li><span class="n">02</span><a href="https://app.twenty.com" target="_blank" rel="noopener">Twenty cloud sign-up</a><span class="st">app.twenty.com</span></li>
+      <li><span class="n">03</span><a href="https://twenty.com/pricing" target="_blank" rel="noopener">Twenty pricing</a><span class="st">twenty.com</span></li>
+      <li><span class="n">04</span><a href="https://docs.twenty.com/getting-started/quickstart" target="_blank" rel="noopener">Quickstart</a><span class="st">Twenty docs</span></li>
+      <li><span class="n">05</span><a href="https://docs.twenty.com/developers/self-host/capabilities/docker-compose" target="_blank" rel="noopener">Self-host with Docker Compose</a><span class="st">Twenty docs</span></li>
+      <li><span class="n">06</span><a href="https://docs.twenty.com/user-guide/data-migration/how-tos/migrating-from-other-crms" target="_blank" rel="noopener">Migrating from other CRMs</a><span class="st">Twenty docs</span></li>
+      <li><span class="n">07</span><a href="https://docs.twenty.com/user-guide/views-pipelines/how-tos/set-up-a-sales-pipeline" target="_blank" rel="noopener">Set up a sales pipeline</a><span class="st">Twenty docs</span></li>
+      <li><span class="n">08</span><a href="https://docs.twenty.com/user-guide/workflows/overview" target="_blank" rel="noopener">Workflows</a><span class="st">Twenty docs</span></li>
+      <li><span class="n">09</span><a href="https://docs.twenty.com/user-guide/ai/overview" target="_blank" rel="noopener">AI chat and agents</a><span class="st">Twenty docs</span></li>
+      <li><span class="n">10</span><a href="https://www.salesforce.com/sales/pricing/" target="_blank" rel="noopener">Salesforce pricing</a><span class="st">salesforce.com</span></li>
+      <li><span class="n">11</span><a href="https://www.salesforce.com/news/stories/salesforce-simplifies-editions-2026/" target="_blank" rel="noopener">Salesforce's new editions</a><span class="st">3 September 2026</span></li>
+      <li><span class="n">12</span><a href="https://trailhead.salesforce.com/content/learn/modules/lex_implementation_data_management/lex_implementation_data_export" target="_blank" rel="noopener">Export your Salesforce data</a><span class="st">Trailhead</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="step pad" id="next">
+  <div class="step-kicker"><span>09</span>What to do now</div>
+  <div>
+    <h2>Pick your starting point.</h2>
+    <p class="lede">Reading this won't change your CRM. Start with the line that fits where you are.</p>
+    <ul>
+      <li><strong>If you want to try it today:</strong> start a cloud trial at <a href="https://app.twenty.com" target="_blank" rel="noopener">app.twenty.com</a>, connect your mailbox and build the pipeline (<a href="#first-10">section 04</a>).</li>
+      <li><strong>If you're paying for Salesforce:</strong> export your data, import a test batch into a trial and run both side by side for a couple of weeks (<a href="#import">section 05</a>).</li>
+      <li><strong>If you want it free:</strong> try the one-line Docker install on your laptop, then move it to a server with HTTPS and daily backups (<a href="#setup">section 03</a>).</li>
+      <li><strong>If you already use Twenty:</strong> build the deal-won workflow, then ask the AI chat about your stuck deals (<a href="#workflows">section 06</a>).</li>
+    </ul>
+  </div>
+</section>
+
+</div>
+
+<!-- The close and the footer are one block on the reversed sky, outside #kit so gated visitors get it too, everything
+     in it white on the dark stretch. .close-kit only shows once #kit is unlocked (CSS: #kit[hidden]~.closeblock .close-kit). -->
+<footer class="closeblock pad">
+  <div class="close-top">
+    <div>
+      <h2>See what's possible. Then build it.</h2>
+      <p class="close-kit">You're on the list now: five useful things I made with AI each week, and how I made them.</p>
+    </div>
+    <a class="close-btn" href="/">Back to the site</a>
+  </div>
+  <div class="close-row"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 897 112" role="img" aria-label="Art of the Possible"><title>Art of the Possible</title><g fill="#FFFFFF"><path transform="scale(0.448)" d="M93.301 48.471A34.601 34.601 0 1 1 156.699 48.471A34.601 34.601 0 0 0 93.301 48.471ZM156.699 48.471A34.601 34.601 0 1 1 201.529 93.301A34.601 34.601 0 0 0 156.699 48.471ZM201.529 93.301A34.601 34.601 0 1 1 156.699 48.471A34.601 34.601 0 0 0 201.529 93.301ZM201.529 93.301A34.601 34.601 0 1 1 201.529 156.699A34.601 34.601 0 0 0 201.529 93.301ZM201.529 156.699A34.601 34.601 0 1 1 156.699 201.529A34.601 34.601 0 0 0 201.529 156.699ZM156.699 201.529A34.601 34.601 0 1 1 201.529 156.699A34.601 34.601 0 0 0 156.699 201.529ZM156.699 201.529A34.601 34.601 0 1 1 93.301 201.529A34.601 34.601 0 0 0 156.699 201.529ZM93.301 201.529A34.601 34.601 0 1 1 48.471 156.699A34.601 34.601 0 0 0 93.301 201.529ZM48.471 156.699A34.601 34.601 0 1 1 93.301 201.529A34.601 34.601 0 0 0 48.471 156.699ZM48.471 156.699A34.601 34.601 0 1 1 48.471 93.301A34.601 34.601 0 0 0 48.471 156.699ZM48.471 93.301A34.601 34.601 0 1 1 93.301 48.471A34.601 34.601 0 0 0 48.471 93.301ZM93.301 48.471A34.601 34.601 0 1 1 48.471 93.301A34.601 34.601 0 0 0 93.301 48.471Z"/><path transform="translate(160 80.736)" d="M11.7 0H0.49L17.57 -49.47H31.04L48.09 0H36.91L24.49 -38.17H24.09ZM11.04 -19.44H37.49V-11.3H11.04ZM51.08 0V-49.47H70.57Q76.2 -49.47 80.16 -47.48Q84.12 -45.48 86.22 -41.85Q88.32 -38.21 88.32 -33.31Q88.32 -28.38 86.2 -24.84Q84.07 -21.29 80.04 -19.41Q76.01 -17.53 70.31 -17.53H57.27V-25.94H68.6Q71.63 -25.94 73.62 -26.76Q75.6 -27.59 76.58 -29.22Q77.55 -30.85 77.55 -33.31Q77.55 -35.78 76.57 -37.47Q75.59 -39.15 73.6 -40.02Q71.62 -40.89 68.58 -40.89H61.52V0ZM78.54 0 66.5 -22.52H77.78L90.09 0ZM90.95 -40.85V-49.47H131.58V-40.85H116.44V0H106.12V-40.85ZM170.54 0.66Q163.97 0.66 158.72 -2.32Q153.46 -5.31 150.41 -10.99Q147.36 -16.66 147.36 -24.7Q147.36 -32.8 150.41 -38.49Q153.46 -44.18 158.72 -47.16Q163.97 -50.14 170.54 -50.14Q177.12 -50.14 182.35 -47.16Q187.59 -44.18 190.64 -38.49Q193.69 -32.8 193.69 -24.7Q193.69 -16.64 190.64 -10.97Q187.59 -5.29 182.35 -2.31Q177.12 0.66 170.54 0.66ZM170.54 -8.58Q174.35 -8.58 177.16 -10.44Q179.98 -12.29 181.54 -15.89Q183.09 -19.49 183.09 -24.7Q183.09 -29.95 181.54 -33.57Q179.98 -37.18 177.16 -39.04Q174.35 -40.89 170.54 -40.89Q166.76 -40.89 163.93 -39.04Q161.1 -37.18 159.53 -33.57Q157.96 -29.95 157.96 -24.7Q157.96 -19.49 159.53 -15.89Q161.1 -12.29 163.93 -10.44Q166.76 -8.58 170.54 -8.58ZM198.51 0V-49.47H231.26V-40.85H208.95V-27.25H229.08V-18.79H208.95V0ZM246.36 -40.85V-49.47H286.99V-40.85H271.85V0H261.53V-40.85ZM290.8 0V-49.47H301.24V-29.06H322.46V-49.47H332.9V0H322.46V-20.44H301.24V0ZM338.59 0V-49.47H371.94V-40.85H349.03V-29.22H370.19V-20.76H349.03V-8.62H372V0ZM390.19 0V-49.47H409.68Q415.31 -49.47 419.27 -47.33Q423.23 -45.19 425.33 -41.4Q427.43 -37.61 427.43 -32.69Q427.43 -27.76 425.31 -24Q423.18 -20.25 419.15 -18.14Q415.12 -16.03 409.43 -16.03H396.99V-24.41H407.71Q410.74 -24.41 412.73 -25.46Q414.71 -26.52 415.69 -28.38Q416.66 -30.25 416.66 -32.69Q416.66 -35.18 415.69 -37.02Q414.71 -38.86 412.72 -39.88Q410.73 -40.89 407.69 -40.89H400.63V0ZM453.6 0.66Q447.03 0.66 441.78 -2.32Q436.52 -5.31 433.47 -10.99Q430.43 -16.66 430.43 -24.7Q430.43 -32.8 433.47 -38.49Q436.52 -44.18 441.78 -47.16Q447.03 -50.14 453.6 -50.14Q460.18 -50.14 465.42 -47.16Q470.65 -44.18 473.7 -38.49Q476.75 -32.8 476.75 -24.7Q476.75 -16.64 473.7 -10.97Q470.65 -5.29 465.42 -2.31Q460.18 0.66 453.6 0.66ZM453.6 -8.58Q457.41 -8.58 460.23 -10.44Q463.05 -12.29 464.6 -15.89Q466.15 -19.49 466.15 -24.7Q466.15 -29.95 464.6 -33.57Q463.05 -37.18 460.23 -39.04Q457.41 -40.89 453.6 -40.89Q449.82 -40.89 446.99 -39.04Q444.17 -37.18 442.6 -33.57Q441.03 -29.95 441.03 -24.7Q441.03 -19.49 442.6 -15.89Q444.17 -12.29 446.99 -10.44Q449.82 -8.58 453.6 -8.58ZM499.91 0.7Q493.92 0.7 489.49 -1.13Q485.06 -2.96 482.58 -6.57Q480.1 -10.19 479.96 -15.54H490.08Q490.27 -13.07 491.53 -11.4Q492.8 -9.74 494.93 -8.9Q497.06 -8.06 499.79 -8.06Q502.45 -8.06 504.43 -8.83Q506.4 -9.6 507.49 -10.98Q508.57 -12.36 508.57 -14.18Q508.57 -15.84 507.58 -16.96Q506.6 -18.08 504.73 -18.89Q502.85 -19.69 500.15 -20.32L494.75 -21.65Q488.5 -23.15 484.89 -26.41Q481.28 -29.68 481.28 -35.17Q481.28 -39.66 483.71 -43.02Q486.14 -46.38 490.37 -48.26Q494.61 -50.14 500.02 -50.14Q505.54 -50.14 509.64 -48.25Q513.75 -46.36 516.05 -43Q518.35 -39.64 518.43 -35.25H508.36Q508.09 -38.16 505.89 -39.78Q503.7 -41.4 499.94 -41.4Q497.4 -41.4 495.62 -40.68Q493.84 -39.97 492.92 -38.71Q492 -37.45 492 -35.83Q492 -34.09 493.06 -32.91Q494.11 -31.74 495.9 -31Q497.68 -30.25 499.81 -29.74L504.23 -28.66Q507.45 -27.93 510.16 -26.72Q512.87 -25.5 514.88 -23.74Q516.89 -21.99 517.99 -19.6Q519.09 -17.22 519.09 -14.13Q519.09 -9.61 516.81 -6.27Q514.53 -2.94 510.24 -1.12Q505.96 0.7 499.91 0.7ZM541.53 0.7Q535.54 0.7 531.11 -1.13Q526.68 -2.96 524.2 -6.57Q521.72 -10.19 521.58 -15.54H531.7Q531.89 -13.07 533.16 -11.4Q534.42 -9.74 536.55 -8.9Q538.68 -8.06 541.41 -8.06Q544.08 -8.06 546.05 -8.83Q548.02 -9.6 549.11 -10.98Q550.19 -12.36 550.19 -14.18Q550.19 -15.84 549.21 -16.96Q548.22 -18.08 546.35 -18.89Q544.47 -19.69 541.77 -20.32L536.37 -21.65Q530.12 -23.15 526.51 -26.41Q522.9 -29.68 522.9 -35.17Q522.9 -39.66 525.33 -43.02Q527.76 -46.38 531.99 -48.26Q536.23 -50.14 541.64 -50.14Q547.16 -50.14 551.26 -48.25Q555.37 -46.36 557.67 -43Q559.97 -39.64 560.05 -35.25H549.98Q549.71 -38.16 547.51 -39.78Q545.32 -41.4 541.56 -41.4Q539.02 -41.4 537.24 -40.68Q535.46 -39.97 534.54 -38.71Q533.62 -37.45 533.62 -35.83Q533.62 -34.09 534.68 -32.91Q535.74 -31.74 537.52 -31Q539.3 -30.25 541.43 -29.74L545.85 -28.66Q549.07 -27.93 551.78 -26.72Q554.49 -25.5 556.5 -23.74Q558.51 -21.99 559.61 -19.6Q560.71 -17.22 560.71 -14.13Q560.71 -9.61 558.43 -6.27Q556.15 -2.94 551.87 -1.12Q547.58 0.7 541.53 0.7ZM575.25 -49.47V0H564.81V-49.47ZM580.93 0V-49.47H600.73Q606.18 -49.47 609.83 -47.85Q613.48 -46.22 615.32 -43.36Q617.15 -40.5 617.15 -36.8Q617.15 -33.89 615.98 -31.71Q614.81 -29.52 612.8 -28.13Q610.78 -26.74 608.2 -26.16V-25.66Q611.03 -25.55 613.51 -24.08Q615.99 -22.6 617.53 -19.97Q619.08 -17.33 619.08 -13.67Q619.08 -9.75 617.14 -6.66Q615.21 -3.57 611.43 -1.78Q607.64 0 602.06 0ZM591.37 -8.54H599.91Q604.27 -8.54 606.29 -10.23Q608.31 -11.93 608.31 -14.7Q608.31 -16.77 607.32 -18.34Q606.33 -19.92 604.5 -20.82Q602.67 -21.71 600.16 -21.71H591.37ZM591.37 -28.77H599.14Q601.27 -28.77 602.96 -29.53Q604.64 -30.29 605.61 -31.69Q606.58 -33.1 606.58 -35.05Q606.58 -37.71 604.69 -39.36Q602.8 -41.01 599.34 -41.01H591.37ZM622.95 0V-49.47H633.39V-8.62H654.6V0ZM658.66 0V-49.47H692.01V-40.85H669.1V-29.22H690.26V-20.76H669.1V-8.62H692.06V0ZM708.66 -22.11V-39.91H717.37Q719.06 -39.94 720.47 -39.25Q721.88 -38.56 722.72 -37.24Q723.56 -35.93 723.56 -34.07Q723.56 -32.17 722.69 -30.82Q721.81 -29.47 720.37 -28.79Q718.94 -28.12 717.18 -28.12H711.19V-31.48H716.19Q717.2 -31.46 717.94 -32.11Q718.68 -32.75 718.68 -34.06Q718.68 -35.37 717.94 -35.95Q717.19 -36.52 716.21 -36.54H713.29V-22.11ZM720.04 -30.35 724.13 -22.11H719.02L715.23 -30.35ZM715.63 -11.49Q711.65 -11.49 708.14 -13Q704.64 -14.51 701.98 -17.17Q699.33 -19.82 697.84 -23.33Q696.35 -26.83 696.35 -30.81Q696.35 -34.8 697.84 -38.3Q699.33 -41.8 701.98 -44.46Q704.64 -47.12 708.14 -48.63Q711.65 -50.14 715.63 -50.14Q719.65 -50.14 723.15 -48.63Q726.65 -47.12 729.31 -44.46Q731.97 -41.8 733.46 -38.3Q734.95 -34.8 734.95 -30.81Q734.95 -26.83 733.46 -23.33Q731.97 -19.82 729.32 -17.17Q726.67 -14.51 723.16 -13Q719.65 -11.49 715.63 -11.49ZM715.63 -16.61Q719.59 -16.61 722.82 -18.52Q726.05 -20.43 727.97 -23.66Q729.88 -26.88 729.87 -30.81Q729.88 -34.74 727.96 -37.97Q726.05 -41.2 722.81 -43.12Q719.57 -45.03 715.63 -45.01Q711.72 -45.03 708.49 -43.12Q705.26 -41.2 703.34 -37.97Q701.43 -34.74 701.43 -30.82Q701.43 -26.89 703.35 -23.66Q705.26 -20.43 708.49 -18.52Q711.71 -16.61 715.63 -16.61Z"/></g></svg><p class="close-foot">New things are possible every day. <span class="nw">&middot; 2026</span></p></div>
+</footer>
+</div>
+
+
+
+<!-- The shared unlock: one email opens every guide in this browser, so nobody types it twice (Rich, 2026-10-03:
+     "People should not have to re-enter their email"). Load it before the gate code. -->
+<script src="/guides/unlock.js"></script>
+<script>
+(function () {
+  var API = 'https://theaotp-gate.theaotp.workers.dev';
+  var KEY = 'aotp_twenty_unlocked';
+  var kit = document.getElementById('kit');
+  var gate = document.getElementById('gate');
+  var form = document.getElementById('gate-form');
+  var status = document.getElementById('gate-status');
+  var subbed = document.getElementById('subbed');
+
+  // window.AOTPUnlock comes from /guides/unlock.js. Where that file cannot load (file://, another host) the same
+  // contract runs inline: "aotp_subscriber" ({"at": ISO time}, never the email) or a member the worker confirmed
+  // ("aotp_member" = "2", set by /f.js) opens every guide. An old aotp_<slug>_unlocked flag on its own does not
+  // (those people never confirmed, so they are asked once more). A settled submit writes "aotp_subscriber" plus this
+  // page's key; "Use a different email" clears them all.
+  var U = window.AOTPUnlock || (function () {
+    var SUB = 'aotp_subscriber', MEMBER = 'aotp_member', PAGE = /^aotp_.+_unlocked$/;
+    function stamp() { return JSON.stringify({ at: new Date().toISOString() }); }
+    function keys() { var out = []; try { for (var i = 0; i < localStorage.length; i++) out.push(localStorage.key(i) || ''); } catch (e) {} return out; }
+    return {
+      isSubscribed: function () {
+        try {
+          if (localStorage.getItem(SUB)) return true;
+          var member = localStorage.getItem(MEMBER) === '2';
+          if (member) localStorage.setItem(SUB, stamp());
+          return member;
+        } catch (e) { return false; }
+      },
+      remember: function (key, answer) {
+        try { if (!(answer && answer.member === false)) localStorage.setItem(SUB, stamp()); localStorage.setItem(key, '1'); } catch (e) {}
+      },
+      forget: function () { keys().forEach(function (k) { if (k === SUB || k === MEMBER || PAGE.test(k)) { try { localStorage.removeItem(k); } catch (e) {} } }); }
+    };
+  })();
+
+  function unlock() {
+    kit.hidden = false;
+    gate.hidden = true;
+    subbed.hidden = false;
+  }
+
+  var open = U.isSubscribed();
+  document.documentElement.classList.toggle('aotp-subscribed', open);
+  if (open) unlock();
+
+  // "Use a different email": lock every guide in this browser again and show the form here, without a reload.
+  document.getElementById('gate-reset').addEventListener('click', function (event) {
+    event.preventDefault();
+    U.forget();
+    document.documentElement.classList.remove('aotp-subscribed');
+    kit.hidden = true;
+    subbed.hidden = true;
+    gate.hidden = false;
+    status.textContent = '';
+    gate.scrollIntoView({ block: 'start' });
+    document.getElementById('gate-email').focus({ preventScroll: true });
+  });
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    var email = document.getElementById('gate-email').value.trim().toLowerCase();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      status.textContent = 'That email looks off. Try again.';
+      return;
+    }
+    status.textContent = 'One sec…';
+    fetch(API + '/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, ctx: window.aotpCtx ? window.aotpCtx() : null }),
+    }).then(function (response) {
+      return response.json().catch(function () { return {}; }).then(function (data) {
+        if (!response.ok) {
+          var err = new Error('subscribe failed');
+          err.status = response.status;
+          err.detail = data && data.detail;
+          throw err;
+        }
+        return data;
+      });
+    }).then(function (data) {
+      if (window.aotpSubscribed) window.aotpSubscribed(data);
+      U.remember(KEY, data);
+      status.textContent = !(data && data.new) ? 'Welcome back. Unlocked.'
+        : data.member === false ? 'Unlocked. Check your inbox to confirm your subscription to the letter.'
+        : 'Unlocked. You\'re on the list for the weekly letter.';
+      unlock();
+      window.scrollTo({ top: subbed.offsetTop - 24, behavior: 'smooth' });
+    }).catch(function (err) {
+      if (err && err.status === 400) {
+        status.textContent = 'That email was rejected' + (err.detail ? ' (' + err.detail + ')' : '') + '. Try a different address.';
+      } else {
+        status.textContent = 'Something broke on our end. Try again in a minute, or subscribe on the homepage and DM me on Instagram for the Twenty CRM setup guide.';
+      }
+    });
+  });
+
+  document.querySelectorAll('[data-copy]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      var pre = button.parentElement.querySelector('pre');
+      navigator.clipboard.writeText(pre.textContent).then(function () {
+        button.textContent = 'Copied';
+        setTimeout(function () { button.textContent = 'Copy'; }, 1600);
+      });
+    });
+  });
+
+})();
+</script>
+</body></html>
