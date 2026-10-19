@@ -1,0 +1,764 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Five AI courses and Architect study notes | Art of the Possible</title>
+<meta name="description" content="The five courses from the Reel, with links, lengths and costs, plus study notes for Anthropic's Claude Certified Architect exam, built from the official exam guide.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://theaotp.com/courses/">
+<link rel="icon" href="/qualia-symbol.png">
+<meta property="og:title" content="Five AI courses and Architect study notes | Art of the Possible">
+<meta property="og:description" content="The five courses from the Reel, with links, lengths and costs, plus study notes for Anthropic's Claude Certified Architect exam, built from the official exam guide.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&amp;family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&amp;family=Geist+Mono:wght@400&amp;display=swap" rel="stylesheet">
+<!--
+  Clear Sky kit template (AOTP design system approved by Rich 2026-09-30).
+  Source of truth: content-intelligence assets/brand/clear-sky/{DESIGN.md,tokens.css,board.html}.
+  Filled example: assets/brand/clear-sky/sample-guide.html.
+  White on blue, ink on sand (Rich, 2026-10-03: "black never over the blue, if we use black its over white").
+  Every button wears the sky action and the big numerals the sky numeral fill. Never retune the sky's stops.
+  No old accent blue, no two-tone headlines, no bold display, no shadows, no em dashes.
+-->
+<!--
+  Sources (read 2026-10-18 and 2026-10-19; every link, length, price and exam fact on this page comes from these):
+  content-intelligence pipeline/5-script/assets/five-courses-vibe-coder-to-builder/sources/{FOOTAGE,SOURCES}.md
+    (course pages captured 2026-10-18: deeplearning.ai/courses/vibe-coding-101-with-replit, /agentic-ai/,
+    /evaluating-ai-agents; academy.claude.com/courses/claude-code-in-action; anthropic.skilljar.com/claude-code-in-action;
+    anthropic.com/news/claude-partner-network for the March 2026 launch).
+  Read 2026-10-19: anthropic-partners.skilljar.com/claude-certified-architect-foundations-certification ($125, exam guide link),
+    anthropic-partners.skilljar.com/page/claude-certification-exam-prep-courses (the seven free prep courses),
+    anthropic-partners.skilljar.com/page/certification-eligibility (partner network only, 18+, ID, Claude Academy for others),
+    the exam guide PDF "Claude Certified Architect - Foundations Exam Guide", version 1.0, effective July 2026, exam code CCAR-F
+    (sections 1 to 17: format, blueprint weights 27/18/20/20/15, six scenarios, task statements, how to prepare,
+    four exercises, twelve sample questions (not reproduced), scoring 720 of 100-1,000, retakes 14/30/90 days, renewal,
+    out-of-scope list), academy.claude.com/courses (building-with-the-claude-api 67 lessons 9 hr,
+    introduction-to-model-context-protocol 10 lessons 1 hr, claude-code-in-action 9 lessons 1 hr,
+    introduction-to-subagents 4 lessons 45 min, introduction-to-agent-skills 6 lessons 1 hr).
+-->
+<style>
+:root{
+  --sand:#EFEBE7;--ink:#08070B;--graphite:#39383D;--ash:#909092;--ice:#BEC4D2;--ice-3:#E2E4EC;--glacier-2:#F3F4F6;--deep-ocean:#034C7C;--light-blue:#A5D4F2;--white:#FFFFFF;
+  /* Sky action: every button and button-like link, now an obvious two-tone (Rich, 2026-10-03: "Not enough gradient in
+     the buttons"). Same values as tokens.css: deep blue at the left into bright cerulean at the right end, 100deg.
+     Everything from 0 to 95% is #027DBA or darker, so white clears 4.5:1 there; only the last 5%, the cap, brightens to
+     #0A8FCF (3.5:1). Keep every label out of the cap: the template's paddings do (gate submit 22px, 12px on phones;
+     small pills 18px), and the worst glyph pixel measures 4.59:1 on the phone gate. Hover deepens every point of the
+     ramp. On sand and glacier the fill is its own edge; on the dark close it adds a 1px white ring. */
+  --g-sky-action:linear-gradient(100deg,#034A7A 0%,#026AA1 50%,#027DBA 95%,#0A8FCF 100%);
+  --g-sky-action-hover:linear-gradient(100deg,#043761 0%,#025F92 50%,#0274AD 95%,#0282C0 100%);
+  /* Sky numeral, FINAL (DESIGN.md 10.5): the deep end of the sky run top to bottom at 180deg, dark at the top like
+     the sky, as the text fill of the big display numerals ("and the big numbers too"). Same value and name as
+     tokens.css, so kit pages match the homepage. Display sizes only (32px and up): the lightest stop, #0282C0, is
+     3.5:1 on sand; #026AA1 is 4.9:1. */
+  --g-sky-numeral:linear-gradient(180deg,#043761 0%,#024F80 35%,#026AA1 70%,#0282C0 100%);
+  --display:'Inter Tight','Helvetica Neue',Arial,sans-serif;--ui:'Inter','Helvetica Neue',Arial,sans-serif;--mono:'Geist Mono',ui-monospace,'SF Mono',Menlo,monospace;
+  --gutter:clamp(16px,4.5vw,64px);
+  --spark:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0C12.8 7.2 16.8 11.2 24 12C16.8 12.8 12.8 16.8 12 24C11.2 16.8 7.2 12.8 0 12C7.2 11.2 11.2 7.2 12 0Z'/%3E%3C/svg%3E");
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--sand);color:var(--ink);font:400 16px/1.6 var(--ui);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:var(--deep-ocean);text-underline-offset:3px;text-decoration-thickness:1px}
+button,input{font:inherit}button,a,input{-webkit-tap-highlight-color:transparent}
+strong,b{font-weight:600;color:var(--ink)}
+:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+.page{min-height:100vh;overflow-x:clip;display:flex;flex-direction:column}
+.page>footer{margin-top:auto}
+/* Full-bleed backgrounds, content held to 1440 with 64px gutters (16px on phones). */
+.pad{padding-left:max(var(--gutter),calc((100% - 1440px)/2 + var(--gutter)));padding-right:max(var(--gutter),calc((100% - 1440px)/2 + var(--gutter)))}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance;overflow-wrap:break-word}
+p,li{text-wrap:pretty}
+
+/* Sparkle label: four-point sparkle + Geist Mono caps. */
+.eyebrow,.inst{display:block;font:400 11px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase}
+.eyebrow::before,.inst::before,.unlocks ul li::before{content:"";display:inline-block;width:.82em;height:.82em;margin-right:.75em;vertical-align:-.04em;background:currentColor;-webkit-mask:var(--spark) center/contain no-repeat;mask:var(--spark) center/contain no-repeat}
+
+/* ---- The head: white on the deep sky (Rich, 2026-10-03: "black never over the blue"; on /team/: "too much space under
+   the heading, and also make the sub text white and move to RHS"). Everything in it is white: the lockup, the nav, the
+   label line, the h1 and the dek. It all sits in the deep stretch, #043761 to #026AA1, where white measures 5.8:1 or
+   better. From 900px the heading is on the left and the dek on the right, bottoms aligned; below 900px they stack.
+   Under the content the sky runs through the rest of its measured stops, in order and evenly, to sand inside --fade,
+   an empty strip, so no type ever sits on the pale tail. Pad inside .kit-hero, never in the fade. ---- */
+.kit-head{--fade:clamp(96px,9vw,136px);padding-bottom:var(--fade);color:var(--white);background:linear-gradient(180deg,#043761 0%,#024F80 calc((100% - var(--fade))*.5),#026AA1 calc(100% - var(--fade)),#0282C0 calc(100% - var(--fade)*6/7),#1199D7 calc(100% - var(--fade)*5/7),#3EA9DA calc(100% - var(--fade)*4/7),#6DB9DC calc(100% - var(--fade)*3/7),#9DCBDD calc(100% - var(--fade)*2/7),#CBDBDF calc(100% - var(--fade)/7),#EFEBE7 100%)}
+nav{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:76px}
+.lockup{display:flex;align-items:center;color:var(--white);text-decoration:none}.lockup svg{display:block;height:22px;width:auto}
+.navlinks{display:flex;gap:28px;font:400 14px/1 var(--ui)}.navlinks a{color:var(--white);text-decoration:none}.navlinks a:hover{text-decoration:underline}
+.kit-head a:focus-visible{outline-color:var(--white)}
+.kit-hero{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);column-gap:clamp(40px,5.5vw,96px);align-items:end;padding-top:clamp(32px,4vw,60px);padding-bottom:clamp(32px,3.4vw,48px)}
+.kit-head .eyebrow{margin-bottom:18px;color:var(--white)}
+.kit-head h1{font-size:clamp(42px,4.8vw,70px);line-height:.98;letter-spacing:-.045em;text-wrap:pretty}
+.dek{max-width:46ch;margin:0;font:400 clamp(16px,1.3vw,19px)/1.55 var(--ui);letter-spacing:-.005em;color:var(--white)}
+/* The line an unlocked page shows (the shared unlock, /guides/unlock.js): ink on sand, under the head. */
+.subbed{margin:0;padding-top:clamp(18px,2vw,28px);padding-bottom:16px;font:400 14px/1.5 var(--ui);color:var(--graphite)}
+.subbed::before{content:"";display:inline-block;width:.82em;height:.82em;margin-right:.6em;vertical-align:-.04em;background:currentColor;-webkit-mask:var(--spark) center/contain no-repeat;mask:var(--spark) center/contain no-repeat}
+.subbed a{margin-left:.35em;color:var(--deep-ocean);white-space:nowrap}
+
+/* ---- The gate: a glacier card on sand, led by THIS guide (Rich, 2026-10-02: "make each page that asks for the
+   persons email address to unlock the guide more compelling ... emphasising current guide"). The featured shelf from
+   /guides/ (DESIGN.md 10.7) shows this guide's cover large under a "This guide" tag, the other guides beside it.
+   The copy names this guide first, then every other guide, then the weekly letter. Desktop: shelf left; copy, the
+   three unlocks and the form right. Under 920px: shelf, copy, form, then the unlocks. If /guides/shelf.js cannot load
+   (file://, another host: the script's onerror adds .no-shelf) or the shelf fails, the column goes and the card is
+   copy | form. ---- */
+.gate{padding-top:8px;padding-bottom:clamp(56px,7vw,96px)}
+.gate-grid{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);grid-template-rows:auto auto auto 1fr;grid-template-areas:"shelf intro" "shelf list" "shelf act" "shelf .";column-gap:clamp(28px,4.5vw,72px);align-items:start;background:var(--glacier-2);border-radius:12px;padding:clamp(22px,3.4vw,48px)}
+.gate-grid>*,.step>*,.concept>*{min-width:0}
+.gate-shelf{grid-area:shelf;align-self:center}.gate-intro{grid-area:intro}.unlocks{grid-area:list}.gate-act{grid-area:act}
+.gate-grid.no-shelf,.gate-grid:has([data-aotp-shelf-state="failed"]){grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);grid-template-rows:auto 1fr;grid-template-areas:"intro act" "list act"}
+.gate-grid.no-shelf>.gate-shelf,.gate-grid:has([data-aotp-shelf-state="failed"])>.gate-shelf{display:none}
+.gate .eyebrow{color:var(--graphite)}
+.gate h2{margin-top:18px;font-size:clamp(30px,3vw,42px);line-height:1.04;letter-spacing:-.03em;max-width:17ch}
+.gate-intro p{max-width:48ch;margin:16px 0 0;color:var(--graphite)}
+/* What the one email opens, in this order: this guide (named in display type, "Opens now", its sections), every
+   other guide, the weekly letter. The 01 02 03 are small mono counters, not sky numerals. */
+.unlocks{list-style:none;margin:26px 0 28px;padding:0;max-width:52ch}
+.unlocks>li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:0 12px;margin:0;border-top:1px solid var(--ice);padding:13px 0;font-size:14.5px;line-height:1.5;color:var(--graphite)}
+.unlocks>li:last-child{border-bottom:1px solid var(--ice)}
+.unlocks .n{padding-top:3px;font:400 11px/1.4 var(--mono);letter-spacing:.1em;color:var(--graphite)}
+.unlocks b{display:block;margin-bottom:2px;font:500 16px/1.35 var(--ui);color:var(--ink)}
+.unlocks .this .n{padding-top:7px}
+.unlocks .this b{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin-bottom:8px;font:400 clamp(22px,2vw,26px)/1.1 var(--display);letter-spacing:-.025em}
+.unlocks .now{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:5px;background:var(--ice-3);font:400 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.unlocks ul{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.unlocks ul li{padding-left:1.6em;text-indent:-1.6em;color:var(--ink)}
+.gate form{display:grid;gap:10px}
+.gate input{width:100%;min-width:0;height:52px;border:1px solid var(--ink);border-radius:999px;background:transparent;padding:0 22px;color:var(--ink);font-size:16px}
+.gate input::placeholder{color:var(--graphite);opacity:1}
+.gate input:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.gate button{width:100%;min-height:52px;border:0;border-radius:999px;background:var(--g-sky-action);color:var(--white);cursor:pointer;padding:14px 22px;font:500 16px/1.25 var(--ui);letter-spacing:-.005em;text-align:center;text-wrap:balance}
+.gate button:hover{background:var(--g-sky-action-hover)}
+/* Buttons on sand and glacier: hover deepens the sky action, focus is a 2px ink ring (the white label would vanish as a ring on sand). */
+.gate button:focus-visible,.copybtn:focus-visible,.read a:focus-visible,.dl-btn:focus-visible,.kc:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.gate-status{margin:12px 0 0;font-size:14px;color:var(--ink)}.gate-status:empty{margin:0}
+.gate-small{margin:14px 0 0;font-size:13.5px;line-height:1.55;color:var(--graphite)}
+.unlocks ul li::before{width:10px;height:10px;margin-right:calc(1.6em - 10px);vertical-align:0}
+
+/* ---- Sections: a mono-and-numeral rail, one reading column, 1px ice hairlines. ---- */
+.step,.concept{position:relative;display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px;padding-top:52px;padding-bottom:72px;scroll-margin-top:24px}
+.step::before,.concept::before{content:"";position:absolute;top:0;left:max(var(--gutter),calc((100% - 1440px)/2 + var(--gutter)));right:max(var(--gutter),calc((100% - 1440px)/2 + var(--gutter)));height:1px;background:var(--ice)}
+.step-kicker,.concept-num{font:400 11px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--graphite)}
+.step-kicker span,.concept-num span{display:table;padding:.1em .1em .1em 0;margin:-.1em -.1em calc(14px - .1em) 0;font:400 64px/.8 var(--display);letter-spacing:-.06em;color:var(--deep-ocean)}
+.step h2,.concept h2{font-size:clamp(34px,3.6vw,50px);line-height:1.02;letter-spacing:-.03em;max-width:20ch}
+.step .lede,.concept .lede{max-width:54ch;margin:20px 0 24px;font:400 20px/1.5 var(--ui);letter-spacing:-.01em;color:var(--ink)}
+.step p,.concept p{max-width:64ch;color:var(--graphite)}
+.step ul,.step ol,.concept ul{max-width:64ch;padding-left:20px;color:var(--graphite)}
+.step li,.concept li{margin-bottom:10px}
+.step li::marker,.concept li::marker{color:var(--ash)}
+.note{max-width:62ch;margin:30px 0;border-top:1px solid var(--ice);padding-top:14px;font-size:14.5px;line-height:1.6;color:var(--graphite)}
+table+.note{margin-top:18px;border-top:0;padding-top:0}
+.step .inst{margin:44px 0 0;color:var(--ink)}
+
+/* Reading-list payload */
+.index{list-style:none;padding:0!important;margin:26px 0 0;max-width:66ch}
+.index li{border-top:1px solid var(--ice);padding:16px 0;margin:0;display:flex;gap:18px;align-items:baseline;font-size:15px;color:var(--graphite)}
+.index .n{min-width:26px;font:400 11px var(--mono);letter-spacing:.1em;color:var(--graphite)}
+.index a{font:400 21px/1.2 var(--display);letter-spacing:-.02em;color:var(--ink);text-decoration:none}.index a:hover{text-decoration:underline}
+.index .st{margin-left:auto;font:400 10.5px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--graphite)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 0}
+.chip{display:inline-flex;align-items:center;height:24px;padding:0 9px;border-radius:5px;background:var(--ice-3);font:400 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.read{max-width:760px;margin:26px 0 0;background:var(--glacier-2);border-radius:12px;padding:20px 22px 22px}
+.read .src{font:400 10.5px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--graphite)}
+.read h3{max-width:40ch;margin:10px 0 16px;font-size:24px;line-height:1.12;letter-spacing:-.025em}
+.read a{display:inline-flex;align-items:center;height:28px;padding:0 18px;border-radius:999px;background:var(--g-sky-action);font:400 10.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--white);text-decoration:none}
+.read a:hover{background:var(--g-sky-action-hover)}
+
+/* ---- The close IS the footer: one short block on the reversed sky, sand at the top and #043761 at the bottom (Rich,
+   2026-10-02: "make the footer smaller and reverse the gradient so dark blue at the bottom"), with everything in it
+   white on the dark stretch (Rich, 2026-10-03: "black never over the blue"). The run from sand to #026AA1 (the
+   measured stops, in order and evenly) happens inside --fade, an empty strip at the top. The headline, the "on the
+   list" line, the white-ringed pill, the lockup and the mono line all sit below it, on #026AA1 to #043761, where white
+   measures 5.8:1 or better. It sits outside #kit so gated visitors get it too; .close-kit only shows once #kit is
+   unlocked. Keep it short: no second headline, button or form. ---- */
+.closeblock{--fade:clamp(64px,6vw,88px);padding-top:calc(var(--fade) + clamp(22px,2.4vw,32px));padding-bottom:clamp(20px,1.8vw,26px);color:var(--white);background:linear-gradient(180deg,#EFEBE7 0%,#CBDBDF calc(var(--fade)/7),#9DCBDD calc(var(--fade)*2/7),#6DB9DC calc(var(--fade)*3/7),#3EA9DA calc(var(--fade)*4/7),#1199D7 calc(var(--fade)*5/7),#0282C0 calc(var(--fade)*6/7),#026AA1 var(--fade),#024F80 calc(var(--fade) + (100% - var(--fade))*.5),#043761 100%)}
+.close-top{display:flex;align-items:flex-end;justify-content:space-between;gap:18px 40px}
+.closeblock h2{font-size:clamp(28px,3vw,44px);line-height:1.02;letter-spacing:-.035em;color:var(--white)}
+.close-kit{max-width:64ch;margin:10px 0 0;font:400 clamp(15px,1.2vw,17px)/1.5 var(--ui);color:var(--white)}
+#kit[hidden]~.closeblock .close-kit{display:none}
+/* The pill is the sky action ringed in 1px white: on the dark sky the fill alone has no edge (it is cut from the same
+   blues), the white ring measures 5.8:1 or better there. */
+.close-btn{display:inline-flex;align-items:center;flex:none;height:40px;padding:0 20px;border:1px solid var(--white);border-radius:999px;background:var(--g-sky-action);color:var(--white);font:500 15px/1 var(--ui);text-decoration:none;white-space:nowrap}
+.close-btn:hover{background:var(--g-sky-action-hover);text-decoration:underline}
+.closeblock a:focus-visible{outline:2px solid var(--white);outline-offset:3px}
+.close-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 24px;margin-top:clamp(22px,2.4vw,32px)}
+.close-row svg{display:block;height:22px;width:auto;flex:none}
+.close-foot{margin:0;font:400 10.5px/1.6 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--white)}
+.close-foot .nw{white-space:nowrap}
+[hidden]{display:none!important}
+/* A subscriber's page opens before first paint: the head script below sets .aotp-subscribed on <html> from the same
+   storage the gate script reads, so the gate never flashes while /guides/unlock.js loads. */
+.aotp-subscribed #gate{display:none!important}
+.aotp-subscribed #kit[hidden],.aotp-subscribed #subbed[hidden]{display:block!important}
+
+/* --- prompt-kit / field-notes / how-to payloads: keep these, delete what you don't use --- */
+.promptbox{max-width:760px;margin-top:26px;background:var(--glacier-2);border-radius:12px;padding-top:12px}
+.copybtn{display:block;margin:0 12px 0 auto;min-height:32px;padding:0 18px;border:0;border-radius:999px;background:var(--g-sky-action);color:var(--white);cursor:pointer;font:400 10.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase}
+.copybtn:hover{background:var(--g-sky-action-hover)}
+.promptbox pre{margin:12px 0 0;border-top:1px solid var(--ice);padding:20px 26px 26px;overflow-x:auto;font:400 13px/1.8 var(--mono);white-space:pre-wrap;overflow-wrap:anywhere;color:var(--ink)}
+.promptbox.code pre{white-space:pre;overflow-wrap:normal}
+.promptbox.tall pre{max-height:560px;overflow-y:auto}
+.cmd,.termshot{max-width:760px;margin:24px 0;border-radius:12px;padding:20px 24px;overflow-x:auto}
+.cmd{background:var(--glacier-2)}.cmd code{display:block;padding:0;background:none;font:400 13px/1.8 var(--mono);white-space:pre}
+.termshot{background:var(--ink);color:var(--sand);font:400 13px/1.9 var(--mono);white-space:pre}
+.termshot .g{color:var(--light-blue)}.termshot .y,.termshot .r{color:var(--white)}.termshot .d{color:var(--ash)}
+code{font-family:var(--mono);font-size:.86em;background:var(--ice-3);padding:1px 5px;border-radius:4px;white-space:nowrap;color:var(--ink)}
+.lessons{list-style:none;padding:0!important;margin:26px 0 0;max-width:66ch}
+.lessons li{position:relative;border-top:1px solid var(--ice);padding:22px 0 22px 72px;margin:0;color:var(--graphite)}
+.lessons strong{display:block;margin-bottom:8px;font:400 23px/1.2 var(--display);letter-spacing:-.02em;color:var(--ink)}
+.lessons .k{position:absolute;left:0;top:22px;padding:.1em .1em .1em 0;margin:-.1em -.1em -.1em 0;font:400 40px/.84 var(--display);letter-spacing:-.05em;color:var(--deep-ocean)}
+.sky-num{display:inline-block;padding:.1em .1em .1em 0;margin:-.1em -.1em -.1em 0;font-family:var(--display);font-weight:400;color:var(--deep-ocean)}
+/* Sky numerals (Rich, 2026-10-02: "and the big numbers too"): every big display numeral (the rail numerals above,
+   .lessons .k, any stat figure you add as .sky-num) takes --g-sky-numeral as its text fill, painted on its own glyph box
+   (display:table shrinks the rail numeral to its digits). The box is padded .1em right, top and bottom with matching
+   negative margins (DESIGN.md 10.5): background-clip:text paints only inside the box, and the tight tracking and line
+   height would otherwise clip the last digit, or the top and tail of a "$". Without background-clip:text, in print and
+   under forced colors it is solid deep ocean. Small numbers (.cmdlist .n, .index .n, mono labels) stay as they are. */
+@supports (-webkit-background-clip:text) or (background-clip:text){
+  .step-kicker span,.concept-num span,.lessons .k,.sky-num{background:var(--g-sky-numeral);background-size:100% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+}
+table{border-collapse:collapse;width:100%;max-width:760px;margin:20px 0;font-size:14.5px}
+th,td{text-align:left;padding:14px 16px 14px 0;border-bottom:1px solid var(--ice);vertical-align:top;color:var(--graphite)}
+th{border-bottom-color:var(--ink);font:400 10.5px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+td:first-child{width:26%;padding-right:24px;color:var(--ink);font-weight:500}td code{white-space:normal;overflow-wrap:anywhere}
+.shot{max-width:760px;margin:26px 0}
+.shot img{display:block;width:100%;height:auto;border:1px solid var(--ice);border-radius:6px;background:var(--white)}
+.cap{max-width:64ch;margin:10px 0 0;font-size:13.5px;line-height:1.5;color:var(--graphite)}
+.dl{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px 28px;max-width:760px;margin:28px 0 0;background:var(--glacier-2);border-radius:12px;padding:22px 24px}
+.dl-meta{font-size:14px;line-height:1.5;color:var(--graphite)}.dl-meta strong{display:block;font:400 21px/1.2 var(--display);letter-spacing:-.02em}
+.dl-btn{display:inline-flex;align-items:center;height:52px;padding:0 26px;border-radius:999px;background:var(--g-sky-action);color:var(--white);font:500 16px/1 var(--ui);text-decoration:none}.dl-btn:hover{background:var(--g-sky-action-hover)}
+.cmdlist{list-style:none;padding:0!important;margin:28px 0 0;max-width:760px}
+.cmdlist li{display:grid;grid-template-columns:34px minmax(0,1fr);gap:14px;border-top:1px solid var(--ice);padding:20px 0;margin:0}
+.cmdlist li>*{min-width:0}.cmdlist .n{padding-top:9px;font:400 11px/1 var(--mono);letter-spacing:.1em;color:var(--graphite)}
+.cmdlist p{margin:10px 0 0}
+/* .kc is 16px round, not a 999px pill: one line is still a full pill (32px tall), but a command that wraps onto three
+   lines keeps its corners square enough that no white glyph falls off the fill onto sand. */
+.kc{display:inline-flex;align-items:center;gap:12px;max-width:100%;min-height:32px;padding:5px 12px 5px 13px;border:0;border-radius:16px;background:var(--g-sky-action);color:var(--white);cursor:pointer;text-align:left}
+.kc code{padding:0;background:none;font-size:14px;white-space:normal;overflow-wrap:anywhere;color:var(--white)}
+.kc .cp{flex:none;padding:3px 8px;border:1px solid var(--white);border-radius:999px;font:400 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase}
+.kc:hover,.kc.done{background:var(--g-sky-action-hover)}
+.kc:hover .cp,.kc.done .cp{background:var(--white);color:var(--ink)}
+/* A long command makes a wide chip, and its "Copy" pill sits at the far right, inside the bright cap of the ramp. The
+   chip paints the same --g-sky-action 10% wider than itself, so the cap always falls outside it and the pill's label
+   stays on #027BB8 or darker. */
+.kc,.kc:hover,.kc.done{background-size:110% 100%;background-repeat:no-repeat}
+.where{display:inline-block;margin-left:12px;font:400 10.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--graphite)}
+.try{list-style:none;padding:0!important;margin:14px 0 0;max-width:66ch}
+.try li{border-top:1px solid var(--ice);padding:14px 0;margin:0;color:var(--graphite)}
+.try strong{margin-right:6px;font:400 14px var(--mono)}
+
+@media(max-width:900px){
+  .kit-hero{grid-template-columns:minmax(0,1fr);row-gap:22px}
+}
+@media(max-width:920px){
+  .gate-grid{grid-template-columns:minmax(0,1fr);grid-template-rows:none;grid-template-areas:"shelf" "intro" "act" "list";row-gap:22px}
+  .gate-grid.no-shelf,.gate-grid:has([data-aotp-shelf-state="failed"]){grid-template-columns:minmax(0,1fr);grid-template-rows:none;grid-template-areas:"intro" "act" "list"}
+  .unlocks{margin:4px 0 0}
+}
+@media(max-width:800px){
+  nav{min-height:64px}.lockup svg,.close-row svg{height:17px}.navlinks{gap:16px;font-size:13px}
+  .kit-head{--fade:88px}.closeblock{--fade:56px}
+  .close-top{flex-direction:column;align-items:flex-start}
+  .gate{padding-top:0}
+  .gate-grid,.step,.concept{grid-template-columns:1fr;gap:22px}.gate-grid>*,.step>*,.concept>*{min-width:0}
+  .step,.concept{padding-top:34px;padding-bottom:48px}
+  .step-kicker span,.concept-num span{display:inline-block;margin:-.1em calc(12px - .1em) -.1em 0;font-size:44px;vertical-align:-.02em}
+  .step .lede,.concept .lede{font-size:18px}
+  .lessons li{padding-left:54px}.lessons .k{font-size:32px;top:24px}
+  .promptbox pre{padding:18px 18px 22px}.index li{flex-wrap:wrap}.index .st{margin-left:44px;width:100%}
+  code{white-space:normal;overflow-wrap:anywhere}th,td{padding-right:12px}td:first-child{width:32%}
+}
+@media(max-width:480px){.lockup svg,.close-row svg{height:15px}.navlinks{gap:14px;font-size:12.5px}.kit-head h1 br{display:none}.gate-grid{padding:24px 16px}.gate button{padding-left:12px;padding-right:12px;font-size:14.5px}}
+@media(max-width:380px){.gate button{font-size:14px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+/* Print drops backgrounds, so a gradient-filled numeral would print blank and every white label on a sky or a sky
+   action would print as faint grey. Paper gets ink: deep ocean numerals, hairline ink pills, ink type where the sky
+   was. Forced colors drops gradients too: the numerals and pills take the system colours (the border gives a
+   borderless pill its edge back). Keep this last in the sheet so it beats every rule above it. */
+@media print,(forced-colors:active){
+  .step-kicker span,.concept-num span,.lessons .k,.sky-num{background:none;color:var(--deep-ocean);-webkit-text-fill-color:currentColor}
+  .gate button,.copybtn,.read a,.dl-btn,.kc,.kc.done,.kc .cp,.kc.done .cp,.close-btn{background:none;color:var(--ink);border:1px solid var(--ink)}
+  .kc code{color:var(--ink)}
+}
+@media print{
+  .kit-head,.kit-head .eyebrow,.kit-head h1,.dek,.lockup,.navlinks a,.closeblock,.closeblock h2,.close-kit,.close-foot{color:var(--ink)}
+  .lockup svg g,.close-row svg g{fill:var(--ink)}
+}
+</style><script src="/f.js"></script>
+<script>try{if(/(?:^|;\s*)aotp_subscriber=[^;\s]/.test(document.cookie)||localStorage.getItem('aotp_subscriber')||localStorage.getItem('aotp_member')==='2')document.documentElement.classList.add('aotp-subscribed')}catch(e){}</script>
+</head><body>
+<div class="page">
+<header class="kit-head pad">
+  <nav><a class="lockup" href="/"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 897 112" role="img" aria-label="Art of the Possible"><title>Art of the Possible</title><g fill="#FFFFFF"><path transform="scale(0.448)" d="M93.301 48.471A34.601 34.601 0 1 1 156.699 48.471A34.601 34.601 0 0 0 93.301 48.471ZM156.699 48.471A34.601 34.601 0 1 1 201.529 93.301A34.601 34.601 0 0 0 156.699 48.471ZM201.529 93.301A34.601 34.601 0 1 1 156.699 48.471A34.601 34.601 0 0 0 201.529 93.301ZM201.529 93.301A34.601 34.601 0 1 1 201.529 156.699A34.601 34.601 0 0 0 201.529 93.301ZM201.529 156.699A34.601 34.601 0 1 1 156.699 201.529A34.601 34.601 0 0 0 201.529 156.699ZM156.699 201.529A34.601 34.601 0 1 1 201.529 156.699A34.601 34.601 0 0 0 156.699 201.529ZM156.699 201.529A34.601 34.601 0 1 1 93.301 201.529A34.601 34.601 0 0 0 156.699 201.529ZM93.301 201.529A34.601 34.601 0 1 1 48.471 156.699A34.601 34.601 0 0 0 93.301 201.529ZM48.471 156.699A34.601 34.601 0 1 1 93.301 201.529A34.601 34.601 0 0 0 48.471 156.699ZM48.471 156.699A34.601 34.601 0 1 1 48.471 93.301A34.601 34.601 0 0 0 48.471 156.699ZM48.471 93.301A34.601 34.601 0 1 1 93.301 48.471A34.601 34.601 0 0 0 48.471 93.301ZM93.301 48.471A34.601 34.601 0 1 1 48.471 93.301A34.601 34.601 0 0 0 93.301 48.471Z"/><path transform="translate(160 80.736)" d="M11.7 0H0.49L17.57 -49.47H31.04L48.09 0H36.91L24.49 -38.17H24.09ZM11.04 -19.44H37.49V-11.3H11.04ZM51.08 0V-49.47H70.57Q76.2 -49.47 80.16 -47.48Q84.12 -45.48 86.22 -41.85Q88.32 -38.21 88.32 -33.31Q88.32 -28.38 86.2 -24.84Q84.07 -21.29 80.04 -19.41Q76.01 -17.53 70.31 -17.53H57.27V-25.94H68.6Q71.63 -25.94 73.62 -26.76Q75.6 -27.59 76.58 -29.22Q77.55 -30.85 77.55 -33.31Q77.55 -35.78 76.57 -37.47Q75.59 -39.15 73.6 -40.02Q71.62 -40.89 68.58 -40.89H61.52V0ZM78.54 0 66.5 -22.52H77.78L90.09 0ZM90.95 -40.85V-49.47H131.58V-40.85H116.44V0H106.12V-40.85ZM170.54 0.66Q163.97 0.66 158.72 -2.32Q153.46 -5.31 150.41 -10.99Q147.36 -16.66 147.36 -24.7Q147.36 -32.8 150.41 -38.49Q153.46 -44.18 158.72 -47.16Q163.97 -50.14 170.54 -50.14Q177.12 -50.14 182.35 -47.16Q187.59 -44.18 190.64 -38.49Q193.69 -32.8 193.69 -24.7Q193.69 -16.64 190.64 -10.97Q187.59 -5.29 182.35 -2.31Q177.12 0.66 170.54 0.66ZM170.54 -8.58Q174.35 -8.58 177.16 -10.44Q179.98 -12.29 181.54 -15.89Q183.09 -19.49 183.09 -24.7Q183.09 -29.95 181.54 -33.57Q179.98 -37.18 177.16 -39.04Q174.35 -40.89 170.54 -40.89Q166.76 -40.89 163.93 -39.04Q161.1 -37.18 159.53 -33.57Q157.96 -29.95 157.96 -24.7Q157.96 -19.49 159.53 -15.89Q161.1 -12.29 163.93 -10.44Q166.76 -8.58 170.54 -8.58ZM198.51 0V-49.47H231.26V-40.85H208.95V-27.25H229.08V-18.79H208.95V0ZM246.36 -40.85V-49.47H286.99V-40.85H271.85V0H261.53V-40.85ZM290.8 0V-49.47H301.24V-29.06H322.46V-49.47H332.9V0H322.46V-20.44H301.24V0ZM338.59 0V-49.47H371.94V-40.85H349.03V-29.22H370.19V-20.76H349.03V-8.62H372V0ZM390.19 0V-49.47H409.68Q415.31 -49.47 419.27 -47.33Q423.23 -45.19 425.33 -41.4Q427.43 -37.61 427.43 -32.69Q427.43 -27.76 425.31 -24Q423.18 -20.25 419.15 -18.14Q415.12 -16.03 409.43 -16.03H396.99V-24.41H407.71Q410.74 -24.41 412.73 -25.46Q414.71 -26.52 415.69 -28.38Q416.66 -30.25 416.66 -32.69Q416.66 -35.18 415.69 -37.02Q414.71 -38.86 412.72 -39.88Q410.73 -40.89 407.69 -40.89H400.63V0ZM453.6 0.66Q447.03 0.66 441.78 -2.32Q436.52 -5.31 433.47 -10.99Q430.43 -16.66 430.43 -24.7Q430.43 -32.8 433.47 -38.49Q436.52 -44.18 441.78 -47.16Q447.03 -50.14 453.6 -50.14Q460.18 -50.14 465.42 -47.16Q470.65 -44.18 473.7 -38.49Q476.75 -32.8 476.75 -24.7Q476.75 -16.64 473.7 -10.97Q470.65 -5.29 465.42 -2.31Q460.18 0.66 453.6 0.66ZM453.6 -8.58Q457.41 -8.58 460.23 -10.44Q463.05 -12.29 464.6 -15.89Q466.15 -19.49 466.15 -24.7Q466.15 -29.95 464.6 -33.57Q463.05 -37.18 460.23 -39.04Q457.41 -40.89 453.6 -40.89Q449.82 -40.89 446.99 -39.04Q444.17 -37.18 442.6 -33.57Q441.03 -29.95 441.03 -24.7Q441.03 -19.49 442.6 -15.89Q444.17 -12.29 446.99 -10.44Q449.82 -8.58 453.6 -8.58ZM499.91 0.7Q493.92 0.7 489.49 -1.13Q485.06 -2.96 482.58 -6.57Q480.1 -10.19 479.96 -15.54H490.08Q490.27 -13.07 491.53 -11.4Q492.8 -9.74 494.93 -8.9Q497.06 -8.06 499.79 -8.06Q502.45 -8.06 504.43 -8.83Q506.4 -9.6 507.49 -10.98Q508.57 -12.36 508.57 -14.18Q508.57 -15.84 507.58 -16.96Q506.6 -18.08 504.73 -18.89Q502.85 -19.69 500.15 -20.32L494.75 -21.65Q488.5 -23.15 484.89 -26.41Q481.28 -29.68 481.28 -35.17Q481.28 -39.66 483.71 -43.02Q486.14 -46.38 490.37 -48.26Q494.61 -50.14 500.02 -50.14Q505.54 -50.14 509.64 -48.25Q513.75 -46.36 516.05 -43Q518.35 -39.64 518.43 -35.25H508.36Q508.09 -38.16 505.89 -39.78Q503.7 -41.4 499.94 -41.4Q497.4 -41.4 495.62 -40.68Q493.84 -39.97 492.92 -38.71Q492 -37.45 492 -35.83Q492 -34.09 493.06 -32.91Q494.11 -31.74 495.9 -31Q497.68 -30.25 499.81 -29.74L504.23 -28.66Q507.45 -27.93 510.16 -26.72Q512.87 -25.5 514.88 -23.74Q516.89 -21.99 517.99 -19.6Q519.09 -17.22 519.09 -14.13Q519.09 -9.61 516.81 -6.27Q514.53 -2.94 510.24 -1.12Q505.96 0.7 499.91 0.7ZM541.53 0.7Q535.54 0.7 531.11 -1.13Q526.68 -2.96 524.2 -6.57Q521.72 -10.19 521.58 -15.54H531.7Q531.89 -13.07 533.16 -11.4Q534.42 -9.74 536.55 -8.9Q538.68 -8.06 541.41 -8.06Q544.08 -8.06 546.05 -8.83Q548.02 -9.6 549.11 -10.98Q550.19 -12.36 550.19 -14.18Q550.19 -15.84 549.21 -16.96Q548.22 -18.08 546.35 -18.89Q544.47 -19.69 541.77 -20.32L536.37 -21.65Q530.12 -23.15 526.51 -26.41Q522.9 -29.68 522.9 -35.17Q522.9 -39.66 525.33 -43.02Q527.76 -46.38 531.99 -48.26Q536.23 -50.14 541.64 -50.14Q547.16 -50.14 551.26 -48.25Q555.37 -46.36 557.67 -43Q559.97 -39.64 560.05 -35.25H549.98Q549.71 -38.16 547.51 -39.78Q545.32 -41.4 541.56 -41.4Q539.02 -41.4 537.24 -40.68Q535.46 -39.97 534.54 -38.71Q533.62 -37.45 533.62 -35.83Q533.62 -34.09 534.68 -32.91Q535.74 -31.74 537.52 -31Q539.3 -30.25 541.43 -29.74L545.85 -28.66Q549.07 -27.93 551.78 -26.72Q554.49 -25.5 556.5 -23.74Q558.51 -21.99 559.61 -19.6Q560.71 -17.22 560.71 -14.13Q560.71 -9.61 558.43 -6.27Q556.15 -2.94 551.87 -1.12Q547.58 0.7 541.53 0.7ZM575.25 -49.47V0H564.81V-49.47ZM580.93 0V-49.47H600.73Q606.18 -49.47 609.83 -47.85Q613.48 -46.22 615.32 -43.36Q617.15 -40.5 617.15 -36.8Q617.15 -33.89 615.98 -31.71Q614.81 -29.52 612.8 -28.13Q610.78 -26.74 608.2 -26.16V-25.66Q611.03 -25.55 613.51 -24.08Q615.99 -22.6 617.53 -19.97Q619.08 -17.33 619.08 -13.67Q619.08 -9.75 617.14 -6.66Q615.21 -3.57 611.43 -1.78Q607.64 0 602.06 0ZM591.37 -8.54H599.91Q604.27 -8.54 606.29 -10.23Q608.31 -11.93 608.31 -14.7Q608.31 -16.77 607.32 -18.34Q606.33 -19.92 604.5 -20.82Q602.67 -21.71 600.16 -21.71H591.37ZM591.37 -28.77H599.14Q601.27 -28.77 602.96 -29.53Q604.64 -30.29 605.61 -31.69Q606.58 -33.1 606.58 -35.05Q606.58 -37.71 604.69 -39.36Q602.8 -41.01 599.34 -41.01H591.37ZM622.95 0V-49.47H633.39V-8.62H654.6V0ZM658.66 0V-49.47H692.01V-40.85H669.1V-29.22H690.26V-20.76H669.1V-8.62H692.06V0ZM708.66 -22.11V-39.91H717.37Q719.06 -39.94 720.47 -39.25Q721.88 -38.56 722.72 -37.24Q723.56 -35.93 723.56 -34.07Q723.56 -32.17 722.69 -30.82Q721.81 -29.47 720.37 -28.79Q718.94 -28.12 717.18 -28.12H711.19V-31.48H716.19Q717.2 -31.46 717.94 -32.11Q718.68 -32.75 718.68 -34.06Q718.68 -35.37 717.94 -35.95Q717.19 -36.52 716.21 -36.54H713.29V-22.11ZM720.04 -30.35 724.13 -22.11H719.02L715.23 -30.35ZM715.63 -11.49Q711.65 -11.49 708.14 -13Q704.64 -14.51 701.98 -17.17Q699.33 -19.82 697.84 -23.33Q696.35 -26.83 696.35 -30.81Q696.35 -34.8 697.84 -38.3Q699.33 -41.8 701.98 -44.46Q704.64 -47.12 708.14 -48.63Q711.65 -50.14 715.63 -50.14Q719.65 -50.14 723.15 -48.63Q726.65 -47.12 729.31 -44.46Q731.97 -41.8 733.46 -38.3Q734.95 -34.8 734.95 -30.81Q734.95 -26.83 733.46 -23.33Q731.97 -19.82 729.32 -17.17Q726.67 -14.51 723.16 -13Q719.65 -11.49 715.63 -11.49ZM715.63 -16.61Q719.59 -16.61 722.82 -18.52Q726.05 -20.43 727.97 -23.66Q729.88 -26.88 729.87 -30.81Q729.88 -34.74 727.96 -37.97Q726.05 -41.2 722.81 -43.12Q719.57 -45.03 715.63 -45.01Q711.72 -45.03 708.49 -43.12Q705.26 -41.2 703.34 -37.97Q701.43 -34.74 701.43 -30.82Q701.43 -26.89 703.35 -23.66Q705.26 -20.43 708.49 -18.52Q711.71 -16.61 715.63 -16.61Z"/></g></svg></a><div class="navlinks"><a href="/">Home</a><a href="/letters/">Archive</a><a href="/#about">About</a></div></nav>
+  <!-- Everything in the head is white on the deep sky. The heading left, the dek right from 900px; they stack on phones. -->
+  <div class="kit-hero">
+    <div>
+      <div class="eyebrow">Five courses + study notes &middot; From the Reel</div>
+      <!-- One colour. The two slots are legacy names: write one headline, never two tones. Two sentences? Put <br> after the first ("skills.<br> Great"); phones drop the break. -->
+      <h1>Five courses from vibe coder to AI builder.<br> Plus notes for the Architect exam.</h1>
+    </div>
+    <p class="dek">You commented "agentic". Here it is. The five courses from the Reel in order, each with the link, who runs it, how long it takes and what it costs. Then study notes for the Claude Certified Architect exam, built from Anthropic's official exam guide. One heads-up: the Architect is a $125 proctored exam, and only people at Claude Partner Network companies can sit it. The prep courses are free. I didn't make any of these and none of the links are affiliate links. No course, no upsell.</p>
+  </div>
+</header>
+
+<section class="gate pad" id="gate">
+  <div class="gate-grid">
+    <!-- The featured shelf (DESIGN.md 10.7): this guide's cover large under a "This guide" tag, every other guide beside it,
+         served from /guides/ on theaotp.com. Its cover is /guides/covers/courses.svg (cover-tools/make_covers.py) and the
+         guide belongs in /guides/guides.json + guides-all.json; with no cover the shelf shows the other guides alone.
+         Where /guides/ does not resolve (file://, another host) onerror drops the column and the card is copy | form. -->
+    <div class="gate-shelf">
+      <link rel="stylesheet" href="/guides/shelf.css">
+      <div data-aotp-shelf="featured" data-featured="courses" data-title="Five courses + Architect study notes"></div>
+      <script src="/guides/shelf.js" defer onerror="this.closest('.gate-grid').classList.add('no-shelf')"></script>
+    </div>
+    <!-- Copy order: THIS guide by name, then every other guide, then the weekly letter (Rich, 2026-10-02). -->
+    <div class="gate-intro">
+      <div class="eyebrow">Free guide &middot; one email</div>
+      <h2>Unlock the five courses and the study notes.</h2>
+      <p>Leave your email and this guide opens right here. The same email opens every other guide on the shelf and signs you up for the weekly letter.</p>
+    </div>
+    <ol class="unlocks">
+      <!-- Item 01 names this guide and two to four of its sections in plain words, never the payload itself. -->
+      <li class="this"><span class="n">01</span><div><b>Five courses + Architect study notes <span class="now">Opens now</span></b><ul><li>All five courses, with links, lengths and costs</li><li>Who can sit the Architect exam, and how it works</li><li>Study notes for all five exam domains</li></ul></div></li>
+      <li><span class="n">02</span><div><b>Every other guide</b>Prompt kits, setup guides and reading lists from my other Reels. The same email opens them all.</div></li>
+      <li><span class="n">03</span><div><b>The weekly letter</b>Five useful things I made with AI each week, with the prompts and workflows inside. Unsubscribe any time.</div></li>
+    </ol>
+    <div class="gate-act">
+      <form id="gate-form" novalidate>
+        <label for="gate-email" class="sr-only">Email address</label>
+        <input id="gate-email" type="email" name="email" placeholder="you@somewhere.com" autocomplete="email" required>
+        <button type="submit">Unlock the guide and subscribe to AOTP</button>
+      </form>
+      <p class="gate-status" id="gate-status" aria-live="polite"></p>
+      <p class="gate-small">Already on the list? Enter the same email and it unlocks without subscribing you twice.</p>
+      <noscript><p class="gate-small">This page needs JavaScript to unlock. Or just subscribe on <a href="/">the homepage</a> and reply to any letter for the five courses and the study notes.</p></noscript>
+    </div>
+  </div>
+</section>
+
+<!-- The shared unlock's line (/guides/unlock.js): shown once the page is open, never with the gate. -->
+<p class="subbed pad" id="subbed" hidden>You're subscribed, so every guide is open.<a href="#gate" id="gate-reset">Use a different email</a></p>
+
+<!-- EVERYTHING OF VALUE LIVES INSIDE #kit. Nothing valuable outside it. -->
+<div id="kit" hidden>
+
+<section class="step pad" id="path">
+  <div class="step-kicker"><span>00</span>The five</div>
+  <div>
+    <h2>Five courses, in the order from the Reel.</h2>
+    <p class="lede">You start by shipping a small app and finish by testing an agent the way a production team would.</p>
+    <ul class="index">
+      <li><span class="n">01</span><a href="#vibe">Vibe Coding 101 with Replit</a><span class="st">1h 34m &middot; free in beta</span></li>
+      <li><span class="n">02</span><a href="#claude-code">Claude Code in Action</a><span class="st">About 1 hr &middot; free</span></li>
+      <li><span class="n">03</span><a href="#agentic">Agentic AI</a><span class="st">9h 55m &middot; free to audit</span></li>
+      <li><span class="n">04</span><a href="#architect">Claude Certified Architect</a><span class="st">Exam &middot; $125</span></li>
+      <li><span class="n">05</span><a href="#evals">Evaluating AI Agents</a><span class="st">2h 36m &middot; free in beta</span></li>
+    </ul>
+    <p>The order is mine, not the providers'. It runs from your first app to testing agents in production. Sections 06 to 08 are the study notes for the Architect exam.</p>
+    <div class="note">I didn't make any of these courses and I earn nothing from them. None of the links are affiliate links. Lengths, prices and access are as the providers listed them on 18 and 19 October 2026.</div>
+  </div>
+</section>
+
+<section class="step pad" id="vibe">
+  <div class="step-kicker"><span>01</span>Vibe coding</div>
+  <div>
+    <h2>Vibe Coding 101 with Replit.</h2>
+    <p class="lede">After this, you can plan an app on one page, build it with an AI agent and put it online.</p>
+    <div class="read">
+      <div class="src">DeepLearning.AI &middot; built with Replit &middot; Beginner</div>
+      <h3>Vibe Coding 101 with Replit</h3>
+      <a href="https://www.deeplearning.ai/courses/vibe-coding-101-with-replit" target="_blank" rel="noopener">Open the course &rarr;</a>
+    </div>
+    <table>
+      <tr><th>The course</th><th>Details</th></tr>
+      <tr><td>Taught by</td><td>Michele Catasta, President of Replit, and Matt Palmer, Replit's Head of Developer Relations</td></tr>
+      <tr><td>Length</td><td>1h 34m, 7 video lessons</td></tr>
+      <tr><td>Cost</td><td>Free to enrol while DeepLearning.AI's learning platform is in beta. The graded quiz and the accomplishment need DeepLearning.AI Pro. You also need a free Replit account.</td></tr>
+      <tr><td>You build</td><td>A website performance (SEO) analyser, and a voting app where national parks go head to head, with the votes saved</td></tr>
+    </table>
+    <p>The "write a proper spec" part of the Reel is here. The course calls it product requirement documents and wireframes: you write down what the app should do and sketch the screens before you prompt anything.</p>
+  </div>
+</section>
+
+<section class="step pad" id="claude-code">
+  <div class="step-kicker"><span>02</span>Claude Code</div>
+  <div>
+    <h2>Claude Code in Action.</h2>
+    <p class="lede">After this, you can hand Claude Code a long job, keep it on track with plan mode and hooks, and check what came back.</p>
+    <div class="read">
+      <div class="src">Anthropic &middot; Claude Academy &middot; free</div>
+      <h3>Claude Code in Action</h3>
+      <a href="https://academy.claude.com/courses/claude-code-in-action" target="_blank" rel="noopener">Open the course &rarr;</a>
+    </div>
+    <table>
+      <tr><th>The course</th><th>Details</th></tr>
+      <tr><td>Length</td><td>9 lessons and 1 quiz, about an hour</td></tr>
+      <tr><td>Cost</td><td>Free, with a completion badge</td></tr>
+      <tr><td>What it covers</td><td>Scoping work with plan mode and steering long sessions. Writing a lean CLAUDE.md, turning repeated procedures into skills and enforcing hard rules with hooks. Scheduled and headless runs, and Claude in your pull requests. Then checking unsupervised runs and sharing a setup with your team.</td></tr>
+      <tr><td>Before you start</td><td>You already use Claude Code for single prompts, and you know basic Git and the command line</td></tr>
+    </table>
+    <div class="note">Anthropic Academy is now Claude Academy, and the course moved with it. It's also one of the free prep courses for the Architect exam in 04.</div>
+  </div>
+</section>
+
+<section class="step pad" id="agentic">
+  <div class="step-kicker"><span>03</span>Agentic AI</div>
+  <div>
+    <h2>Agentic AI with Andrew Ng.</h2>
+    <p class="lede">After this, you can break a job into an agent workflow and pick the right pattern for each step.</p>
+    <div class="read">
+      <div class="src">DeepLearning.AI &middot; Andrew Ng &middot; Intermediate</div>
+      <h3>Agentic AI</h3>
+      <a href="https://www.deeplearning.ai/courses/agentic-ai/" target="_blank" rel="noopener">Open the course &rarr;</a>
+    </div>
+    <table>
+      <tr><th>The course</th><th>Details</th></tr>
+      <tr><td>Taught by</td><td>Andrew Ng, founder of DeepLearning.AI</td></tr>
+      <tr><td>Length</td><td>9h 55m: 31 video lessons and 7 code examples. This is the "about 10 hours" from the Reel.</td></tr>
+      <tr><td>Cost</td><td>The videos are free to audit. The quizzes, labs and certificate need DeepLearning.AI Pro: $25 a month billed annually, or $30 month to month.</td></tr>
+      <tr><td>Before you start</td><td>Intermediate Python, and a basic idea of how LLMs and APIs work</td></tr>
+    </table>
+    <p>The course teaches the four patterns from the Reel: reflection, tool use, planning and multi-agent workflows. Once you know them, most agent products stop looking like magic. You can see which pattern each step uses.</p>
+  </div>
+</section>
+
+<section class="step pad" id="architect">
+  <div class="step-kicker"><span>04</span>The Architect</div>
+  <div>
+    <h2>Claude Certified Architect: Foundations.</h2>
+    <p class="lede">This one is an exam, not a course. Pass it and you've shown you can make the design calls behind production apps on Claude.</p>
+    <div class="read">
+      <div class="src">Anthropic &middot; Claude Partner Network &middot; certification exam</div>
+      <h3>Claude Certified Architect: Foundations</h3>
+      <a href="https://anthropic-partners.skilljar.com/claude-certified-architect-foundations-certification" target="_blank" rel="noopener">Open the exam page &rarr;</a>
+    </div>
+    <table>
+      <tr><th>The exam</th><th>Details</th></tr>
+      <tr><td>What it is</td><td>Anthropic's exam for solution architects who build production applications with Claude. It covers Claude Code, the Claude Agent SDK, the Claude API and MCP. Anthropic launched it in March 2026 as its first technical certification for Claude.</td></tr>
+      <tr><td>Cost</td><td>$125 USD per attempt</td></tr>
+      <tr><td>Who can sit it</td><td>Only people who work at a company in the Claude Partner Network. You register with your work email, you must be 18 or older, and you show a government ID on the day.</td></tr>
+      <tr><td>Format</td><td>60 questions in 120 minutes, proctored online or at a Pearson VUE test centre</td></tr>
+      <tr><td>Prep</td><td>Seven free courses, listed in 08</td></tr>
+    </table>
+    <div class="note">Not at a partner company? You can't register for the exam. Anthropic points you to <a href="https://academy.claude.com/" target="_blank" rel="noopener">Claude Academy</a> instead, where passing a course earns a certificate of completion. That isn't a certification. If your company delivers Claude to clients, it can <a href="https://claude.com/partners" target="_blank" rel="noopener">apply to the partner network</a>, and membership opens the exams.</div>
+    <p>The study notes I promised in the Reel start at 06.</p>
+  </div>
+</section>
+
+<section class="step pad" id="evals">
+  <div class="step-kicker"><span>05</span>Evals</div>
+  <div>
+    <h2>Evaluating AI Agents.</h2>
+    <p class="lede">After this, you can trace what your agent did at every step and score it, so you know it's reliable before you launch and after.</p>
+    <div class="read">
+      <div class="src">DeepLearning.AI &middot; with Arize AI</div>
+      <h3>Evaluating AI Agents</h3>
+      <a href="https://www.deeplearning.ai/courses/evaluating-ai-agents" target="_blank" rel="noopener">Open the course &rarr;</a>
+    </div>
+    <table>
+      <tr><th>The course</th><th>Details</th></tr>
+      <tr><td>Taught by</td><td>John Gilhuly and Aman Khan from Arize AI</td></tr>
+      <tr><td>Length</td><td>2h 36m: 15 video lessons and 6 code examples</td></tr>
+      <tr><td>Cost</td><td>Free to enrol while DeepLearning.AI's learning platform is in beta. The graded quiz and the accomplishment need DeepLearning.AI Pro.</td></tr>
+      <tr><td>Before you start</td><td>Basic Python</td></tr>
+    </table>
+    <p>The lessons cover tracing an agent, adding evaluations for its router and its skills, and monitoring it once it's live. The labs use Phoenix, Arize's open-source tool for viewing traces.</p>
+    <div class="note">DeepLearning.AI labels this course Beginner. I put it last because it pays off most once you have an agent of your own to test.</div>
+  </div>
+</section>
+
+<section class="step pad" id="exam">
+  <div class="step-kicker"><span>06</span>The exam</div>
+  <div>
+    <h2>The Architect exam at a glance.</h2>
+    <p class="lede">Every question sits inside a realistic build. You get four scenarios and answer questions about the tradeoffs in each.</p>
+    <table>
+      <tr><th>Exam detail</th><th>From the official guide</th></tr>
+      <tr><td>Questions</td><td>60, multiple choice and multiple response. Each question tells you how many answers to pick.</td></tr>
+      <tr><td>Time</td><td>120 minutes</td></tr>
+      <tr><td>Scenarios</td><td>4, picked at random from a bank of 6</td></tr>
+      <tr><td>Pass mark</td><td>A scaled score of 720 on a scale of 100 to 1,000</td></tr>
+      <tr><td>Results</td><td>Pass or fail, plus your percentage correct in each domain</td></tr>
+      <tr><td>Valid for</td><td>12 months. Renewing on time is a free assessment with no proctor. If it lapses, you sit the full exam again.</td></tr>
+      <tr><td>Retakes</td><td>Wait 14 days after a first fail, 30 after a second and 90 after a third. Up to four attempts in 12 months, and every attempt costs the fee.</td></tr>
+    </table>
+
+    <p class="inst">The six scenarios</p>
+    <ul>
+      <li><strong>Customer support resolution agent.</strong> An Agent SDK agent with MCP tools for customers, orders and refunds, aiming for 80% first-contact resolution and knowing when to hand over to a person.</li>
+      <li><strong>Code generation with Claude Code.</strong> Custom slash commands, CLAUDE.md files, and when to use plan mode instead of direct execution.</li>
+      <li><strong>Multi-agent research system.</strong> A coordinator that hands work to subagents for search, document analysis, synthesis and cited reports.</li>
+      <li><strong>Developer productivity with Claude.</strong> An agent that helps engineers explore unfamiliar codebases using the built-in tools and MCP servers.</li>
+      <li><strong>Claude Code for continuous integration.</strong> Automated code reviews, generated tests and pull request feedback that's useful and low on false positives.</li>
+      <li><strong>Structured data extraction.</strong> Pulling information out of messy documents, checking it against JSON schemas and handling the edge cases.</li>
+    </ul>
+    <p>The guide's ideal candidate is a solution architect with six or more months of hands-on work across the Claude API, the Agent SDK, Claude Code and MCP.</p>
+
+    <div class="read">
+      <div class="src">Anthropic &middot; exam guide &middot; version 1.0, July 2026 &middot; PDF</div>
+      <h3>Claude Certified Architect: Foundations exam guide</h3>
+      <a href="https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542750%2FClaude+Certified+Architect+%E2%80%93+Foundations+Exam+Guide.pdf" target="_blank" rel="noopener">Open the guide &rarr;</a>
+    </div>
+    <div class="note">You sign a non-disclosure agreement before the exam starts, so nobody can legitimately share real exam questions. Skip anyone selling "leaked" ones. Everything in these notes comes from Anthropic's public exam guide, linked above. Read it in full before you book.</div>
+  </div>
+</section>
+
+<section class="step pad" id="notes">
+  <div class="step-kicker"><span>07</span>Study notes</div>
+  <div>
+    <h2>Study notes, domain by domain.</h2>
+    <p class="lede">Five domains. The bigger the weight, the more questions. Here's what each one tests, in plain English.</p>
+
+    <p class="inst">Domain 1 &middot; 27% of the exam</p>
+    <p><strong>Agentic architecture and orchestration.</strong> How an agent loop runs, and how a coordinator manages a team of subagents.</p>
+    <ul>
+      <li><strong>The loop.</strong> Send the request and read <code>stop_reason</code>. If it's <code>"tool_use"</code>, run the tool and send the result back. If it's <code>"end_turn"</code>, stop. Don't decide when to stop by reading the model's text, and don't rely on a turn limit as the main way to stop.</li>
+      <li><strong>Subagents start blank.</strong> They don't inherit the coordinator's conversation, so put everything they need in their prompt. The coordinator spawns them with the Task tool, which has to be in its <code>allowedTools</code>. Several Task calls in one response run in parallel.</li>
+      <li><strong>The coordinator owns the plan.</strong> All messages between subagents go through it. If it splits a topic too narrowly, the report misses whole areas even when every subagent does its job.</li>
+      <li><strong>Code beats prompts for hard rules.</strong> When a rule must hold every time, like verifying the customer before a refund, enforce it with a hook or a prerequisite check. Prompt instructions still fail some of the time.</li>
+      <li><strong>Hooks.</strong> <code>PostToolUse</code> hooks clean up tool results before the model sees them, for example turning mixed date formats into one. Hooks on outgoing calls can block a refund over a limit and route it to a person instead.</li>
+      <li><strong>Fixed or adaptive plans.</strong> Use a fixed prompt chain for predictable work like a review, and let the plan adapt for open-ended investigation.</li>
+      <li><strong>Sessions.</strong> <code>--resume</code> continues a named session and <code>fork_session</code> branches one. If the old tool results are stale, start fresh with a summary instead.</li>
+    </ul>
+
+    <p class="inst">Domain 2 &middot; 18% of the exam</p>
+    <p><strong>Tool design and MCP integration.</strong> How the model picks tools, how tools report failure, and where MCP servers are configured.</p>
+    <ul>
+      <li><strong>The description is how the model chooses.</strong> Say what the tool does, what it takes, example queries, edge cases, and when to use it instead of a similar tool. If two tools overlap, rename or split them.</li>
+      <li><strong>Structured errors.</strong> Use MCP's <code>isError</code> flag and say what kind of error it is (transient, validation, business rule or permission), whether a retry could work, and what happened in words. A generic "operation failed" leaves the agent guessing.</li>
+      <li><strong>A failure isn't an empty result.</strong> A timeout needs a retry decision. A search that worked and found nothing is a valid answer.</li>
+      <li><strong>Fewer tools per agent.</strong> Give each agent the four or five tools its role needs, not eighteen. <code>tool_choice</code> can be <code>"auto"</code>, <code>"any"</code> (it must call some tool) or a named tool.</li>
+      <li><strong>Where MCP servers live.</strong> Shared team servers go in the project's <code>.mcp.json</code>, with secrets pulled from environment variables like <code>${GITHUB_TOKEN}</code>. Personal ones go in <code>~/.claude.json</code>. Use an existing community server for standard tools like Jira, and build your own only for team-specific work.</li>
+      <li><strong>Built-in tools.</strong> Grep searches file contents, Glob finds files by name or pattern, Edit needs a unique text match, and Read plus Write is the fallback when Edit can't find one.</li>
+    </ul>
+
+    <p class="inst">Domain 3 &middot; 20% of the exam</p>
+    <p><strong>Claude Code configuration and workflows.</strong> Where instructions, commands, skills and rules live, and how to run Claude Code in a pipeline.</p>
+    <ul>
+      <li><strong>The CLAUDE.md hierarchy.</strong> User level (<code>~/.claude/CLAUDE.md</code>) is yours alone and never reaches teammates. Project and directory files are shared through the repo. <code>@import</code> pulls in other files, and <code>/memory</code> shows what actually loaded.</li>
+      <li><strong>Commands and skills.</strong> Project commands go in <code>.claude/commands/</code> and are shared through version control. Personal ones go in <code>~/.claude/commands/</code>. Skills live in <code>.claude/skills/</code>, and their frontmatter can set <code>context: fork</code> (run in isolation), <code>allowed-tools</code> and <code>argument-hint</code>. Skills load on demand, while CLAUDE.md is always loaded.</li>
+      <li><strong>Path rules.</strong> Files in <code>.claude/rules/</code> with a <code>paths</code> glob in their frontmatter, like <code>**/*.test.tsx</code>, only load when Claude edits matching files. They beat a CLAUDE.md per folder when the files are spread across the codebase.</li>
+      <li><strong>Plan mode or direct execution.</strong> Plan mode suits big, multi-file changes with several valid approaches. A small fix with a clear stack trace can run directly. The Explore subagent keeps noisy discovery out of your main conversation.</li>
+      <li><strong>Iterating.</strong> Two or three concrete input and output examples fix vague instructions. Write the tests first and share the failures. Ask Claude to interview you before it builds in an unfamiliar area.</li>
+      <li><strong>In CI.</strong> <code>claude -p</code> runs without waiting for input. <code>--output-format json</code> with <code>--json-schema</code> gives findings you can post as pull request comments. A fresh instance reviews code better than the session that wrote it.</li>
+    </ul>
+
+    <p class="inst">Domain 4 &middot; 20% of the exam</p>
+    <p><strong>Prompt engineering and structured output.</strong> How to get precise, consistent, machine-readable output.</p>
+    <ul>
+      <li><strong>Explicit criteria.</strong> "Be conservative" doesn't improve precision. Say exactly what to report and what to skip. If one category throws up false positives, switch it off while you fix it, because it drags down trust in the rest.</li>
+      <li><strong>Few-shot examples.</strong> Two to four targeted examples for the ambiguous cases, showing the reasoning and the output format, do more for consistency than longer instructions.</li>
+      <li><strong>Schema output.</strong> <code>tool_use</code> with a JSON schema is the most reliable way to get valid JSON. It fixes syntax, not meaning: totals can still fail to add up. Make fields nullable when the source might not have the answer, so the model doesn't invent one, and add <code>"other"</code> or <code>"unclear"</code> to enums.</li>
+      <li><strong>Validation and retry.</strong> On a retry, send the document, the failed output and the specific error. Retrying won't help when the information isn't in the document.</li>
+      <li><strong>Message Batches API.</strong> 50% cheaper, but results can take up to 24 hours with no latency guarantee, and it can't run tools mid-request. Use it for overnight reports and audits, never for a check that blocks a merge. <code>custom_id</code> matches results to requests.</li>
+      <li><strong>Review in passes.</strong> Review each file on its own, then run a separate pass across files. A second, independent instance catches more than asking the same session to check itself.</li>
+    </ul>
+
+    <p class="inst">Domain 5 &middot; 15% of the exam</p>
+    <p><strong>Context management and reliability.</strong> Keeping the facts straight over long runs, and knowing when to hand over to a person.</p>
+    <ul>
+      <li><strong>Protect the facts.</strong> Summaries blur numbers, dates and promises. Keep amounts, order numbers and statuses in a "case facts" block in every prompt, trim tool output to the fields that matter, and put key findings at the start, because findings in the middle of a long input can get missed.</li>
+      <li><strong>Escalation.</strong> Hand over when the customer asks for a person, when policy doesn't cover the request, or when the agent can't make progress. Sentiment and the model's own confidence score are poor triggers. If a lookup returns several matching customers, ask for another identifier rather than guessing.</li>
+      <li><strong>Errors across agents.</strong> Send the coordinator the failure type, what was tried, any partial results and possible alternatives. Hiding an error as an empty success and killing the whole run over one failure are both wrong.</li>
+      <li><strong>Long sessions.</strong> Use scratchpad files for findings, subagents for exploration and <code>/compact</code> when context fills up. For crash recovery, each agent writes its state to a known file and the coordinator reloads it on resume.</li>
+      <li><strong>Human review.</strong> 97% overall accuracy can hide poor results on one document type or field. Check accuracy by document type and field, sample high-confidence results at random, and send the low-confidence ones to people.</li>
+      <li><strong>Sources.</strong> Keep each claim tied to its source through every summary. When two good sources disagree, report both and say where each came from, and include dates so an older figure doesn't read as a contradiction.</li>
+    </ul>
+    <div class="note">The guide also lists topics that won't be tested, including fine-tuning, API billing and authentication, computer use, vision, streaming, rate limits and pricing calculations, cloud provider setup, embeddings and vector databases, and tokenisation details. Spend your time elsewhere.</div>
+  </div>
+</section>
+
+<section class="step pad" id="prepare">
+  <div class="step-kicker"><span>08</span>How to prepare</div>
+  <div>
+    <h2>Build first, then test yourself.</h2>
+    <p class="lede">The guide's own advice is hands-on. Do the free courses, build the four exercises, then work through the sample questions.</p>
+
+    <p class="inst">The free prep courses</p>
+    <p>Anthropic lists seven free prep courses on its partner academy: AI Fluency: Framework &amp; Foundations, Building with the Claude API, Claude on Google Cloud, Claude Code in Action, Claude 101, Claude with Amazon Bedrock and Introduction to Model Context Protocol. The three that line up best with the domains are open to everyone on Claude Academy:</p>
+    <table>
+      <tr><th>Course</th><th>Length and domains</th></tr>
+      <tr><td><a href="https://academy.claude.com/courses/building-with-the-claude-api" target="_blank" rel="noopener">Building with the Claude API</a></td><td>67 lessons, about 9 hours. Prompting, tool use, agents, MCP and production patterns: domains 1, 2 and 4.</td></tr>
+      <tr><td><a href="https://academy.claude.com/courses/introduction-to-model-context-protocol" target="_blank" rel="noopener">Introduction to Model Context Protocol</a></td><td>10 lessons, about an hour. MCP servers and clients with tools, resources and prompts: domain 2.</td></tr>
+      <tr><td><a href="https://academy.claude.com/courses/claude-code-in-action" target="_blank" rel="noopener">Claude Code in Action</a></td><td>9 lessons, about an hour: domain 3.</td></tr>
+    </table>
+    <p>Claude Academy also has short courses on <a href="https://academy.claude.com/courses/introduction-to-subagents" target="_blank" rel="noopener">subagents</a> (4 lessons, 45 minutes) and <a href="https://academy.claude.com/courses/introduction-to-agent-skills" target="_blank" rel="noopener">agent skills</a> (6 lessons, an hour), which match parts of domains 1 and 3.</p>
+    <div class="read">
+      <div class="src">Anthropic &middot; Partner Academy</div>
+      <h3>Claude Certified Architect prep courses</h3>
+      <a href="https://anthropic-partners.skilljar.com/page/claude-certification-exam-prep-courses" target="_blank" rel="noopener">See all seven &rarr;</a>
+    </div>
+
+    <p class="inst">Four exercises from the guide</p>
+    <ul class="lessons">
+      <li><strong><span class="k">1</span>A multi-tool agent that escalates.</strong>Three or four MCP tools with clear descriptions, two of them deliberately similar. A loop driven by <code>stop_reason</code>, structured errors, a hook that blocks anything over a set amount and sends it to a person, and a test message with several problems in it.</li>
+      <li><strong><span class="k">2</span>Claude Code set up for a team.</strong>A project CLAUDE.md, path rules in <code>.claude/rules/</code>, a skill with <code>context: fork</code> and <code>allowed-tools</code>, a shared MCP server in <code>.mcp.json</code> next to a personal one, and three tasks of different sizes tried in plan mode and direct execution.</li>
+      <li><strong><span class="k">3</span>A structured extraction pipeline.</strong>A JSON schema with required, optional and nullable fields, a validation and retry loop, few-shot examples for messy documents, 100 documents through the Message Batches API, and low-confidence fields routed to a person.</li>
+      <li><strong><span class="k">4</span>A multi-agent research pipeline.</strong>A coordinator running at least two subagents in parallel, findings that keep their source and date, a simulated timeout that comes back as a structured error, and two sources that disagree, with both kept in the report.</li>
+    </ul>
+
+    <p class="inst">Then the sample questions</p>
+    <p>Section 9 of the guide has twelve sample questions from four of the scenarios, each with why the right answer is right and why the others aren't. Do them after the exercises and read every explanation, including the ones you got right.</p>
+
+    <p class="inst">Checklist before you book</p>
+    <ul>
+      <li>You can say what a loop does when <code>stop_reason</code> is <code>"tool_use"</code> and when it's <code>"end_turn"</code>.</li>
+      <li>You know why a hook beats a prompt for a rule that must always hold.</li>
+      <li>You pass context to subagents on purpose, because they inherit nothing.</li>
+      <li>You can write a tool description that stops the model mixing up two similar tools.</li>
+      <li>Your tools return errors that say whether a retry could work.</li>
+      <li>You can put a command, skill, rule or MCP server at the right scope, personal or project.</li>
+      <li>You can choose plan mode or direct execution for a given change, and say why.</li>
+      <li>You can run Claude Code in CI with <code>-p</code> and get JSON out.</li>
+      <li>You can get schema-valid output with <code>tool_use</code>, and you know what the schema won't catch.</li>
+      <li>You know when the Batches API fits and when it doesn't.</li>
+      <li>You can name the right escalation triggers, and the two unreliable ones.</li>
+      <li>You can keep facts, sources and dates intact through a long or multi-agent run.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="step pad" id="next">
+  <div class="step-kicker"><span>09</span>What to do now</div>
+  <div>
+    <h2>Pick your starting point.</h2>
+    <p class="lede">You don't need all five. Start where you are and finish one this week.</p>
+    <ul>
+      <li><strong>If you've never built an app:</strong> start with 01. It's short, free during the beta, and you finish with two working apps.</li>
+      <li><strong>If you run a business and want to know what agents can do for it:</strong> watch the free videos in 03. You'll learn how agents are put together, which makes it much easier to tell a real agent project from a demo.</li>
+      <li><strong>If you already use Claude Code:</strong> do 02, then 05, so you can run longer jobs and prove they work.</li>
+      <li><strong>If your company is a Claude partner:</strong> book the Architect exam once the four exercises in 08 feel easy and every line of the checklist is true.</li>
+      <li><strong>If your company isn't a partner:</strong> do the prep courses anyway. The skills are the same, and Claude Academy gives you a certificate of completion.</li>
+    </ul>
+  </div>
+</section>
+
+</div>
+
+<!-- The close and the footer are one block on the reversed sky, outside #kit so gated visitors get it too, everything
+     in it white on the dark stretch. .close-kit only shows once #kit is unlocked (CSS: #kit[hidden]~.closeblock .close-kit). -->
+<footer class="closeblock pad">
+  <div class="close-top">
+    <div>
+      <h2>See what's possible. Then build it.</h2>
+      <p class="close-kit">You're on the list now: five useful things I made with AI each week, and how I made them.</p>
+    </div>
+    <a class="close-btn" href="/">Back to the site</a>
+  </div>
+  <div class="close-row"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 897 112" role="img" aria-label="Art of the Possible"><title>Art of the Possible</title><g fill="#FFFFFF"><path transform="scale(0.448)" d="M93.301 48.471A34.601 34.601 0 1 1 156.699 48.471A34.601 34.601 0 0 0 93.301 48.471ZM156.699 48.471A34.601 34.601 0 1 1 201.529 93.301A34.601 34.601 0 0 0 156.699 48.471ZM201.529 93.301A34.601 34.601 0 1 1 156.699 48.471A34.601 34.601 0 0 0 201.529 93.301ZM201.529 93.301A34.601 34.601 0 1 1 201.529 156.699A34.601 34.601 0 0 0 201.529 93.301ZM201.529 156.699A34.601 34.601 0 1 1 156.699 201.529A34.601 34.601 0 0 0 201.529 156.699ZM156.699 201.529A34.601 34.601 0 1 1 201.529 156.699A34.601 34.601 0 0 0 156.699 201.529ZM156.699 201.529A34.601 34.601 0 1 1 93.301 201.529A34.601 34.601 0 0 0 156.699 201.529ZM93.301 201.529A34.601 34.601 0 1 1 48.471 156.699A34.601 34.601 0 0 0 93.301 201.529ZM48.471 156.699A34.601 34.601 0 1 1 93.301 201.529A34.601 34.601 0 0 0 48.471 156.699ZM48.471 156.699A34.601 34.601 0 1 1 48.471 93.301A34.601 34.601 0 0 0 48.471 156.699ZM48.471 93.301A34.601 34.601 0 1 1 93.301 48.471A34.601 34.601 0 0 0 48.471 93.301ZM93.301 48.471A34.601 34.601 0 1 1 48.471 93.301A34.601 34.601 0 0 0 93.301 48.471Z"/><path transform="translate(160 80.736)" d="M11.7 0H0.49L17.57 -49.47H31.04L48.09 0H36.91L24.49 -38.17H24.09ZM11.04 -19.44H37.49V-11.3H11.04ZM51.08 0V-49.47H70.57Q76.2 -49.47 80.16 -47.48Q84.12 -45.48 86.22 -41.85Q88.32 -38.21 88.32 -33.31Q88.32 -28.38 86.2 -24.84Q84.07 -21.29 80.04 -19.41Q76.01 -17.53 70.31 -17.53H57.27V-25.94H68.6Q71.63 -25.94 73.62 -26.76Q75.6 -27.59 76.58 -29.22Q77.55 -30.85 77.55 -33.31Q77.55 -35.78 76.57 -37.47Q75.59 -39.15 73.6 -40.02Q71.62 -40.89 68.58 -40.89H61.52V0ZM78.54 0 66.5 -22.52H77.78L90.09 0ZM90.95 -40.85V-49.47H131.58V-40.85H116.44V0H106.12V-40.85ZM170.54 0.66Q163.97 0.66 158.72 -2.32Q153.46 -5.31 150.41 -10.99Q147.36 -16.66 147.36 -24.7Q147.36 -32.8 150.41 -38.49Q153.46 -44.18 158.72 -47.16Q163.97 -50.14 170.54 -50.14Q177.12 -50.14 182.35 -47.16Q187.59 -44.18 190.64 -38.49Q193.69 -32.8 193.69 -24.7Q193.69 -16.64 190.64 -10.97Q187.59 -5.29 182.35 -2.31Q177.12 0.66 170.54 0.66ZM170.54 -8.58Q174.35 -8.58 177.16 -10.44Q179.98 -12.29 181.54 -15.89Q183.09 -19.49 183.09 -24.7Q183.09 -29.95 181.54 -33.57Q179.98 -37.18 177.16 -39.04Q174.35 -40.89 170.54 -40.89Q166.76 -40.89 163.93 -39.04Q161.1 -37.18 159.53 -33.57Q157.96 -29.95 157.96 -24.7Q157.96 -19.49 159.53 -15.89Q161.1 -12.29 163.93 -10.44Q166.76 -8.58 170.54 -8.58ZM198.51 0V-49.47H231.26V-40.85H208.95V-27.25H229.08V-18.79H208.95V0ZM246.36 -40.85V-49.47H286.99V-40.85H271.85V0H261.53V-40.85ZM290.8 0V-49.47H301.24V-29.06H322.46V-49.47H332.9V0H322.46V-20.44H301.24V0ZM338.59 0V-49.47H371.94V-40.85H349.03V-29.22H370.19V-20.76H349.03V-8.62H372V0ZM390.19 0V-49.47H409.68Q415.31 -49.47 419.27 -47.33Q423.23 -45.19 425.33 -41.4Q427.43 -37.61 427.43 -32.69Q427.43 -27.76 425.31 -24Q423.18 -20.25 419.15 -18.14Q415.12 -16.03 409.43 -16.03H396.99V-24.41H407.71Q410.74 -24.41 412.73 -25.46Q414.71 -26.52 415.69 -28.38Q416.66 -30.25 416.66 -32.69Q416.66 -35.18 415.69 -37.02Q414.71 -38.86 412.72 -39.88Q410.73 -40.89 407.69 -40.89H400.63V0ZM453.6 0.66Q447.03 0.66 441.78 -2.32Q436.52 -5.31 433.47 -10.99Q430.43 -16.66 430.43 -24.7Q430.43 -32.8 433.47 -38.49Q436.52 -44.18 441.78 -47.16Q447.03 -50.14 453.6 -50.14Q460.18 -50.14 465.42 -47.16Q470.65 -44.18 473.7 -38.49Q476.75 -32.8 476.75 -24.7Q476.75 -16.64 473.7 -10.97Q470.65 -5.29 465.42 -2.31Q460.18 0.66 453.6 0.66ZM453.6 -8.58Q457.41 -8.58 460.23 -10.44Q463.05 -12.29 464.6 -15.89Q466.15 -19.49 466.15 -24.7Q466.15 -29.95 464.6 -33.57Q463.05 -37.18 460.23 -39.04Q457.41 -40.89 453.6 -40.89Q449.82 -40.89 446.99 -39.04Q444.17 -37.18 442.6 -33.57Q441.03 -29.95 441.03 -24.7Q441.03 -19.49 442.6 -15.89Q444.17 -12.29 446.99 -10.44Q449.82 -8.58 453.6 -8.58ZM499.91 0.7Q493.92 0.7 489.49 -1.13Q485.06 -2.96 482.58 -6.57Q480.1 -10.19 479.96 -15.54H490.08Q490.27 -13.07 491.53 -11.4Q492.8 -9.74 494.93 -8.9Q497.06 -8.06 499.79 -8.06Q502.45 -8.06 504.43 -8.83Q506.4 -9.6 507.49 -10.98Q508.57 -12.36 508.57 -14.18Q508.57 -15.84 507.58 -16.96Q506.6 -18.08 504.73 -18.89Q502.85 -19.69 500.15 -20.32L494.75 -21.65Q488.5 -23.15 484.89 -26.41Q481.28 -29.68 481.28 -35.17Q481.28 -39.66 483.71 -43.02Q486.14 -46.38 490.37 -48.26Q494.61 -50.14 500.02 -50.14Q505.54 -50.14 509.64 -48.25Q513.75 -46.36 516.05 -43Q518.35 -39.64 518.43 -35.25H508.36Q508.09 -38.16 505.89 -39.78Q503.7 -41.4 499.94 -41.4Q497.4 -41.4 495.62 -40.68Q493.84 -39.97 492.92 -38.71Q492 -37.45 492 -35.83Q492 -34.09 493.06 -32.91Q494.11 -31.74 495.9 -31Q497.68 -30.25 499.81 -29.74L504.23 -28.66Q507.45 -27.93 510.16 -26.72Q512.87 -25.5 514.88 -23.74Q516.89 -21.99 517.99 -19.6Q519.09 -17.22 519.09 -14.13Q519.09 -9.61 516.81 -6.27Q514.53 -2.94 510.24 -1.12Q505.96 0.7 499.91 0.7ZM541.53 0.7Q535.54 0.7 531.11 -1.13Q526.68 -2.96 524.2 -6.57Q521.72 -10.19 521.58 -15.54H531.7Q531.89 -13.07 533.16 -11.4Q534.42 -9.74 536.55 -8.9Q538.68 -8.06 541.41 -8.06Q544.08 -8.06 546.05 -8.83Q548.02 -9.6 549.11 -10.98Q550.19 -12.36 550.19 -14.18Q550.19 -15.84 549.21 -16.96Q548.22 -18.08 546.35 -18.89Q544.47 -19.69 541.77 -20.32L536.37 -21.65Q530.12 -23.15 526.51 -26.41Q522.9 -29.68 522.9 -35.17Q522.9 -39.66 525.33 -43.02Q527.76 -46.38 531.99 -48.26Q536.23 -50.14 541.64 -50.14Q547.16 -50.14 551.26 -48.25Q555.37 -46.36 557.67 -43Q559.97 -39.64 560.05 -35.25H549.98Q549.71 -38.16 547.51 -39.78Q545.32 -41.4 541.56 -41.4Q539.02 -41.4 537.24 -40.68Q535.46 -39.97 534.54 -38.71Q533.62 -37.45 533.62 -35.83Q533.62 -34.09 534.68 -32.91Q535.74 -31.74 537.52 -31Q539.3 -30.25 541.43 -29.74L545.85 -28.66Q549.07 -27.93 551.78 -26.72Q554.49 -25.5 556.5 -23.74Q558.51 -21.99 559.61 -19.6Q560.71 -17.22 560.71 -14.13Q560.71 -9.61 558.43 -6.27Q556.15 -2.94 551.87 -1.12Q547.58 0.7 541.53 0.7ZM575.25 -49.47V0H564.81V-49.47ZM580.93 0V-49.47H600.73Q606.18 -49.47 609.83 -47.85Q613.48 -46.22 615.32 -43.36Q617.15 -40.5 617.15 -36.8Q617.15 -33.89 615.98 -31.71Q614.81 -29.52 612.8 -28.13Q610.78 -26.74 608.2 -26.16V-25.66Q611.03 -25.55 613.51 -24.08Q615.99 -22.6 617.53 -19.97Q619.08 -17.33 619.08 -13.67Q619.08 -9.75 617.14 -6.66Q615.21 -3.57 611.43 -1.78Q607.64 0 602.06 0ZM591.37 -8.54H599.91Q604.27 -8.54 606.29 -10.23Q608.31 -11.93 608.31 -14.7Q608.31 -16.77 607.32 -18.34Q606.33 -19.92 604.5 -20.82Q602.67 -21.71 600.16 -21.71H591.37ZM591.37 -28.77H599.14Q601.27 -28.77 602.96 -29.53Q604.64 -30.29 605.61 -31.69Q606.58 -33.1 606.58 -35.05Q606.58 -37.71 604.69 -39.36Q602.8 -41.01 599.34 -41.01H591.37ZM622.95 0V-49.47H633.39V-8.62H654.6V0ZM658.66 0V-49.47H692.01V-40.85H669.1V-29.22H690.26V-20.76H669.1V-8.62H692.06V0ZM708.66 -22.11V-39.91H717.37Q719.06 -39.94 720.47 -39.25Q721.88 -38.56 722.72 -37.24Q723.56 -35.93 723.56 -34.07Q723.56 -32.17 722.69 -30.82Q721.81 -29.47 720.37 -28.79Q718.94 -28.12 717.18 -28.12H711.19V-31.48H716.19Q717.2 -31.46 717.94 -32.11Q718.68 -32.75 718.68 -34.06Q718.68 -35.37 717.94 -35.95Q717.19 -36.52 716.21 -36.54H713.29V-22.11ZM720.04 -30.35 724.13 -22.11H719.02L715.23 -30.35ZM715.63 -11.49Q711.65 -11.49 708.14 -13Q704.64 -14.51 701.98 -17.17Q699.33 -19.82 697.84 -23.33Q696.35 -26.83 696.35 -30.81Q696.35 -34.8 697.84 -38.3Q699.33 -41.8 701.98 -44.46Q704.64 -47.12 708.14 -48.63Q711.65 -50.14 715.63 -50.14Q719.65 -50.14 723.15 -48.63Q726.65 -47.12 729.31 -44.46Q731.97 -41.8 733.46 -38.3Q734.95 -34.8 734.95 -30.81Q734.95 -26.83 733.46 -23.33Q731.97 -19.82 729.32 -17.17Q726.67 -14.51 723.16 -13Q719.65 -11.49 715.63 -11.49ZM715.63 -16.61Q719.59 -16.61 722.82 -18.52Q726.05 -20.43 727.97 -23.66Q729.88 -26.88 729.87 -30.81Q729.88 -34.74 727.96 -37.97Q726.05 -41.2 722.81 -43.12Q719.57 -45.03 715.63 -45.01Q711.72 -45.03 708.49 -43.12Q705.26 -41.2 703.34 -37.97Q701.43 -34.74 701.43 -30.82Q701.43 -26.89 703.35 -23.66Q705.26 -20.43 708.49 -18.52Q711.71 -16.61 715.63 -16.61Z"/></g></svg><p class="close-foot">New things are possible every day. <span class="nw">&middot; 2026</span></p></div>
+</footer>
+</div>
+
+
+
+<!-- The shared unlock: one email opens every guide in this browser, so nobody types it twice (Rich, 2026-10-03:
+     "People should not have to re-enter their email"). Load it before the gate code. -->
+<script src="/guides/unlock.js"></script>
+<script>
+(function () {
+  var API = 'https://theaotp-gate.theaotp.workers.dev';
+  var KEY = 'aotp_courses_unlocked';
+  var kit = document.getElementById('kit');
+  var gate = document.getElementById('gate');
+  var form = document.getElementById('gate-form');
+  var status = document.getElementById('gate-status');
+  var subbed = document.getElementById('subbed');
+
+  // window.AOTPUnlock comes from /guides/unlock.js. Where that file cannot load (file://, another host) the same
+  // contract runs inline: "aotp_subscriber" ({"at": ISO time}, never the email) or a member the worker confirmed
+  // ("aotp_member" = "2", set by /f.js) opens every guide. An old aotp_<slug>_unlocked flag on its own does not
+  // (those people never confirmed, so they are asked once more). A settled submit writes "aotp_subscriber" plus this
+  // page's key; "Use a different email" clears them all.
+  var U = window.AOTPUnlock || (function () {
+    var SUB = 'aotp_subscriber', MEMBER = 'aotp_member', PAGE = /^aotp_.+_unlocked$/;
+    function stamp() { return JSON.stringify({ at: new Date().toISOString() }); }
+    function keys() { var out = []; try { for (var i = 0; i < localStorage.length; i++) out.push(localStorage.key(i) || ''); } catch (e) {} return out; }
+    return {
+      isSubscribed: function () {
+        try {
+          if (localStorage.getItem(SUB)) return true;
+          var member = localStorage.getItem(MEMBER) === '2';
+          if (member) localStorage.setItem(SUB, stamp());
+          return member;
+        } catch (e) { return false; }
+      },
+      remember: function (key, answer) {
+        try { if (!(answer && answer.member === false)) localStorage.setItem(SUB, stamp()); localStorage.setItem(key, '1'); } catch (e) {}
+      },
+      forget: function () { keys().forEach(function (k) { if (k === SUB || k === MEMBER || PAGE.test(k)) { try { localStorage.removeItem(k); } catch (e) {} } }); }
+    };
+  })();
+
+  function unlock() {
+    kit.hidden = false;
+    gate.hidden = true;
+    subbed.hidden = false;
+  }
+
+  var open = U.isSubscribed();
+  document.documentElement.classList.toggle('aotp-subscribed', open);
+  if (open) unlock();
+
+  // "Use a different email": lock every guide in this browser again and show the form here, without a reload.
+  document.getElementById('gate-reset').addEventListener('click', function (event) {
+    event.preventDefault();
+    U.forget();
+    document.documentElement.classList.remove('aotp-subscribed');
+    kit.hidden = true;
+    subbed.hidden = true;
+    gate.hidden = false;
+    status.textContent = '';
+    gate.scrollIntoView({ block: 'start' });
+    document.getElementById('gate-email').focus({ preventScroll: true });
+  });
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    var email = document.getElementById('gate-email').value.trim().toLowerCase();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      status.textContent = 'That email looks off. Try again.';
+      return;
+    }
+    status.textContent = 'One sec…';
+    fetch(API + '/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, ctx: window.aotpCtx ? window.aotpCtx() : null }),
+    }).then(function (response) {
+      return response.json().catch(function () { return {}; }).then(function (data) {
+        if (!response.ok) {
+          var err = new Error('subscribe failed');
+          err.status = response.status;
+          err.detail = data && data.detail;
+          throw err;
+        }
+        return data;
+      });
+    }).then(function (data) {
+      if (window.aotpSubscribed) window.aotpSubscribed(data);
+      U.remember(KEY, data);
+      status.textContent = !(data && data.new) ? 'Welcome back. Unlocked.'
+        : data.member === false ? 'Unlocked. Check your inbox to confirm your subscription to the letter.'
+        : 'Unlocked. You\'re on the list for the weekly letter.';
+      unlock();
+      window.scrollTo({ top: subbed.offsetTop - 24, behavior: 'smooth' });
+    }).catch(function (err) {
+      if (err && err.status === 400) {
+        status.textContent = 'That email was rejected' + (err.detail ? ' (' + err.detail + ')' : '') + '. Try a different address.';
+      } else {
+        status.textContent = 'Something broke on our end. Try again in a minute, or subscribe on the homepage and DM me on Instagram for the five courses and the study notes.';
+      }
+    });
+  });
+
+  document.querySelectorAll('[data-copy]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      var pre = button.parentElement.querySelector('pre');
+      navigator.clipboard.writeText(pre.textContent).then(function () {
+        button.textContent = 'Copied';
+        setTimeout(function () { button.textContent = 'Copy'; }, 1600);
+      });
+    });
+  });
+
+})();
+</script>
+</body></html>
