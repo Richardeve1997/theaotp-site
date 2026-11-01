@@ -41,7 +41,8 @@
   var ok = /^[A-Za-z0-9_-]{1,64}$/;
   var query = location.search.slice(0, 200);
   var src = ok.test(params.get('s') || '') ? params.get('s') : '';
-  var token = ok.test(params.get('t') || '') ? params.get('t') : '';
+  // t = the commenter's Instagram username, filled in by Zernio, so dots are allowed.
+  var token = /^[A-Za-z0-9._-]{1,64}$/.test(params.get('t') || '') ? params.get('t').toLowerCase() : '';
   if (src || token) {
     set('aotp_src_' + slug, JSON.stringify({ s: src, t: token }));
     // Drop the codes from the address bar so a shared URL is not credited to this campaign.
@@ -66,6 +67,24 @@
       vid = 'v' + Date.now().toString(36) + Math.random().toString(36).slice(2, 12);
       set('aotp_vid', vid);
     }
+  }
+
+  // A fresh in-app browser (Instagram, LinkedIn) has forgotten this person. If the DM link's token
+  // belongs to someone already on the list, remember them and reload once so the kit opens without
+  // the email form.
+  if (slug && token && !member) {
+    try {
+      fetch(API + '/known', { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify({ t: token }) })
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          if (!data || !data.member || sessionStorage.getItem('aotp_known_reload')) return;
+          set(MEMBER, '2');
+          set('aotp_subscriber', JSON.stringify({ at: new Date().toISOString() }));
+          sessionStorage.setItem('aotp_known_reload', '1');
+          var kit = document.getElementById('kit');
+          if (!kit || kit.hidden) location.reload();
+        }).catch(function () {});
+    } catch (e) {}
   }
 
   window.aotpCtx = function () { return { vid: vid, src: src, t: token, page: page }; };

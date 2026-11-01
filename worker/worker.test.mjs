@@ -292,3 +292,15 @@ test('routing: GET is refused, unknown paths 404, preflight answers', async () =
   const preflight = await worker.fetch(new Request('https://gate.test/e', { method: 'OPTIONS', headers: { Origin: ORIGIN } }), {}, {});
   assert.equal(preflight.headers.get('Access-Control-Allow-Origin'), ORIGIN);
 });
+
+test('/known opens the kit for a subscriber who came in on a DM link token, and never leaks the email', async () => {
+  const DB = sqliteDb();
+  await post('/subscribe', { email: 'kenley@example.com', ctx: { ...CTX, t: 'Kenley.Jean' } }, { env: { DB } });
+  const yes = await post('/known', { t: 'kenley.jean' }, { env: { DB } });
+  assert.deepEqual(await yes.json(), { member: true });
+  assert.deepEqual(await (await post('/known', { t: 'someone_else' }, { env: { DB } })).json(), { member: false });
+  assert.deepEqual(await (await post('/known', { t: 'kenley.jean' }, { env: { DB }, origin: 'https://evil.test' })).json(), { member: false });
+  assert.deepEqual(await (await post('/known', { t: '{{username}}' }, { env: { DB } })).json(), { member: false });
+  DB.raw.prepare("UPDATE subscribers SET status = 'unsubscribed' WHERE email = 'kenley@example.com'").run();
+  assert.deepEqual(await (await post('/known', { t: 'kenley.jean' }, { env: { DB } })).json(), { member: false });
+});

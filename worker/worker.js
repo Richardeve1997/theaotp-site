@@ -6,6 +6,9 @@
 //                                      emailed from here: sending will go through Resend, reading
 //                                      this list (Flywheel ADR 0008).
 //   POST /e          {vid, type, page, src?, t?, label?, meta?}  -> records one page event
+//   POST /known      {t}            -> {member}: true when a subscribed person once signed up through a
+//                                      DM link carrying this token, so a kit opens for them in a fresh
+//                                      in-app browser without the email again. Never answers the email.
 // Until 2026-10-10 signups went to Buttondown, whose API takes at most 100 new subscribers a day;
 // past that every reader was refused and the guide stayed locked. Rich, that day: "switch to
 // collecting the emails ourselves and using resend to eventually send emails".
@@ -49,11 +52,14 @@ const HOME_WORDING = 'Subscribe';
 const clip = (value, max) => (typeof value === 'string' ? value.slice(0, max) : '');
 // vid / src / token are opaque ids minted by f.js or by our own link builder.
 const ident = (value, max) => (typeof value === 'string' && /^[A-Za-z0-9_-]+$/.test(value) ? value.slice(0, max) : '');
+// The per-person ?t= token is the commenter's Instagram username (Zernio fills {{username}} into the
+// DM link), so it may carry dots. Lower case, so one person is one token however it was typed.
+const linkToken = (value) => (typeof value === 'string' && /^[A-Za-z0-9._-]+$/.test(value) ? value.slice(0, 64).toLowerCase() : '');
 const pagePath = (value) => (typeof value === 'string' && /^\/[A-Za-z0-9/_-]*$/.test(value) ? value.slice(0, 80) : '');
 
 function context(raw) {
   const ctx = raw && typeof raw === 'object' ? raw : {};
-  return { vid: ident(ctx.vid, 40), src: ident(ctx.src, 40), token: ident(ctx.t, 64), page: pagePath(ctx.page) };
+  return { vid: ident(ctx.vid, 40), src: ident(ctx.src, 40), token: linkToken(ctx.t), page: pagePath(ctx.page) };
 }
 
 async function record(env, ctx, type, label, meta) {
@@ -159,6 +165,21 @@ export default {
           await record(env, ctx, body.type, clip(body.label, 200), body.meta);
         })());
       return new Response(null, { status: 204, headers });
+    }
+
+    if (url.pathname === '/known') {
+      // Worst case someone guesses a username and opens a free guide; no address ever leaves here.
+      const token = linkToken(body.t);
+      if (!token || !ALLOWED_ORIGINS.includes(origin) || !env.DB || !(await allowed(env.BEACON_PER_IP, ip)))
+        return new Response(JSON.stringify({ member: false }), { headers });
+      try {
+        const row = await env.DB.prepare(`SELECT 1 FROM consent_records c JOIN subscribers s ON s.email = c.email
+                                          WHERE c.link_token = ?1 AND s.status = 'subscribed' LIMIT 1`).bind(token).first();
+        return new Response(JSON.stringify({ member: Boolean(row) }), { headers });
+      } catch (err) {
+        console.log('known lookup failed', String(err));
+        return new Response(JSON.stringify({ member: false }), { headers });
+      }
     }
 
     const email = (typeof body.email === 'string' ? body.email : '').trim().toLowerCase();
