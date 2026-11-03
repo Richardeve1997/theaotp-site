@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Content Intelligence Kit | Art of the Possible</title>
-<meta name="description" content="The free Content Intelligence Kit from the Reel, plus a guide to set it up: what version 1 does, what you need, setup in one conversation, making it your own and keeping it updated.">
+<meta name="description" content="The free Content Intelligence Kit from the Reel, plus a visual guide: how it works, research, the edit, two video styles, posting, setup in five steps, making it your own and keeping it updated.">
 <meta name="robots" content="noindex">
 <link rel="canonical" href="https://theaotp.com/intelligence/">
 <link rel="icon" href="/qualia-symbol.png">
@@ -19,6 +19,13 @@
     v1.0.1 published 2026-11-01).
   - The Reels content-system-kit-walkthrough and -b (CTA word INTELLIGENCE; Rich's own result: 300 to almost 7,000
     followers in two months, over 500,000 views a month), pipeline/5-script/assets/<slug>/captions/transcript.json.
+  - The kit's layout and skills from the repo itself (.claude/skills/*, kit/, bin/, .gitignore, CLAUDE.md), and the
+    research, ui-story, post and mini-me SKILL.md files for the diagrams (score formula, five ideas, rules in me/).
+  - Video in /media/kits/intelligence/, re-encoded for the web (360x640 H.264, faststart): trio-raw/cut/final from
+    talks/demo-night-2026-10/media/trio_*_full.mp4 (the Archify take: raw IMG_9186, its clean cut, and the shipped
+    renders/codebase-visualizer.mp4); ui-story from media/style_ui-story.mp4 (renders/strix-pentest-v2.mp4, 0 to 6 s);
+    mini-rich from media/minirich_full.mp4 (renders/cs-bm-insomnia.mp4); mini-me-kit from the kit repo's
+    docs/media/mini-me-example.mp4 (a test Reel the kit made for a made-up creator).
 -->
 <!--
   Clear Sky kit template (AOTP design system approved by Rich 2026-09-30).
@@ -243,6 +250,148 @@ td:first-child{width:26%;padding-right:24px;color:var(--ink);font-weight:500}td 
 .say{display:block;margin-top:6px;font:400 12px/1.5 var(--mono);letter-spacing:.02em;color:var(--graphite)}
 .wo{display:block;margin-top:8px;color:var(--ink)}
 
+/* ---- /intelligence/ visual layer (Rich, 2026-11-03: "make the intelligence repo page more visual like the deck").
+   The deck's diagram grammar on Clear Sky: glacier cards for what Claude does, deep ocean cards (white type) for what
+   you do, a cerulean ring for the one skill in focus, graphite arrows, a cerulean loop where feedback goes back in.
+   Diagrams are SVG drawn by the small script at the end of the page, in a wide and a tall layout (phones). Everything
+   here sits inside #kit. ---- */
+.viz{max-width:1000px;margin:34px 0 8px}
+.viz svg{display:block;width:100%;height:auto;overflow:visible}
+.viz.tall svg{max-width:440px}
+.viz svg text{font-family:var(--ui)}
+.viz .n>rect:first-child{fill:var(--glacier-2);stroke:var(--ice);stroke-width:1.5}
+.viz .n .t{font:400 22px var(--display);letter-spacing:-.02em;fill:var(--ink)}
+.viz .n .s{font:400 11.5px var(--mono);letter-spacing:.1em;text-transform:uppercase;fill:var(--graphite)}
+.viz .n.human>rect:first-child{fill:var(--deep-ocean);stroke:var(--deep-ocean)}
+.viz .n.human .t,.viz .n.human .s{fill:var(--white)}
+.viz .n.accent>rect:first-child{fill:var(--white);stroke:#1199D7;stroke-width:2.5}
+.viz .n.dashed>rect:first-child{fill:none;stroke:var(--ash);stroke-dasharray:5 5}
+.viz .n.dashed .t,.viz .n.dashed .s{fill:var(--graphite)}
+.viz .tag{font:400 11.5px var(--mono);letter-spacing:.12em;text-transform:uppercase;fill:var(--deep-ocean)}
+.viz .mono{font:400 12px var(--mono);letter-spacing:.11em;text-transform:uppercase;fill:var(--graphite)}
+.viz .mono.ink{fill:var(--ink)}
+.viz .disp{font:400 30px var(--display);letter-spacing:-.03em;fill:var(--ink)}
+.viz .disp.blue{fill:var(--deep-ocean)}
+.viz .e{fill:none;stroke:var(--graphite);stroke-width:1.75}
+.viz .e.blue{stroke:#1199D7;stroke-width:2.5}
+.viz .e.ring{stroke:var(--ice);stroke-width:1.5}
+.vizcap{max-width:64ch;margin:12px 0 0;font:400 11px/1.6 var(--mono);letter-spacing:.11em;text-transform:uppercase;color:var(--graphite)}
+.vizcap i{display:inline-block;width:12px;height:12px;margin:0 8px 0 0;border-radius:3px;vertical-align:-1px;background:var(--glacier-2);border:1.5px solid var(--ice)}
+.vizcap i.h{background:var(--deep-ocean);border-color:var(--deep-ocean)}
+.vizcap i.f{background:var(--white);border:2px solid #1199D7}
+.vizcap i.d{background:none;border:1.5px dashed var(--ash)}
+.vizcap span{display:inline-block;margin-right:22px;white-space:nowrap}
+/* Reveal: nodes fade, arrows draw, once the diagram scrolls into view (the script adds .in). */
+.viz .n,.viz .fade{opacity:0;transition:opacity .55s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--i,0)*90ms + 80ms)}
+.viz .e{opacity:0;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .7s cubic-bezier(.2,.7,.2,1),opacity .2s;transition-delay:calc(var(--i,0)*90ms + 160ms)}
+.viz.in .n,.viz.in .fade{opacity:1}
+.viz.in .n.dim{opacity:.55}
+.viz.in .e{stroke-dashoffset:0;opacity:1}
+
+/* The folder tree (the deck's "Just folders and files"), the kit's real layout. */
+.tree{max-width:760px;margin:30px 0 0;padding:22px 24px 20px;background:var(--glacier-2);border-radius:12px}
+.tr{position:relative;display:grid;grid-template-columns:22px minmax(0,auto) minmax(0,1fr);align-items:baseline;column-gap:12px;padding:7px 0 7px var(--ind,0px)}
+.tr.l1{--ind:26px}.tr.l2{--ind:52px}
+.tr.l2::after{content:"";position:absolute;left:9px;top:0;bottom:0;border-left:1.5px solid var(--ice)}
+.tr.l1::before,.tr.l2::before{content:"";position:absolute;left:calc(var(--ind) - 17px);top:calc(-50% + 4px);height:calc(100% - 4px);width:11px;border-left:1.5px solid var(--ice);border-bottom:1.5px solid var(--ice);border-bottom-left-radius:6px}
+.tr i{align-self:center;width:18px;height:14px;display:inline-block;background:no-repeat center/contain}
+.tr i.fo{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 20'%3E%3Cpath d='M1 4a2 2 0 0 1 2-2h6l2.5 2.5H23a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2z' fill='%23909092'/%3E%3C/svg%3E")}
+.tr.sk i.fo,.tr.mine i.fo{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 20'%3E%3Cpath d='M1 4a2 2 0 0 1 2-2h6l2.5 2.5H23a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2z' fill='%23034C7C'/%3E%3C/svg%3E")}
+.tr i.fi{width:14px;height:17px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 24'%3E%3Cpath d='M3 1h9l5 5v15a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2z' fill='none' stroke='%2339383D' stroke-width='2'/%3E%3C/svg%3E")}
+.tr b{font:400 14px/1.4 var(--mono);color:var(--ink);white-space:nowrap}
+.tr.sk b,.tr.mine b{color:var(--deep-ocean)}
+.tr span{font-size:14px;line-height:1.45;color:var(--graphite)}
+.tr .mine-chip{display:inline-block;margin-left:8px;padding:2px 7px;border-radius:5px;background:var(--deep-ocean);color:var(--white);font:400 10px/1.5 var(--mono);letter-spacing:.1em;text-transform:uppercase;vertical-align:1px}
+.tools{max-width:760px;margin:22px 0 0;padding:22px 24px;background:var(--glacier-2);border-radius:12px}
+.tools .tk{font:400 11px/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--graphite)}
+.tools .tg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:16px}
+.tools .tl{background:var(--white);border-radius:10px;padding:12px 14px 13px}
+.tools .tl b{display:block;font:400 19px/1.15 var(--display);letter-spacing:-.02em;color:var(--ink)}
+.tools .tl span{display:block;margin-top:5px;font-size:13.5px;line-height:1.4;color:var(--graphite)}
+.tools .tl em{display:inline-block;margin-top:8px;padding:2px 7px;border-radius:5px;background:var(--ice-3);font:400 9.5px/1.5 var(--mono);font-style:normal;letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.tools .tn{margin-top:16px;font:400 11px/1.5 var(--mono);letter-spacing:.11em;text-transform:uppercase;color:var(--deep-ocean)}
+
+/* Phones: real Reels in rounded frames (the deck's "Same take, start to finish"). Videos load and play only when they
+   scroll into view, muted; the Sound pill turns the sound on for one video at a time. Three across, two across on
+   phones (a sideways swipe would put Sound pills off the page, where check_sky.py cannot measure them). */
+.phone{margin:0}
+.phones{display:grid;grid-template-columns:repeat(3,minmax(0,220px));gap:22px;max-width:760px;margin:30px 0 0}
+.phone .scr{position:relative;aspect-ratio:9/16;border-radius:20px;overflow:hidden;background:var(--ink);cursor:pointer}
+.phone video{display:block;width:100%;height:100%;object-fit:cover}
+.phone .pcap{margin-top:12px;font:400 11px/1.5 var(--mono);letter-spacing:.11em;text-transform:uppercase;color:var(--graphite)}
+.phone .pcap b{font-weight:400;color:var(--ink)}
+.phone .pcap .dur{color:var(--deep-ocean)}
+.snd{position:absolute;right:10px;bottom:10px;z-index:2;height:30px;padding:0 13px 0 28px;border:0;border-radius:999px;background:var(--g-sky-action);color:var(--white);font:400 10.5px/30px var(--mono);letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
+.snd::before{content:"";position:absolute;left:12px;top:10px;width:10px;height:10px;border-radius:50%;border:1.5px solid var(--white);box-sizing:border-box}
+.snd:hover{background:var(--g-sky-action-hover)}
+.snd.on::before{background:var(--white)}
+.snd:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+
+/* The setup strip: five numbered steps in a row, a column on phones. */
+.step .strip{list-style:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;max-width:1000px;margin:30px 0 8px;padding:0!important}
+.strip li{position:relative;margin:0;padding:0 14px 0 0;color:var(--graphite)}
+.strip li::before{content:"";position:absolute;left:34px;right:0;top:16px;height:1.5px;background:var(--ice)}
+.strip li:last-child::before{display:none}
+.strip .sn{position:relative;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--deep-ocean);color:var(--white);font:500 15px/1 var(--ui)}
+.strip b{display:block;margin-top:14px;font:400 19px/1.2 var(--display);letter-spacing:-.02em;color:var(--ink)}
+.strip li>span:last-child{display:block;margin-top:6px;font-size:13.5px;line-height:1.45}
+.strip li.mine .sn{background:var(--white);color:var(--deep-ocean);box-shadow:inset 0 0 0 2px #1199D7}
+
+/* Your first video, as the conversation it is: what you type (deep ocean, white type), what comes back (glacier). */
+.chat{display:grid;gap:10px;max-width:640px;margin:28px 0 0}
+.chat .you,.chat .kit{max-width:84%;padding:12px 16px;border-radius:16px;font-size:15px;line-height:1.45}
+.chat .you{justify-self:end;border-bottom-right-radius:5px;background:var(--deep-ocean);color:var(--white);font:400 14px/1.5 var(--mono)}
+.chat .kit{justify-self:start;border-bottom-left-radius:5px;background:var(--glacier-2);color:var(--ink)}
+.chat .kit small{display:block;margin-bottom:3px;font:400 10px/1.4 var(--mono);letter-spacing:.11em;text-transform:uppercase;color:var(--graphite)}
+.chat .mid{justify-self:center;margin:6px 0;padding:5px 12px;border-radius:5px;border:1.5px dashed var(--ash);font:400 10.5px/1.5 var(--mono);letter-spacing:.11em;text-transform:uppercase;color:var(--graphite)}
+
+/* Two columns of cards: what you need, kit files against yours, in the kit against my setup only. */
+.need{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;max-width:1000px;margin:28px 0 0}
+.need div{background:var(--glacier-2);border-radius:12px;padding:16px 16px 18px}
+.need svg{display:block;width:30px;height:30px;margin-bottom:14px}
+.need b{display:block;font:400 19px/1.2 var(--display);letter-spacing:-.02em;color:var(--ink)}
+.need span{display:block;margin-top:6px;font-size:13.5px;line-height:1.45;color:var(--graphite)}
+.cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;max-width:760px;margin:28px 0 0}
+.col{border-radius:12px;padding:18px 20px 16px;background:var(--glacier-2)}
+.col.mine{background:var(--deep-ocean);color:var(--white)}
+.col.out{background:none;border:1.5px dashed var(--ash)}
+.col h3{margin:0 0 4px;font-size:21px;line-height:1.15;letter-spacing:-.02em}
+.col .ck{font:400 10.5px/1.5 var(--mono);letter-spacing:.11em;text-transform:uppercase;color:var(--graphite)}
+.col.mine .ck,.col.mine h3,.col.mine li,.col.mine code{color:var(--white)}
+.col ul{list-style:none;margin:14px 0 0;padding:0!important;max-width:none}
+.col li{position:relative;margin:0;padding:8px 0 8px 22px;border-top:1px solid var(--ice);font-size:14.5px;line-height:1.45;color:var(--ink)}
+.col.mine li{border-top-color:rgba(255,255,255,.35)}
+.col li::before{content:"";position:absolute;left:0;top:14px;width:11px;height:6px;border-left:1.75px solid currentColor;border-bottom:1.75px solid currentColor;transform:rotate(-45deg)}
+.col.out li{color:var(--graphite)}
+.col.out li::before{top:16px;width:10px;height:0;border-left:0;border-bottom:1.5px solid var(--ash);transform:none}
+.col.mine code{background:rgba(255,255,255,.16)}
+
+@media(max-width:800px){
+  .phones{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 14px}
+  .tools .tg{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .step .strip{grid-template-columns:minmax(0,1fr);gap:18px}
+  .strip li{display:grid;grid-template-columns:34px minmax(0,1fr);column-gap:14px;padding:0}
+  .strip li::before{left:16px;right:auto;top:34px;bottom:-18px;width:1.5px;height:auto}
+  .strip b{margin-top:5px}.strip li>span:last-child{grid-column:2}
+  .need{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cols{grid-template-columns:minmax(0,1fr)}
+  .tree{padding:16px 14px}
+  .tr{grid-template-columns:20px minmax(0,1fr)}
+  .tr span{grid-column:2;font-size:13px}
+  .tr b{white-space:normal;overflow-wrap:anywhere}
+  .chat .you,.chat .kit{max-width:92%}
+}
+@media(prefers-reduced-motion:reduce){
+  .viz .n,.viz .fade{opacity:1;transition:none}.viz .n.dim{opacity:.55}
+  .viz .e{stroke-dashoffset:0;opacity:1;transition:none}
+}
+/* Paper and forced colours drop backgrounds: white type on deep ocean would vanish, so it prints as ink. */
+@media print,(forced-colors:active){
+  .snd{background:none;color:var(--ink);border:1px solid var(--ink)}.snd::before{border-color:var(--ink)}
+  .chat .you,.col.mine,.strip .sn,.tr .mine-chip{background:none;color:var(--ink);border:1px solid var(--ink)}
+  .col.mine .ck,.col.mine h3,.col.mine li,.col.mine code{color:var(--ink)}
+}
+
 @media(max-width:900px){
   .kit-hero{grid-template-columns:minmax(0,1fr);row-gap:22px}
 }
@@ -314,7 +463,7 @@ td:first-child{width:26%;padding-right:24px;color:var(--ink);font-weight:500}td 
       <p>Leave your email and this guide opens right here. The same email opens every other guide on the shelf and signs you up for the weekly letter.</p>
     </div>
     <ol class="unlocks">
-      <li class="this"><span class="n">01</span><div><b>Content Intelligence Kit <span class="now">Opens now</span></b><ul><li>The free repo, and what version&nbsp;1 does</li><li>What you need, and the optional costs</li><li>Setup, from install to "set me up"</li><li>Making it yours, and updates that keep your changes</li></ul></div></li>
+      <li class="this"><span class="n">01</span><div><b>Content Intelligence Kit <span class="now">Opens now</span></b><ul><li>The free repo, and a map of how it works</li><li>Research, the edit and posting, step by step</li><li>One of my takes, from raw to finished</li><li>Setup in five steps, and making it yours</li></ul></div></li>
       <li><span class="n">02</span><div><b>Every other guide</b>Prompt kits, setup guides and reading lists from my other Reels. The same email opens them all.</div></li>
       <li><span class="n">03</span><div><b>The weekly letter</b>Five useful things I made with AI each week, with the prompts and workflows inside. Unsubscribe any time.</div></li>
     </ol>
@@ -342,64 +491,153 @@ td:first-child{width:26%;padding-right:24px;color:var(--ink);font-weight:500}td 
   <div>
     <h2>The kit, in one minute.</h2>
     <p class="lede">The Content Intelligence Kit is a set of skills for Claude Code and Codex. They research, plan, edit, check and post short vertical videos in your own brand and voice.</p>
+    <div class="viz"><svg data-viz="loop" role="img" aria-label="The kit's loop: research, you pick an idea, plan, you film, edit, review, post, and your feedback saved as rules, back to research. Dashed underneath, in my own setup and not in the kit: comment to DM, email capture, analytics review."></svg></div>
+    <div class="vizcap"><span><i class="h"></i>You</span><span><i></i>The kit</span><span><i class="d"></i>My setup only</span></div>
     <div class="dl"><div class="dl-meta"><strong>content-intelligence-kit</strong>Free on GitHub under the MIT licence. Version 1.0.1, released 1 November 2026.</div><a class="dl-btn" href="https://github.com/Richardeve1997/content-intelligence-kit" target="_blank" rel="noopener">Open the repo</a></div>
     <p>You run it by talking to your agent inside the kit's folder. Say "run my research" or "here's my raw take, edit it" and the skill for that job does the work. You never type a slash command.</p>
     <p>In the Reel I said ChatGPT. The kit runs in Codex, which you sign into with your ChatGPT account, or in Claude Code, on your own Mac.</p>
     <ol class="index">
-      <li><span class="n">01</span><a href="#parts">What's in it</a><span class="st">Five parts, plus feedback</span></li>
-      <li><span class="n">02</span><a href="#need">What you need</a><span class="st">Mac, plan, optional keys</span></li>
-      <li><span class="n">03</span><a href="#setup">Setup</a><span class="st">One conversation</span></li>
-      <li><span class="n">04</span><a href="#first-video">Your first video</a><span class="st">What to say, in order</span></li>
-      <li><span class="n">05</span><a href="#yours">Make it yours</a><span class="st">Feedback becomes rules</span></li>
-      <li><span class="n">06</span><a href="#updates">Updates</a><span class="st">Your files stay put</span></li>
-      <li><span class="n">07</span><a href="#not-included">What's not in it</a><span class="st">The honest list</span></li>
-      <li><span class="n">08</span><a href="#next">What to do now</a><span class="st">Pick your start</span></li>
+      <li><span class="n">01</span><a href="#parts">What's in it</a><span class="st">Folders, skills, tools</span></li>
+      <li><span class="n">02</span><a href="#research">Research</a><span class="st">Five ranked ideas</span></li>
+      <li><span class="n">03</span><a href="#edit">The edit</a><span class="st">Raw take to Reel</span></li>
+      <li><span class="n">04</span><a href="#styles">Two video styles</a><span class="st">UI story and mini me</span></li>
+      <li><span class="n">05</span><a href="#post">Posting</a><span class="st">Six platforms</span></li>
+      <li><span class="n">06</span><a href="#need">What you need</a><span class="st">Mac, plan, optional keys</span></li>
+      <li><span class="n">07</span><a href="#setup">Setup</a><span class="st">Five steps</span></li>
+      <li><span class="n">08</span><a href="#first-video">Your first video</a><span class="st">What to say, in order</span></li>
+      <li><span class="n">09</span><a href="#yours">Make it yours</a><span class="st">Feedback becomes rules</span></li>
+      <li><span class="n">10</span><a href="#updates">Updates</a><span class="st">Your files stay put</span></li>
+      <li><span class="n">11</span><a href="#not-included">What's not in it</a><span class="st">The honest list</span></li>
+      <li><span class="n">12</span><a href="#next">What to do now</a><span class="st">Pick your start</span></li>
     </ol>
-    <div class="note">My own account went from 300 to almost 7,000 followers in two months on my version of this system, and it now gets over 500,000 views a month. My version does more than the public kit. Section 07 lists what isn't in it.</div>
+    <div class="note">My own account went from 300 to almost 7,000 followers in two months on my version of this system, and it now gets over 500,000 views a month. My version does more than the public kit. Section 11 lists what isn't in it.</div>
   </div>
 </section>
 
 <section class="step pad" id="parts">
   <div class="step-kicker"><span>01</span>What's in it</div>
   <div>
-    <h2>Five parts, plus feedback and updates.</h2>
-    <p class="lede">Version 1 covers onboarding, research, two video styles and posting through Zernio. Each part starts with something you say.</p>
+    <h2>Folders, files and skills. Your agent runs them.</h2>
+    <p class="lede">The kit is one folder. Your agent reads the instructions at the top, picks the skill for what you said and calls the tools that skill needs.</p>
+    <div class="tree" aria-label="The kit's folder layout">
+      <div class="tr root"><i class="fo"></i><b>content-intelligence-kit/</b><span></span></div>
+      <div class="tr l1"><i class="fi"></i><b>CLAUDE.md</b><span>The instructions your agent reads first</span></div>
+      <div class="tr l1"><i class="fi"></i><b>AGENTS.md</b><span>Points Codex to the same instructions</span></div>
+      <div class="tr l1"><i class="fo"></i><b>.claude/skills/</b><span>12 skills, one for each job</span></div>
+      <div class="tr l2 sk"><i class="fo"></i><b>onboard/</b><span>"set me up"</span></div>
+      <div class="tr l2 sk"><i class="fo"></i><b>research/</b><span>"run my research"</span></div>
+      <div class="tr l2 sk"><i class="fo"></i><b>ui-story/</b><span>Plans and edits a filmed take</span></div>
+      <div class="tr l2 sk"><i class="fo"></i><b>mini-me/</b><span>A Reel with no filming</span></div>
+      <div class="tr l2 sk"><i class="fo"></i><b>review/</b><span>Checks a Reel before it counts as done</span></div>
+      <div class="tr l2 sk"><i class="fo"></i><b>post/</b><span>Captions, then the schedule</span></div>
+      <div class="tr l2 sk"><i class="fo"></i><b>+ 6 more</b><span>voice, character, next, learnings, update-kit, humanizer</span></div>
+      <div class="tr l1"><i class="fo"></i><b>kit/</b><span>The code the skills run</span></div>
+      <div class="tr l1"><i class="fo"></i><b>bin/</b><span>The machine check and the updater</span></div>
+      <div class="tr l1 mine"><i class="fo"></i><b>me/</b><span>Your brand, voice, watch list and rules <em class="mine-chip">Yours</em></span></div>
+      <div class="tr l1 mine"><i class="fo"></i><b>work/</b><span>One folder for each video <em class="mine-chip">Yours</em></span></div>
+      <div class="tr l1 mine"><i class="fo"></i><b>research/</b><span>Every research run <em class="mine-chip">Yours</em></span></div>
+      <div class="tr l1 mine"><i class="fi"></i><b>.env</b><span>Your keys <em class="mine-chip">Yours</em></span></div>
+    </div>
+    <div class="vizcap">me/, work/ and research/ appear when you set up. Updates never touch them.</div>
+    <div class="tools">
+      <div class="tk">Tools the skills call</div>
+      <div class="tg">
+        <div class="tl"><b>Apify</b><span>Instagram and TikTok research</span><em>Optional key</em></div>
+        <div class="tl"><b>yt-dlp</b><span>YouTube creators, no key</span></div>
+        <div class="tl"><b>Whisper</b><span>Speech to text, on your Mac</span></div>
+        <div class="tl"><b>ffmpeg</b><span>Cuts, mixes and encodes</span></div>
+        <div class="tl"><b>HyperFrames</b><span>The motion graphics</span></div>
+        <div class="tl"><b>Chromium + GSAP</b><span>Render the graphics</span></div>
+        <div class="tl"><b>Image model</b><span>Draws your mini me</span><em>Optional key</em></div>
+        <div class="tl"><b>ElevenLabs</b><span>A voice for mini me</span><em>Optional key</em></div>
+        <div class="tl"><b>Zernio</b><span>Schedules six platforms</span><em>Optional key</em></div>
+      </div>
+      <div class="tn">Setup asks before each install. Every optional key has a free way round it.</div>
+    </div>
+    <p class="inst">What you say, and what you get</p>
     <table>
       <tr><th>Part and what you say</th><th>What you get</th></tr>
       <tr><td>Onboarding<span class="say">"set me up"</span></td><td>Your brand, voice, audience, watch list and character files, a checked Mac, and a test clip in your brand.</td></tr>
-      <tr><td>Research<span class="say">"run my research", then "give me hooks for number 2"</span></td><td>A report on what's working for the creators you watch. Each video is scored against that creator's usual engagement, and you get a ranked list of ideas, then hook options for the one you pick.</td></tr>
+      <tr><td>Research<span class="say">"run my research", then "give me hooks for number 2"</span></td><td>A report on what's working for the creators you watch, with a ranked list of ideas, then hook options for the one you pick.</td></tr>
       <tr><td>UI story<span class="say">"plan the video for number 2", then "here's my raw take, edit it"</span></td><td>Talking points and a film guide in your voice, then the finished Reel made from your take.</td></tr>
       <tr><td>Mini me<span class="say">"make number 3 a mini me video"</span></td><td>A narration in your voice, the voice-over, and a finished faceless Reel.</td></tr>
       <tr><td>Posting through Zernio<span class="say">"post it everywhere tomorrow at 6pm"</span></td><td>A caption for each platform to approve, then the Reel scheduled on Instagram, TikTok, YouTube Shorts, Facebook, LinkedIn and X.</td></tr>
       <tr><td>Feedback<span class="say">"the captions are too long, fix that going forward"</span></td><td>The fix, plus a rule in your rules file that every later video follows.</td></tr>
       <tr><td>Update<span class="say">"update the kit"</span></td><td>The latest kit files, with your own files left alone.</td></tr>
     </table>
-    <p>Both video styles run quality checks and a visual review before a Reel counts as done. No Zernio key? Every Reel still ends with the MP4 and one file holding each platform's caption, ready to post by hand.</p>
+  </div>
+</section>
 
+<section class="step pad" id="research">
+  <div class="step-kicker"><span>02</span>Research</div>
+  <div>
+    <h2>Start from what already works.</h2>
+    <p class="lede">Say "run my research". It pulls the newest videos from the creators you watch, scores each one against that creator's normal and gives you five ranked ideas.</p>
+    <div class="viz"><svg data-viz="research" role="img" aria-label="Research in four stages. Inputs: creators you watch on Instagram and TikTok through Apify, YouTube creators through yt-dlp, your notes and X links, your own results through Zernio. One skill pulls the newest videos, turns them into text, scores every video and picks five ideas. The report ranks five ideas. You pick one, then get hooks for it."></svg></div>
+    <p>A score of 1 is an ordinary video for that creator, and 5 is five times that. Comments count three times as much as likes, because they take more effort. Pick a number and say "give me hooks for number 2", and it writes hook options for that idea.</p>
+    <div class="note">No Apify key? Research still runs on YouTube creators, links you paste and your own notes.</div>
+  </div>
+</section>
+
+<section class="step pad" id="edit">
+  <div class="step-kicker"><span>03</span>The edit</div>
+  <div>
+    <h2>Raw take to Reel, then your feedback.</h2>
+    <p class="lede">Film your take and say "here's my raw take, edit it". The ui-story skill cuts and edits it, the review skill checks it, and whatever you correct becomes a rule.</p>
+    <div class="viz"><svg data-viz="edit" role="img" aria-label="The edit: your raw take, then transcribe and cut, then the Reel edit with graphics and captions (both by the ui-story skill), then review, then your feedback. A loop from your feedback back to the Reel edit: saved as a rule, every later video follows it."></svg></div>
+    <div class="vizcap"><span><i class="h"></i>You</span><span><i></i>The kit</span><span><i class="f"></i>The main edit</span></div>
+    <p class="inst">Same take, start to finish</p>
+    <div class="phones">
+      <figure class="phone"><div class="scr"><video data-src="/media/kits/intelligence/trio-raw.mp4" data-poster="/media/kits/intelligence/trio-raw.jpg" muted playsinline loop preload="none" aria-label="The raw take, as filmed: 3 minutes 23 seconds"></video><button class="snd" type="button" aria-pressed="false">Sound</button></div><figcaption class="pcap"><b>Raw</b> &middot; <span class="dur">3:23</span><br>As filmed</figcaption></figure>
+      <figure class="phone"><div class="scr"><video data-src="/media/kits/intelligence/trio-cut.mp4" data-poster="/media/kits/intelligence/trio-cut.jpg" muted playsinline loop preload="none" aria-label="The cut: 57 seconds, dead air and retakes out"></video><button class="snd" type="button" aria-pressed="false">Sound</button></div><figcaption class="pcap"><b>Cut</b> &middot; <span class="dur">0:57</span><br>Dead air and retakes out</figcaption></figure>
+      <figure class="phone"><div class="scr"><video data-src="/media/kits/intelligence/trio-final.mp4" data-poster="/media/kits/intelligence/trio-final.jpg" muted playsinline loop preload="none" aria-label="The finished Reel in the UI story style: 47 seconds"></video><button class="snd" type="button" aria-pressed="false">Sound</button></div><figcaption class="pcap"><b>Final</b> &middot; <span class="dur">0:47</span><br>UI story style</figcaption></figure>
+    </div>
+    <div class="vizcap">One of my own takes, the Archify Reel, edited by my setup in the UI story style. Tap a video to pause it, or Sound to hear it.</div>
+  </div>
+</section>
+
+<section class="step pad" id="styles">
+  <div class="step-kicker"><span>04</span>Two video styles</div>
+  <div>
+    <h2>Film it, or don't.</h2>
+    <p class="lede">UI story turns a talking-head take into a Reel. Mini me needs no filming at all.</p>
     <p class="inst">UI story</p>
-    <p>UI story is for talking-head Reels. You film yourself talking, and the edit puts the real thing you're talking about on screen as you say it: footage of a product in use, its interface, a chart or a post.</p>
-    <p>It cuts between three layouts. Split puts real footage and graphics on a grid above you, with your head breaking out of a rounded frame at the bottom. Canvas is the grid alone, for a diagram or a list. Face is you full screen, with punch-ins. A new visual lands about every two seconds, the captions light up word by word in your fonts, and the motion graphics come in your accent colour. The Reel closes on your call to action and plays at 1.15x speed.</p>
-    <p>The kit ships no music. A bed plays under the Reel only once you add tracks you have the right to use.</p>
-
+    <p>You film yourself talking, and the edit puts the real thing you're talking about on screen as you say it: footage of a product in use, its interface, a chart or a post. It cuts between three layouts.</p>
+    <div class="viz"><svg data-viz="layouts" role="img" aria-label="The three UI story layouts. Split: the real thing on a grid above, you in a rounded frame below with your head breaking out. Canvas: the grid alone, for a diagram or a list. Face: you full screen, with punch-ins."></svg></div>
+    <p>A new visual lands about every two seconds, the captions light up word by word in your fonts, and the motion graphics come in your accent colour. The Reel closes on your call to action and plays at 1.15x speed.</p>
     <p class="inst">Mini me</p>
-    <p>Mini me needs no filming. A pixel character of you, drawn from 3 to 5 photos or from a description, does the talking. You approve the character sheet first, then each pose. In the video it takes a new pose on every page, and each spoken phrase lands as a giant keyword headline in your colours.</p>
-    <p>The voice-over is your own phone recording, which is free, or an ElevenLabs voice if you add your key.</p>
+    <p>A pixel character of you, drawn from 3 to 5 photos or from a description, does the talking. You approve the character sheet first, then each pose. Each spoken phrase lands as a giant keyword headline in your colours. The voice-over is your own phone recording, which is free, or an ElevenLabs voice if you add your key.</p>
+    <div class="phones">
+      <figure class="phone"><div class="scr"><video data-src="/media/kits/intelligence/ui-story.mp4" data-poster="/media/kits/intelligence/ui-story.jpg" muted playsinline loop preload="none" aria-label="The opening of one of my UI story Reels"></video></div><figcaption class="pcap"><b>UI story</b><br>The open of one of my Reels</figcaption></figure>
+      <figure class="phone"><div class="scr"><video data-src="/media/kits/intelligence/mini-me-kit.mp4" data-poster="/media/kits/intelligence/mini-me-kit.jpg" muted playsinline loop preload="none" aria-label="A mini me test Reel the kit made for a made-up creator"></video><button class="snd" type="button" aria-pressed="false">Sound</button></div><figcaption class="pcap"><b>Mini me</b><br>Made by the kit, for a made&#8209;up creator</figcaption></figure>
+      <figure class="phone"><div class="scr"><video data-src="/media/kits/intelligence/mini-rich.mp4" data-poster="/media/kits/intelligence/mini-rich.jpg" muted playsinline loop preload="none" aria-label="One of my own mini me Reels"></video><button class="snd" type="button" aria-pressed="false">Sound</button></div><figcaption class="pcap"><b>Mini me</b><br>One of mine</figcaption></figure>
+    </div>
+    <div class="note">The kit ships no music. A bed plays under a Reel only once you add tracks you have the right to use.</div>
+  </div>
+</section>
+
+<section class="step pad" id="post">
+  <div class="step-kicker"><span>05</span>Posting</div>
+  <div>
+    <h2>One Reel, six platforms.</h2>
+    <p class="lede">Say "post it everywhere tomorrow at 6pm". You get a caption for each platform to read, and nothing goes out until you say yes.</p>
+    <div class="viz"><svg data-viz="post" role="img" aria-label="Posting: the finished Reel, a caption for each platform, you approve every caption, then the post skill schedules each post through Zernio on Instagram, TikTok, YouTube Shorts, Facebook, LinkedIn and X. With no Zernio key you get the MP4 and a caption file to post by hand."></svg></div>
+    <p>Each post has its own caption and time, and you can cancel any one of them on its own. Without a Zernio key, every Reel still ends with the MP4 and one file holding each platform's caption, ready to post by hand.</p>
   </div>
 </section>
 
 <section class="step pad" id="need">
-  <div class="step-kicker"><span>02</span>What you need</div>
+  <div class="step-kicker"><span>06</span>What you need</div>
   <div>
     <h2>A Mac, an AI plan and some disk space.</h2>
     <p class="lede">The code is free. To run the video styles you need an Apple silicon Mac and a paid Claude or ChatGPT plan.</p>
-    <ul>
-      <li><strong>A Mac with Apple silicon, M1 or newer.</strong> The kit is built and tested on these Macs, and setup stops on any other computer.</li>
-      <li><strong>At least 20 GB of free disk space.</strong> Setup downloads a few gigabytes of tools, and renders need room while they run. The machine check warns below 20 GB and stops below 5 GB.</li>
-      <li><strong>Claude Code on a Claude Max plan, or Codex.</strong> A UI story edit or a mini me build is one long agent run, so the video styles need the bigger plan. Codex was tested on ChatGPT Pro at US$100 a month (October 2026).</li>
-      <li><strong>An internet connection</strong> during setup.</li>
-      <li><strong>Optional keys</strong> for Apify, an image model, ElevenLabs and Zernio. Each one has a free way round it, in the table below.</li>
-    </ul>
-    <p>Setup installs the rest and asks before each install: Homebrew, ffmpeg, uv with Python 3.11, Node 22 or newer, HyperFrames, Chromium, GSAP and the Python tools, speech to text and yt-dlp among them.</p>
+    <div class="need">
+      <div><svg viewBox="0 0 30 30" aria-hidden="true"><rect x="5" y="6" width="20" height="13" rx="2" fill="none" stroke="#034C7C" stroke-width="2"/><path d="M2 23h26" stroke="#034C7C" stroke-width="2" stroke-linecap="round"/></svg><b>An Apple silicon Mac</b><span>M1 or newer. Setup stops on any other computer.</span></div>
+      <div><svg viewBox="0 0 30 30" aria-hidden="true"><ellipse cx="15" cy="8" rx="10" ry="4" fill="none" stroke="#034C7C" stroke-width="2"/><path d="M5 8v14c0 2.2 4.5 4 10 4s10-1.8 10-4V8" fill="none" stroke="#034C7C" stroke-width="2"/><path d="M5 15c0 2.2 4.5 4 10 4s10-1.8 10-4" fill="none" stroke="#034C7C" stroke-width="2"/></svg><b>20 GB free</b><span>It warns below 20 GB and stops below 5 GB.</span></div>
+      <div><svg viewBox="0 0 30 30" aria-hidden="true"><path d="M15 3c.9 6.5 4.5 10.1 11 11-6.5.9-10.1 4.5-11 11-.9-6.5-4.5-10.1-11-11 6.5-.9 10.1-4.5 11-11z" fill="none" stroke="#034C7C" stroke-width="2" stroke-linejoin="round"/></svg><b>Claude Max, or paid ChatGPT</b><span>An edit is one long agent run. Codex was tested on ChatGPT Pro.</span></div>
+      <div><svg viewBox="0 0 30 30" aria-hidden="true"><path d="M4 12a16 16 0 0 1 22 0M8 16.5a10 10 0 0 1 14 0M12 21a4 4 0 0 1 6 0" fill="none" stroke="#034C7C" stroke-width="2" stroke-linecap="round"/><circle cx="15" cy="24.5" r="1.6" fill="#034C7C"/></svg><b>Internet for setup</b><span>Setup downloads a few gigabytes of tools.</span></div>
+    </div>
+    <p>Codex was tested on ChatGPT Pro at US$100 a month (October 2026), and in Codex the video styles need a paid ChatGPT plan. Setup installs the rest and asks before each install: Homebrew, ffmpeg, uv with Python 3.11, Node 22 or newer, HyperFrames, Chromium, GSAP and the Python tools, speech to text and yt-dlp among them.</p>
 
     <p class="inst">The optional keys</p>
     <table>
@@ -414,10 +652,17 @@ td:first-child{width:26%;padding-right:24px;color:var(--ink);font-weight:500}td 
 </section>
 
 <section class="step pad" id="setup">
-  <div class="step-kicker"><span>03</span>Setup</div>
+  <div class="step-kicker"><span>07</span>Setup</div>
   <div>
     <h2>From a fresh install to "set me up".</h2>
     <p class="lede">Install your agent, get your own copy of the kit, open the folder and say "set me up". Setup is one conversation of 30 to 45 minutes.</p>
+    <ol class="strip">
+      <li><span class="sn">1</span><b>Install your agent</b><span>Claude Code or Codex, then sign in</span></li>
+      <li><span class="sn">2</span><b>Get your copy</b><span>Clone it, or use the template</span></li>
+      <li><span class="sn">3</span><b>Open the folder</b><span>Run claude or codex inside it</span></li>
+      <li class="mine"><span class="sn">4</span><b>Say "set me up"</b><span>One conversation, 30 to 45 minutes</span></li>
+      <li><span class="sn">5</span><b>A test clip</b><span>In your colours, at the end of setup</span></li>
+    </ol>
     <ul class="lessons">
       <li><strong><span class="k">1</span>Install Claude Code or Codex, and sign in.</strong>
         <p>For Claude Code, run this in Terminal, as its <a href="https://code.claude.com/docs/en/setup" target="_blank" rel="noopener">setup page</a> shows. Then open a new Terminal window, run <code>claude</code> and log in through the browser prompts.</p>
@@ -449,50 +694,62 @@ cd content-intelligence-kit</pre></div>
 </section>
 
 <section class="step pad" id="first-video">
-  <div class="step-kicker"><span>04</span>Your first video</div>
+  <div class="step-kicker"><span>08</span>Your first video</div>
   <div>
     <h2>After setup, you just talk to it.</h2>
-    <p class="lede">Each job starts with a plain sentence. Here's the order for one video, from research to the schedule.</p>
-    <ul class="try">
-      <li><strong>"run my research"</strong> Read the report and pick an idea from the ranked list.</li>
-      <li><strong>"give me hooks for number 2"</strong> Hook options for the idea you picked.</li>
-      <li><strong>"plan the video for number 2"</strong> Talking points and a film guide in your voice. Film your take from the guide.</li>
-      <li><strong>"here's my raw take, edit it"</strong> The finished UI story Reel.</li>
-      <li><strong>"make number 3 a mini me video"</strong> For a day you don't want to film: a faceless Reel from a narration and a voice-over.</li>
-      <li><strong>"post it everywhere tomorrow at 6pm"</strong> Approve each platform's caption and it schedules the Reel.</li>
-      <li><strong>"what's next"</strong> The next step for the video you're working on, whenever you lose track.</li>
-    </ul>
-    <div class="note">My advice from the Reel: the kit can help with the script, but write it yourself. That's how your own taste gets into the video.</div>
+    <p class="lede">Each job starts with a plain sentence. Here's one video, from research to the schedule.</p>
+    <div class="chat" role="list" aria-label="One video, as a conversation with the kit">
+      <div class="you" role="listitem">run my research</div>
+      <div class="kit" role="listitem"><small>research</small>A report on the creators you watch, with five ranked ideas.</div>
+      <div class="you" role="listitem">give me hooks for number 2</div>
+      <div class="kit" role="listitem"><small>research</small>Hook options for that idea.</div>
+      <div class="you" role="listitem">plan the video for number 2</div>
+      <div class="kit" role="listitem"><small>ui-story</small>Talking points and a film guide in your voice.</div>
+      <div class="mid" role="listitem">You film the take</div>
+      <div class="you" role="listitem">here's my raw take, edit it</div>
+      <div class="kit" role="listitem"><small>ui-story + review</small>The finished Reel, checked before it counts as done.</div>
+      <div class="you" role="listitem">the captions are too long, fix that going forward</div>
+      <div class="kit" role="listitem"><small>feedback</small>Fixed, and saved as a rule for every later video.</div>
+      <div class="you" role="listitem">post it everywhere tomorrow at 6pm</div>
+      <div class="kit" role="listitem"><small>post</small>A caption for each platform to approve, then the schedule.</div>
+      <div class="mid" role="listitem">Lost? Say "what's next" any time</div>
+    </div>
+    <div class="note">For a day you don't want to film, say "make number 3 a mini me video" instead. My advice from the Reel: the kit can help with the script, but write it yourself. That's how your own taste gets into the video.</div>
   </div>
 </section>
 
 <section class="step pad" id="yours">
-  <div class="step-kicker"><span>05</span>Make it yours</div>
+  <div class="step-kicker"><span>09</span>Make it yours</div>
   <div>
     <h2>It learns your preferences and keeps them.</h2>
     <p class="lede">Everything the kit learns about you lives in your own folder, <code>me/</code>, and kit updates never touch it.</p>
+    <div class="viz"><svg data-viz="rules" role="img" aria-label="Feedback becomes a rule: you correct it and say going forward, it fixes this video first, it saves a rule in me/, every skill reads its rules first on every later video. Updates never undo your rules."></svg></div>
     <ul class="lessons">
       <li><strong><span class="k">1</span>Setup writes your files.</strong>
         <p>The first conversation produces your brand, voice, audience, watch list and character files. The video styles work from them, which is how a Reel comes out in your fonts, your colours and your voice.</p>
       </li>
       <li><strong><span class="k">2</span>Feedback becomes a rule.</strong>
-        <p>When something's off, say so and add "going forward". For example: "the captions are too long, fix that going forward". It fixes this video and writes a rule into your rules file that every later video follows. Updates never undo your rules. In Codex, each skill records your corrections in its own Feedback step.</p>
+        <p>When something's off, say so and add "going forward". It fixes this video and writes a rule into your rules file that every later video follows. In Codex, each skill records your corrections in its own Feedback step.</p>
       </li>
       <li><strong><span class="k">3</span>Edit anything in your copy.</strong>
         <p>The public repo takes no pull requests, because the kit has one maintainer. So clone it and change whatever you like in your own copy. For preferences you want to last, use rules.</p>
       </li>
     </ul>
-    <div class="note">Your voice samples, photos and scripts sit in folders git ignores. If you put your copy on GitHub, keep the repository private. Section 03 explains why a fork can't be.</div>
+    <div class="note">Your voice samples, photos and scripts sit in folders git ignores. If you put your copy on GitHub, keep the repository private. Section 07 explains why a fork can't be.</div>
   </div>
 </section>
 
 <section class="step pad" id="updates">
-  <div class="step-kicker"><span>06</span>Updates</div>
+  <div class="step-kicker"><span>10</span>Updates</div>
   <div>
     <h2>Updates leave your files alone.</h2>
     <p class="lede">Say "update the kit". It checks how your copy was made first, because a clone and a template copy update in different ways.</p>
+    <div class="cols">
+      <div class="col"><div class="ck">Updated when you say so</div><h3>Kit files</h3><ul><li><code>CLAUDE.md</code> and <code>AGENTS.md</code></li><li>The skills in <code>.claude/skills/</code></li><li>The code in <code>kit/</code> and <code>bin/</code></li></ul></div>
+      <div class="col mine"><div class="ck">Never touched</div><h3>Your files</h3><ul><li><code>me/</code>: brand, voice, watch list, rules</li><li><code>work/</code>: your videos</li><li><code>research/</code>: your runs</li><li><code>.env</code>: your keys</li></ul></div>
+    </div>
     <ul>
-      <li><strong>A clone of the repo</strong> updates with <code>git pull</code>. Your folders (<code>me/</code>, <code>work/</code> and <code>research/</code>) and <code>.env</code> are gitignored, so a pull leaves them alone.</li>
+      <li><strong>A clone of the repo</strong> updates with <code>git pull</code>. Your folders and <code>.env</code> are gitignored, so a pull leaves them alone.</li>
       <li><strong>A template copy, a clone pointed at your own repository or an unzipped download</strong> updates from the latest release through <code>bin/update_kit.py</code>. It shows what would change before it changes anything.</li>
       <li><strong>A kit file you edited</strong> stays as you left it, unless the release changed it too. Then your version is copied to <code>me/kit-backups/</code> before it's replaced.</li>
     </ul>
@@ -503,32 +760,26 @@ npm ci</pre></div>
 </section>
 
 <section class="step pad" id="not-included">
-  <div class="step-kicker"><span>07</span>What's not in it</div>
+  <div class="step-kicker"><span>11</span>What's not in it</div>
   <div>
     <h2>What my setup does that the kit doesn't.</h2>
-    <p class="lede">The Reel shows my own system. Version 1 of the public kit leaves these out:</p>
-    <ul>
-      <li>comment-to-DM rules, the part that sent you this page</li>
-      <li>email capture and resource pages</li>
-      <li>an analytics dashboard and a weekly performance review</li>
-      <li>other edit styles and script methods, clips, plain motion graphics, carousels and thumbnails</li>
-      <li>a standalone script skill (script writing lives inside the two video styles)</li>
-      <li>Slack as a research input</li>
-      <li>Cowork, which can't run the video renders</li>
-      <li>Windows, Linux and Intel Macs, where setup stops</li>
-    </ul>
-    <div class="note">In the Reel I mentioned tracking how your posts perform. In the kit, Zernio brings your own results back in as a research input. The analytics dashboard and the weekly review from my setup aren't part of version 1.</div>
+    <p class="lede">The Reel shows my own system. Version 1 of the public kit leaves some of it out.</p>
+    <div class="cols">
+      <div class="col"><div class="ck">Version 1</div><h3>In the kit</h3><ul><li>Onboarding</li><li>Research</li><li>UI story</li><li>Mini me</li><li>A review before a Reel counts as done</li><li>Posting through Zernio</li><li>Feedback saved as rules</li><li>Updates</li></ul></div>
+      <div class="col out"><div class="ck">Left out</div><h3>Only in my setup</h3><ul><li>Comment-to-DM rules, the part that sent you this page</li><li>Email capture and resource pages</li><li>An analytics dashboard and a weekly performance review</li><li>Other edit styles and script methods, clips, plain motion graphics, carousels and thumbnails</li><li>A standalone script skill (script writing lives inside the two video styles)</li><li>Slack as a research input</li><li>Cowork, which can't run the video renders</li></ul></div>
+    </div>
+    <div class="note">Windows, Linux and Intel Macs aren't supported either: setup stops on them. In the Reel I mentioned tracking how your posts perform. In the kit, Zernio brings your own results back in as a research input. The analytics dashboard and the weekly review from my setup aren't part of version 1.</div>
   </div>
 </section>
 
 <section class="step pad" id="next">
-  <div class="step-kicker"><span>08</span>What to do now</div>
+  <div class="step-kicker"><span>12</span>What to do now</div>
   <div>
     <h2>Pick one. Use it today.</h2>
     <p class="lede">Reading this won't get you a video. Setup is the first step, and it takes 30 to 45 minutes.</p>
     <ul>
-      <li><strong>If you have an Apple silicon Mac and Claude Max or ChatGPT Pro:</strong> start at <a href="#setup">03</a> and say "set me up" tonight.</li>
-      <li><strong>If you don't want to pay for the extra tools yet:</strong> start anyway. Each optional key has a free way round it (<a href="#need">02</a>).</li>
+      <li><strong>If you have an Apple silicon Mac and Claude Max or a paid ChatGPT plan:</strong> start at <a href="#setup">07</a> and say "set me up" tonight.</li>
+      <li><strong>If you don't want to pay for the extra tools yet:</strong> start anyway. Each optional key has a free way round it (<a href="#need">06</a>).</li>
       <li><strong>If you want to read before you install:</strong> the <a href="https://github.com/Richardeve1997/content-intelligence-kit#readme" target="_blank" rel="noopener">README</a> and <a href="https://github.com/Richardeve1997/content-intelligence-kit/blob/main/ONBOARDING.md" target="_blank" rel="noopener">ONBOARDING.md</a> cover every step.</li>
       <li><strong>If you're on Windows, Linux or an Intel Mac:</strong> setup stops on those computers, so version 1 won't run for you.</li>
     </ul>
@@ -663,6 +914,364 @@ npm ci</pre></div>
     });
   });
 
+})();
+</script>
+<script>
+// The diagrams and the Reels on /intelligence/. Each <svg data-viz="name"> is drawn by D[name](svg, mode) in a wide
+// layout or a tall one for phones, chosen from the width it actually has (redrawn if that changes). Each diagram fades
+// and draws in once it scrolls into view. Videos load and play only when on screen, muted; Sound unmutes one at a time.
+(function () {
+  var NS = 'http://www.w3.org/2000/svg';
+  var INK = '#08070B', GRAPHITE = '#39383D', OCEAN = '#034C7C', CERULEAN = '#1199D7', GLACIER = '#F3F4F6', ICE = '#BEC4D2', ICE3 = '#E2E4EC', STONE = '#DBDCD7';
+  function el(tag, attrs, parent) {
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) if (attrs[k] !== undefined && attrs[k] !== null) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  function txt(parent, x, y, str, cls, anchor, i, style) {
+    var t = el('text', { x: x, y: y, 'class': (cls || 'mono') + ' fade', 'text-anchor': anchor || 'middle', style: '--i:' + (i || 0) + (style ? ';' + style : '') }, parent);
+    t.textContent = str;
+    return t;
+  }
+  function defs(svg, id) {
+    var d = el('defs', {}, svg);
+    var m = el('marker', { id: id + '-a', viewBox: '0 0 10 10', refX: 8.5, refY: 5, markerWidth: 7, markerHeight: 7, orient: 'auto-start-reverse' }, d);
+    el('path', { d: 'M0 0 L10 5 L0 10 z', fill: GRAPHITE }, m);
+    var b = el('marker', { id: id + '-b', viewBox: '0 0 10 10', refX: 8.5, refY: 5, markerWidth: 6, markerHeight: 6, orient: 'auto-start-reverse' }, d);
+    el('path', { d: 'M0 0 L10 5 L0 10 z', fill: CERULEAN }, b);
+    var g = el('linearGradient', { id: id + '-band', x1: 0, y1: 0, x2: 0, y2: 1 }, d);
+    el('stop', { offset: 0, 'stop-color': '#043761' }, g); el('stop', { offset: 1, 'stop-color': '#026AA1' }, g);
+  }
+  // A card: title lines centred, a mono sub under them, an optional tag above its top-left corner.
+  function node(svg, n, i) {
+    var cls = 'n' + (n.human ? ' human' : '') + (n.accent ? ' accent' : '') + (n.dashed ? ' dashed' : '') + (n.dim ? ' dim' : '');
+    var g = el('g', { 'class': cls, style: '--i:' + i }, svg);
+    el('rect', { x: n.x - n.w / 2, y: n.y - n.h / 2, width: n.w, height: n.h, rx: n.rx || 12 }, g);
+    var lines = String(n.t || '').split('\n'), lh = n.lh || 26, sub = n.s ? 22 : 0;
+    var y = n.y - (lines.length * lh + sub) / 2 + lh * 0.76;
+    lines.forEach(function (ln) {
+      if (!ln) return;
+      var t = el('text', { x: n.x, y: y, 'class': 't', 'text-anchor': 'middle' }, g);
+      if (n.fs) t.style.fontSize = n.fs + 'px';
+      t.textContent = ln; y += lh;
+    });
+    if (n.s) { var s = el('text', { x: n.x, y: y + (lines[0] ? -4 : 6), 'class': 's', 'text-anchor': 'middle' }, g); if (n.ss) s.style.fontSize = n.ss + 'px'; s.textContent = n.s; }
+    if (n.tag) { var tg = el('text', { x: n.tagEnd ? n.x + n.w / 2 : n.x - n.w / 2, y: n.y - n.h / 2 - 9, 'class': 'tag', 'text-anchor': n.tagEnd ? 'end' : 'start' }, g); tg.textContent = n.tag; }
+    return g;
+  }
+  function path(svg, d, id, i, blue, noArrow) {
+    return el('path', { d: d, 'class': 'e' + (blue ? ' blue' : ''), pathLength: 1, 'marker-end': noArrow ? null : 'url(#' + id + (blue ? '-b' : '-a') + ')', style: '--i:' + i }, svg);
+  }
+  function right(svg, a, b, id, i) { return path(svg, 'M' + (a.x + a.w / 2 + 6) + ' ' + a.y + ' L' + (b.x - b.w / 2 - 8) + ' ' + b.y, id, i); }
+  function down(svg, a, b, id, i) { return path(svg, 'M' + a.x + ' ' + (a.y + a.h / 2 + 6) + ' L' + b.x + ' ' + (b.y - b.h / 2 - 8), id, i); }
+  function stage(svg, x, y, num, label, i) {
+    var g = el('g', { 'class': 'fade', style: '--i:' + i }, svg);
+    el('circle', { cx: x + 12, cy: y, r: 12, fill: OCEAN }, g);
+    var n = el('text', { x: x + 12, y: y + 5, 'text-anchor': 'middle', style: 'font:600 13px var(--ui);fill:#FFFFFF' }, g); n.textContent = num;
+    var t = el('text', { x: x + 32, y: y + 4.5, 'class': 'mono ink' }, g); t.textContent = label;
+  }
+
+  // Platform marks, drawn in ink so they sit on glacier cards.
+  function igIcon(g, cx, cy) { el('rect', { x: cx - 10, y: cy - 10, width: 20, height: 20, rx: 6, fill: 'none', stroke: INK, 'stroke-width': 2 }, g); el('circle', { cx: cx, cy: cy, r: 4.6, fill: 'none', stroke: INK, 'stroke-width': 2 }, g); el('circle', { cx: cx + 6, cy: cy - 6, r: 1.4, fill: INK }, g); }
+  function ttIcon(g, cx, cy) { var p = el('g', { transform: 'translate(' + (cx - 10) + ' ' + (cy - 10) + ') scale(.72)', fill: 'none', stroke: INK, 'stroke-width': 2.8, 'stroke-linecap': 'round' }, g); el('path', { d: 'M16 3 V18.5 A5.5 5.5 0 1 1 10.5 13' }, p); el('path', { d: 'M16 3 C16.8 6.8 19.6 9.2 24 9.4' }, p); }
+  function ytIcon(g, cx, cy) { el('rect', { x: cx - 13, y: cy - 9, width: 26, height: 18, rx: 5, fill: INK }, g); el('path', { d: 'M' + (cx - 3.5) + ' ' + (cy - 4.5) + ' L' + (cx + 5.5) + ' ' + cy + ' L' + (cx - 3.5) + ' ' + (cy + 4.5) + ' Z', fill: GLACIER }, g); }
+  function fbIcon(g, cx, cy) { el('circle', { cx: cx, cy: cy, r: 10, fill: INK }, g); var t = el('text', { x: cx + 1, y: cy + 6, 'text-anchor': 'middle', style: 'font:700 16px var(--ui);fill:#FFFFFF' }, g); t.textContent = 'f'; }
+  function liIcon(g, cx, cy) { el('rect', { x: cx - 10, y: cy - 10, width: 20, height: 20, rx: 4, fill: INK }, g); var t = el('text', { x: cx, y: cy + 4.5, 'text-anchor': 'middle', style: 'font:700 11px var(--ui);fill:#FFFFFF' }, g); t.textContent = 'in'; }
+  function xIcon(g, cx, cy) { el('rect', { x: cx - 10, y: cy - 10, width: 20, height: 20, rx: 4.5, fill: INK }, g); el('path', { d: 'M' + (cx - 4.5) + ' ' + (cy - 4.5) + ' L' + (cx + 4.5) + ' ' + (cy + 4.5) + ' M' + (cx + 4.5) + ' ' + (cy - 4.5) + ' L' + (cx - 4.5) + ' ' + (cy + 4.5), stroke: '#FFFFFF', 'stroke-width': 2, 'stroke-linecap': 'round' }, g); }
+  var PLATFORMS = [['Instagram', igIcon], ['TikTok', ttIcon], ['YouTube Shorts', ytIcon], ['Facebook', fbIcon], ['LinkedIn', liIcon], ['X', xIcon]];
+  function platform(svg, x, y, w, h, k, i) {
+    var p = PLATFORMS[k];
+    var g = node(svg, { x: x, y: y, w: w, h: h, t: '' }, i);
+    p[1](g, x - w / 2 + 22, y);
+    var t = el('text', { x: x - w / 2 + 42, y: y + 6, 'class': 't', style: 'font-size:17px' }, g); t.textContent = p[0];
+  }
+
+  var D = {};
+
+  // The kit's loop: eight stages, blue where you act. Below it, dashed, what only my own setup does.
+  var LOOP = [['Research', 'Creators you watch'], ['Pick an idea', 'You choose', 1], ['Plan', 'Talking points'], ['Film', 'Or skip it: mini me', 1],
+    ['Edit', 'UI story or mini me'], ['Review', 'Checks every Reel'], ['Post', 'Six platforms'], ['Your feedback', 'Saved as rules', 1]];
+  var MINE = ['Comment to DM', 'Email capture', 'Analytics review'];
+  D.loop = function (svg, mode) {
+    if (mode === 'wide') {
+      svg.setAttribute('viewBox', '0 0 1000 540');
+      var cx = 500, cy = 225, rx = 385, ry = 170;
+      el('ellipse', { cx: cx, cy: cy, rx: rx, ry: ry, 'class': 'e ring', pathLength: 1, style: '--i:0' }, svg);
+      LOOP.forEach(function (s, k) {
+        var a = -Math.PI / 2 + k * Math.PI / 4, am = a + Math.PI / 8;
+        var mx = cx + rx * Math.cos(am), my = cy + ry * Math.sin(am), ang = Math.atan2(ry * Math.cos(am), -rx * Math.sin(am)) * 180 / Math.PI;
+        el('path', { d: 'M-6 -6 L4 0 L-6 6', fill: 'none', stroke: GRAPHITE, 'stroke-width': 2, transform: 'translate(' + mx + ' ' + my + ') rotate(' + ang + ')', 'class': 'fade', style: '--i:' + (k + 2) }, svg);
+        node(svg, { x: cx + rx * Math.cos(a), y: cy + ry * Math.sin(a), w: 184, h: 66, t: s[0], s: s[1], human: !!s[2] }, k + 1);
+      });
+      txt(svg, cx, cy - 4, 'Claude Code or Codex', 'disp', 'middle', 9);
+      txt(svg, cx, cy + 28, '12 skills in one folder', 'mono', 'middle', 10);
+      txt(svg, cx, 455, 'In my own setup, not in the kit', 'mono', 'middle', 11);
+      MINE.forEach(function (t, k) { node(svg, { x: 270 + k * 230, y: 500, w: 210, h: 48, t: t, fs: 17, dashed: true }, 11 + k * 0.4); });
+    } else {
+      svg.setAttribute('viewBox', '0 0 360 840');
+      txt(svg, 150, 26, 'Claude Code or Codex', 'disp', 'middle', 0, 'font-size:24px');
+      txt(svg, 150, 50, '12 skills in one folder', 'mono', 'middle', 0);
+      var nodes = LOOP.map(function (s, k) { return { x: 150, y: 104 + k * 74, w: 240, h: 56, t: s[0], s: s[1], human: !!s[2], fs: 20, lh: 24 }; });
+      nodes.forEach(function (n, k) { node(svg, n, k + 1); if (k) down(svg, nodes[k - 1], n, svg.id, k + 0.5); });
+      var last = nodes[7], first = nodes[0];
+      path(svg, 'M' + (last.x + 126) + ' ' + last.y + ' C 336 ' + last.y + ', 336 ' + last.y + ', 336 ' + (last.y - 40) + ' L336 ' + (first.y + 40) + ' C 336 ' + first.y + ', 336 ' + first.y + ', ' + (first.x + 128) + ' ' + first.y, svg.id, 9, true);
+      txt(svg, 150, 694, 'In my own setup, not in the kit', 'mono', 'middle', 10);
+      MINE.forEach(function (t, k) { node(svg, { x: 150, y: 732 + k * 48, w: 240, h: 38, t: t, fs: 16, lh: 20, dashed: true }, 10 + k * 0.4); });
+    }
+  };
+
+  // Research: four numbered stages, the deck's "Start from what already works".
+  D.research = function (svg, mode) {
+    var id = svg.id, inputs = [['Creators you watch', 'Instagram + TikTok · Apify'], ['YouTube creators', 'yt-dlp · no key needed'], ['Your notes + X links', 'me/ideas.md', 1], ['Your own results', 'Zernio · optional']];
+    var steps = ['Pull the newest videos', 'Turn them into text', 'Score every video', 'Pick five ideas'];
+    function skillBox(x, y, w, h, i, stepH, gap) {
+      var g = el('g', { 'class': 'n', style: '--i:' + i }, svg);
+      el('rect', { x: x, y: y, width: w, height: h, rx: 16, style: 'fill:#FFFFFF;stroke:' + CERULEAN + ';stroke-width:2.5' }, g);
+      var t = el('text', { x: x + w / 2, y: y + 40, 'text-anchor': 'middle', 'class': 't', style: 'font-size:26px' }, g); t.textContent = 'research';
+      var s = el('text', { x: x + w / 2, y: y + 62, 'text-anchor': 'middle', 'class': 's', style: 'fill:' + OCEAN }, g); s.textContent = 'One skill, one sentence';
+      steps.forEach(function (lab, k) {
+        var yy = y + 80 + k * (stepH + gap);
+        el('rect', { x: x + 14, y: yy, width: w - 28, height: stepH, rx: 10, style: 'fill:' + GLACIER + ';stroke:' + ICE3 + ';stroke-width:1.5' }, g);
+        var n = el('text', { x: x + 30, y: yy + stepH / 2 + 4.5, 'class': 's', style: 'fill:' + OCEAN }, g); n.textContent = '0' + (k + 1);
+        var l = el('text', { x: x + 60, y: yy + stepH / 2 + 6, 'class': 't', style: 'font-size:18px' }, g); l.textContent = lab;
+      });
+    }
+    function report(x, y, w, h, i) {
+      var g = el('g', { 'class': 'n', style: '--i:' + i }, svg);
+      el('rect', { x: x, y: y, width: w, height: h, rx: 14, style: 'fill:#FFFFFF;stroke:' + ICE + ';stroke-width:1.5' }, g);
+      el('path', { d: 'M' + x + ' ' + (y + 14) + ' Q' + x + ' ' + y + ' ' + (x + 14) + ' ' + y + ' L' + (x + w - 14) + ' ' + y + ' Q' + (x + w) + ' ' + y + ' ' + (x + w) + ' ' + (y + 14) + ' L' + (x + w) + ' ' + (y + 60) + ' L' + x + ' ' + (y + 60) + ' Z', fill: 'url(#' + id + '-band)' }, g);
+      var a = el('text', { x: x + 16, y: y + 24, style: 'font:400 10.5px var(--mono);letter-spacing:.11em;text-transform:uppercase;fill:#FFFFFF' }, g); a.textContent = 'report.html';
+      var b = el('text', { x: x + 16, y: y + 48, style: 'font:400 19px var(--display);letter-spacing:-.02em;fill:#FFFFFF' }, g); b.textContent = 'Five ranked ideas';
+      for (var k = 0; k < 5; k++) {
+        var yy = y + 78 + k * 30;
+        el('rect', { x: x + 16, y: yy, width: 22, height: 18, rx: 9, fill: OCEAN }, g);
+        var n = el('text', { x: x + 27, y: yy + 13, 'text-anchor': 'middle', style: 'font:600 11px var(--ui);fill:#FFFFFF' }, g); n.textContent = k + 1;
+        el('rect', { x: x + 48, y: yy + 4, width: (w - 70) * (1 - k * 0.12), height: 10, rx: 5, fill: STONE }, g);
+      }
+    }
+    if (mode === 'wide') {
+      svg.setAttribute('viewBox', '0 0 1000 450');
+      stage(svg, 0, 18, 1, 'Inputs', 0); stage(svg, 300, 18, 2, 'One skill', 3); stage(svg, 640, 18, 3, 'The report', 6); stage(svg, 870, 18, 4, 'You choose', 8);
+      inputs.forEach(function (s, k) {
+        var n = { x: 120, y: 92 + k * 82, w: 240, h: 66, t: s[0], s: s[1], human: !!s[2], fs: 19, lh: 24 };
+        node(svg, n, 0.5 + k * 0.4);
+        path(svg, 'M' + 246 + ' ' + n.y + ' L' + 292 + ' ' + n.y, id, 2.4 + k * 0.15);
+      });
+      skillBox(300, 52, 280, 330, 3, 48, 12);
+      txt(svg, 440, 410, 'Score = (3 × comments + likes)', 'mono', 'middle', 4, 'font-size:10.5px');
+      txt(svg, 440, 428, "÷ the creator's median", 'mono', 'middle', 4, 'font-size:10.5px');
+      path(svg, 'M586 217 L632 217', id, 5);
+      report(640, 110, 190, 230, 6);
+      path(svg, 'M836 217 L862 217', id, 7);
+      node(svg, { x: 935, y: 217, w: 130, h: 120, t: 'You pick', s: 'Hooks next', human: true, fs: 21 }, 8);
+    } else {
+      svg.setAttribute('viewBox', '0 0 360 1110');
+      stage(svg, 30, 18, 1, 'Inputs', 0);
+      var last;
+      inputs.forEach(function (s, k) { last = { x: 180, y: 70 + k * 66, w: 300, h: 56, t: s[0], s: s[1], human: !!s[2], fs: 19, lh: 24 }; node(svg, last, 0.5 + k * 0.4); });
+      path(svg, 'M180 ' + (last.y + 34) + ' L180 ' + (last.y + 64), id, 2.6);
+      stage(svg, 30, 360, 2, 'One skill', 3);
+      skillBox(30, 380, 300, 270, 3, 38, 10);
+      txt(svg, 180, 674, 'Score = (3 × comments + likes)', 'mono', 'middle', 4, 'font-size:10.5px');
+      txt(svg, 180, 692, "÷ the creator's median", 'mono', 'middle', 4, 'font-size:10.5px');
+      path(svg, 'M180 704 L180 734', id, 5);
+      stage(svg, 30, 756, 3, 'The report', 6);
+      report(30, 776, 300, 224, 6);
+      path(svg, 'M180 1006 L180 1028', id, 7);
+      node(svg, { x: 180, y: 1070, w: 300, h: 70, t: 'You pick', s: 'Then: hooks for that idea', human: true, fs: 21 }, 8);
+    }
+  };
+
+  // The edit: raw take to Reel, then your feedback goes back in as a rule.
+  D.edit = function (svg, mode) {
+    var id = svg.id;
+    var N = [{ t: 'Raw take', s: 'You film it', human: true }, { t: 'Transcribe\n+ cut', s: 'Dead air out' }, { t: 'Reel edit', s: 'Graphics + captions', accent: true },
+      { t: 'Review', s: 'Checks every frame' }, { t: 'Your\nfeedback', s: 'Plain English', human: true }];
+    if (mode === 'wide') {
+      svg.setAttribute('viewBox', '0 36 1000 354');
+      var xs = [95, 298, 500, 702, 905];
+      var nodes = N.map(function (n, k) { return Object.assign({ x: xs[k], y: 160, w: 172, h: 100, lh: 24, fs: 21 }, n); });
+      nodes[3].tag = 'review skill';
+      nodes.forEach(function (n, k) { node(svg, n, k * 2); if (k) right(svg, nodes[k - 1], n, id, k * 2 - 1); });
+      path(svg, 'M212 92 V78 H586 V92', id, 3, true, true);
+      txt(svg, 399, 64, 'One skill: ui-story', 'mono', 'middle', 3, 'fill:' + OCEAN);
+      path(svg, 'M905 218 C 905 330, 500 330, 500 222', id, 9, true);
+      txt(svg, 702, 352, 'Saved as a rule', 'disp blue', 'middle', 10, 'font-size:26px');
+      txt(svg, 702, 378, 'Every later video follows it', 'mono', 'middle', 10);
+    } else {
+      svg.setAttribute('viewBox', '0 0 360 600');
+      var ns = N.map(function (n, k) { return Object.assign({ x: 150, y: 56 + k * 104, w: 236, h: 68, lh: 22, fs: 19 }, n); });
+      ns[1].tag = 'ui-story'; ns[2].tag = 'ui-story'; ns[3].tag = 'review';
+      ns.forEach(function (n) { n.tagEnd = true; });
+      ns.forEach(function (n, k) { node(svg, n, k * 2); if (k) down(svg, ns[k - 1], n, id, k * 2 - 1); });
+      var f = ns[4], b = ns[2];
+      path(svg, 'M' + (f.x + 124) + ' ' + f.y + ' C 340 ' + f.y + ', 340 ' + f.y + ', 340 ' + (f.y - 40) + ' L340 ' + (b.y + 40) + ' C 340 ' + b.y + ', 340 ' + b.y + ', ' + (b.x + 126) + ' ' + b.y, id, 9, true);
+      txt(svg, 150, 556, 'Saved as a rule', 'disp blue', 'middle', 10, 'font-size:22px');
+      txt(svg, 150, 580, 'Every later video follows it', 'mono', 'middle', 10);
+    }
+  };
+
+  // The three UI story layouts, as small phones.
+  D.layouts = function (svg, mode) {
+    var wide = mode === 'wide';
+    svg.setAttribute('viewBox', wide ? '0 0 1000 358' : '0 0 360 236');
+    var pw = wide ? 160 : 100, ph = pw * 16 / 9, top = wide ? 6 : 4;
+    var xs = wide ? [210, 500, 790] : [62, 180, 298];
+    var labels = [['Split', wide ? 'The thing above, you below' : 'Thing + you'], ['Canvas', wide ? 'The grid alone' : 'The grid'], ['Face', wide ? 'You full screen, punch-ins' : 'You, full']];
+    xs.forEach(function (cx, k) {
+      var x = cx - pw / 2, y = top, s = pw / 160;
+      var g = el('g', { 'class': 'n', style: '--i:' + k * 1.5 }, svg);
+      var clip = svg.id + '-c' + k, cp = el('clipPath', { id: clip }, g);
+      el('rect', { x: x, y: y, width: pw, height: ph, rx: 16 * s }, cp);
+      var inner = el('g', { 'clip-path': 'url(#' + clip + ')' }, g);
+      el('rect', { x: x, y: y, width: pw, height: ph, fill: '#FFFFFF' }, inner);
+      for (var gx = x + 14 * s; gx < x + pw; gx += 14 * s) el('line', { x1: gx, y1: y, x2: gx, y2: y + ph, stroke: ICE3, 'stroke-width': 1 }, inner);
+      for (var gy = y + 14 * s; gy < y + ph; gy += 14 * s) el('line', { x1: x, y1: gy, x2: x + pw, y2: gy, stroke: ICE3, 'stroke-width': 1 }, inner);
+      function person(px, py, r, fill) { el('path', { d: 'M' + (px - r * 1.9) + ' ' + (py + r * 3.4) + ' C' + (px - r * 1.9) + ' ' + (py + r * 1.4) + ' ' + (px + r * 1.9) + ' ' + (py + r * 1.4) + ' ' + (px + r * 1.9) + ' ' + (py + r * 3.4) + ' Z', fill: fill }, inner); el('circle', { cx: px, cy: py, r: r, fill: fill }, inner); }
+      function captions(cy) { el('rect', { x: cx - 40 * s, y: cy, width: 80 * s, height: 13 * s, rx: 6.5 * s, fill: INK }, inner); el('rect', { x: cx - 12 * s, y: cy + 3 * s, width: 24 * s, height: 7 * s, rx: 3.5 * s, fill: '#FFFFFF' }, inner); }
+      if (k === 0) {
+        el('rect', { x: x + 14 * s, y: y + 24 * s, width: pw - 28 * s, height: 78 * s, rx: 9 * s, fill: '#FFFFFF', stroke: ICE, 'stroke-width': 1.2 }, inner);
+        el('rect', { x: x + 24 * s, y: y + 36 * s, width: 34 * s, height: 34 * s, rx: 8 * s, fill: CERULEAN }, inner);
+        el('rect', { x: x + 66 * s, y: y + 40 * s, width: 62 * s, height: 9 * s, rx: 4.5 * s, fill: STONE }, inner);
+        el('rect', { x: x + 66 * s, y: y + 56 * s, width: 44 * s, height: 9 * s, rx: 4.5 * s, fill: STONE }, inner);
+        el('rect', { x: x + 14 * s, y: y + ph - 112 * s, width: pw - 28 * s, height: 100 * s, rx: 14 * s, fill: OCEAN }, inner);
+        person(cx, y + ph - 116 * s, 17 * s, GRAPHITE);
+        captions(y + ph - 140 * s);
+      } else if (k === 1) {
+        [0, 1, 2].forEach(function (j) {
+          var by = y + 52 * s + j * 62 * s;
+          el('rect', { x: cx - 46 * s, y: by, width: 92 * s, height: 38 * s, rx: 9 * s, fill: j === 1 ? '#FFFFFF' : GLACIER, stroke: j === 1 ? CERULEAN : ICE, 'stroke-width': j === 1 ? 2 : 1.2 }, inner);
+          el('rect', { x: cx - 30 * s, y: by + 15 * s, width: 60 * s, height: 8 * s, rx: 4 * s, fill: STONE }, inner);
+          if (j < 2) el('path', { d: 'M' + cx + ' ' + (by + 40 * s) + ' L' + cx + ' ' + (by + 60 * s), stroke: GRAPHITE, 'stroke-width': 1.5 }, inner);
+        });
+        captions(y + ph - 52 * s);
+      } else {
+        el('rect', { x: x, y: y, width: pw, height: ph, fill: '#E9E6E1' }, inner);
+        person(cx, y + ph * 0.42, 34 * s, GRAPHITE);
+        el('rect', { x: cx - 52 * s, y: y + ph * 0.42 - 52 * s, width: 104 * s, height: 104 * s, rx: 8 * s, fill: 'none', stroke: CERULEAN, 'stroke-width': 2, 'stroke-dasharray': '6 5' }, inner);
+        captions(y + ph - 52 * s);
+      }
+      el('rect', { x: x, y: y, width: pw, height: ph, rx: 16 * s, fill: 'none', stroke: ICE, 'stroke-width': 1.5 }, g);
+      var lt = el('text', { x: cx, y: y + ph + (wide ? 34 : 24), 'text-anchor': 'middle', 'class': 't', style: 'font-size:' + (wide ? 22 : 17) + 'px' }, g); lt.textContent = labels[k][0];
+      var ls = el('text', { x: cx, y: y + ph + (wide ? 56 : 42), 'text-anchor': 'middle', 'class': 's', style: wide ? '' : 'font-size:9.5px' }, g); ls.textContent = labels[k][1];
+    });
+  };
+
+  // Posting: one caption per platform, your yes, then Zernio schedules six posts. Without a key: a caption file.
+  D.post = function (svg, mode) {
+    var id = svg.id;
+    function zernio(x, y, w, h, i) {
+      var g = el('g', { 'class': 'n', style: '--i:' + i }, svg);
+      el('rect', { x: x - w / 2, y: y - h / 2, width: w, height: h, rx: 14, style: 'fill:#FFFFFF;stroke:' + CERULEAN + ';stroke-width:2.5' }, g);
+      var tg = el('text', { x: x - w / 2, y: y - h / 2 - 9, 'class': 'tag' }, g); tg.textContent = 'post skill';
+      var t = el('text', { x: x, y: y - 2, 'text-anchor': 'middle', 'class': 't', style: 'font-size:24px' }, g); t.textContent = 'Zernio';
+      var s = el('text', { x: x, y: y + 22, 'text-anchor': 'middle', 'class': 's' }, g); s.textContent = 'Schedules each post';
+    }
+    if (mode === 'wide') {
+      svg.setAttribute('viewBox', '0 0 1000 420');
+      var R = { x: 62, y: 170, w: 124, h: 92, t: 'Finished\nReel', fs: 20, lh: 24 }, C = { x: 250, y: 170, w: 180, h: 92, t: 'Captions', s: 'One per platform', fs: 21 };
+      var A = { x: 438, y: 170, w: 140, h: 92, t: 'You approve', s: 'Every caption', human: true, fs: 19 }, Z = { x: 628, y: 170, w: 170, h: 110 };
+      node(svg, R, 0); right(svg, R, C, id, 1); node(svg, C, 2); right(svg, C, A, id, 3); node(svg, A, 4); right(svg, A, Z, id, 5); zernio(Z.x, Z.y, Z.w, Z.h, 6);
+      PLATFORMS.forEach(function (p, k) {
+        var y = 26 + k * 58;
+        platform(svg, 885, y, 210, 46, k, 7 + k * 0.4);
+        path(svg, 'M' + (Z.x + Z.w / 2 + 6) + ' ' + Z.y + ' C 750 ' + Z.y + ', 740 ' + y + ', ' + (885 - 105 - 8) + ' ' + y, id, 7 + k * 0.4);
+      });
+      path(svg, 'M438 222 L438 308', id, 9);
+      node(svg, { x: 438, y: 350, w: 380, h: 70, t: 'No Zernio key?', s: 'MP4 + a caption file, post by hand', dashed: true, fs: 19 }, 10);
+    } else {
+      svg.setAttribute('viewBox', '0 0 360 740');
+      var nodes = [{ x: 180, y: 40, w: 260, h: 58, t: 'Finished Reel', fs: 20 }, { x: 180, y: 130, w: 260, h: 62, t: 'Captions', s: 'One per platform', fs: 20 },
+        { x: 180, y: 224, w: 260, h: 62, t: 'You approve', s: 'Every caption', human: true, fs: 20 }];
+      nodes.forEach(function (n, k) { node(svg, n, k * 2); if (k) down(svg, nodes[k - 1], n, id, k * 2 - 1); });
+      var Zt = { x: 180, y: 332, w: 260, h: 86 };
+      down(svg, nodes[2], Zt, id, 5); zernio(Zt.x, Zt.y, Zt.w, Zt.h, 6);
+      path(svg, 'M180 381 L180 410', id, 7);
+      PLATFORMS.forEach(function (p, k) { platform(svg, k % 2 ? 268 : 92, 444 + Math.floor(k / 2) * 56, 168, 44, k, 7 + k * 0.4); });
+      path(svg, 'M180 590 L180 618', id, 9);
+      node(svg, { x: 180, y: 670, w: 320, h: 78, t: 'No Zernio key?', s: 'MP4 + a caption file', dashed: true, fs: 19 }, 10);
+    }
+  };
+
+  // Feedback becomes a rule: the loop that makes the kit yours.
+  D.rules = function (svg, mode) {
+    var id = svg.id;
+    var N = [{ t: 'You correct it', s: '"...going forward"', human: true }, { t: 'It fixes\nthis video', s: 'First' }, { t: 'It saves\na rule', s: 'In me/' }, { t: 'Every skill\nreads it first', s: 'Every later video' }];
+    if (mode === 'wide') {
+      svg.setAttribute('viewBox', '0 0 1000 300');
+      var nodes = N.map(function (n, k) { return Object.assign({ x: 112 + k * 258, y: 96, w: 204, h: 104, fs: 21, lh: 24 }, n); });
+      nodes.forEach(function (n, k) { node(svg, n, k * 2); if (k) right(svg, nodes[k - 1], n, id, k * 2 - 1); });
+      path(svg, 'M886 152 C 886 262, 112 262, 112 158', id, 7, true);
+      txt(svg, 500, 284, 'Updates never undo your rules', 'mono', 'middle', 8, 'fill:' + OCEAN);
+    } else {
+      svg.setAttribute('viewBox', '0 0 360 470');
+      var ns = N.map(function (n, k) { return Object.assign({ x: 150, y: 50 + k * 104, w: 236, h: 72, fs: 19, lh: 22 }, n); });
+      ns.forEach(function (n, k) { node(svg, n, k * 2); if (k) down(svg, ns[k - 1], n, id, k * 2 - 1); });
+      var l = ns[3], f = ns[0];
+      path(svg, 'M' + (l.x + 124) + ' ' + l.y + ' C 340 ' + l.y + ', 340 ' + l.y + ', 340 ' + (l.y - 40) + ' L340 ' + (f.y + 40) + ' C 340 ' + f.y + ', 340 ' + f.y + ', ' + (f.x + 126) + ' ' + f.y, id, 7, true);
+      txt(svg, 150, 458, 'Updates never undo your rules', 'mono', 'middle', 8, 'fill:' + OCEAN);
+    }
+  };
+
+  // Draw each diagram for the width it has: wide from 640px, tall below. Redraw only when the mode changes.
+  var svgs = Array.prototype.slice.call(document.querySelectorAll('svg[data-viz]'));
+  function draw(svg) {
+    var w = svg.parentElement.getBoundingClientRect().width;
+    if (!w) return;
+    var mode = w >= 640 ? 'wide' : 'tall';
+    if (svg.getAttribute('data-mode') === mode) return;
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    svg.setAttribute('data-mode', mode);
+    svg.parentElement.classList.toggle('tall', mode === 'tall');
+    defs(svg, svg.id);
+    D[svg.getAttribute('data-viz')](svg, mode);
+  }
+  svgs.forEach(function (svg, k) { if (!svg.id) svg.id = 'viz' + k; });
+  if ('ResizeObserver' in window) {
+    var ro = new ResizeObserver(function (entries) { entries.forEach(function (e) { var s = e.target.querySelector('svg[data-viz]'); if (s) draw(s); }); });
+    svgs.forEach(function (svg) { ro.observe(svg.parentElement); });
+  } else {
+    var redraw = function () { svgs.forEach(draw); };
+    addEventListener('resize', redraw); redraw();
+    var kitEl = document.getElementById('kit');
+    if (kitEl && 'MutationObserver' in window) new MutationObserver(redraw).observe(kitEl, { attributes: true, attributeFilter: ['hidden'] });
+  }
+
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var vizzes = Array.prototype.slice.call(document.querySelectorAll('.viz'));
+  if (!('IntersectionObserver' in window) || reduce) vizzes.forEach(function (v) { v.classList.add('in'); });
+  else {
+    var io = new IntersectionObserver(function (entries) { entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold: 0.2 });
+    vizzes.forEach(function (v) { io.observe(v); });
+  }
+
+  // Reels: the poster and file load only near the screen, play while half visible, pause when not.
+  var vids = Array.prototype.slice.call(document.querySelectorAll('video[data-src]'));
+  function load(v) { if (!v.getAttribute('poster') && v.dataset.poster) v.setAttribute('poster', v.dataset.poster); }
+  function start(v) { if (!v.getAttribute('src')) { v.setAttribute('src', v.dataset.src); } var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+  if ('IntersectionObserver' in window) {
+    var near = new IntersectionObserver(function (entries) { entries.forEach(function (e) { if (e.isIntersecting) { load(e.target); near.unobserve(e.target); } }); }, { rootMargin: '400px 0px' });
+    var seen = new IntersectionObserver(function (entries) { entries.forEach(function (e) { var v = e.target; if (e.isIntersecting && e.intersectionRatio >= 0.5) { if (!reduce || v.dataset.userPlay) start(v); } else if (!v.paused) v.pause(); }); }, { threshold: [0, 0.5] });
+    vids.forEach(function (v) { near.observe(v); seen.observe(v); });
+  } else vids.forEach(function (v) { load(v); });
+  vids.forEach(function (v) {
+    v.parentElement.addEventListener('click', function (ev) {
+      if (ev.target.closest('.snd')) return;
+      v.dataset.userPlay = '1';
+      if (v.paused) start(v); else v.pause();
+    });
+  });
+  document.querySelectorAll('.snd').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var v = b.parentElement.querySelector('video');
+      var on = v.muted;
+      vids.forEach(function (o) { o.muted = true; });
+      document.querySelectorAll('.snd').forEach(function (o) { o.classList.remove('on'); o.textContent = 'Sound'; o.setAttribute('aria-pressed', 'false'); });
+      v.muted = !on;
+      if (on) { b.classList.add('on'); b.textContent = 'Sound on'; b.setAttribute('aria-pressed', 'true'); v.dataset.userPlay = '1'; start(v); }
+    });
+  });
 })();
 </script>
 </body></html>
