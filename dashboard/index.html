@@ -1,0 +1,1012 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ChatGPT Money Dashboard | Art of the Possible</title>
+<meta name="description" content="The prompts from the Reel: turn your bank statements into a budget report, find costs to cut, build a private dashboard in ChatGPT Work and keep it current each month.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://theaotp.com/dashboard/">
+<link rel="icon" href="/qualia-symbol.png">
+<meta property="og:title" content="ChatGPT Money Dashboard | Art of the Possible">
+<meta property="og:description" content="Copy-paste prompts for a budget report, a cost check, a private money dashboard and a monthly update in ChatGPT.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&amp;family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&amp;family=Geist+Mono:wght@400&amp;display=swap" rel="stylesheet">
+<!--
+  Clear Sky kit template (AOTP design system approved by Rich 2026-09-30).
+  Source of truth: content-intelligence assets/brand/clear-sky/{DESIGN.md,tokens.css,board.html}.
+  Filled example: assets/brand/clear-sky/sample-guide.html.
+  White on blue, ink on sand (Rich, 2026-10-03: "black never over the blue, if we use black its over white").
+  Every button wears the sky action and the big numerals the sky numeral fill. Never retune the sky's stops.
+  No old accent blue, no two-tone headlines, no bold display, no shadows, no em dashes.
+-->
+<!--
+  /dashboard/ : the resource behind the "DASHBOARD" comment CTA on the chatgpt-money-dashboard Reel (2026-11-05).
+  Every feature and plan claim was read on 2026-11-05 from:
+    https://help.openai.com/en/articles/10169521-projects-in-chatgpt     (file types; files per project Free 5, Go and Plus 25, Edu, Pro, Business, Enterprise 40; 10 per upload;
+                                                                          delete a file or a project, removed within 30 days; project-only memory means no ChatGPT Work;
+                                                                          shared projects are project-only; training on project data while Improve the model is on)
+    https://learn.chatgpt.com/docs/projects                              (web and desktop; Chats and Sources; Chat and Work chats in one project)
+    https://help.openai.com/en/articles/7730893-data-controls-in-chatgpt (Improve the model for everyone on by default on personal Free, Plus, Pro; Settings, Data controls;
+                                                                          rating a response; Business, Enterprise, Edu not trained on by default)
+    https://chatgpt.com/features/sites/  https://learn.chatgpt.com/docs/sites  https://learn.chatgpt.com/docs/sites/publishing-and-sharing
+                                                                         (public beta on eligible Plus, Pro, Business, Enterprise, Edu; a new site is owner and admins only;
+                                                                          hosting free through 2026-12-31, overages from 2027-01-01; building and editing count toward usage)
+    https://learn.chatgpt.com/use-cases/analyze-data-export             (private dashboard from spreadsheets; Google Drive source; a scheduled Work task updates it;
+                                                                          start it in the browser so it runs with the laptop off)
+    https://help.openai.com/en/articles/10291617-scheduled-tasks-in-chatgpt (a task created in a project cannot access that project's files; active tasks 3 Free and Go,
+                                                                          5 Plus, 10 Business and Edu, 15 Pro and Enterprise; Free once a day in flexible windows;
+                                                                          no financial details or account numbers in shared task instructions)
+    https://learn.chatgpt.com/docs/automations                           (standalone tasks, custom schedule, monthly RRULE example; web tasks use uploaded context and tools)
+    https://learn.chatgpt.com/docs/pricing                               (Work on the web, Sites, scheduled tasks: Plus, Pro, Business, Enterprise and Edu)
+    https://help.openai.com/en/articles/20001222-finances-in-chatgpt     (US Finances through Plaid; ChatGPT is not a fiduciary or adviser)
+  Prompts: content-intelligence pipeline/5-script/research/chatgpt-money-dashboard-prompts.txt, edited for clarity. Prompt 2 is the
+  pack's cost paragraph as its own step; prompt 5 is the by-hand update, added because project tasks cannot read project files.
+  Ledger: content-intelligence pipeline/5-script/assets/chatgpt-money-dashboard/sources/SOURCES.md
+  Still: OpenAI's Sites video (youtube.com/watch?v=8zH_O74hZBw at about 64.6 s), from sources/img/oai-sites-deployed-only-visible-to-you.png
+-->
+<style>
+:root{
+  --sand:#EFEBE7;--ink:#08070B;--graphite:#39383D;--ash:#909092;--ice:#BEC4D2;--ice-3:#E2E4EC;--glacier-2:#F3F4F6;--deep-ocean:#034C7C;--light-blue:#A5D4F2;--white:#FFFFFF;
+  /* Sky action: every button and button-like link, now an obvious two-tone (Rich, 2026-10-03: "Not enough gradient in
+     the buttons"). Same values as tokens.css: deep blue at the left into bright cerulean at the right end, 100deg.
+     Everything from 0 to 95% is #027DBA or darker, so white clears 4.5:1 there; only the last 5%, the cap, brightens to
+     #0A8FCF (3.5:1). Keep every label out of the cap: the template's paddings do (gate submit 22px, 12px on phones;
+     small pills 18px), and the worst glyph pixel measures 4.59:1 on the phone gate. Hover deepens every point of the
+     ramp. On sand and glacier the fill is its own edge; on the dark close it adds a 1px white ring. */
+  --g-sky-action:linear-gradient(100deg,#034A7A 0%,#026AA1 50%,#027DBA 95%,#0A8FCF 100%);
+  --g-sky-action-hover:linear-gradient(100deg,#043761 0%,#025F92 50%,#0274AD 95%,#0282C0 100%);
+  /* Sky numeral, FINAL (DESIGN.md 10.5): the deep end of the sky run top to bottom at 180deg, dark at the top like
+     the sky, as the text fill of the big display numerals ("and the big numbers too"). Same value and name as
+     tokens.css, so kit pages match the homepage. Display sizes only (32px and up): the lightest stop, #0282C0, is
+     3.5:1 on sand; #026AA1 is 4.9:1. */
+  --g-sky-numeral:linear-gradient(180deg,#043761 0%,#024F80 35%,#026AA1 70%,#0282C0 100%);
+  --display:'Inter Tight','Helvetica Neue',Arial,sans-serif;--ui:'Inter','Helvetica Neue',Arial,sans-serif;--mono:'Geist Mono',ui-monospace,'SF Mono',Menlo,monospace;
+  --gutter:clamp(16px,4.5vw,64px);
+  --spark:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0C12.8 7.2 16.8 11.2 24 12C16.8 12.8 12.8 16.8 12 24C11.2 16.8 7.2 12.8 0 12C7.2 11.2 11.2 7.2 12 0Z'/%3E%3C/svg%3E");
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--sand);color:var(--ink);font:400 16px/1.6 var(--ui);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:var(--deep-ocean);text-underline-offset:3px;text-decoration-thickness:1px}
+button,input{font:inherit}button,a,input{-webkit-tap-highlight-color:transparent}
+strong,b{font-weight:600;color:var(--ink)}
+:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+.page{min-height:100vh;overflow-x:clip;display:flex;flex-direction:column}
+.page>footer{margin-top:auto}
+/* Full-bleed backgrounds, content held to 1440 with 64px gutters (16px on phones). */
+.pad{padding-left:max(var(--gutter),calc((100% - 1440px)/2 + var(--gutter)));padding-right:max(var(--gutter),calc((100% - 1440px)/2 + var(--gutter)))}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance;overflow-wrap:break-word}
+p,li{text-wrap:pretty}
+
+/* Sparkle label: four-point sparkle + Geist Mono caps. */
+.eyebrow,.inst{display:block;font:400 11px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase}
+.eyebrow::before,.inst::before,.unlocks ul li::before{content:"";display:inline-block;width:.82em;height:.82em;margin-right:.75em;vertical-align:-.04em;background:currentColor;-webkit-mask:var(--spark) center/contain no-repeat;mask:var(--spark) center/contain no-repeat}
+
+/* ---- The head: white on the deep sky (Rich, 2026-10-03: "black never over the blue"; on /team/: "too much space under
+   the heading, and also make the sub text white and move to RHS"). Everything in it is white: the lockup, the nav, the
+   label line, the h1 and the dek. It all sits in the deep stretch, #043761 to #026AA1, where white measures 5.8:1 or
+   better. From 900px the heading is on the left and the dek on the right, bottoms aligned; below 900px they stack.
+   Under the content the sky runs through the rest of its measured stops, in order and evenly, to sand inside --fade,
+   an empty strip, so no type ever sits on the pale tail. Pad inside .kit-hero, never in the fade. ---- */
+.kit-head{--fade:clamp(96px,9vw,136px);padding-bottom:var(--fade);color:var(--white);background:linear-gradient(180deg,#043761 0%,#024F80 calc((100% - var(--fade))*.5),#026AA1 calc(100% - var(--fade)),#0282C0 calc(100% - var(--fade)*6/7),#1199D7 calc(100% - var(--fade)*5/7),#3EA9DA calc(100% - var(--fade)*4/7),#6DB9DC calc(100% - var(--fade)*3/7),#9DCBDD calc(100% - var(--fade)*2/7),#CBDBDF calc(100% - var(--fade)/7),#EFEBE7 100%)}
+nav{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:76px}
+.lockup{display:flex;align-items:center;color:var(--white);text-decoration:none}.lockup svg{display:block;height:22px;width:auto}
+.navlinks{display:flex;gap:28px;font:400 14px/1 var(--ui)}.navlinks a{color:var(--white);text-decoration:none}.navlinks a:hover{text-decoration:underline}
+.kit-head a:focus-visible{outline-color:var(--white)}
+.kit-hero{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);column-gap:clamp(40px,5.5vw,96px);align-items:end;padding-top:clamp(32px,4vw,60px);padding-bottom:clamp(32px,3.4vw,48px)}
+.kit-head .eyebrow{margin-bottom:18px;color:var(--white)}
+.kit-head h1{font-size:clamp(42px,4.8vw,70px);line-height:.98;letter-spacing:-.045em;text-wrap:pretty}
+.dek{max-width:46ch;margin:0;font:400 clamp(16px,1.3vw,19px)/1.55 var(--ui);letter-spacing:-.005em;color:var(--white)}
+/* The line an unlocked page shows (the shared unlock, /guides/unlock.js): ink on sand, under the head. */
+.subbed{margin:0;padding-top:clamp(18px,2vw,28px);padding-bottom:16px;font:400 14px/1.5 var(--ui);color:var(--graphite)}
+.subbed::before{content:"";display:inline-block;width:.82em;height:.82em;margin-right:.6em;vertical-align:-.04em;background:currentColor;-webkit-mask:var(--spark) center/contain no-repeat;mask:var(--spark) center/contain no-repeat}
+.subbed a{margin-left:.35em;color:var(--deep-ocean);white-space:nowrap}
+
+/* ---- The gate: a glacier card on sand, led by THIS guide (Rich, 2026-10-02: "make each page that asks for the
+   persons email address to unlock the guide more compelling ... emphasising current guide"). The featured shelf from
+   /guides/ (DESIGN.md 10.7) shows this guide's cover large under a "This guide" tag, the other guides beside it.
+   The copy names this guide first, then every other guide, then the weekly letter. Desktop: shelf left; copy, the
+   three unlocks and the form right. Under 920px: shelf, copy, form, then the unlocks. If /guides/shelf.js cannot load
+   (file://, another host: the script's onerror adds .no-shelf) or the shelf fails, the column goes and the card is
+   copy | form. ---- */
+.gate{padding-top:8px;padding-bottom:clamp(56px,7vw,96px)}
+.gate-grid{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);grid-template-rows:auto auto auto 1fr;grid-template-areas:"shelf intro" "shelf list" "shelf act" "shelf .";column-gap:clamp(28px,4.5vw,72px);align-items:start;background:var(--glacier-2);border-radius:12px;padding:clamp(22px,3.4vw,48px)}
+.gate-grid>*,.step>*,.concept>*{min-width:0}
+.gate-shelf{grid-area:shelf;align-self:center}.gate-intro{grid-area:intro}.unlocks{grid-area:list}.gate-act{grid-area:act}
+.gate-grid.no-shelf,.gate-grid:has([data-aotp-shelf-state="failed"]){grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);grid-template-rows:auto 1fr;grid-template-areas:"intro act" "list act"}
+.gate-grid.no-shelf>.gate-shelf,.gate-grid:has([data-aotp-shelf-state="failed"])>.gate-shelf{display:none}
+.gate .eyebrow{color:var(--graphite)}
+.gate h2{margin-top:18px;font-size:clamp(30px,3vw,42px);line-height:1.04;letter-spacing:-.03em;max-width:17ch}
+.gate-intro p{max-width:48ch;margin:16px 0 0;color:var(--graphite)}
+/* What the one email opens, in this order: this guide (named in display type, "Opens now", its sections), every
+   other guide, the weekly letter. The 01 02 03 are small mono counters, not sky numerals. */
+.unlocks{list-style:none;margin:26px 0 28px;padding:0;max-width:52ch}
+.unlocks>li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:0 12px;margin:0;border-top:1px solid var(--ice);padding:13px 0;font-size:14.5px;line-height:1.5;color:var(--graphite)}
+.unlocks>li:last-child{border-bottom:1px solid var(--ice)}
+.unlocks .n{padding-top:3px;font:400 11px/1.4 var(--mono);letter-spacing:.1em;color:var(--graphite)}
+.unlocks b{display:block;margin-bottom:2px;font:500 16px/1.35 var(--ui);color:var(--ink)}
+.unlocks .this .n{padding-top:7px}
+.unlocks .this b{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin-bottom:8px;font:400 clamp(22px,2vw,26px)/1.1 var(--display);letter-spacing:-.025em}
+.unlocks .now{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:5px;background:var(--ice-3);font:400 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.unlocks ul{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.unlocks ul li{padding-left:1.6em;text-indent:-1.6em;color:var(--ink)}
+.gate form{display:grid;gap:10px}
+.gate input{width:100%;min-width:0;height:52px;border:1px solid var(--ink);border-radius:999px;background:transparent;padding:0 22px;color:var(--ink);font-size:16px}
+.gate input::placeholder{color:var(--graphite);opacity:1}
+.gate input:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.gate button{width:100%;min-height:52px;border:0;border-radius:999px;background:var(--g-sky-action);color:var(--white);cursor:pointer;padding:14px 22px;font:500 16px/1.25 var(--ui);letter-spacing:-.005em;text-align:center;text-wrap:balance}
+.gate button:hover{background:var(--g-sky-action-hover)}
+/* Buttons on sand and glacier: hover deepens the sky action, focus is a 2px ink ring (the white label would vanish as a ring on sand). */
+.gate button:focus-visible,.copybtn:focus-visible,.read a:focus-visible,.dl-btn:focus-visible,.kc:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.gate-status{margin:12px 0 0;font-size:14px;color:var(--ink)}.gate-status:empty{margin:0}
+.gate-small{margin:14px 0 0;font-size:13.5px;line-height:1.55;color:var(--graphite)}
+.unlocks ul li::before{width:10px;height:10px;margin-right:calc(1.6em - 10px);vertical-align:0}
+
+/* ---- Sections: a mono-and-numeral rail, one reading column, 1px ice hairlines. ---- */
+.step,.concept{position:relative;display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px;padding-top:52px;padding-bottom:72px;scroll-margin-top:24px}
+.step::before,.concept::before{content:"";position:absolute;top:0;left:max(var(--gutter),calc((100% - 1440px)/2 + var(--gutter)));right:max(var(--gutter),calc((100% - 1440px)/2 + var(--gutter)));height:1px;background:var(--ice)}
+.step-kicker,.concept-num{font:400 11px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--graphite)}
+.step-kicker span,.concept-num span{display:table;padding:.1em .1em .1em 0;margin:-.1em -.1em calc(14px - .1em) 0;font:400 64px/.8 var(--display);letter-spacing:-.06em;color:var(--deep-ocean)}
+.step h2,.concept h2{font-size:clamp(34px,3.6vw,50px);line-height:1.02;letter-spacing:-.03em;max-width:20ch}
+.step .lede,.concept .lede{max-width:54ch;margin:20px 0 24px;font:400 20px/1.5 var(--ui);letter-spacing:-.01em;color:var(--ink)}
+.step p,.concept p{max-width:64ch;color:var(--graphite)}
+.step ul,.step ol,.concept ul{max-width:64ch;padding-left:20px;color:var(--graphite)}
+.step li,.concept li{margin-bottom:10px}
+.step li::marker,.concept li::marker{color:var(--ash)}
+.note{max-width:62ch;margin:30px 0;border-top:1px solid var(--ice);padding-top:14px;font-size:14.5px;line-height:1.6;color:var(--graphite)}
+table+.note{margin-top:18px;border-top:0;padding-top:0}
+.step .inst{margin:44px 0 0;color:var(--ink)}
+
+/* Reading-list payload */
+.index{list-style:none;padding:0!important;margin:26px 0 0;max-width:66ch}
+.index li{border-top:1px solid var(--ice);padding:16px 0;margin:0;display:flex;gap:18px;align-items:baseline;font-size:15px;color:var(--graphite)}
+.index .n{min-width:26px;font:400 11px var(--mono);letter-spacing:.1em;color:var(--graphite)}
+.index a{font:400 21px/1.2 var(--display);letter-spacing:-.02em;color:var(--ink);text-decoration:none}.index a:hover{text-decoration:underline}
+.index .st{margin-left:auto;font:400 10.5px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--graphite)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 0}
+.chip{display:inline-flex;align-items:center;height:24px;padding:0 9px;border-radius:5px;background:var(--ice-3);font:400 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.read{max-width:760px;margin:26px 0 0;background:var(--glacier-2);border-radius:12px;padding:20px 22px 22px}
+.read .src{font:400 10.5px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--graphite)}
+.read h3{max-width:40ch;margin:10px 0 16px;font-size:24px;line-height:1.12;letter-spacing:-.025em}
+.read a{display:inline-flex;align-items:center;height:28px;padding:0 18px;border-radius:999px;background:var(--g-sky-action);font:400 10.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--white);text-decoration:none}
+.read a:hover{background:var(--g-sky-action-hover)}
+
+/* ---- The close IS the footer: one short block on the reversed sky, sand at the top and #043761 at the bottom (Rich,
+   2026-10-02: "make the footer smaller and reverse the gradient so dark blue at the bottom"), with everything in it
+   white on the dark stretch (Rich, 2026-10-03: "black never over the blue"). The run from sand to #026AA1 (the
+   measured stops, in order and evenly) happens inside --fade, an empty strip at the top. The headline, the "on the
+   list" line, the white-ringed pill, the lockup and the mono line all sit below it, on #026AA1 to #043761, where white
+   measures 5.8:1 or better. It sits outside #kit so gated visitors get it too; .close-kit only shows once #kit is
+   unlocked. Keep it short: no second headline, button or form. ---- */
+.closeblock{--fade:clamp(64px,6vw,88px);padding-top:calc(var(--fade) + clamp(22px,2.4vw,32px));padding-bottom:clamp(20px,1.8vw,26px);color:var(--white);background:linear-gradient(180deg,#EFEBE7 0%,#CBDBDF calc(var(--fade)/7),#9DCBDD calc(var(--fade)*2/7),#6DB9DC calc(var(--fade)*3/7),#3EA9DA calc(var(--fade)*4/7),#1199D7 calc(var(--fade)*5/7),#0282C0 calc(var(--fade)*6/7),#026AA1 var(--fade),#024F80 calc(var(--fade) + (100% - var(--fade))*.5),#043761 100%)}
+.close-top{display:flex;align-items:flex-end;justify-content:space-between;gap:18px 40px}
+.closeblock h2{font-size:clamp(28px,3vw,44px);line-height:1.02;letter-spacing:-.035em;color:var(--white)}
+.close-kit{max-width:64ch;margin:10px 0 0;font:400 clamp(15px,1.2vw,17px)/1.5 var(--ui);color:var(--white)}
+#kit[hidden]~.closeblock .close-kit{display:none}
+/* The pill is the sky action ringed in 1px white: on the dark sky the fill alone has no edge (it is cut from the same
+   blues), the white ring measures 5.8:1 or better there. */
+.close-btn{display:inline-flex;align-items:center;flex:none;height:40px;padding:0 20px;border:1px solid var(--white);border-radius:999px;background:var(--g-sky-action);color:var(--white);font:500 15px/1 var(--ui);text-decoration:none;white-space:nowrap}
+.close-btn:hover{background:var(--g-sky-action-hover);text-decoration:underline}
+.closeblock a:focus-visible{outline:2px solid var(--white);outline-offset:3px}
+.close-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 24px;margin-top:clamp(22px,2.4vw,32px)}
+.close-row svg{display:block;height:22px;width:auto;flex:none}
+.close-foot{margin:0;font:400 10.5px/1.6 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--white)}
+.close-foot .nw{white-space:nowrap}
+[hidden]{display:none!important}
+/* A subscriber's page opens before first paint: the head script below sets .aotp-subscribed on <html> from the same
+   storage the gate script reads, so the gate never flashes while /guides/unlock.js loads. */
+.aotp-subscribed #gate{display:none!important}
+.aotp-subscribed #kit[hidden],.aotp-subscribed #subbed[hidden]{display:block!important}
+
+/* --- prompt-kit / field-notes / how-to payloads: keep these, delete what you don't use --- */
+.promptbox{max-width:760px;margin-top:26px;background:var(--glacier-2);border-radius:12px;padding-top:12px}
+.copybtn{display:block;margin:0 12px 0 auto;min-height:32px;padding:0 18px;border:0;border-radius:999px;background:var(--g-sky-action);color:var(--white);cursor:pointer;font:400 10.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase}
+.copybtn:hover{background:var(--g-sky-action-hover)}
+.promptbox pre{margin:12px 0 0;border-top:1px solid var(--ice);padding:20px 26px 26px;overflow-x:auto;font:400 13px/1.8 var(--mono);white-space:pre-wrap;overflow-wrap:anywhere;color:var(--ink)}
+.promptbox.code pre{white-space:pre;overflow-wrap:normal}
+.promptbox.tall pre{max-height:560px;overflow-y:auto}
+.cmd,.termshot{max-width:760px;margin:24px 0;border-radius:12px;padding:20px 24px;overflow-x:auto}
+.cmd{background:var(--glacier-2)}.cmd code{display:block;padding:0;background:none;font:400 13px/1.8 var(--mono);white-space:pre}
+.termshot{background:var(--ink);color:var(--sand);font:400 13px/1.9 var(--mono);white-space:pre}
+.termshot .g{color:var(--light-blue)}.termshot .y,.termshot .r{color:var(--white)}.termshot .d{color:var(--ash)}
+code{font-family:var(--mono);font-size:.86em;background:var(--ice-3);padding:1px 5px;border-radius:4px;white-space:nowrap;color:var(--ink)}
+.lessons{list-style:none;padding:0!important;margin:26px 0 0;max-width:66ch}
+.lessons li{position:relative;border-top:1px solid var(--ice);padding:22px 0 22px 72px;margin:0;color:var(--graphite)}
+.lessons strong{display:block;margin-bottom:8px;font:400 23px/1.2 var(--display);letter-spacing:-.02em;color:var(--ink)}
+.lessons .k{position:absolute;left:0;top:22px;padding:.1em .1em .1em 0;margin:-.1em -.1em -.1em 0;font:400 40px/.84 var(--display);letter-spacing:-.05em;color:var(--deep-ocean)}
+.sky-num{display:inline-block;padding:.1em .1em .1em 0;margin:-.1em -.1em -.1em 0;font-family:var(--display);font-weight:400;color:var(--deep-ocean)}
+/* Sky numerals (Rich, 2026-10-02: "and the big numbers too"): every big display numeral (the rail numerals above,
+   .lessons .k, any stat figure you add as .sky-num) takes --g-sky-numeral as its text fill, painted on its own glyph box
+   (display:table shrinks the rail numeral to its digits). The box is padded .1em right, top and bottom with matching
+   negative margins (DESIGN.md 10.5): background-clip:text paints only inside the box, and the tight tracking and line
+   height would otherwise clip the last digit, or the top and tail of a "$". Without background-clip:text, in print and
+   under forced colors it is solid deep ocean. Small numbers (.cmdlist .n, .index .n, mono labels) stay as they are. */
+@supports (-webkit-background-clip:text) or (background-clip:text){
+  .step-kicker span,.concept-num span,.lessons .k,.sky-num{background:var(--g-sky-numeral);background-size:100% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+}
+table{border-collapse:collapse;width:100%;max-width:760px;margin:20px 0;font-size:14.5px}
+th,td{text-align:left;padding:14px 16px 14px 0;border-bottom:1px solid var(--ice);vertical-align:top;color:var(--graphite)}
+th{border-bottom-color:var(--ink);font:400 10.5px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+td:first-child{width:26%;padding-right:24px;color:var(--ink);font-weight:500}td code{white-space:normal;overflow-wrap:anywhere}
+.shot{max-width:760px;margin:26px 0}
+.shot img{display:block;width:100%;height:auto;border:1px solid var(--ice);border-radius:6px;background:var(--white)}
+.cap{max-width:64ch;margin:10px 0 0;font-size:13.5px;line-height:1.5;color:var(--graphite)}
+.dl{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px 28px;max-width:760px;margin:28px 0 0;background:var(--glacier-2);border-radius:12px;padding:22px 24px}
+.dl-meta{font-size:14px;line-height:1.5;color:var(--graphite)}.dl-meta strong{display:block;font:400 21px/1.2 var(--display);letter-spacing:-.02em}
+.dl-btn{display:inline-flex;align-items:center;height:52px;padding:0 26px;border-radius:999px;background:var(--g-sky-action);color:var(--white);font:500 16px/1 var(--ui);text-decoration:none}.dl-btn:hover{background:var(--g-sky-action-hover)}
+.cmdlist{list-style:none;padding:0!important;margin:28px 0 0;max-width:760px}
+.cmdlist li{display:grid;grid-template-columns:34px minmax(0,1fr);gap:14px;border-top:1px solid var(--ice);padding:20px 0;margin:0}
+.cmdlist li>*{min-width:0}.cmdlist .n{padding-top:9px;font:400 11px/1 var(--mono);letter-spacing:.1em;color:var(--graphite)}
+.cmdlist p{margin:10px 0 0}
+/* .kc is 16px round, not a 999px pill: one line is still a full pill (32px tall), but a command that wraps onto three
+   lines keeps its corners square enough that no white glyph falls off the fill onto sand. */
+.kc{display:inline-flex;align-items:center;gap:12px;max-width:100%;min-height:32px;padding:5px 12px 5px 13px;border:0;border-radius:16px;background:var(--g-sky-action);color:var(--white);cursor:pointer;text-align:left}
+.kc code{padding:0;background:none;font-size:14px;white-space:normal;overflow-wrap:anywhere;color:var(--white)}
+.kc .cp{flex:none;padding:3px 8px;border:1px solid var(--white);border-radius:999px;font:400 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase}
+.kc:hover,.kc.done{background:var(--g-sky-action-hover)}
+.kc:hover .cp,.kc.done .cp{background:var(--white);color:var(--ink)}
+/* A long command makes a wide chip, and its "Copy" pill sits at the far right, inside the bright cap of the ramp. The
+   chip paints the same --g-sky-action 10% wider than itself, so the cap always falls outside it and the pill's label
+   stays on #027BB8 or darker. */
+.kc,.kc:hover,.kc.done{background-size:110% 100%;background-repeat:no-repeat}
+.where{display:inline-block;margin-left:12px;font:400 10.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--graphite)}
+.try{list-style:none;padding:0!important;margin:14px 0 0;max-width:66ch}
+.try li{border-top:1px solid var(--ice);padding:14px 0;margin:0;color:var(--graphite)}
+.try strong{margin-right:6px;font:400 14px var(--mono)}
+
+/* ---- /dashboard/ page layer. Diagrams use the /setup/ grammar on Clear Sky: deep ocean cards for you, glacier cards
+   for ChatGPT, a cerulean ring for your private dashboard. The dashboard sketch is panels and labels with no figures,
+   solid for actual months and dashed for estimates. Drawn by the small script at the end of the page in a wide layout
+   or a tall one for phones. Everything here sits inside #kit. ---- */
+.viz{max-width:1000px;margin:34px 0 8px}
+.viz svg{display:block;width:100%;height:auto;overflow:visible}
+.viz.tall svg{max-width:440px}
+.viz svg text{font-family:var(--ui)}
+.viz .n>rect:first-child{fill:var(--glacier-2);stroke:var(--ice);stroke-width:1.5}
+.viz .n .t{font:400 20px var(--display);letter-spacing:-.02em;fill:var(--ink)}
+.viz .n .s{font:400 11.5px var(--mono);letter-spacing:.1em;text-transform:uppercase;fill:var(--graphite)}
+.viz .n.human>rect:first-child{fill:var(--deep-ocean);stroke:var(--deep-ocean)}
+.viz .n.human .t,.viz .n.human .s{fill:var(--white)}
+.viz .n.accent>rect:first-child{fill:var(--white);stroke:#1199D7;stroke-width:2.5}
+.viz .tag{font:400 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;fill:var(--deep-ocean)}
+.viz .e{fill:none;stroke:var(--graphite);stroke-width:1.75}
+/* List cards (the report) and the dashboard sketch. */
+.viz .hl{stroke:var(--ice);stroke-width:1}
+.viz .rt{font:400 15px var(--ui);fill:var(--graphite)}
+.viz .frame{fill:var(--white);stroke:var(--ice);stroke-width:1.5}
+.viz .pnl{fill:var(--glacier-2)}
+.viz .lbl{font:400 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;fill:var(--graphite)}
+.viz .ttl{font:400 24px var(--display);letter-spacing:-.02em;fill:var(--ink)}
+.viz .ph{fill:var(--ice-3)}
+.viz .bar{fill:var(--deep-ocean)}
+.viz .bar2{fill:#9DCBDD}
+.viz .est{fill:none;stroke:var(--deep-ocean);stroke-width:1.5;stroke-dasharray:4 3}
+.viz .est2{fill:none;stroke:#3EA9DA;stroke-width:1.5;stroke-dasharray:4 3}
+.viz .div{stroke:var(--graphite);stroke-width:1;stroke-dasharray:3 4}
+.viz .rbg{fill:none;stroke:var(--ice-3);stroke-width:7}
+.viz .ring{fill:none;stroke:#1199D7;stroke-width:7;stroke-linecap:round}
+.viz .on{fill:var(--deep-ocean)}.viz .off{fill:var(--ice)}.viz .knob{fill:var(--white)}
+.vizcap{max-width:64ch;margin:12px 0 0;font:400 11px/1.6 var(--mono);letter-spacing:.11em;text-transform:uppercase;color:var(--graphite)}
+.vizcap i{display:inline-block;width:12px;height:12px;margin:0 8px 0 0;border-radius:3px;vertical-align:-1px;background:var(--glacier-2);border:1.5px solid var(--ice)}
+.vizcap i.h{background:var(--deep-ocean);border-color:var(--deep-ocean)}
+.vizcap i.f{background:var(--white);border:2px solid #1199D7}
+.vizcap span{display:inline-block;margin-right:22px;white-space:nowrap}
+/* Reveal: cards and panels fade, arrows draw, once a diagram scrolls into view (the script adds .in). */
+.viz .n,.viz .fade{opacity:0;transition:opacity .55s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--i,0)*90ms + 80ms)}
+.viz .e{opacity:0;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .7s cubic-bezier(.2,.7,.2,1),opacity .2s;transition-delay:calc(var(--i,0)*90ms + 160ms)}
+.viz.in .n,.viz.in .fade{opacity:1}
+.viz.in .e{stroke-dashoffset:0;opacity:1}
+.shot figcaption.cap{margin-top:10px}
+@media(prefers-reduced-motion:reduce){.viz .n,.viz .fade,.viz .e{transition:none}}
+
+@media(max-width:900px){
+  .kit-hero{grid-template-columns:minmax(0,1fr);row-gap:22px}
+}
+@media(max-width:920px){
+  .gate-grid{grid-template-columns:minmax(0,1fr);grid-template-rows:none;grid-template-areas:"shelf" "intro" "act" "list";row-gap:22px}
+  .gate-grid.no-shelf,.gate-grid:has([data-aotp-shelf-state="failed"]){grid-template-columns:minmax(0,1fr);grid-template-rows:none;grid-template-areas:"intro" "act" "list"}
+  .unlocks{margin:4px 0 0}
+}
+@media(max-width:800px){
+  nav{min-height:64px}.lockup svg,.close-row svg{height:17px}.navlinks{gap:16px;font-size:13px}
+  .kit-head{--fade:88px}.closeblock{--fade:56px}
+  .close-top{flex-direction:column;align-items:flex-start}
+  .gate{padding-top:0}
+  .gate-grid,.step,.concept{grid-template-columns:1fr;gap:22px}.gate-grid>*,.step>*,.concept>*{min-width:0}
+  .step,.concept{padding-top:34px;padding-bottom:48px}
+  .step-kicker span,.concept-num span{display:inline-block;margin:-.1em calc(12px - .1em) -.1em 0;font-size:44px;vertical-align:-.02em}
+  .step .lede,.concept .lede{font-size:18px}
+  .lessons li{padding-left:54px}.lessons .k{font-size:32px;top:24px}
+  .promptbox pre{padding:18px 18px 22px}.index li{flex-wrap:wrap}.index .st{margin-left:44px;width:100%}
+  code{white-space:normal;overflow-wrap:anywhere}th,td{padding-right:12px}td:first-child{width:32%}
+}
+@media(max-width:480px){.lockup svg,.close-row svg{height:15px}.navlinks{gap:14px;font-size:12.5px}.kit-head h1 br{display:none}.gate-grid{padding:24px 16px}.gate button{padding-left:12px;padding-right:12px;font-size:14.5px}}
+@media(max-width:380px){.gate button{font-size:14px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+/* Print drops backgrounds, so a gradient-filled numeral would print blank and every white label on a sky or a sky
+   action would print as faint grey. Paper gets ink: deep ocean numerals, hairline ink pills, ink type where the sky
+   was. Forced colors drops gradients too: the numerals and pills take the system colours (the border gives a
+   borderless pill its edge back). Keep this last in the sheet so it beats every rule above it. */
+@media print,(forced-colors:active){
+  .step-kicker span,.concept-num span,.lessons .k,.sky-num{background:none;color:var(--deep-ocean);-webkit-text-fill-color:currentColor}
+  .gate button,.copybtn,.read a,.dl-btn,.kc,.kc.done,.kc .cp,.kc.done .cp,.close-btn{background:none;color:var(--ink);border:1px solid var(--ink)}
+  .kc code{color:var(--ink)}
+}
+@media print{
+  .kit-head,.kit-head .eyebrow,.kit-head h1,.dek,.lockup,.navlinks a,.closeblock,.closeblock h2,.close-kit,.close-foot{color:var(--ink)}
+  .lockup svg g,.close-row svg g{fill:var(--ink)}
+}
+</style><script src="/f.js"></script>
+<script>try{if(/(?:^|;\s*)aotp_subscriber=[^;\s]/.test(document.cookie)||localStorage.getItem('aotp_subscriber')||localStorage.getItem('aotp_member')==='2')document.documentElement.classList.add('aotp-subscribed')}catch(e){}</script>
+</head><body>
+<div class="page">
+<header class="kit-head pad">
+  <nav><a class="lockup" href="/"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 897 112" role="img" aria-label="Art of the Possible"><title>Art of the Possible</title><g fill="#FFFFFF"><path transform="scale(0.448)" d="M93.301 48.471A34.601 34.601 0 1 1 156.699 48.471A34.601 34.601 0 0 0 93.301 48.471ZM156.699 48.471A34.601 34.601 0 1 1 201.529 93.301A34.601 34.601 0 0 0 156.699 48.471ZM201.529 93.301A34.601 34.601 0 1 1 156.699 48.471A34.601 34.601 0 0 0 201.529 93.301ZM201.529 93.301A34.601 34.601 0 1 1 201.529 156.699A34.601 34.601 0 0 0 201.529 93.301ZM201.529 156.699A34.601 34.601 0 1 1 156.699 201.529A34.601 34.601 0 0 0 201.529 156.699ZM156.699 201.529A34.601 34.601 0 1 1 201.529 156.699A34.601 34.601 0 0 0 156.699 201.529ZM156.699 201.529A34.601 34.601 0 1 1 93.301 201.529A34.601 34.601 0 0 0 156.699 201.529ZM93.301 201.529A34.601 34.601 0 1 1 48.471 156.699A34.601 34.601 0 0 0 93.301 201.529ZM48.471 156.699A34.601 34.601 0 1 1 93.301 201.529A34.601 34.601 0 0 0 48.471 156.699ZM48.471 156.699A34.601 34.601 0 1 1 48.471 93.301A34.601 34.601 0 0 0 48.471 156.699ZM48.471 93.301A34.601 34.601 0 1 1 93.301 48.471A34.601 34.601 0 0 0 48.471 93.301ZM93.301 48.471A34.601 34.601 0 1 1 48.471 93.301A34.601 34.601 0 0 0 93.301 48.471Z"/><path transform="translate(160 80.736)" d="M11.7 0H0.49L17.57 -49.47H31.04L48.09 0H36.91L24.49 -38.17H24.09ZM11.04 -19.44H37.49V-11.3H11.04ZM51.08 0V-49.47H70.57Q76.2 -49.47 80.16 -47.48Q84.12 -45.48 86.22 -41.85Q88.32 -38.21 88.32 -33.31Q88.32 -28.38 86.2 -24.84Q84.07 -21.29 80.04 -19.41Q76.01 -17.53 70.31 -17.53H57.27V-25.94H68.6Q71.63 -25.94 73.62 -26.76Q75.6 -27.59 76.58 -29.22Q77.55 -30.85 77.55 -33.31Q77.55 -35.78 76.57 -37.47Q75.59 -39.15 73.6 -40.02Q71.62 -40.89 68.58 -40.89H61.52V0ZM78.54 0 66.5 -22.52H77.78L90.09 0ZM90.95 -40.85V-49.47H131.58V-40.85H116.44V0H106.12V-40.85ZM170.54 0.66Q163.97 0.66 158.72 -2.32Q153.46 -5.31 150.41 -10.99Q147.36 -16.66 147.36 -24.7Q147.36 -32.8 150.41 -38.49Q153.46 -44.18 158.72 -47.16Q163.97 -50.14 170.54 -50.14Q177.12 -50.14 182.35 -47.16Q187.59 -44.18 190.64 -38.49Q193.69 -32.8 193.69 -24.7Q193.69 -16.64 190.64 -10.97Q187.59 -5.29 182.35 -2.31Q177.12 0.66 170.54 0.66ZM170.54 -8.58Q174.35 -8.58 177.16 -10.44Q179.98 -12.29 181.54 -15.89Q183.09 -19.49 183.09 -24.7Q183.09 -29.95 181.54 -33.57Q179.98 -37.18 177.16 -39.04Q174.35 -40.89 170.54 -40.89Q166.76 -40.89 163.93 -39.04Q161.1 -37.18 159.53 -33.57Q157.96 -29.95 157.96 -24.7Q157.96 -19.49 159.53 -15.89Q161.1 -12.29 163.93 -10.44Q166.76 -8.58 170.54 -8.58ZM198.51 0V-49.47H231.26V-40.85H208.95V-27.25H229.08V-18.79H208.95V0ZM246.36 -40.85V-49.47H286.99V-40.85H271.85V0H261.53V-40.85ZM290.8 0V-49.47H301.24V-29.06H322.46V-49.47H332.9V0H322.46V-20.44H301.24V0ZM338.59 0V-49.47H371.94V-40.85H349.03V-29.22H370.19V-20.76H349.03V-8.62H372V0ZM390.19 0V-49.47H409.68Q415.31 -49.47 419.27 -47.33Q423.23 -45.19 425.33 -41.4Q427.43 -37.61 427.43 -32.69Q427.43 -27.76 425.31 -24Q423.18 -20.25 419.15 -18.14Q415.12 -16.03 409.43 -16.03H396.99V-24.41H407.71Q410.74 -24.41 412.73 -25.46Q414.71 -26.52 415.69 -28.38Q416.66 -30.25 416.66 -32.69Q416.66 -35.18 415.69 -37.02Q414.71 -38.86 412.72 -39.88Q410.73 -40.89 407.69 -40.89H400.63V0ZM453.6 0.66Q447.03 0.66 441.78 -2.32Q436.52 -5.31 433.47 -10.99Q430.43 -16.66 430.43 -24.7Q430.43 -32.8 433.47 -38.49Q436.52 -44.18 441.78 -47.16Q447.03 -50.14 453.6 -50.14Q460.18 -50.14 465.42 -47.16Q470.65 -44.18 473.7 -38.49Q476.75 -32.8 476.75 -24.7Q476.75 -16.64 473.7 -10.97Q470.65 -5.29 465.42 -2.31Q460.18 0.66 453.6 0.66ZM453.6 -8.58Q457.41 -8.58 460.23 -10.44Q463.05 -12.29 464.6 -15.89Q466.15 -19.49 466.15 -24.7Q466.15 -29.95 464.6 -33.57Q463.05 -37.18 460.23 -39.04Q457.41 -40.89 453.6 -40.89Q449.82 -40.89 446.99 -39.04Q444.17 -37.18 442.6 -33.57Q441.03 -29.95 441.03 -24.7Q441.03 -19.49 442.6 -15.89Q444.17 -12.29 446.99 -10.44Q449.82 -8.58 453.6 -8.58ZM499.91 0.7Q493.92 0.7 489.49 -1.13Q485.06 -2.96 482.58 -6.57Q480.1 -10.19 479.96 -15.54H490.08Q490.27 -13.07 491.53 -11.4Q492.8 -9.74 494.93 -8.9Q497.06 -8.06 499.79 -8.06Q502.45 -8.06 504.43 -8.83Q506.4 -9.6 507.49 -10.98Q508.57 -12.36 508.57 -14.18Q508.57 -15.84 507.58 -16.96Q506.6 -18.08 504.73 -18.89Q502.85 -19.69 500.15 -20.32L494.75 -21.65Q488.5 -23.15 484.89 -26.41Q481.28 -29.68 481.28 -35.17Q481.28 -39.66 483.71 -43.02Q486.14 -46.38 490.37 -48.26Q494.61 -50.14 500.02 -50.14Q505.54 -50.14 509.64 -48.25Q513.75 -46.36 516.05 -43Q518.35 -39.64 518.43 -35.25H508.36Q508.09 -38.16 505.89 -39.78Q503.7 -41.4 499.94 -41.4Q497.4 -41.4 495.62 -40.68Q493.84 -39.97 492.92 -38.71Q492 -37.45 492 -35.83Q492 -34.09 493.06 -32.91Q494.11 -31.74 495.9 -31Q497.68 -30.25 499.81 -29.74L504.23 -28.66Q507.45 -27.93 510.16 -26.72Q512.87 -25.5 514.88 -23.74Q516.89 -21.99 517.99 -19.6Q519.09 -17.22 519.09 -14.13Q519.09 -9.61 516.81 -6.27Q514.53 -2.94 510.24 -1.12Q505.96 0.7 499.91 0.7ZM541.53 0.7Q535.54 0.7 531.11 -1.13Q526.68 -2.96 524.2 -6.57Q521.72 -10.19 521.58 -15.54H531.7Q531.89 -13.07 533.16 -11.4Q534.42 -9.74 536.55 -8.9Q538.68 -8.06 541.41 -8.06Q544.08 -8.06 546.05 -8.83Q548.02 -9.6 549.11 -10.98Q550.19 -12.36 550.19 -14.18Q550.19 -15.84 549.21 -16.96Q548.22 -18.08 546.35 -18.89Q544.47 -19.69 541.77 -20.32L536.37 -21.65Q530.12 -23.15 526.51 -26.41Q522.9 -29.68 522.9 -35.17Q522.9 -39.66 525.33 -43.02Q527.76 -46.38 531.99 -48.26Q536.23 -50.14 541.64 -50.14Q547.16 -50.14 551.26 -48.25Q555.37 -46.36 557.67 -43Q559.97 -39.64 560.05 -35.25H549.98Q549.71 -38.16 547.51 -39.78Q545.32 -41.4 541.56 -41.4Q539.02 -41.4 537.24 -40.68Q535.46 -39.97 534.54 -38.71Q533.62 -37.45 533.62 -35.83Q533.62 -34.09 534.68 -32.91Q535.74 -31.74 537.52 -31Q539.3 -30.25 541.43 -29.74L545.85 -28.66Q549.07 -27.93 551.78 -26.72Q554.49 -25.5 556.5 -23.74Q558.51 -21.99 559.61 -19.6Q560.71 -17.22 560.71 -14.13Q560.71 -9.61 558.43 -6.27Q556.15 -2.94 551.87 -1.12Q547.58 0.7 541.53 0.7ZM575.25 -49.47V0H564.81V-49.47ZM580.93 0V-49.47H600.73Q606.18 -49.47 609.83 -47.85Q613.48 -46.22 615.32 -43.36Q617.15 -40.5 617.15 -36.8Q617.15 -33.89 615.98 -31.71Q614.81 -29.52 612.8 -28.13Q610.78 -26.74 608.2 -26.16V-25.66Q611.03 -25.55 613.51 -24.08Q615.99 -22.6 617.53 -19.97Q619.08 -17.33 619.08 -13.67Q619.08 -9.75 617.14 -6.66Q615.21 -3.57 611.43 -1.78Q607.64 0 602.06 0ZM591.37 -8.54H599.91Q604.27 -8.54 606.29 -10.23Q608.31 -11.93 608.31 -14.7Q608.31 -16.77 607.32 -18.34Q606.33 -19.92 604.5 -20.82Q602.67 -21.71 600.16 -21.71H591.37ZM591.37 -28.77H599.14Q601.27 -28.77 602.96 -29.53Q604.64 -30.29 605.61 -31.69Q606.58 -33.1 606.58 -35.05Q606.58 -37.71 604.69 -39.36Q602.8 -41.01 599.34 -41.01H591.37ZM622.95 0V-49.47H633.39V-8.62H654.6V0ZM658.66 0V-49.47H692.01V-40.85H669.1V-29.22H690.26V-20.76H669.1V-8.62H692.06V0ZM708.66 -22.11V-39.91H717.37Q719.06 -39.94 720.47 -39.25Q721.88 -38.56 722.72 -37.24Q723.56 -35.93 723.56 -34.07Q723.56 -32.17 722.69 -30.82Q721.81 -29.47 720.37 -28.79Q718.94 -28.12 717.18 -28.12H711.19V-31.48H716.19Q717.2 -31.46 717.94 -32.11Q718.68 -32.75 718.68 -34.06Q718.68 -35.37 717.94 -35.95Q717.19 -36.52 716.21 -36.54H713.29V-22.11ZM720.04 -30.35 724.13 -22.11H719.02L715.23 -30.35ZM715.63 -11.49Q711.65 -11.49 708.14 -13Q704.64 -14.51 701.98 -17.17Q699.33 -19.82 697.84 -23.33Q696.35 -26.83 696.35 -30.81Q696.35 -34.8 697.84 -38.3Q699.33 -41.8 701.98 -44.46Q704.64 -47.12 708.14 -48.63Q711.65 -50.14 715.63 -50.14Q719.65 -50.14 723.15 -48.63Q726.65 -47.12 729.31 -44.46Q731.97 -41.8 733.46 -38.3Q734.95 -34.8 734.95 -30.81Q734.95 -26.83 733.46 -23.33Q731.97 -19.82 729.32 -17.17Q726.67 -14.51 723.16 -13Q719.65 -11.49 715.63 -11.49ZM715.63 -16.61Q719.59 -16.61 722.82 -18.52Q726.05 -20.43 727.97 -23.66Q729.88 -26.88 729.87 -30.81Q729.88 -34.74 727.96 -37.97Q726.05 -41.2 722.81 -43.12Q719.57 -45.03 715.63 -45.01Q711.72 -45.03 708.49 -43.12Q705.26 -41.2 703.34 -37.97Q701.43 -34.74 701.43 -30.82Q701.43 -26.89 703.35 -23.66Q705.26 -20.43 708.49 -18.52Q711.71 -16.61 715.63 -16.61Z"/></g></svg></a><div class="navlinks"><a href="/">Home</a><a href="/letters/">Archive</a><a href="/#about">About</a></div></nav>
+  <!-- Everything in the head is white on the deep sky. The heading left, the dek right from 900px; they stack on phones. -->
+  <div class="kit-hero">
+    <div>
+      <div class="eyebrow">ChatGPT Money Dashboard &middot; From the Reel</div>
+      <!-- One colour. The two slots are legacy names: write one headline, never two tones. Two sentences? Put <br> after the first ("skills.<br> Great"); phones drop the break. -->
+      <h1>Where your money goes,<br> and where it's heading.</h1>
+    </div>
+    <p class="dek">You commented "DASHBOARD". Here it is. The prompts from the Reel, ready to copy: the budget report, the cost check, the dashboard and the monthly update, plus how to keep your statements private. General information only, not financial advice. No course, no upsell.</p>
+  </div>
+</header>
+
+<section class="gate pad" id="gate">
+  <div class="gate-grid">
+    <!-- The featured shelf (DESIGN.md 10.7): this guide's cover large under a "This guide" tag, every other guide beside it,
+         served from /guides/ on theaotp.com. Its cover is /guides/covers/dashboard.svg (cover-tools/make_covers.py) and the
+         guide belongs in /guides/guides.json + guides-all.json; with no cover the shelf shows the other guides alone.
+         Where /guides/ does not resolve (file://, another host) onerror drops the column and the card is copy | form. -->
+    <div class="gate-shelf">
+      <link rel="stylesheet" href="/guides/shelf.css">
+      <div data-aotp-shelf="featured" data-featured="dashboard" data-title="ChatGPT Money Dashboard"></div>
+      <script src="/guides/shelf.js" defer onerror="this.closest('.gate-grid').classList.add('no-shelf')"></script>
+    </div>
+    <!-- Copy order: THIS guide by name, then every other guide, then the weekly letter (Rich, 2026-10-02). -->
+    <div class="gate-intro">
+      <div class="eyebrow">Free guide &middot; one email</div>
+      <h2>Unlock ChatGPT Money Dashboard.</h2>
+      <p>Leave your email and this guide opens right here. The same email opens every other guide on the shelf and signs you up for the weekly letter.</p>
+    </div>
+    <ol class="unlocks">
+      <!-- Item 01 names this guide and two to four of its sections in plain words, never the payload itself. -->
+      <li class="this"><span class="n">01</span><div><b>ChatGPT Money Dashboard <span class="now">Opens now</span></b><ul><li>The workflow, step by step</li><li>Five prompts you can copy</li><li>How to keep your statements private</li></ul></div></li>
+      <li><span class="n">02</span><div><b>Every other guide</b>Prompt kits, setup guides and reading lists from my other Reels. The same email opens them all.</div></li>
+      <li><span class="n">03</span><div><b>The weekly letter</b>Five useful things I made with AI each week, with the prompts and workflows inside. Unsubscribe any time.</div></li>
+    </ol>
+    <div class="gate-act">
+      <form id="gate-form" novalidate>
+        <label for="gate-email" class="sr-only">Email address</label>
+        <input id="gate-email" type="email" name="email" placeholder="you@somewhere.com" autocomplete="email" required>
+        <button type="submit">Unlock the guide and subscribe to AOTP</button>
+      </form>
+      <p class="gate-status" id="gate-status" aria-live="polite"></p>
+      <p class="gate-small">Already on the list? Enter the same email and it unlocks without subscribing you twice.</p>
+      <noscript><p class="gate-small">This page needs JavaScript to unlock. Or just subscribe on <a href="/">the homepage</a> and reply to any letter for the prompts.</p></noscript>
+    </div>
+  </div>
+</section>
+
+<!-- The shared unlock's line (/guides/unlock.js): shown once the page is open, never with the gate. -->
+<p class="subbed pad" id="subbed" hidden>You're subscribed, so every guide is open.<a href="#gate" id="gate-reset">Use a different email</a></p>
+
+<!-- EVERYTHING OF VALUE LIVES INSIDE #kit. Nothing valuable outside it. -->
+<div id="kit" hidden>
+
+<section class="step pad" id="how">
+  <div class="step-kicker"><span>01</span>How it works</div>
+  <div>
+    <h2>Five steps, all in one Finance project.</h2>
+    <p class="lede">You upload your bank statements once. ChatGPT turns them into a budget report, finds costs you could cut, builds you a private dashboard and helps you update it every month.</p>
+    <div class="viz"><svg data-viz="flow" role="img" aria-label="The workflow in five steps. Step 1, your bank statements go into a Finance project. Step 2, prompt 1 turns them into a budget report. Step 3, prompt 2 finds costs to cut. Step 4, prompt 3 builds a private dashboard in ChatGPT Work. Step 5, prompt 4 sets up a monthly update, which brings in new statements every month."></svg></div>
+    <div class="vizcap"><span><i class="h"></i>You</span><span><i></i>ChatGPT</span><span><i class="f"></i>Your private dashboard</span></div>
+    <p>Every step has a prompt you can copy. The report and the cost check work in any ChatGPT project. The dashboard needs ChatGPT Work with Sites, and the monthly update uses a scheduled task.</p>
+    <p class="inst">What you need</p>
+    <table>
+      <tr><th>Step</th><th>What it needs</th></tr>
+      <tr><td>Report and cost check</td><td>A ChatGPT project. Projects come with Free, Go, Plus, Pro, Business, Enterprise and Edu. A project holds up to 5 files on Free, 25 on Go and Plus, and 40 on Pro, Business, Enterprise and Edu. You can upload 10 at a time.</td></tr>
+      <tr><td>The dashboard</td><td>ChatGPT Work and Sites. Sites is in public beta on eligible Plus, Pro, Business, Enterprise and Edu plans. What you get depends on your plan, region and workspace settings.</td></tr>
+      <tr><td>The monthly update</td><td>A scheduled task. You can have 3 active tasks on Free and Go, 5 on Plus, 10 on Business and Edu, and 15 on Pro and Enterprise. On Free, tasks run at most once a day in a rough window, such as morning. Exact times need a paid plan.</td></tr>
+    </table>
+    <div class="note">I checked these against OpenAI's own pages on 5 November 2026. Rollouts move fast, so check the links in section 09 before you plan around one.</div>
+    <div class="note"><b>General information, not financial advice.</b> ChatGPT can show you where your money goes, but it isn't a financial adviser, and OpenAI's own finance help page says so. For advice on debt, investing, tax or insurance, talk to a licensed professional.</div>
+  </div>
+</section>
+
+<section class="step pad" id="privacy">
+  <div class="step-kicker"><span>02</span>Privacy</div>
+  <div>
+    <h2>Know what you're sharing before you upload.</h2>
+    <p class="lede">Bank statements say a lot about you. Take out what ChatGPT doesn't need, and check one setting before you start.</p>
+    <ul class="lessons">
+      <li><strong><span class="k">1</span>Remove what identifies you.</strong>Black out or delete account and card numbers, your address and any reference numbers. Keep the dates, amounts and merchant names. That's all the report needs.</li>
+      <li><strong><span class="k">2</span>Decide on model training.</strong>On personal Free, Plus and Pro accounts, <b>Improve the model for everyone</b> is on by default. While it's on, OpenAI says it may use information from your projects to train its models. To turn it off, open <b>Settings</b>, select <b>Data controls</b> and switch it off. Your chats stay where they are.</li>
+      <li><strong><span class="k">3</span>Skip the thumbs.</strong>If you rate a response with a thumbs up or down, OpenAI says the whole conversation may be used for training, even with that setting off.</li>
+      <li><strong><span class="k">4</span>Know how to delete it.</strong>You can delete any file from the project's sources list. Deleting the whole project removes its chats, instructions and files, and OpenAI says it clears them from its systems within 30 days unless it has to keep them for legal or security reasons.</li>
+    </ul>
+    <div class="note">On Business, Enterprise and Edu workspaces, OpenAI doesn't train on your content by default, and your organisation's own retention rules apply. The dashboard starts private too: a new Site opens only for you, plus workspace admins on a work account, until you change who can visit.</div>
+  </div>
+</section>
+
+<section class="step pad" id="setup">
+  <div class="step-kicker"><span>03</span>Set up</div>
+  <div>
+    <h2>Make a Finance project and add your statements.</h2>
+    <p class="lede">A project keeps your statements, chats and instructions in one place, so every prompt on this page works from the same files.</p>
+    <ul class="lessons">
+      <li><strong><span class="k">1</span>Create the project.</strong>Select <b>New project</b> in the sidebar and call it Finance. It works in your browser and in the desktop app.</li>
+      <li><strong><span class="k">2</span>Download your statements.</strong>Get the last few months from each bank account and credit card, as PDFs or spreadsheet exports. Three months is a good start, and more history gives the estimates more to work with.</li>
+      <li><strong><span class="k">3</span>Upload them to the project.</strong>Add them to the project's sources, up to 10 files at a time, so every chat in the project can use them. ChatGPT doesn't connect to your bank here. It only sees what you upload.</li>
+    </ul>
+    <div class="note"><b>Keep the project on default memory.</b> OpenAI's help page says ChatGPT Work isn't available in a project that uses project-only memory, and you need Work for the dashboard. Shared projects always use project-only memory, which is one more reason to keep this one to yourself.</div>
+    <div class="note">In the US, OpenAI also has Finances, which links bank accounts to ChatGPT through Plaid. You don't need it for anything on this page.</div>
+  </div>
+</section>
+
+<section class="step pad" id="report">
+  <div class="step-kicker"><span>04</span>The report</div>
+  <div>
+    <h2>Find out where your money actually goes.</h2>
+    <p class="lede">Start a new chat in the Finance project and paste prompt 1. You get a clean table of every transaction and a report for each month: income, spending by category, bills, subscriptions and what's left.</p>
+    <div class="viz"><svg data-viz="report" role="img" aria-label="What prompt 1 gives you. Your statements go in. ChatGPT builds a transaction table with the account and date, merchant, amount and category, with transfers matched. Then it writes a report for each complete month: income, spending by category, bills and subscriptions, money left over, and three things to review."></svg></div>
+    <p class="inst">Prompt 1 &middot; The budget report</p>
+    <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>Use the bank statements and transaction exports uploaded to this project to prepare a personal budget report. First, tell me which accounts and dates the files cover. If something that affects the answer is missing, ask me rather than making it up.
+
+Create a transaction table with account, date, merchant or description, amount, currency and category. Flag uncertain categories and possible duplicates. Match transfers between my own accounts so they don't inflate my income or spending. Match credit card repayments to the card purchases where you can, so nothing is counted twice. List any transactions you can't match for me to review, rather than leaving them out without telling me.
+
+For each complete month, summarise my income, spending by category, regular bills, subscriptions and the money left after spending. Keep transfers to savings separate from income and spending. Point out unusual changes, and only compare equivalent periods. Check the totals against the statements and explain any difference.
+
+Finish with the three things most worth reviewing first.</pre></div>
+    <div class="note">Check the totals against your statements before you go further, because everything after this builds on them. If it counts a transfer between your own accounts as spending, say so and ask it to fix the table.</div>
+  </div>
+</section>
+
+<section class="step pad" id="cut">
+  <div class="step-kicker"><span>05</span>Cut costs</div>
+  <div>
+    <h2>Then ask where you could spend less.</h2>
+    <p class="lede">Stay in the same chat and paste prompt 2. It works from your real spending, and for things like phone plans and insurance it's told to check current prices before it suggests a switch.</p>
+    <p class="inst">Prompt 2 &middot; The cost check</p>
+    <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>Using the budget report and transaction table from this chat, show me where I could cut costs, based on my real spending. Look at subscriptions, regular bills that have gone up, and the categories where most of my money goes.
+
+I live in [your country and state]. For phone plans, insurance and other bills where switching could save money, first ask me what cover, data or features I need. Then search the web for current offers on the providers' own websites. For each one, show the price, the main conditions, any fees and the link. Don't invent deals, and don't call any saving guaranteed.
+
+For every suggestion, show the estimated saving per month and per year, the transactions it's based on and what I'd give up. Put the easiest ones first.</pre></div>
+    <div class="note">Fill in where you live, because offers depend on it. Then open every link and check the offer yourself before you switch. A cheaper policy can also cover less, which is why the prompt asks what cover you need first.</div>
+  </div>
+</section>
+
+<section class="step pad" id="dashboard">
+  <div class="step-kicker"><span>06</span>Dashboard</div>
+  <div>
+    <h2>Build a private dashboard in ChatGPT Work.</h2>
+    <p class="lede">Start a ChatGPT Work chat in the same project and paste prompt 3. It asks what you expect to earn and spend, then uses Sites to build a dashboard of your spending, your savings goal and estimates for the rest of the year.</p>
+    <div class="viz"><svg data-viz="dash" role="img" aria-label="A sketch of the dashboard layout prompt 3 asks for, with no real figures. Along the top: income, spending, money left over and progress towards your savings goal. Below: income and spending by month, with actual months solid and estimated months dashed after today, and spending by category. Along the bottom: scenarios you can switch on, such as half the takeaway, your savings by your target date at your current pace and with your changes, and how each figure is worked out."></svg></div>
+    <p class="vizcap">A sketch of the layout prompt 3 asks for. Yours will look different.</p>
+    <p class="inst">Prompt 3 &middot; The dashboard</p>
+    <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>In ChatGPT Work, use Sites to build a private, interactive dashboard from the transaction table and budget report in this project. If it helps, create a clean spreadsheet or CSV from the report first. Keep the Site private and show it to me for review.
+
+Before you build it, ask me for my expected income, upcoming bills, irregular costs (such as car registration or holidays), my savings target and the date I want to reach it. Treat anything I don't know as unknown, and tell me what you can't estimate yet. My bank accounts are not connected, so don't treat any figure as live.
+
+Show my monthly income and spending, spending by category, regular bills and subscriptions, and progress towards my savings target. Keep actual figures clearly separate from estimates of spending and savings for the end of this month and the end of the year. Base the estimates on my history, known bills and the assumptions I give you. For each estimate, explain the calculation, which months of data it uses, what's missing and when the data was last updated. Check that the historical totals match the budget report.
+
+Add date and category filters, and a scenario panel where I can try changes such as spending less on takeaway or cancelling a subscription. Show the difference per month and by my target date. Keep one-off savings separate from monthly ones, and never present a future saving as guaranteed.
+
+Add a short list of practical suggestions, each linked to the transactions behind it, with the estimated effect and the assumption it relies on. Don't count transfers between my own accounts as spending or income. Show uncertain categories and any totals that don't reconcile, so I can correct them.
+
+When I add new statements, update the transaction table, report, charts and estimates, and explain the main changes. Don't set up a schedule yet.</pre></div>
+    <p class="inst">Then try asking</p>
+    <ul class="try">
+      <li><strong>01</strong>If I spent half as much on takeaway, how much more would I have by the end of the year?</li>
+      <li><strong>02</strong>Which subscriptions could I cancel, and what would that add up to over a year?</li>
+      <li><strong>03</strong>Am I on track for my savings target? If not, what would get me there?</li>
+      <li><strong>04</strong>Which categories have crept up over the last three months?</li>
+    </ul>
+    <figure class="shot"><img src="/media/kits/dashboard/site-only-visible-to-you.jpg" alt="A ChatGPT chat after Deploy this site, showing Deployed successfully and a site card marked Only visible to you, with Open in and Share buttons" width="1200" height="480" loading="lazy" decoding="async"><figcaption class="cap">From OpenAI's Sites video: a new Site shows as "Only visible to you" until you share it. The site in the still is OpenAI's demo.</figcaption></figure>
+    <div class="note">Estimates are only as good as the history and assumptions behind them, so read the assumptions the dashboard shows. Building and editing a Site counts towards your plan's usage. Hosting is free until 31 December 2026. From 1 January 2027 you pay only for usage above your plan's monthly allowance.</div>
+  </div>
+</section>
+
+<section class="step pad" id="monthly">
+  <div class="step-kicker"><span>07</span>Every month</div>
+  <div>
+    <h2>Keep it current with a monthly task.</h2>
+    <p class="lede">A scheduled task reminds you on the 1st of every month to add your new statements. The dashboard then picks up the new month, explains what changed and updates its suggestions.</p>
+    <div class="viz"><svg data-viz="loop" role="img" aria-label="The monthly update in four steps. On the 1st at 9am the task runs. It reminds you to add your statements. You add them to a Google Drive folder or the Finance project. The dashboard is updated and the changes explained. Then it repeats next month."></svg></div>
+    <p>OpenAI's help page says a task created inside a project can't read that project's files, so there are two ways to run the update.</p>
+    <p><b>Hands off.</b> Save each month's statements to a Google Drive folder, connect Google Drive in ChatGPT Work, and paste the folder link into prompt 4. Each run reads the folder and updates the dashboard itself. OpenAI's own example of a dashboard that stays up to date works the same way.</p>
+    <p><b>By hand.</b> Delete the folder line from prompt 4, and the task becomes your monthly reminder. When it arrives, upload the statements to your Finance project and paste prompt 5 into a ChatGPT Work chat there.</p>
+    <p class="inst">Prompt 4 &middot; The monthly task</p>
+    <p>Paste it into a ChatGPT Work chat in your browser. A task started in the browser keeps running when your laptop is off.</p>
+    <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>Create a standalone scheduled task called Monthly budget refresh. Run it on the 1st of every month at 9am, my time.
+
+On each run:
+1. Remind me to add last month's bank statements.
+2. Check this Google Drive folder for new statements: [paste the folder link, or delete this line to upload by hand]
+3. If there are new statements, update my private dashboard Site, [your Site's name]: the transactions, the budget report, the charts and the estimates. Compare the new month with earlier months, explain the main changes and suggest what to change next.
+4. Review the assumptions behind the estimates and my savings target. Tell me which ones changed and why.
+5. Check the totals against the statements and list anything that doesn't reconcile.
+
+If there are no new statements yet, send the reminder only and change nothing. Keep the dashboard private. Don't share it, publish it or change who can see it.</pre></div>
+    <p class="inst">Prompt 5 &middot; The update, by hand</p>
+    <div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>I've added last month's statements to this project. Update the transaction table, the budget report and my dashboard Site with them. Compare the new month with earlier months, explain the main changes and suggest what to change next. Tell me which assumptions behind the estimates changed and why, and list anything that doesn't reconcile with the statements. Keep the dashboard private.</pre></div>
+    <div class="note">Keep account numbers and other financial details out of the task's title and instructions. OpenAI warns that anyone with a shared link to a task can read them. Check the first run's figures against your statements before you rely on it.</div>
+  </div>
+</section>
+
+<section class="step pad" id="next">
+  <div class="step-kicker"><span>08</span>What to do now</div>
+  <div>
+    <h2>Start with the report. Add the rest when it's useful.</h2>
+    <p class="lede">You don't need all five steps on day one. The report on its own shows you where your money goes.</p>
+    <ul>
+      <li><strong>If you just want to see where it goes:</strong> do sections <a href="#setup">03</a> and <a href="#report">04</a>. Any plan with Projects can.</li>
+      <li><strong>If money's tight this month:</strong> run <a href="#cut">prompt 2</a> straight after the report and start with the easiest three suggestions.</li>
+      <li><strong>If you're saving for something:</strong> build the <a href="#dashboard">dashboard</a> and give it your target and date.</li>
+      <li><strong>If you'll check it every month:</strong> set up <a href="#monthly">prompt 4</a>, then check the first run against your statements.</li>
+      <li><strong>If you need advice on debt, investing or tax:</strong> take the report to a licensed adviser. It gives them a clear picture to start from.</li>
+    </ul>
+    <p>After the first month, tell it what it got wrong, such as a payment in the wrong category, so the next update starts from better data.</p>
+  </div>
+</section>
+
+<section class="step pad" id="sources">
+  <div class="step-kicker"><span>09</span>Sources</div>
+  <div>
+    <h2>Where all of this comes from.</h2>
+    <p class="lede">Every feature and plan on this page comes from OpenAI's own pages, checked on 5 November 2026.</p>
+    <ol class="index">
+      <li><span class="n">01</span><a href="https://help.openai.com/en/articles/10169521-projects-in-chatgpt" target="_blank" rel="noopener">Projects in ChatGPT</a><span class="st">Help Center</span></li>
+      <li><span class="n">02</span><a href="https://learn.chatgpt.com/docs/projects" target="_blank" rel="noopener">Projects and chats</a><span class="st">Docs</span></li>
+      <li><span class="n">03</span><a href="https://help.openai.com/en/articles/7730893-data-controls-in-chatgpt" target="_blank" rel="noopener">Data controls in ChatGPT</a><span class="st">Help Center</span></li>
+      <li><span class="n">04</span><a href="https://chatgpt.com/features/sites/" target="_blank" rel="noopener">ChatGPT Sites</a><span class="st">Feature page</span></li>
+      <li><span class="n">05</span><a href="https://learn.chatgpt.com/docs/sites" target="_blank" rel="noopener">Sites docs</a><span class="st">Docs</span></li>
+      <li><span class="n">06</span><a href="https://learn.chatgpt.com/docs/sites/publishing-and-sharing" target="_blank" rel="noopener">Publish and share a Site</a><span class="st">Docs</span></li>
+      <li><span class="n">07</span><a href="https://learn.chatgpt.com/use-cases/analyze-data-export" target="_blank" rel="noopener">Dashboard use case</a><span class="st">Use case</span></li>
+      <li><span class="n">08</span><a href="https://help.openai.com/en/articles/10291617-scheduled-tasks-in-chatgpt" target="_blank" rel="noopener">Scheduled tasks in ChatGPT</a><span class="st">Help Center</span></li>
+      <li><span class="n">09</span><a href="https://learn.chatgpt.com/docs/automations" target="_blank" rel="noopener">Scheduled tasks docs</a><span class="st">Docs</span></li>
+      <li><span class="n">10</span><a href="https://learn.chatgpt.com/docs/pricing" target="_blank" rel="noopener">Plans and pricing</a><span class="st">Docs</span></li>
+      <li><span class="n">11</span><a href="https://help.openai.com/en/articles/20001222-finances-in-chatgpt" target="_blank" rel="noopener">Finances in ChatGPT</a><span class="st">Help Center</span></li>
+    </ol>
+    <div class="note">I don't work for OpenAI, and none of these are affiliate links. The prompts are mine. Try them on your own statements and check what they give you.</div>
+  </div>
+</section>
+
+
+</div>
+
+<!-- The close and the footer are one block on the reversed sky, outside #kit so gated visitors get it too, everything
+     in it white on the dark stretch. .close-kit only shows once #kit is unlocked (CSS: #kit[hidden]~.closeblock .close-kit). -->
+<footer class="closeblock pad">
+  <div class="close-top">
+    <div>
+      <h2>See what's possible. Then build it.</h2>
+      <p class="close-kit">You're on the list now: five useful things I made with AI each week, and how I made them.</p>
+    </div>
+    <a class="close-btn" href="/">Back to the site</a>
+  </div>
+  <div class="close-row"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 897 112" role="img" aria-label="Art of the Possible"><title>Art of the Possible</title><g fill="#FFFFFF"><path transform="scale(0.448)" d="M93.301 48.471A34.601 34.601 0 1 1 156.699 48.471A34.601 34.601 0 0 0 93.301 48.471ZM156.699 48.471A34.601 34.601 0 1 1 201.529 93.301A34.601 34.601 0 0 0 156.699 48.471ZM201.529 93.301A34.601 34.601 0 1 1 156.699 48.471A34.601 34.601 0 0 0 201.529 93.301ZM201.529 93.301A34.601 34.601 0 1 1 201.529 156.699A34.601 34.601 0 0 0 201.529 93.301ZM201.529 156.699A34.601 34.601 0 1 1 156.699 201.529A34.601 34.601 0 0 0 201.529 156.699ZM156.699 201.529A34.601 34.601 0 1 1 201.529 156.699A34.601 34.601 0 0 0 156.699 201.529ZM156.699 201.529A34.601 34.601 0 1 1 93.301 201.529A34.601 34.601 0 0 0 156.699 201.529ZM93.301 201.529A34.601 34.601 0 1 1 48.471 156.699A34.601 34.601 0 0 0 93.301 201.529ZM48.471 156.699A34.601 34.601 0 1 1 93.301 201.529A34.601 34.601 0 0 0 48.471 156.699ZM48.471 156.699A34.601 34.601 0 1 1 48.471 93.301A34.601 34.601 0 0 0 48.471 156.699ZM48.471 93.301A34.601 34.601 0 1 1 93.301 48.471A34.601 34.601 0 0 0 48.471 93.301ZM93.301 48.471A34.601 34.601 0 1 1 48.471 93.301A34.601 34.601 0 0 0 93.301 48.471Z"/><path transform="translate(160 80.736)" d="M11.7 0H0.49L17.57 -49.47H31.04L48.09 0H36.91L24.49 -38.17H24.09ZM11.04 -19.44H37.49V-11.3H11.04ZM51.08 0V-49.47H70.57Q76.2 -49.47 80.16 -47.48Q84.12 -45.48 86.22 -41.85Q88.32 -38.21 88.32 -33.31Q88.32 -28.38 86.2 -24.84Q84.07 -21.29 80.04 -19.41Q76.01 -17.53 70.31 -17.53H57.27V-25.94H68.6Q71.63 -25.94 73.62 -26.76Q75.6 -27.59 76.58 -29.22Q77.55 -30.85 77.55 -33.31Q77.55 -35.78 76.57 -37.47Q75.59 -39.15 73.6 -40.02Q71.62 -40.89 68.58 -40.89H61.52V0ZM78.54 0 66.5 -22.52H77.78L90.09 0ZM90.95 -40.85V-49.47H131.58V-40.85H116.44V0H106.12V-40.85ZM170.54 0.66Q163.97 0.66 158.72 -2.32Q153.46 -5.31 150.41 -10.99Q147.36 -16.66 147.36 -24.7Q147.36 -32.8 150.41 -38.49Q153.46 -44.18 158.72 -47.16Q163.97 -50.14 170.54 -50.14Q177.12 -50.14 182.35 -47.16Q187.59 -44.18 190.64 -38.49Q193.69 -32.8 193.69 -24.7Q193.69 -16.64 190.64 -10.97Q187.59 -5.29 182.35 -2.31Q177.12 0.66 170.54 0.66ZM170.54 -8.58Q174.35 -8.58 177.16 -10.44Q179.98 -12.29 181.54 -15.89Q183.09 -19.49 183.09 -24.7Q183.09 -29.95 181.54 -33.57Q179.98 -37.18 177.16 -39.04Q174.35 -40.89 170.54 -40.89Q166.76 -40.89 163.93 -39.04Q161.1 -37.18 159.53 -33.57Q157.96 -29.95 157.96 -24.7Q157.96 -19.49 159.53 -15.89Q161.1 -12.29 163.93 -10.44Q166.76 -8.58 170.54 -8.58ZM198.51 0V-49.47H231.26V-40.85H208.95V-27.25H229.08V-18.79H208.95V0ZM246.36 -40.85V-49.47H286.99V-40.85H271.85V0H261.53V-40.85ZM290.8 0V-49.47H301.24V-29.06H322.46V-49.47H332.9V0H322.46V-20.44H301.24V0ZM338.59 0V-49.47H371.94V-40.85H349.03V-29.22H370.19V-20.76H349.03V-8.62H372V0ZM390.19 0V-49.47H409.68Q415.31 -49.47 419.27 -47.33Q423.23 -45.19 425.33 -41.4Q427.43 -37.61 427.43 -32.69Q427.43 -27.76 425.31 -24Q423.18 -20.25 419.15 -18.14Q415.12 -16.03 409.43 -16.03H396.99V-24.41H407.71Q410.74 -24.41 412.73 -25.46Q414.71 -26.52 415.69 -28.38Q416.66 -30.25 416.66 -32.69Q416.66 -35.18 415.69 -37.02Q414.71 -38.86 412.72 -39.88Q410.73 -40.89 407.69 -40.89H400.63V0ZM453.6 0.66Q447.03 0.66 441.78 -2.32Q436.52 -5.31 433.47 -10.99Q430.43 -16.66 430.43 -24.7Q430.43 -32.8 433.47 -38.49Q436.52 -44.18 441.78 -47.16Q447.03 -50.14 453.6 -50.14Q460.18 -50.14 465.42 -47.16Q470.65 -44.18 473.7 -38.49Q476.75 -32.8 476.75 -24.7Q476.75 -16.64 473.7 -10.97Q470.65 -5.29 465.42 -2.31Q460.18 0.66 453.6 0.66ZM453.6 -8.58Q457.41 -8.58 460.23 -10.44Q463.05 -12.29 464.6 -15.89Q466.15 -19.49 466.15 -24.7Q466.15 -29.95 464.6 -33.57Q463.05 -37.18 460.23 -39.04Q457.41 -40.89 453.6 -40.89Q449.82 -40.89 446.99 -39.04Q444.17 -37.18 442.6 -33.57Q441.03 -29.95 441.03 -24.7Q441.03 -19.49 442.6 -15.89Q444.17 -12.29 446.99 -10.44Q449.82 -8.58 453.6 -8.58ZM499.91 0.7Q493.92 0.7 489.49 -1.13Q485.06 -2.96 482.58 -6.57Q480.1 -10.19 479.96 -15.54H490.08Q490.27 -13.07 491.53 -11.4Q492.8 -9.74 494.93 -8.9Q497.06 -8.06 499.79 -8.06Q502.45 -8.06 504.43 -8.83Q506.4 -9.6 507.49 -10.98Q508.57 -12.36 508.57 -14.18Q508.57 -15.84 507.58 -16.96Q506.6 -18.08 504.73 -18.89Q502.85 -19.69 500.15 -20.32L494.75 -21.65Q488.5 -23.15 484.89 -26.41Q481.28 -29.68 481.28 -35.17Q481.28 -39.66 483.71 -43.02Q486.14 -46.38 490.37 -48.26Q494.61 -50.14 500.02 -50.14Q505.54 -50.14 509.64 -48.25Q513.75 -46.36 516.05 -43Q518.35 -39.64 518.43 -35.25H508.36Q508.09 -38.16 505.89 -39.78Q503.7 -41.4 499.94 -41.4Q497.4 -41.4 495.62 -40.68Q493.84 -39.97 492.92 -38.71Q492 -37.45 492 -35.83Q492 -34.09 493.06 -32.91Q494.11 -31.74 495.9 -31Q497.68 -30.25 499.81 -29.74L504.23 -28.66Q507.45 -27.93 510.16 -26.72Q512.87 -25.5 514.88 -23.74Q516.89 -21.99 517.99 -19.6Q519.09 -17.22 519.09 -14.13Q519.09 -9.61 516.81 -6.27Q514.53 -2.94 510.24 -1.12Q505.96 0.7 499.91 0.7ZM541.53 0.7Q535.54 0.7 531.11 -1.13Q526.68 -2.96 524.2 -6.57Q521.72 -10.19 521.58 -15.54H531.7Q531.89 -13.07 533.16 -11.4Q534.42 -9.74 536.55 -8.9Q538.68 -8.06 541.41 -8.06Q544.08 -8.06 546.05 -8.83Q548.02 -9.6 549.11 -10.98Q550.19 -12.36 550.19 -14.18Q550.19 -15.84 549.21 -16.96Q548.22 -18.08 546.35 -18.89Q544.47 -19.69 541.77 -20.32L536.37 -21.65Q530.12 -23.15 526.51 -26.41Q522.9 -29.68 522.9 -35.17Q522.9 -39.66 525.33 -43.02Q527.76 -46.38 531.99 -48.26Q536.23 -50.14 541.64 -50.14Q547.16 -50.14 551.26 -48.25Q555.37 -46.36 557.67 -43Q559.97 -39.64 560.05 -35.25H549.98Q549.71 -38.16 547.51 -39.78Q545.32 -41.4 541.56 -41.4Q539.02 -41.4 537.24 -40.68Q535.46 -39.97 534.54 -38.71Q533.62 -37.45 533.62 -35.83Q533.62 -34.09 534.68 -32.91Q535.74 -31.74 537.52 -31Q539.3 -30.25 541.43 -29.74L545.85 -28.66Q549.07 -27.93 551.78 -26.72Q554.49 -25.5 556.5 -23.74Q558.51 -21.99 559.61 -19.6Q560.71 -17.22 560.71 -14.13Q560.71 -9.61 558.43 -6.27Q556.15 -2.94 551.87 -1.12Q547.58 0.7 541.53 0.7ZM575.25 -49.47V0H564.81V-49.47ZM580.93 0V-49.47H600.73Q606.18 -49.47 609.83 -47.85Q613.48 -46.22 615.32 -43.36Q617.15 -40.5 617.15 -36.8Q617.15 -33.89 615.98 -31.71Q614.81 -29.52 612.8 -28.13Q610.78 -26.74 608.2 -26.16V-25.66Q611.03 -25.55 613.51 -24.08Q615.99 -22.6 617.53 -19.97Q619.08 -17.33 619.08 -13.67Q619.08 -9.75 617.14 -6.66Q615.21 -3.57 611.43 -1.78Q607.64 0 602.06 0ZM591.37 -8.54H599.91Q604.27 -8.54 606.29 -10.23Q608.31 -11.93 608.31 -14.7Q608.31 -16.77 607.32 -18.34Q606.33 -19.92 604.5 -20.82Q602.67 -21.71 600.16 -21.71H591.37ZM591.37 -28.77H599.14Q601.27 -28.77 602.96 -29.53Q604.64 -30.29 605.61 -31.69Q606.58 -33.1 606.58 -35.05Q606.58 -37.71 604.69 -39.36Q602.8 -41.01 599.34 -41.01H591.37ZM622.95 0V-49.47H633.39V-8.62H654.6V0ZM658.66 0V-49.47H692.01V-40.85H669.1V-29.22H690.26V-20.76H669.1V-8.62H692.06V0ZM708.66 -22.11V-39.91H717.37Q719.06 -39.94 720.47 -39.25Q721.88 -38.56 722.72 -37.24Q723.56 -35.93 723.56 -34.07Q723.56 -32.17 722.69 -30.82Q721.81 -29.47 720.37 -28.79Q718.94 -28.12 717.18 -28.12H711.19V-31.48H716.19Q717.2 -31.46 717.94 -32.11Q718.68 -32.75 718.68 -34.06Q718.68 -35.37 717.94 -35.95Q717.19 -36.52 716.21 -36.54H713.29V-22.11ZM720.04 -30.35 724.13 -22.11H719.02L715.23 -30.35ZM715.63 -11.49Q711.65 -11.49 708.14 -13Q704.64 -14.51 701.98 -17.17Q699.33 -19.82 697.84 -23.33Q696.35 -26.83 696.35 -30.81Q696.35 -34.8 697.84 -38.3Q699.33 -41.8 701.98 -44.46Q704.64 -47.12 708.14 -48.63Q711.65 -50.14 715.63 -50.14Q719.65 -50.14 723.15 -48.63Q726.65 -47.12 729.31 -44.46Q731.97 -41.8 733.46 -38.3Q734.95 -34.8 734.95 -30.81Q734.95 -26.83 733.46 -23.33Q731.97 -19.82 729.32 -17.17Q726.67 -14.51 723.16 -13Q719.65 -11.49 715.63 -11.49ZM715.63 -16.61Q719.59 -16.61 722.82 -18.52Q726.05 -20.43 727.97 -23.66Q729.88 -26.88 729.87 -30.81Q729.88 -34.74 727.96 -37.97Q726.05 -41.2 722.81 -43.12Q719.57 -45.03 715.63 -45.01Q711.72 -45.03 708.49 -43.12Q705.26 -41.2 703.34 -37.97Q701.43 -34.74 701.43 -30.82Q701.43 -26.89 703.35 -23.66Q705.26 -20.43 708.49 -18.52Q711.71 -16.61 715.63 -16.61Z"/></g></svg><p class="close-foot">New things are possible every day. <span class="nw">&middot; 2026</span></p></div>
+</footer>
+</div>
+
+
+
+<!-- The shared unlock: one email opens every guide in this browser, so nobody types it twice (Rich, 2026-10-03:
+     "People should not have to re-enter their email"). Load it before the gate code. -->
+<script src="/guides/unlock.js"></script>
+<script>
+(function () {
+  var API = 'https://theaotp-gate.theaotp.workers.dev';
+  var KEY = 'aotp_dashboard_unlocked';
+  var kit = document.getElementById('kit');
+  var gate = document.getElementById('gate');
+  var form = document.getElementById('gate-form');
+  var status = document.getElementById('gate-status');
+  var subbed = document.getElementById('subbed');
+
+  // window.AOTPUnlock comes from /guides/unlock.js. Where that file cannot load (file://, another host) the same
+  // contract runs inline: "aotp_subscriber" ({"at": ISO time}, never the email) or a member the worker confirmed
+  // ("aotp_member" = "2", set by /f.js) opens every guide. An old aotp_<slug>_unlocked flag on its own does not
+  // (those people never confirmed, so they are asked once more). A settled submit writes "aotp_subscriber" plus this
+  // page's key; "Use a different email" clears them all.
+  var U = window.AOTPUnlock || (function () {
+    var SUB = 'aotp_subscriber', MEMBER = 'aotp_member', PAGE = /^aotp_.+_unlocked$/;
+    function stamp() { return JSON.stringify({ at: new Date().toISOString() }); }
+    function keys() { var out = []; try { for (var i = 0; i < localStorage.length; i++) out.push(localStorage.key(i) || ''); } catch (e) {} return out; }
+    return {
+      isSubscribed: function () {
+        try {
+          if (localStorage.getItem(SUB)) return true;
+          var member = localStorage.getItem(MEMBER) === '2';
+          if (member) localStorage.setItem(SUB, stamp());
+          return member;
+        } catch (e) { return false; }
+      },
+      remember: function (key, answer) {
+        try { if (!(answer && answer.member === false)) localStorage.setItem(SUB, stamp()); localStorage.setItem(key, '1'); } catch (e) {}
+      },
+      forget: function () { keys().forEach(function (k) { if (k === SUB || k === MEMBER || PAGE.test(k)) { try { localStorage.removeItem(k); } catch (e) {} } }); }
+    };
+  })();
+
+  function unlock() {
+    kit.hidden = false;
+    gate.hidden = true;
+    subbed.hidden = false;
+  }
+
+  var open = U.isSubscribed();
+  document.documentElement.classList.toggle('aotp-subscribed', open);
+  if (open) unlock();
+
+  // "Use a different email": lock every guide in this browser again and show the form here, without a reload.
+  document.getElementById('gate-reset').addEventListener('click', function (event) {
+    event.preventDefault();
+    U.forget();
+    document.documentElement.classList.remove('aotp-subscribed');
+    kit.hidden = true;
+    subbed.hidden = true;
+    gate.hidden = false;
+    status.textContent = '';
+    gate.scrollIntoView({ block: 'start' });
+    document.getElementById('gate-email').focus({ preventScroll: true });
+  });
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    var email = document.getElementById('gate-email').value.trim().toLowerCase();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      status.textContent = 'That email looks off. Try again.';
+      return;
+    }
+    status.textContent = 'One sec…';
+    fetch(API + '/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, ctx: window.aotpCtx ? window.aotpCtx() : null }),
+    }).then(function (response) {
+      return response.json().catch(function () { return {}; }).then(function (data) {
+        if (!response.ok) {
+          var err = new Error('subscribe failed');
+          err.status = response.status;
+          err.detail = data && data.detail;
+          throw err;
+        }
+        return data;
+      });
+    }).then(function (data) {
+      if (window.aotpSubscribed) window.aotpSubscribed(data);
+      U.remember(KEY, data);
+      status.textContent = !(data && data.new) ? 'Welcome back. Unlocked.'
+        : data.member === false ? 'Unlocked. Check your inbox to confirm your subscription to the letter.'
+        : 'Unlocked. You\'re on the list for the weekly letter.';
+      unlock();
+      window.scrollTo({ top: subbed.offsetTop - 24, behavior: 'smooth' });
+    }).catch(function (err) {
+      if (err && err.status === 400) {
+        status.textContent = 'That email was rejected' + (err.detail ? ' (' + err.detail + ')' : '') + '. Try a different address.';
+      } else {
+        status.textContent = 'Something broke on our end. Try again in a minute, or subscribe on the homepage and DM me on Instagram for the prompts.';
+      }
+    });
+  });
+
+  document.querySelectorAll('[data-copy]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      var pre = button.parentElement.querySelector('pre');
+      navigator.clipboard.writeText(pre.textContent).then(function () {
+        button.textContent = 'Copied';
+        setTimeout(function () { button.textContent = 'Copy'; }, 1600);
+      });
+    });
+  });
+
+})();
+</script>
+<script>
+// The diagrams on /dashboard/. Each <svg data-viz="name"> is drawn by D[name](svg, mode) in a wide layout or a tall
+// one for phones, chosen from the width it actually has (redrawn when that changes, and once the fonts load, so the
+// shrink-to-fit below measures real glyphs). #kit starts hidden, so nothing draws until the page is open. Each
+// diagram fades and draws in once it scrolls into view. The dashboard sketch carries labels only, never figures.
+(function () {
+  var NS = 'http://www.w3.org/2000/svg';
+  var GRAPHITE = '#39383D';
+  var uid = 0;
+  function el(tag, attrs, parent) {
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) if (attrs[k] !== undefined && attrs[k] !== null) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  function txt(parent, x, y, cls, s, anchor, max) {
+    var t = el('text', { x: x, y: y, 'class': cls, 'text-anchor': anchor || 'start' }, parent);
+    t.textContent = s;
+    if (max) fit(t, max);
+    return t;
+  }
+  // Shrink a line of text to fit its card if the real font runs wider than planned.
+  function fit(t, max) {
+    try {
+      var w = t.getComputedTextLength();
+      if (w > max && w > 0) {
+        var fs = parseFloat(window.getComputedStyle(t).fontSize) || 16;
+        t.style.fontSize = (fs * max / w).toFixed(2) + 'px';
+      }
+    } catch (e) {}
+  }
+  function defs(svg, id) {
+    var d = el('defs', {}, svg);
+    var m = el('marker', { id: id + '-a', viewBox: '0 0 10 10', refX: 8.5, refY: 5, markerWidth: 7, markerHeight: 7, orient: 'auto-start-reverse' }, d);
+    el('path', { d: 'M0 0 L10 5 L0 10 z', fill: GRAPHITE }, m);
+  }
+  // A card: an optional mono tag above its top-left corner, title lines centred, an optional mono sub under them.
+  function node(svg, n, i) {
+    var cls = 'n' + (n.human ? ' human' : '') + (n.accent ? ' accent' : '');
+    var g = el('g', { 'class': cls, style: '--i:' + i }, svg);
+    el('rect', { x: n.x - n.w / 2, y: n.y - n.h / 2, width: n.w, height: n.h, rx: n.rx || 12 }, g);
+    var lines = String(n.t || '').split('\n'), lh = n.lh || 24, sub = n.s ? 22 : 0;
+    var y = n.y - (lines.length * lh + sub) / 2 + lh * 0.74;
+    lines.forEach(function (ln) {
+      var t = el('text', { x: n.x, y: y, 'class': 't', 'text-anchor': 'middle' }, g);
+      if (n.fs) t.style.fontSize = n.fs + 'px';
+      t.textContent = ln; fit(t, n.w - 24); y += lh;
+    });
+    if (n.s) {
+      var s = el('text', { x: n.x, y: y + 2, 'class': 's', 'text-anchor': 'middle' }, g);
+      s.textContent = n.s; fit(s, n.w - 24);
+    }
+    if (n.tag) {
+      var tg = el('text', { x: n.tagMid ? n.x : n.x - n.w / 2 + 2, y: n.y - n.h / 2 - 9, 'class': 'tag', 'text-anchor': n.tagMid ? 'middle' : 'start' }, g);
+      tg.textContent = n.tag; fit(tg, n.w);
+    }
+    return n;
+  }
+  // A list card: a title, then one row per item under a hairline.
+  function card(svg, c, i) {
+    var g = el('g', { 'class': 'n' + (c.accent ? ' accent' : ''), style: '--i:' + i }, svg);
+    var top = c.y - c.h / 2, left = c.x - c.w / 2 + 20, rgt = c.x + c.w / 2 - 20, rh = c.rh || 28;
+    el('rect', { x: c.x - c.w / 2, y: top, width: c.w, height: c.h, rx: 12 }, g);
+    var t = txt(g, left, top + 34, 't', c.title, 'start');
+    if (c.fs) t.style.fontSize = c.fs + 'px';
+    fit(t, c.w - 40);
+    c.rows.forEach(function (r, k) {
+      var yy = top + 54 + k * rh;
+      el('line', { x1: left, x2: rgt, y1: yy, y2: yy, 'class': 'hl' }, g);
+      txt(g, left, yy + 19, 'rt', r, 'start', c.w - 40);
+    });
+    if (c.tag) txt(g, c.x - c.w / 2 + 2, top - 9, 'tag', c.tag, 'start', c.w);
+    return c;
+  }
+  function path(svg, d, id, i, both) {
+    return el('path', { d: d, 'class': 'e', pathLength: 1, 'marker-end': 'url(#' + id + '-a)', 'marker-start': both ? 'url(#' + id + '-a)' : null, style: '--i:' + i }, svg);
+  }
+  function right(svg, a, b, id, i) { return path(svg, 'M' + (a.x + a.w / 2 + 6) + ' ' + a.y + ' L' + (b.x - b.w / 2 - 8) + ' ' + b.y, id, i); }
+  function down(svg, a, b, id, i) { return path(svg, 'M' + a.x + ' ' + (a.y + a.h / 2 + 6) + ' L' + b.x + ' ' + (b.y - b.h / 2 - 8), id, i); }
+  // The return arrow from the last card back to the first: under the row when wide, down the right edge when tall.
+  function back(svg, a, b, id, i, mode, label) {
+    if (mode === 'wide') {
+      var yb = a.y + a.h / 2, yl = yb + 66;
+      path(svg, 'M' + a.x + ' ' + (yb + 6) + ' L' + a.x + ' ' + (yl - 14) + ' Q' + a.x + ' ' + yl + ' ' + (a.x - 14) + ' ' + yl +
+        ' L' + (b.x + 14) + ' ' + yl + ' Q' + b.x + ' ' + yl + ' ' + b.x + ' ' + (yl - 14) + ' L' + b.x + ' ' + (yb + 8), id, i);
+      var t = txt(svg, (a.x + b.x) / 2, yl - 11, 'tag fade', label, 'middle');
+      t.setAttribute('style', '--i:' + i);
+    } else {
+      var xr = a.x + a.w / 2, xl = 336;
+      path(svg, 'M' + (xr + 6) + ' ' + a.y + ' L' + (xl - 12) + ' ' + a.y + ' Q' + xl + ' ' + a.y + ' ' + xl + ' ' + (a.y - 12) +
+        ' L' + xl + ' ' + (b.y + 12) + ' Q' + xl + ' ' + b.y + ' ' + (xl - 12) + ' ' + b.y + ' L' + (xr + 8) + ' ' + b.y, id, i);
+      var tv = el('text', { 'class': 'tag fade', 'text-anchor': 'middle', transform: 'translate(349 ' + (a.y + b.y) / 2 + ') rotate(90)', style: '--i:' + i }, svg);
+      tv.textContent = label;
+    }
+  }
+
+  var D = {};
+
+  // 01: the five steps, with the monthly loop back to new statements.
+  var FLOW = [['Your\nstatements', 'Your statements', 'PDF or CSV', 1], ['Budget\nreport', 'Budget report', 'Prompt 1'],
+    ['Cut\ncosts', 'Cut costs', 'Prompt 2'], ['Private\ndashboard', 'Private dashboard', 'Prompt 3 · Work', 0, 1],
+    ['Monthly\nupdate', 'Monthly update', 'Prompt 4 · Task']];
+  D.flow = function (svg, mode, id) {
+    var ns = [];
+    if (mode === 'wide') {
+      svg.setAttribute('viewBox', '0 0 1000 226');
+      FLOW.forEach(function (s, k) {
+        var n = node(svg, { x: 92 + k * 204, y: 95, w: 176, h: 104, t: s[0], s: s[2], human: !!s[3], accent: !!s[4], tag: 'Step ' + (k + 1) }, k);
+        if (k) right(svg, ns[k - 1], n, id, k - 0.5);
+        ns.push(n);
+      });
+    } else {
+      svg.setAttribute('viewBox', '0 0 360 596');
+      FLOW.forEach(function (s, k) {
+        var n = node(svg, { x: 160, y: 58 + k * 122, w: 260, h: 72, t: s[1], s: s[2], fs: 20, human: !!s[3], accent: !!s[4], tag: 'Step ' + (k + 1) }, k);
+        if (k) down(svg, ns[k - 1], n, id, k - 0.5);
+        ns.push(n);
+      });
+    }
+    back(svg, ns[4], ns[0], id, 5, mode, mode === 'wide' ? 'Every month, with new statements' : 'Every month');
+  };
+
+  // 04: what prompt 1 gives you.
+  var TABLE = ['Account and date', 'Merchant', 'Amount', 'Category', 'Transfers matched'];
+  var REPORT = ['Income', 'Spending by category', 'Bills and subscriptions', 'Money left over', 'Three things to review'];
+  D.report = function (svg, mode, id) {
+    var st, tb, rp;
+    if (mode === 'wide') {
+      svg.setAttribute('viewBox', '0 0 1000 284');
+      st = node(svg, { x: 100, y: 156, w: 176, h: 104, t: 'Your\nstatements', s: '3+ months', human: true, tag: 'You upload' }, 0);
+      tb = card(svg, { x: 400, y: 156, w: 290, h: 206, title: 'Transaction table', rows: TABLE, tag: 'ChatGPT builds' }, 1);
+      rp = card(svg, { x: 790, y: 156, w: 300, h: 206, title: 'Monthly report', rows: REPORT, tag: 'Each complete month' }, 2);
+      right(svg, st, tb, id, 0.5);
+      right(svg, tb, rp, id, 1.5);
+    } else {
+      svg.setAttribute('viewBox', '0 0 360 640');
+      st = node(svg, { x: 180, y: 52, w: 280, h: 70, t: 'Your statements', s: '3+ months', fs: 20, human: true }, 0);
+      tb = card(svg, { x: 180, y: 233, w: 300, h: 206, title: 'Transaction table', rows: TABLE, tag: 'ChatGPT builds' }, 1);
+      rp = card(svg, { x: 180, y: 527, w: 300, h: 206, title: 'Monthly report', rows: REPORT, tag: 'Each complete month' }, 2);
+      down(svg, st, tb, id, 0.5);
+      down(svg, tb, rp, id, 1.5);
+    }
+  };
+
+  // 06: a sketch of the dashboard prompt 3 asks for. Panels and labels only, no figures.
+  var CATS = [['Housing', 1], ['Groceries', 0.62], ['Transport', 0.44], ['Takeaway', 0.36], ['Subscriptions', 0.22]];
+  var INC = [0.74, 0.74, 0.76, 0.74, 0.8, 0.76, 0.76, 0.76, 0.76];
+  var SPEND = [0.62, 0.7, 0.58, 0.66, 0.74, 0.6, 0.6, 0.56, 0.54];
+  function panel(svg, x, y, w, h, label, i) {
+    var g = el('g', { 'class': 'fade', style: '--i:' + i }, svg);
+    el('rect', { x: x, y: y, width: w, height: h, rx: 10, 'class': 'pnl' }, g);
+    if (label) txt(g, x + 16, y + 26, 'lbl', label, 'start', w - 32);
+    return g;
+  }
+  function kpi(svg, x, y, w, h, label, ring, i) {
+    var g = panel(svg, x, y, w, h, label, i);
+    var r = Math.min(22, (h - 48) / 2);
+    el('rect', { x: x + 16, y: y + h - 34, width: Math.min(110, w - 32 - (ring ? 2 * r + 24 : 0)), height: 18, rx: 6, 'class': 'ph' }, g);
+    if (ring) {
+      var cx = x + w - 16 - r, cy = y + h - 12 - r, a = 0.68 * 2 * Math.PI;
+      el('circle', { cx: cx, cy: cy, r: r, 'class': 'rbg' }, g);
+      el('path', { d: 'M' + cx + ' ' + (cy - r) + ' A' + r + ' ' + r + ' 0 1 1 ' + (cx + r * Math.sin(a)).toFixed(1) + ' ' + (cy - r * Math.cos(a)).toFixed(1), 'class': 'ring' }, g);
+    }
+  }
+  function chart(svg, x, y, w, h, i) {
+    var g = panel(svg, x, y, w, h, 'Income and spending by month', i);
+    var x0 = x + 18, x1 = x + w - 18, base = y + h - 40, top = y + 56, gw = (x1 - x0) / 9, bw = Math.min(18, gw * 0.3);
+    for (var k = 0; k < 9; k++) {
+      var gx = x0 + k * gw + gw / 2, est = k >= 6, hi = (base - top) * INC[k], hs = (base - top) * SPEND[k];
+      el('rect', { x: gx - bw - 1.5, y: base - hi, width: bw, height: hi, rx: 3, 'class': est ? 'est2' : 'bar2' }, g);
+      el('rect', { x: gx + 1.5, y: base - hs, width: bw, height: hs, rx: 3, 'class': est ? 'est' : 'bar' }, g);
+    }
+    var dx = x0 + 6 * gw - 2;
+    el('line', { x1: dx, x2: dx, y1: top - 8, y2: base + 4, 'class': 'div' }, g);
+    txt(g, dx + 6, top - 4, 'lbl', 'Today', 'start');
+    el('line', { x1: x0, x2: x1, y1: base + 0.5, y2: base + 0.5, 'class': 'hl' }, g);
+    var ly = y + h - 16, lx = x0;
+    [['bar2', 'Income'], ['bar', 'Spending'], ['est', 'Estimate']].forEach(function (L) {
+      el('rect', { x: lx, y: ly - 9, width: 10, height: 10, rx: 2, 'class': L[0] }, g);
+      var t = txt(g, lx + 16, ly, 'lbl', L[1], 'start');
+      var w0 = 70; try { w0 = t.getComputedTextLength() + 34; } catch (e) {}
+      lx += w0;
+    });
+  }
+  function cats(svg, x, y, w, h, i) {
+    var g = panel(svg, x, y, w, h, 'Spending by category', i);
+    var step = (h - 52) / CATS.length, bx = x + Math.round(w * 0.42), bmax = x + w - 18 - bx;
+    CATS.forEach(function (c, k) {
+      var yy = y + 46 + k * step + step / 2;
+      txt(g, x + 16, yy + 5, 'rt', c[0], 'start', bx - x - 24);
+      el('rect', { x: bx, y: yy - 6, width: Math.max(8, bmax * c[1]), height: 12, rx: 4, 'class': 'bar' }, g);
+    });
+  }
+  function toggles(svg, x, y, w, h, i) {
+    var g = panel(svg, x, y, w, h, 'Try a scenario', i);
+    [['Half the takeaway', 1], ['Cancel 2 subscriptions', 0]].forEach(function (r, k) {
+      var yy = y + 50 + k * 30;
+      el('rect', { x: x + 16, y: yy - 10, width: 34, height: 20, rx: 10, 'class': r[1] ? 'on' : 'off' }, g);
+      el('circle', { cx: r[1] ? x + 40 : x + 26, cy: yy, r: 7, 'class': 'knob' }, g);
+      txt(g, x + 62, yy + 5, 'rt', r[0], 'start', w - 78);
+    });
+  }
+  function target(svg, x, y, w, h, i) {
+    var g = panel(svg, x, y, w, h, 'Savings by your target date', i);
+    var bx = x + 16, full = w - 32;
+    [['At your current pace', 0.56, 'bar'], ['With your changes', 0.84, 'est']].forEach(function (r, k) {
+      var yy = y + 38 + k * 34;
+      el('rect', { x: bx, y: yy, width: full * r[1], height: 10, rx: 4, 'class': r[2] }, g);
+      txt(g, bx, yy + 23, 'lbl', r[0], 'start', full);
+    });
+  }
+  function worked(svg, x, y, w, h, i) {
+    var g = panel(svg, x, y, w, h, "How it's worked out", i);
+    ['Months of data used', 'Your assumptions', 'Last updated'].forEach(function (r, k) {
+      txt(g, x + 16, y + 52 + k * 22, 'rt', r, 'start', w - 32);
+    });
+  }
+  D.dash = function (svg, mode) {
+    var f;
+    if (mode === 'wide') {
+      svg.setAttribute('viewBox', '0 0 1000 566');
+      f = el('g', { 'class': 'fade', style: '--i:0' }, svg);
+      el('rect', { x: 0.75, y: 0.75, width: 998.5, height: 564.5, rx: 16, 'class': 'frame' }, f);
+      txt(f, 32, 50, 'ttl', 'Money dashboard', 'start');
+      txt(f, 968, 46, 'lbl', 'Private · only you', 'end');
+      var tw = (936 - 48) / 4;
+      [['Income'], ['Spending'], ['Left over'], ['Savings goal', 1]].forEach(function (k, j) { kpi(svg, 32 + j * (tw + 16), 76, tw, 92, k[0], k[1], j + 1); });
+      chart(svg, 32, 184, 600, 248, 5);
+      cats(svg, 648, 184, 320, 248, 6);
+      var bw3 = (936 - 32) / 3;
+      toggles(svg, 32, 448, bw3, 106, 7);
+      target(svg, 32 + bw3 + 16, 448, bw3, 106, 8);
+      worked(svg, 32 + 2 * (bw3 + 16), 448, bw3, 106, 9);
+    } else {
+      svg.setAttribute('viewBox', '0 0 360 862');
+      f = el('g', { 'class': 'fade', style: '--i:0' }, svg);
+      el('rect', { x: 0.75, y: 0.75, width: 358.5, height: 860.5, rx: 16, 'class': 'frame' }, f);
+      txt(f, 18, 44, 'ttl', 'Money dashboard', 'start', 220);
+      txt(f, 342, 41, 'lbl', 'Private', 'end');
+      var t2 = (324 - 10) / 2;
+      [['Income'], ['Spending'], ['Left over'], ['Savings goal', 1]].forEach(function (k, j) { kpi(svg, 18 + (j % 2) * (t2 + 10), 66 + Math.floor(j / 2) * 92, t2, 82, k[0], k[1], j + 1); });
+      chart(svg, 18, 260, 324, 210, 5);
+      cats(svg, 18, 482, 324, 200, 6);
+      toggles(svg, 18, 694, 324, 100, 7);
+      var g = el('g', { 'class': 'fade', style: '--i:8' }, svg);
+      txt(g, 180, 830, 'lbl', 'Plus savings by your target date', 'middle', 320);
+      txt(g, 180, 848, 'lbl', "and how it's worked out", 'middle', 320);
+    }
+  };
+
+  // 07: the monthly update, round and round.
+  var LOOP = [['Task runs', '1st · 9am'], ['Reminds you', 'Add statements'], ['You add them', 'Drive or project', 1], ['Dashboard updated', 'Changes explained', 0, 1]];
+  D.loop = function (svg, mode, id) {
+    var ns = [];
+    if (mode === 'wide') {
+      svg.setAttribute('viewBox', '0 0 1000 208');
+      LOOP.forEach(function (s, k) {
+        var n = node(svg, { x: 120 + k * 253, y: 80, w: 206, h: 96, t: s[0], s: s[1], human: !!s[2], accent: !!s[3], tag: k ? null : 'On the 1st' }, k);
+        if (k) right(svg, ns[k - 1], n, id, k - 0.5);
+        ns.push(n);
+      });
+    } else {
+      svg.setAttribute('viewBox', '0 0 360 470');
+      LOOP.forEach(function (s, k) {
+        var n = node(svg, { x: 160, y: 58 + k * 120, w: 260, h: 70, t: s[0], s: s[1], fs: 20, human: !!s[2], accent: !!s[3], tag: k ? null : 'On the 1st' }, k);
+        if (k) down(svg, ns[k - 1], n, id, k - 0.5);
+        ns.push(n);
+      });
+    }
+    back(svg, ns[3], ns[0], id, 4, mode, 'Next month');
+  };
+
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function draw(svg) {
+    var box = svg.parentNode, w = box.clientWidth;
+    if (!w) return;
+    var mode = w >= 640 ? 'wide' : 'tall';
+    if (svg.getAttribute('data-drawn') === mode + w) return;
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    if (!svg.id) svg.id = 'viz' + (++uid);
+    defs(svg, svg.id);
+    box.classList.toggle('tall', mode === 'tall');
+    D[svg.getAttribute('data-viz')](svg, mode, svg.id);
+    svg.setAttribute('data-drawn', mode + w);
+  }
+  var svgs = Array.prototype.slice.call(document.querySelectorAll('svg[data-viz]'));
+  function drawAll() { svgs.forEach(draw); }
+  if ('ResizeObserver' in window) {
+    var ro = new ResizeObserver(function (entries) { entries.forEach(function (e) { var s = e.target.querySelector('svg[data-viz]'); if (s) draw(s); }); });
+    svgs.forEach(function (s) { ro.observe(s.parentNode); });
+  } else {
+    window.addEventListener('resize', drawAll);
+    document.addEventListener('click', function () { setTimeout(drawAll, 50); });
+    drawAll();
+  }
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { svgs.forEach(function (s) { s.removeAttribute('data-drawn'); }); drawAll(); });
+
+  var vizzes = svgs.map(function (s) { return s.parentNode; });
+  if (!('IntersectionObserver' in window) || reduce) vizzes.forEach(function (v) { v.classList.add('in'); });
+  else {
+    var io = new IntersectionObserver(function (entries) { entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold: 0.2 });
+    vizzes.forEach(function (v) { io.observe(v); });
+  }
+})();
+</script>
+</body></html>
