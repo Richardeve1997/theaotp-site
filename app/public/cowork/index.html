@@ -1,0 +1,646 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>20 Claude Cowork Tips | Art of the Possible</title>
+<meta name="description" content="Twenty Claude Cowork tips from Felix Rieseberg, each with the video cued to the moment he says it, plus a longer summary of the interview.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://theaotp.com/cowork/">
+<link rel="icon" href="/qualia-symbol.png">
+<meta property="og:title" content="20 Claude Cowork Tips | Art of the Possible">
+<meta property="og:description" content="Twenty Claude Cowork tips from Felix Rieseberg, each with the video cued to the moment he says it, plus a longer summary of the interview.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&amp;family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&amp;family=Geist+Mono:wght@400&amp;display=swap" rel="stylesheet">
+<!--
+  Clear Sky kit template (AOTP design system approved by Rich 2026-09-30).
+  Source of truth: content-intelligence assets/brand/clear-sky/{DESIGN.md,tokens.css,board.html}.
+  Filled example: assets/brand/clear-sky/sample-guide.html.
+  White on blue, ink on sand (Rich, 2026-10-03: "black never over the blue, if we use black its over white").
+  Every button wears the sky action and the big numerals the sky numeral fill. Never retune the sky's stops.
+  No old accent blue, no two-tone headlines, no bold display, no shadows, no em dashes.
+-->
+<!-- Sources (verified 2026-11-08, yt-dlp + curl): interview https://www.youtube.com/watch?v=D-SVFneJ_Nk (Silicon Valley Girl, 2026-10-20; description: Felix 'has led engineering for Claude.ai, Cowork, and Claude Code Desktop at Anthropic'); How I AI https://www.youtube.com/watch?v=-tdNsYi8AXs; Anthropic/Claude videos UAmKyyZ-b9E, Lbml7IuGJYw, qMUf-jwSpMo; creators z9rdrNrkvDY, 4wvLHFgnQZQ, szWBwfPX30M, YYr7hw5EAtk; Felix ZpZ7lFoWaT8, 9MEJ4syOVrQ. Tip times from YouTube word timings. Ledger: content-intelligence pipeline/5-script/assets/cowork-engineer-tips/resource/SOURCES.md -->
+<style>
+:root{
+  --sand:#EFEBE7;--ink:#08070B;--graphite:#39383D;--ash:#909092;--ice:#BEC4D2;--ice-3:#E2E4EC;--glacier-2:#F3F4F6;--deep-ocean:#034C7C;--light-blue:#A5D4F2;--white:#FFFFFF;
+  /* Sky action: every button and button-like link, now an obvious two-tone (Rich, 2026-10-03: "Not enough gradient in
+     the buttons"). Same values as tokens.css: deep blue at the left into bright cerulean at the right end, 100deg.
+     Everything from 0 to 95% is #027DBA or darker, so white clears 4.5:1 there; only the last 5%, the cap, brightens to
+     #0A8FCF (3.5:1). Keep every label out of the cap: the template's paddings do (gate submit 22px, 12px on phones;
+     small pills 18px), and the worst glyph pixel measures 4.59:1 on the phone gate. Hover deepens every point of the
+     ramp. On sand and glacier the fill is its own edge; on the dark close it adds a 1px white ring. */
+  --g-sky-action:linear-gradient(100deg,#034A7A 0%,#026AA1 50%,#027DBA 95%,#0A8FCF 100%);
+  --g-sky-action-hover:linear-gradient(100deg,#043761 0%,#025F92 50%,#0274AD 95%,#0282C0 100%);
+  /* Sky numeral, FINAL (DESIGN.md 10.5): the deep end of the sky run top to bottom at 180deg, dark at the top like
+     the sky, as the text fill of the big display numerals ("and the big numbers too"). Same value and name as
+     tokens.css, so kit pages match the homepage. Display sizes only (32px and up): the lightest stop, #0282C0, is
+     3.5:1 on sand; #026AA1 is 4.9:1. */
+  --g-sky-numeral:linear-gradient(180deg,#043761 0%,#024F80 35%,#026AA1 70%,#0282C0 100%);
+  --display:'Inter Tight','Helvetica Neue',Arial,sans-serif;--ui:'Inter','Helvetica Neue',Arial,sans-serif;--mono:'Geist Mono',ui-monospace,'SF Mono',Menlo,monospace;
+  --gutter:clamp(16px,4.5vw,64px);
+  --spark:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0C12.8 7.2 16.8 11.2 24 12C16.8 12.8 12.8 16.8 12 24C11.2 16.8 7.2 12.8 0 12C7.2 11.2 11.2 7.2 12 0Z'/%3E%3C/svg%3E");
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--sand);color:var(--ink);font:400 16px/1.6 var(--ui);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:var(--deep-ocean);text-underline-offset:3px;text-decoration-thickness:1px}
+button,input{font:inherit}button,a,input{-webkit-tap-highlight-color:transparent}
+strong,b{font-weight:600;color:var(--ink)}
+:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+.page{min-height:100vh;overflow-x:clip;display:flex;flex-direction:column}
+.page>footer{margin-top:auto}
+/* Full-bleed backgrounds, content held to 1440 with 64px gutters (16px on phones). */
+.pad{padding-left:max(var(--gutter),calc((100% - 1440px)/2 + var(--gutter)));padding-right:max(var(--gutter),calc((100% - 1440px)/2 + var(--gutter)))}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance;overflow-wrap:break-word}
+p,li{text-wrap:pretty}
+
+/* Sparkle label: four-point sparkle + Geist Mono caps. */
+.eyebrow,.inst{display:block;font:400 11px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase}
+.eyebrow::before,.inst::before,.unlocks ul li::before{content:"";display:inline-block;width:.82em;height:.82em;margin-right:.75em;vertical-align:-.04em;background:currentColor;-webkit-mask:var(--spark) center/contain no-repeat;mask:var(--spark) center/contain no-repeat}
+
+/* ---- The head: white on the deep sky (Rich, 2026-10-03: "black never over the blue"; on /team/: "too much space under
+   the heading, and also make the sub text white and move to RHS"). Everything in it is white: the lockup, the nav, the
+   label line, the h1 and the dek. It all sits in the deep stretch, #043761 to #026AA1, where white measures 5.8:1 or
+   better. From 900px the heading is on the left and the dek on the right, bottoms aligned; below 900px they stack.
+   Under the content the sky runs through the rest of its measured stops, in order and evenly, to sand inside --fade,
+   an empty strip, so no type ever sits on the pale tail. Pad inside .kit-hero, never in the fade. ---- */
+.kit-head{--fade:clamp(96px,9vw,136px);padding-bottom:var(--fade);color:var(--white);background:linear-gradient(180deg,#043761 0%,#024F80 calc((100% - var(--fade))*.5),#026AA1 calc(100% - var(--fade)),#0282C0 calc(100% - var(--fade)*6/7),#1199D7 calc(100% - var(--fade)*5/7),#3EA9DA calc(100% - var(--fade)*4/7),#6DB9DC calc(100% - var(--fade)*3/7),#9DCBDD calc(100% - var(--fade)*2/7),#CBDBDF calc(100% - var(--fade)/7),#EFEBE7 100%)}
+nav{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:76px}
+.lockup{display:flex;align-items:center;color:var(--white);text-decoration:none}.lockup svg{display:block;height:22px;width:auto}
+.navlinks{display:flex;gap:28px;font:400 14px/1 var(--ui)}.navlinks a{color:var(--white);text-decoration:none}.navlinks a:hover{text-decoration:underline}
+.kit-head a:focus-visible{outline-color:var(--white)}
+.kit-hero{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);column-gap:clamp(40px,5.5vw,96px);align-items:end;padding-top:clamp(32px,4vw,60px);padding-bottom:clamp(32px,3.4vw,48px)}
+.kit-head .eyebrow{margin-bottom:18px;color:var(--white)}
+.kit-head h1{font-size:clamp(42px,4.8vw,70px);line-height:.98;letter-spacing:-.045em;text-wrap:pretty}
+.dek{max-width:46ch;margin:0;font:400 clamp(16px,1.3vw,19px)/1.55 var(--ui);letter-spacing:-.005em;color:var(--white)}
+/* The line an unlocked page shows (the shared unlock, /guides/unlock.js): ink on sand, under the head. */
+.subbed{margin:0;padding-top:clamp(18px,2vw,28px);padding-bottom:16px;font:400 14px/1.5 var(--ui);color:var(--graphite)}
+.subbed::before{content:"";display:inline-block;width:.82em;height:.82em;margin-right:.6em;vertical-align:-.04em;background:currentColor;-webkit-mask:var(--spark) center/contain no-repeat;mask:var(--spark) center/contain no-repeat}
+.subbed a{margin-left:.35em;color:var(--deep-ocean);white-space:nowrap}
+
+/* ---- The gate: a glacier card on sand, led by THIS guide (Rich, 2026-10-02: "make each page that asks for the
+   persons email address to unlock the guide more compelling ... emphasising current guide"). The featured shelf from
+   /guides/ (DESIGN.md 10.7) shows this guide's cover large under a "This guide" tag, the other guides beside it.
+   The copy names this guide first, then every other guide, then the weekly letter. Desktop: shelf left; copy, the
+   three unlocks and the form right. Under 920px: shelf, copy, form, then the unlocks. If /guides/shelf.js cannot load
+   (file://, another host: the script's onerror adds .no-shelf) or the shelf fails, the column goes and the card is
+   copy | form. ---- */
+.gate{padding-top:8px;padding-bottom:clamp(56px,7vw,96px)}
+.gate-grid{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);grid-template-rows:auto auto auto 1fr;grid-template-areas:"shelf intro" "shelf list" "shelf act" "shelf .";column-gap:clamp(28px,4.5vw,72px);align-items:start;background:var(--glacier-2);border-radius:12px;padding:clamp(22px,3.4vw,48px)}
+.gate-grid>*,.step>*,.concept>*{min-width:0}
+.gate-shelf{grid-area:shelf;align-self:center}.gate-intro{grid-area:intro}.unlocks{grid-area:list}.gate-act{grid-area:act}
+.gate-grid.no-shelf,.gate-grid:has([data-aotp-shelf-state="failed"]){grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);grid-template-rows:auto 1fr;grid-template-areas:"intro act" "list act"}
+.gate-grid.no-shelf>.gate-shelf,.gate-grid:has([data-aotp-shelf-state="failed"])>.gate-shelf{display:none}
+.gate .eyebrow{color:var(--graphite)}
+.gate h2{margin-top:18px;font-size:clamp(30px,3vw,42px);line-height:1.04;letter-spacing:-.03em;max-width:17ch}
+.gate-intro p{max-width:48ch;margin:16px 0 0;color:var(--graphite)}
+/* What the one email opens, in this order: this guide (named in display type, "Opens now", its sections), every
+   other guide, the weekly letter. The 01 02 03 are small mono counters, not sky numerals. */
+.unlocks{list-style:none;margin:26px 0 28px;padding:0;max-width:52ch}
+.unlocks>li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:0 12px;margin:0;border-top:1px solid var(--ice);padding:13px 0;font-size:14.5px;line-height:1.5;color:var(--graphite)}
+.unlocks>li:last-child{border-bottom:1px solid var(--ice)}
+.unlocks .n{padding-top:3px;font:400 11px/1.4 var(--mono);letter-spacing:.1em;color:var(--graphite)}
+.unlocks b{display:block;margin-bottom:2px;font:500 16px/1.35 var(--ui);color:var(--ink)}
+.unlocks .this .n{padding-top:7px}
+.unlocks .this b{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin-bottom:8px;font:400 clamp(22px,2vw,26px)/1.1 var(--display);letter-spacing:-.025em}
+.unlocks .now{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:5px;background:var(--ice-3);font:400 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.unlocks ul{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.unlocks ul li{padding-left:1.6em;text-indent:-1.6em;color:var(--ink)}
+.gate form{display:grid;gap:10px}
+.gate input{width:100%;min-width:0;height:52px;border:1px solid var(--ink);border-radius:999px;background:transparent;padding:0 22px;color:var(--ink);font-size:16px}
+.gate input::placeholder{color:var(--graphite);opacity:1}
+.gate input:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.gate button{width:100%;min-height:52px;border:0;border-radius:999px;background:var(--g-sky-action);color:var(--white);cursor:pointer;padding:14px 22px;font:500 16px/1.25 var(--ui);letter-spacing:-.005em;text-align:center;text-wrap:balance}
+.gate button:hover{background:var(--g-sky-action-hover)}
+/* Buttons on sand and glacier: hover deepens the sky action, focus is a 2px ink ring (the white label would vanish as a ring on sand). */
+.gate button:focus-visible,.copybtn:focus-visible,.read a:focus-visible,.dl-btn:focus-visible,.kc:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.gate-status{margin:12px 0 0;font-size:14px;color:var(--ink)}.gate-status:empty{margin:0}
+.gate-small{margin:14px 0 0;font-size:13.5px;line-height:1.55;color:var(--graphite)}
+.unlocks ul li::before{width:10px;height:10px;margin-right:calc(1.6em - 10px);vertical-align:0}
+
+/* ---- Sections: a mono-and-numeral rail, one reading column, 1px ice hairlines. ---- */
+.step,.concept{position:relative;display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px;padding-top:52px;padding-bottom:72px;scroll-margin-top:24px}
+.step::before,.concept::before{content:"";position:absolute;top:0;left:max(var(--gutter),calc((100% - 1440px)/2 + var(--gutter)));right:max(var(--gutter),calc((100% - 1440px)/2 + var(--gutter)));height:1px;background:var(--ice)}
+.step-kicker,.concept-num{font:400 11px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--graphite)}
+.step-kicker span,.concept-num span{display:table;padding:.1em .1em .1em 0;margin:-.1em -.1em calc(14px - .1em) 0;font:400 64px/.8 var(--display);letter-spacing:-.06em;color:var(--deep-ocean)}
+.step h2,.concept h2{font-size:clamp(34px,3.6vw,50px);line-height:1.02;letter-spacing:-.03em;max-width:20ch}
+.step .lede,.concept .lede{max-width:54ch;margin:20px 0 24px;font:400 20px/1.5 var(--ui);letter-spacing:-.01em;color:var(--ink)}
+.step p,.concept p{max-width:64ch;color:var(--graphite)}
+.step ul,.step ol,.concept ul{max-width:64ch;padding-left:20px;color:var(--graphite)}
+.step li,.concept li{margin-bottom:10px}
+.step li::marker,.concept li::marker{color:var(--ash)}
+.note{max-width:62ch;margin:30px 0;border-top:1px solid var(--ice);padding-top:14px;font-size:14.5px;line-height:1.6;color:var(--graphite)}
+table+.note{margin-top:18px;border-top:0;padding-top:0}
+.step .inst{margin:44px 0 0;color:var(--ink)}
+
+/* Reading-list payload */
+.index{list-style:none;padding:0!important;margin:26px 0 0;max-width:66ch}
+.index li{border-top:1px solid var(--ice);padding:16px 0;margin:0;display:flex;gap:18px;align-items:baseline;font-size:15px;color:var(--graphite)}
+.index .n{min-width:26px;font:400 11px var(--mono);letter-spacing:.1em;color:var(--graphite)}
+.index a{font:400 21px/1.2 var(--display);letter-spacing:-.02em;color:var(--ink);text-decoration:none}.index a:hover{text-decoration:underline}
+.index .st{margin-left:auto;font:400 10.5px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--graphite)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 0}
+.chip{display:inline-flex;align-items:center;height:24px;padding:0 9px;border-radius:5px;background:var(--ice-3);font:400 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.read{max-width:760px;margin:26px 0 0;background:var(--glacier-2);border-radius:12px;padding:20px 22px 22px}
+.read .src{font:400 10.5px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--graphite)}
+.read h3{max-width:40ch;margin:10px 0 16px;font-size:24px;line-height:1.12;letter-spacing:-.025em}
+.read a{display:inline-flex;align-items:center;height:28px;padding:0 18px;border-radius:999px;background:var(--g-sky-action);font:400 10.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--white);text-decoration:none}
+.read a:hover{background:var(--g-sky-action-hover)}
+
+/* ---- The close IS the footer: one short block on the reversed sky, sand at the top and #043761 at the bottom (Rich,
+   2026-10-02: "make the footer smaller and reverse the gradient so dark blue at the bottom"), with everything in it
+   white on the dark stretch (Rich, 2026-10-03: "black never over the blue"). The run from sand to #026AA1 (the
+   measured stops, in order and evenly) happens inside --fade, an empty strip at the top. The headline, the "on the
+   list" line, the white-ringed pill, the lockup and the mono line all sit below it, on #026AA1 to #043761, where white
+   measures 5.8:1 or better. It sits outside #kit so gated visitors get it too; .close-kit only shows once #kit is
+   unlocked. Keep it short: no second headline, button or form. ---- */
+.closeblock{--fade:clamp(64px,6vw,88px);padding-top:calc(var(--fade) + clamp(22px,2.4vw,32px));padding-bottom:clamp(20px,1.8vw,26px);color:var(--white);background:linear-gradient(180deg,#EFEBE7 0%,#CBDBDF calc(var(--fade)/7),#9DCBDD calc(var(--fade)*2/7),#6DB9DC calc(var(--fade)*3/7),#3EA9DA calc(var(--fade)*4/7),#1199D7 calc(var(--fade)*5/7),#0282C0 calc(var(--fade)*6/7),#026AA1 var(--fade),#024F80 calc(var(--fade) + (100% - var(--fade))*.5),#043761 100%)}
+.close-top{display:flex;align-items:flex-end;justify-content:space-between;gap:18px 40px}
+.closeblock h2{font-size:clamp(28px,3vw,44px);line-height:1.02;letter-spacing:-.035em;color:var(--white)}
+.close-kit{max-width:64ch;margin:10px 0 0;font:400 clamp(15px,1.2vw,17px)/1.5 var(--ui);color:var(--white)}
+#kit[hidden]~.closeblock .close-kit{display:none}
+/* The pill is the sky action ringed in 1px white: on the dark sky the fill alone has no edge (it is cut from the same
+   blues), the white ring measures 5.8:1 or better there. */
+.close-btn{display:inline-flex;align-items:center;flex:none;height:40px;padding:0 20px;border:1px solid var(--white);border-radius:999px;background:var(--g-sky-action);color:var(--white);font:500 15px/1 var(--ui);text-decoration:none;white-space:nowrap}
+.close-btn:hover{background:var(--g-sky-action-hover);text-decoration:underline}
+.closeblock a:focus-visible{outline:2px solid var(--white);outline-offset:3px}
+.close-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 24px;margin-top:clamp(22px,2.4vw,32px)}
+.close-row svg{display:block;height:22px;width:auto;flex:none}
+.close-foot{margin:0;font:400 10.5px/1.6 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--white)}
+.close-foot .nw{white-space:nowrap}
+[hidden]{display:none!important}
+/* A subscriber's page opens before first paint: the head script below sets .aotp-subscribed on <html> from the same
+   storage the gate script reads, so the gate never flashes while /guides/unlock.js loads. */
+.aotp-subscribed #gate{display:none!important}
+.aotp-subscribed #kit[hidden],.aotp-subscribed #subbed[hidden]{display:block!important}
+
+/* --- prompt-kit / field-notes / how-to payloads: keep these, delete what you don't use --- */
+.promptbox{max-width:760px;margin-top:26px;background:var(--glacier-2);border-radius:12px;padding-top:12px}
+.copybtn{display:block;margin:0 12px 0 auto;min-height:32px;padding:0 18px;border:0;border-radius:999px;background:var(--g-sky-action);color:var(--white);cursor:pointer;font:400 10.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase}
+.copybtn:hover{background:var(--g-sky-action-hover)}
+.promptbox pre{margin:12px 0 0;border-top:1px solid var(--ice);padding:20px 26px 26px;overflow-x:auto;font:400 13px/1.8 var(--mono);white-space:pre-wrap;overflow-wrap:anywhere;color:var(--ink)}
+.promptbox.code pre{white-space:pre;overflow-wrap:normal}
+.promptbox.tall pre{max-height:560px;overflow-y:auto}
+.cmd,.termshot{max-width:760px;margin:24px 0;border-radius:12px;padding:20px 24px;overflow-x:auto}
+.cmd{background:var(--glacier-2)}.cmd code{display:block;padding:0;background:none;font:400 13px/1.8 var(--mono);white-space:pre}
+.termshot{background:var(--ink);color:var(--sand);font:400 13px/1.9 var(--mono);white-space:pre}
+.termshot .g{color:var(--light-blue)}.termshot .y,.termshot .r{color:var(--white)}.termshot .d{color:var(--ash)}
+code{font-family:var(--mono);font-size:.86em;background:var(--ice-3);padding:1px 5px;border-radius:4px;white-space:nowrap;color:var(--ink)}
+.lessons{list-style:none;padding:0!important;margin:26px 0 0;max-width:66ch}
+.lessons li{position:relative;border-top:1px solid var(--ice);padding:22px 0 22px 72px;margin:0;color:var(--graphite)}
+.lessons strong{display:block;margin-bottom:8px;font:400 23px/1.2 var(--display);letter-spacing:-.02em;color:var(--ink)}
+.lessons .k{position:absolute;left:0;top:22px;padding:.1em .1em .1em 0;margin:-.1em -.1em -.1em 0;font:400 40px/.84 var(--display);letter-spacing:-.05em;color:var(--deep-ocean)}
+.sky-num{display:inline-block;padding:.1em .1em .1em 0;margin:-.1em -.1em -.1em 0;font-family:var(--display);font-weight:400;color:var(--deep-ocean)}
+/* Sky numerals (Rich, 2026-10-02: "and the big numbers too"): every big display numeral (the rail numerals above,
+   .lessons .k, any stat figure you add as .sky-num) takes --g-sky-numeral as its text fill, painted on its own glyph box
+   (display:table shrinks the rail numeral to its digits). The box is padded .1em right, top and bottom with matching
+   negative margins (DESIGN.md 10.5): background-clip:text paints only inside the box, and the tight tracking and line
+   height would otherwise clip the last digit, or the top and tail of a "$". Without background-clip:text, in print and
+   under forced colors it is solid deep ocean. Small numbers (.cmdlist .n, .index .n, mono labels) stay as they are. */
+@supports (-webkit-background-clip:text) or (background-clip:text){
+  .step-kicker span,.concept-num span,.lessons .k,.sky-num{background:var(--g-sky-numeral);background-size:100% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+}
+table{border-collapse:collapse;width:100%;max-width:760px;margin:20px 0;font-size:14.5px}
+th,td{text-align:left;padding:14px 16px 14px 0;border-bottom:1px solid var(--ice);vertical-align:top;color:var(--graphite)}
+th{border-bottom-color:var(--ink);font:400 10.5px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+td:first-child{width:26%;padding-right:24px;color:var(--ink);font-weight:500}td code{white-space:normal;overflow-wrap:anywhere}
+.shot{max-width:760px;margin:26px 0}
+.shot img{display:block;width:100%;height:auto;border:1px solid var(--ice);border-radius:6px;background:var(--white)}
+.cap{max-width:64ch;margin:10px 0 0;font-size:13.5px;line-height:1.5;color:var(--graphite)}
+.dl{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px 28px;max-width:760px;margin:28px 0 0;background:var(--glacier-2);border-radius:12px;padding:22px 24px}
+.dl-meta{font-size:14px;line-height:1.5;color:var(--graphite)}.dl-meta strong{display:block;font:400 21px/1.2 var(--display);letter-spacing:-.02em}
+.dl-btn{display:inline-flex;align-items:center;height:52px;padding:0 26px;border-radius:999px;background:var(--g-sky-action);color:var(--white);font:500 16px/1 var(--ui);text-decoration:none}.dl-btn:hover{background:var(--g-sky-action-hover)}
+.cmdlist{list-style:none;padding:0!important;margin:28px 0 0;max-width:760px}
+.cmdlist li{display:grid;grid-template-columns:34px minmax(0,1fr);gap:14px;border-top:1px solid var(--ice);padding:20px 0;margin:0}
+.cmdlist li>*{min-width:0}.cmdlist .n{padding-top:9px;font:400 11px/1 var(--mono);letter-spacing:.1em;color:var(--graphite)}
+.cmdlist p{margin:10px 0 0}
+/* .kc is 16px round, not a 999px pill: one line is still a full pill (32px tall), but a command that wraps onto three
+   lines keeps its corners square enough that no white glyph falls off the fill onto sand. */
+.kc{display:inline-flex;align-items:center;gap:12px;max-width:100%;min-height:32px;padding:5px 12px 5px 13px;border:0;border-radius:16px;background:var(--g-sky-action);color:var(--white);cursor:pointer;text-align:left}
+.kc code{padding:0;background:none;font-size:14px;white-space:normal;overflow-wrap:anywhere;color:var(--white)}
+.kc .cp{flex:none;padding:3px 8px;border:1px solid var(--white);border-radius:999px;font:400 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase}
+.kc:hover,.kc.done{background:var(--g-sky-action-hover)}
+.kc:hover .cp,.kc.done .cp{background:var(--white);color:var(--ink)}
+/* A long command makes a wide chip, and its "Copy" pill sits at the far right, inside the bright cap of the ramp. The
+   chip paints the same --g-sky-action 10% wider than itself, so the cap always falls outside it and the pill's label
+   stays on #027BB8 or darker. */
+.kc,.kc:hover,.kc.done{background-size:110% 100%;background-repeat:no-repeat}
+.where{display:inline-block;margin-left:12px;font:400 10.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--graphite)}
+.try{list-style:none;padding:0!important;margin:14px 0 0;max-width:66ch}
+.try li{border-top:1px solid var(--ice);padding:14px 0;margin:0;color:var(--graphite)}
+.try strong{margin-right:6px;font:400 14px var(--mono)}
+
+
+/* ---- /cowork/ visual guide parts (2026-11-08): tip cards with a cued video each, hand-built diagrams, a timeline
+   summary, quote cards and a video shelf. Videos are click-to-load facades: a poster and a sky-action Play pill, and
+   only a click mounts the youtube-nocookie iframe at the tip's exact second, so the page stays light. ---- */
+.map{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;max-width:1040px;margin:30px 0 0;padding:0;list-style:none}
+.map li{margin:0;background:var(--glacier-2);border-radius:12px;padding:16px 16px 18px}
+.map a{display:block;color:var(--ink);text-decoration:none}
+.map .r{display:block;font:400 10.5px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--graphite)}
+.map b{display:block;margin-top:8px;font:400 20px/1.15 var(--display);letter-spacing:-.02em;color:var(--ink)}
+.map a:hover b{text-decoration:underline;text-underline-offset:3px}
+.credit{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0}
+.credit .chip{height:28px;padding:0 11px;font-size:10.5px}
+.viz{max-width:620px;margin:30px 0 10px;background:var(--glacier-2);border-radius:12px;padding:22px 22px 16px}
+.viz svg{display:block;width:100%;height:auto}
+.viz svg text{font-family:var(--ui)}
+.viz figcaption{margin:12px 0 0;font:400 10.5px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--graphite)}
+.viz .t{font:400 21px var(--display);letter-spacing:-.02em;fill:var(--ink)}
+.viz .t.w,.viz .s.w{fill:var(--white)}
+.viz .s{font:400 15px var(--ui);fill:var(--graphite)}
+.viz .m{font:400 12.5px var(--mono);letter-spacing:.1em;text-transform:uppercase;fill:var(--graphite)}
+.viz .m.b{fill:var(--deep-ocean)}
+.viz .num{font:400 26px var(--display);fill:var(--deep-ocean)}
+.viz .bx{fill:var(--white);stroke:var(--ice);stroke-width:1.5}
+.viz .bx.ac{stroke:var(--deep-ocean);stroke-width:2}
+.viz .bx.dk{fill:var(--deep-ocean);stroke:var(--deep-ocean)}
+.viz .bx.ds{fill:none;stroke:var(--ash);stroke-dasharray:5 5}
+.viz .e{fill:none;stroke:var(--graphite);stroke-width:1.75}
+.viz .e.b{stroke:var(--deep-ocean);stroke-width:2.25}
+.viz .e.d{stroke-dasharray:5 5}
+.pair{display:flex;flex-wrap:wrap;gap:0 24px;max-width:1040px}
+.pair .viz{flex:1 1 380px}
+.tips{max-width:1040px;margin:34px 0 0}
+.tip{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,440px);gap:18px 32px;border-top:1px solid var(--ice);padding:30px 0 34px;scroll-margin-top:24px}
+/* Heading on top, the tip's own diagram under it across the card, then the words beside the video (Rich's review
+   2026-11-08: a diagram between two tips read as the end of the tip above). */
+.tip{grid-template-areas:"head head" "txt vid"}.tip.has-viz{grid-template-areas:"head head" "viz viz" "txt vid"}
+.tip>.tip-h{grid-area:head}.tip>.viz{grid-area:viz}.tip>.tip-txt{grid-area:txt}.tip>.tip-vid{grid-area:vid}
+.tip>.tip-txt>p:first-child{margin-top:0}
+.tip-h{display:flex;align-items:baseline;gap:16px}
+.tip-n{flex:none;min-width:44px}
+.tip-n .sky-num{font-size:40px;line-height:.84;letter-spacing:-.05em}
+.tip h3{font-size:clamp(23px,2.2vw,28px);line-height:1.12;letter-spacing:-.025em;max-width:24ch}
+.tip p{margin:14px 0 0}
+.tip>.viz{margin:2px 0 6px}
+.tip blockquote{max-width:58ch;margin:18px 0 0;padding:0;font:400 19px/1.4 var(--display);letter-spacing:-.015em;color:var(--ink)}
+.tip blockquote cite{display:block;margin-top:6px;font:400 10.5px/1.5 var(--mono);font-style:normal;letter-spacing:.12em;text-transform:uppercase;color:var(--graphite)}
+.tip .chips{margin-top:16px}
+.yt{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:var(--ink);cursor:pointer}
+.yt img,.yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+.yt img{object-fit:cover}
+.ytplay{position:absolute;left:12px;bottom:12px;display:inline-flex;align-items:center;gap:10px;min-height:36px;padding:0 20px 0 16px;border:0;border-radius:999px;background:var(--g-sky-action);color:var(--white);cursor:pointer;font:500 14px/1 var(--ui)}
+.ytplay::before{content:"";width:0;height:0;border-left:9px solid currentColor;border-top:6px solid transparent;border-bottom:6px solid transparent}
+.ytplay:hover,.yt:hover .ytplay{background:var(--g-sky-action-hover)}
+.ytsrc{position:absolute;left:12px;top:12px;display:inline-flex;align-items:center;height:24px;padding:0 9px;border-radius:5px;background:var(--ice-3);font:400 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.ytmeta{margin:9px 0 0;font-size:13.5px;line-height:1.5;color:var(--graphite)}
+.tl{list-style:none;padding:0!important;margin:28px 0 0;max-width:820px}
+.tl li{display:grid;grid-template-columns:72px minmax(0,1fr);gap:16px;border-top:1px solid var(--ice);padding:20px 0;margin:0}
+.tl .ts{font:400 13px/1.9 var(--mono);letter-spacing:.06em}
+.tl b{display:block;font:400 22px/1.2 var(--display);letter-spacing:-.02em;color:var(--ink);font-weight:400}
+.tl p{margin:8px 0 0}
+.quotes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;max-width:1040px;margin:34px 0 0}
+.quotes figure{margin:0;background:var(--glacier-2);border-radius:12px;padding:22px 22px 18px}
+.quotes blockquote{margin:0;font:400 22px/1.3 var(--display);letter-spacing:-.02em;color:var(--ink)}
+.quotes figcaption{margin-top:12px;font:400 10.5px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--graphite)}
+.vids{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px 22px;max-width:1040px;margin:20px 0 0}
+.vid h3{margin:12px 0 0;font-size:20px;line-height:1.2;letter-spacing:-.02em}
+.vid .who{display:block;margin-top:12px;font:400 10.5px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--graphite)}
+.vid p{margin:6px 0 0;font-size:14.5px;line-height:1.55}
+.docs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;max-width:1040px;margin:20px 0 0}
+.docs .read{margin:0}
+.docs .read h3{font-size:20px}
+@media(max-width:1100px){.tip,.tip.has-viz{grid-template-columns:minmax(0,1fr);grid-template-areas:none}.tip>*{grid-area:auto!important}.tip-vid{max-width:640px}.map{grid-template-columns:repeat(3,minmax(0,1fr))}.vids,.docs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:480px){.viz .s{font-size:16.5px}.viz .m{font-size:14.5px;letter-spacing:.06em}}
+@media(max-width:800px){
+  .map{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.quotes,.vids,.docs{grid-template-columns:minmax(0,1fr)}
+  .viz{padding:16px 12px 12px}.tip-n{min-width:36px}.tip-n .sky-num{font-size:32px}
+  .tl li{grid-template-columns:minmax(0,1fr);gap:4px}
+}
+@media(max-width:900px){
+  .kit-hero{grid-template-columns:minmax(0,1fr);row-gap:22px}
+}
+@media(max-width:920px){
+  .gate-grid{grid-template-columns:minmax(0,1fr);grid-template-rows:none;grid-template-areas:"shelf" "intro" "act" "list";row-gap:22px}
+  .gate-grid.no-shelf,.gate-grid:has([data-aotp-shelf-state="failed"]){grid-template-columns:minmax(0,1fr);grid-template-rows:none;grid-template-areas:"intro" "act" "list"}
+  .unlocks{margin:4px 0 0}
+}
+@media(max-width:800px){
+  nav{min-height:64px}.lockup svg,.close-row svg{height:17px}.navlinks{gap:16px;font-size:13px}
+  .kit-head{--fade:88px}.closeblock{--fade:56px}
+  .close-top{flex-direction:column;align-items:flex-start}
+  .gate{padding-top:0}
+  .gate-grid,.step,.concept{grid-template-columns:1fr;gap:22px}.gate-grid>*,.step>*,.concept>*{min-width:0}
+  .step,.concept{padding-top:34px;padding-bottom:48px}
+  .step-kicker span,.concept-num span{display:inline-block;margin:-.1em calc(12px - .1em) -.1em 0;font-size:44px;vertical-align:-.02em}
+  .step .lede,.concept .lede{font-size:18px}
+  .lessons li{padding-left:54px}.lessons .k{font-size:32px;top:24px}
+  .promptbox pre{padding:18px 18px 22px}.index li{flex-wrap:wrap}.index .st{margin-left:44px;width:100%}
+  code{white-space:normal;overflow-wrap:anywhere}th,td{padding-right:12px}td:first-child{width:32%}
+}
+@media(max-width:480px){.lockup svg,.close-row svg{height:15px}.navlinks{gap:14px;font-size:12.5px}.kit-head h1 br{display:none}.gate-grid{padding:24px 16px}.gate button{padding-left:12px;padding-right:12px;font-size:14.5px}}
+@media(max-width:380px){.gate button{font-size:14px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+/* Print drops backgrounds, so a gradient-filled numeral would print blank and every white label on a sky or a sky
+   action would print as faint grey. Paper gets ink: deep ocean numerals, hairline ink pills, ink type where the sky
+   was. Forced colors drops gradients too: the numerals and pills take the system colours (the border gives a
+   borderless pill its edge back). Keep this last in the sheet so it beats every rule above it. */
+@media print,(forced-colors:active){
+  .step-kicker span,.concept-num span,.lessons .k,.sky-num{background:none;color:var(--deep-ocean);-webkit-text-fill-color:currentColor}
+  .gate button,.copybtn,.ytplay,.read a,.dl-btn,.kc,.kc.done,.kc .cp,.kc.done .cp,.close-btn{background:none;color:var(--ink);border:1px solid var(--ink)}
+  .kc code{color:var(--ink)}
+}
+@media print{
+  .kit-head,.kit-head .eyebrow,.kit-head h1,.dek,.lockup,.navlinks a,.closeblock,.closeblock h2,.close-kit,.close-foot{color:var(--ink)}
+  .lockup svg g,.close-row svg g{fill:var(--ink)}
+}
+</style><script src="/f.js"></script>
+<script>try{if(/(?:^|;\s*)aotp_subscriber=[^;\s]/.test(document.cookie)||localStorage.getItem('aotp_subscriber')||localStorage.getItem('aotp_member')==='2')document.documentElement.classList.add('aotp-subscribed')}catch(e){}</script>
+</head><body>
+<div class="page">
+<header class="kit-head pad">
+  <nav><a class="lockup" href="/"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 897 112" role="img" aria-label="Art of the Possible"><title>Art of the Possible</title><g fill="#FFFFFF"><path transform="scale(0.448)" d="M93.301 48.471A34.601 34.601 0 1 1 156.699 48.471A34.601 34.601 0 0 0 93.301 48.471ZM156.699 48.471A34.601 34.601 0 1 1 201.529 93.301A34.601 34.601 0 0 0 156.699 48.471ZM201.529 93.301A34.601 34.601 0 1 1 156.699 48.471A34.601 34.601 0 0 0 201.529 93.301ZM201.529 93.301A34.601 34.601 0 1 1 201.529 156.699A34.601 34.601 0 0 0 201.529 93.301ZM201.529 156.699A34.601 34.601 0 1 1 156.699 201.529A34.601 34.601 0 0 0 201.529 156.699ZM156.699 201.529A34.601 34.601 0 1 1 201.529 156.699A34.601 34.601 0 0 0 156.699 201.529ZM156.699 201.529A34.601 34.601 0 1 1 93.301 201.529A34.601 34.601 0 0 0 156.699 201.529ZM93.301 201.529A34.601 34.601 0 1 1 48.471 156.699A34.601 34.601 0 0 0 93.301 201.529ZM48.471 156.699A34.601 34.601 0 1 1 93.301 201.529A34.601 34.601 0 0 0 48.471 156.699ZM48.471 156.699A34.601 34.601 0 1 1 48.471 93.301A34.601 34.601 0 0 0 48.471 156.699ZM48.471 93.301A34.601 34.601 0 1 1 93.301 48.471A34.601 34.601 0 0 0 48.471 93.301ZM93.301 48.471A34.601 34.601 0 1 1 48.471 93.301A34.601 34.601 0 0 0 93.301 48.471Z"/><path transform="translate(160 80.736)" d="M11.7 0H0.49L17.57 -49.47H31.04L48.09 0H36.91L24.49 -38.17H24.09ZM11.04 -19.44H37.49V-11.3H11.04ZM51.08 0V-49.47H70.57Q76.2 -49.47 80.16 -47.48Q84.12 -45.48 86.22 -41.85Q88.32 -38.21 88.32 -33.31Q88.32 -28.38 86.2 -24.84Q84.07 -21.29 80.04 -19.41Q76.01 -17.53 70.31 -17.53H57.27V-25.94H68.6Q71.63 -25.94 73.62 -26.76Q75.6 -27.59 76.58 -29.22Q77.55 -30.85 77.55 -33.31Q77.55 -35.78 76.57 -37.47Q75.59 -39.15 73.6 -40.02Q71.62 -40.89 68.58 -40.89H61.52V0ZM78.54 0 66.5 -22.52H77.78L90.09 0ZM90.95 -40.85V-49.47H131.58V-40.85H116.44V0H106.12V-40.85ZM170.54 0.66Q163.97 0.66 158.72 -2.32Q153.46 -5.31 150.41 -10.99Q147.36 -16.66 147.36 -24.7Q147.36 -32.8 150.41 -38.49Q153.46 -44.18 158.72 -47.16Q163.97 -50.14 170.54 -50.14Q177.12 -50.14 182.35 -47.16Q187.59 -44.18 190.64 -38.49Q193.69 -32.8 193.69 -24.7Q193.69 -16.64 190.64 -10.97Q187.59 -5.29 182.35 -2.31Q177.12 0.66 170.54 0.66ZM170.54 -8.58Q174.35 -8.58 177.16 -10.44Q179.98 -12.29 181.54 -15.89Q183.09 -19.49 183.09 -24.7Q183.09 -29.95 181.54 -33.57Q179.98 -37.18 177.16 -39.04Q174.35 -40.89 170.54 -40.89Q166.76 -40.89 163.93 -39.04Q161.1 -37.18 159.53 -33.57Q157.96 -29.95 157.96 -24.7Q157.96 -19.49 159.53 -15.89Q161.1 -12.29 163.93 -10.44Q166.76 -8.58 170.54 -8.58ZM198.51 0V-49.47H231.26V-40.85H208.95V-27.25H229.08V-18.79H208.95V0ZM246.36 -40.85V-49.47H286.99V-40.85H271.85V0H261.53V-40.85ZM290.8 0V-49.47H301.24V-29.06H322.46V-49.47H332.9V0H322.46V-20.44H301.24V0ZM338.59 0V-49.47H371.94V-40.85H349.03V-29.22H370.19V-20.76H349.03V-8.62H372V0ZM390.19 0V-49.47H409.68Q415.31 -49.47 419.27 -47.33Q423.23 -45.19 425.33 -41.4Q427.43 -37.61 427.43 -32.69Q427.43 -27.76 425.31 -24Q423.18 -20.25 419.15 -18.14Q415.12 -16.03 409.43 -16.03H396.99V-24.41H407.71Q410.74 -24.41 412.73 -25.46Q414.71 -26.52 415.69 -28.38Q416.66 -30.25 416.66 -32.69Q416.66 -35.18 415.69 -37.02Q414.71 -38.86 412.72 -39.88Q410.73 -40.89 407.69 -40.89H400.63V0ZM453.6 0.66Q447.03 0.66 441.78 -2.32Q436.52 -5.31 433.47 -10.99Q430.43 -16.66 430.43 -24.7Q430.43 -32.8 433.47 -38.49Q436.52 -44.18 441.78 -47.16Q447.03 -50.14 453.6 -50.14Q460.18 -50.14 465.42 -47.16Q470.65 -44.18 473.7 -38.49Q476.75 -32.8 476.75 -24.7Q476.75 -16.64 473.7 -10.97Q470.65 -5.29 465.42 -2.31Q460.18 0.66 453.6 0.66ZM453.6 -8.58Q457.41 -8.58 460.23 -10.44Q463.05 -12.29 464.6 -15.89Q466.15 -19.49 466.15 -24.7Q466.15 -29.95 464.6 -33.57Q463.05 -37.18 460.23 -39.04Q457.41 -40.89 453.6 -40.89Q449.82 -40.89 446.99 -39.04Q444.17 -37.18 442.6 -33.57Q441.03 -29.95 441.03 -24.7Q441.03 -19.49 442.6 -15.89Q444.17 -12.29 446.99 -10.44Q449.82 -8.58 453.6 -8.58ZM499.91 0.7Q493.92 0.7 489.49 -1.13Q485.06 -2.96 482.58 -6.57Q480.1 -10.19 479.96 -15.54H490.08Q490.27 -13.07 491.53 -11.4Q492.8 -9.74 494.93 -8.9Q497.06 -8.06 499.79 -8.06Q502.45 -8.06 504.43 -8.83Q506.4 -9.6 507.49 -10.98Q508.57 -12.36 508.57 -14.18Q508.57 -15.84 507.58 -16.96Q506.6 -18.08 504.73 -18.89Q502.85 -19.69 500.15 -20.32L494.75 -21.65Q488.5 -23.15 484.89 -26.41Q481.28 -29.68 481.28 -35.17Q481.28 -39.66 483.71 -43.02Q486.14 -46.38 490.37 -48.26Q494.61 -50.14 500.02 -50.14Q505.54 -50.14 509.64 -48.25Q513.75 -46.36 516.05 -43Q518.35 -39.64 518.43 -35.25H508.36Q508.09 -38.16 505.89 -39.78Q503.7 -41.4 499.94 -41.4Q497.4 -41.4 495.62 -40.68Q493.84 -39.97 492.92 -38.71Q492 -37.45 492 -35.83Q492 -34.09 493.06 -32.91Q494.11 -31.74 495.9 -31Q497.68 -30.25 499.81 -29.74L504.23 -28.66Q507.45 -27.93 510.16 -26.72Q512.87 -25.5 514.88 -23.74Q516.89 -21.99 517.99 -19.6Q519.09 -17.22 519.09 -14.13Q519.09 -9.61 516.81 -6.27Q514.53 -2.94 510.24 -1.12Q505.96 0.7 499.91 0.7ZM541.53 0.7Q535.54 0.7 531.11 -1.13Q526.68 -2.96 524.2 -6.57Q521.72 -10.19 521.58 -15.54H531.7Q531.89 -13.07 533.16 -11.4Q534.42 -9.74 536.55 -8.9Q538.68 -8.06 541.41 -8.06Q544.08 -8.06 546.05 -8.83Q548.02 -9.6 549.11 -10.98Q550.19 -12.36 550.19 -14.18Q550.19 -15.84 549.21 -16.96Q548.22 -18.08 546.35 -18.89Q544.47 -19.69 541.77 -20.32L536.37 -21.65Q530.12 -23.15 526.51 -26.41Q522.9 -29.68 522.9 -35.17Q522.9 -39.66 525.33 -43.02Q527.76 -46.38 531.99 -48.26Q536.23 -50.14 541.64 -50.14Q547.16 -50.14 551.26 -48.25Q555.37 -46.36 557.67 -43Q559.97 -39.64 560.05 -35.25H549.98Q549.71 -38.16 547.51 -39.78Q545.32 -41.4 541.56 -41.4Q539.02 -41.4 537.24 -40.68Q535.46 -39.97 534.54 -38.71Q533.62 -37.45 533.62 -35.83Q533.62 -34.09 534.68 -32.91Q535.74 -31.74 537.52 -31Q539.3 -30.25 541.43 -29.74L545.85 -28.66Q549.07 -27.93 551.78 -26.72Q554.49 -25.5 556.5 -23.74Q558.51 -21.99 559.61 -19.6Q560.71 -17.22 560.71 -14.13Q560.71 -9.61 558.43 -6.27Q556.15 -2.94 551.87 -1.12Q547.58 0.7 541.53 0.7ZM575.25 -49.47V0H564.81V-49.47ZM580.93 0V-49.47H600.73Q606.18 -49.47 609.83 -47.85Q613.48 -46.22 615.32 -43.36Q617.15 -40.5 617.15 -36.8Q617.15 -33.89 615.98 -31.71Q614.81 -29.52 612.8 -28.13Q610.78 -26.74 608.2 -26.16V-25.66Q611.03 -25.55 613.51 -24.08Q615.99 -22.6 617.53 -19.97Q619.08 -17.33 619.08 -13.67Q619.08 -9.75 617.14 -6.66Q615.21 -3.57 611.43 -1.78Q607.64 0 602.06 0ZM591.37 -8.54H599.91Q604.27 -8.54 606.29 -10.23Q608.31 -11.93 608.31 -14.7Q608.31 -16.77 607.32 -18.34Q606.33 -19.92 604.5 -20.82Q602.67 -21.71 600.16 -21.71H591.37ZM591.37 -28.77H599.14Q601.27 -28.77 602.96 -29.53Q604.64 -30.29 605.61 -31.69Q606.58 -33.1 606.58 -35.05Q606.58 -37.71 604.69 -39.36Q602.8 -41.01 599.34 -41.01H591.37ZM622.95 0V-49.47H633.39V-8.62H654.6V0ZM658.66 0V-49.47H692.01V-40.85H669.1V-29.22H690.26V-20.76H669.1V-8.62H692.06V0ZM708.66 -22.11V-39.91H717.37Q719.06 -39.94 720.47 -39.25Q721.88 -38.56 722.72 -37.24Q723.56 -35.93 723.56 -34.07Q723.56 -32.17 722.69 -30.82Q721.81 -29.47 720.37 -28.79Q718.94 -28.12 717.18 -28.12H711.19V-31.48H716.19Q717.2 -31.46 717.94 -32.11Q718.68 -32.75 718.68 -34.06Q718.68 -35.37 717.94 -35.95Q717.19 -36.52 716.21 -36.54H713.29V-22.11ZM720.04 -30.35 724.13 -22.11H719.02L715.23 -30.35ZM715.63 -11.49Q711.65 -11.49 708.14 -13Q704.64 -14.51 701.98 -17.17Q699.33 -19.82 697.84 -23.33Q696.35 -26.83 696.35 -30.81Q696.35 -34.8 697.84 -38.3Q699.33 -41.8 701.98 -44.46Q704.64 -47.12 708.14 -48.63Q711.65 -50.14 715.63 -50.14Q719.65 -50.14 723.15 -48.63Q726.65 -47.12 729.31 -44.46Q731.97 -41.8 733.46 -38.3Q734.95 -34.8 734.95 -30.81Q734.95 -26.83 733.46 -23.33Q731.97 -19.82 729.32 -17.17Q726.67 -14.51 723.16 -13Q719.65 -11.49 715.63 -11.49ZM715.63 -16.61Q719.59 -16.61 722.82 -18.52Q726.05 -20.43 727.97 -23.66Q729.88 -26.88 729.87 -30.81Q729.88 -34.74 727.96 -37.97Q726.05 -41.2 722.81 -43.12Q719.57 -45.03 715.63 -45.01Q711.72 -45.03 708.49 -43.12Q705.26 -41.2 703.34 -37.97Q701.43 -34.74 701.43 -30.82Q701.43 -26.89 703.35 -23.66Q705.26 -20.43 708.49 -18.52Q711.71 -16.61 715.63 -16.61Z"/></g></svg></a><div class="navlinks"><a href="/">Home</a><a href="/letters/">Archive</a><a href="/#about">About</a></div></nav>
+  <!-- Everything in the head is white on the deep sky. The heading left, the dek right from 900px; they stack on phones. -->
+  <div class="kit-hero">
+    <div>
+      <div class="eyebrow">20 Claude Cowork Tips &middot; From the Reel</div>
+      <!-- One colour. The two slots are legacy names: write one headline, never two tones. Two sentences? Put <br> after the first ("skills.<br> Great"); phones drop the break. -->
+      <h1>How the Cowork lead<br> uses Claude.</h1>
+    </div>
+    <p class="dek">You commented "COWORK". Here it is. Twenty tips from Felix Rieseberg, who has led engineering for Claude Cowork at Anthropic, each with the video cued to the second he says it. Then a longer summary of the interview and the best Cowork videos I've found. No course, no upsell.</p>
+  </div>
+</header>
+
+<section class="gate pad" id="gate">
+  <div class="gate-grid">
+    <!-- The featured shelf (DESIGN.md 10.7): this guide's cover large under a "This guide" tag, every other guide beside it,
+         served from /guides/ on theaotp.com. Its cover is /guides/covers/cowork.svg (cover-tools/make_covers.py) and the
+         guide belongs in /guides/guides.json + guides-all.json; with no cover the shelf shows the other guides alone.
+         Where /guides/ does not resolve (file://, another host) onerror drops the column and the card is copy | form. -->
+    <div class="gate-shelf">
+      <link rel="stylesheet" href="/guides/shelf.css">
+      <div data-aotp-shelf="featured" data-featured="cowork" data-title="20 Claude Cowork Tips"></div>
+      <script src="/guides/shelf.js" defer onerror="this.closest('.gate-grid').classList.add('no-shelf')"></script>
+    </div>
+    <!-- Copy order: THIS guide by name, then every other guide, then the weekly letter (Rich, 2026-10-02). -->
+    <div class="gate-intro">
+      <div class="eyebrow">Free guide &middot; one email</div>
+      <h2>Unlock 20&nbsp;Claude Cowork&nbsp;Tips.</h2>
+      <p>Leave your email and this guide opens right here. The same email opens every other guide on the shelf and signs you up for the weekly letter.</p>
+    </div>
+    <ol class="unlocks">
+      <!-- Item 01 names this guide and two to four of its sections in plain words, never the payload itself. -->
+      <li class="this"><span class="n">01</span><div><b>20 Claude Cowork Tips <span class="now">Opens now</span></b><ul><li>Twenty tips, each cued to the moment</li><li>Seven diagrams of the ideas</li><li>The long summary of the interview</li><li>More Cowork videos worth watching</li></ul></div></li>
+      <li><span class="n">02</span><div><b>Every other guide</b>Prompt kits, setup guides and reading lists from my other Reels. The same email opens them all.</div></li>
+      <li><span class="n">03</span><div><b>The weekly letter</b>Five useful things I made with AI each week, with the prompts and workflows inside. Unsubscribe any time.</div></li>
+    </ol>
+    <div class="gate-act">
+      <form id="gate-form" novalidate>
+        <label for="gate-email" class="sr-only">Email address</label>
+        <input id="gate-email" type="email" name="email" placeholder="you@somewhere.com" autocomplete="email" required>
+        <button type="submit">Unlock the guide and subscribe to AOTP</button>
+      </form>
+      <p class="gate-status" id="gate-status" aria-live="polite"></p>
+      <p class="gate-small">Already on the list? Enter the same email and it unlocks without subscribing you twice.</p>
+      <noscript><p class="gate-small">This page needs JavaScript to unlock. Or just subscribe on <a href="/">the homepage</a> and reply to any letter for the guide.</p></noscript>
+    </div>
+  </div>
+</section>
+
+<!-- The shared unlock's line (/guides/unlock.js): shown once the page is open, never with the gate. -->
+<p class="subbed pad" id="subbed" hidden>You're subscribed, so every guide is open.<a href="#gate" id="gate-reset">Use a different email</a></p>
+
+<!-- EVERYTHING OF VALUE LIVES INSIDE #kit. Nothing valuable outside it. -->
+<div id="kit" hidden>
+
+<section class="step pad" id="start">
+  <div class="step-kicker"><span>01</span>Start here</div>
+  <div>
+    <h2>One interview. Twenty tips.</h2>
+    <p class="lede">Felix Rieseberg has led engineering for Claude.ai, Cowork and Claude Code Desktop at Anthropic. In October he spent 49 minutes with Marina Mogilko on Silicon Valley Girl talking about how he uses Claude now.</p>
+    <p>I watched the whole thing and pulled out the tips you can use this week. Seventeen come from that interview, two from his How I AI episode with Claire Vo, and one from Anthropic's own Cowork walkthrough. Every tip has its clip cued to the second it's said, so you hear it from the source and not just from me.</p><div class="tip-vid" style="max-width:720px;margin-top:26px"><div class="yt" data-yt="D-SVFneJ_Nk" data-start="0" data-embed="https://www.youtube-nocookie.com/embed/D-SVFneJ_Nk?start=0" data-title="The full Silicon Valley Girl interview with Felix Rieseberg"><img src="/media/kits/cowork/t00-source.jpg" alt="The full Silicon Valley Girl interview with Felix Rieseberg" loading="lazy" decoding="async" width="720" height="406"><button type="button" class="ytplay">Play the full interview</button><span class="ytsrc">Silicon Valley Girl</span></div><p class="ytmeta"><a href="https://www.youtube.com/watch?v=D-SVFneJ_Nk&amp;t=0s">Open on YouTube</a></p></div><div class="credit"><span class="chip">Interview: Silicon Valley Girl</span><span class="chip">Guest: Felix Rieseberg</span><span class="chip">49 min · 20 Oct 2026</span></div><p class="note">The interview belongs to Marina Mogilko's Silicon Valley Girl channel. I didn't make it, I'm not connected to it and I earn nothing from it. If these tips help, go and watch the whole thing on her channel.</p><p class="inst">The 20 tips in five groups</p><ul class="map"><li><a href="#method"><span class="r">Tips 1 to 2</span><b>Ask for the tools</b></a></li><li><a href="#prove"><span class="r">Tips 3 to 7</span><b>Make it prove itself</b></a></li><li><a href="#everything"><span class="r">Tips 8 to 12</span><b>Give it everything</b></a></li><li><a href="#taste"><span class="r">Tips 13 to 15</span><b>Teach it your taste</b></a></li><li><a href="#higher"><span class="r">Tips 16 to 20</span><b>Stay fresh, aim higher</b></a></li></ul>
+  </div>
+</section>
+
+<section class="step pad" id="method">
+  <div class="step-kicker"><span>02</span>Ask for the tools</div>
+  <div>
+    <h2>Ask for the tools, not the title.</h2>
+    <p class="lede">Telling Claude it's a world-class expert mostly gets you the vocabulary. Asking how the best people in the field work gets you their method.</p>
+    <div class="tips"><article class="tip has-viz" id="tip-1"><div class="tip-h"><span class="tip-n"><span class="sky-num">1</span></span><h3>Drop the "you're an expert" prompt.</h3></div><figure class="viz"><svg viewBox="0 0 480 430" role="img" aria-label="Tools, not roles. The 2024 habit: you tell Claude it is an expert 3D artist, Claude role plays and learns the vocabulary, and the result sounds like an expert. What Felix does: ask which tools a top 3D artist would use and tell Claude to use the same ones, Claude opens Blender and follows the steps, and the result works like an expert."><defs><marker id="ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#39383D"/></marker><marker id="ab1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#034C7C"/></marker></defs><text class="m" x="118" y="22" text-anchor="middle">The 2024 habit</text><text class="m b" x="362" y="22" text-anchor="middle">What Felix does</text><rect class="bx ds" x="10" y="38" width="216" height="104" rx="10"/><text class="t" x="118" y="82" text-anchor="middle">"You're an expert</text><text class="t" x="118" y="106" text-anchor="middle">3D artist."</text><rect class="bx ac" x="254" y="38" width="216" height="104" rx="10"/><text class="t" x="362" y="70" text-anchor="middle">"Which tools would a</text><text class="t" x="362" y="95" text-anchor="middle">top 3D artist use?</text><text class="t" x="362" y="120" text-anchor="middle">Use the same ones."</text><path class="e" d="M118 142V174" marker-end="url(#ah1)"/><path class="e b" d="M362 142V174" marker-end="url(#ab1)"/><rect class="bx ds" x="10" y="178" width="216" height="88" rx="10"/><text class="t" x="118" y="214" text-anchor="middle">Role play:</text><text class="t" x="118" y="238" text-anchor="middle">just the vocabulary</text><rect class="bx dk" x="254" y="178" width="216" height="88" rx="10"/><text class="t w" x="362" y="214" text-anchor="middle">Opens Blender and</text><text class="t w" x="362" y="238" text-anchor="middle">follows the steps</text><path class="e" d="M118 266V298" marker-end="url(#ah1)"/><path class="e b" d="M362 266V298" marker-end="url(#ab1)"/><rect class="bx ds" x="10" y="302" width="216" height="80" rx="10"/><text class="t" x="118" y="336" text-anchor="middle">Sounds like</text><text class="t" x="118" y="360" text-anchor="middle">an expert</text><rect class="bx ac" x="254" y="302" width="216" height="80" rx="10"/><text class="t" x="362" y="336" text-anchor="middle">Works like</text><text class="t" x="362" y="360" text-anchor="middle">an expert</text><text class="m" x="10" y="416">Felix at 25:08 and 10:09</text></svg><figcaption>Tools, not roles · Felix's Blender example</figcaption></figure><div class="tip-txt"><p>Felix never opens with "you're an excellent engineer". He calls it a 2024 habit. Tell a model to act like a very good accountant and it starts to role play, and role play gets you the vocabulary. He wants the techniques, the tools and the knowledge a professional would use.</p><p>So he asks Claude which tools someone at the top of the field would use, then tells it to use the same ones.</p><blockquote>"I never tell Claude, 'You're an excellent whatever.'"<cite>Felix at 25:10</cite></blockquote><div class="chips"><span class="chip">In the Reel</span></div></div><div class="tip-vid"><div class="yt" data-yt="D-SVFneJ_Nk" data-start="1508" data-embed="https://www.youtube-nocookie.com/embed/D-SVFneJ_Nk?start=1508" data-title="Felix Rieseberg on Silicon Valley Girl, from 25:08: Drop the &quot;you&#x27;re an expert&quot; prompt."><img src="/media/kits/cowork/t01.jpg" alt="Felix Rieseberg on Silicon Valley Girl, from 25:08: Drop the &quot;you&#x27;re an expert&quot; prompt." loading="lazy" decoding="async" width="720" height="406"><button type="button" class="ytplay">Play from 25:08</button><span class="ytsrc">Silicon Valley Girl</span></div><p class="ytmeta"><a href="https://www.youtube.com/watch?v=D-SVFneJ_Nk&amp;t=1508s">Open on YouTube at 25:08</a></p></div></article><article class="tip" id="tip-2"><div class="tip-h"><span class="tip-n"><span class="sky-num">2</span></span><h3>Copy the pro's steps, not their result.</h3></div><div class="tip-txt"><p>The naive prompt is "make this good". Felix gets more by asking how the best in the field work and having Claude take the same steps. His example is 3D and motion video: the big jump came when people told Claude to use Blender, the tool professional animators use.</p><p>Writing works the same way. His friend Adam Davidson, who was a staff writer at a number of publications, asks Claude for the strongest counterargument to his piece.</p><blockquote>"just tell Claude to use Blender."<cite>Felix at 10:31</cite></blockquote></div><div class="tip-vid"><div class="yt" data-yt="D-SVFneJ_Nk" data-start="609" data-embed="https://www.youtube-nocookie.com/embed/D-SVFneJ_Nk?start=609" data-title="Felix Rieseberg on Silicon Valley Girl, from 10:09: Copy the pro&#x27;s steps, not their result."><img src="/media/kits/cowork/t02.jpg" alt="Felix Rieseberg on Silicon Valley Girl, from 10:09: Copy the pro&#x27;s steps, not their result." loading="lazy" decoding="async" width="720" height="406"><button type="button" class="ytplay">Play from 10:09</button><span class="ytsrc">Silicon Valley Girl</span></div><p class="ytmeta"><a href="https://www.youtube.com/watch?v=D-SVFneJ_Nk&amp;t=609s">Open on YouTube at 10:09</a></p></div></article></div>
+  </div>
+</section>
+
+<section class="step pad" id="prove">
+  <div class="step-kicker"><span>03</span>Make it prove itself</div>
+  <div>
+    <h2>Make Claude prove itself wrong.</h2>
+    <p class="lede">Claude can sound sure and still be wrong. Felix's answer is more Claude: critics that attack the work, and a judge that sorts their notes.</p>
+    <div class="tips"><article class="tip has-viz" id="tip-3"><div class="tip-h"><span class="tip-n"><span class="sky-num">3</span></span><h3>Run an adversarial review.</h3></div><figure class="viz"><svg viewBox="0 0 480 512" role="img" aria-label="An adversarial review. Your draft goes to five separate threads, each told to prove it wrong. Their criticisms go to a judge, another Claude, which decides which ones hold up. Only the valid notes go back to the Claude that made the draft. The critics can be a smaller model."><defs><marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#39383D"/></marker><marker id="ab2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#034C7C"/></marker></defs><text class="m" x="240" y="18" text-anchor="middle">Five threads, each told:</text><text class="m b" x="240" y="38" text-anchor="middle">prove this wrong</text><rect class="bx dk" x="150" y="56" width="180" height="56" rx="10"/><text class="t w" x="240" y="91" text-anchor="middle">Your draft</text><path class="e" d="M240 112 L48 164"/><circle class="bx" cx="48" cy="196" r="32"/><text class="num" x="48" y="205" text-anchor="middle">1</text><path class="e" d="M48 228 L240 296" marker-end="url(#ah2)"/><path class="e" d="M240 112 L144 164"/><circle class="bx" cx="144" cy="196" r="32"/><text class="num" x="144" y="205" text-anchor="middle">2</text><path class="e" d="M144 228 L240 296" marker-end="url(#ah2)"/><path class="e" d="M240 112 L240 164"/><circle class="bx" cx="240" cy="196" r="32"/><text class="num" x="240" y="205" text-anchor="middle">3</text><path class="e" d="M240 228 L240 296" marker-end="url(#ah2)"/><path class="e" d="M240 112 L336 164"/><circle class="bx" cx="336" cy="196" r="32"/><text class="num" x="336" y="205" text-anchor="middle">4</text><path class="e" d="M336 228 L240 296" marker-end="url(#ah2)"/><path class="e" d="M240 112 L432 164"/><circle class="bx" cx="432" cy="196" r="32"/><text class="num" x="432" y="205" text-anchor="middle">5</text><path class="e" d="M432 228 L240 296" marker-end="url(#ah2)"/><rect class="bx ac" x="100" y="300" width="280" height="76" rx="10"/><text class="t" x="240" y="332" text-anchor="middle">The judge</text><text class="s" x="240" y="358" text-anchor="middle">Which criticisms hold up?</text><path class="e b" d="M240 376V400" marker-end="url(#ab2)"/><rect class="bx dk" x="80" y="404" width="320" height="66" rx="10"/><text class="s w" x="240" y="432" text-anchor="middle">Valid notes go back to</text><text class="s w" x="240" y="454" text-anchor="middle">the Claude that made it</text><text class="m" x="10" y="502">Critics can be a smaller model · 13:47</text></svg><figcaption>One draft, five critics, one judge</figcaption></figure><div class="tip-txt"><p>When he's written something, Felix tells Claude to fire off five threads, each one trying to prove the piece wrong: the facts, the framing, anything he misunderstood. He compares it to red teaming or short selling.</p><p>Then another Claude acts as the judge and decides which criticisms are valid, and only those go back to the Claude that made the work. When the critics only find small things, he knows the work is good.</p><blockquote>"please fire off five threads"<cite>Felix at 14:14</cite></blockquote></div><div class="tip-vid"><div class="yt" data-yt="D-SVFneJ_Nk" data-start="781" data-embed="https://www.youtube-nocookie.com/embed/D-SVFneJ_Nk?start=781" data-title="Felix Rieseberg on Silicon Valley Girl, from 13:01: Run an adversarial review."><img src="/media/kits/cowork/t03.jpg" alt="Felix Rieseberg on Silicon Valley Girl, from 13:01: Run an adversarial review." loading="lazy" decoding="async" width="720" height="406"><button type="button" class="ytplay">Play from 13:01</button><span class="ytsrc">Silicon Valley Girl</span></div><p class="ytmeta"><a href="https://www.youtube.com/watch?v=D-SVFneJ_Nk&amp;t=781s">Open on YouTube at 13:01</a></p></div></article><article class="tip" id="tip-4"><div class="tip-h"><span class="tip-n"><span class="sky-num">4</span></span><h3>Use a cheaper model for the critics.</h3></div><div class="tip-txt"><p>Finding flaws is easier than making something, for people and for models. Felix says you can take a step down in intelligence for the reviewers and still get very good results, so a five-critic review doesn't have to run on your most expensive model.</p><blockquote>"take a step down in intelligence and still get very good results."<cite>Felix at 13:48</cite></blockquote></div><div class="tip-vid"><div class="yt" data-yt="D-SVFneJ_Nk" data-start="827" data-embed="https://www.youtube-nocookie.com/embed/D-SVFneJ_Nk?start=827" data-title="Felix Rieseberg on Silicon Valley Girl, from 13:47: Use a cheaper model for the critics."><img src="/media/kits/cowork/t04.jpg" alt="Felix Rieseberg on Silicon Valley Girl, from 13:47: Use a cheaper model for the critics." loading="lazy" decoding="async" width="720" height="406"><button type="button" class="ytplay">Play from 13:47</button><span class="ytsrc">Silicon Valley Girl</span></div><p class="ytmeta"><a href="https://www.youtube.com/watch?v=D-SVFneJ_Nk&amp;t=827s">Open on YouTube at 13:47</a></p></div></article><article class="tip" id="tip-5"><div class="tip-h"><span class="tip-n"><span class="sky-num">5</span></span><h3>Never let a session grade its own work.</h3></div><div class="tip-txt"><p>Felix trusts Claude with a lot. What he doesn't trust is one session judging what it just made. He looks for hard outside evidence that the work did its job, and in a pinch he uses another Claude session as the judge.</p><blockquote>"the current session tends to be quite bad at being a being a judge"<cite>Felix at 26:46</cite></blockquote></div><div class="tip-vid"><div class="yt" data-yt="D-SVFneJ_Nk" data-start="1570" data-embed="https://www.youtube-nocookie.com/embed/D-SVFneJ_Nk?start=1570" data-title="Felix Rieseberg on Silicon Valley Girl, from 26:10: Never let a session grade its own work."><img src="/media/kits/cowork/t05.jpg" alt="Felix Rieseberg on Silicon Valley Girl, from 26:10: Never let a session grade its own work." loading="lazy" decoding="async" width="720" height="406"><button type="button" class="ytplay">Play from 26:10</button><span class="ytsrc">Silicon Valley Girl</span></div><p class="ytmeta"><a href="https://www.youtube.com/watch?v=D-SVFneJ_Nk&amp;t=1570s">Open on YouTube at 26:10</a></p></div></article><article class="tip" id="tip-6"><div class="tip-h"><span class="tip-n"><span class="sky-num">6</span></span><h3>Hand over fact-checking completely.</h3></div><div class="tip-txt"><p>Fact-checking is the one job he trusts Claude with 100%, with a single agent and no extra rounds. The instruction: find a primary source for every number he mentions, and check that each one is a good primary source.</p><p>Run it on your next deck or post before it goes out. The prompt is in section 09.</p><blockquote>"I need you to find primary sources for every number I mention."<cite>Felix at 17:28</cite></blockquote></div><div class="tip-vid"><div class="yt" data-yt="D-SVFneJ_Nk" data-start="1033" data-embed="https://www.youtube-nocookie.com/embed/D-SVFneJ_Nk?start=1033" data-title="Felix Rieseberg on Silicon Valley Girl, from 17:13: Hand over fact-checking completely."><img src="/media/kits/cowork/t06.jpg" alt="Felix Rieseberg on Silicon Valley Girl, from 17:13: Hand over fact-checking completely." loading="lazy" decoding="async" width="720" height="406"><button type="button" class="ytplay">Play from 17:13</button><span class="ytsrc">Silicon Valley Girl</span></div><p class="ytmeta"><a href="https://www.youtube.com/watch?v=D-SVFneJ_Nk&amp;t=1033s">Open on YouTube at 17:13</a></p></div></article><article class="tip has-viz" id="tip-7"><div class="tip-h"><span class="tip-n"><span class="sky-num">7</span></span><h3>Grade the route, not a lucky answer.</h3></div><figure class="viz"><svg viewBox="0 0 480 252" role="img" aria-label="Grade the route. A model that guessed the temperature and happened to be right should fail. A model that found the right location and a reputable source, and ended up half a degree off, should pass."><text class="m" x="10" y="20">The task: what's the temperature outside?</text><rect class="bx ds" x="10" y="34" width="320" height="84" rx="10"/><text class="t" x="24" y="68" text-anchor="start">Guessed the number</text><text class="t" x="24" y="92" text-anchor="start">and got it right</text><rect class="bx" x="344" y="34" width="126" height="84" rx="10"/><text class="t" x="407" y="84" text-anchor="middle">Fail</text><rect class="bx ac" x="10" y="134" width="320" height="84" rx="10"/><text class="t" x="24" y="168" text-anchor="start">Found the place and a good</text><text class="t" x="24" y="192" text-anchor="start">source, half a degree off</text><rect class="bx dk" x="344" y="134" width="126" height="84" rx="10"/><text class="t w" x="407" y="184" text-anchor="middle">Pass</text><text class="m" x="10" y="244">Felix at 7:37</text></svg><figcaption>Grade the route, not the guess</figcaption></figure><div class="tip-txt"><p>Felix's example is a weather report. If the model guesses the temperature and happens to be right, that should still fail. If it finds the right location and a reputable data source and ends up half a degree off, that should score higher.</p><p>When you check Claude's work, check how it got there as well as what it says.</p></div><div class="tip-vid"><div class="yt" data-yt="D-SVFneJ_Nk" data-start="457" data-embed="https://www.youtube-nocookie.com/embed/D-SVFneJ_Nk?start=457" data-title="Felix Rieseberg on Silicon Valley Girl, from 7:37: Grade the route, not a lucky answer."><img src="/media/kits/cowork/t07.jpg" alt="Felix Rieseberg on Silicon Valley Girl, from 7:37: Grade the route, not a lucky answer." loading="lazy" decoding="async" width="720" height="406"><button type="button" class="ytplay">Play from 7:37</button><span class="ytsrc">Silicon Valley Girl</span></div><p class="ytmeta"><a href="https://www.youtube.com/watch?v=D-SVFneJ_Nk&amp;t=457s">Open on YouTube at 7:37</a></p></div></article></div>
+  </div>
+</section>
+
+<section class="step pad" id="everything">
+  <div class="step-kicker"><span>04</span>Give it everything</div>
+  <div>
+    <h2>Give it the whole business.</h2>
+    <p class="lede">Felix doesn't build a team of agents with a slice of data each. He gives one generalist Claude everything, through tools it can call when it needs them.</p>
+    <div class="tips"><article class="tip" id="tip-8"><div class="tip-h"><span class="tip-n"><span class="sky-num">8</span></span><h3>Skip the cast of characters.</h3></div><div class="tip-txt"><p>Felix's spicy take is that people overdo agents. Models are strong generalists: a custom model and harness won silver at the Math Olympiad, and a few months later the general models won gold. Your "data scientist" agent has the same intelligence as any other, so making up a cast of roles first can hold you back.</p><p>He still splits work into projects, by the piece of work rather than by role.</p><blockquote>"I think we're kind of over-rotating on this agents thing."<cite>Felix at 17:48</cite></blockquote></div><div class="tip-vid"><div class="yt" data-yt="D-SVFneJ_Nk" data-start="1068" data-embed="https://www.youtube-nocookie.com/embed/D-SVFneJ_Nk?start=1068" data-title="Felix Rieseberg on Silicon Valley Girl, from 17:48: Skip the cast of characters."><img src="/media/kits/cowork/t08.jpg" alt="Felix Rieseberg on Silicon Valley Girl, from 17:48: Skip the cast of characters." loading="lazy" decoding="async" width="720" height="406"><button type="button" class="ytplay">Play from 17:48</button><span class="ytsrc">Silicon Valley Girl</span></div><p class="ytmeta"><a href="https://www.youtube.com/watch?v=D-SVFneJ_Nk&amp;t=1068s">Open on YouTube at 17:48</a></p></div></article><article class="tip" id="tip-9"><div class="tip-h"><span class="tip-n"><span class="sky-num">9</span></span><h3>Give it the whole picture, through tools.</h3></div><div class="tip-txt"><p>An engineering manager who only sees the code is far less useful than one who also hears customer calls and sees usage and business data. Claude is the same, so don't hand each agent a slice.</p><p>If that sounds like too much data, the answer is tools. Give Claude a tool for each source and write down clearly what's behind it, so it pulls only what it needs. Models have got much better at deciding when to call a tool, so Felix no longer decides up front what data a task gets.</p></div><div class="tip-vid"><div class="yt" data-yt="D-SVFneJ_Nk" data-start="1148" data-embed="https://www.youtube-nocookie.com/embed/D-SVFneJ_Nk?start=1148" data-title="Felix Rieseberg on Silicon Valley Girl, from 19:08: Give it the whole picture, through tools."><img src="/media/kits/cowork/t09.jpg" alt="Felix Rieseberg on Silicon Valley Girl, from 19:08: Give it the whole picture, through tools." loading="lazy" decoding="async" width="720" height="406"><button type="button" class="ytplay">Play from 19:08</button><span class="ytsrc">Silicon Valley Girl</span></div><p class="ytmeta"><a href="https://www.youtube.com/watch?v=D-SVFneJ_Nk&amp;t=1148s">Open on YouTube at 19:08</a></p></div></article><article class="tip" id="tip-10"><div class="tip-h"><span class="tip-n"><span class="sky-num">10</span></span><h3>Think about the model's experience.</h3></div><div class="tip-txt"><p>Product people design for user experience. Felix also thinks about model experience: pretend for a second that you're Claude and you've been handed the task. You'd soon find you want the raw data, a computer, and maybe the ability to install some software. Then set it up that way.</p><blockquote>"I like to consider the model experience"<cite>Felix at 22:21</cite></blockquote></div><div class="tip-vid"><div class="yt" data-yt="D-SVFneJ_Nk" data-start="1339" data-embed="https://www.youtube-nocookie.com/embed/D-SVFneJ_Nk?start=1339" data-title="Felix Rieseberg on Silicon Valley Girl, from 22:19: Think about the model&#x27;s experience."><img src="/media/kits/cowork/t10.jpg" alt="Felix Rieseberg on Silicon Valley Girl, from 22:19: Think about the model&#x27;s experience." loading="lazy" decoding="async" width="720" height="406"><button type="button" class="ytplay">Play from 22:19</button><span class="ytsrc">Silicon Valley Girl</span></div><p class="ytmeta"><a href="https://www.youtube.com/watch?v=D-SVFneJ_Nk&amp;t=1339s">Open on YouTube at 22:19</a></p></div></article><article class="tip has-viz" id="tip-11"><div class="tip-h"><span class="tip-n"><span class="sky-num">11</span></span><h3>Stop being the conveyor belt.</h3></div><figure class="viz"><svg viewBox="0 0 480 478" role="img" aria-label="Before: the conveyor belt. You pick up one crash at a time and hand it to Claude, so you are the bottleneck. After: give it everything. Crash data, customer calls, usage data and business data reach Claude through documented tools, and Claude decides what to fix. It costs more to set up once, then Claude pulls only what it needs."><defs><marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#39383D"/></marker><marker id="ab3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#034C7C"/></marker></defs><text class="m" x="10" y="22">Before: the conveyor belt</text><rect x="10" y="90" width="250" height="12" rx="6" fill="#BEC4D2"/><rect class="bx" x="14" y="58" width="66" height="30" rx="6"/><text class="m" x="47" y="78" text-anchor="middle">Crash</text><rect class="bx" x="92" y="58" width="66" height="30" rx="6"/><text class="m" x="125" y="78" text-anchor="middle">Crash</text><rect class="bx" x="170" y="58" width="66" height="30" rx="6"/><text class="m" x="203" y="78" text-anchor="middle">Crash</text><path class="e" d="M262 96H300" marker-end="url(#ah3)"/><circle cx="330" cy="96" r="28" fill="#E2E4EC"/><text class="t" x="330" y="103" text-anchor="middle">You</text><path class="e" d="M360 96H384" marker-end="url(#ah3)"/><rect class="bx dk" x="388" y="70" width="82" height="52" rx="10"/><text class="t w" x="429" y="103" text-anchor="middle">Claude</text><text class="s" x="10" y="154" text-anchor="start">One crash at a time.</text><text class="s" x="10" y="175" text-anchor="start">You're the bottleneck.</text><path d="M10 196H470" stroke="#BEC4D2" stroke-width="1"/><text class="m b" x="10" y="232">After: give it everything</text><rect class="bx" x="10" y="252" width="168" height="42" rx="8"/><text class="s" x="24" y="279" style="fill:#08070B">Crash data</text><path class="e" d="M178 273 C230 273 240 330 296 330" marker-end="url(#ah3)"/><rect class="bx" x="10" y="304" width="168" height="42" rx="8"/><text class="s" x="24" y="331" style="fill:#08070B">Customer calls</text><path class="e" d="M178 325 C230 325 240 330 296 330" marker-end="url(#ah3)"/><rect class="bx" x="10" y="356" width="168" height="42" rx="8"/><text class="s" x="24" y="383" style="fill:#08070B">Usage data</text><path class="e" d="M178 377 C230 377 240 330 296 330" marker-end="url(#ah3)"/><rect class="bx" x="10" y="408" width="168" height="42" rx="8"/><text class="s" x="24" y="435" style="fill:#08070B">Business data</text><path class="e" d="M178 429 C230 429 240 330 296 330" marker-end="url(#ah3)"/><text class="m" x="214" y="262">Tools</text><rect class="bx dk" x="300" y="290" width="170" height="80" rx="10"/><text class="t w" x="385" y="324" text-anchor="middle">Claude</text><text class="s w" x="385" y="350" text-anchor="middle">decides what to fix</text><text class="s" x="300" y="400" text-anchor="start">Set it up once.</text><text class="s" x="300" y="421" text-anchor="start">Claude pulls only</text><text class="s" x="300" y="442" text-anchor="start">what it needs.</text><text class="m" x="10" y="468">Felix at 19:08 and 22:47</text></svg><figcaption>From conveyor belt to the whole picture</figcaption></figure><div class="tip-txt"><p>A year and a half ago Felix was finding crashes one at a time and handing each one to Claude to fix. Then it dawned on him that he was just moving work from one place to another.</p><p>The fix was to give Claude all the crash data and let it work out what needs fixing and what doesn't. That takes more work to set up, and he says it's worth it.</p><blockquote>"I'm just a conveyor belt for Claude"<cite>Felix at 23:00</cite></blockquote></div><div class="tip-vid"><div class="yt" data-yt="D-SVFneJ_Nk" data-start="1367" data-embed="https://www.youtube-nocookie.com/embed/D-SVFneJ_Nk?start=1367" data-title="Felix Rieseberg on Silicon Valley Girl, from 22:47: Stop being the conveyor belt."><img src="/media/kits/cowork/t11.jpg" alt="Felix Rieseberg on Silicon Valley Girl, from 22:47: Stop being the conveyor belt." loading="lazy" decoding="async" width="720" height="406"><button type="button" class="ytplay">Play from 22:47</button><span class="ytsrc">Silicon Valley Girl</span></div><p class="ytmeta"><a href="https://www.youtube.com/watch?v=D-SVFneJ_Nk&amp;t=1367s">Open on YouTube at 22:47</a></p></div></article><article class="tip" id="tip-12"><div class="tip-h"><span class="tip-n"><span class="sky-num">12</span></span><h3>Start with the desktop app and the browser.</h3></div><div class="tip-txt"><p>His step one for anyone starting today: download the Claude desktop app and let Claude use your computer, with its built-in browser. Forget connectors and data exports at first.</p><p>Once a workflow proves itself, ask whether Claude could get something better than clicking around a dashboard, like a connector.</p><blockquote>"step one, download the desktop app."<cite>Felix at 24:09</cite></blockquote></div><div class="tip-vid"><div class="yt" data-yt="D-SVFneJ_Nk" data-start="1447" data-embed="https://www.youtube-nocookie.com/embed/D-SVFneJ_Nk?start=1447" data-title="Felix Rieseberg on Silicon Valley Girl, from 24:07: Start with the desktop app and the browser."><img src="/media/kits/cowork/t12.jpg" alt="Felix Rieseberg on Silicon Valley Girl, from 24:07: Start with the desktop app and the browser." loading="lazy" decoding="async" width="720" height="406"><button type="button" class="ytplay">Play from 24:07</button><span class="ytsrc">Silicon Valley Girl</span></div><p class="ytmeta"><a href="https://www.youtube.com/watch?v=D-SVFneJ_Nk&amp;t=1447s">Open on YouTube at 24:07</a></p></div></article></div>
+  </div>
+</section>
+
+<section class="step pad" id="taste">
+  <div class="step-kicker"><span>05</span>Teach it your taste</div>
+  <div>
+    <h2>Turn your feedback into rules.</h2>
+    <p class="lede">You give feedback all day. Felix has Claude collect it, boil it down and find the rules you didn't know you had. This is the tip from the Reel.</p>
+    <div class="tips"><article class="tip has-viz" id="tip-13"><div class="tip-h"><span class="tip-n"><span class="sky-num">13</span></span><h3>Turn your feedback into principles.</h3></div><figure class="viz"><svg viewBox="0 0 480 494" role="img" aria-label="The three-round feedback loop. Your feedback from Slack, GitHub and chats goes into round one, assemble all the feedback you have ever given. Round two, condense it into the rules you care about. Round three, find the principles you might believe but do not know you believe. The result is a principles list that feeds every future review, and the new feedback from those reviews goes back into round one."><defs><marker id="ah4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#39383D"/></marker><marker id="ab4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#034C7C"/></marker></defs><rect x="40" y="10" width="98" height="32" rx="6" fill="#E2E4EC"/><text class="m" x="89" y="31" text-anchor="middle" style="fill:#08070B">Slack</text><rect x="150" y="10" width="98" height="32" rx="6" fill="#E2E4EC"/><text class="m" x="199" y="31" text-anchor="middle" style="fill:#08070B">GitHub</text><rect x="260" y="10" width="98" height="32" rx="6" fill="#E2E4EC"/><text class="m" x="309" y="31" text-anchor="middle" style="fill:#08070B">Chats</text><path class="e" d="M199 42V66" marker-end="url(#ah4)"/><rect class="bx" x="40" y="70" width="318" height="76" rx="10"/><text class="num" x="62" y="108">1</text><text class="t" x="92" y="102" text-anchor="start">Assemble</text><text class="s" x="92" y="128" text-anchor="start">all the feedback you've given</text><path class="e" d="M199 146V170" marker-end="url(#ah4)"/><rect class="bx" x="40" y="174" width="318" height="76" rx="10"/><text class="num" x="62" y="212">2</text><text class="t" x="92" y="206" text-anchor="start">Condense</text><text class="s" x="92" y="232" text-anchor="start">into rules you care about</text><path class="e" d="M199 250V274" marker-end="url(#ah4)"/><rect class="bx dk" x="40" y="278" width="318" height="92" rx="10"/><text class="num" x="62" y="318" style="fill:#FFFFFF">3</text><text class="t w" x="92" y="310" text-anchor="start">Find the hidden ones</text><text class="s w" x="92" y="336" text-anchor="start">principles you don't know</text><text class="s w" x="92" y="356" text-anchor="start">you believe</text><path class="e b" d="M199 370V394" marker-end="url(#ab4)"/><rect class="bx ac" x="40" y="398" width="318" height="60" rx="10"/><text class="t" x="199" y="434" text-anchor="middle">Your principles list</text><path class="e b d" d="M358 428H430V108H366" marker-end="url(#ab4)"/><text class="m b" x="446" y="268" text-anchor="middle" transform="rotate(90 446 268)">Into every review</text><text class="m" x="10" y="486">Felix at 28:45 · the tip from the Reel</text></svg><figcaption>The three-round feedback loop</figcaption></figure><div class="tip-txt"><p>Round one: have Claude assemble all the feedback you've ever given, from Slack, GitHub or wherever it lives. Round two: condense it into a list of rules or principles you care about. Round three is the one people miss: ask for the principles you might believe but don't know you believe.</p><p>Then use that list as an input to every future review. Felix says it has helped specialise the feedback individual sessions give.</p><blockquote>"what are the principles that maybe you might believe but you don't actually know you believe."<cite>Felix at 28:59</cite></blockquote><div class="chips"><span class="chip">In the Reel</span></div></div><div class="tip-vid"><div class="yt" data-yt="D-SVFneJ_Nk" data-start="1725" data-embed="https://www.youtube-nocookie.com/embed/D-SVFneJ_Nk?start=1725" data-title="Felix Rieseberg on Silicon Valley Girl, from 28:45: Turn your feedback into principles."><img src="/media/kits/cowork/t13.jpg" alt="Felix Rieseberg on Silicon Valley Girl, from 28:45: Turn your feedback into principles." loading="lazy" decoding="async" width="720" height="406"><button type="button" class="ytplay">Play from 28:45</button><span class="ytsrc">Silicon Valley Girl</span></div><p class="ytmeta"><a href="https://www.youtube.com/watch?v=D-SVFneJ_Nk&amp;t=1725s">Open on YouTube at 28:45</a></p></div></article><article class="tip" id="tip-14"><div class="tip-h"><span class="tip-n"><span class="sky-num">14</span></span><h3>Run Claude side by side before you hand over.</h3></div><div class="tip-txt"><p>If you don't trust it yet, don't hand over the reins overnight. For a few rounds, write your own feedback first, then check what Claude would have said. Where the two differ shows you what to sharpen.</p><p>He points out that even one person gives different feedback on a Monday than on a Friday, so don't expect a perfect match.</p></div><div class="tip-vid"><div class="yt" data-yt="D-SVFneJ_Nk" data-start="1801" data-embed="https://www.youtube-nocookie.com/embed/D-SVFneJ_Nk?start=1801" data-title="Felix Rieseberg on Silicon Valley Girl, from 30:01: Run Claude side by side before you hand over."><img src="/media/kits/cowork/t14.jpg" alt="Felix Rieseberg on Silicon Valley Girl, from 30:01: Run Claude side by side before you hand over." loading="lazy" decoding="async" width="720" height="406"><button type="button" class="ytplay">Play from 30:01</button><span class="ytsrc">Silicon Valley Girl</span></div><p class="ytmeta"><a href="https://www.youtube.com/watch?v=D-SVFneJ_Nk&amp;t=1801s">Open on YouTube at 30:01</a></p></div></article><article class="tip" id="tip-15"><div class="tip-h"><span class="tip-n"><span class="sky-num">15</span></span><h3>Ask for the plan before it touches your files.</h3></div><div class="tip-txt"><p>This one is from Anthropic's own getting-started video. Point Cowork at a folder, describe the job, and ask it to show you the plan before it changes anything. You fix what's wrong in the plan, then it does the work on your machine.</p><p>Anthropic's advice is to start with tasks that have clear boundaries and to always review what Claude produces.</p><blockquote>"Show me the plan before making changes."<cite>Claude, Getting started with Claude Cowork, 2:38</cite></blockquote></div><div class="tip-vid"><div class="yt" data-yt="Lbml7IuGJYw" data-start="145" data-embed="https://www.youtube-nocookie.com/embed/Lbml7IuGJYw?start=145" data-title="Anthropic&#x27;s Getting started with Claude Cowork video, from 2:25: Ask for the plan before it touches your files."><img src="/media/kits/cowork/t15.jpg" alt="Anthropic&#x27;s Getting started with Claude Cowork video, from 2:25: Ask for the plan before it touches your files." loading="lazy" decoding="async" width="720" height="406"><button type="button" class="ytplay">Play from 2:25</button><span class="ytsrc">Claude</span></div><p class="ytmeta"><a href="https://www.youtube.com/watch?v=Lbml7IuGJYw&amp;t=145s">Open on YouTube at 2:25</a></p></div></article></div>
+  </div>
+</section>
+
+<section class="step pad" id="higher">
+  <div class="step-kicker"><span>06</span>Stay fresh, aim higher</div>
+  <div>
+    <h2>Keep your setup fresh. Then aim higher.</h2>
+    <p class="lede">Models get better every few months, so a setup that helped last time can start holding Claude back. Re-test it, and keep handing Claude bigger goals.</p>
+    <div class="tips"><article class="tip has-viz" id="tip-16"><div class="tip-h"><span class="tip-n"><span class="sky-num">16</span></span><h3>Re-test your skills at every model release.</h3></div><figure class="viz"><svg viewBox="0 0 480 372" role="img" aria-label="Illustration of the half-life of a skill. Across four model releases, what a skill adds to the output falls from a lot to nothing, and then below zero, where the skill holds the model back. At every release, re-test the raw model against the model with the skill, and remove the skill once raw wins."><text class="m" x="10" y="20">What the skill adds</text><path d="M60 36V280H470" fill="none" stroke="#39383D" stroke-width="1.5"/><path d="M60 214H470" stroke="#909092" stroke-width="1.25" stroke-dasharray="4 5"/><text class="m" x="66" y="206">No difference</text><rect x="61" y="215" width="409" height="64" fill="#E2E4EC"/><text class="s" x="250" y="262" style="fill:#08070B">Now it holds Claude back</text><path d="M80 56 C150 120 220 160 290 190 S420 232 466 244" fill="none" stroke="#034C7C" stroke-width="3"/><circle cx="80" cy="56" r="6" fill="#034C7C"/><circle cx="200" cy="148" r="6" fill="#034C7C"/><circle cx="320" cy="203" r="6" fill="#034C7C"/><circle cx="440" cy="238" r="7" fill="#FFFFFF" stroke="#034C7C" stroke-width="2.5"/><text class="s" x="96" y="60" style="fill:#08070B">A big help</text><text class="s" x="214" y="140">Re-test: raw vs skill</text><text class="t" x="352" y="190" style="fill:#034C7C">Remove it</text><text class="m" x="80" y="304" text-anchor="middle">Model 1</text><text class="m" x="200" y="304" text-anchor="middle">Model 2</text><text class="m" x="320" y="304" text-anchor="middle">Model 3</text><text class="m" x="440" y="304" text-anchor="middle">Model 4</text><text class="m" x="10" y="360">Illustration · Felix at 21:42</text></svg><figcaption>The half-life of a skill</figcaption></figure><div class="tip-txt"><p>Anthropic's official guidance, and Felix's own, is to be careful with skills. They often tell a model things that mattered for the last generation, and sometimes removing a skill gives better output.</p><p>This is the one that made me rethink my own setup. At every major model release I now run the task on the raw model and with the skill, and keep whichever does better.</p><blockquote>"the half-life of a good skill is very short."<cite>Felix at 21:54</cite></blockquote><div class="chips"><span class="chip">In the Reel</span></div></div><div class="tip-vid"><div class="yt" data-yt="D-SVFneJ_Nk" data-start="1302" data-embed="https://www.youtube-nocookie.com/embed/D-SVFneJ_Nk?start=1302" data-title="Felix Rieseberg on Silicon Valley Girl, from 21:42: Re-test your skills at every model release."><img src="/media/kits/cowork/t16.jpg" alt="Felix Rieseberg on Silicon Valley Girl, from 21:42: Re-test your skills at every model release." loading="lazy" decoding="async" width="720" height="406"><button type="button" class="ytplay">Play from 21:42</button><span class="ytsrc">Silicon Valley Girl</span></div><p class="ytmeta"><a href="https://www.youtube.com/watch?v=D-SVFneJ_Nk&amp;t=1302s">Open on YouTube at 21:42</a></p></div></article><article class="tip" id="tip-17"><div class="tip-h"><span class="tip-n"><span class="sky-num">17</span></span><h3>Give it the goal, not just the task.</h3></div><div class="tip-txt"><p>Ask what you're hoping happens after the task, and give Claude that instead. Keep going up until you hit what the current model can't do. "Go make money" is too far, Felix admits, but reaching the ceiling tells you you're at the frontier, and you'll get more out of every new model.</p><p>If all you ask for is an email summary, you're not using what the new models can do.</p><blockquote>"whatever outcome you're hoping for, give the model that task."<cite>Felix at 39:15</cite></blockquote></div><div class="tip-vid"><div class="yt" data-yt="D-SVFneJ_Nk" data-start="2335" data-embed="https://www.youtube-nocookie.com/embed/D-SVFneJ_Nk?start=2335" data-title="Felix Rieseberg on Silicon Valley Girl, from 38:55: Give it the goal, not just the task."><img src="/media/kits/cowork/t17.jpg" alt="Felix Rieseberg on Silicon Valley Girl, from 38:55: Give it the goal, not just the task." loading="lazy" decoding="async" width="720" height="406"><button type="button" class="ytplay">Play from 38:55</button><span class="ytsrc">Silicon Valley Girl</span></div><p class="ytmeta"><a href="https://www.youtube.com/watch?v=D-SVFneJ_Nk&amp;t=2335s">Open on YouTube at 38:55</a></p></div></article><article class="tip has-viz" id="tip-18"><div class="tip-h"><span class="tip-n"><span class="sky-num">18</span></span><h3>Go one level up.</h3></div><figure class="viz"><svg viewBox="0 0 480 360" role="img" aria-label="Go one level up, from Felix's furniture planner. Step one, type in each piece of furniture by hand. One level up, tell Claude what furniture you have. One more level up, Claude works out what you own by itself."><defs><marker id="ah6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#39383D"/></marker><marker id="ab6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#034C7C"/></marker></defs><rect class="bx ds" x="10" y="246" width="210" height="76" rx="10"/><text class="s" x="115" y="279" text-anchor="middle">Type in each piece</text><text class="s" x="115" y="301" text-anchor="middle">of furniture by hand</text><path class="e" d="M60 246 C60 196 90 184 136 184" marker-end="url(#ah6)"/><text class="m" x="72" y="240">One level up</text><rect class="bx ac" x="140" y="146" width="210" height="76" rx="10"/><text class="s" x="245" y="179" text-anchor="middle">Tell Claude what</text><text class="s" x="245" y="201" text-anchor="middle">furniture you have</text><path class="e b" d="M190 146 C190 96 210 74 256 74" marker-end="url(#ab6)"/><text class="m b" x="202" y="136">One more level up</text><rect class="bx dk" x="260" y="36" width="210" height="76" rx="10"/><text class="s w" x="365" y="69" text-anchor="middle">Claude works out</text><text class="s w" x="365" y="91" text-anchor="middle">what you own</text><text class="m" x="10" y="350">How I AI · Felix at 16:00</text></svg><figcaption>One level up</figcaption></figure><div class="tip-txt"><p>On How I AI, Felix built a furniture planner for his house and caught himself typing in each piece by hand. So he went a step up and just told Claude what furniture he had. Then another: why tell it at all, when Claude could work out what he owns from his email?</p><p>He keeps asking that question, then spends his own time on the fun, creative part.</p></div><div class="tip-vid"><div class="yt" data-yt="-tdNsYi8AXs" data-start="960" data-embed="https://www.youtube-nocookie.com/embed/-tdNsYi8AXs?start=960" data-title="Felix Rieseberg on How I AI, from 16:00: Go one level up."><img src="/media/kits/cowork/t18.jpg" alt="Felix Rieseberg on How I AI, from 16:00: Go one level up." loading="lazy" decoding="async" width="720" height="406"><button type="button" class="ytplay">Play from 16:00</button><span class="ytsrc">How I AI</span></div><p class="ytmeta"><a href="https://www.youtube.com/watch?v=-tdNsYi8AXs&amp;t=960s">Open on YouTube at 16:00</a></p></div></article><article class="tip" id="tip-19"><div class="tip-h"><span class="tip-n"><span class="sky-num">19</span></span><h3>Tell Claude it's possible.</h3></div><div class="tip-txt"><p>When Felix tries something at the edge of what a computer can do, he tells Claude that he knows it's possible, even when he doesn't know how. He says it gives Claude more confidence to go after the task, and it skips the back and forth about whether the idea is a good one.</p></div><div class="tip-vid"><div class="yt" data-yt="-tdNsYi8AXs" data-start="1906" data-embed="https://www.youtube-nocookie.com/embed/-tdNsYi8AXs?start=1906" data-title="Felix Rieseberg on How I AI, from 31:46: Tell Claude it&#x27;s possible."><img src="/media/kits/cowork/t19.jpg" alt="Felix Rieseberg on How I AI, from 31:46: Tell Claude it&#x27;s possible." loading="lazy" decoding="async" width="720" height="406"><button type="button" class="ytplay">Play from 31:46</button><span class="ytsrc">How I AI</span></div><p class="ytmeta"><a href="https://www.youtube.com/watch?v=-tdNsYi8AXs&amp;t=1906s">Open on YouTube at 31:46</a></p></div></article><article class="tip" id="tip-20"><div class="tip-h"><span class="tip-n"><span class="sky-num">20</span></span><h3>Spend the time you save on your customers.</h3></div><div class="tip-txt"><p>Building is cheap now. Felix thinks the secret to a good product hasn't changed: empathy for the user, for the use case, and for whether the person paying finds it valuable. AI just makes it much easier to act on.</p><blockquote>"And I believe it's empathy."<cite>Felix at 32:10</cite></blockquote></div><div class="tip-vid"><div class="yt" data-yt="D-SVFneJ_Nk" data-start="1911" data-embed="https://www.youtube-nocookie.com/embed/D-SVFneJ_Nk?start=1911" data-title="Felix Rieseberg on Silicon Valley Girl, from 31:51: Spend the time you save on your customers."><img src="/media/kits/cowork/t20.jpg" alt="Felix Rieseberg on Silicon Valley Girl, from 31:51: Spend the time you save on your customers." loading="lazy" decoding="async" width="720" height="406"><button type="button" class="ytplay">Play from 31:51</button><span class="ytsrc">Silicon Valley Girl</span></div><p class="ytmeta"><a href="https://www.youtube.com/watch?v=D-SVFneJ_Nk&amp;t=1911s">Open on YouTube at 31:51</a></p></div></article></div>
+  </div>
+</section>
+
+<section class="step pad" id="summary">
+  <div class="step-kicker"><span>07</span>The long summary</div>
+  <div>
+    <h2>The interview, in plain English.</h2>
+    <p class="lede">What Felix said, in the order he said it, for a business owner who uses Claude every day. Each time links to that moment in the video.</p>
+    <div class="quotes"><figure><blockquote>"you are not really benefiting from the new intelligence."</blockquote><figcaption>Felix at <a class="ts" href="https://www.youtube.com/watch?v=D-SVFneJ_Nk&amp;t=2s">0:02</a></figcaption></figure><figure><blockquote>"I'm just a conveyor belt for Claude"</blockquote><figcaption>Felix at <a class="ts" href="https://www.youtube.com/watch?v=D-SVFneJ_Nk&amp;t=1380s">23:00</a></figcaption></figure><figure><blockquote>"the half-life of a good skill is very short."</blockquote><figcaption>Felix at <a class="ts" href="https://www.youtube.com/watch?v=D-SVFneJ_Nk&amp;t=1314s">21:54</a></figcaption></figure><figure><blockquote>"I think we're kind of over-rotating on this agents thing."</blockquote><figcaption>Felix at <a class="ts" href="https://www.youtube.com/watch?v=D-SVFneJ_Nk&amp;t=1068s">17:48</a></figcaption></figure><figure><blockquote>"I fully trust that 100%."</blockquote><figcaption>Felix at <a class="ts" href="https://www.youtube.com/watch?v=D-SVFneJ_Nk&amp;t=1055s">17:35</a></figcaption></figure><figure><blockquote>"I think we're still in the pre-iPhone era"</blockquote><figcaption>Felix at <a class="ts" href="https://www.youtube.com/watch?v=D-SVFneJ_Nk&amp;t=2903s">48:23</a></figcaption></figure></div><ol class="tl"><li><a class="ts" href="https://www.youtube.com/watch?v=D-SVFneJ_Nk&amp;t=0s">0:00</a><div><b>You're asking too little of AI.</b><p>The cold open. If all you ask for is "summarize this email", Felix says you aren't benefiting from the new intelligence. Marina runs a 35-person team that uses Claude across the channel and wants to get further.</p></div></li><li><a class="ts" href="https://www.youtube.com/watch?v=D-SVFneJ_Nk&amp;t=184s">3:04</a><div><b>What his workday looks like now.</b><p>He calls himself a mix of product manager, engineering manager, people manager and data scientist. Most days he prototypes: the team talks an idea through, tells Claude to build all the variations, then critiques them. Building is cheap and attention isn't: "I can easily build a thousand. I can't show you a thousand." Good products have fewer buttons, and the signal he looks for is people getting it quickly.</p></div></li><li><a class="ts" href="https://www.youtube.com/watch?v=D-SVFneJ_Nk&amp;t=344s">5:44</a><div><b>Automation versus augmentation.</b><p>Automation saves time and money and is where most of AI's economic value is today. Augmentation, doing things you couldn't do before, is what interests him. In a company, how people changed their workflow impresses him more than what the tool does.</p></div></li><li><a class="ts" href="https://www.youtube.com/watch?v=D-SVFneJ_Nk&amp;t=433s">7:13</a><div><b>How to judge creative work.</b><p>Decide what good means first. His weather example: a lucky guess should fail and a well-sourced near miss should pass. Good writers and artists have a process, and Claude responds well to being asked to take the same steps a professional takes. That's why telling it to use Blender lifted its 3D work.</p></div></li><li><a class="ts" href="https://www.youtube.com/watch?v=D-SVFneJ_Nk&amp;t=777s">12:57</a><div><b>How to catch confident mistakes.</b><p>Adversarial reviews: five threads try to prove the work wrong, a judge decides which criticisms hold, and the critics can be a smaller model. Then two buckets. If you have no idea what good looks like, "Just throw more tokens at it." If you do, judge the result the way a client judges a contractor or a lawyer.</p></div></li><li><a class="ts" href="https://www.youtube.com/watch?v=D-SVFneJ_Nk&amp;t=1033s">17:13</a><div><b>The one job he trusts fully.</b><p>Fact-checking. One agent, primary sources for every number, and he trusts the result 100%.</p></div></li><li><a class="ts" href="https://www.youtube.com/watch?v=D-SVFneJ_Nk&amp;t=1056s">17:36</a><div><b>Are we overcomplicating agents?</b><p>Yes, he thinks. Models are generalists, so skip the cast of characters. Give Claude the full view of the business through well-documented tools and let it choose what to pull. Be careful with skills, because the half-life of a good skill is very short. Think about the model's experience: it wants raw data and a computer.</p></div></li><li><a class="ts" href="https://www.youtube.com/watch?v=D-SVFneJ_Nk&amp;t=1367s">22:47</a><div><b>"I'm just a conveyor belt for Claude."</b><p>He used to hand Claude one crash at a time. Now Claude gets all the crash data and decides what to fix. It costs more to set up, and it pays off.</p></div></li><li><a class="ts" href="https://www.youtube.com/watch?v=D-SVFneJ_Nk&amp;t=1446s">24:06</a><div><b>How to get started.</b><p>Download the desktop app, let Claude use your computer and its built-in browser, and add connectors only once a workflow has proved itself.</p></div></li><li><a class="ts" href="https://www.youtube.com/watch?v=D-SVFneJ_Nk&amp;t=1508s">25:08</a><div><b>Why "you're an expert" isn't enough.</b><p>Role prompts were a 2024 habit and get you role play. Ask which tools a top professional uses and have Claude use them. On trust, the question for him is less what he won't trust Claude with and more what he won't trust one session with, and a session judging its own work is top of that list. Find an outside signal, or at least another session.</p></div></li><li><a class="ts" href="https://www.youtube.com/watch?v=D-SVFneJ_Nk&amp;t=1725s">28:45</a><div><b>How to stop being your company's bottleneck.</b><p>Marina's feedback lives in Telegram and closing the loop is manual. Felix's answer is the three-round loop: assemble your feedback, condense it into principles, find the ones you don't know you hold, then feed the list into reviews. Run Claude side by side with your own reviews for a few rounds before you hand over. For a team he suggests Claude Tag, Claude inside Slack, where several people can talk to Claude at once.</p></div></li><li><a class="ts" href="https://www.youtube.com/watch?v=D-SVFneJ_Nk&amp;t=1911s">31:51</a><div><b>What's the moat now?</b><p>It hasn't changed, he says: empathy for the user and the use case. Bad software, the kind you use because there's nothing better, should go away.</p></div></li><li><a class="ts" href="https://www.youtube.com/watch?v=D-SVFneJ_Nk&amp;t=2096s">34:56</a><div><b>Where the opportunities are.</b><p>The software running hotels and airports is clunky, and cleaning it up is an untapped opportunity. Execution has become extremely cheap, so people who understand a business's needs, MBAs included, can now build software startups.</p></div></li><li><a class="ts" href="https://www.youtube.com/watch?v=D-SVFneJ_Nk&amp;t=2254s">37:34</a><div><b>The gap between what AI can do and how we use it.</b><p>He agrees there's a capability overhang. Anthropic's CEO Dario Amodei talks about a data center of geniuses, and Felix sees his job as helping people make use of it. What we believe is possible holds us back more than the models do.</p></div></li><li><a class="ts" href="https://www.youtube.com/watch?v=D-SVFneJ_Nk&amp;t=2317s">38:37</a><div><b>Give Claude the goal beyond the task.</b><p>Ask what you hope happens next and give the model that. Keep going until you find the limit of the current model, and you'll benefit from every new one.</p></div></li><li><a class="ts" href="https://www.youtube.com/watch?v=D-SVFneJ_Nk&amp;t=2391s">39:51</a><div><b>What to build and learn to stay valuable.</b><p>For young engineers: build real things and a portfolio, show you can talk to customers, and learn to combine systems. When he hires, what you've made counts for more than your degree.</p></div></li><li><a class="ts" href="https://www.youtube.com/watch?v=D-SVFneJ_Nk&amp;t=2604s">43:24</a><div><b>What children should learn.</b><p>How businesses work and how people collaborate. He admires the University of Waterloo's model, where students do several internships before they graduate.</p></div></li><li><a class="ts" href="https://www.youtube.com/watch?v=D-SVFneJ_Nk&amp;t=2814s">46:54</a><div><b>Life in five years.</b><p>We keep underestimating how fast AI improves. He thinks today's AI products are like the phones before the smartphone. And a warning about this whole list: "all the advice I've given you today in about 10 weeks, we're probably going to have a new revision on all of it."</p></div></li></ol>
+  </div>
+</section>
+
+<section class="step pad" id="more">
+  <div class="step-kicker"><span>08</span>More Cowork videos</div>
+  <div>
+    <h2>More Cowork videos worth your time.</h2>
+    <p class="lede">Anthropic's own walkthroughs first, then the creators I'd send a friend to, then more Felix. Some start at the useful part.</p>
+    <p class="inst">From Anthropic</p><div class="vids"><div class="vid"><div class="yt" data-yt="UAmKyyZ-b9E" data-start="0" data-embed="https://www.youtube-nocookie.com/embed/UAmKyyZ-b9E?start=0" data-title="Anthropic: Introducing Cowork: Claude Code for the rest of your work"><img src="https://i.ytimg.com/vi/UAmKyyZ-b9E/hqdefault.jpg" alt="Anthropic: Introducing Cowork: Claude Code for the rest of your work" loading="lazy" decoding="async" width="720" height="406"><button type="button" class="ytplay">Play</button><span class="ytsrc">Anthropic</span></div><p class="ytmeta"><a href="https://www.youtube.com/watch?v=UAmKyyZ-b9E&amp;t=0s">Open on YouTube</a></p><span class="who">Anthropic · 1:09 · Jan 2026</span><h3>Introducing Cowork: Claude Code for the rest of your work</h3><p>The launch film. One minute on what Cowork is for.</p></div><div class="vid"><div class="yt" data-yt="Lbml7IuGJYw" data-start="0" data-embed="https://www.youtube-nocookie.com/embed/Lbml7IuGJYw?start=0" data-title="Claude: Getting started with Claude Cowork"><img src="https://i.ytimg.com/vi/Lbml7IuGJYw/hqdefault.jpg" alt="Claude: Getting started with Claude Cowork" loading="lazy" decoding="async" width="720" height="406"><button type="button" class="ytplay">Play</button><span class="ytsrc">Claude</span></div><p class="ytmeta"><a href="https://www.youtube.com/watch?v=Lbml7IuGJYw&amp;t=0s">Open on YouTube</a></p><span class="who">Claude · 4:16 · May 2026</span><h3>Getting started with Claude Cowork</h3><p>Give it a folder, connect your tools, use Chrome, and set global instructions that apply to every session.</p></div><div class="vid"><div class="yt" data-yt="qMUf-jwSpMo" data-start="0" data-embed="https://www.youtube-nocookie.com/embed/qMUf-jwSpMo?start=0" data-title="Claude: Claude Cowork and chat are now one Claude"><img src="https://i.ytimg.com/vi/qMUf-jwSpMo/hqdefault.jpg" alt="Claude: Claude Cowork and chat are now one Claude" loading="lazy" decoding="async" width="720" height="406"><button type="button" class="ytplay">Play</button><span class="ytsrc">Claude</span></div><p class="ytmeta"><a href="https://www.youtube.com/watch?v=qMUf-jwSpMo&amp;t=0s">Open on YouTube</a></p><span class="who">Claude · 1:11 · Sep 2026</span><h3>Claude Cowork and chat are now one Claude</h3><p>Anthropic's one-minute update from September.</p></div></div><div class="docs"><div class="read"><div class="src">Claude Help Center</div><h3>Get started with Claude Cowork</h3><a href="https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork">Read it</a></div><div class="read"><div class="src">Claude Academy</div><h3>Get started in Claude Cowork in three steps</h3><a href="https://academy.claude.com/tutorials/get-started-in-claude-cowork-in-three-steps">Read it</a></div><div class="read"><div class="src">claude.com</div><h3>The Claude Cowork product page</h3><a href="https://claude.com/product/cowork">Read it</a></div></div><p class="inst">From creators</p><div class="vids"><div class="vid"><div class="yt" data-yt="z9rdrNrkvDY" data-start="0" data-embed="https://www.youtube-nocookie.com/embed/z9rdrNrkvDY?start=0" data-title="Jeff Su: Learn 80% of Claude Cowork in Under 20 Minutes"><img src="https://i.ytimg.com/vi/z9rdrNrkvDY/hqdefault.jpg" alt="Jeff Su: Learn 80% of Claude Cowork in Under 20 Minutes" loading="lazy" decoding="async" width="720" height="406"><button type="button" class="ytplay">Play</button><span class="ytsrc">Jeff Su</span></div><p class="ytmeta"><a href="https://www.youtube.com/watch?v=z9rdrNrkvDY&amp;t=0s">Open on YouTube</a></p><span class="who">Jeff Su · 18:54 · Apr 2026</span><h3>Learn 80% of Claude Cowork in Under 20 Minutes</h3><p>Seven capabilities in order: local files, memory, connectors, skills, projects, the browser extension and scheduled tasks.</p></div><div class="vid"><div class="yt" data-yt="4wvLHFgnQZQ" data-start="118" data-embed="https://www.youtube-nocookie.com/embed/4wvLHFgnQZQ?start=118" data-title="Jeff Su: Claude Cowork: Top 5 Tips for Productivity"><img src="https://i.ytimg.com/vi/4wvLHFgnQZQ/hqdefault.jpg" alt="Jeff Su: Claude Cowork: Top 5 Tips for Productivity" loading="lazy" decoding="async" width="720" height="406"><button type="button" class="ytplay">Play from 1:58</button><span class="ytsrc">Jeff Su</span></div><p class="ytmeta"><a href="https://www.youtube.com/watch?v=4wvLHFgnQZQ&amp;t=118s">Open on YouTube at 1:58</a></p><span class="who">Jeff Su · 17:50 · May 2026</span><h3>Claude Cowork: Top 5 Tips for Productivity</h3><p>Starts at his 300-line rule for your claude.md. He cut his from over 600 lines to around 250 and says his token use dropped by roughly 25%.</p></div><div class="vid"><div class="yt" data-yt="szWBwfPX30M" data-start="338" data-embed="https://www.youtube-nocookie.com/embed/szWBwfPX30M?start=338" data-title="Paul J Lipsky: Claude Cowork Finally Clicked When I Learned This"><img src="https://i.ytimg.com/vi/szWBwfPX30M/hqdefault.jpg" alt="Paul J Lipsky: Claude Cowork Finally Clicked When I Learned This" loading="lazy" decoding="async" width="720" height="406"><button type="button" class="ytplay">Play from 5:38</button><span class="ytsrc">Paul J Lipsky</span></div><p class="ytmeta"><a href="https://www.youtube.com/watch?v=szWBwfPX30M&amp;t=338s">Open on YouTube at 5:38</a></p><span class="who">Paul J Lipsky · 14:34 · Jul 2026</span><h3>Claude Cowork Finally Clicked When I Learned This</h3><p>Starts at the claude.md chapter: the standing instructions Cowork reads every time it works in your folder. Sponsored by Anthropic, as his description says.</p></div><div class="vid"><div class="yt" data-yt="YYr7hw5EAtk" data-start="0" data-embed="https://www.youtube-nocookie.com/embed/YYr7hw5EAtk?start=0" data-title="Kevin Stratvert: How to Use Claude Cowork (Step-by-Step Tutorial)"><img src="https://i.ytimg.com/vi/YYr7hw5EAtk/hqdefault.jpg" alt="Kevin Stratvert: How to Use Claude Cowork (Step-by-Step Tutorial)" loading="lazy" decoding="async" width="720" height="406"><button type="button" class="ytplay">Play</button><span class="ytsrc">Kevin Stratvert</span></div><p class="ytmeta"><a href="https://www.youtube.com/watch?v=YYr7hw5EAtk&amp;t=0s">Open on YouTube</a></p><span class="who">Kevin Stratvert · 9:41 · Aug 2026</span><h3>How to Use Claude Cowork (Step-by-Step Tutorial)</h3><p>A step-by-step tutorial from the start.</p></div></div><p class="inst">More Felix</p><div class="vids"><div class="vid"><div class="yt" data-yt="-tdNsYi8AXs" data-start="0" data-embed="https://www.youtube-nocookie.com/embed/-tdNsYi8AXs?start=0" data-title="How I AI: How the engineer behind Claude Cowork actually uses Claude"><img src="https://i.ytimg.com/vi/-tdNsYi8AXs/hqdefault.jpg" alt="How I AI: How the engineer behind Claude Cowork actually uses Claude" loading="lazy" decoding="async" width="720" height="406"><button type="button" class="ytplay">Play</button><span class="ytsrc">How I AI</span></div><p class="ytmeta"><a href="https://www.youtube.com/watch?v=-tdNsYi8AXs&amp;t=0s">Open on YouTube</a></p><span class="who">How I AI · 59:25 · May 2026</span><h3>How the engineer behind Claude Cowork actually uses Claude</h3><p>Felix with Claire Vo: floor plans turned into a 3D walkthrough, live artifacts and a $20 hardware button. Tips 18 and 19 come from here.</p></div><div class="vid"><div class="yt" data-yt="ZpZ7lFoWaT8" data-start="0" data-embed="https://www.youtube-nocookie.com/embed/ZpZ7lFoWaT8?start=0" data-title="Latent Space: Anthropic&#x27;s Felix Rieseberg on AI Coworkers, Local-First Agents, and the Future of Knowledge Work"><img src="https://i.ytimg.com/vi/ZpZ7lFoWaT8/hqdefault.jpg" alt="Latent Space: Anthropic&#x27;s Felix Rieseberg on AI Coworkers, Local-First Agents, and the Future of Knowledge Work" loading="lazy" decoding="async" width="720" height="406"><button type="button" class="ytplay">Play</button><span class="ytsrc">Latent Space</span></div><p class="ytmeta"><a href="https://www.youtube.com/watch?v=ZpZ7lFoWaT8&amp;t=0s">Open on YouTube</a></p><span class="who">Latent Space · 1:27:34 · Mar 2026</span><h3>Anthropic's Felix Rieseberg on AI Coworkers, Local-First Agents, and the Future of Knowledge Work</h3><p>The long, technical conversation.</p></div><div class="vid"><div class="yt" data-yt="9MEJ4syOVrQ" data-start="0" data-embed="https://www.youtube-nocookie.com/embed/9MEJ4syOVrQ?start=0" data-title="The MAD Podcast with Matt Turck: Anthropic&#x27;s Felix Rieseberg: Claude Cowork, Mythos, and the SaaS Extinction"><img src="https://i.ytimg.com/vi/9MEJ4syOVrQ/hqdefault.jpg" alt="The MAD Podcast with Matt Turck: Anthropic&#x27;s Felix Rieseberg: Claude Cowork, Mythos, and the SaaS Extinction" loading="lazy" decoding="async" width="720" height="406"><button type="button" class="ytplay">Play</button><span class="ytsrc">The MAD Podcast with Matt Turck</span></div><p class="ytmeta"><a href="https://www.youtube.com/watch?v=9MEJ4syOVrQ&amp;t=0s">Open on YouTube</a></p><span class="who">The MAD Podcast with Matt Turck · 58:08 · Apr 2026</span><h3>Anthropic's Felix Rieseberg: Claude Cowork, Mythos, and the SaaS Extinction</h3><p>Matt Turck's hour with Felix.</p></div></div><p class="note">None of these are mine and I earn nothing from any of them. The creators made them; go and subscribe if they help.</p>
+  </div>
+</section>
+
+<section class="step pad" id="now">
+  <div class="step-kicker"><span>09</span>What to do now</div>
+  <div>
+    <h2>Pick one. Try it this week.</h2>
+    <p class="lede">Reading these won't change much. Trying one on real work will. Here are three of Felix's methods as prompts you can paste into Cowork or any Claude chat.</p>
+    <p class="inst">The three-round feedback loop (tip 13)</p><div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>Here is feedback I've given on my team's work: [paste it, or point to the folder or channel where it lives].
+
+Round 1: Assemble all of it into one list, grouped by topic. Keep my exact words.
+Round 2: Condense that list into the rules or principles I care about. Give one real example of my feedback for each.
+Round 3: Now find the principles I might believe but don't know I believe: patterns in my feedback that I've never written down. Show the evidence for each.
+
+Finish with one list I can paste into future reviews as my review principles.</pre></div><p class="inst">The adversarial review (tips 3 and 4)</p><div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>Here is my draft: [paste or attach it].
+
+Fire off five separate threads. Give each one a single job: prove this draft is wrong. One checks every fact, one attacks the main argument, one looks for anything I've misunderstood, one writes the strongest counterargument, and one looks for what's missing.
+
+Then act as the judge. List every criticism, say whether it holds up and why. Give me only the valid ones, most important first.</pre></div><p class="note">In a plain chat with no threads, open five chats with the same draft and one job each, then paste their notes into a sixth chat as the judge.</p><p class="inst">The fact-check (tip 6)</p><div class="promptbox"><button class="copybtn" data-copy>Copy</button><pre>Check every fact in this [deck / post / document]. For every number I mention, find a primary source and check that it's a good primary source.
+
+Give me a table: the claim, the source with its link, whether it holds up, and the fix if it doesn't.</pre></div><p class="inst">Where to start</p><ul><li><strong>New to Cowork:</strong> tips 12 and 15. Download the desktop app, point it at one messy folder and ask for the plan first.</li><li><strong>Your prompts start with "you are an expert":</strong> tips 1 and 2.</li><li><strong>You don't trust what Claude hands back:</strong> tips 3 to 7. Run the fact-check on your next deck.</li><li><strong>You're the bottleneck on your team:</strong> tips 13 and 14. Gather a month of your feedback and run the three rounds.</li><li><strong>You've built a lot of skills or long instructions:</strong> tip 16. Test them against the raw model this week.</li></ul>
+  </div>
+</section>
+
+
+</div>
+
+<!-- The close and the footer are one block on the reversed sky, outside #kit so gated visitors get it too, everything
+     in it white on the dark stretch. .close-kit only shows once #kit is unlocked (CSS: #kit[hidden]~.closeblock .close-kit). -->
+<footer class="closeblock pad">
+  <div class="close-top">
+    <div>
+      <h2>See what's possible. Then build it.</h2>
+      <p class="close-kit">You're on the list now: five useful things I made with AI each week, and how I made them.</p>
+    </div>
+    <a class="close-btn" href="/">Back to the site</a>
+  </div>
+  <div class="close-row"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 897 112" role="img" aria-label="Art of the Possible"><title>Art of the Possible</title><g fill="#FFFFFF"><path transform="scale(0.448)" d="M93.301 48.471A34.601 34.601 0 1 1 156.699 48.471A34.601 34.601 0 0 0 93.301 48.471ZM156.699 48.471A34.601 34.601 0 1 1 201.529 93.301A34.601 34.601 0 0 0 156.699 48.471ZM201.529 93.301A34.601 34.601 0 1 1 156.699 48.471A34.601 34.601 0 0 0 201.529 93.301ZM201.529 93.301A34.601 34.601 0 1 1 201.529 156.699A34.601 34.601 0 0 0 201.529 93.301ZM201.529 156.699A34.601 34.601 0 1 1 156.699 201.529A34.601 34.601 0 0 0 201.529 156.699ZM156.699 201.529A34.601 34.601 0 1 1 201.529 156.699A34.601 34.601 0 0 0 156.699 201.529ZM156.699 201.529A34.601 34.601 0 1 1 93.301 201.529A34.601 34.601 0 0 0 156.699 201.529ZM93.301 201.529A34.601 34.601 0 1 1 48.471 156.699A34.601 34.601 0 0 0 93.301 201.529ZM48.471 156.699A34.601 34.601 0 1 1 93.301 201.529A34.601 34.601 0 0 0 48.471 156.699ZM48.471 156.699A34.601 34.601 0 1 1 48.471 93.301A34.601 34.601 0 0 0 48.471 156.699ZM48.471 93.301A34.601 34.601 0 1 1 93.301 48.471A34.601 34.601 0 0 0 48.471 93.301ZM93.301 48.471A34.601 34.601 0 1 1 48.471 93.301A34.601 34.601 0 0 0 93.301 48.471Z"/><path transform="translate(160 80.736)" d="M11.7 0H0.49L17.57 -49.47H31.04L48.09 0H36.91L24.49 -38.17H24.09ZM11.04 -19.44H37.49V-11.3H11.04ZM51.08 0V-49.47H70.57Q76.2 -49.47 80.16 -47.48Q84.12 -45.48 86.22 -41.85Q88.32 -38.21 88.32 -33.31Q88.32 -28.38 86.2 -24.84Q84.07 -21.29 80.04 -19.41Q76.01 -17.53 70.31 -17.53H57.27V-25.94H68.6Q71.63 -25.94 73.62 -26.76Q75.6 -27.59 76.58 -29.22Q77.55 -30.85 77.55 -33.31Q77.55 -35.78 76.57 -37.47Q75.59 -39.15 73.6 -40.02Q71.62 -40.89 68.58 -40.89H61.52V0ZM78.54 0 66.5 -22.52H77.78L90.09 0ZM90.95 -40.85V-49.47H131.58V-40.85H116.44V0H106.12V-40.85ZM170.54 0.66Q163.97 0.66 158.72 -2.32Q153.46 -5.31 150.41 -10.99Q147.36 -16.66 147.36 -24.7Q147.36 -32.8 150.41 -38.49Q153.46 -44.18 158.72 -47.16Q163.97 -50.14 170.54 -50.14Q177.12 -50.14 182.35 -47.16Q187.59 -44.18 190.64 -38.49Q193.69 -32.8 193.69 -24.7Q193.69 -16.64 190.64 -10.97Q187.59 -5.29 182.35 -2.31Q177.12 0.66 170.54 0.66ZM170.54 -8.58Q174.35 -8.58 177.16 -10.44Q179.98 -12.29 181.54 -15.89Q183.09 -19.49 183.09 -24.7Q183.09 -29.95 181.54 -33.57Q179.98 -37.18 177.16 -39.04Q174.35 -40.89 170.54 -40.89Q166.76 -40.89 163.93 -39.04Q161.1 -37.18 159.53 -33.57Q157.96 -29.95 157.96 -24.7Q157.96 -19.49 159.53 -15.89Q161.1 -12.29 163.93 -10.44Q166.76 -8.58 170.54 -8.58ZM198.51 0V-49.47H231.26V-40.85H208.95V-27.25H229.08V-18.79H208.95V0ZM246.36 -40.85V-49.47H286.99V-40.85H271.85V0H261.53V-40.85ZM290.8 0V-49.47H301.24V-29.06H322.46V-49.47H332.9V0H322.46V-20.44H301.24V0ZM338.59 0V-49.47H371.94V-40.85H349.03V-29.22H370.19V-20.76H349.03V-8.62H372V0ZM390.19 0V-49.47H409.68Q415.31 -49.47 419.27 -47.33Q423.23 -45.19 425.33 -41.4Q427.43 -37.61 427.43 -32.69Q427.43 -27.76 425.31 -24Q423.18 -20.25 419.15 -18.14Q415.12 -16.03 409.43 -16.03H396.99V-24.41H407.71Q410.74 -24.41 412.73 -25.46Q414.71 -26.52 415.69 -28.38Q416.66 -30.25 416.66 -32.69Q416.66 -35.18 415.69 -37.02Q414.71 -38.86 412.72 -39.88Q410.73 -40.89 407.69 -40.89H400.63V0ZM453.6 0.66Q447.03 0.66 441.78 -2.32Q436.52 -5.31 433.47 -10.99Q430.43 -16.66 430.43 -24.7Q430.43 -32.8 433.47 -38.49Q436.52 -44.18 441.78 -47.16Q447.03 -50.14 453.6 -50.14Q460.18 -50.14 465.42 -47.16Q470.65 -44.18 473.7 -38.49Q476.75 -32.8 476.75 -24.7Q476.75 -16.64 473.7 -10.97Q470.65 -5.29 465.42 -2.31Q460.18 0.66 453.6 0.66ZM453.6 -8.58Q457.41 -8.58 460.23 -10.44Q463.05 -12.29 464.6 -15.89Q466.15 -19.49 466.15 -24.7Q466.15 -29.95 464.6 -33.57Q463.05 -37.18 460.23 -39.04Q457.41 -40.89 453.6 -40.89Q449.82 -40.89 446.99 -39.04Q444.17 -37.18 442.6 -33.57Q441.03 -29.95 441.03 -24.7Q441.03 -19.49 442.6 -15.89Q444.17 -12.29 446.99 -10.44Q449.82 -8.58 453.6 -8.58ZM499.91 0.7Q493.92 0.7 489.49 -1.13Q485.06 -2.96 482.58 -6.57Q480.1 -10.19 479.96 -15.54H490.08Q490.27 -13.07 491.53 -11.4Q492.8 -9.74 494.93 -8.9Q497.06 -8.06 499.79 -8.06Q502.45 -8.06 504.43 -8.83Q506.4 -9.6 507.49 -10.98Q508.57 -12.36 508.57 -14.18Q508.57 -15.84 507.58 -16.96Q506.6 -18.08 504.73 -18.89Q502.85 -19.69 500.15 -20.32L494.75 -21.65Q488.5 -23.15 484.89 -26.41Q481.28 -29.68 481.28 -35.17Q481.28 -39.66 483.71 -43.02Q486.14 -46.38 490.37 -48.26Q494.61 -50.14 500.02 -50.14Q505.54 -50.14 509.64 -48.25Q513.75 -46.36 516.05 -43Q518.35 -39.64 518.43 -35.25H508.36Q508.09 -38.16 505.89 -39.78Q503.7 -41.4 499.94 -41.4Q497.4 -41.4 495.62 -40.68Q493.84 -39.97 492.92 -38.71Q492 -37.45 492 -35.83Q492 -34.09 493.06 -32.91Q494.11 -31.74 495.9 -31Q497.68 -30.25 499.81 -29.74L504.23 -28.66Q507.45 -27.93 510.16 -26.72Q512.87 -25.5 514.88 -23.74Q516.89 -21.99 517.99 -19.6Q519.09 -17.22 519.09 -14.13Q519.09 -9.61 516.81 -6.27Q514.53 -2.94 510.24 -1.12Q505.96 0.7 499.91 0.7ZM541.53 0.7Q535.54 0.7 531.11 -1.13Q526.68 -2.96 524.2 -6.57Q521.72 -10.19 521.58 -15.54H531.7Q531.89 -13.07 533.16 -11.4Q534.42 -9.74 536.55 -8.9Q538.68 -8.06 541.41 -8.06Q544.08 -8.06 546.05 -8.83Q548.02 -9.6 549.11 -10.98Q550.19 -12.36 550.19 -14.18Q550.19 -15.84 549.21 -16.96Q548.22 -18.08 546.35 -18.89Q544.47 -19.69 541.77 -20.32L536.37 -21.65Q530.12 -23.15 526.51 -26.41Q522.9 -29.68 522.9 -35.17Q522.9 -39.66 525.33 -43.02Q527.76 -46.38 531.99 -48.26Q536.23 -50.14 541.64 -50.14Q547.16 -50.14 551.26 -48.25Q555.37 -46.36 557.67 -43Q559.97 -39.64 560.05 -35.25H549.98Q549.71 -38.16 547.51 -39.78Q545.32 -41.4 541.56 -41.4Q539.02 -41.4 537.24 -40.68Q535.46 -39.97 534.54 -38.71Q533.62 -37.45 533.62 -35.83Q533.62 -34.09 534.68 -32.91Q535.74 -31.74 537.52 -31Q539.3 -30.25 541.43 -29.74L545.85 -28.66Q549.07 -27.93 551.78 -26.72Q554.49 -25.5 556.5 -23.74Q558.51 -21.99 559.61 -19.6Q560.71 -17.22 560.71 -14.13Q560.71 -9.61 558.43 -6.27Q556.15 -2.94 551.87 -1.12Q547.58 0.7 541.53 0.7ZM575.25 -49.47V0H564.81V-49.47ZM580.93 0V-49.47H600.73Q606.18 -49.47 609.83 -47.85Q613.48 -46.22 615.32 -43.36Q617.15 -40.5 617.15 -36.8Q617.15 -33.89 615.98 -31.71Q614.81 -29.52 612.8 -28.13Q610.78 -26.74 608.2 -26.16V-25.66Q611.03 -25.55 613.51 -24.08Q615.99 -22.6 617.53 -19.97Q619.08 -17.33 619.08 -13.67Q619.08 -9.75 617.14 -6.66Q615.21 -3.57 611.43 -1.78Q607.64 0 602.06 0ZM591.37 -8.54H599.91Q604.27 -8.54 606.29 -10.23Q608.31 -11.93 608.31 -14.7Q608.31 -16.77 607.32 -18.34Q606.33 -19.92 604.5 -20.82Q602.67 -21.71 600.16 -21.71H591.37ZM591.37 -28.77H599.14Q601.27 -28.77 602.96 -29.53Q604.64 -30.29 605.61 -31.69Q606.58 -33.1 606.58 -35.05Q606.58 -37.71 604.69 -39.36Q602.8 -41.01 599.34 -41.01H591.37ZM622.95 0V-49.47H633.39V-8.62H654.6V0ZM658.66 0V-49.47H692.01V-40.85H669.1V-29.22H690.26V-20.76H669.1V-8.62H692.06V0ZM708.66 -22.11V-39.91H717.37Q719.06 -39.94 720.47 -39.25Q721.88 -38.56 722.72 -37.24Q723.56 -35.93 723.56 -34.07Q723.56 -32.17 722.69 -30.82Q721.81 -29.47 720.37 -28.79Q718.94 -28.12 717.18 -28.12H711.19V-31.48H716.19Q717.2 -31.46 717.94 -32.11Q718.68 -32.75 718.68 -34.06Q718.68 -35.37 717.94 -35.95Q717.19 -36.52 716.21 -36.54H713.29V-22.11ZM720.04 -30.35 724.13 -22.11H719.02L715.23 -30.35ZM715.63 -11.49Q711.65 -11.49 708.14 -13Q704.64 -14.51 701.98 -17.17Q699.33 -19.82 697.84 -23.33Q696.35 -26.83 696.35 -30.81Q696.35 -34.8 697.84 -38.3Q699.33 -41.8 701.98 -44.46Q704.64 -47.12 708.14 -48.63Q711.65 -50.14 715.63 -50.14Q719.65 -50.14 723.15 -48.63Q726.65 -47.12 729.31 -44.46Q731.97 -41.8 733.46 -38.3Q734.95 -34.8 734.95 -30.81Q734.95 -26.83 733.46 -23.33Q731.97 -19.82 729.32 -17.17Q726.67 -14.51 723.16 -13Q719.65 -11.49 715.63 -11.49ZM715.63 -16.61Q719.59 -16.61 722.82 -18.52Q726.05 -20.43 727.97 -23.66Q729.88 -26.88 729.87 -30.81Q729.88 -34.74 727.96 -37.97Q726.05 -41.2 722.81 -43.12Q719.57 -45.03 715.63 -45.01Q711.72 -45.03 708.49 -43.12Q705.26 -41.2 703.34 -37.97Q701.43 -34.74 701.43 -30.82Q701.43 -26.89 703.35 -23.66Q705.26 -20.43 708.49 -18.52Q711.71 -16.61 715.63 -16.61Z"/></g></svg><p class="close-foot">New things are possible every day. <span class="nw">&middot; 2026</span></p></div>
+</footer>
+</div>
+
+
+
+<!-- The shared unlock: one email opens every guide in this browser, so nobody types it twice (Rich, 2026-10-03:
+     "People should not have to re-enter their email"). Load it before the gate code. -->
+<script src="/guides/unlock.js"></script>
+<script>
+(function () {
+  var API = 'https://theaotp-gate.theaotp.workers.dev';
+  var KEY = 'aotp_cowork_unlocked';
+  var kit = document.getElementById('kit');
+  var gate = document.getElementById('gate');
+  var form = document.getElementById('gate-form');
+  var status = document.getElementById('gate-status');
+  var subbed = document.getElementById('subbed');
+
+  // window.AOTPUnlock comes from /guides/unlock.js. Where that file cannot load (file://, another host) the same
+  // contract runs inline: "aotp_subscriber" ({"at": ISO time}, never the email) or a member the worker confirmed
+  // ("aotp_member" = "2", set by /f.js) opens every guide. An old aotp_<slug>_unlocked flag on its own does not
+  // (those people never confirmed, so they are asked once more). A settled submit writes "aotp_subscriber" plus this
+  // page's key; "Use a different email" clears them all.
+  var U = window.AOTPUnlock || (function () {
+    var SUB = 'aotp_subscriber', MEMBER = 'aotp_member', PAGE = /^aotp_.+_unlocked$/;
+    function stamp() { return JSON.stringify({ at: new Date().toISOString() }); }
+    function keys() { var out = []; try { for (var i = 0; i < localStorage.length; i++) out.push(localStorage.key(i) || ''); } catch (e) {} return out; }
+    return {
+      isSubscribed: function () {
+        try {
+          if (localStorage.getItem(SUB)) return true;
+          var member = localStorage.getItem(MEMBER) === '2';
+          if (member) localStorage.setItem(SUB, stamp());
+          return member;
+        } catch (e) { return false; }
+      },
+      remember: function (key, answer) {
+        try { if (!(answer && answer.member === false)) localStorage.setItem(SUB, stamp()); localStorage.setItem(key, '1'); } catch (e) {}
+      },
+      forget: function () { keys().forEach(function (k) { if (k === SUB || k === MEMBER || PAGE.test(k)) { try { localStorage.removeItem(k); } catch (e) {} } }); }
+    };
+  })();
+
+  function unlock() {
+    kit.hidden = false;
+    gate.hidden = true;
+    subbed.hidden = false;
+  }
+
+  var open = U.isSubscribed();
+  document.documentElement.classList.toggle('aotp-subscribed', open);
+  if (open) unlock();
+
+  // "Use a different email": lock every guide in this browser again and show the form here, without a reload.
+  document.getElementById('gate-reset').addEventListener('click', function (event) {
+    event.preventDefault();
+    U.forget();
+    document.documentElement.classList.remove('aotp-subscribed');
+    kit.hidden = true;
+    subbed.hidden = true;
+    gate.hidden = false;
+    status.textContent = '';
+    gate.scrollIntoView({ block: 'start' });
+    document.getElementById('gate-email').focus({ preventScroll: true });
+  });
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    var email = document.getElementById('gate-email').value.trim().toLowerCase();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      status.textContent = 'That email looks off. Try again.';
+      return;
+    }
+    status.textContent = 'One sec…';
+    fetch(API + '/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, ctx: window.aotpCtx ? window.aotpCtx() : null }),
+    }).then(function (response) {
+      return response.json().catch(function () { return {}; }).then(function (data) {
+        if (!response.ok) {
+          var err = new Error('subscribe failed');
+          err.status = response.status;
+          err.detail = data && data.detail;
+          throw err;
+        }
+        return data;
+      });
+    }).then(function (data) {
+      if (window.aotpSubscribed) window.aotpSubscribed(data);
+      U.remember(KEY, data);
+      status.textContent = !(data && data.new) ? 'Welcome back. Unlocked.'
+        : data.member === false ? 'Unlocked. Check your inbox to confirm your subscription to the letter.'
+        : 'Unlocked. You\'re on the list for the weekly letter.';
+      unlock();
+      window.scrollTo({ top: subbed.offsetTop - 24, behavior: 'smooth' });
+    }).catch(function (err) {
+      if (err && err.status === 400) {
+        status.textContent = 'That email was rejected' + (err.detail ? ' (' + err.detail + ')' : '') + '. Try a different address.';
+      } else {
+        status.textContent = 'Something broke on our end. Try again in a minute, or subscribe on the homepage and DM me on Instagram for the prompt.';
+      }
+    });
+  });
+
+  document.querySelectorAll('[data-copy]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      var pre = button.parentElement.querySelector('pre');
+      navigator.clipboard.writeText(pre.textContent).then(function () {
+        button.textContent = 'Copied';
+        setTimeout(function () { button.textContent = 'Copy'; }, 1600);
+      });
+    });
+  });
+
+})();
+</script>
+<script>
+/* Click-to-load YouTube (2026-11-08): each .yt shows a poster and a Play pill; a click mounts the youtube-nocookie
+   iframe at the tip's exact second (data-embed carries ?start=), so 30 videos cost nothing until one is played. */
+document.querySelectorAll('.yt').forEach(function (box) {
+  box.addEventListener('click', function () {
+    if (box.querySelector('iframe')) return;
+    var f = document.createElement('iframe');
+    f.src = box.dataset.embed + (box.dataset.embed.indexOf('?') < 0 ? '?' : '&') + 'autoplay=1&rel=0';
+    f.title = box.dataset.title || 'YouTube video';
+    f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+    f.referrerPolicy = 'strict-origin-when-cross-origin';
+    box.innerHTML = '';
+    box.appendChild(f);
+  });
+});
+</script>
+</body></html>
