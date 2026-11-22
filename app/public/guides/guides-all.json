@@ -1,6 +1,15 @@
 {
   "guides": [
     {
+      "slug": "rent",
+      "title": "Rent the Compute",
+      "blurb": "Have Claude rent a graphics card by the second for a heavy job, with the setup, the exact prompt I used and the check that nothing is left running.",
+      "url": "/rent/",
+      "cover": "/guides/covers/rent.svg",
+      "topic": "Costs",
+      "date": "2026-11-22"
+    },
+    {
       "slug": "focus",
       "title": "Three Focus Skills",
       "blurb": "Three skills to install in your AI agent that nudge you to practise unlearning, building systems and relationships, with a weekly habit for each.",

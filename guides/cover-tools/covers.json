@@ -1,4 +1,7 @@
 {
+  "rent": {
+    "diagram": "pipeline"
+  },
   "focus": {
     "diagram": "focus"
   },

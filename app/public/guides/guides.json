@@ -1,6 +1,15 @@
 {
   "guides": [
     {
+      "slug": "rent",
+      "title": "Rent the Compute",
+      "blurb": "Have Claude rent a graphics card by the second for a heavy job, with the setup, the exact prompt I used and the check that nothing is left running.",
+      "url": "/rent/",
+      "cover": "/guides/covers/rent.svg",
+      "topic": "Costs",
+      "date": "2026-11-22"
+    },
+    {
       "slug": "focus",
       "title": "Three Focus Skills",
       "blurb": "Three skills to install in your AI agent that nudge you to practise unlearning, building systems and relationships, with a weekly habit for each.",
@@ -125,15 +134,6 @@
       "cover": "/guides/covers/fable.svg",
       "topic": "Prompting",
       "date": "2026-11-11"
-    },
-    {
-      "slug": "anthropic-gap",
-      "title": "Anthropic's own playbook",
-      "blurb": "How Anthropic's own teams use Claude, taken from its own report and put in plain English on one page.",
-      "url": "/anthropic-gap/",
-      "cover": "/guides/covers/anthropic-gap.svg",
-      "topic": "Claude",
-      "date": "2026-11-10"
     }
   ]
 }
