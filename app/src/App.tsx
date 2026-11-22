@@ -24,7 +24,7 @@ import logoHcf from './assets/about/logo-hcf.png'
 import logoJuniper from './assets/about/logo-juniper.png'
 import logoCompound from './assets/about/logo-compound.png'
 import logoEverlab from './assets/about/logo-everlab.png'
-import logoQualia from './assets/about/logo-qualia.png'
+import logoWoolworths from './assets/about/logo-woolworths.png'
 
 const API_BASE = 'https://theaotp-gate.theaotp.workers.dev'
 const WRAP = 'mx-auto max-w-wrap px-5 sm:px-10 md:px-14'
@@ -262,7 +262,7 @@ const COMPANY_LOGOS = [
   { src: logoJuniper, name: 'Juniper' },
   { src: logoCompound, name: 'compound' },
   { src: logoEverlab, name: 'everlab' },
-  { src: logoQualia, name: 'Qualia' },
+  { src: logoWoolworths, name: 'Woolworths' },
 ]
 
 const JOURNEY = [
@@ -270,7 +270,8 @@ const JOURNEY = [
   { year: '2022', title: 'Built my first AI product', body: "Won 1st place at Australia's largest generative-AI accelerator, back in the GPT-3 days." },
   { year: '2023–25', title: "Led Euc's AI products", body: 'Shipped multiple AI systems, including a healthcare assistant used by 100,000+ people globally.' },
   { year: '2025', title: 'Went all-in on Qualia', body: "Quit to build an AI mental-health coach to sit alongside therapy. It didn't work out, but I learnt a lot." },
-  { year: '2026', title: 'AI innovation at HCF', body: "Now leading AI projects at Australia's largest health insurer, a $4b+ enterprise." },
+  { year: '2026', title: 'AI innovation at HCF', body: "Led AI projects at Australia's largest health insurer, a $4b+ enterprise." },
+  { year: '2026', title: 'Conversational AI at Woolworths', body: 'Now Product Lead, Conversational AI, working on Olive, our AI shopping assistant.' },
 ]
 
 const POST_TYPES = [
@@ -438,7 +439,7 @@ export default function App() {
                 <h2 className="rv text-balance font-display text-[clamp(30px,4.3vw,58px)] font-extrabold leading-[1.02] tracking-[-0.04em]">
                   I'm a massive nerd with <em className="italic">AI psychosis</em>, and enough real-world experience to have something to say about it.
                 </h2>
-                <p className="rv mt-8 text-[15px] leading-relaxed text-ink-soft">Ten years obsessed with startups and innovation. I've built AI products everywhere from a consumer startup that sold for $1.6b to one of Australia's largest enterprises, doing over $4b in revenue.</p>
+                <p className="rv mt-8 text-[15px] leading-relaxed text-ink-soft">Ten years obsessed with startups and innovation. I've built AI products everywhere from a consumer startup that sold for $1.6b to one of Australia's largest enterprises, doing over $4b in revenue. Now I lead conversational AI at Woolworths.</p>
                 <p className="rv mt-4 text-[13px] italic leading-relaxed text-ink-mid">AI psychosis (noun): a state of all-consuming curiosity that leaves you unable to stop thinking about, tinkering with, or talking about AI.</p>
               </div>
               <figure className="rv w-full max-w-[380px] md:self-end md:justify-self-end">
