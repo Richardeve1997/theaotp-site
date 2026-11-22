@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Free AI guides | Art of the Possible</title>
+<meta name="description" content="Every free guide from Art of the Possible: setups, prompts and playbooks for Claude Code, Codex and the rest of your AI tools. Each one opens with your email.">
+<link rel="canonical" href="https://theaotp.com/guides/">
+<link rel="icon" href="/qualia-symbol.png">
+<meta property="og:title" content="Free AI guides | Art of the Possible">
+<meta property="og:description" content="Every free guide from Art of the Possible: setups, prompts and playbooks for Claude Code, Codex and the rest of your AI tools. Each one opens with your email.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://theaotp.com/guides/">
+<meta name="theme-color" content="#043761">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&amp;family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&amp;family=Geist+Mono:wght@400&amp;display=swap" rel="stylesheet">
+<!--
+  The guides page ("view all"), Clear Sky. Rich, 2026-10-02: "someoen can click to view all, then they do to a page
+  that has all the guide tiles laid out, not in the carousel but something that makes more easy to digest".
+  Spec: content-intelligence assets/brand/clear-sky/DESIGN.md 10.7 (grid), 10.6 (covers), 10.1 (sky action),
+  10.2 (reversed footer). Reads /guides/guides-all.json, every live guide, newest first (Rich, 2026-11-22: one
+  link for the TikTok bio that shows every free guide; this replaces the 2026-10-03 "last 15" rule on this page).
+  guides.json stays the 15-guide shelf for the gates. Skips any entry with duplicate_of (the same page under a
+  second address). Brought onto main 2026-11-22 next to the older homepage, which has no #work section, so the
+  nav, close and footer point at the homepage's About and newsletter instead of "Work with me".
+  Covers come from /guides/covers/ and are always <img>, never inline SVG.
+  2026-10-03 (Rich: "black never over the blue, if we use black its over white"): every word on the header sky is
+  white and sits in its deep stretch; the sky fades to sand only in the empty tail below, where the covers rise.
+  Each tile says Unlock, or Open once this browser is subscribed (/guides/unlock.js, the shared unlock). The sunset
+  reveal is gone (Rich: "I dont love the sunset colours revealed with the mouse") until its replacement is chosen.
+  No em dashes, no bold display, no shadows. The sky's stops are never retuned, only spaced.
+-->
+<style>
+:root{
+  --sand:#EFEBE7;--ink:#08070B;--graphite:#39383D;--ice:#BEC4D2;--ice-3:#E2E4EC;--glacier-2:#F3F4F6;--deep-ocean:#034C7C;--white:#FFFFFF;
+  --f-display:'Inter Tight','Helvetica Neue',Arial,sans-serif;
+  --f-text:'Inter','Helvetica Neue',Arial,sans-serif;
+  --f-mono:'Geist Mono',ui-monospace,'SF Mono',Menlo,monospace;
+  /* Sky action, a clear two-tone (Rich, 2026-10-03: "Not enough gradient in the buttons"): deep blue into bright
+     cerulean. #0A8FCF fills only the last 20 px, outside the label, so white keeps 4.9 : 1 or better at the worst
+     pixel under any label (Chrome, 2x). Hover deepens every point (5.8 : 1 or better). */
+  --sky-action:linear-gradient(100deg,#034A7A 0%,#026AA1 52%,#0277B3 calc(100% - 20px),#0A8FCF 100%);
+  --sky-action-hover:linear-gradient(100deg,#033E68 0%,#025F92 52%,#026AA1 calc(100% - 20px),#0282C0 100%);
+  /* Reversed sky with the short sand lead-in, as on the homepage footer (DESIGN.md 10.2). White body text from
+     73.6% of the box down (t 0.30), white display, lockup and rings from 56% (t 0.50). */
+  --sky-reversed-short:linear-gradient(180deg,#EFEBE7 0%,#CBDBDF 12%,#9DCBDD 23%,#6DB9DC 34%,#3EA9DA 45%,#1199D7 56%,#0282C0 67%,#026AA1 78%,#024F80 89%,#043761 100%);
+  --gutter:16px;
+  /* The header sky: the nine measured stops, in order. The deep three (t 0 to 0.25) stretch over the header's
+     content, however tall it wraps, so every word sits on #026AA1 or darker (white body text 5.8 : 1 or better).
+     The other six fall in the empty tail below (--tail), where the sky fades to sand and the covers rise. */
+  --tail:200px;
+  --rise:104px;
+}
+@media (max-width:359.98px){:root{--rise:80px;--tail:176px}}
+@media (min-width:430px){:root{--rise:120px;--tail:224px}}
+@media (min-width:640px){:root{--gutter:32px}}
+@media (min-width:1024px){:root{--gutter:64px;--rise:150px;--tail:280px}}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--sand);color:var(--ink);font-family:var(--f-text);font-optical-sizing:auto;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%;height:auto}
+button{font:inherit}
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.on-sky :focus-visible{outline-color:var(--white)}
+.wrap{width:100%;max-width:1440px;margin:0 auto;padding:0 var(--gutter)}
+.skip{position:absolute;left:var(--gutter);top:-60px;z-index:200;padding:10px 16px;border-radius:999px;background:var(--ink);color:var(--white);font:500 14px/1 var(--f-text)}
+.skip:focus{top:12px}
+
+/* Sparkle label: the four-point sparkle, then mono caps. */
+.label{display:inline-flex;align-items:center;gap:.75em;font:400 11px/1.3 var(--f-mono);letter-spacing:.12em;text-transform:uppercase}
+.sparkle{width:9px;height:9px;flex:none;fill:currentColor}
+
+/* Buttons. Every button here is the sky action; on the dark sky it adds a 1 px white hairline (10.1). */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:52px;padding:0 26px;border-radius:999px;border:1px solid transparent;background:var(--sky-action) border-box;color:var(--white);font:500 16px/1 var(--f-text);letter-spacing:-.005em;white-space:nowrap;cursor:pointer;transition:background .2s ease}
+.btn:hover{background:var(--sky-action-hover) border-box}
+.btn svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.btn-sm{height:40px;padding:0 18px;font-size:15px}
+.btn-ring{border-color:var(--white)}
+.link{color:var(--deep-ocean);text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+.link:hover{text-decoration-thickness:2px}
+
+/* ---- Nav: on the dark top of the sky, in white ---------------------------------------------- */
+.nav{position:absolute;inset:0 0 auto 0;z-index:20;color:var(--white)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px}
+@media (min-width:1024px){.nav .wrap{height:72px}}
+.lockup{display:flex;align-items:center}
+.lockup svg{display:block;height:18px;width:auto;fill:currentColor}
+@media (min-width:640px){.lockup svg{height:21px}}
+.navlinks{display:flex;align-items:center;gap:28px}
+.navlinks a.txt{display:none;font-size:15px;text-underline-offset:4px}
+.navlinks a.txt:hover{text-decoration:underline}
+.navlinks a.txt[aria-current="page"]{text-decoration:underline;text-decoration-thickness:1px}
+@media (min-width:640px){.navlinks a.txt{display:inline}}
+/* Phones: the links fold into a menu, as on the homepage (Work with me first, then the links in page order).
+   Open, the bar turns sand with ink type, so the focus ring turns ink too. */
+.navlinks .btn{display:none}
+@media (min-width:640px){.navlinks .btn{display:inline-flex}}
+.menu-btn{display:grid;place-items:center;width:44px;height:44px;margin-right:-8px;padding:0;border:0;background:transparent;color:inherit;cursor:pointer}
+.menu-btn svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round}
+.menu-btn .x,.nav.is-open .menu-btn .bars{display:none}
+.nav.is-open .menu-btn .x{display:block}
+@media (min-width:640px){.menu-btn{display:none}}
+.menu{display:none}
+.nav.is-open{background:var(--sand);color:var(--ink);border-bottom:1px solid var(--ice)}
+.nav.is-open :focus-visible{outline-color:var(--ink)}
+.nav.is-open .menu{display:block;border-top:1px solid var(--ice);background:var(--sand)}
+/* The menu's own wrap is a plain block, not the 64 px flex bar above it. */
+.nav .menu .wrap{display:block;height:auto}
+@media (min-width:640px){.nav.is-open{background:none;color:var(--white);border-bottom:0}.nav.is-open .menu{display:none}}
+.menu ul{margin:0;padding:12px 0;list-style:none}
+.menu a{display:block;padding:16px 0;font:400 28px/1.04 var(--f-display);letter-spacing:-.03em;color:var(--ink)}
+.menu li:not(:last-child) a{border-bottom:1px solid var(--ice)}
+
+/* ---- Header: the sky, white type in its deep stretch, then sand ---------------------------- */
+/* All the type is white. The content box ends at #026AA1 (t 0.25): the deep stretch grows with the content, so a
+   longer headline never pushes a word onto the pale end. The tail below it holds nothing but sky and the top of
+   the first row of covers. */
+.head{position:relative;isolation:isolate;padding:84px 0 var(--tail);color:var(--white);
+  background:linear-gradient(180deg,#043761 0,#024F80 calc((100% - var(--tail)) * .5),#026AA1 calc(100% - var(--tail)),#0282C0 calc(100% - var(--tail) * .857),#1199D7 calc(100% - var(--tail) * .714),#3EA9DA calc(100% - var(--tail) * .571),#6DB9DC calc(100% - var(--tail) * .429),#9DCBDD calc(100% - var(--tail) * .286),#CBDBDF calc(100% - var(--tail) * .143),#EFEBE7 100%)}
+@media (min-width:1024px){.head{padding-top:100px}}
+.head-in{display:grid;gap:22px}
+/* Desktop: the headline on the left, the line about the guides on the right, level with its foot. */
+@media (min-width:1024px){.head-in{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:64px;align-items:end}}
+.head .label{color:var(--white)}
+.head h1{margin:14px 0 0;font:400 clamp(44px,6.3vw,96px)/.96 var(--f-display);letter-spacing:-.045em;color:var(--white);text-wrap:balance;max-width:14em}
+.head-side{padding-bottom:4px}
+.head-side p{margin:0;max-width:44ch;font:400 18px/1.5 var(--f-text);letter-spacing:-.012em;color:var(--white);text-wrap:pretty}
+@media (min-width:1024px){.head-side p{font-size:20px}}
+.head-meta{display:flex;flex-wrap:wrap;align-items:center;gap:10px 20px;margin-top:20px;color:var(--white)}
+/* Subscribed: one white line under the dek, with a link that locks the guides again. */
+.head .subnote{margin:14px 0 0;font:400 15px/1.5 var(--f-text);color:var(--white)}
+.head .subnote[hidden]{display:none}
+.head .subnote a{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px;white-space:nowrap}
+.head .subnote a:hover{text-decoration-thickness:2px}
+
+/* ---- Topic chips (only topics with two or more guides) ------------------------------------- */
+.filters{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 clamp(24px,3vw,36px);padding:8px 0 0}
+.filters[hidden]{display:none}
+.filters .label{color:var(--graphite);margin-right:8px}
+@media (max-width:639.98px){
+  /* On a phone the chips run in one row that scrolls sideways, so the grid starts sooner. */
+  .filters{flex-wrap:nowrap;overflow-x:auto;margin:0 calc(-1 * var(--gutter)) 20px;padding:8px var(--gutter) 6px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .filters::-webkit-scrollbar{display:none}
+  .filters .label,.chip{flex:none}
+}
+.chip{display:inline-flex;align-items:center;gap:8px;height:32px;padding:0 13px;border:1px solid var(--ink);border-radius:999px;background:transparent;color:var(--ink);font:500 14px/1 var(--f-text);cursor:pointer;transition:background .2s ease,color .2s ease}
+.chip .n{font:400 10.5px/1 var(--f-mono);letter-spacing:.08em;color:var(--graphite)}
+.chip:hover{background:var(--ice-3)}
+.chip[aria-pressed="true"]{border-color:transparent;background:var(--sky-action) border-box;color:var(--white)}
+.chip[aria-pressed="true"] .n{color:var(--white)}
+
+/* ---- The grid: four across at 1440, two on a phone, newest first (DESIGN.md 10.7) ---------- */
+/* The first row of covers rises into the pale foot of the header sky (t 0.80 and lighter), so the page does not
+   open on an empty band. Covers are not text: their #05416E edge measures well over 3 : 1 on the pale stops. */
+.library{position:relative;z-index:1;margin-top:calc(var(--rise) * -1);padding:0 0 clamp(64px,8vw,112px)}
+.library:focus{outline:none}
+.grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px 14px}
+@media (min-width:720px){.grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:40px 22px}}
+@media (min-width:1100px){.grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:48px 28px}}
+.grid > li{min-width:0}
+.grid > li[hidden]{display:none}
+.tile{display:block;color:var(--ink)}
+.tile .cv{display:block;border-radius:6px;overflow:hidden;background:#05416E;transition:transform .35s cubic-bezier(.16,1,.3,1)}
+.tile .cv img{width:100%;aspect-ratio:4/5;object-fit:cover}
+.tile:hover .cv{transform:translateY(-4px)}
+.tile h3{margin:14px 0 0;font:500 16px/1.3 var(--f-text);letter-spacing:-.01em;text-wrap:balance}
+@media (min-width:1100px){.tile h3{font-size:17px}}
+.tile:hover h3{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+.tile p{margin:6px 0 0;font:400 14px/1.45 var(--f-text);color:var(--graphite);text-wrap:pretty}
+@media (min-width:1100px){.tile p{font-size:15px}}
+.tile .meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin-top:12px;font:400 10.5px/1.3 var(--f-mono);letter-spacing:.1em;text-transform:uppercase}
+.tile .meta .addr{color:var(--deep-ocean)}
+.tile .meta .when{color:var(--graphite)}
+/* The tile's state: Unlock (an ink hairline tag) until this browser has given an email, then Open (deep ocean,
+   white type, 7.6 : 1). Ink and white only ever sit on sand or on the deep ocean fill. */
+.tile .state{display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 8px;border:1px solid var(--ink);border-radius:5px;color:var(--ink);font:400 10px/1 var(--f-mono);letter-spacing:.12em}
+.tile .state svg{width:11px;height:11px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.tile .state.is-open{border-color:var(--deep-ocean);background:var(--deep-ocean);color:var(--white)}
+.tile:focus-visible{outline:none}
+.tile:focus-visible .cv{outline:2px solid var(--ink);outline-offset:3px}
+.empty{margin:28px 0 0;color:var(--graphite)}
+
+/* ---- Close: the weekly letter, on sand ---------------------------------------------------------- */
+.close{border-top:1px solid var(--ice);padding:clamp(48px,6vw,88px) 0 clamp(56px,7vw,104px)}
+.close .grid2{display:grid;gap:24px 64px;align-items:end}
+@media (min-width:900px){.close .grid2{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr)}}
+.close .label{color:var(--ink)}
+.close h2{margin:18px 0 0;font:400 clamp(34px,4.2vw,56px)/1.02 var(--f-display);letter-spacing:-.035em;text-wrap:balance;max-width:16em}
+.close p{margin:0;max-width:46ch;font:400 17px/1.55 var(--f-text);color:var(--graphite)}
+.close .acts{display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px;margin-top:26px}
+
+/* ---- Footer: the reversed sky, as on the homepage (DESIGN.md 10.2) ------------------------- */
+.site-footer{position:relative;isolation:isolate;background:var(--sky-reversed-short);color:var(--white)}
+/* The homepage footer, height for height (app/src/index.css): Rich, third round, "footer is a bit fat". The
+   same links as the homepage, in page order. Phones show three (Newsletter returns from 640 up, and the
+   letter's link sits just above in the close), so they hold one line down to 320 and the box keeps the
+   homepage's min-heights: text row from 73.6% down (t 0.30), rings from 56%. */
+.footer-inner{display:flex;min-height:336px;flex-direction:column;justify-content:flex-end;padding-bottom:22px}
+@media (max-width:319.98px){.footer-inner{min-height:440px}}
+@media (min-width:376px){.footer-inner{min-height:312px}}
+@media (min-width:640px){.footer-inner{min-height:324px;padding-bottom:26px}}
+@media (min-width:1024px){.footer-inner{min-height:272px;padding-bottom:28px}}
+.footer-top{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.footer-top .lockup svg{height:24px}
+@media (min-width:640px){.footer-top .lockup svg{height:28px}}
+.socials{display:flex;gap:8px}
+.socials a{display:grid;place-items:center;width:40px;height:40px;border:1px solid var(--white);border-radius:50%;transition:background .2s ease,color .2s ease}
+.socials a:hover{background:var(--white);color:var(--ink)}
+.socials svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.footer-bottom{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+@media (min-width:1024px){.footer-bottom{flex-direction:row;align-items:center;justify-content:space-between;gap:40px;margin-top:20px}}
+.footer-links{display:flex;flex-wrap:wrap;gap:4px 20px;margin:0;padding:0;list-style:none}
+@media (min-width:360px){.footer-links{column-gap:28px}}
+.footer-links a{font-size:17px;line-height:1.4;text-underline-offset:4px}
+.footer-links .wide-only{display:none}
+@media (min-width:640px){.footer-links .wide-only{display:list-item}}
+@media (min-width:640px){.footer-links a{font-size:18px}}
+.footer-links a:hover{text-decoration:underline}
+.footer-meta{margin:0;font-size:12px;letter-spacing:.08em}
+@media (min-width:640px){.footer-meta{font-size:13px;letter-spacing:.1em}}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .tile .cv,.btn,.chip{transition:none}
+  .tile:hover .cv{transform:none}
+}
+/* Print and forced colours (DESIGN.md 10.1): a printer drops the sky backgrounds, and forced colours drops the
+   gradient, so nothing white may be left on white. Print goes plain: no skies, ink type, every button an ink
+   outline. Under forced colours the buttons keep a system-colour edge. */
+@media print, (forced-colors:active){
+  .btn,.btn:hover,.btn-ring,.chip[aria-pressed="true"]{background:none;color:#08070B;border:1px solid #08070B}
+  .chip[aria-pressed="true"] .n{color:#39383D}
+  .tile .state.is-open{background:none;color:#08070B;border:1px solid #08070B}
+}
+@media print{
+  .head,.site-footer{background:none;color:#08070B}
+  .head h1,.head .label,.head-side p,.head-meta,.head .subnote,.nav{color:#08070B}
+  .head{padding:96px 0 32px}
+  .library{margin-top:0}
+  .skip,.menu-btn,.menu{display:none}
+  .socials a{border-color:#08070B}
+  .footer-inner{min-height:0;padding-top:24px}
+  .tile .cv{break-inside:avoid}
+  .grid > li{break-inside:avoid}
+}
+@media (forced-colors:active){
+  .btn,.btn-ring,.chip[aria-pressed="true"]{border:1px solid ButtonText}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="lockup" viewBox="0 0 897 112"><g>
+    <path transform="scale(0.448)" d="M93.301 48.471A34.601 34.601 0 1 1 156.699 48.471A34.601 34.601 0 0 0 93.301 48.471ZM156.699 48.471A34.601 34.601 0 1 1 201.529 93.301A34.601 34.601 0 0 0 156.699 48.471ZM201.529 93.301A34.601 34.601 0 1 1 156.699 48.471A34.601 34.601 0 0 0 201.529 93.301ZM201.529 93.301A34.601 34.601 0 1 1 201.529 156.699A34.601 34.601 0 0 0 201.529 93.301ZM201.529 156.699A34.601 34.601 0 1 1 156.699 201.529A34.601 34.601 0 0 0 201.529 156.699ZM156.699 201.529A34.601 34.601 0 1 1 201.529 156.699A34.601 34.601 0 0 0 156.699 201.529ZM156.699 201.529A34.601 34.601 0 1 1 93.301 201.529A34.601 34.601 0 0 0 156.699 201.529ZM93.301 201.529A34.601 34.601 0 1 1 48.471 156.699A34.601 34.601 0 0 0 93.301 201.529ZM48.471 156.699A34.601 34.601 0 1 1 93.301 201.529A34.601 34.601 0 0 0 48.471 156.699ZM48.471 156.699A34.601 34.601 0 1 1 48.471 93.301A34.601 34.601 0 0 0 48.471 156.699ZM48.471 93.301A34.601 34.601 0 1 1 93.301 48.471A34.601 34.601 0 0 0 48.471 93.301ZM93.301 48.471A34.601 34.601 0 1 1 48.471 93.301A34.601 34.601 0 0 0 93.301 48.471Z"/>
+    <path transform="translate(160 80.736)" d="M11.7 0H0.49L17.57 -49.47H31.04L48.09 0H36.91L24.49 -38.17H24.09ZM11.04 -19.44H37.49V-11.3H11.04ZM51.08 0V-49.47H70.57Q76.2 -49.47 80.16 -47.48Q84.12 -45.48 86.22 -41.85Q88.32 -38.21 88.32 -33.31Q88.32 -28.38 86.2 -24.84Q84.07 -21.29 80.04 -19.41Q76.01 -17.53 70.31 -17.53H57.27V-25.94H68.6Q71.63 -25.94 73.62 -26.76Q75.6 -27.59 76.58 -29.22Q77.55 -30.85 77.55 -33.31Q77.55 -35.78 76.57 -37.47Q75.59 -39.15 73.6 -40.02Q71.62 -40.89 68.58 -40.89H61.52V0ZM78.54 0 66.5 -22.52H77.78L90.09 0ZM90.95 -40.85V-49.47H131.58V-40.85H116.44V0H106.12V-40.85ZM170.54 0.66Q163.97 0.66 158.72 -2.32Q153.46 -5.31 150.41 -10.99Q147.36 -16.66 147.36 -24.7Q147.36 -32.8 150.41 -38.49Q153.46 -44.18 158.72 -47.16Q163.97 -50.14 170.54 -50.14Q177.12 -50.14 182.35 -47.16Q187.59 -44.18 190.64 -38.49Q193.69 -32.8 193.69 -24.7Q193.69 -16.64 190.64 -10.97Q187.59 -5.29 182.35 -2.31Q177.12 0.66 170.54 0.66ZM170.54 -8.58Q174.35 -8.58 177.16 -10.44Q179.98 -12.29 181.54 -15.89Q183.09 -19.49 183.09 -24.7Q183.09 -29.95 181.54 -33.57Q179.98 -37.18 177.16 -39.04Q174.35 -40.89 170.54 -40.89Q166.76 -40.89 163.93 -39.04Q161.1 -37.18 159.53 -33.57Q157.96 -29.95 157.96 -24.7Q157.96 -19.49 159.53 -15.89Q161.1 -12.29 163.93 -10.44Q166.76 -8.58 170.54 -8.58ZM198.51 0V-49.47H231.26V-40.85H208.95V-27.25H229.08V-18.79H208.95V0ZM246.36 -40.85V-49.47H286.99V-40.85H271.85V0H261.53V-40.85ZM290.8 0V-49.47H301.24V-29.06H322.46V-49.47H332.9V0H322.46V-20.44H301.24V0ZM338.59 0V-49.47H371.94V-40.85H349.03V-29.22H370.19V-20.76H349.03V-8.62H372V0ZM390.19 0V-49.47H409.68Q415.31 -49.47 419.27 -47.33Q423.23 -45.19 425.33 -41.4Q427.43 -37.61 427.43 -32.69Q427.43 -27.76 425.31 -24Q423.18 -20.25 419.15 -18.14Q415.12 -16.03 409.43 -16.03H396.99V-24.41H407.71Q410.74 -24.41 412.73 -25.46Q414.71 -26.52 415.69 -28.38Q416.66 -30.25 416.66 -32.69Q416.66 -35.18 415.69 -37.02Q414.71 -38.86 412.72 -39.88Q410.73 -40.89 407.69 -40.89H400.63V0ZM453.6 0.66Q447.03 0.66 441.78 -2.32Q436.52 -5.31 433.47 -10.99Q430.43 -16.66 430.43 -24.7Q430.43 -32.8 433.47 -38.49Q436.52 -44.18 441.78 -47.16Q447.03 -50.14 453.6 -50.14Q460.18 -50.14 465.42 -47.16Q470.65 -44.18 473.7 -38.49Q476.75 -32.8 476.75 -24.7Q476.75 -16.64 473.7 -10.97Q470.65 -5.29 465.42 -2.31Q460.18 0.66 453.6 0.66ZM453.6 -8.58Q457.41 -8.58 460.23 -10.44Q463.05 -12.29 464.6 -15.89Q466.15 -19.49 466.15 -24.7Q466.15 -29.95 464.6 -33.57Q463.05 -37.18 460.23 -39.04Q457.41 -40.89 453.6 -40.89Q449.82 -40.89 446.99 -39.04Q444.17 -37.18 442.6 -33.57Q441.03 -29.95 441.03 -24.7Q441.03 -19.49 442.6 -15.89Q444.17 -12.29 446.99 -10.44Q449.82 -8.58 453.6 -8.58ZM499.91 0.7Q493.92 0.7 489.49 -1.13Q485.06 -2.96 482.58 -6.57Q480.1 -10.19 479.96 -15.54H490.08Q490.27 -13.07 491.53 -11.4Q492.8 -9.74 494.93 -8.9Q497.06 -8.06 499.79 -8.06Q502.45 -8.06 504.43 -8.83Q506.4 -9.6 507.49 -10.98Q508.57 -12.36 508.57 -14.18Q508.57 -15.84 507.58 -16.96Q506.6 -18.08 504.73 -18.89Q502.85 -19.69 500.15 -20.32L494.75 -21.65Q488.5 -23.15 484.89 -26.41Q481.28 -29.68 481.28 -35.17Q481.28 -39.66 483.71 -43.02Q486.14 -46.38 490.37 -48.26Q494.61 -50.14 500.02 -50.14Q505.54 -50.14 509.64 -48.25Q513.75 -46.36 516.05 -43Q518.35 -39.64 518.43 -35.25H508.36Q508.09 -38.16 505.89 -39.78Q503.7 -41.4 499.94 -41.4Q497.4 -41.4 495.62 -40.68Q493.84 -39.97 492.92 -38.71Q492 -37.45 492 -35.83Q492 -34.09 493.06 -32.91Q494.11 -31.74 495.9 -31Q497.68 -30.25 499.81 -29.74L504.23 -28.66Q507.45 -27.93 510.16 -26.72Q512.87 -25.5 514.88 -23.74Q516.89 -21.99 517.99 -19.6Q519.09 -17.22 519.09 -14.13Q519.09 -9.61 516.81 -6.27Q514.53 -2.94 510.24 -1.12Q505.96 0.7 499.91 0.7ZM541.53 0.7Q535.54 0.7 531.11 -1.13Q526.68 -2.96 524.2 -6.57Q521.72 -10.19 521.58 -15.54H531.7Q531.89 -13.07 533.16 -11.4Q534.42 -9.74 536.55 -8.9Q538.68 -8.06 541.41 -8.06Q544.08 -8.06 546.05 -8.83Q548.02 -9.6 549.11 -10.98Q550.19 -12.36 550.19 -14.18Q550.19 -15.84 549.21 -16.96Q548.22 -18.08 546.35 -18.89Q544.47 -19.69 541.77 -20.32L536.37 -21.65Q530.12 -23.15 526.51 -26.41Q522.9 -29.68 522.9 -35.17Q522.9 -39.66 525.33 -43.02Q527.76 -46.38 531.99 -48.26Q536.23 -50.14 541.64 -50.14Q547.16 -50.14 551.26 -48.25Q555.37 -46.36 557.67 -43Q559.97 -39.64 560.05 -35.25H549.98Q549.71 -38.16 547.51 -39.78Q545.32 -41.4 541.56 -41.4Q539.02 -41.4 537.24 -40.68Q535.46 -39.97 534.54 -38.71Q533.62 -37.45 533.62 -35.83Q533.62 -34.09 534.68 -32.91Q535.74 -31.74 537.52 -31Q539.3 -30.25 541.43 -29.74L545.85 -28.66Q549.07 -27.93 551.78 -26.72Q554.49 -25.5 556.5 -23.74Q558.51 -21.99 559.61 -19.6Q560.71 -17.22 560.71 -14.13Q560.71 -9.61 558.43 -6.27Q556.15 -2.94 551.87 -1.12Q547.58 0.7 541.53 0.7ZM575.25 -49.47V0H564.81V-49.47ZM580.93 0V-49.47H600.73Q606.18 -49.47 609.83 -47.85Q613.48 -46.22 615.32 -43.36Q617.15 -40.5 617.15 -36.8Q617.15 -33.89 615.98 -31.71Q614.81 -29.52 612.8 -28.13Q610.78 -26.74 608.2 -26.16V-25.66Q611.03 -25.55 613.51 -24.08Q615.99 -22.6 617.53 -19.97Q619.08 -17.33 619.08 -13.67Q619.08 -9.75 617.14 -6.66Q615.21 -3.57 611.43 -1.78Q607.64 0 602.06 0ZM591.37 -8.54H599.91Q604.27 -8.54 606.29 -10.23Q608.31 -11.93 608.31 -14.7Q608.31 -16.77 607.32 -18.34Q606.33 -19.92 604.5 -20.82Q602.67 -21.71 600.16 -21.71H591.37ZM591.37 -28.77H599.14Q601.27 -28.77 602.96 -29.53Q604.64 -30.29 605.61 -31.69Q606.58 -33.1 606.58 -35.05Q606.58 -37.71 604.69 -39.36Q602.8 -41.01 599.34 -41.01H591.37ZM622.95 0V-49.47H633.39V-8.62H654.6V0ZM658.66 0V-49.47H692.01V-40.85H669.1V-29.22H690.26V-20.76H669.1V-8.62H692.06V0ZM708.66 -22.11V-39.91H717.37Q719.06 -39.94 720.47 -39.25Q721.88 -38.56 722.72 -37.24Q723.56 -35.93 723.56 -34.07Q723.56 -32.17 722.69 -30.82Q721.81 -29.47 720.37 -28.79Q718.94 -28.12 717.18 -28.12H711.19V-31.48H716.19Q717.2 -31.46 717.94 -32.11Q718.68 -32.75 718.68 -34.06Q718.68 -35.37 717.94 -35.95Q717.19 -36.52 716.21 -36.54H713.29V-22.11ZM720.04 -30.35 724.13 -22.11H719.02L715.23 -30.35ZM715.63 -11.49Q711.65 -11.49 708.14 -13Q704.64 -14.51 701.98 -17.17Q699.33 -19.82 697.84 -23.33Q696.35 -26.83 696.35 -30.81Q696.35 -34.8 697.84 -38.3Q699.33 -41.8 701.98 -44.46Q704.64 -47.12 708.14 -48.63Q711.65 -50.14 715.63 -50.14Q719.65 -50.14 723.15 -48.63Q726.65 -47.12 729.31 -44.46Q731.97 -41.8 733.46 -38.3Q734.95 -34.8 734.95 -30.81Q734.95 -26.83 733.46 -23.33Q731.97 -19.82 729.32 -17.17Q726.67 -14.51 723.16 -13Q719.65 -11.49 715.63 -11.49ZM715.63 -16.61Q719.59 -16.61 722.82 -18.52Q726.05 -20.43 727.97 -23.66Q729.88 -26.88 729.87 -30.81Q729.88 -34.74 727.96 -37.97Q726.05 -41.2 722.81 -43.12Q719.57 -45.03 715.63 -45.01Q711.72 -45.03 708.49 -43.12Q705.26 -41.2 703.34 -37.97Q701.43 -34.74 701.43 -30.82Q701.43 -26.89 703.35 -23.66Q705.26 -20.43 708.49 -18.52Q711.71 -16.61 715.63 -16.61Z"/>
+  </g></symbol>
+  <symbol id="lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
+  <symbol id="unlock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 7.75-1.4"/></symbol>
+  <symbol id="spk" viewBox="0 0 24 24"><path d="M12 0C12.8 7.2 16.8 11.2 24 12C16.8 12.8 12.8 16.8 12 24C11.2 16.8 7.2 12.8 0 12C7.2 11.2 11.2 7.2 12 0Z"/></symbol>
+</svg>
+<a class="skip" href="#library">Skip to the guides</a>
+
+<header class="head on-sky" id="top">
+  <nav class="nav" aria-label="Main">
+    <div class="wrap">
+      <a class="lockup" href="/" aria-label="Art of the Possible, home"><svg viewBox="0 0 897 112" width="144" height="18" aria-hidden="true"><use href="#lockup"/></svg></a>
+      <div class="navlinks">
+        <a class="txt" href="/#about">About</a>
+        <a class="txt" href="/guides/" aria-current="page">Guides</a>
+        <a class="txt" href="/#signup">Newsletter</a>
+        <button class="menu-btn" id="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-menu"><svg class="bars" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg><svg class="x" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+      </div>
+    </div>
+    <div class="menu" id="site-menu">
+      <div class="wrap">
+        <ul>
+          <li><a href="/#about">About</a></li>
+          <li><a href="/guides/" aria-current="page">Guides</a></li>
+          <li><a href="/#signup">Newsletter</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="wrap head-in">
+    <div>
+      <span class="label"><svg class="sparkle" aria-hidden="true"><use href="#spk"/></svg>Free guides</span>
+      <h1>Every guide, in one place.</h1>
+    </div>
+    <div class="head-side">
+      <p>Setups, prompts and playbooks from my Reels, newest first. Each one opens with your email. That same email opens every other guide here and signs you up for the weekly letter.</p>
+      <p class="subnote" id="subnote" hidden></p>
+      <div class="head-meta"><span class="label" id="count-label">Newest first</span></div>
+    </div>
+  </div>
+</header>
+
+<main id="library" class="library" tabindex="-1">
+  <div class="wrap">
+    <h2 class="sr-only">All guides</h2>
+    <div class="filters" id="filters" hidden>
+      <span class="label" id="filter-label"><svg class="sparkle" aria-hidden="true"><use href="#spk"/></svg>Filter by topic</span>
+    </div>
+    <ul class="grid" id="grid" aria-live="polite"></ul>
+    <noscript><p class="empty">This page needs JavaScript to list the guides. Or go back to <a class="link" href="/">the homepage</a>.</p></noscript>
+  </div>
+</main>
+
+<section class="close" aria-labelledby="close-h">
+  <div class="wrap grid2">
+    <div>
+      <span class="label"><svg class="sparkle" aria-hidden="true"><use href="#spk"/></svg>The weekly letter</span>
+      <h2 id="close-h">One email a week on AI and startups.</h2>
+    </div>
+    <div>
+      <p>The most useful AI and startup content each week, with the prompts and workflows inside. Unlocking any guide here signs you up too.</p>
+      <div class="acts">
+        <a class="btn" href="/#signup">Get the weekly letter<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        <a class="link" href="/">Back to the homepage</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer on-sky">
+  <div class="wrap footer-inner">
+    <div class="footer-top">
+      <a class="lockup" href="/" aria-label="Art of the Possible, home"><svg viewBox="0 0 897 112" width="224" height="28" aria-hidden="true"><use href="#lockup"/></svg></a>
+      <div class="socials">
+        <a href="https://www.instagram.com/artofthepossible.ai/" target="_blank" rel="noopener noreferrer" aria-label="Instagram (opens in a new tab)"><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+        <a href="https://www.linkedin.com/in/richard-eve-545179138/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (opens in a new tab)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <ul class="footer-links" aria-label="Footer">
+        <li><a href="/#about">About</a></li>
+        <li><a href="/guides/" aria-current="page">Guides</a></li>
+        <li><a href="/#signup">Newsletter</a></li>
+      </ul>
+      <p class="label footer-meta">New things are possible every&nbsp;day&nbsp;·&nbsp;2026</p>
+    </div>
+  </div>
+</footer>
+
+<script src="/f.js"></script>
+<script src="/guides/unlock.js"></script>
+<script>
+(function () {
+  'use strict';
+  var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  var grid = document.getElementById('grid');
+  var filters = document.getElementById('filters');
+  var countLabel = document.getElementById('count-label');
+  var guides = [];
+  var active = 'all';
+
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function fmt(iso) { var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || ''); return m ? (+m[3]) + ' ' + MONTHS[+m[2] - 1] + ' ' + m[1] : ''; }
+  function safe(p) {
+    try { var u = new URL(p, location.origin); if (u.protocol === 'http:' || u.protocol === 'https:') return u.origin === location.origin ? u.pathname + u.search + u.hash : u.href; } catch (e) {}
+    return '';
+  }
+  function key(t) { return t.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); }
+
+  function load(url) {
+    return fetch(url, { credentials: 'omit' }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (json) {
+      if (!json || !Array.isArray(json.guides) || !json.guides.length) throw new Error('empty ' + url);
+      return json;
+    });
+  }
+  /* Every live guide, newest first (Rich, 2026-11-22: "one link ... shows every free guide"). A guide with duplicate_of (/review/ is
+     /switch/ under another title) is the same page twice, so it gets no tile of its own. */
+  load('/guides/guides-all.json').then(function (json) {
+    var seen = {};
+    guides = json.guides.filter(function (g) {
+      if (!g || typeof g.slug !== 'string' || typeof g.title !== 'string' || g.duplicate_of || seen[g.slug]) return false;
+      seen[g.slug] = true;
+      return true;
+    }).map(function (g, i) {
+      return { slug: g.slug, title: g.title, blurb: g.blurb || '', topic: g.topic || '', date: g.date || '', i: i,
+        url: safe(g.url || '/' + g.slug + '/'), cover: safe(g.cover || '/guides/covers/' + g.slug + '.svg') };
+    }).filter(function (g) { return g.url && g.cover; });
+    /* Newest first; the manifest's own order breaks ties. */
+    guides.sort(function (a, b) { return a.date === b.date ? a.i - b.i : (a.date < b.date ? 1 : -1); });
+    render();
+  }).catch(function () {
+    grid.removeAttribute('aria-live');
+    var p = el('p', 'empty');
+    p.appendChild(document.createTextNode('The guides did not load. Try again in a minute, or go back to '));
+    var a = el('a', 'link', 'the homepage'); a.href = '/'; p.appendChild(a); p.appendChild(document.createTextNode('.'));
+    grid.parentNode.insertBefore(p, grid);
+  });
+
+  function render() {
+    countLabel.textContent = guides.length + ' guides · Newest first';
+    var frag = document.createDocumentFragment();
+    guides.forEach(function (g, i) {
+      var li = el('li'); li.setAttribute('data-topic', key(g.topic));
+      var a = el('a', 'tile'); a.href = g.url;
+      var cv = el('span', 'cv');
+      var img = el('img'); img.src = g.cover; img.alt = ''; img.width = 800; img.height = 1000; img.decoding = 'async';
+      if (i >= 8) img.loading = 'lazy';
+      cv.appendChild(img); a.appendChild(cv);
+      a.appendChild(el('h3', '', g.title));
+      if (g.blurb) a.appendChild(el('p', '', g.blurb));
+      var meta = el('span', 'meta');
+      meta.appendChild(el('span', 'state'));
+      meta.appendChild(el('span', 'addr', 'theaotp.com/' + g.slug));
+      if (g.date) meta.appendChild(el('span', 'when', fmt(g.date)));
+      a.appendChild(meta);
+      li.appendChild(a); frag.appendChild(li);
+    });
+    grid.appendChild(frag);
+    paintState();
+    buildFilters();
+  }
+
+  /* Unlock or Open on every tile, and the subscribed line in the header. Follows the shared unlock's events, so a
+     visitor who subscribes in another tab, or uses a different email, sees it change here too. Open is a promise
+     the guide keeps: isSubscribed() also writes /f.js's member flag, and /f.js opens the guide before its gate runs. */
+  var subnote = document.getElementById('subnote');
+  function subscribed() { try { return !!(window.AOTPUnlock && window.AOTPUnlock.isSubscribed()); } catch (e) { return false; } }
+  function paintState() {
+    var on = subscribed();
+    [].forEach.call(grid.querySelectorAll('.state'), function (t) {
+      t.className = 'state' + (on ? ' is-open' : '');
+      t.textContent = '';
+      var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.setAttribute('viewBox', '0 0 24 24'); svg.setAttribute('aria-hidden', 'true'); svg.setAttribute('focusable', 'false');
+      var use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+      use.setAttribute('href', on ? '#unlock' : '#lock');
+      svg.appendChild(use); t.appendChild(svg);
+      t.appendChild(document.createTextNode(on ? 'Open' : 'Unlock'));
+    });
+    if (on && window.AOTPUnlock && window.AOTPUnlock.note) {
+      window.AOTPUnlock.note(subnote, { onForget: paintState });
+      subnote.hidden = false;
+    } else {
+      subnote.hidden = true;
+      subnote.textContent = '';
+    }
+  }
+  document.addEventListener('aotp:subscribed', paintState);
+  document.addEventListener('aotp:forgotten', paintState);
+
+  /* Chips only help once the library sorts into a few real shelves: three or more topics holding three or more
+     guides each, which between them hold at least half the guides. A chip row that leaves most guides out of
+     every chip reads as a broken filter. On 2026-10-03 (30 guides, 22 topics) only Models, Reading list and
+     Skills reach three, nine guides in all, so the grid stands alone. */
+  function buildFilters() {
+    var counts = {}, names = {};
+    guides.forEach(function (g) { if (!g.topic) return; var k = key(g.topic); counts[k] = (counts[k] || 0) + 1; names[k] = g.topic; });
+    var shared = Object.keys(counts).filter(function (k) { return counts[k] > 2; }).sort(function (a, b) { return counts[b] - counts[a] || names[a].localeCompare(names[b]); });
+    var covered = shared.reduce(function (s, k) { return s + counts[k]; }, 0);
+    if (shared.length < 3 || covered * 2 < guides.length) return;
+    var group = el('div'); group.setAttribute('role', 'group'); group.setAttribute('aria-labelledby', 'filter-label');
+    group.style.cssText = 'display:contents';
+    [['all', 'All', guides.length]].concat(shared.map(function (k) { return [k, names[k], counts[k]]; })).forEach(function (c) {
+      var b = el('button', 'chip'); b.type = 'button'; b.setAttribute('data-k', c[0]); b.setAttribute('aria-pressed', c[0] === active ? 'true' : 'false');
+      b.appendChild(document.createTextNode(c[1])); b.appendChild(el('span', 'n', String(c[2])));
+      b.addEventListener('click', function () { setFilter(c[0]); });
+      group.appendChild(b);
+    });
+    filters.appendChild(group);
+    filters.hidden = false;
+    var want = new URLSearchParams(location.search).get('topic');
+    if (want && (want === 'all' || counts[want] > 1)) setFilter(want, true);
+  }
+  function setFilter(k, quiet) {
+    active = k;
+    [].forEach.call(filters.querySelectorAll('.chip'), function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-k') === k ? 'true' : 'false'); });
+    var shown = 0;
+    [].forEach.call(grid.children, function (li) { var on = k === 'all' || li.getAttribute('data-topic') === k; li.hidden = !on; if (on) shown++; });
+    countLabel.textContent = (k === 'all' ? guides.length + ' guides' : shown + ' of ' + guides.length + ' guides') + ' · Newest first';
+    if (!quiet) {
+      var u = new URL(location.href);
+      if (k === 'all') u.searchParams.delete('topic'); else u.searchParams.set('topic', k);
+      history.replaceState(null, '', u.pathname + u.search + u.hash);
+    }
+  }
+})();
+
+/* The phone menu: the button opens it, a link or Escape closes it, and it closes when the page widens past 640. */
+(function () {
+  'use strict';
+  var nav = document.querySelector('.nav');
+  var btn = document.getElementById('menu-btn');
+  var menu = document.getElementById('site-menu');
+  if (!nav || !btn || !menu) return;
+  function set(open) {
+    nav.classList.toggle('is-open', open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  }
+  btn.addEventListener('click', function () { set(!nav.classList.contains('is-open')); });
+  menu.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('a')) set(false); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && nav.classList.contains('is-open')) { set(false); btn.focus(); }
+  });
+  if (window.matchMedia) {
+    var wide = window.matchMedia('(min-width:640px)');
+    var onWide = function () { if (wide.matches) set(false); };
+    if (wide.addEventListener) wide.addEventListener('change', onWide); else if (wide.addListener) wide.addListener(onWide);
+  }
+})();
+</script>
+</body>
+</html>

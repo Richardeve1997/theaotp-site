@@ -1,0 +1,139 @@
+{
+  "guides": [
+    {
+      "slug": "focus",
+      "title": "Three Focus Skills",
+      "blurb": "Three skills to install in your AI agent that nudge you to practise unlearning, building systems and relationships, with a weekly habit for each.",
+      "url": "/focus/",
+      "cover": "/guides/covers/focus.svg",
+      "topic": "Skills",
+      "date": "2026-11-18"
+    },
+    {
+      "slug": "design",
+      "title": "Design Skills and Prompts",
+      "blurb": "Three free design skills that stop a Claude-built site looking AI made, the install line for each, and three prompts to run them in order.",
+      "url": "/design/",
+      "cover": "/guides/covers/design.svg",
+      "topic": "Design",
+      "date": "2026-11-18"
+    },
+    {
+      "slug": "builder",
+      "title": "Product Builder: 10 Resources",
+      "blurb": "Ten books and courses for becoming a product builder, in the order I'd do them, with what each teaches and what it costs.",
+      "url": "/builder/",
+      "cover": "/guides/covers/builder.svg",
+      "topic": "Product",
+      "date": "2026-11-16"
+    },
+    {
+      "slug": "audit",
+      "title": "Security Audit Setup",
+      "blurb": "The install command for Cloudflare's free security audit skill, the three prompts that run it, and how to read the report.",
+      "url": "/audit/",
+      "cover": "/guides/covers/audit.svg",
+      "topic": "Security",
+      "date": "2026-11-16"
+    },
+    {
+      "slug": "30",
+      "title": "The 30 Claude Plugins",
+      "blurb": "The 30 Claude plugins from the Reel in five rows by the job they do, with the link and one plain line for each.",
+      "url": "/30/",
+      "cover": "/guides/covers/30.svg",
+      "topic": "Plugins",
+      "date": "2026-11-14"
+    },
+    {
+      "slug": "swaps",
+      "title": "Nine Open Source Swaps",
+      "blurb": "Nine open source repos, each beside the paid app it replaces, with the licence and what it still costs to run.",
+      "url": "/swaps/",
+      "cover": "/guides/covers/swaps.svg",
+      "topic": "Open source",
+      "date": "2026-11-14"
+    },
+    {
+      "slug": "seven",
+      "title": "Seven Repos for Claude",
+      "blurb": "Seven GitHub repos worth installing for Claude, each with what it does and the install lines from its own README.",
+      "url": "/seven/",
+      "cover": "/guides/covers/seven.svg",
+      "topic": "Claude skills",
+      "date": "2026-11-14"
+    },
+    {
+      "slug": "fastest",
+      "title": "Seven Fastest Growing Skills",
+      "blurb": "Seven of the fastest growing Claude skills on GitHub, counted up to number one, with the install line for each.",
+      "url": "/fastest/",
+      "cover": "/guides/covers/fastest.svg",
+      "topic": "Skills",
+      "date": "2026-11-14"
+    },
+    {
+      "slug": "mcp",
+      "title": "Five MCP Servers",
+      "blurb": "The five MCP servers to add to Claude Code first, with each vendor's own install line and which two cost money.",
+      "url": "/mcp/",
+      "cover": "/guides/covers/mcp.svg",
+      "topic": "Claude Code",
+      "date": "2026-11-14"
+    },
+    {
+      "slug": "taste",
+      "title": "Three Design Skills",
+      "blurb": "Three free design skills that stop a Claude-built site looking AI made, with the exact install lines.",
+      "url": "/taste/",
+      "cover": "/guides/covers/taste.svg",
+      "topic": "Design",
+      "date": "2026-11-14"
+    },
+    {
+      "slug": "launch",
+      "title": "The Two Dollar Website",
+      "blurb": "The three skills with their install lines, then every step from Claude Design to a live site on a .top domain.",
+      "url": "/launch/",
+      "cover": "/guides/covers/launch.svg",
+      "topic": "Websites",
+      "date": "2026-11-14"
+    },
+    {
+      "slug": "jcode",
+      "title": "The jcode Setup",
+      "blurb": "The repo, the install line for each system, the sign-in commands, and jcode's own benchmark numbers.",
+      "url": "/jcode/",
+      "cover": "/guides/covers/jcode.svg",
+      "topic": "Coding agents",
+      "date": "2026-11-14"
+    },
+    {
+      "slug": "ecc",
+      "title": "The ECC Setup",
+      "blurb": "The repo and the one command, what it installs, and how to take it out again.",
+      "url": "/ecc/",
+      "cover": "/guides/covers/ecc.svg",
+      "topic": "Claude Code",
+      "date": "2026-11-14"
+    },
+    {
+      "slug": "fable",
+      "title": "Prompting Claude Fable 5.2",
+      "blurb": "Anthropic's guide to prompting Claude Fable 5.2 on one page: nine rules, six prompts to paste, and a link to the exact wording for each.",
+      "url": "/fable/",
+      "cover": "/guides/covers/fable.svg",
+      "topic": "Prompting",
+      "date": "2026-11-11"
+    },
+    {
+      "slug": "anthropic-gap",
+      "title": "Anthropic's own playbook",
+      "blurb": "How Anthropic's own teams use Claude, taken from its own report and put in plain English on one page.",
+      "url": "/anthropic-gap/",
+      "cover": "/guides/covers/anthropic-gap.svg",
+      "topic": "Claude",
+      "date": "2026-11-10"
+    }
+  ]
+}

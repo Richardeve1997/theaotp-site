@@ -1,0 +1,377 @@
+{
+  "focus": {
+    "diagram": "focus"
+  },
+  "design": {
+    "diagram": "cycle3"
+  },
+  "builder": {
+    "diagram": "steps"
+  },
+  "audit": {
+    "diagram": "checklist"
+  },
+  "30": {
+    "diagram": "dotgrid"
+  },
+  "swaps": {
+    "diagram": "toggle"
+  },
+  "seven": {
+    "diagram": "stack"
+  },
+  "fastest": {
+    "diagram": "stepchart"
+  },
+  "mcp": {
+    "diagram": "orbit",
+    "params": {
+      "count": 5
+    }
+  },
+  "taste": {
+    "diagram": "docs3"
+  },
+  "launch": {
+    "diagram": "pipeline"
+  },
+  "jcode": {
+    "diagram": "panes",
+    "params": {
+      "focus": 1
+    }
+  },
+  "ecc": {
+    "diagram": "terminal"
+  },
+  "fable": {
+    "diagram": "tiles",
+    "params": {
+      "pick": [
+        9
+      ]
+    }
+  },
+  "anthropic-gap": {
+    "diagram": "org"
+  },
+  "effects": {
+    "diagram": "reel"
+  },
+  "email-tells": {
+    "diagram": "focus"
+  },
+  "film": {
+    "diagram": "tiles",
+    "params": {
+      "pick": [
+        4
+      ]
+    }
+  },
+  "find-skills": {
+    "diagram": "dotgrid"
+  },
+  "five": {
+    "diagram": "stack"
+  },
+  "five-jobs": {
+    "diagram": "pipeline"
+  },
+  "free-courses": {
+    "diagram": "steps"
+  },
+  "job-ads": {
+    "diagram": "broadcast"
+  },
+  "linkedin": {
+    "diagram": "bars"
+  },
+  "notion": {
+    "diagram": "pages"
+  },
+  "reveal": {
+    "diagram": "cycle3"
+  },
+  "ugc": {
+    "diagram": "orbit",
+    "params": {
+      "count": 6
+    }
+  },
+  "files": {
+    "diagram": "docs3"
+  },
+  "hired": {
+    "diagram": "fan",
+    "params": {
+      "pick": 2
+    }
+  },
+  "monday": {
+    "diagram": "timeline"
+  },
+  "plug": {
+    "diagram": "orbit",
+    "params": {
+      "count": 4
+    }
+  },
+  "quotes": {
+    "diagram": "stepchart"
+  },
+  "settings": {
+    "diagram": "toggle"
+  },
+  "tools": {
+    "diagram": "converge"
+  },
+  "cowork": {
+    "diagram": "reels"
+  },
+  "dashboard": {
+    "diagram": "pies"
+  },
+  "setup": {
+    "diagram": "org"
+  },
+  "intelligence": {
+    "diagram": "reel"
+  },
+  "archify": {
+    "diagram": "orbit",
+    "params": {
+      "count": 5
+    }
+  },
+  "artcraft": {
+    "diagram": "tiles",
+    "params": {
+      "pick": [
+        6
+      ]
+    }
+  },
+  "courses": {
+    "diagram": "steps"
+  },
+  "handy": {
+    "diagram": "toggle"
+  },
+  "penpot": {
+    "diagram": "triangle"
+  },
+  "plugins": {
+    "diagram": "pipeline"
+  },
+  "stier": {
+    "diagram": "reels"
+  },
+  "twenty": {
+    "diagram": "docs3"
+  },
+  "stack": {
+    "diagram": "stack"
+  },
+  "cal": {
+    "diagram": "stepchart"
+  },
+  "clone": {
+    "diagram": "harness"
+  },
+  "finance": {
+    "diagram": "org"
+  },
+  "law": {
+    "diagram": "docs3"
+  },
+  "rank": {
+    "diagram": "bars"
+  },
+  "steve": {
+    "diagram": "cycle3"
+  },
+  "viral": {
+    "diagram": "reel"
+  },
+  "weekend": {
+    "diagram": "tiles",
+    "params": {
+      "pick": [
+        2
+      ]
+    }
+  },
+  "agentcraft": {
+    "diagram": "org"
+  },
+  "loop": {
+    "diagram": "infinity"
+  },
+  "trust": {
+    "diagram": "focus"
+  },
+  "websites": {
+    "diagram": "cycle3"
+  },
+  "ai-pm": {
+    "diagram": "reels"
+  },
+  "shopify": {
+    "diagram": "converge"
+  },
+  "eng": {
+    "diagram": "panes"
+  },
+  "hyper": {
+    "diagram": "reel"
+  },
+  "hack": {
+    "diagram": "terminal"
+  },
+  "brain": {
+    "diagram": "pages"
+  },
+  "hype": {
+    "diagram": "pipeline"
+  },
+  "boris": {
+    "diagram": "terminal"
+  },
+  "sites": {
+    "diagram": "harness"
+  },
+  "team": {
+    "diagram": "org"
+  },
+  "new": {
+    "diagram": "timeline",
+    "params": {
+      "pick": 4
+    }
+  },
+  "human": {
+    "diagram": "cycle3"
+  },
+  "levelup": {
+    "diagram": "steps"
+  },
+  "reach": {
+    "diagram": "orbit",
+    "params": {
+      "count": 5
+    }
+  },
+  "projects": {
+    "diagram": "pages"
+  },
+  "learn": {
+    "diagram": "reels"
+  },
+  "solo": {
+    "diagram": "converge"
+  },
+  "pm": {
+    "diagram": "dotgrid"
+  },
+  "commands": {
+    "diagram": "terminal"
+  },
+  "decision": {
+    "diagram": "fan",
+    "params": {
+      "pick": 1
+    }
+  },
+  "fix": {
+    "diagram": "focus"
+  },
+  "win": {
+    "diagram": "docs3"
+  },
+  "cfo": {
+    "diagram": "broadcast"
+  },
+  "simplify": {
+    "diagram": "ladder",
+    "params": {
+      "hold": 3
+    }
+  },
+  "grow": {
+    "diagram": "bars"
+  },
+  "future": {
+    "diagram": "pies",
+    "params": {
+      "shares": [
+        0.594,
+        0.561,
+        0.452
+      ]
+    }
+  },
+  "review": {
+    "diagram": "duo"
+  },
+  "agentic": {
+    "diagram": "pipeline"
+  },
+  "ai-native": {
+    "diagram": "checklist",
+    "params": {
+      "ticked": [
+        1,
+        2,
+        3,
+        5,
+        7,
+        8
+      ]
+    }
+  },
+  "skills": {
+    "diagram": "track"
+  },
+  "both": {
+    "diagram": "panes",
+    "params": {
+      "focus": 1
+    }
+  },
+  "instinct": {
+    "diagram": "stepchart"
+  },
+  "glm": {
+    "diagram": "harness"
+  },
+  "edit": {
+    "diagram": "reel"
+  },
+  "upskill": {
+    "diagram": "tiles",
+    "params": {
+      "pick": [
+        3
+      ]
+    }
+  },
+  "agents": {
+    "diagram": "stack"
+  },
+  "top1": {
+    "diagram": "triangle"
+  },
+  "tokens": {
+    "diagram": "gauge",
+    "params": {
+      "left": 0.62
+    }
+  },
+  "101": {
+    "diagram": "infinity"
+  },
+  "switch": {
+    "diagram": "toggle"
+  }
+}

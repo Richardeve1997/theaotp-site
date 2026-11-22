@@ -1,0 +1,896 @@
+{
+  "guides": [
+    {
+      "slug": "focus",
+      "title": "Three Focus Skills",
+      "blurb": "Three skills to install in your AI agent that nudge you to practise unlearning, building systems and relationships, with a weekly habit for each.",
+      "url": "/focus/",
+      "cover": "/guides/covers/focus.svg",
+      "topic": "Skills",
+      "date": "2026-11-18"
+    },
+    {
+      "slug": "design",
+      "title": "Design Skills and Prompts",
+      "blurb": "Three free design skills that stop a Claude-built site looking AI made, the install line for each, and three prompts to run them in order.",
+      "url": "/design/",
+      "cover": "/guides/covers/design.svg",
+      "topic": "Design",
+      "date": "2026-11-18"
+    },
+    {
+      "slug": "builder",
+      "title": "Product Builder: 10 Resources",
+      "blurb": "Ten books and courses for becoming a product builder, in the order I'd do them, with what each teaches and what it costs.",
+      "url": "/builder/",
+      "cover": "/guides/covers/builder.svg",
+      "topic": "Product",
+      "date": "2026-11-16"
+    },
+    {
+      "slug": "audit",
+      "title": "Security Audit Setup",
+      "blurb": "The install command for Cloudflare's free security audit skill, the three prompts that run it, and how to read the report.",
+      "url": "/audit/",
+      "cover": "/guides/covers/audit.svg",
+      "topic": "Security",
+      "date": "2026-11-16"
+    },
+    {
+      "slug": "30",
+      "title": "The 30 Claude Plugins",
+      "blurb": "The 30 Claude plugins from the Reel in five rows by the job they do, with the link and one plain line for each.",
+      "url": "/30/",
+      "cover": "/guides/covers/30.svg",
+      "topic": "Plugins",
+      "date": "2026-11-14"
+    },
+    {
+      "slug": "swaps",
+      "title": "Nine Open Source Swaps",
+      "blurb": "Nine open source repos, each beside the paid app it replaces, with the licence and what it still costs to run.",
+      "url": "/swaps/",
+      "cover": "/guides/covers/swaps.svg",
+      "topic": "Open source",
+      "date": "2026-11-14"
+    },
+    {
+      "slug": "seven",
+      "title": "Seven Repos for Claude",
+      "blurb": "Seven GitHub repos worth installing for Claude, each with what it does and the install lines from its own README.",
+      "url": "/seven/",
+      "cover": "/guides/covers/seven.svg",
+      "topic": "Claude skills",
+      "date": "2026-11-14"
+    },
+    {
+      "slug": "fastest",
+      "title": "Seven Fastest Growing Skills",
+      "blurb": "Seven of the fastest growing Claude skills on GitHub, counted up to number one, with the install line for each.",
+      "url": "/fastest/",
+      "cover": "/guides/covers/fastest.svg",
+      "topic": "Skills",
+      "date": "2026-11-14"
+    },
+    {
+      "slug": "mcp",
+      "title": "Five MCP Servers",
+      "blurb": "The five MCP servers to add to Claude Code first, with each vendor's own install line and which two cost money.",
+      "url": "/mcp/",
+      "cover": "/guides/covers/mcp.svg",
+      "topic": "Claude Code",
+      "date": "2026-11-14"
+    },
+    {
+      "slug": "taste",
+      "title": "Three Design Skills",
+      "blurb": "Three free design skills that stop a Claude-built site looking AI made, with the exact install lines.",
+      "url": "/taste/",
+      "cover": "/guides/covers/taste.svg",
+      "topic": "Design",
+      "date": "2026-11-14"
+    },
+    {
+      "slug": "launch",
+      "title": "The Two Dollar Website",
+      "blurb": "The three skills with their install lines, then every step from Claude Design to a live site on a .top domain.",
+      "url": "/launch/",
+      "cover": "/guides/covers/launch.svg",
+      "topic": "Websites",
+      "date": "2026-11-14"
+    },
+    {
+      "slug": "jcode",
+      "title": "The jcode Setup",
+      "blurb": "The repo, the install line for each system, the sign-in commands, and jcode's own benchmark numbers.",
+      "url": "/jcode/",
+      "cover": "/guides/covers/jcode.svg",
+      "topic": "Coding agents",
+      "date": "2026-11-14"
+    },
+    {
+      "slug": "ecc",
+      "title": "The ECC Setup",
+      "blurb": "The repo and the one command, what it installs, and how to take it out again.",
+      "url": "/ecc/",
+      "cover": "/guides/covers/ecc.svg",
+      "topic": "Claude Code",
+      "date": "2026-11-14"
+    },
+    {
+      "slug": "fable",
+      "title": "Prompting Claude Fable 5.2",
+      "blurb": "Anthropic's guide to prompting Claude Fable 5.2 on one page: nine rules, six prompts to paste, and a link to the exact wording for each.",
+      "url": "/fable/",
+      "cover": "/guides/covers/fable.svg",
+      "topic": "Prompting",
+      "date": "2026-11-11"
+    },
+    {
+      "slug": "anthropic-gap",
+      "title": "Anthropic's own playbook",
+      "blurb": "How Anthropic's own teams use Claude, taken from its own report and put in plain English on one page.",
+      "url": "/anthropic-gap/",
+      "cover": "/guides/covers/anthropic-gap.svg",
+      "topic": "Claude",
+      "date": "2026-11-10"
+    },
+    {
+      "slug": "effects",
+      "title": "20 Video Effects Built by Claude",
+      "blurb": "All 20 video effects from the Reel, each with a looping preview and the prompt I'd give Claude Code to build it.",
+      "url": "/effects/",
+      "cover": "/guides/covers/effects.svg",
+      "topic": "Video",
+      "date": "2026-11-10"
+    },
+    {
+      "slug": "email-tells",
+      "title": "Human Email Kit",
+      "blurb": "The 12 signs a customer can tell AI wrote your email, as one prompt for Claude, and where to put it so it runs on every email.",
+      "url": "/email-tells/",
+      "cover": "/guides/covers/email-tells.svg",
+      "topic": "Writing",
+      "date": "2026-11-10"
+    },
+    {
+      "slug": "film",
+      "title": "66 Film Styles",
+      "blurb": "All 66 Lemo-Opuscar film styles with a still of each, the two commands that install the free skill, and how to make a style your own.",
+      "url": "/film/",
+      "cover": "/guides/covers/film.svg",
+      "topic": "Video",
+      "date": "2026-11-10"
+    },
+    {
+      "slug": "find-skills",
+      "title": "Find Skills Kit",
+      "blurb": "The one-line install for Vercel's find-skills, how it picks a Claude skill, and the goal-first prompt I use so Claude plans the work.",
+      "url": "/find-skills/",
+      "cover": "/guides/covers/find-skills.svg",
+      "topic": "Skills",
+      "date": "2026-11-10"
+    },
+    {
+      "slug": "five",
+      "title": "5 Foundational Claude Skills",
+      "blurb": "The five free Claude skills I'd install first, each with its link, its install command and a first prompt.",
+      "url": "/five/",
+      "cover": "/guides/covers/five.svg",
+      "topic": "Skills",
+      "date": "2026-11-10"
+    },
+    {
+      "slug": "five-jobs",
+      "title": "Five Jobs for Claude",
+      "blurb": "Five copy-paste Claude prompts, one for each job: your inbox, quotes, meeting notes, Google reviews and the Monday report.",
+      "url": "/five-jobs/",
+      "cover": "/guides/covers/five-jobs.svg",
+      "topic": "Prompting",
+      "date": "2026-11-10"
+    },
+    {
+      "slug": "free-courses",
+      "title": "Three free AI courses for your team",
+      "blurb": "Three free AI courses from Anthropic, OpenAI Academy and Elements of AI, who on your team should take each, and a one-a-month plan.",
+      "url": "/free-courses/",
+      "cover": "/guides/covers/free-courses.svg",
+      "topic": "Courses",
+      "date": "2026-11-10"
+    },
+    {
+      "slug": "job-ads",
+      "title": "The Job Ad Prompt",
+      "blurb": "A prompt where Claude interviews you about the real job, writes the ad the way your best employee would, then cuts every generic line.",
+      "url": "/job-ads/",
+      "cover": "/guides/covers/job-ads.svg",
+      "topic": "Prompting",
+      "date": "2026-11-10"
+    },
+    {
+      "slug": "linkedin",
+      "title": "LinkedIn Ghostwriter Kit",
+      "blurb": "Hat Tip's free LinkedIn writing system in Claude, how its review works, and one prompt that adds Zernio to schedule posts and answer comments.",
+      "url": "/linkedin/",
+      "cover": "/guides/covers/linkedin.svg",
+      "topic": "LinkedIn",
+      "date": "2026-11-10"
+    },
+    {
+      "slug": "notion",
+      "title": "The Notion AI Second Brain",
+      "blurb": "Notion's official prompt for a second brain every AI agent shares, how its co-founder runs his, and 10 tips for an AI-native business.",
+      "url": "/notion/",
+      "cover": "/guides/covers/notion.svg",
+      "topic": "Memory",
+      "date": "2026-11-10"
+    },
+    {
+      "slug": "reveal",
+      "title": "Colour Reveal Skill",
+      "blurb": "The Claude skill behind the colour reveal Reel: give it a finished website and it builds the three-step colour video, filmed or faceless.",
+      "url": "/reveal/",
+      "cover": "/guides/covers/reveal.svg",
+      "topic": "Video",
+      "date": "2026-11-10"
+    },
+    {
+      "slug": "ugc",
+      "title": "Wispr Flow's UGC Playbook",
+      "blurb": "How Wispr Flow runs 500 to 600 creator ads a month, from Hector Serrano on Lenny's Podcast, with each tip cued to the second.",
+      "url": "/ugc/",
+      "cover": "/guides/covers/ugc.svg",
+      "topic": "Marketing",
+      "date": "2026-11-10"
+    },
+    {
+      "slug": "files",
+      "title": "Skills Repo Kit",
+      "blurb": "Anthropic's free Skills repo, how to switch it on in Claude and Claude Code, and a test prompt each for a Word doc, a deck and a spreadsheet.",
+      "url": "/files/",
+      "cover": "/guides/covers/files.svg",
+      "topic": "Skills",
+      "date": "2026-11-09"
+    },
+    {
+      "slug": "hired",
+      "title": "5 PM Resources",
+      "blurb": "Five product management resources for getting hired at an AI company, each with a summary, a diagram and the author's clip cued to the second.",
+      "url": "/hired/",
+      "cover": "/guides/covers/hired.svg",
+      "topic": "Product",
+      "date": "2026-11-09"
+    },
+    {
+      "slug": "monday",
+      "title": "Monday Admin Kit",
+      "blurb": "Three Claude scheduled tasks for Monday admin: who's waiting on a reply, last week's sales in one line and every clash in your week.",
+      "url": "/monday/",
+      "cover": "/guides/covers/monday.svg",
+      "topic": "Automation",
+      "date": "2026-11-09"
+    },
+    {
+      "slug": "plug",
+      "title": "Claude Connectors Setup",
+      "blurb": "Switch on the Gmail, Calendar, Drive and Stripe connectors in Claude in about five minutes, then test each one with a single prompt.",
+      "url": "/plug/",
+      "cover": "/guides/covers/plug.svg",
+      "topic": "Claude",
+      "date": "2026-11-09"
+    },
+    {
+      "slug": "quotes",
+      "title": "The Weekend Quote Plan",
+      "blurb": "A weekend plan to teach Claude how you price: one project, your three most-sent emails, a test on last month's jobs, then a skill.",
+      "url": "/quotes/",
+      "cover": "/guides/covers/quotes.svg",
+      "topic": "Small business",
+      "date": "2026-11-09"
+    },
+    {
+      "slug": "settings",
+      "title": "Claude in Four Switches",
+      "blurb": "Where Claude's four settings live and what to type into each: your instructions, memory, a skill built from three of your emails, and your files.",
+      "url": "/settings/",
+      "cover": "/guides/covers/settings.svg",
+      "topic": "Claude",
+      "date": "2026-11-09"
+    },
+    {
+      "slug": "tools",
+      "title": "Free AI Tools",
+      "blurb": "Six free AI tools that replace Wispr Flow, Granola, Grammarly, Notion, Gamma and ElevenLabs, plus one prompt that sets them all up.",
+      "url": "/tools/",
+      "cover": "/guides/covers/tools.svg",
+      "topic": "Tools",
+      "date": "2026-11-09"
+    },
+    {
+      "slug": "cowork",
+      "title": "20 Claude Cowork Tips",
+      "blurb": "Twenty Claude Cowork tips from Felix Rieseberg, each with the video cued to the moment he says it, plus a longer summary of the interview.",
+      "url": "/cowork/",
+      "cover": "/guides/covers/cowork.svg",
+      "topic": "Claude",
+      "date": "2026-11-08"
+    },
+    {
+      "slug": "dashboard",
+      "title": "ChatGPT Money Dashboard",
+      "blurb": "Prompts that turn your bank statements into a budget report, find costs to cut, and build a private ChatGPT dashboard you update each month.",
+      "url": "/dashboard/",
+      "cover": "/guides/covers/dashboard.svg",
+      "topic": "Finance",
+      "date": "2026-11-05"
+    },
+    {
+      "slug": "setup",
+      "title": "ChatGPT Work Setups",
+      "blurb": "Five example ChatGPT Work setups for finance, ops, marketing, sales and engineering, using Space, Sites, dots and shared pages.",
+      "url": "/setup/",
+      "cover": "/guides/covers/setup.svg",
+      "topic": "ChatGPT",
+      "date": "2026-11-04"
+    },
+    {
+      "slug": "intelligence",
+      "title": "Content Intelligence Kit",
+      "blurb": "My free Content Intelligence Kit plus a visual guide: how it works, research, the edit, two video styles, posting and setup in five steps.",
+      "url": "/intelligence/",
+      "cover": "/guides/covers/intelligence.svg",
+      "topic": "Content",
+      "date": "2026-11-03"
+    },
+    {
+      "slug": "archify",
+      "title": "Archify guide",
+      "blurb": "Archify turns your codebase into an interactive diagram. How to install it, read your first map and use it to point Claude at the right part.",
+      "url": "/archify/",
+      "cover": "/guides/covers/archify.svg",
+      "topic": "Coding",
+      "date": "2026-10-19"
+    },
+    {
+      "slug": "artcraft",
+      "title": "ArtCraft and REA guide",
+      "blurb": "Links to ArtCraft's 13 free, open-source apps and what each one replaces, GridCraft in Claude over MCP, and the Reverse Engineer Anything repo.",
+      "url": "/artcraft/",
+      "cover": "/guides/covers/artcraft.svg",
+      "topic": "Open source",
+      "date": "2026-10-19"
+    },
+    {
+      "slug": "courses",
+      "title": "Five AI courses and Architect study notes",
+      "blurb": "Five courses from vibe coder to AI builder, with links, lengths and costs, plus study notes for Anthropic's Claude Certified Architect exam.",
+      "url": "/courses/",
+      "cover": "/guides/covers/courses.svg",
+      "topic": "Courses",
+      "date": "2026-10-19"
+    },
+    {
+      "slug": "handy",
+      "title": "Handy setup kit",
+      "blurb": "Free speech to text that runs offline: the Handy repo, a prompt that has Claude install it for you, and the cost next to Wispr Flow.",
+      "url": "/handy/",
+      "cover": "/guides/covers/handy.svg",
+      "topic": "Tools",
+      "date": "2026-10-19"
+    },
+    {
+      "slug": "penpot",
+      "title": "Penpot setup guide",
+      "blurb": "Penpot, the free open-source alternative to Figma: the cost next to Figma, setup in your browser or with Docker, and what to do first.",
+      "url": "/penpot/",
+      "cover": "/guides/covers/penpot.svg",
+      "topic": "Design",
+      "date": "2026-10-19"
+    },
+    {
+      "slug": "plugins",
+      "title": "Agentic coding plugins setup guide",
+      "blurb": "Five plugins that give your coding agent a real process, from Matt Pocock's skills to Claude Mem, with install steps and a daily workflow.",
+      "url": "/plugins/",
+      "cover": "/guides/covers/plugins.svg",
+      "topic": "Coding",
+      "date": "2026-10-19"
+    },
+    {
+      "slug": "stier",
+      "title": "10 videos for AI product managers",
+      "blurb": "The ten videos everyone in product should watch to win in the AI era, each with a link, its length and what to take from it.",
+      "url": "/stier/",
+      "cover": "/guides/covers/stier.svg",
+      "topic": "Product",
+      "date": "2026-10-19"
+    },
+    {
+      "slug": "twenty",
+      "title": "Twenty CRM setup guide",
+      "blurb": "Twenty, the free open-source Salesforce alternative, with the full setup: cloud or Docker, your contacts, a deal pipeline, workflows and the real cost.",
+      "url": "/twenty/",
+      "cover": "/guides/covers/twenty.svg",
+      "topic": "Open source",
+      "date": "2026-10-19"
+    },
+    {
+      "slug": "stack",
+      "title": "Tech stack guide",
+      "blurb": "The eleven tools from the Reel in order, what each one does and costs, plus the process for testing a product idea in two weeks.",
+      "url": "/stack/",
+      "cover": "/guides/covers/stack.svg",
+      "topic": "Product",
+      "date": "2026-10-13"
+    },
+    {
+      "slug": "cal",
+      "title": "Cal AI playbook",
+      "blurb": "Zach Yadegari's four-move playbook with the source next to every number, plus every interview of his I could find.",
+      "url": "/cal/",
+      "cover": "/guides/covers/cal.svg",
+      "topic": "Growth",
+      "date": "2026-10-12"
+    },
+    {
+      "slug": "clone",
+      "title": "The Clone Kit",
+      "blurb": "The REA repo, what it does and doesn't give your agent, how to try it, and five projects that cloned something legally and added to it.",
+      "url": "/clone/",
+      "cover": "/guides/covers/clone.svg",
+      "topic": "Product",
+      "date": "2026-10-12"
+    },
+    {
+      "slug": "finance",
+      "title": "Finance Agents setup guide",
+      "blurb": "Anthropic's finance agents for Claude, set up in plain English: what you need, how to install them, which three to start with and the cost.",
+      "url": "/finance/",
+      "cover": "/guides/covers/finance.svg",
+      "topic": "Finance",
+      "date": "2026-10-12"
+    },
+    {
+      "slug": "law",
+      "title": "Legal Agents setup guide",
+      "blurb": "Anthropic's legal agents for Claude, set up in plain English: what you need, the install, four plugins to start with and the cost.",
+      "url": "/law/",
+      "cover": "/guides/covers/law.svg",
+      "topic": "Legal",
+      "date": "2026-10-12"
+    },
+    {
+      "slug": "rank",
+      "title": "The 38 Minute Ranking Guide",
+      "blurb": "How a new article reached the top of Google 38 minutes after it went up, step by step, with the prompt and the full webinar.",
+      "url": "/rank/",
+      "cover": "/guides/covers/rank.svg",
+      "topic": "Growth",
+      "date": "2026-10-12"
+    },
+    {
+      "slug": "steve",
+      "title": "Apple design skill kit",
+      "blurb": "Emil Kowalski's apple-design skill for Claude: the link, how to install and use it, what my test found, plus two libraries of animated components.",
+      "url": "/steve/",
+      "cover": "/guides/covers/steve.svg",
+      "topic": "Design",
+      "date": "2026-10-12"
+    },
+    {
+      "slug": "viral",
+      "title": "Viral launch video kit",
+      "blurb": "The Prompt Motion library, a plain walkthrough for using it on your own business, and its most-liked videos with the prompt behind each.",
+      "url": "/viral/",
+      "cover": "/guides/covers/viral.svg",
+      "topic": "Video",
+      "date": "2026-10-12"
+    },
+    {
+      "slug": "weekend",
+      "title": "Weekend guide",
+      "blurb": "Five Claude projects for a free weekend, each with what you end up with, the tools, the steps in order and roughly how long.",
+      "url": "/weekend/",
+      "cover": "/guides/covers/weekend.svg",
+      "topic": "Claude",
+      "date": "2026-10-12"
+    },
+    {
+      "slug": "agentcraft",
+      "title": "AgentCraft setup guide",
+      "blurb": "Clone the repo, launch the Minecraft studio and give a team of Claude agents its first goal, with what you need and what it costs.",
+      "url": "/agentcraft/",
+      "cover": "/guides/covers/agentcraft.svg",
+      "topic": "Agents",
+      "date": "2026-10-11"
+    },
+    {
+      "slug": "loop",
+      "title": "The AI Learning Loop",
+      "blurb": "The AI learning loop prompt, plus the setup that runs it every session in Claude Code, Codex, Cursor, or Claude and ChatGPT in the browser.",
+      "url": "/loop/",
+      "cover": "/guides/covers/loop.svg",
+      "topic": "Learning",
+      "date": "2026-10-11"
+    },
+    {
+      "slug": "trust",
+      "title": "Humanizer setup guide",
+      "blurb": "Install Humanizer, the free skill, in Claude, Claude Code or Codex, make it run on everything you write, and get a better rewrite each time.",
+      "url": "/trust/",
+      "cover": "/guides/covers/trust.svg",
+      "topic": "Writing",
+      "date": "2026-10-11"
+    },
+    {
+      "slug": "websites",
+      "title": "Website workflow",
+      "blurb": "Start with a template, make it yours in three steps, then hand it to Claude with the prompt that has it interview you first.",
+      "url": "/websites/",
+      "cover": "/guides/covers/websites.svg",
+      "topic": "Websites",
+      "date": "2026-10-11"
+    },
+    {
+      "slug": "ai-pm",
+      "title": "The AI Product Manager Kit",
+      "blurb": "Three free videos on people, business and communication for product managers, with a short summary of the frameworks in each.",
+      "url": "/ai-pm/",
+      "cover": "/guides/covers/ai-pm.svg",
+      "topic": "Product",
+      "date": "2026-10-09"
+    },
+    {
+      "slug": "shopify",
+      "title": "The AI Council Guide",
+      "blurb": "The setup for your own AI council: a chief of staff prompt, the multi-model workflow and how to keep the costs under control.",
+      "url": "/shopify/",
+      "cover": "/guides/covers/shopify.svg",
+      "topic": "Agents",
+      "date": "2026-10-09"
+    },
+    {
+      "slug": "eng",
+      "title": "The Matt and Lauren Kit",
+      "blurb": "Matt Pocock's skills and Lauren Tan's pstack, the commands that install both, and the two habits from their talk.",
+      "url": "/eng/",
+      "cover": "/guides/covers/eng.svg",
+      "topic": "Coding",
+      "date": "2026-10-08"
+    },
+    {
+      "slug": "hyper",
+      "title": "The HyperFrames Studio Kit",
+      "blurb": "The HyperFrames Studio link, the templates from the Reel with their install commands, and the workflow I use to make my hyperreels.",
+      "url": "/hyper/",
+      "cover": "/guides/covers/hyper.svg",
+      "topic": "Video",
+      "date": "2026-10-08"
+    },
+    {
+      "slug": "hack",
+      "title": "The Strix Pentest Kit",
+      "blurb": "The Strix repo, the one command that adds it to your coding tool, and the GitHub Action that pen-tests every pull request.",
+      "url": "/hack/",
+      "cover": "/guides/covers/hack.svg",
+      "topic": "Security",
+      "date": "2026-10-06"
+    },
+    {
+      "slug": "brain",
+      "title": "GBrain Setup",
+      "blurb": "My prompt to set up GBrain, Garry Tan's open-source memory system, in the agent you already use, plus how to get the most from it.",
+      "url": "/brain/",
+      "cover": "/guides/covers/brain.svg",
+      "topic": "Memory",
+      "date": "2026-10-04"
+    },
+    {
+      "slug": "hype",
+      "title": "The Launch Video Kit",
+      "blurb": "Six steps for making launch videos with Claude Opus 5.5, the real launch videos from the Reel, the setup and the prompt I paste in.",
+      "url": "/hype/",
+      "cover": "/guides/covers/hype.svg",
+      "topic": "Video",
+      "date": "2026-10-04"
+    },
+    {
+      "slug": "boris",
+      "title": "Boris on Opus 5.5",
+      "blurb": "How Boris Cherny and the Claude Code team work with Opus 5.5, from his own posts and talks, plus the five-step workflow from the Reel.",
+      "url": "/boris/",
+      "cover": "/guides/covers/boris.svg",
+      "topic": "Claude Code",
+      "date": "2026-10-03"
+    },
+    {
+      "slug": "sites",
+      "title": "Cinematic Sites with Opus 5.5",
+      "blurb": "A step-by-step workflow for building a cinematic, on-brand website with Claude Opus 5.5, with both prompts to copy.",
+      "url": "/sites/",
+      "cover": "/guides/covers/sites.svg",
+      "topic": "Websites",
+      "date": "2026-10-03"
+    },
+    {
+      "slug": "team",
+      "title": "Paperclip setup guide",
+      "blurb": "Install Paperclip, connect Claude Code, Codex or another model, then build an agent team and give it work.",
+      "url": "/team/",
+      "cover": "/guides/covers/team.svg",
+      "topic": "Agent teams",
+      "date": "2026-10-02"
+    },
+    {
+      "slug": "new",
+      "title": "September models kit",
+      "blurb": "The eight models from the September Reel plus two released after it, with tips from each vendor's docs and setup for the three you can run yourself.",
+      "url": "/new/",
+      "cover": "/guides/covers/new.svg",
+      "topic": "Models",
+      "date": "2026-10-02"
+    },
+    {
+      "slug": "human",
+      "title": "PM 101 kit",
+      "blurb": "Product management 101: the three-step loop, 28 free PM skills built from Lenny's Podcast, and 35 episode digests you can ask any product question.",
+      "url": "/human/",
+      "cover": "/guides/covers/human.svg",
+      "topic": "Product",
+      "date": "2026-10-01"
+    },
+    {
+      "slug": "levelup",
+      "title": "The Level Up Kit",
+      "blurb": "One prompt that reads your AI chat history and tells you which skills and scheduled tasks to build.",
+      "url": "/levelup/",
+      "cover": "/guides/covers/levelup.svg",
+      "topic": "Skills",
+      "date": "2026-09-29"
+    },
+    {
+      "slug": "reach",
+      "title": "The Agent Reach Kit",
+      "blurb": "Install Agent Reach so your agent can read Reddit, Instagram, LinkedIn and YouTube, plus five prompts to put it to work.",
+      "url": "/reach/",
+      "cover": "/guides/covers/reach.svg",
+      "topic": "Research",
+      "date": "2026-09-28"
+    },
+    {
+      "slug": "projects",
+      "title": "The Project Memory Kit",
+      "blurb": "A prompt and setup guide that gives a Claude Project a memory it keeps up to date.",
+      "url": "/projects/",
+      "cover": "/guides/covers/projects.svg",
+      "topic": "Memory",
+      "date": "2026-09-28"
+    },
+    {
+      "slug": "learn",
+      "title": "The Learn From Any Creator Skill",
+      "blurb": "A skill for Claude Code and Codex that turns any creator's Reels into skills in your own setup.",
+      "url": "/learn/",
+      "cover": "/guides/covers/learn.svg",
+      "topic": "Skills",
+      "date": "2026-09-27"
+    },
+    {
+      "slug": "solo",
+      "title": "The Solo Founder Stack",
+      "blurb": "Five skill repos, one each for product, engineering, design, marketing and support, set up in one project.",
+      "url": "/solo/",
+      "cover": "/guides/covers/solo.svg",
+      "topic": "Founders",
+      "date": "2026-09-26"
+    },
+    {
+      "slug": "pm",
+      "title": "PM kit",
+      "blurb": "28 product management skills from Lenny's Podcast, plus a knowledge base that answers with the episode cited.",
+      "url": "/pm/",
+      "cover": "/guides/covers/pm.svg",
+      "topic": "Product",
+      "date": "2026-09-25"
+    },
+    {
+      "slug": "commands",
+      "title": "50 commands",
+      "blurb": "Fifty commands, keys and shortcuts for Claude Code, the Claude app, ChatGPT and Codex, checked against the docs.",
+      "url": "/commands/",
+      "cover": "/guides/covers/commands.svg",
+      "topic": "Shortcuts",
+      "date": "2026-09-25"
+    },
+    {
+      "slug": "decision",
+      "title": "Decision model kit",
+      "blurb": "Six things people built on Jev in its first week, and a prompt to find the decisions a model could make in your work.",
+      "url": "/decision/",
+      "cover": "/guides/covers/decision.svg",
+      "topic": "Models",
+      "date": "2026-09-24"
+    },
+    {
+      "slug": "fix",
+      "title": "The Fix Kit",
+      "blurb": "A setup prompt for the I Have ADHD skill, so new Claude Code sessions get to the answer and keep your place.",
+      "url": "/fix/",
+      "cover": "/guides/covers/fix.svg",
+      "topic": "Focus",
+      "date": "2026-09-19"
+    },
+    {
+      "slug": "win",
+      "title": "Your marketing system",
+      "blurb": "One prompt that installs Corey Haines's Marketing Skills, interviews you and writes up your business context.",
+      "url": "/win/",
+      "cover": "/guides/covers/win.svg",
+      "topic": "Marketing",
+      "date": "2026-09-18"
+    },
+    {
+      "slug": "cfo",
+      "title": "The AI Agent Launch Playbook",
+      "blurb": "How cfo.ai launched its agent with public answers people could inspect, and a plan to do the same for your product.",
+      "url": "/cfo/",
+      "cover": "/guides/covers/cfo.svg",
+      "topic": "Launch",
+      "date": "2026-09-18"
+    },
+    {
+      "slug": "simplify",
+      "title": "The Simplify Kit",
+      "blurb": "The ponytail repo and the seven-rung ladder it makes your agent climb before it writes anything.",
+      "url": "/simplify/",
+      "cover": "/guides/covers/simplify.svg",
+      "topic": "Code",
+      "date": "2026-09-16"
+    },
+    {
+      "slug": "grow",
+      "title": "Grow on LinkedIn Kit",
+      "blurb": "Eleven LinkedIn marketing skills for Claude and Codex, with the install for both and Publora for posting.",
+      "url": "/grow/",
+      "cover": "/guides/covers/grow.svg",
+      "topic": "LinkedIn",
+      "date": "2026-09-14"
+    },
+    {
+      "slug": "future",
+      "title": "The Future of Jobs Kit",
+      "blurb": "Anthropic's economic scenarios report on one page: four findings, the exact figures and what to do about it.",
+      "url": "/future/",
+      "cover": "/guides/covers/future.svg",
+      "topic": "Jobs",
+      "date": "2026-09-12"
+    },
+    {
+      "slug": "review",
+      "title": "The Cross Model Review Kit",
+      "blurb": "A handover skill where Claude plans and reviews and GPT 5.6 builds through Codex, set up in one shared folder.",
+      "url": "/review/",
+      "cover": "/guides/covers/review.svg",
+      "topic": "Claude + Codex",
+      "date": "2026-09-12",
+      "duplicate_of": "switch"
+    },
+    {
+      "slug": "agentic",
+      "title": "Agentic engineering kit",
+      "blurb": "Matt Pocock's skills repo, the two install commands and his five-step workflow from grill-me to code review.",
+      "url": "/agentic/",
+      "cover": "/guides/covers/agentic.svg",
+      "topic": "Engineering",
+      "date": "2026-09-10"
+    },
+    {
+      "slug": "ai-native",
+      "title": "The AI Native Reading List",
+      "blurb": "Ten things a company needs before it can call itself AI native, each with one source from a company doing it.",
+      "url": "/ai-native/",
+      "cover": "/guides/covers/ai-native.svg",
+      "topic": "Reading list",
+      "date": "2026-09-10"
+    },
+    {
+      "slug": "skills",
+      "title": "Self-improving skills",
+      "blurb": "A criteria file and a self-check for every skill, with your feedback written back in. One prompt sets it up.",
+      "url": "/skills/",
+      "cover": "/guides/covers/skills.svg",
+      "topic": "Skills",
+      "date": "2026-09-09"
+    },
+    {
+      "slug": "both",
+      "title": "The Both Kit",
+      "blurb": "Run Claude Code and Codex side by side in VS Code, sharing instruction files, one skills folder and a wiki.",
+      "url": "/both/",
+      "cover": "/guides/covers/both.svg",
+      "topic": "Claude + Codex",
+      "date": "2026-09-07"
+    },
+    {
+      "slug": "instinct",
+      "title": "The Instinct Launch File",
+      "blurb": "Everything I read on how a 23-year-old raised $350 million for an invite-only agent, starting with the founder's posts.",
+      "url": "/instinct/",
+      "cover": "/guides/covers/instinct.svg",
+      "topic": "Startups",
+      "date": "2026-09-04"
+    },
+    {
+      "slug": "glm",
+      "title": "The GLM Setup",
+      "blurb": "The setup that points Claude Code at GLM-5.3-Flash, the two ways to get access, and where it lands against Opus.",
+      "url": "/glm/",
+      "cover": "/guides/covers/glm.svg",
+      "topic": "Models",
+      "date": "2026-09-03"
+    },
+    {
+      "slug": "edit",
+      "title": "Reel Studio",
+      "blurb": "The Claude Code skills that take an idea to a finished vertical video, as a free template repo.",
+      "url": "/edit/",
+      "cover": "/guides/covers/edit.svg",
+      "topic": "Video",
+      "date": "2026-08-21"
+    },
+    {
+      "slug": "upskill",
+      "title": "The Upskill List",
+      "blurb": "Ten things from the Reel you've heard of and never gone deep on, each with one link that teaches it.",
+      "url": "/upskill/",
+      "cover": "/guides/covers/upskill.svg",
+      "topic": "Reading list",
+      "date": "2026-08-18"
+    },
+    {
+      "slug": "agents",
+      "title": "The Agents Kit",
+      "blurb": "LangChain's Managed Deep Agents explained block by block, with the commands to ship one in about ten minutes.",
+      "url": "/agents/",
+      "cover": "/guides/covers/agents.svg",
+      "topic": "Agents",
+      "date": "2026-08-15"
+    },
+    {
+      "slug": "top1",
+      "title": "The Top 1% Reading List",
+      "blurb": "Ten disciplines that separate people who use AI from people who ship it, each with the best article I found on it.",
+      "url": "/top1/",
+      "cover": "/guides/covers/top1.svg",
+      "topic": "Reading list",
+      "date": "2026-08-14"
+    },
+    {
+      "slug": "tokens",
+      "title": "The Token Kit",
+      "blurb": "Two prompts that put a live plan-usage bar in your Claude Code and Codex status lines.",
+      "url": "/tokens/",
+      "cover": "/guides/covers/tokens.svg",
+      "topic": "Costs",
+      "date": "2026-08-11"
+    },
+    {
+      "slug": "101",
+      "title": "AI Engineering 101",
+      "blurb": "Field notes from two days of AI training in Sydney on what comes after you ship an agent.",
+      "url": "/101/",
+      "cover": "/guides/covers/101.svg",
+      "topic": "Field notes",
+      "date": "2026-08-11"
+    },
+    {
+      "slug": "switch",
+      "title": "The Switch Kit",
+      "blurb": "Set up Claude Code and Codex in one folder, then add a handover skill: Claude plans and reviews, Codex builds.",
+      "url": "/switch/",
+      "cover": "/guides/covers/switch.svg",
+      "topic": "Claude + Codex",
+      "date": "2026-08-09"
+    }
+  ]
+}
