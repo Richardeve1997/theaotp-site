@@ -129,6 +129,7 @@ function Nav() {
 
         <div className="hidden items-center gap-7 sm:flex">
           <a href="#about" className={`text-sm font-medium transition-colors duration-500 ${secondaryColour}`}>About</a>
+          <a href="/guides/" className={`text-sm font-medium transition-colors duration-500 ${secondaryColour}`}>Guides</a>
           <a href="#signup" className={`px-5 py-2.5 font-display text-[13px] font-semibold transition-colors duration-500 ${scrolled ? 'bg-ink text-paper hover:opacity-85' : 'bg-white text-ink hover:bg-white/90'}`}>
             Subscribe
           </a>
@@ -149,6 +150,7 @@ function Nav() {
           <div className="mx-auto flex max-w-wrap flex-col gap-4 font-display font-semibold">
             <a href="#signup" onClick={() => setOpen(false)}>Subscribe</a>
             <a href="#about" onClick={() => setOpen(false)}>About</a>
+            <a href="/guides/" onClick={() => setOpen(false)}>Guides</a>
           </div>
         </div>
       )}
@@ -284,9 +286,19 @@ const FOR_YOU = [
   { icon: Compass, text: "Learn from someone who's lived the unicorn startup journey." },
 ]
 
+// lucide has no TikTok mark, so this draws it with the same size prop the lucide icons take.
+function TikTok({ size = 18, className }: { size?: number; strokeWidth?: number; className?: string }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
+      <path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5 2.6 2.6 0 0 1-2.6-2.6 2.6 2.6 0 0 1 3.4-2.47V9.67a5.7 5.7 0 0 0-.8-.06A5.69 5.69 0 0 0 4.18 15.3 5.69 5.69 0 0 0 9.86 21a5.69 5.69 0 0 0 5.69-5.69V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3a4.3 4.3 0 0 1-3.25-1.48Z" />
+    </svg>
+  )
+}
+
 const SOCIALS = [
   { icon: Instagram, label: 'Instagram', href: 'https://www.instagram.com/artofthepossible.ai/' },
   { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/richard-eve-545179138/' },
+  { icon: TikTok, label: 'TikTok', href: 'https://www.tiktok.com/@artofthepossible.ai' },
 ]
 
 function Journey() {

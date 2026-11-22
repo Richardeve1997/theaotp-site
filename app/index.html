@@ -33,8 +33,12 @@
       .aotp-guides .ag-side{border-top:1px solid #121210;padding-top:24px}
       @media (min-width:768px){.aotp-guides .ag-side{margin-top:56px}}
       .aotp-guides .ag-side p{margin:0 0 28px;max-width:44ch;font-size:15px;line-height:1.625;color:#52524d}
-      .aotp-guides .ag-btn{display:inline-flex;align-items:center;gap:10px;border:1px solid #121210;background:#121210;color:#fff;padding:12px 20px;font:600 14px/1 "Inter Tight","Helvetica Neue",Arial,sans-serif;text-decoration:none;transition:background-color .2s,color .2s}
-      .aotp-guides .ag-btn:hover{background:#fff;color:#121210}
+      /* The sky action from the /guides/ page (Clear Sky DESIGN.md 10.1): the one blue button on the homepage. */
+      .aotp-guides .ag-btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;height:56px;padding:0 30px;border-radius:999px;border:1px solid transparent;background:linear-gradient(100deg,#034A7A 0%,#026AA1 52%,#0277B3 calc(100% - 20px),#0A8FCF 100%) border-box;color:#fff;font:600 17px/1 "Inter Tight","Helvetica Neue",Arial,sans-serif;letter-spacing:-.005em;white-space:nowrap;text-decoration:none;box-shadow:0 10px 28px -12px rgba(2,79,128,.55);transition:background .2s ease,transform .2s ease}
+      .aotp-guides .ag-btn:hover{background:linear-gradient(100deg,#033E68 0%,#025F92 52%,#026AA1 calc(100% - 20px),#0282C0 100%) border-box;transform:translateY(-1px)}
+      .aotp-guides .ag-btn:focus-visible{outline:2px solid #026AA1;outline-offset:3px}
+      @media (max-width:640px){.aotp-guides .ag-btn{width:100%}}
+      @media (forced-colors:active){.aotp-guides .ag-btn{background:ButtonFace;color:ButtonText;border-color:ButtonText}}
       .aotp-guides .ag-btn svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
       .aotp-guides .ag-grid{list-style:none;margin:clamp(48px,8vh,84px) 0 0;padding:40px 0 0;border-top:1px solid #e4e4e0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px 12px}
       @media (min-width:640px){.aotp-guides .ag-grid{gap:40px 24px}}
@@ -120,5 +124,72 @@
       })();
     </script>
     <script type="module" src="/src/main.tsx"></script>
+    <!-- Homepage extras (2026-11-22): a Guides link beside About in the nav and the mobile menu, and TikTok beside
+         Instagram and LinkedIn in the Follow buttons and the footer icons. Added outside the React bundle like the
+         guides section above; App.tsx carries the same links, so after a rebuild this finds them and does nothing. -->
+    <script>
+      (function () {
+        var TIKTOK = 'https://www.tiktok.com/@artofthepossible.ai';
+        var ICON = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5 2.6 2.6 0 0 1-2.6-2.6 2.6 2.6 0 0 1 3.4-2.47V9.67a5.7 5.7 0 0 0-.8-.06A5.69 5.69 0 0 0 4.18 15.3 5.69 5.69 0 0 0 9.86 21a5.69 5.69 0 0 0 5.69-5.69V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3a4.3 4.3 0 0 1-3.25-1.48Z"/></svg>';
+        function guidesLink(about) {
+          var a = about.cloneNode(false);
+          a.setAttribute('href', '/guides/');
+          a.textContent = 'Guides';
+          a.removeAttribute('onclick');
+          a.setAttribute('data-aotp-extra', 'guides');
+          return a;
+        }
+        function nav() {
+          var bar = document.querySelector('nav');
+          if (!bar) return false;
+          var about = bar.querySelector('a[href="#about"]');
+          if (!about) return false;
+          if (!bar.querySelector('a[href="/guides/"]')) about.parentNode.insertBefore(guidesLink(about), about.nextSibling);
+          var mine = bar.querySelector('a[data-aotp-extra="guides"]');
+          if (mine && mine.parentNode === about.parentNode) {
+            /* React swaps About's colours as the page scrolls; keep the Guides link in step. */
+            new MutationObserver(function () { mine.className = about.className; }).observe(about, { attributes: true, attributeFilter: ['class'] });
+          }
+          /* The mobile menu is drawn only while open, so add the link each time it appears. */
+          new MutationObserver(function () {
+            bar.querySelectorAll('a[href="#about"]').forEach(function (a) {
+              if (a === about || a.parentNode.querySelector('a[href="/guides/"]')) return;
+              var g = guidesLink(a);
+              g.addEventListener('click', function () { var b = bar.querySelector('button[aria-expanded="true"]'); if (b) b.click(); });
+              a.parentNode.insertBefore(g, a.nextSibling);
+            });
+          }).observe(bar, { childList: true, subtree: true });
+          return true;
+        }
+        function socials() {
+          var rows = [];
+          document.querySelectorAll('a[href*="linkedin.com/in/richard-eve"]').forEach(function (li) {
+            if (rows.indexOf(li.parentNode) < 0) rows.push(li.parentNode);
+          });
+          if (!rows.length) return false;
+          rows.forEach(function (row) {
+            if (row.querySelector('a[href*="tiktok.com"]')) return;
+            var li = row.querySelector('a[href*="linkedin.com/in/richard-eve"]');
+            var a = li.cloneNode(true);
+            a.setAttribute('href', TIKTOK);
+            a.setAttribute('aria-label', 'TikTok');
+            var svg = a.querySelector('svg');
+            var label = (a.textContent || '').trim();
+            a.innerHTML = ICON + (label ? '<span>TikTok</span>' : '');
+            if (svg && svg.getAttribute('class')) a.querySelector('svg').setAttribute('class', svg.getAttribute('class').replace(/lucide\S*/g, '').trim());
+            if (label && !li.querySelector('span')) { var s = a.querySelector('span'); s.replaceWith(document.createTextNode('TikTok')); }
+            row.insertBefore(a, li.nextSibling);
+          });
+          return true;
+        }
+        function run() { var n = nav(), s = socials(); return n && s; }
+        if (!run()) {
+          var root = document.getElementById('root');
+          var mo = new MutationObserver(function () { if (run()) mo.disconnect(); });
+          if (root) mo.observe(root, { childList: true, subtree: true });
+          setTimeout(function () { mo.disconnect(); }, 8000);
+        }
+      })();
+    </script>
   </body>
 </html>
